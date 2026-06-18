@@ -1,0 +1,8 @@
+/node_modules
+
+# Raw + regenerable data artifacts. Re-fetch raw tx hex with `pnpm fetch`, then
+# regenerate the listings with `pnpm nchain:extract` / `pnpm scrypt:extract`.
+# Kept in git: each folder's SOURCE.md (provenance).
+data/**/*.hex
+data/**/*.asm
+data/**/*.meta.json

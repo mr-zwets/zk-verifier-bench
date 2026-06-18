@@ -1,0 +1,36 @@
+{
+  "name": "zk-verifier-bench",
+  "version": "1.0.0",
+  "description": "Benchmark ZKP (Groth16/STARK) verifiers on the Bitcoin Cash VM: correctness, size, op-cost, and BCH compatibility.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "fetch": "tsx src/fetch-data.ts",
+    "fetch:nchain": "tsx src/fetch-data.ts nchain",
+    "fetch:scrypt": "tsx src/fetch-data.ts scrypt",
+    "fetch:scrypt-bn256": "tsx src/fetch-data.ts scrypt-bn256",
+    "benchmark": "tsx src/harness/benchmark.ts",
+    "bch:fp-mul": "tsx src/bch/fp-mul.ts",
+    "nchain:extract": "tsx src/nchain/extract.ts",
+    "nchain:run": "tsx src/nchain/run.ts",
+    "nchain:verify": "tsx src/nchain/verify-proofs.ts",
+    "scrypt-bn256:extract": "tsx --max-old-space-size=4096 src/scrypt-bn256/extract.ts",
+    "scrypt-bn256:run": "tsx --max-old-space-size=4096 src/scrypt-bn256/run.ts",
+    "scrypt-bn256:verify": "tsx --max-old-space-size=8192 src/scrypt-bn256/verify-proofs.ts",
+    "scrypt:extract": "tsx --max-old-space-size=4096 src/scrypt/extract.ts",
+    "starkware:probe": "tsx src/starkware/probe.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.12.2",
+  "dependencies": {
+    "@bitauth/libauth": "3.1.0-next.8"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.3",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

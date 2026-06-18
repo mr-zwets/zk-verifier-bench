@@ -1,0 +1,104 @@
+# zk-verifier-bench
+
+A benchmark harness for **zero-knowledge-proof verifiers on the Bitcoin Cash VM**.
+It takes a verifier implementation (its opcode program + a curve/field and proof
+vectors), and on the BCH 2026 virtual machine (libauth) it:
+
+1. **proves correctness** — the valid proof is ACCEPTED and invalid proofs are
+   REJECTED;
+2. **measures cost** — locking/unlocking byte size and op-cost; and
+3. **checks BCH compatibility** — replays the run on the *real* BCH 2026 VM
+   (consensus limits) to see whether it actually validates.
+
+Implementations can be **single-transaction** or **multi-transaction** (state
+carried across steps, the way BCH must split heavy work). Results are grouped
+into separate leaderboards by proof system and structure.
+
+## Why
+
+BSV runs a Groth16 verifier in one ~0.5 MB transaction because it removed
+Bitcoin's script/transaction limits. BCH kept those limits, so the same verifier
+cannot run in a single transaction and must be split across a chain of
+transactions. This harness quantifies that: it runs the real on-chain BSV
+verifiers, shows they are **not BCH-compatible** as-is, and provides the rails to
+build and benchmark BCH-native (multi-step) verifiers against them. It is the
+experimental companion to the comparison writeup in the `groth16_contract` repo.
+
+## Quick start
+
+```
+pnpm install
+pnpm fetch:nchain     # download the real nChain verifier + proof from WhatsOnChain
+pnpm benchmark        # run the leaderboards
+```
+
+Current output:
+
+```
+### Groth16  [single-tx]
+nchain               BLS12-381   PASS (1/1✗)   1   522,477  510,467,864  510,467,864  no (script-size; ~64 steps by op-cost)
+
+### demo (hash-chained state)  [multi-tx]
+bch-multistep-demo   -           PASS (3/3✗)   3       228        3,894        1,298  yes
+```
+
+The real BSV Groth16 verifier is functionally correct but **not BCH-compatible**
+(its 39,876-byte unlocking alone exceeds BCH's 10,000-byte script-size limit,
+and its op-cost is ~64x a single input's budget). A properly chunked multi-step
+run keeps every step inside the limits.
+
+## How it works
+
+Two VMs (see `src/harness/vm.ts`):
+
+- a **loosened** BCH 2026 VM (every resource ceiling lifted) to prove correctness
+  and measure op-cost even for oversized verifiers, and
+- the **real** BCH 2026 VM (consensus limits) to decide BCH compatibility.
+
+The unit of execution is a `Step` (one locking + unlocking pair = one
+transaction's evaluation). A single-tx verifier is one step; a multi-tx verifier
+is an ordered list. See `docs/benchmark.md` for the full contract and how to add
+an implementation.
+
+## Scripts
+
+| script | what |
+|--------|------|
+| `pnpm benchmark` | run all registered implementations and print the leaderboards |
+| `pnpm fetch[:nchain\|:scrypt]` | download raw tx hex artifacts from WhatsOnChain |
+| `pnpm nchain:extract` | disassemble the nChain verifier to an opcode listing |
+| `pnpm nchain:run` / `nchain:verify` | run / accept-reject the nChain verifier in detail |
+| `pnpm scrypt:extract` | analyse the sCrypt BLS12-381 verifier (curve + opcodes) |
+| `pnpm bch:fp-mul` | measure a single BN254 field multiply's op-cost on BCH |
+| `pnpm typecheck` | `tsc --noEmit` |
+
+## Layout
+
+```
+src/harness/          types, VM(s), tamper, benchmark runner
+src/implementations/  one module per verifier (registered in benchmark.ts)
+src/nchain/           detailed nChain extract/run/verify scripts
+src/scrypt-bn256/     sCrypt BN256 extract/run/verify scripts
+src/scrypt/           sCrypt BLS12-381 verifier extraction
+src/bch/              BCH primitive measurements (fp-mul)
+data/<impl>/          SOURCE.md provenance (raw hex + listings are gitignored, re-fetchable)
+docs/                 benchmark.md, scrypt.md
+```
+
+## Implementations
+
+| id | track | state |
+|----|-------|-------|
+| `nchain` | Groth16 / single-tx | real BSV mainnet verifier (BLS12-381) |
+| `scrypt-bn256` | Groth16 / single-tx | real BSV mainnet verifier (BN254, same curve as `BN256.cash`); accepts/rejects via `pnpm scrypt-bn256:verify` |
+| `bch-multistep-demo` | demo / multi-tx | hash-chained-state demo validating the multi-tx path |
+| sCrypt BLS12-381 | Groth16 / single-tx | extracted, not registered — see `docs/scrypt.md` |
+
+Next target: a BCH-native BN254 Groth16 verifier as a multi-tx implementation, so
+the harness can report step by step when it becomes BCH-compatible.
+
+## Notes
+
+- libauth `@bitauth/libauth@3.1.0-next.8` provides the BCH 2023/2025/2026 VMs.
+- Large raw-hex and disassembly artifacts are gitignored; each `data/<impl>/`
+  folder keeps a `SOURCE.md` with provenance and the commands to regenerate.
