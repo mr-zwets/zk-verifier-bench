@@ -81,11 +81,5 @@ just `valid: [oneStep]`.
 | `scrypt-bn256` | Groth16 / single-tx | runnable | real mainnet verifier (BN254, same curve as `BN256.cash`); see `data/scrypt-bn256/SOURCE.md` |
 | `bch-multistep-demo` | demo / multi-tx | runnable | hash-chained state across 3 steps; validates the multi-tx path, every step BCH-compatible |
 
-### Not yet registered
-
-- **sCrypt BLS12-381** (Groth16 / single-tx, profile-only): `pnpm fetch:scrypt`,
-  then a loader over `data/scrypt`'s extracted script with no valid witness (it
-  is a deploy output; we lack a spendable proof). See `docs/scrypt.md`.
-
 Next target: our own BCH BN254 Groth16 verifier as a **multi-tx** entry, so it
 can be compared on size and per-step budget fit against these references.

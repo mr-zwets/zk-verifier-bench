@@ -7,9 +7,8 @@
   "scripts": {
     "fetch": "tsx src/fetch-data.ts",
     "fetch:nchain": "tsx src/fetch-data.ts nchain",
-    "fetch:scrypt": "tsx src/fetch-data.ts scrypt",
     "fetch:scrypt-bn256": "tsx src/fetch-data.ts scrypt-bn256",
-    "benchmark": "tsx src/harness/benchmark.ts",
+    "benchmark": "tsx --max-old-space-size=8192 src/harness/benchmark.ts",
     "bch:fp-mul": "tsx src/bch/fp-mul.ts",
     "nchain:extract": "tsx src/nchain/extract.ts",
     "nchain:run": "tsx src/nchain/run.ts",
@@ -17,7 +16,6 @@
     "scrypt-bn256:extract": "tsx --max-old-space-size=4096 src/scrypt-bn256/extract.ts",
     "scrypt-bn256:run": "tsx --max-old-space-size=4096 src/scrypt-bn256/run.ts",
     "scrypt-bn256:verify": "tsx --max-old-space-size=8192 src/scrypt-bn256/verify-proofs.ts",
-    "scrypt:extract": "tsx --max-old-space-size=4096 src/scrypt/extract.ts",
     "starkware:probe": "tsx src/starkware/probe.ts",
     "typecheck": "tsc --noEmit"
   },

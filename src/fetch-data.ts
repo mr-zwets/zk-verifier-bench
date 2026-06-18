@@ -1,10 +1,10 @@
 // Fetch the raw transaction hex artifacts from WhatsOnChain on demand, so the
 // large .hex blobs do not need to live in git. After fetching, regenerate the
-// derived listings with `pnpm nchain:extract` / `pnpm scrypt:extract`.
+// derived listings with the per-impl extract scripts.
 //
-//   pnpm fetch          # everything
-//   pnpm fetch:nchain   # just the nChain mainnet txs
-//   pnpm fetch:scrypt   # just the sCrypt testnet tx (~55 MB)
+//   pnpm fetch                    # everything
+//   pnpm fetch:nchain             # just the nChain mainnet txs
+//   pnpm fetch:scrypt-bn256       # just the sCrypt BN256 mainnet txs
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 
@@ -26,13 +26,6 @@ const TXS: Tx[] = [
     note: 'nChain proof (unlocking script, vin 0)',
   },
   {
-    group: 'scrypt',
-    net: 'test',
-    txid: 'eba34263bbede27fd1e08a84459066fba7eb10510a3bb1d92d735c067b8309dd',
-    out: 'data/scrypt/eba3.hex',
-    note: 'sCrypt BLS12-381 verifier tx (~55 MB hex)',
-  },
-  {
     group: 'scrypt-bn256',
     net: 'main',
     txid: '320ba9fb3826c0bc66beed51edf2463e958b7274921563c5c90be62deabb725f',
@@ -51,7 +44,7 @@ const TXS: Tx[] = [
 const filter = process.argv[2];
 const selected = filter ? TXS.filter((t) => t.group === filter) : TXS;
 if (selected.length === 0) {
-  console.error(`no txs match group "${filter}" (known groups: nchain, scrypt, scrypt-bn256)`);
+  console.error(`no txs match group "${filter}" (known groups: nchain, scrypt-bn256)`);
   process.exit(1);
 }
 

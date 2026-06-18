@@ -1,53 +1,44 @@
-# sCrypt verifiers (BN256 + BLS12-381)
+# sCrypt BN256 Groth16 verifier
 
-sCrypt built two distinct Groth16 verifier lines, and we obtained both directly
-from chain (no compilation needed):
+sCrypt's first Groth16 verifier (Jul 2022, "first zk-SNARK on Bitcoin"), over
+**BN256 / alt_bn128** — the same curve as this project's `BN256.cash` (prime
+`0x30644e72...cfd47` =
+`21888242871839275222246405745257275088696311157297823662689037894645226208583`).
+Deployed and spent on **BSV mainnet** in one block, so it carries a real proof
+and is fully runnable. Registered as `scrypt-bn256`; provenance in
+[`data/scrypt-bn256/SOURCE.md`](../data/scrypt-bn256/SOURCE.md).
 
-1. **BN256 / alt_bn128 (Jul 2022)**: sCrypt's first Groth16 verifier ("first
-   zk-SNARK on Bitcoin"). Same curve as this project's `BN256.cash` (prime
-   `0x30644e72...cfd47` =
-   `21888242871839275222246405745257275088696311157297823662689037894645226208583`).
-   Deployed and spent on **BSV mainnet** in one block. We pulled the verifier
-   (~11.7 MB locking script) and its 510-byte proof straight off mainnet and
-   registered it as the `scrypt-bn256` benchmark entry. See
-   [`data/scrypt-bn256/SOURCE.md`](../data/scrypt-bn256/SOURCE.md).
-2. **BLS12-381 (Dec 2022)**: a later, separate verifier. An early unoptimised
-   version is on **BSV testnet** as tx `eba3...09dd` (output 0, ~27.5 MB). We
-   extracted its opcodes as a profile. See [`data/scrypt/`](../data/scrypt/SOURCE.md).
+## Findings
 
-## scrypt-bn256 (curve-matched, registered, runnable)
-
-The directly comparable BSV reference, on the same curve as our repo. Findings:
-
-- **Functionally correct, BSV-style.** Self-contained (proof in the unlocking, no
-  introspection, no signature checks). It accepts the genuine mainnet proof and
-  rejects tampered proofs: `pnpm scrypt-bn256:verify`.
-- **Uses the BSV OP_RETURN terminator.** The script leaves the verification
-  boolean on the stack and halts at an `OP_RETURN`. Post-Genesis BSV (active since
-  Feb 2020, so it applied to this Jul 2022 tx) treats that as success iff a single
-  non-zero item remains; BCH treats an executed `OP_RETURN` as failure. So the
-  harness judges its correctness by the BSV rule (`bsvOpReturnTerminator`) while
-  keeping the BCH verdict strict.
+- **Self-contained.** Proof in the unlocking, no introspection, no signature
+  checks. Accepts the genuine mainnet proof, rejects tampered proofs:
+  `pnpm scrypt-bn256:verify`.
+- **BSV OP_RETURN terminator.** It leaves the verification boolean on the stack
+  and halts at an `OP_RETURN`. Post-Genesis BSV (active since 4 Feb 2020, so it
+  applied to this Jul 2022 tx) treats that as success iff a single non-zero item
+  remains; BCH treats an executed `OP_RETURN` as failure. So the harness judges
+  correctness by the BSV rule (`bsvOpReturnTerminator`) and keeps the BCH verdict
+  strict.
 - **Not BCH-compatible.** ~11.7 MB locking script (far over the 10,000-byte cap)
   and ~998M op-cost (~125x one input's budget). See `pnpm benchmark`.
 
-## BLS12-381 (data/scrypt, profile-only)
+## sCrypt's BLS12-381 line (not included)
 
-27,549,371 bytes, 22,940,451 instructions, 55 distinct opcodes; every opcode it
-uses exists on BCH 2026 (the only non-standard one is `OP_CAT`, which BCH has).
-Curve confirmed empirically from the 48/49-byte field-element pushes. It is a
-deploy output (verifier with embedded proof), so we keep it as a size/opcode
-profile rather than a runnable entry: `pnpm scrypt:extract`.
+sCrypt later (Dec 2022) built a separate BLS12-381 verifier. Its testnet deploy
+(tx `eba3...09dd` vout 0, ~27.5 MB) was **never spent** (confirmed via
+WhatsOnChain `/{vout}/spent`: 404 = unspent), so no proof exists on-chain and it
+cannot be run as a success case (an empty unlock underflows; it needs ~12 proof
+elements from a spender that does not exist). We do not carry it: the BLS12-381
+curve is already a runnable entry via `nchain` (mainnet, spent with a real proof).
 
 ## scrypt-pairing source: structural reference (not compiled)
 
 sCrypt's BN256 source lives at
 [`sCrypt-Inc/scrypt-pairing`](https://github.com/sCrypt-Inc/scrypt-pairing)
-(`bn256/zksnark.scrypt`). We did not compile it: we did not need to (the deployed
-verifier is on mainnet, above), and a compiled *BSV* opcode count would not map
-cleanly to BCH op-cost anyway. It is also legacy `.scrypt` (the `scryptc`
-compiler is superseded by `scrypt-ts`), so compiling would be high-effort and
-low-ROI. It stays useful as a **structural reference** for our own verifier:
+(`bn256/zksnark.scrypt`). We did not compile it: the deployed verifier is already
+on mainnet (above), a compiled *BSV* opcode count would not map cleanly to BCH
+op-cost, and it is legacy `.scrypt` (the `scryptc` compiler is superseded by
+`scrypt-ts`). It stays useful as a **structural reference** for our own verifier:
 
 - the full **FQ2 / FQ6 / FQ12 tower** laid out concretely (the part `BN256.cash`
   currently stubs), and
@@ -56,7 +47,7 @@ low-ROI. It stays useful as a **structural reference** for our own verifier:
 
 ## Pinning `N_steps`
 
-To get `N_steps` in the cost model that actually binds us, measure **our own**
-representative chunks (an F_p¹² mul, one Miller-loop iteration, a
-final-exponentiation segment) on the BCH 2026 VM the way `src/bch/fp-mul.ts`
-measures a single field mul, rather than converting a BSV opcode count.
+Measure **our own** representative chunks (an F_p¹² mul, one Miller-loop
+iteration, a final-exponentiation segment) on the BCH 2026 VM the way
+`src/bch/fp-mul.ts` measures a single field mul, rather than converting a BSV
+opcode count.

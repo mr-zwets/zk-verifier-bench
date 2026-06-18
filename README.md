@@ -65,10 +65,10 @@ an implementation.
 | script | what |
 |--------|------|
 | `pnpm benchmark` | run all registered implementations and print the leaderboards |
-| `pnpm fetch[:nchain\|:scrypt]` | download raw tx hex artifacts from WhatsOnChain |
+| `pnpm fetch[:nchain\|:scrypt-bn256]` | download raw tx hex artifacts from WhatsOnChain |
 | `pnpm nchain:extract` | disassemble the nChain verifier to an opcode listing |
 | `pnpm nchain:run` / `nchain:verify` | run / accept-reject the nChain verifier in detail |
-| `pnpm scrypt:extract` | analyse the sCrypt BLS12-381 verifier (curve + opcodes) |
+| `pnpm scrypt-bn256:run` / `scrypt-bn256:verify` | run / accept-reject the sCrypt BN256 verifier |
 | `pnpm bch:fp-mul` | measure a single BN254 field multiply's op-cost on BCH |
 | `pnpm typecheck` | `tsc --noEmit` |
 
@@ -79,7 +79,6 @@ src/harness/          types, VM(s), tamper, benchmark runner
 src/implementations/  one module per verifier (registered in benchmark.ts)
 src/nchain/           detailed nChain extract/run/verify scripts
 src/scrypt-bn256/     sCrypt BN256 extract/run/verify scripts
-src/scrypt/           sCrypt BLS12-381 verifier extraction
 src/bch/              BCH primitive measurements (fp-mul)
 data/<impl>/          SOURCE.md provenance (raw hex + listings are gitignored, re-fetchable)
 docs/                 benchmark.md, scrypt.md
@@ -92,7 +91,6 @@ docs/                 benchmark.md, scrypt.md
 | `nchain` | Groth16 / single-tx | real BSV mainnet verifier (BLS12-381) |
 | `scrypt-bn256` | Groth16 / single-tx | real BSV mainnet verifier (BN254, same curve as `BN256.cash`); accepts/rejects via `pnpm scrypt-bn256:verify` |
 | `bch-multistep-demo` | demo / multi-tx | hash-chained-state demo validating the multi-tx path |
-| sCrypt BLS12-381 | Groth16 / single-tx | extracted, not registered — see `docs/scrypt.md` |
 
 Next target: a BCH-native BN254 Groth16 verifier as a multi-tx implementation, so
 the harness can report step by step when it becomes BCH-compatible.
