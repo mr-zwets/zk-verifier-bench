@@ -11,6 +11,8 @@
     "benchmark": "tsx --max-old-space-size=8192 src/harness/benchmark.ts",
     "checkpoints": "tsx src/checkpoints/demo.ts",
     "bch:fp-mul": "tsx src/bch/fp-mul.ts",
+    "bch:vkx": "tsx src/bch/vkx.ts",
+    "bch:vkx-scalarmult": "tsx src/bch/vkx-scalarmult.ts",
     "nchain:extract": "tsx src/nchain/extract.ts",
     "nchain:run": "tsx src/nchain/run.ts",
     "nchain:verify": "tsx src/nchain/verify-proofs.ts",
