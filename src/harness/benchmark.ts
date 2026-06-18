@@ -152,9 +152,14 @@ const padR = (s: string, w: number) => s.padEnd(w);
 const padL = (s: string, w: number) => s.padStart(w);
 
 const main = async () => {
-  console.log(`benchmarking ${REGISTRY.length} implementation(s) on the BCH 2026 VM (limits loosened)\n`);
+  const includeDemos = process.argv.includes('--demos');
+  const registry = includeDemos ? REGISTRY : REGISTRY.filter((i) => i.demo !== true);
+  console.log(
+    `benchmarking ${registry.length} implementation(s) on the BCH 2026 VM (limits loosened)` +
+    (includeDemos ? '' : '  [demos hidden; --demos to show]') + '\n',
+  );
   const results: BenchmarkResult[] = [];
-  for (const impl of REGISTRY) {
+  for (const impl of registry) {
     process.stdout.write(`- ${impl.id} ... `);
     try {
       const scenario = await impl.load();
@@ -174,10 +179,10 @@ const main = async () => {
   }
 
   const cols = (c: string[]) => [
-    padR(c[0]!, 22), padR(c[1]!, 11), padR(c[2]!, 28),
-    padL(c[3]!, 6), padL(c[4]!, 12), padL(c[5]!, 14), padL(c[6]!, 15), padR(c[7]!, 16),
-  ].join(' ');
-  const header = cols(['implementation', 'field', 'correctness', 'steps', 'total B', 'total op-cost', 'max/step cost', 'BCH compatible']);
+    padR(c[0]!, 20), padR(c[1]!, 9), padR(c[2]!, 26),
+    padL(c[3]!, 5), padL(c[4]!, 12), padL(c[5]!, 13), padL(c[6]!, 7), c[7]!,
+  ].join('  ');
+  const header = cols(['implementation', 'field', 'correctness', 'steps', 'total B', 'op-cost', '@10KB', 'BCH compatible']);
 
   for (const [track, rs] of tracks) {
     console.log(`\n### ${track}`);
@@ -191,25 +196,58 @@ const main = async () => {
           : r.validPassed
             ? 'valid-only'
             : 'FAIL';
-      const compat = r.bchCompatible
-        ? 'yes'
-        : r.profileOnly
-          ? `no (${r.bchIncompatibleReason ?? 'script-size'})`
-          : `no (${r.bchIncompatibleReason ?? 'limit'}; ~${r.inputsForHeaviestStep} steps by op-cost)`;
+      const compat = r.bchCompatible ? 'yes' : `no: ${r.bchIncompatibleReason ?? 'limit'}`;
+      const at10kb = r.profileOnly ? '-' : r.inputsForHeaviestStep <= 1 ? '1' : `~${r.inputsForHeaviestStep}`;
       console.log(cols([
         r.impl.id, r.impl.field, correctness,
         String(r.stepCount), fmt(r.totalBytes),
-        r.profileOnly ? '-' : fmt(r.totalOperationCost),
-        r.profileOnly ? '-' : fmt(r.maxStepOperationCost), compat,
+        r.profileOnly ? '-' : fmt(r.totalOperationCost), at10kb, compat,
       ]));
       for (const c of r.checkpointStats) {
         console.log(`    > reach "${c.label}" @ step ${c.atStep}: ${fmt(c.cumulativeOpCost)} op-cost, ${fmt(c.cumulativeBytes)} B`);
       }
+      const ms = r.impl.milestone;
+      if (ms !== undefined && !r.profileOnly) {
+        const at = ms.scalar !== undefined ? ` @ scalar ${ms.scalar}` : '';
+        console.log(`    > milestone "${ms.name}"${at}: ours ${fmt(ms.thisOpCost)} op-cost vs ${fmt(ms.referenceOpCost)} [${ms.referenceSource}]`);
+        if (ms.normalized === true) {
+          const cmp = ms.thisOpCost < ms.referenceOpCost
+            ? `${(ms.referenceOpCost / ms.thisOpCost).toFixed(2)}x cheaper`
+            : `${(ms.thisOpCost / ms.referenceOpCost).toFixed(2)}x costlier`;
+          console.log(`        normalized (same scalar; both fixed-iteration loops): ours is ${cmp}`);
+        } else if (ms.caveat !== undefined) {
+          console.log(`        ${ms.caveat}`);
+        }
+      }
     }
   }
 
-  console.log(`\nBCH compatible = every step of the valid run validates on the REAL BCH 2026 VM (consensus limits, non-standard).`);
-  console.log(`"no (reason; ~N steps by op-cost)" = the heaviest step breaks that consensus limit (reason) and, by op-cost alone, would need ~N standard inputs (budget ${fmt(standardInputBudget())}).`);
+  // --- vs the reference implementation (size + op-cost ratios) ---
+  const ref = results.find((r) => r.impl.reference === true && !r.profileOnly);
+  if (ref !== undefined) {
+    const ratio = (impl: number, base: number): string => {
+      if (impl === base) return 'same';
+      return impl < base
+        ? `${(base / impl).toFixed(base / impl >= 10 ? 0 : 1)}x smaller`
+        : `${(impl / base).toFixed(1)}x larger`;
+    };
+    // Only compare SAME-SCOPE entries (same proofSystem = a full verifier of the
+    // same system). A partial/checkpoint entry (e.g. the vk_x sub-step) must not be
+    // ratioed against the whole verifier, and the monolithic reference exposes no
+    // isolable vk_x cost to compare a part against.
+    console.log(`\n### vs reference: ${ref.impl.id} (full ${ref.impl.proofSystem} verifier; ${fmt(ref.totalBytes)} B, ${fmt(ref.totalOperationCost)} op-cost)`);
+    const peers = results.filter((r) => r !== ref && !r.profileOnly && r.impl.proofSystem === ref.impl.proofSystem);
+    for (const r of peers) {
+      console.log(
+        `  ${padR(r.impl.id, 20)} bytes ${padR(ratio(r.totalBytes, ref.totalBytes), 14)} ` +
+        `op-cost ${padR(ratio(r.totalOperationCost, ref.totalOperationCost), 14)} [${r.impl.field}]`,
+      );
+    }
+    console.log(`  (same proof system only; curves/circuits differ — see "Not every Groth16 is alike" in the README)`);
+  }
+
+  console.log(`\n@10KB = inputs needed if the unlocking is zero-padded to the 10,000-byte cap (max budget (41+10000)x800 = ${fmt(standardInputBudget())} op-cost/input); "1" fits one input.`);
+  console.log(`BCH compatible = validates on the real BCH 2026 VM as-is; the blocker (script-size / op-cost) is shown.`);
 };
 
 await main();

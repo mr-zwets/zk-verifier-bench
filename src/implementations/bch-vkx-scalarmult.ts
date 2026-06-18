@@ -25,6 +25,20 @@ export const bchVkxScalarmult: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   source: 'BCH-native CashScript (cashc feat/reusable-functions); checkpoint #1 sub-step',
+  // Same-milestone, NORMALIZED comparison at scrypt-bn256's scalar (113569).
+  // Both loops are fixed-iteration (ours: a 254-step loop; scrypt's: unrolled,
+  // since BSV scripts can't loop), so op-cost is ~scalar-VALUE-independent and a
+  // same-scalar measurement is a fair per-implementation comparison:
+  //   ours @113569      = 38,735,274  (pnpm bch:vkx-scalarmult-sweep)
+  //   scrypt-bn256 @113569 = 49,477,018  (pnpm scrypt-bn256:find-vkx)
+  milestone: {
+    name: 'vk_x (1 scalar-mult + add)',
+    thisOpCost: 38_735_274,
+    referenceOpCost: 49_477_018,
+    referenceSource: 'scrypt-bn256',
+    scalar: '113569 (popcount 10)',
+    normalized: true,
+  },
   load: async () => ({
     valid: [
       {

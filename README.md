@@ -92,10 +92,32 @@ docs/                 benchmark.md, scrypt.md, checkpoints.md
 |----|-------|-------|
 | `nchain` | Groth16 / single-tx | real BSV mainnet verifier (BLS12-381) |
 | `scrypt-bn256` | Groth16 / single-tx | real BSV mainnet verifier (BN254, same curve as `BN256.cash`); accepts/rejects via `pnpm scrypt-bn256:verify` |
+| `bch-vkx-scalarmult` | Groth16 vk_x (BCH-native) / single-tx | first BCH-native step (vk_x scalar-mult sub-step); normalized vs scrypt-bn256 at the same scalar |
 | `bch-multistep-demo` | demo / multi-tx | hash-chained-state demo validating the multi-tx path |
 
 Next target: a BCH-native BN254 Groth16 verifier as a multi-tx implementation, so
 the harness can report step by step when it becomes BCH-compatible.
+
+## Not every Groth16 is alike
+
+The Groth16 entries are not interchangeable. Comparing their *totals* mixes
+several factors that have nothing to do with implementation quality:
+
+- **Curve.** `nchain` is BLS12-381 (48-byte field elements); `scrypt-bn256` and
+  our BCH work are BN254 (32-byte). A bigger curve means bigger, costlier scripts.
+- **Statement / circuit.** Each verifies a different proof for a different
+  circuit, with a different verifying key and a different number of public inputs
+  (which sets the size of the vk_x multi-scalar-multiplication).
+- **Optimization.** Precomputed pairings (e.g. `e(alpha,beta)` folded into the
+  VK), affine vs projective coordinates, window sizes, etc.
+- **Codegen.** BSV scripts are fully unrolled; BCH uses loops and functions, so
+  the same work compiles to far smaller bytecode.
+
+So a cross-entry "Nx larger / cheaper" on totals is *indicative, not a clean
+benchmark*. An apples-to-apples result needs the same curve, statement, and
+inputs; that is why per-milestone comparisons are normalized (e.g. vk_x measured
+at the same scalar, both loops fixed-iteration, so the gap reflects per-operation
+efficiency rather than input size — see `docs/checkpoints.md`).
 
 ## Notes
 

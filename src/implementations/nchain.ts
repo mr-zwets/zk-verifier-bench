@@ -18,6 +18,7 @@ export const nchain: Implementation = {
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'single-tx',
+  reference: true,
   source: 'BSV mainnet tx e4cd...514c (proof) spending 79a5...4940:0 (verifier)',
   load: async () => ({
     valid: [

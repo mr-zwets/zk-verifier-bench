@@ -62,7 +62,35 @@ export interface Implementation {
   field: string;
   structure: Structure;
   source: string;
+  /** the current reference implementation; others are compared against it */
+  reference?: boolean;
+  /** a toy demo, not a real verifier; kept in its own leaderboard but excluded
+   * from the vs-reference comparison (its ratios would be meaningless) */
+  demo?: boolean;
+  /** a same-milestone comparison against a reference verifier (see Milestone) */
+  milestone?: Milestone;
   load: () => Promise<Scenario>;
+}
+
+/**
+ * A same-milestone comparison: this implementation reaches a named verifier
+ * milestone, and the benchmark shows its op-cost next to a reference cost measured
+ * in the same VM (where the monolithic reference reaches the same milestone). Raw
+ * numbers only — no ratio unless `normalized`, since op-cost depends on scalar
+ * width/popcount.
+ */
+export interface Milestone {
+  name: string;
+  /** this implementation's op-cost at the comparison scalar */
+  thisOpCost: number;
+  referenceOpCost: number;
+  referenceSource: string;
+  /** the scalar both sides are measured at (for a normalized comparison) */
+  scalar?: string;
+  /** confound to surface when NOT normalized */
+  caveat?: string;
+  /** true only if both sides ran identical work (same scalar) */
+  normalized?: boolean;
 }
 
 export interface StepMetrics {

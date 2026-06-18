@@ -45,6 +45,7 @@ export const bchMultistepDemo: Implementation = {
   proofSystem: 'demo (hash-chained state)',
   field: '-',
   structure: 'multi-tx',
+  demo: true,
   source: 'synthetic; mirrors multi-step-computation.md',
   load: async () => {
     const valid = Array.from({ length: STEPS }, (_, i) => makeStep(BigInt(i)));
