@@ -5,6 +5,7 @@
 // Results are grouped into separate leaderboards by (proofSystem, structure).
 // Correctness gates the cost numbers.
 import { bchMultistepDemo } from '../implementations/bch-multistep-demo.js';
+import { bchVkxChunked } from '../implementations/bch-vkx-chunked.js';
 import { bchVkxScalarmult } from '../implementations/bch-vkx-scalarmult.js';
 import { nchain } from '../implementations/nchain.js';
 import { scryptBn256 } from '../implementations/scrypt-bn256.js';
@@ -26,7 +27,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-const REGISTRY: Implementation[] = [nchain, scryptBn256, bchVkxScalarmult, bchMultistepDemo];
+const REGISTRY: Implementation[] = [nchain, scryptBn256, bchVkxScalarmult, bchVkxChunked, bchMultistepDemo];
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
   const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode);
