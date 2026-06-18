@@ -74,6 +74,7 @@ const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementa
     return {
       impl, profileOnly: true, checked: false, validPassed: false,
       invalidRejected: 0, invalidTotal: 0, pass: false, bsvOpReturn: false, steps,
+      checkpointStats: [],
       stepCount: steps.length,
       totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
       totalOperationCost: 0, maxStepOperationCost: 0,
@@ -87,6 +88,19 @@ const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementa
   const vm = createLoosenedVm();
   const steps = scenario.valid.map((s) => runStep(vm, s, bsv));
   const validPassed = steps.every((s) => s.accepted);
+
+  // cumulative op-cost + bytes to reach each named checkpoint (in-between metrics)
+  const checkpointStats: BenchmarkResult['checkpointStats'] = [];
+  let cumOp = 0;
+  let cumBytes = 0;
+  steps.forEach((sm, i) => {
+    cumOp += sm.operationCost;
+    cumBytes += sm.lockingBytes + sm.unlockingBytes;
+    const label = scenario.valid[i]!.checkpoint;
+    if (label !== undefined) {
+      checkpointStats.push({ label, atStep: i + 1, cumulativeOpCost: cumOp, cumulativeBytes: cumBytes });
+    }
+  });
 
   // BCH compatibility: replay the valid run on the REAL BCH 2026 VM (consensus limits).
   const realVm = createRealVm();
@@ -120,6 +134,7 @@ const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementa
     pass: validPassed && invalidRuns.length > 0 && invalidRejected === invalidRuns.length,
     bsvOpReturn: bsv,
     steps,
+    checkpointStats,
     stepCount: steps.length,
     totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
     totalOperationCost: opCosts.reduce((a, b) => a + b, 0),
@@ -186,6 +201,9 @@ const main = async () => {
         r.profileOnly ? '-' : fmt(r.totalOperationCost),
         r.profileOnly ? '-' : fmt(r.maxStepOperationCost), compat,
       ]));
+      for (const c of r.checkpointStats) {
+        console.log(`    > reach "${c.label}" @ step ${c.atStep}: ${fmt(c.cumulativeOpCost)} op-cost, ${fmt(c.cumulativeBytes)} B`);
+      }
     }
   }
 

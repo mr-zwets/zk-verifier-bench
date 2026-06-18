@@ -9,6 +9,7 @@
     "fetch:nchain": "tsx src/fetch-data.ts nchain",
     "fetch:scrypt-bn256": "tsx src/fetch-data.ts scrypt-bn256",
     "benchmark": "tsx --max-old-space-size=8192 src/harness/benchmark.ts",
+    "checkpoints": "tsx src/checkpoints/demo.ts",
     "bch:fp-mul": "tsx src/bch/fp-mul.ts",
     "nchain:extract": "tsx src/nchain/extract.ts",
     "nchain:run": "tsx src/nchain/run.ts",
@@ -16,7 +17,6 @@
     "scrypt-bn256:extract": "tsx --max-old-space-size=4096 src/scrypt-bn256/extract.ts",
     "scrypt-bn256:run": "tsx --max-old-space-size=4096 src/scrypt-bn256/run.ts",
     "scrypt-bn256:verify": "tsx --max-old-space-size=8192 src/scrypt-bn256/verify-proofs.ts",
-    "starkware:probe": "tsx src/starkware/probe.ts",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
@@ -24,7 +24,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.12.2",
   "dependencies": {
-    "@bitauth/libauth": "3.1.0-next.8"
+    "@bitauth/libauth": "3.1.0-next.8",
+    "@noble/curves": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.3",

@@ -12,6 +12,22 @@ export interface Step {
   lockingBytecode: Uint8Array;
   /** the witness for this step (proof data / carried state), push-only */
   unlockingBytecode: Uint8Array;
+  /**
+   * If set, this step reaches a named milestone (e.g. "vk_x", "miller-boundary").
+   * The benchmark records the cumulative op-cost and on-chain bytes to reach it,
+   * so implementations can compete on the in-between metrics, not just the total.
+   */
+  checkpoint?: string;
+}
+
+export interface CheckpointStat {
+  label: string;
+  /** 1-based step index at which the checkpoint is reached */
+  atStep: number;
+  /** cumulative op-cost of steps 1..atStep */
+  cumulativeOpCost: number;
+  /** cumulative locking+unlocking bytes of steps 1..atStep */
+  cumulativeBytes: number;
 }
 
 /** A valid run (all steps must be accepted) plus optional invalid runs (each must fail). */
@@ -73,6 +89,8 @@ export interface BenchmarkResult {
    * (the valid run halts at a reachable OP_RETURN, which fails on strict BCH) */
   bsvOpReturn: boolean;
   steps: StepMetrics[];
+  /** cumulative op-cost + bytes to reach each named checkpoint (multi-step) */
+  checkpointStats: CheckpointStat[];
   stepCount: number;
   totalBytes: number;
   totalOperationCost: number;

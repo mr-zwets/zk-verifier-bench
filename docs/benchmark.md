@@ -72,6 +72,10 @@ just `valid: [oneStep]`.
   implies (`ceil(maxStepOpCost / 8,032,800)`, the budget of one input at the
   10,000-byte unlocking cap). A verifier "runs on BCH" only when every step is
   compatible.
+- **Checkpoint cost (in-between metrics).** Tag a step with `checkpoint: "<label>"`
+  and the benchmark reports the cumulative op-cost + on-chain bytes to *reach* it,
+  printed under the row. This lets implementations compete per-milestone (e.g.
+  cheapest to reach vk_x), not just on the total. See `docs/checkpoints.md`.
 
 ## Current entries
 

@@ -46,8 +46,12 @@ export const bchMultistepDemo: Implementation = {
   field: '-',
   structure: 'multi-tx',
   source: 'synthetic; mirrors multi-step-computation.md',
-  load: async () => ({
-    valid: Array.from({ length: STEPS }, (_, i) => makeStep(BigInt(i))),
-    tamperable: true,
-  }),
+  load: async () => {
+    const valid = Array.from({ length: STEPS }, (_, i) => makeStep(BigInt(i)));
+    // tag a couple of steps as checkpoints so the benchmark reports the
+    // cumulative op-cost + bytes to reach them (stand-ins for vk_x / boundary).
+    valid[0]!.checkpoint = 'milestone-1';
+    valid[STEPS - 1]!.checkpoint = 'milestone-final';
+    return { valid, tamperable: true };
+  },
 };

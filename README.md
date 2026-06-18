@@ -65,6 +65,7 @@ an implementation.
 | script | what |
 |--------|------|
 | `pnpm benchmark` | run all registered implementations and print the leaderboards |
+| `pnpm checkpoints` | compute/validate the BN254 golden checkpoints (vk_x + Miller boundary) |
 | `pnpm fetch[:nchain\|:scrypt-bn256]` | download raw tx hex artifacts from WhatsOnChain |
 | `pnpm nchain:extract` | disassemble the nChain verifier to an opcode listing |
 | `pnpm nchain:run` / `nchain:verify` | run / accept-reject the nChain verifier in detail |
@@ -77,11 +78,12 @@ an implementation.
 ```
 src/harness/          types, VM(s), tamper, benchmark runner
 src/implementations/  one module per verifier (registered in benchmark.ts)
+src/checkpoints/      off-chain BN254 golden checkpoints (vk_x, Miller boundary)
 src/nchain/           detailed nChain extract/run/verify scripts
 src/scrypt-bn256/     sCrypt BN256 extract/run/verify scripts
 src/bch/              BCH primitive measurements (fp-mul)
 data/<impl>/          SOURCE.md provenance (raw hex + listings are gitignored, re-fetchable)
-docs/                 benchmark.md, scrypt.md
+docs/                 benchmark.md, scrypt.md, checkpoints.md
 ```
 
 ## Implementations
@@ -97,6 +99,10 @@ the harness can report step by step when it becomes BCH-compatible.
 
 ## Notes
 
-- libauth `@bitauth/libauth@3.1.0-next.8` provides the BCH 2023/2025/2026 VMs.
+- libauth `@bitauth/libauth@3.1.0-next.8` provides the BCH 2023/2025/2026 VMs;
+  `@noble/curves` provides the off-chain BN254 reference for the checkpoints.
+- A step can be tagged `checkpoint: "vk_x"`; the benchmark then reports the
+  cumulative op-cost + bytes to reach it, so implementations compete on the
+  in-between metrics, not just the total. See `docs/checkpoints.md`.
 - Large raw-hex and disassembly artifacts are gitignored; each `data/<impl>/`
   folder keeps a `SOURCE.md` with provenance and the commands to regenerate.
