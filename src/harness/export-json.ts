@@ -9,7 +9,7 @@
 // Score = total on-chain bytes (lower = cheaper fees). op-cost / steps are
 // secondary. BCH compatibility is a multi-dimensional cell, not a yes/no: a huge
 // BSV singleton is a correct, listed submission that simply does not fit BCH.
-import { writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 import type { BenchmarkResult } from './types.js';
 import { computeResults } from './benchmark.js';
@@ -17,6 +17,19 @@ import { STANDARD_UNLOCKING_CAP } from './vm.js';
 
 const SCHEMA_VERSION = 1;
 const SIZE_CAP = STANDARD_UNLOCKING_CAP; // 10,000 B per locking/unlocking script
+
+// Accumulating time-series of the best BCH-native (fitting) full verifier, for the
+// score-history chart. Committed and appended to whenever that best score changes.
+const HISTORY_FILE = 'score-history.json';
+interface HistoryPoint { t: string; score: number; id: string; steps: number }
+const loadHistory = (): HistoryPoint[] => {
+  if (!existsSync(HISTORY_FILE)) return [];
+  try {
+    return JSON.parse(readFileSync(HISTORY_FILE, 'utf8')) as HistoryPoint[];
+  } catch {
+    return [];
+  }
+};
 
 type Category = 'full' | 'partial' | 'demo';
 
@@ -107,9 +120,21 @@ const main = async () => {
     .filter((e) => !e.official)
     .sort((a, b) => a.score - b.score)[0];
 
+  // accumulate the score-history time-series: append a point when the best fitting
+  // verifier's score changes (deduped against the last recorded score).
+  const generatedAt = new Date().toISOString();
+  const history = loadHistory();
+  if (bestBchNative !== undefined) {
+    const last = history[history.length - 1];
+    if (last === undefined || last.score !== bestBchNative.score) {
+      history.push({ t: generatedAt, score: bestBchNative.score, id: bestBchNative.id, steps: bestBchNative.secondary.steps });
+      writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2) + '\n');
+    }
+  }
+
   const artifact = {
     schema: SCHEMA_VERSION,
-    generatedAt: new Date().toISOString(),
+    generatedAt,
     statement: {
       proofSystem: 'Groth16',
       // the competition's pinned BN254 target (same curve as the BCH-native work)
@@ -127,6 +152,7 @@ const main = async () => {
       // best full verifier that fits BCH, or null while the slot is open
       current: bestBchNative === undefined ? null : anchor(bestBchNative, 'Best BCH-native full verifier'),
     },
+    history,
     entries,
   };
 
