@@ -30,13 +30,13 @@ const v = JSON.parse(readFileSync('src/bch/pairing-chunked-vectors.json', 'utf8'
 
 export const bchPairingChunked: Implementation = {
   id: 'bch-pairing-chunked',
-  name: 'BCH Groth16 pairing chunked (Miller boundary across 133 txs, multi-tx, BCH-compatible)',
+  name: 'BCH Groth16 pairing chunked (Miller boundary, multi-tx, BCH-compatible)',
   proofSystem: 'Groth16 pairing (BCH-native)',
   field: 'BN254',
   structure: 'multi-tx',
   source:
     'BCH-native CashScript: the BN254 Groth16 Miller boundary e(-A,B)*e(alpha,beta)*' +
-    'e(vk_x,gamma)*e(C,delta) split across 133 transactions so EVERY step fits one ' +
+    'e(vk_x,gamma)*e(C,delta) split across transactions so EVERY step fits one ' +
     'BCH input (op-cost <=8,032,800, scripts <=10,000 B). 4 single-pair optimal-ate ' +
     'Miller chains (f in Fp12 + running G2 point R, hash256-committed, ~5 KB/chunk, ' +
     'NAF steps unrolled with the digit baked so op-cost binds not size) + a combine ' +
