@@ -20,11 +20,21 @@ const v = JSON.parse(readFileSync('src/bch/vkx-scalarmult-vectors.json', 'utf8')
 
 export const bchVkxScalarmult: Implementation = {
   id: 'bch-vkx-scalarmult',
-  name: 'BCH vk_x scalarMult (Groth16 checkpoint #1 sub-step)',
-  proofSystem: 'Groth16 vk_x (BCH-native)',
+  name: 'BCH ONE scalarMult (vk_x building block, NOT the full vk_x)',
+  // Distinct leaderboard: this is a single scalarMult (input*IC + one Jacobian
+  // add + affine), a SUB-STEP / measurement reference -- NOT the full vk_x
+  // (which is IC0 + input0*IC1 + input1*IC2, i.e. TWO of these). Kept out of the
+  // full-vk_x milestone so it does not compete with the singleton/chunked
+  // full-vk_x entries.
+  proofSystem: 'Groth16 vk_x sub-step (1 scalarMult)',
   field: 'BN254',
   structure: 'single-tx',
-  source: 'BCH-native CashScript (cashc feat/reusable-functions); checkpoint #1 sub-step',
+  source:
+    'BCH-native CashScript (cashc feat/reusable-functions), contract VkXJacAdd: ' +
+    'ONE scalar multiply (input*IC, 254-bit double-and-add) + one Jacobian point ' +
+    'add + affine conversion -- a BUILDING BLOCK / measurement reference, NOT the ' +
+    'full vk_x (the full vk_x needs two of these plus the IC0 fold; see ' +
+    'bch-vkx-singleton / bch-vkx-chunked-*).',
   // Same-milestone, NORMALIZED comparison at scrypt-bn256's scalar (113569).
   // Both loops are fixed-iteration (ours: a 254-step loop; scrypt's: unrolled,
   // since BSV scripts can't loop), so op-cost is ~scalar-VALUE-independent and a

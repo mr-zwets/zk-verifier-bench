@@ -20,6 +20,12 @@ const SIZE_CAP = STANDARD_UNLOCKING_CAP; // 10,000 B per locking/unlocking scrip
 
 type Category = 'full' | 'partial' | 'demo';
 
+// Entries the harness still benchmarks (e.g. for the normalized vs-sCrypt op-cost
+// comparison) but the website should not list. bch-vkx-scalarmult is a single
+// scalarMult sub-step on the old EC codegen — a fraction of vk_x, so it muddies the
+// monolith-vs-chunked milestone story.
+const SITE_EXCLUDE = new Set(['bch-vkx-scalarmult']);
+
 const categoryOf = (r: BenchmarkResult): Category => {
   if (r.impl.demo === true) return 'demo';
   return r.impl.proofSystem === 'Groth16' ? 'full' : 'partial';
@@ -87,7 +93,7 @@ const main = async () => {
   const outfile = process.argv[2] ?? 'results.json';
   // include demos so the artifact is complete; the site filters by category.
   const results = await computeResults(true);
-  const entries = results.map(entryOf);
+  const entries = results.map(entryOf).filter((e) => !SITE_EXCLUDE.has(e.id));
 
   const byId = (id: string) => entries.find((e) => e.id === id);
   const full = entries.filter((e) => e.category === 'full');

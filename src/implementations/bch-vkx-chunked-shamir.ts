@@ -78,11 +78,11 @@ export const bchVkxChunkedShamir: Implementation = {
     'doublings (single 254-iter MSB-first loop), RUNTIME public inputs (input0/' +
     'input1 carried in the hash-chained state and bit-tested in-script via a 2-bit ' +
     'Shamir select over VK consts {IC1,IC2,T}), verified-inverse-on-stack, ' +
-    'byte-budgeted chunks, zero-padded unlocking for per-input budget. The EC ops ' +
+    'tuned per-chunk padding for per-input budget. The EC ops ' +
     'jacDouble/jacAdd/selectPoint are MULTI-VALUE-RETURN reusable functions ' +
-    '(returns (int,int,int) -> OP_DEFINE/OP_INVOKE) defined ONCE per chunk and ' +
-    'invoked per iteration instead of inlined, collapsing per-iteration bytecode ' +
-    '(~250-480B vs ~1350B inlined) so ~16-17 iters pack per chunk -> 16 chunks',
+    '(returns (int,int,int) -> OP_DEFINE/OP_INVOKE) defined ONCE per chunk, and ' +
+    'each chunk LOOPS over its bit-range (body compiled once) so per-chunk bytecode ' +
+    'is ~1.5KB and op-cost (not size) binds -> 3 chunks, ~23KB total, ~14.3M op-cost',
   load: async () => {
     const valid: Step[] = v.chunks.map((c) => {
       const tail = c.final ? ' +fold IC0 +verified-inverse->affine, assert vk_x' : '';

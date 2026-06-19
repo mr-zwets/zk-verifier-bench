@@ -19,6 +19,14 @@ grade it against two intermediate "golden" values computed off-chain
   must use the same Fp12 basis; otherwise compare via `finalExponentiate(...) == 1`
   (basis-tolerant). `millerBoundary(vk, proof, vk_x)` → `fp12Hex(...)`.
 
+> **Pairing milestone oracle (checkpoint #2 → #3).** The full pairing checker,
+> a deterministic **non-degenerate** vector generator, py_ecc cross-validation,
+> and the precise **Fp12-basis finding** (noble's 2-over-3-over-2 tower vs
+> py_ecc's flat power basis — same tower *shape*, different serialization) live in
+> [`pairing-checker.md`](./pairing-checker.md). Run `pnpm checkpoints:pairing`
+> (`gradeCandidate` grades vk_x exactly, the Miller Fp12 exactly if same-basis
+> else via finalExp, and the verdict). Vectors: `src/checkpoints/pairing-vectors.json`.
+
 `pnpm checkpoints` validates the math on a constructed BN254 instance: it checks
 vk_x against a manual MSM, accepts a valid instance, rejects a tampered public
 input, and prints both golden values.

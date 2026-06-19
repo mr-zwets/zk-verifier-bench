@@ -8,6 +8,7 @@ import { bchMultistepDemo } from '../implementations/bch-multistep-demo.js';
 import { bchVkxChunkedShamir } from '../implementations/bch-vkx-chunked-shamir.js';
 import { bchVkxChunkedTwoloop } from '../implementations/bch-vkx-chunked-twoloop.js';
 import { bchVkxScalarmult } from '../implementations/bch-vkx-scalarmult.js';
+import { bchVkxSingleton } from '../implementations/bch-vkx-singleton.js';
 import { nchain } from '../implementations/nchain.js';
 import { scryptBn256 } from '../implementations/scrypt-bn256.js';
 
@@ -30,7 +31,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchVkxScalarmult, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchVkxScalarmult, bchVkxSingleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchMultistepDemo];
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
   const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode);
