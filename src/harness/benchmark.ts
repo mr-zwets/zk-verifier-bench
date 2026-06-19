@@ -5,10 +5,13 @@
 // Results are grouped into separate leaderboards by (proofSystem, structure).
 // Correctness gates the cost numbers.
 import { bchMultistepDemo } from '../implementations/bch-multistep-demo.js';
-import { bchVkxChunked } from '../implementations/bch-vkx-chunked.js';
+import { bchVkxChunkedShamir } from '../implementations/bch-vkx-chunked-shamir.js';
+import { bchVkxChunkedTwoloop } from '../implementations/bch-vkx-chunked-twoloop.js';
 import { bchVkxScalarmult } from '../implementations/bch-vkx-scalarmult.js';
 import { nchain } from '../implementations/nchain.js';
 import { scryptBn256 } from '../implementations/scrypt-bn256.js';
+
+import { pathToFileURL } from 'node:url';
 
 import { tamperProof } from './tamper.js';
 import type { BenchmarkResult, Implementation, Step, StepMetrics } from './types.js';
@@ -27,7 +30,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-const REGISTRY: Implementation[] = [nchain, scryptBn256, bchVkxScalarmult, bchVkxChunked, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchVkxScalarmult, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchMultistepDemo];
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
   const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode);
@@ -59,7 +62,7 @@ const tryTamper = (witness: Uint8Array): Uint8Array | undefined => {
 
 const SCRIPT_SIZE_CAP = 10_000; // BCH maximumBytecodeLength (per locking/unlocking script)
 
-const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementation['load']>>): BenchmarkResult => {
+export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementation['load']>>): BenchmarkResult => {
   // Profile-only: size-decidable, not executed (e.g. tx-introspection covenants
   // we cannot drive in a synthetic context). BCH compat == every script fits the cap.
   if (scenario.profileOnly) {
@@ -146,6 +149,22 @@ const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementa
     bchCompatible,
     bchIncompatibleReason,
   };
+};
+
+/** Run every registered implementation and return its BenchmarkResult (no printing).
+ * Shared by the CLI table and the JSON exporter. Demos are excluded by default. */
+export const computeResults = async (includeDemos = false): Promise<BenchmarkResult[]> => {
+  const registry = includeDemos ? REGISTRY : REGISTRY.filter((i) => i.demo !== true);
+  const results: BenchmarkResult[] = [];
+  for (const impl of registry) {
+    try {
+      const scenario = await impl.load();
+      results.push(benchmark(impl, scenario));
+    } catch {
+      // an implementation that fails to load is simply omitted from the results
+    }
+  }
+  return results;
 };
 
 const fmt = (n: number) => n.toLocaleString();
@@ -251,4 +270,8 @@ const main = async () => {
   console.log(`BCH compatible = validates on the real BCH 2026 VM as-is; the blocker (script-size / op-cost) is shown.`);
 };
 
-await main();
+// Only run the CLI table when invoked directly (`pnpm benchmark`), not when this
+// module is imported (e.g. by the JSON exporter, which reuses computeResults).
+const invokedDirectly =
+  process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (invokedDirectly) await main();

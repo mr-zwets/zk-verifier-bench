@@ -4,16 +4,19 @@
 //   vk_x = IC0 + input0*IC1 + input1*IC2   (G1 points on BN254/alt_bn128)
 //
 // The monolithic single-tx vk_x (src/bch/vkx.ts) is ~76M op-cost (~10 inputs).
-// Here it is split into K=32-iteration double-and-add windows; each window is a
-// CashScript contract that verifies its hash256-committed incoming state, runs
-// its K iterations (Fp ops as OP_DEFINE/OP_INVOKE), and commits the outgoing
-// state -- chunk i's outgoing == chunk i+1's incoming. The final chunk does the
-// single Fermat inverse -> affine and asserts equality with the py_ecc vk_x.
+// Here a SINGLE 254-iteration MSB-first double-and-add (Shamir/Straus shared
+// doublings) is split into byte-budgeted windows; each window is a CashScript
+// contract that verifies its hash256-committed incoming state -- R=(rX,rY,rZ)
+// PLUS the carried PUBLIC INPUTS (input0,input1) -- runs its iterations reading
+// the input bits AT RUNTIME (2-bit Shamir select over VK consts {IC1,IC2,T}),
+// and commits the outgoing state -- chunk i's outgoing == chunk i+1's incoming.
+// The final chunk folds IC0, does a verified inverse-on-stack -> affine and
+// asserts equality with the py_ecc vk_x.
 //
-// PADDING: each chunk's unlocking = the 9 incoming coords (reverse declaration
-// order, minimal pushes) + one big zero-PUSH padding the unlocking to ~10,000
-// bytes; the locking has a single OP_DROP prepended to consume that pad push.
-// That buys real-VM budget (41 + 10000) * 800 = 8,032,800 per input.
+// PADDING: each chunk's unlocking = the incoming coords+inputs (reverse
+// declaration order, minimal pushes) + one big zero-PUSH padding the unlocking
+// to ~10,000 bytes; the locking has a single OP_DROP prepended to consume that
+// pad push. That buys real-VM budget (41 + 10000) * 800 = 8,032,800 per input.
 //
 // This script re-evaluates each chunk's PADDED (locking, unlocking) on the
 // loosened VM (math correctness) and the real BCH 2026 VM (consensus verdict),
@@ -22,8 +25,8 @@
 //
 // Regenerate vectors:
 //   (groth16_contract)        python vkx_ref.py
-//   (groth16_contract/chunked) K=32 python gen_chunks.py
-//   (groth16_contract/chunked) node build_vectors.mjs   -> writes vkx-chunked-vectors.json
+//   (groth16_contract/chunked) python gen_chunks.py
+//   (groth16_contract/chunked) node build_vectors.mjs   -> writes vkx-chunked-shamir-vectors.json
 // Run:  pnpm tsx src/bch/vkx-chunked.ts
 import { hexToBin } from '@bitauth/libauth';
 import { readFileSync } from 'node:fs';
@@ -35,20 +38,22 @@ import { createLoosenedVm, createRealVm, evaluatePair, standardInputBudget } fro
 const here = dirname(fileURLToPath(import.meta.url));
 interface Chunk {
   idx: number;
-  term: number;
   lo: number;
   hi: number;
-  fold: boolean;
   final: boolean;
   incoming: string;
   outgoing: string | null;
   locking: string;
   unlocking: string;
+  invalidUnlocking: string;
+  invalidRejected: boolean;
   lockingBytes: number;
   unlockingBytes: number;
 }
-const vectors = JSON.parse(readFileSync(join(here, 'vkx-chunked-vectors.json'), 'utf8')) as {
+const vectors = JSON.parse(readFileSync(join(here, 'vkx-chunked-shamir-vectors.json'), 'utf8')) as {
   K: number;
+  byteBudget: number;
+  algorithm: string;
   numChunks: number;
   input0: number;
   input1: number;
@@ -69,8 +74,9 @@ const real = createRealVm();
 const BUDGET = standardInputBudget();
 
 console.log('=== Groth16 checkpoint #1: vk_x = IC0 + input0*IC1 + input1*IC2 (CHUNKED, multi-tx) ===');
+console.log(`algorithm = ${vectors.algorithm} (Shamir/Straus shared doublings, RUNTIME public inputs)`);
 console.log(`input0 = ${vectors.input0}  input1 = ${vectors.input1}`);
-console.log(`K = ${vectors.K} iterations/chunk,  ${vectors.numChunks} chunks`);
+console.log(`byte-budgeted chunks (~${vectors.byteBudget}B locking each),  ${vectors.numChunks} chunks`);
 console.log('expected vk_x (affine, py_ecc.bn128):');
 console.log('  x =', vectors.expected[0]);
 console.log('  y =', vectors.expected[1]);
@@ -85,7 +91,8 @@ let allReal = true;
 let maxLock = 0;
 let maxUnlock = 0;
 
-console.log('idx term  iters        lock    unlock  loose real     op-cost   fits');
+let allInvalid = true;
+console.log('idx  iters        lock    unlock  loose real     op-cost   fits  inval');
 for (const c of vectors.chunks) {
   const locking = hexToBin(c.locking);
   const unlocking = hexToBin(c.unlocking);
@@ -97,6 +104,10 @@ for (const c of vectors.chunks) {
     realR.operationCost <= BUDGET &&
     realR.accepted;
 
+  // re-verify the invalid (tampered) unlocking baked into the vectors is rejected
+  const invalidR = evaluatePair(real, locking, hexToBin(c.invalidUnlocking));
+  if (invalidR.accepted) allInvalid = false;
+
   totalOp += realR.operationCost;
   maxOp = Math.max(maxOp, realR.operationCost);
   maxLock = Math.max(maxLock, locking.length);
@@ -106,12 +117,13 @@ for (const c of vectors.chunks) {
   if (!realR.accepted) allReal = false;
 
   console.log(
-    `${String(c.idx).padStart(3)}  ${c.term === 0 ? 'IC1' : 'IC2'}  ` +
+    `${String(c.idx).padStart(3)}  ` +
       `[${String(c.lo).padStart(3)},${String(c.hi).padStart(3)})  ` +
       `${String(locking.length).padStart(5)}B  ${String(unlocking.length).padStart(5)}B  ` +
       `${loose.accepted ? 'OK ' : 'X  '}  ${realR.accepted ? 'OK ' : 'X  '}  ` +
-      `${realR.operationCost.toLocaleString().padStart(11)}  ${fits ? 'Y' : 'N'}` +
-      `${c.final ? '  <- inverse->affine, assert vk_x' : c.fold ? '  <- fold acc+=R' : ''}` +
+      `${realR.operationCost.toLocaleString().padStart(11)}  ${fits ? 'Y' : 'N'}    ` +
+      `${!invalidR.accepted ? 'rej' : 'ACC'}` +
+      `${c.final ? '  <- fold IC0 + verified-inverse->affine, assert vk_x' : ''}` +
       `${realR.error ? '  realerr:' + realR.error : ''}`,
   );
 }
@@ -133,23 +145,30 @@ const matchesPyEcc =
   BigInt(vectors.expected[1]) === BigInt(ref.expected[1]);
 console.log('  final expected vk_x == py_ecc reference:', matchesPyEcc);
 
-// tamper: perturb one byte of a middle chunk's arg region -> wrong incoming state.
+// tamper #1: perturb one byte of a middle chunk's incoming R -> wrong state.
 const tIdx = Math.floor(vectors.chunks.length / 2);
 const tch = vectors.chunks[tIdx]!;
 const tLock = hexToBin(tch.locking);
 const tUnlock = Uint8Array.from(hexToBin(tch.unlocking));
 tUnlock[1] = tUnlock[1]! ^ 0x01; // flip a bit inside the first coord push payload
 const tampered = evaluatePair(real, tLock, tUnlock);
-console.log(`  tampered chunk ${tIdx} rejected on real VM:`, !tampered.accepted, `(err: ${tampered.error ?? 'none'})`);
+console.log(`  tampered incoming-state (chunk ${tIdx}) rejected on real VM:`, !tampered.accepted, `(err: ${tampered.error ?? 'none'})`);
+
+// tamper #2: the final chunk's baked invalid unlocking forges zInv (Z*zInv != 1).
+const fch = vectors.chunks[vectors.chunks.length - 1]!;
+const fTampered = evaluatePair(real, hexToBin(fch.locking), hexToBin(fch.invalidUnlocking));
+console.log(`  tampered zInv (final chunk) rejected on real VM:`, !fTampered.accepted, `(err: ${fTampered.error ?? 'none'})`);
+console.log('  every chunk\'s baked invalid unlocking rejected:', allInvalid);
 
 console.log();
 console.log('--- summary ---');
-console.log(`chunks                : ${vectors.numChunks} (K=${vectors.K})`);
+console.log(`chunks                : ${vectors.numChunks} (Shamir/Straus, byte-budget ${vectors.byteBudget})`);
 console.log(`max lock / unlock     : ${maxLock}B / ${maxUnlock}B (both <= 10,000)`);
 console.log(`max step op-cost      : ${maxOp.toLocaleString()}  (budget ${BUDGET.toLocaleString()})`);
-console.log(`total op-cost (chain) : ${totalOp.toLocaleString()}  (singleton vk_x ~76,004,958)`);
+console.log(`total op-cost (chain) : ${totalOp.toLocaleString()}  (16-chunk baseline 85,206,922; singleton ~76M)`);
 console.log(`every chunk loose-OK  : ${allLoose}`);
 console.log(`every chunk real-OK   : ${allReal}`);
 console.log(`EVERY chunk fits ONE input (op-cost <= budget AND real-VM-valid): ${allFit}`);
 console.log(`chain continuous      : ${continuity}`);
 console.log(`reproduces py_ecc vk_x: ${matchesPyEcc}`);
+console.log(`every invalid unlocking rejected (incl. zInv tamper): ${allInvalid}`);

@@ -1,6 +1,6 @@
 // Compile every chunk*.cash in groth16_contract/chunked, build per-chunk
 // (locking, unlocking) vectors, and measure op-cost + size on the real &
-// loosened BCH 2026 VMs. Writes src/bch/vkx-chunked-vectors.json for the
+// loosened BCH 2026 VMs. Writes src/bch/vkx-chunked-shamir-vectors.json for the
 // bch-vkx-chunked benchmark entry.
 //
 // Unlocking = the 9 incoming-state coords pushed in REVERSE declaration order
@@ -12,7 +12,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { hexToBin, binToHex, bigIntToVmNumber } from '@bitauth/libauth';
 import { createLoosenedVm, createRealVm, evaluatePair, standardInputBudget } from '../harness/vm.js';
 
-const CHUNKDIR = 'C:/Users/mathi/Desktop/groth16_contract/chunked';
+const CHUNKDIR = 'C:/Users/mathi/Desktop/groth16_contract/chunked/shamir';
 const CASHC = 'C:/Users/mathi/Desktop/cashscript/packages/cashc/dist/cashc-cli.js';
 const manifest = JSON.parse(readFileSync(`${CHUNKDIR}/manifest.json`, 'utf8')) as {
   K: number; numChunks: number; input0: number; input1: number; expected: [string, string];
@@ -80,5 +80,5 @@ console.log('---');
 console.log(`chunks=${manifest.numChunks} K=${manifest.K} | total op-cost ${totalOp.toLocaleString()} | max/step ${maxOp.toLocaleString()} (budget ${BUDGET.toLocaleString()})`);
 console.log(`max lock ${maxLock}B max unlock ${maxUnlock}B | allAccept=${allAccept} allFit=${allFit}`);
 
-writeFileSync('src/bch/vkx-chunked-vectors.json', JSON.stringify(out, null, 2));
-console.log('wrote src/bch/vkx-chunked-vectors.json');
+writeFileSync('src/bch/vkx-chunked-shamir-vectors.json', JSON.stringify(out, null, 2));
+console.log('wrote src/bch/vkx-chunked-shamir-vectors.json');

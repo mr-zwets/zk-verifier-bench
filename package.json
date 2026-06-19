@@ -9,6 +9,7 @@
     "fetch:nchain": "tsx src/fetch-data.ts nchain",
     "fetch:scrypt-bn256": "tsx src/fetch-data.ts scrypt-bn256",
     "benchmark": "tsx --max-old-space-size=8192 src/harness/benchmark.ts",
+    "benchmark:json": "tsx --max-old-space-size=8192 src/harness/export-json.ts",
     "checkpoints": "tsx src/checkpoints/demo.ts",
     "bch:fp-mul": "tsx src/bch/fp-mul.ts",
     "bch:vkx": "tsx src/bch/vkx.ts",
