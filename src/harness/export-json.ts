@@ -101,6 +101,11 @@ const main = async () => {
   const bestBchNative = full
     .filter((e) => e.bch.compatible)
     .sort((a, b) => a.score - b.score)[0];
+  // smallest BCH-native (non-baseline) full verifier: the current frontier leader,
+  // whether or not it already fits BCH per-tx limits
+  const leader = full
+    .filter((e) => !e.official)
+    .sort((a, b) => a.score - b.score)[0];
 
   const artifact = {
     schema: SCHEMA_VERSION,
@@ -117,6 +122,8 @@ const main = async () => {
       nchain: anchor(byId('nchain'), 'BSV nChain · BLS12-381 · huge singleton · ✗ BCH'),
       // the wall every BCH submission must get under (per transaction)
       bchPerTxCap: { label: 'BCH per-tx script cap', bytes: SIZE_CAP },
+      // smallest BCH-native full verifier so far (the frontier leader)
+      leader: leader === undefined ? null : anchor(leader, 'BCH-native full verifier'),
       // best full verifier that fits BCH, or null while the slot is open
       current: bestBchNative === undefined ? null : anchor(bestBchNative, 'Best BCH-native full verifier'),
     },
