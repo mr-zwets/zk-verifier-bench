@@ -41,7 +41,7 @@ const limitReason = (error: string): string => {
 export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchMultistepDemo];
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
-  const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode);
+  const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode, step.covenant);
   return {
     label: step.label,
     lockingBytes: step.lockingBytecode.length,
@@ -56,7 +56,7 @@ const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
 /** A run is rejected if at least one of its steps does not accept. */
 const runRejects = (vm: Bch2026Vm, run: Step[], bsv: boolean): boolean =>
   run.some((s) => {
-    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode);
+    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant);
     return !(bsv ? o.bsvAccepted : o.accepted);
   });
 
@@ -129,7 +129,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
 
   // BCH compatibility: replay the valid run on the REAL BCH 2026 VM (consensus limits).
   const realVm = createRealVm();
-  const realOutcomes = scenario.valid.map((s) => evaluatePair(realVm, s.lockingBytecode, s.unlockingBytecode));
+  const realOutcomes = scenario.valid.map((s) => evaluatePair(realVm, s.lockingBytecode, s.unlockingBytecode, s.covenant));
   const firstFail = realOutcomes.find((o) => !o.accepted);
   const bchCompatible = firstFail === undefined && validPassed;
   const bchIncompatibleReason = firstFail?.error === undefined ? undefined : limitReason(firstFail.error);

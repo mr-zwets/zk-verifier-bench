@@ -18,6 +18,21 @@ export interface Step {
    * so implementations can compete on the in-between metrics, not just the total.
    */
   checkpoint?: string;
+  /**
+   * Token-threading covenant context. When set, this step's program carries NO
+   * baked state: the running state lives in the spent/created NFT commitment and
+   * the locking enforces it by introspection, so one fixed program verifies ANY
+   * proof. The harness drives the step through a synthetic token-carrying tx
+   * (spent UTXO = inCommitment, output[0] = outCommitment under outLockingBytecode,
+   * same category). All hex; the runner builds the transaction (see vm.evaluatePair).
+   */
+  covenant?: {
+    category: Uint8Array;
+    capability: 'none' | 'mutable' | 'minting';
+    inCommitment: Uint8Array;
+    outCommitment: Uint8Array;
+    outLockingBytecode: Uint8Array;
+  };
 }
 
 export interface CheckpointStat {

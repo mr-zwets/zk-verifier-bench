@@ -75,17 +75,55 @@ const OP_RETURN_ERR = 'Program called an OP_RETURN operation.';
 const isTruthy = (v: Uint8Array | undefined): boolean =>
   v !== undefined && v.length > 0 && !v.every((b, i) => b === 0 || (i === v.length - 1 && b === 0x80));
 
-/** Evaluate unlocking + locking as a synthetic spend and report acceptance + metrics. */
+/**
+ * Token-threading covenant context. When present, the running state lives in the
+ * spent/created NFT commitment (an introspection covenant), so the locking carries
+ * NO baked state and one fixed program verifies any proof. The harness builds a
+ * synthetic 1-in/1-out tx: the spent UTXO holds `inCommitment`, output[0] holds
+ * `outCommitment` under `outLockingBytecode` (the next chunk), same token category.
+ */
+export interface CovenantContext {
+  category: Uint8Array; // 32-byte token category (the thread id)
+  capability: 'none' | 'mutable' | 'minting';
+  inCommitment: Uint8Array; // NFT commitment of the spent UTXO  = hash256(incoming state)
+  outCommitment: Uint8Array; // NFT commitment of tx.outputs[0]   = hash256(outgoing state)
+  outLockingBytecode: Uint8Array; // tx.outputs[0] locking (next chunk; the perpetuation target)
+}
+
+/** Evaluate unlocking + locking as a synthetic spend and report acceptance + metrics.
+ * With a covenant context the spend is driven through a token-carrying tx so the
+ * contract's NFT-commitment / output introspection resolves. */
 export const evaluatePair = (
   vm: Bch2026Vm,
   lockingBytecode: Uint8Array,
   unlockingBytecode: Uint8Array,
+  covenant?: CovenantContext,
 ): EvalOutcome => {
-  const program = createTestAuthenticationProgramBch({
-    lockingBytecode,
-    unlockingBytecode,
-    valueSatoshis: 1000n,
+  const mkToken = (commitment: Uint8Array) => ({
+    amount: 0n,
+    category: covenant!.category,
+    nft: { capability: covenant!.capability, commitment },
   });
+  const program = covenant
+    ? {
+        inputIndex: 0,
+        sourceOutputs: [{ lockingBytecode, valueSatoshis: 1000n, token: mkToken(covenant.inCommitment) }],
+        transaction: {
+          version: 2,
+          inputs: [
+            { outpointTransactionHash: new Uint8Array(32), outpointIndex: 0, sequenceNumber: 0, unlockingBytecode },
+          ],
+          outputs: [
+            { lockingBytecode: covenant.outLockingBytecode, valueSatoshis: 1000n, token: mkToken(covenant.outCommitment) },
+          ],
+          locktime: 0,
+        },
+      }
+    : createTestAuthenticationProgramBch({
+        lockingBytecode,
+        unlockingBytecode,
+        valueSatoshis: 1000n,
+      });
   const state = vm.evaluate(program);
   const top = state.stack[state.stack.length - 1];
   const accepted =
