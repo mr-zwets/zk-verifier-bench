@@ -103,8 +103,10 @@ the harness can report step by step when it becomes BCH-compatible.
 The Groth16 entries are not interchangeable. Comparing their *totals* mixes
 several factors that have nothing to do with implementation quality:
 
-- **Curve.** `nchain` is BLS12-381 (48-byte field elements); `scrypt-bn256` and
-  our BCH work are BN254 (32-byte). A bigger curve means bigger, costlier scripts.
+- **Curve.** `nchain` is BLS12-381 (48-byte field elements); `scrypt-bn256` is
+  BN254 (32-byte). Our BCH work covers **both** — the BN254 line is the same-curve
+  match for `scrypt-bn256`, the BLS12-381 line for `nchain` — so each reference has
+  a same-curve BCH counterpart. A bigger curve means bigger, costlier scripts.
 - **Statement / circuit.** Each verifies a different proof for a different
   circuit, with a different verifying key and a different number of public inputs
   (which sets the size of the vk_x multi-scalar-multiplication).
@@ -112,10 +114,20 @@ several factors that have nothing to do with implementation quality:
   VK), affine vs projective coordinates, window sizes, etc.
 - **Codegen.** BSV scripts are fully unrolled; BCH uses loops and functions, so
   the same work compiles to far smaller bytecode.
+- **Deployment model — proof at runtime vs baked per-proof.** The references
+  (`nchain`, `scrypt-bn256`) and our **singleton** entries are *runtime-general*:
+  the proof (A,B,C) arrives push-only in the unlocking script at spend time, so one
+  deployed verifier validates any proof for that circuit. Our **chunked** entries
+  are *instance-specific*: the proof points are baked into the chunk scripts (the
+  public inputs are recomputed on-chain but pinned to the baked vk_x), so a
+  different proof requires regenerating the chunks. Both genuinely verify on-chain
+  — an invalid proof cannot satisfy the chain — but a per-proof-compiled multi-tx
+  chain and a runtime-general single script are different artifacts, so their byte
+  totals are not directly comparable.
 
 So a cross-entry "Nx larger / cheaper" on totals is *indicative, not a clean
-benchmark*. An apples-to-apples result needs the same curve, statement, and
-inputs; that is why per-milestone comparisons are normalized (e.g. vk_x measured
+benchmark*. An apples-to-apples result needs the same curve, statement, inputs,
+and deployment model; that is why per-milestone comparisons are normalized (e.g. vk_x measured
 at the same scalar, both loops fixed-iteration, so the gap reflects per-operation
 efficiency rather than input size — see `docs/checkpoints.md`).
 
