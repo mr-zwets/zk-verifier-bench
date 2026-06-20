@@ -72,6 +72,8 @@ export const bchVkxChunkedShamir: Implementation = {
   proofSystem: 'Groth16 vk_x (BCH-native)',
   field: 'BN254',
   structure: 'multi-tx',
+  // per-step state commitments are baked for this instance -> instance-specific
+  proofBinding: 'baked',
   source:
     'BCH-native CashScript: Shamir/Straus + multi-return EC functions + tuned padding. ' +
     'Shamir/Straus shared ' +

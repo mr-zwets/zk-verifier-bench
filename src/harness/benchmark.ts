@@ -87,6 +87,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     return {
       impl, profileOnly: true, checked: false, validPassed: false,
       invalidRejected: 0, invalidTotal: 0, pass: false, bsvOpReturn: false, steps,
+      proofBinding: impl.proofBinding ?? 'runtime', proofsTested: 1, proofsPassed: 0, runtimeGeneral: false,
       checkpointStats: [],
       stepCount: steps.length,
       totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
@@ -101,6 +102,17 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
   const vm = createLoosenedVm();
   const steps = scenario.valid.map((s) => runStep(vm, s, bsv));
   const validPassed = steps.every((s) => s.accepted);
+
+  // Proof-generality: run each EXTRA distinct proof against the same locking and
+  // count how many fully accept. A runtime-general verifier accepts them all; a
+  // verifier with the proof baked into its program accepts only the one it was
+  // built for. (The main valid run above is proof #0.)
+  const extraRuns = scenario.extraValidProofs ?? [];
+  const extraPassed = extraRuns.filter((run) => !runRejects(vm, run, bsv)).length;
+  const proofBinding = impl.proofBinding ?? 'runtime';
+  const proofsTested = 1 + extraRuns.length;
+  const proofsPassed = (validPassed ? 1 : 0) + extraPassed;
+  const runtimeGeneral = proofsPassed >= 2;
 
   // cumulative op-cost + bytes to reach each named checkpoint (in-between metrics)
   const checkpointStats: BenchmarkResult['checkpointStats'] = [];
@@ -145,6 +157,10 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     invalidRejected,
     invalidTotal: invalidRuns.length,
     pass: validPassed && invalidRuns.length > 0 && invalidRejected === invalidRuns.length,
+    proofBinding,
+    proofsTested,
+    proofsPassed,
+    runtimeGeneral,
     bsvOpReturn: bsv,
     steps,
     checkpointStats,
@@ -233,6 +249,16 @@ const main = async () => {
       ]));
       for (const c of r.checkpointStats) {
         console.log(`    > reach "${c.label}" @ step ${c.atStep}: ${fmt(c.cumulativeOpCost)} op-cost, ${fmt(c.cumulativeBytes)} B`);
+      }
+      if (!r.profileOnly) {
+        if (r.proofBinding === 'baked') {
+          console.log(`    > proof generality: instance-specific — the proof is baked into the program; a different proof needs it regenerated (the tamper test confirms only the baked witness is accepted)`);
+        } else if (r.proofsTested >= 2) {
+          const tag = r.proofsPassed === r.proofsTested ? 'runtime-general' : `ONLY ${r.proofsPassed}/${r.proofsTested} — NOT general`;
+          console.log(`    > proof generality: ${tag} — one fixed locking verifies ${r.proofsPassed}/${r.proofsTested} distinct proofs (proof in the unlocking witness)`);
+        } else {
+          console.log(`    > proof generality: runtime-general by construction — proof supplied in the unlocking witness (1 reference proof available)`);
+        }
       }
       const ms = r.impl.milestone;
       if (ms !== undefined && !r.profileOnly) {

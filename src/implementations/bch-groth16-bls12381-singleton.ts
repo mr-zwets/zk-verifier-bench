@@ -33,12 +33,20 @@ const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-vectors.js
   invalidUnlocking: string;
 };
 
+// Extra DISTINCT proofs minted under the SAME VK (same locking), to confirm this
+// verifier is runtime-general (one program verifies many proofs) on nchain's curve.
+// Built by groth16_contract/singleton/bls12-381/gen_multiproof.mjs.
+const mp = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-multiproof-vectors.json', 'utf8')) as {
+  proofs: { unlocking: string; invalidUnlocking: string; committed: boolean }[];
+};
+
 export const bchGroth16Bls12381Singleton: Implementation = {
   id: 'bch-groth16-bls12381-singleton',
   name: 'BCH Groth16 verifier singleton, BLS12-381 (vk_x on-chain + full pairing, single-tx)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'single-tx',
+  proofBinding: 'runtime',
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on ' +
     'BLS12-381 -- the SAME curve as nchain (Groth16Verify, ' +
@@ -62,6 +70,9 @@ export const bchGroth16Bls12381Singleton: Implementation = {
     const invalid: Step[][] = [
       [{ ...valid[0]!, unlockingBytecode: hexToBin(v.invalidUnlocking) }],
     ];
-    return { valid, invalid };
+    const extraValidProofs: Step[][] = mp.proofs
+      .filter((p) => !p.committed)
+      .map((p) => [{ ...valid[0]!, unlockingBytecode: hexToBin(p.unlocking) }]);
+    return { valid, invalid, extraValidProofs };
   },
 };

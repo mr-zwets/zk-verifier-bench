@@ -18,6 +18,9 @@ export const nchain: Implementation = {
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'single-tx',
+  // proof (~40 KB) supplied push-only in the spending tx's unlocking script;
+  // the locking verifier is fixed -> runtime-general (see data/nchain/SOURCE.md).
+  proofBinding: 'runtime',
   reference: true,
   source: 'BSV mainnet tx e4cd...514c (proof) spending 79a5...4940:0 (verifier)',
   load: async () => ({

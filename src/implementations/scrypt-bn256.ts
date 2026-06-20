@@ -22,6 +22,9 @@ export const scryptBn256: Implementation = {
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
+  // proof (510 B) supplied push-only in the spending tx's unlocking script; the
+  // locking verifier is fixed -> runtime-general (see data/scrypt-bn256/SOURCE.md).
+  proofBinding: 'runtime',
   source: 'BSV mainnet tx 24e8...bf24 (proof) spending 320b...725f:0 (verifier)',
   load: async () => ({
     valid: [

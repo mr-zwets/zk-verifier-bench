@@ -125,6 +125,20 @@ several factors that have nothing to do with implementation quality:
   chain and a runtime-general single script are different artifacts, so their byte
   totals are not directly comparable.
 
+  The benchmark **proves this empirically** rather than just asserting it. Each
+  entry carries a `proofBinding` (`runtime` / `baked`), and for the verifiers we
+  control the trusted setup of, the harness mints several *distinct* valid proofs
+  under the **same** verifying key (fresh public inputs + A,B, with C solved in the
+  exponent — `singleton/{bn254,bls12-381}/gen_multiproof.mjs`) and runs them all
+  against the one fixed locking. The singleton entries verify **every** minted proof
+  (reported as "runtime-general — one fixed locking verifies N/N distinct proofs"),
+  while a `baked` entry would accept only the one it was compiled for. So if an
+  entry claimed runtime-generality but had the proof baked in, the multi-proof run
+  would catch it — it accepts 1/N. (The references run a single real mainnet proof,
+  so they are runtime-general *by construction* — proof in the unlocking witness —
+  rather than by the N/N sweep.) See [docs/proof-generality.md](docs/proof-generality.md)
+  for the construction (how the extra proofs are minted under one fixed VK).
+
 So a cross-entry "Nx larger / cheaper" on totals is *indicative, not a clean
 benchmark*. An apples-to-apples result needs the same curve, statement, inputs,
 and deployment model; that is why per-milestone comparisons are normalized (e.g. vk_x measured

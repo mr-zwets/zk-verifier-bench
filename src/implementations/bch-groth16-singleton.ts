@@ -35,15 +35,25 @@ const v = JSON.parse(readFileSync('src/bch/groth16-singleton-vectors.json', 'utf
   invalidUnlocking: string;
 };
 
+// Extra DISTINCT proofs minted under the SAME VK (same locking), so the benchmark
+// can confirm this verifier is runtime-general rather than a single proof baked in.
+// Built by groth16_contract/singleton/bn254/gen_multiproof.mjs. proofs[0] is the
+// committed instance (== v above); proofs[1..] are the additional ones.
+const mp = JSON.parse(readFileSync('src/bch/groth16-singleton-multiproof-vectors.json', 'utf8')) as {
+  lockingOK: string;
+  proofs: { publicInputs: string[]; unlocking: string; invalidUnlocking: string; committed: boolean }[];
+};
+
 export const bchGroth16Singleton: Implementation = {
   id: 'bch-groth16-singleton',
   name: 'BCH Groth16 verifier singleton (vk_x on-chain + full pairing, single-tx)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
+  proofBinding: 'runtime',
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract ' +
-    '(Groth16Verify, singleton/pairing/groth16.cash). Computes vk_x = IC0 + in0*IC1 ' +
+    '(Groth16Verify, singleton/bn254/groth16.cash). Computes vk_x = IC0 + in0*IC1 ' +
     '+ in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full ' +
     'BN254 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) and require()s == 1. ' +
     'VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated ' +
@@ -64,6 +74,11 @@ export const bchGroth16Singleton: Implementation = {
     const invalid: Step[][] = [
       [{ ...valid[0]!, unlockingBytecode: hexToBin(v.invalidUnlocking) }],
     ];
-    return { valid, invalid };
+    // extra DISTINCT proofs (proofs[1..]) against the SAME locking -- a
+    // runtime-general verifier must accept every one of them.
+    const extraValidProofs: Step[][] = mp.proofs
+      .filter((p) => !p.committed)
+      .map((p) => [{ ...valid[0]!, unlockingBytecode: hexToBin(p.unlocking) }]);
+    return { valid, invalid, extraValidProofs };
   },
 };

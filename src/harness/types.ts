@@ -33,6 +33,15 @@ export interface CheckpointStat {
 /** A valid run (all steps must be accepted) plus optional invalid runs (each must fail). */
 export interface Scenario {
   valid: Step[];
+  /**
+   * Additional INDEPENDENT valid runs, each a DISTINCT proof verified against the
+   * SAME locking program(s) as `valid` (same step lockingBytecode, different
+   * unlocking witness). A runtime-general verifier accepts all of them; a verifier
+   * with the proof baked into its program accepts only the one it was built for.
+   * The harness runs these to empirically grade proof-generality (see
+   * Implementation.proofBinding). Each entry must be the same length as `valid`.
+   */
+  extraValidProofs?: Step[][];
   /** explicit invalid runs; each is a full step list that must fail at some step */
   invalid?: Step[][];
   /** if true, the harness derives invalid runs by bit-flipping each step's witness */
@@ -62,6 +71,19 @@ export interface Implementation {
   field: string;
   structure: Structure;
   source: string;
+  /**
+   * Where the proof lives, which decides whether one deployed program verifies many
+   * proofs or just one:
+   *   'runtime' - the proof (A,B,C / public inputs) is supplied in the unlocking
+   *               witness at spend time; one fixed locking verifies ANY valid proof
+   *               for its VK. Runtime-general (nchain, scrypt, our singletons).
+   *   'baked'   - the specific proof is compiled into the locking program (e.g. the
+   *               chunked verifier bakes each step's state-commitments); a different
+   *               proof needs the program regenerated. Instance-specific.
+   * The harness reports this and, where `extraValidProofs` are provided, confirms it
+   * empirically. Defaults to 'runtime' when omitted.
+   */
+  proofBinding?: 'runtime' | 'baked';
   /** the current reference implementation; others are compared against it */
   reference?: boolean;
   /** a toy demo, not a real verifier; kept in its own leaderboard but excluded
@@ -113,6 +135,14 @@ export interface BenchmarkResult {
   invalidRejected: number;
   invalidTotal: number;
   pass: boolean;
+  /** how the proof is bound to the program (see Implementation.proofBinding) */
+  proofBinding: 'runtime' | 'baked';
+  /** distinct proofs run against the SAME locking (1 = the main valid run, + extras) */
+  proofsTested: number;
+  /** how many of those distinct proofs the program fully accepted */
+  proofsPassed: number;
+  /** verifies >= 2 distinct proofs under one locking (empirically runtime-general) */
+  runtimeGeneral: boolean;
   /** correctness was judged under the BSV post-Genesis OP_RETURN-terminator rule
    * (the valid run halts at a reachable OP_RETURN, which fails on strict BCH) */
   bsvOpReturn: boolean;

@@ -92,6 +92,21 @@ const entryOf = (r: BenchmarkResult) => ({
   // BCH treats as failure (so the success case is scored differently per chain)
   bsvOpReturn: r.bsvOpReturn,
   bch: bchCell(r),
+  // proof-generality: does ONE deployed program verify many proofs (runtime-general)
+  // or just the one it was built for (instance-specific)? Empirically confirmed where
+  // extra proofs were run (proofsTested > 1).
+  generality: {
+    binding: r.proofBinding, // 'runtime' | 'baked'
+    runtimeGeneral: r.runtimeGeneral,
+    proofsTested: r.proofsTested,
+    proofsPassed: r.proofsPassed,
+    detail:
+      r.proofBinding === 'baked'
+        ? 'instance-specific: the proof is baked into the program; a different proof needs it regenerated'
+        : r.proofsTested >= 2
+          ? `runtime-general: one fixed locking verifies ${r.proofsPassed}/${r.proofsTested} distinct proofs (proof in the unlocking witness)`
+          : 'runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)',
+  },
   source: r.impl.source,
 });
 

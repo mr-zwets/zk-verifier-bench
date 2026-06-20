@@ -36,6 +36,10 @@ export const bchGroth16Chunked: Implementation = {
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'multi-tx',
+  // The proof is baked into the chunk programs (each step's locking carries the
+  // hash256 commitment of that proof's carried state), so a different proof needs
+  // the chunks regenerated. Instance-specific, unlike the runtime-general singleton.
+  proofBinding: 'baked',
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier split across transactions ' +
     'so EVERY step fits one BCH input. vk_x = IC0+in0*IC1+in1*IC2 computed on-chain ' +

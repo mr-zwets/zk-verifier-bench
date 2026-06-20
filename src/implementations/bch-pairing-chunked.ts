@@ -34,6 +34,8 @@ export const bchPairingChunked: Implementation = {
   proofSystem: 'Groth16 pairing (BCH-native)',
   field: 'BN254',
   structure: 'multi-tx',
+  // chunk programs bake this proof's per-step state commitments -> instance-specific
+  proofBinding: 'baked',
   source:
     'BCH-native CashScript: the BN254 Groth16 Miller boundary e(-A,B)*e(alpha,beta)*' +
     'e(vk_x,gamma)*e(C,delta) split across transactions so EVERY step fits one ' +
