@@ -70,6 +70,18 @@ const tryTamper = (witness: Uint8Array): Uint8Array | undefined => {
 
 const SCRIPT_SIZE_CAP = 10_000; // BCH maximumBytecodeLength (per locking/unlocking script)
 
+/** Token-threading safety: a step that carries state through an NFT commitment
+ * (Step.covenant) is only safe if the covenant pins the token (category continuity
+ * + capability constraint). Default FALSE for any covenant entry until that is
+ * actually enforced; null (not applicable) for non-covenant entries. */
+const tokenSafetyOf = (
+  scenario: Awaited<ReturnType<Implementation['load']>>,
+  impl: Implementation,
+): { tokenThreaded: boolean; tokenSafetyEnforced: boolean | null } => {
+  const tokenThreaded = scenario.valid.some((s) => s.covenant !== undefined);
+  return { tokenThreaded, tokenSafetyEnforced: tokenThreaded ? impl.tokenSafetyEnforced ?? false : null };
+};
+
 export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementation['load']>>): BenchmarkResult => {
   // Profile-only: size-decidable, not executed (e.g. tx-introspection covenants
   // we cannot drive in a synthetic context). BCH compat == every script fits the cap.
@@ -88,6 +100,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       impl, profileOnly: true, checked: false, validPassed: false,
       invalidRejected: 0, invalidTotal: 0, pass: false, bsvOpReturn: false, steps,
       proofBinding: impl.proofBinding ?? 'runtime', proofsTested: 1, proofsPassed: 0, runtimeGeneral: false,
+      ...tokenSafetyOf(scenario, impl),
       checkpointStats: [],
       stepCount: steps.length,
       totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
@@ -161,6 +174,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     proofsTested,
     proofsPassed,
     runtimeGeneral,
+    ...tokenSafetyOf(scenario, impl),
     bsvOpReturn: bsv,
     steps,
     checkpointStats,
@@ -258,6 +272,10 @@ const main = async () => {
           console.log(`    > proof generality: ${tag} — one fixed locking verifies ${r.proofsPassed}/${r.proofsTested} distinct proofs (proof in the unlocking witness)`);
         } else {
           console.log(`    > proof generality: runtime-general by construction — proof supplied in the unlocking witness (1 reference proof available)`);
+        }
+        if (r.tokenThreaded) {
+          console.log(`    > token safety: ${r.tokenSafetyEnforced ? 'ENFORCED' : 'NOT enforced'} — state is threaded through the NFT commitment` +
+            (r.tokenSafetyEnforced ? '' : ', but category continuity / capability are not pinned (a real deployment must enforce them)'));
         }
       }
       const ms = r.impl.milestone;

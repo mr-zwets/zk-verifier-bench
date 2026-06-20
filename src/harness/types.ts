@@ -99,6 +99,23 @@ export interface Implementation {
    * empirically. Defaults to 'runtime' when omitted.
    */
   proofBinding?: 'runtime' | 'baked';
+  /**
+   * For a token-threading covenant entry (its steps carry `Step.covenant`): does the
+   * covenant actually enforce TOKEN SAFETY, i.e. that the carried state token cannot
+   * be swapped or forged across the thread? A safe deployment must either pin the
+   * category and require a perpetuated MUTABLE (non-minting) commitment, or mint a
+   * fresh IMMUTABLE token each step with the new commitment bound by the covenant.
+   * That means introspecting and require()-ing, at minimum:
+   *   - output[0].tokenCategory == input.tokenCategory   (category continuity)
+   *   - the carried NFT capability stays mutable (never minting)
+   *   - exactly one such token flows in -> out[0] (no injected sibling tokens)
+   * The current PoC covenant enforces only the commitment transition, not the above,
+   * so this defaults to FALSE for any token-threading entry. Set true only once the
+   * covenant genuinely enforces it (and the harness exercises a category-swap /
+   * capability-escalation rejection). Meaningless (null in results) for non-covenant
+   * entries.
+   */
+  tokenSafetyEnforced?: boolean;
   /** the current reference implementation; others are compared against it */
   reference?: boolean;
   /** a toy demo, not a real verifier; kept in its own leaderboard but excluded
@@ -158,6 +175,11 @@ export interface BenchmarkResult {
   proofsPassed: number;
   /** verifies >= 2 distinct proofs under one locking (empirically runtime-general) */
   runtimeGeneral: boolean;
+  /** any step threads state through an NFT-commitment covenant (Step.covenant set) */
+  tokenThreaded: boolean;
+  /** token-threading entries only: does the covenant enforce token safety (category
+   * continuity + capability constraint)? null when not token-threaded. */
+  tokenSafetyEnforced: boolean | null;
   /** correctness was judged under the BSV post-Genesis OP_RETURN-terminator rule
    * (the valid run halts at a reachable OP_RETURN, which fails on strict BCH) */
   bsvOpReturn: boolean;

@@ -24,9 +24,29 @@ import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
 
+interface RawStep {
+  label: string; locking: string; unlocking: string; invalidUnlocking: string; checkpoint?: string;
+  covenant?: { category: string; capability: 'none' | 'mutable' | 'minting'; inCommitment: string; outCommitment: string; outLockingBytecode: string };
+}
 const v = JSON.parse(readFileSync('src/bch/pairing-chunked-vectors.json', 'utf8')) as {
-  steps: { label: string; locking: string; unlocking: string; invalidUnlocking: string; checkpoint?: string }[];
+  steps: RawStep[]; extraValidProofs?: RawStep[][];
 };
+
+// map a raw (hex) step -> Step, carrying the token-covenant context so the harness
+// drives it through a synthetic token tx (state in the NFT commitment, not baked).
+const toStep = (s: RawStep): Step => ({
+  label: s.label,
+  lockingBytecode: hexToBin(s.locking),
+  unlockingBytecode: hexToBin(s.unlocking),
+  checkpoint: s.checkpoint,
+  covenant: s.covenant && {
+    category: hexToBin(s.covenant.category),
+    capability: s.covenant.capability,
+    inCommitment: hexToBin(s.covenant.inCommitment),
+    outCommitment: hexToBin(s.covenant.outCommitment),
+    outLockingBytecode: hexToBin(s.covenant.outLockingBytecode),
+  },
+});
 
 export const bchPairingChunked: Implementation = {
   id: 'bch-pairing-chunked',
@@ -34,8 +54,12 @@ export const bchPairingChunked: Implementation = {
   proofSystem: 'Groth16 pairing (BCH-native)',
   field: 'BN254',
   structure: 'multi-tx',
-  // chunk programs bake this proof's per-step state commitments -> instance-specific
-  proofBinding: 'baked',
+  // GENERIC covenant chunks: the running state lives in the token NFT commitment,
+  // NOT baked into the program. One fixed set of lockings verifies any proof; the
+  // benchmark confirms it empirically via extraValidProofs (a distinct proof, same
+  // lockings). (Token-safety pinning of category/capability/single-token-flow is a
+  // separate hardening step; tokenSafetyEnforced is left at its default.)
+  proofBinding: 'runtime',
   source:
     'BCH-native CashScript: the BN254 Groth16 Miller boundary e(-A,B)*e(alpha,beta)*' +
     'e(vk_x,gamma)*e(C,delta) split across transactions so EVERY step fits one ' +
@@ -47,16 +71,14 @@ export const bchPairingChunked: Implementation = {
     '~151 inputs); here every step is BCH-compatible. Reaches the miller-boundary ' +
     'checkpoint (the full verdict is bch-groth16-chunked).',
   load: async () => {
-    const valid: Step[] = v.steps.map((s) => ({
-      label: s.label,
-      lockingBytecode: hexToBin(s.locking),
-      unlockingBytecode: hexToBin(s.unlocking),
-      checkpoint: s.checkpoint,
-    }));
-    // invalid runs: a tampered witness (wrong committed incoming state) must be
-    // rejected -- test it at the first Miller step and at the combine.
+    const valid: Step[] = v.steps.map(toStep);
+    // additional DISTINCT proofs (same lockings, different state/commitments) -> the
+    // harness confirms runtime-generality (one program, many proofs).
+    const extraValidProofs: Step[][] = (v.extraValidProofs ?? []).map((run) => run.map(toStep));
+    // invalid runs: a tampered state limb (NFT-commitment mismatch) must be rejected
+    // -- test it at the first Miller step and at the combine.
     const tampered = (i: number): Step[] => [{ ...valid[i]!, unlockingBytecode: hexToBin(v.steps[i]!.invalidUnlocking) }];
     const invalid: Step[][] = [tampered(0), tampered(valid.length - 1)];
-    return { valid, invalid };
+    return { valid, extraValidProofs, invalid };
   },
 };

@@ -107,6 +107,19 @@ const entryOf = (r: BenchmarkResult) => ({
           ? `runtime-general: one fixed locking verifies ${r.proofsPassed}/${r.proofsTested} distinct proofs (proof in the unlocking witness)`
           : 'runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)',
   },
+  // token-threading covenant safety (only meaningful for covenant entries): does the
+  // covenant pin the carried token (category continuity + capability) so the threaded
+  // state cannot be swapped/forged? null when the entry does not thread a token.
+  tokenSafety: r.tokenThreaded
+    ? {
+        threaded: true,
+        enforced: r.tokenSafetyEnforced === true,
+        detail:
+          r.tokenSafetyEnforced === true
+            ? 'covenant pins category + capability and perpetuates the commitment'
+            : 'state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)',
+      }
+    : null,
   source: r.impl.source,
 });
 
