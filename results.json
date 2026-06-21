@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-21T09:29:49.733Z",
+  "generatedAt": "2026-06-21T10:58:17.655Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -36,7 +36,7 @@
       "id": "bch-groth16-chunked",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 1543293,
+      "bytes": 1347828,
       "bchCompatible": true
     }
   },
@@ -46,6 +46,18 @@
       "score": 1543293,
       "id": "bch-groth16-chunked",
       "steps": 123
+    },
+    {
+      "t": "2026-06-21T09:59:29.801Z",
+      "score": 1469450,
+      "id": "bch-groth16-bls12381-chunked",
+      "steps": 116
+    },
+    {
+      "t": "2026-06-21T10:58:17.655Z",
+      "score": 1347828,
+      "id": "bch-groth16-chunked",
+      "steps": 103
     }
   ],
   "entries": [
@@ -218,17 +230,17 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 1543293,
+      "score": 1347828,
       "benchmarks": {
         "smallProof": {
-          "opCost": 754559825,
-          "steps": 123,
+          "opCost": 683683545,
+          "steps": 103,
           "heaviestStepOpCost": 7893884,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
-          "opCost": 804132655,
-          "steps": 123,
+          "opCost": 733258192,
+          "steps": 103,
           "heaviestStepOpCost": 7894074,
           "inputsForHeaviestStep": 1
         }
@@ -567,18 +579,18 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 1140668,
+      "score": 823050,
       "benchmarks": {
         "smallProof": {
-          "opCost": 561192937,
-          "steps": 89,
-          "heaviestStepOpCost": 7459904,
+          "opCost": 418497264,
+          "steps": 59,
+          "heaviestStepOpCost": 7686129,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
-          "opCost": 561205982,
-          "steps": 89,
-          "heaviestStepOpCost": 7460946,
+          "opCost": 418510587,
+          "steps": 59,
+          "heaviestStepOpCost": 7686209,
           "inputsForHeaviestStep": 1
         }
       },
@@ -612,12 +624,12 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 2243102,
+      "score": 1430479,
       "benchmarks": {
         "smallProof": {
-          "opCost": 1124700572,
-          "steps": 183,
-          "heaviestStepOpCost": 7655631,
+          "opCost": 742308000,
+          "steps": 103,
+          "heaviestStepOpCost": 7661142,
           "inputsForHeaviestStep": 1
         }
       },
@@ -651,12 +663,12 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 2282073,
+      "score": 1469450,
       "benchmarks": {
         "smallProof": {
-          "opCost": 1136808398,
-          "steps": 196,
-          "heaviestStepOpCost": 7655631,
+          "opCost": 754415826,
+          "steps": 116,
+          "heaviestStepOpCost": 7661142,
           "inputsForHeaviestStep": 1
         }
       },
