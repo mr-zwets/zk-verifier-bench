@@ -95,6 +95,16 @@ const entryOf = (r: BenchmarkResult) => ({
       heaviestStepOpCost: r.maxStepOperationCost,
       inputsForHeaviestStep: r.inputsForHeaviestStep,
     },
+    ...(r.worstCase
+      ? {
+          worstCase: {
+            opCost: r.worstCase.totalOperationCost,
+            steps: r.worstCase.stepCount,
+            heaviestStepOpCost: r.worstCase.maxStepOperationCost,
+            inputsForHeaviestStep: r.worstCase.inputsForHeaviestStep,
+          },
+        }
+      : {}),
   },
   // BSV prior art: a single huge transaction that is correct but does not fit BCH.
   // Only the seeded BSV verifiers carry this framing (not BCH-native sub-steps).

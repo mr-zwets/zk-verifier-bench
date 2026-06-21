@@ -31,7 +31,7 @@ interface RawStep {
   covenant?: { category: string; capability: 'none' | 'mutable' | 'minting'; inCommitment: string; outCommitment: string; outLockingBytecode: string };
 }
 const v = JSON.parse(readFileSync('src/bch/groth16-chunked-vectors.json', 'utf8')) as {
-  steps: RawStep[]; extraValidProofs?: RawStep[][];
+  steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[];
 };
 
 // map a raw (hex) step -> Step, carrying the token-covenant context (state lives in
@@ -76,10 +76,14 @@ export const bchGroth16Chunked: Implementation = {
     // additional DISTINCT proofs (same lockings, different state/commitments) -> the
     // harness confirms runtime-generality (one program graph, many proofs).
     const extraValidProofs: Step[][] = (v.extraValidProofs ?? []).map((run) => run.map(toStep));
+    // worst-case run: dense public inputs (2^253-1) through the same lockings. The vk_x
+    // prefix pays for nearly every scalar position; op-cost rises but the step graph is
+    // unchanged (worst-case-sized windows). Reported as benchmarks.worstCase.
+    const worstCaseProof: Step[] | undefined = v.worstCaseProof?.map(toStep);
     // tampered state limb (NFT-commitment mismatch) must be rejected — test at the
     // first vk_x step and at the final verdict step.
     const tampered = (i: number): Step[] => [{ ...valid[i]!, unlockingBytecode: hexToBin(v.steps[i]!.invalidUnlocking) }];
     const invalid: Step[][] = [tampered(0), tampered(valid.length - 1)];
-    return { valid, extraValidProofs, invalid };
+    return { valid, extraValidProofs, worstCaseProof, invalid };
   },
 };

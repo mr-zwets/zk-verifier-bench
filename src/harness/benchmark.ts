@@ -166,6 +166,25 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
   const opCosts = steps.map((s) => s.operationCost);
   const maxStepOperationCost = opCosts.length ? Math.max(...opCosts) : 0;
   const budget = standardInputBudget();
+
+  // worst-case proof run (dense near-r inputs through the SAME lockings): measure its
+  // op-cost separately so the proof-size dependence is visible. Only recorded if every
+  // step actually accepts (a real worst-case run, not a broken one).
+  const wcRun = scenario.worstCaseProof ?? [];
+  let worstCase: BenchmarkResult['worstCase'];
+  if (wcRun.length > 0) {
+    const wcSteps = wcRun.map((s) => runStep(vm, s, bsv));
+    if (wcSteps.every((s) => s.accepted)) {
+      const wcOps = wcSteps.map((s) => s.operationCost);
+      const wcMax = Math.max(...wcOps);
+      worstCase = {
+        stepCount: wcSteps.length,
+        totalOperationCost: wcOps.reduce((a, b) => a + b, 0),
+        maxStepOperationCost: wcMax,
+        inputsForHeaviestStep: Math.ceil(wcMax / budget),
+      };
+    }
+  }
   return {
     impl,
     profileOnly: false,
@@ -188,6 +207,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     maxStepOperationCost,
     fitsStandardBudget: steps.every((s) => s.operationCost <= budget),
     inputsForHeaviestStep: Math.ceil(maxStepOperationCost / budget),
+    worstCase,
     bchCompatible,
     bchIncompatibleReason,
   };

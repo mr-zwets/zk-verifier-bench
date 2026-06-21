@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-21T09:06:22.921Z",
+  "generatedAt": "2026-06-21T09:29:49.733Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -225,6 +225,12 @@
           "steps": 123,
           "heaviestStepOpCost": 7893884,
           "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "opCost": 804132655,
+          "steps": 123,
+          "heaviestStepOpCost": 7894074,
+          "inputsForHeaviestStep": 1
         }
       },
       "bsvSingleton": false,
@@ -408,6 +414,12 @@
           "steps": 10,
           "heaviestStepOpCost": 3374810,
           "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "opCost": 62104686,
+          "steps": 10,
+          "heaviestStepOpCost": 7595362,
+          "inputsForHeaviestStep": 1
         }
       },
       "bsvSingleton": false,
@@ -562,6 +574,12 @@
           "steps": 89,
           "heaviestStepOpCost": 7459904,
           "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "opCost": 561205982,
+          "steps": 89,
+          "heaviestStepOpCost": 7460946,
+          "inputsForHeaviestStep": 1
         }
       },
       "bsvSingleton": false,
@@ -627,12 +645,12 @@
     {
       "id": "bch-groth16-bls12381-chunked",
       "name": "BCH Groth16 full verifier chunked, BLS12-381 (vk_x + pairing + final exp -> verdict, multi-tx, BCH-compatible)",
-      "category": "partial",
+      "category": "full",
       "official": false,
       "solver": null,
       "curve": "BLS12-381",
       "structure": "multi-tx",
-      "proofSystem": "Groth16 (BCH-native)",
+      "proofSystem": "Groth16",
       "score": 2282073,
       "benchmarks": {
         "smallProof": {

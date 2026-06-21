@@ -21,7 +21,7 @@ interface RawStep {
   covenant?: { category: string; capability: 'none' | 'mutable' | 'minting'; inCommitment: string; outCommitment: string; outLockingBytecode: string };
 }
 const v = JSON.parse(readFileSync('src/bch/vkx-chunked-covenant-vectors.json', 'utf8')) as {
-  steps: RawStep[]; extraValidProofs?: RawStep[][];
+  steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[];
 };
 
 const toStep = (s: RawStep): Step => ({
@@ -59,8 +59,11 @@ export const bchVkxChunkedCovenant: Implementation = {
   load: async () => {
     const valid: Step[] = v.steps.map(toStep);
     const extraValidProofs: Step[][] = (v.extraValidProofs ?? []).map((run) => run.map(toStep));
+    // worst-case run: dense public inputs through the same lockings (proof-size-dependent
+    // op-cost; the chunk windows are sized for it).
+    const worstCaseProof: Step[] | undefined = v.worstCaseProof?.map(toStep);
     const tampered = (i: number): Step[] => [{ ...valid[i]!, unlockingBytecode: hexToBin(v.steps[i]!.invalidUnlocking) }];
     const invalid: Step[][] = [tampered(0), tampered(valid.length - 1)];
-    return { valid, extraValidProofs, invalid };
+    return { valid, extraValidProofs, worstCaseProof, invalid };
   },
 };

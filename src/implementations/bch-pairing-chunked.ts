@@ -29,7 +29,7 @@ interface RawStep {
   covenant?: { category: string; capability: 'none' | 'mutable' | 'minting'; inCommitment: string; outCommitment: string; outLockingBytecode: string };
 }
 const v = JSON.parse(readFileSync('src/bch/pairing-chunked-vectors.json', 'utf8')) as {
-  steps: RawStep[]; extraValidProofs?: RawStep[][];
+  steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[];
 };
 
 // map a raw (hex) step -> Step, carrying the token-covenant context so the harness
@@ -75,10 +75,13 @@ export const bchPairingChunked: Implementation = {
     // additional DISTINCT proofs (same lockings, different state/commitments) -> the
     // harness confirms runtime-generality (one program, many proofs).
     const extraValidProofs: Step[][] = (v.extraValidProofs ?? []).map((run) => run.map(toStep));
+    // worst-case run: dense public inputs through the same lockings. No vk_x stage here,
+    // so op-cost is ~unchanged (proof-size-independent) — recorded for the side-by-side.
+    const worstCaseProof: Step[] | undefined = v.worstCaseProof?.map(toStep);
     // invalid runs: a tampered state limb (NFT-commitment mismatch) must be rejected
     // -- test it at the first Miller step and at the combine.
     const tampered = (i: number): Step[] => [{ ...valid[i]!, unlockingBytecode: hexToBin(v.steps[i]!.invalidUnlocking) }];
     const invalid: Step[][] = [tampered(0), tampered(valid.length - 1)];
-    return { valid, extraValidProofs, invalid };
+    return { valid, extraValidProofs, worstCaseProof, invalid };
   },
 };

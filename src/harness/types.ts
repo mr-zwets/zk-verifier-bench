@@ -57,6 +57,16 @@ export interface Scenario {
    * Implementation.proofBinding). Each entry must be the same length as `valid`.
    */
   extraValidProofs?: Step[][];
+  /**
+   * A WORST-CASE proof run: the same fixed locking(s) as `valid`, but with dense,
+   * near-r public inputs so a chunk-sized covenant pays for (nearly) every scalar
+   * position. Op-cost is proof-size dependent for these verifiers — the chunk windows
+   * are worst-case SIZED (so the step graph matches `valid`), but the measured op-cost
+   * only reaches the worst case when a dense proof is actually RUN. The harness records
+   * this run's op-cost separately (benchmarks.worstCase). Must be a valid, accepted run
+   * (same length as `valid`); omit for proof-size-independent verifiers.
+   */
+  worstCaseProof?: Step[];
   /** explicit invalid runs; each is a full step list that must fail at some step */
   invalid?: Step[][];
   /** if true, the harness derives invalid runs by bit-flipping each step's witness */
@@ -194,6 +204,18 @@ export interface BenchmarkResult {
   fitsStandardBudget: boolean;
   /** ceil(maxStepOpCost / standard budget): inputs the heaviest step needs */
   inputsForHeaviestStep: number;
+  /**
+   * Op-cost of the WORST-CASE proof run (dense near-r public inputs), when the scenario
+   * supplies one. Same step graph as the valid run (worst-case-sized windows), but the
+   * op-cost reflects a dense proof — proof-size dependent for chunked covenants (~5-6×
+   * the vk_x stage), ~unchanged for proof-size-independent verifiers. undefined when no
+   * worst-case run was provided or it did not fully accept. */
+  worstCase?: {
+    stepCount: number;
+    totalOperationCost: number;
+    maxStepOperationCost: number;
+    inputsForHeaviestStep: number;
+  };
   /** every step of the valid run validates on the REAL BCH 2026 VM (consensus limits) */
   bchCompatible: boolean;
   /** short reason the first incompatible step failed on the real VM */
