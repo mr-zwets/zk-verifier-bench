@@ -42,7 +42,7 @@ export const bchVkxSingleton: Implementation = {
   structure: 'single-tx',
   source:
     'BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE ' +
-    'contract (monolithic baseline, VkX/singleton/vkx.cash). Two inlined ' +
+    'contract (monolithic baseline, VkX/singleton/bn254/vkx.cash). Two inlined ' +
     '254-iteration double-and-add scalar mults over Jacobian-projective coords + ' +
     'one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x ' +
     'baked, like the chunked entries). ~76M op-cost -> ~10 BCH inputs; does NOT fit ' +

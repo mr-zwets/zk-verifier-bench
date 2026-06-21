@@ -42,7 +42,7 @@ export const bchPairingSingleton: Implementation = {
   structure: 'single-tx',
   source:
     'BCH-native CashScript: the FULL pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*' +
-    'e(C,delta)==1 in ONE contract (GrothPairing, singleton/pairing/verify.cash). ' +
+    'e(C,delta)==1 in ONE contract (GrothPairing, singleton/bn254/verify.cash). ' +
     'BN254 field tower (Fp2/Fp6/Fp12), four optimal-ate Miller loops (6x+2, divisive ' +
     'twist, mul034 lines, psi Q1/Q2), product, and final exponentiation ' +
     '((p^12-1)/r, cyclotomic exp). RUNTIME pair inputs; the contract require()s the ' +
