@@ -11,6 +11,7 @@ import { bchMultistepDemo } from '../implementations/bch-multistep-demo.js';
 import { bchPairingBls12381Singleton } from '../implementations/bch-pairing-bls12381-singleton.js';
 import { bchPairingChunked } from '../implementations/bch-pairing-chunked.js';
 import { bchPairingSingleton } from '../implementations/bch-pairing-singleton.js';
+import { bchVkxChunkedCovenant } from '../implementations/bch-vkx-chunked-covenant.js';
 import { bchVkxChunkedShamir } from '../implementations/bch-vkx-chunked-shamir.js';
 import { bchVkxChunkedTwoloop } from '../implementations/bch-vkx-chunked-twoloop.js';
 import { bchVkxBls12381Singleton } from '../implementations/bch-vkx-bls12381-singleton.js';
@@ -38,7 +39,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchMultistepDemo];
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
   const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode, step.covenant);

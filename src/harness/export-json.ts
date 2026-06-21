@@ -138,9 +138,11 @@ const main = async () => {
 
   const byId = (id: string) => entries.find((e) => e.id === id);
   const full = entries.filter((e) => e.category === 'full');
-  // current best full verifier that actually runs on BCH (none yet -> null)
+  // current best GENUINE BCH-native verifier (none yet -> null): fits the per-tx limits
+  // AND verifies any proof at runtime. Instance-specific (baked) artifacts fit but are
+  // excluded, so neither the frontier "current" nor the score-history records them.
   const bestBchNative = full
-    .filter((e) => e.bch.compatible)
+    .filter((e) => e.bch.compatible && e.generality.runtimeGeneral)
     .sort((a, b) => a.score - b.score)[0];
   // smallest BCH-native (non-baseline) full verifier: the current frontier leader,
   // whether or not it already fits BCH per-tx limits
