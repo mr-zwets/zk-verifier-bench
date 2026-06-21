@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-21T08:59:57.536Z",
+  "generatedAt": "2026-06-21T09:06:22.921Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -584,6 +584,84 @@
         "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
       },
       "source": "BCH-native CashScript: the BN254 Groth16 Miller boundary e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) split across transactions so EVERY step fits one BCH input (op-cost <=8,032,800, scripts <=10,000 B). 4 single-pair optimal-ate Miller chains (f in Fp12 + running G2 point R, hash256-committed, ~5 KB/chunk, NAF steps unrolled with the digit baked so op-cost binds not size) + a combine step (boundary = f0*f1*f2*f3). Verified vs @noble/curves: combine boundary == golden millerHex. Multi-tx counterpart of bch-pairing-singleton (which needs ~151 inputs); here every step is BCH-compatible. Reaches the miller-boundary checkpoint (the full verdict is bch-groth16-chunked)."
+    },
+    {
+      "id": "bch-pairing-bls12381-chunked",
+      "name": "BCH Groth16 pairing chunked, BLS12-381 (Miller loops + final exponentiation -> verdict, multi-tx, BCH-compatible)",
+      "category": "partial",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "multi-tx",
+      "proofSystem": "Groth16 pairing (BCH-native)",
+      "score": 2243102,
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 1124700572,
+          "steps": 183,
+          "heaviestStepOpCost": 7655631,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": false,
+        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
+      },
+      "source": "BCH-native CashScript: the BLS12-381 Groth16 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) — 4 single-pair optimal-ate Miller loops + a combine (boundary = f0*f1*f2*f3) + the BLS/Hayashida-Scott final exponentiation -> verdict == Fp12 ONE — split across transactions so EVERY step fits one BCH input. Proof-agnostic covenant: Miller f+R / live final-exp values + proof-derived points ride in the token NFT commitment (48-byte limbs); the easy-part Fermat inverse is a verified unlocking witness. Verified vs @noble/curves bls12-381. Multi-tx counterpart of bch-pairing-bls12381-singleton; same curve as nchain."
+    },
+    {
+      "id": "bch-groth16-bls12381-chunked",
+      "name": "BCH Groth16 full verifier chunked, BLS12-381 (vk_x + pairing + final exp -> verdict, multi-tx, BCH-compatible)",
+      "category": "partial",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "multi-tx",
+      "proofSystem": "Groth16 (BCH-native)",
+      "score": 2282073,
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 1136808398,
+          "steps": 196,
+          "heaviestStepOpCost": 7655631,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": false,
+        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
+      },
+      "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — vk_x = IC0 + in0*IC1 + in1*IC2 (public-input aggregation) then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) via 4 Miller loops + combine + final exponentiation, asserting the verdict == Fp12 ONE — split across transactions so EVERY step fits one BCH input. Proof-agnostic covenant: all state + proof-derived points + public inputs ride in the token NFT commitment (48-byte limbs), so one fixed set of lockings verifies any proof (confirmed via extraValidProofs). Verified vs @noble/curves bls12-381. The BLS12-381 counterpart of bch-groth16-chunked; the BCH-compatible full Groth16 verifier on the nchain curve."
     },
     {
       "id": "bch-multistep-demo",

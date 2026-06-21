@@ -78,14 +78,16 @@ const entryOf = (r: BenchmarkResult) => ({
   proofSystem: r.impl.proofSystem,
   // headline score = total on-chain bytes (lower is better)
   score: r.totalBytes,
-  // op-cost benchmarks, keyed by the PROOF SCENARIO measured. Op-cost is proof-size
-  // dependent for chunk-sized covenant verifiers (the chunk windows are sized for a
-  // given proof's public inputs), so collapsing it to one number is misleading. Every
-  // entry carries the 'smallProof' scenario (the committed small public inputs the
-  // vectors ship with); a 'worstCase' scenario (full-width, all-bits-set planning
-  // inputs) is added per entry as those vectors land. For proof-size-INDEPENDENT
-  // entries (singletons, baselines) worstCase ~matches smallProof; for chunked
-  // covenants it jumps ~5-6×, which the two keys make visible side by side.
+  // op-cost benchmarks, keyed by the PROOF SCENARIO actually RUN. Even though the
+  // chunked covenant lockings are now worst-case SIZED (the fixed step graph can
+  // verify ANY public input < r), the measured op-cost still depends on the specific
+  // proof executed: a sparse/small input skips most doublings+adds, a dense full-width
+  // input pays for all of them. So one number is misleading — we key by the proof run.
+  // 'smallProof' is the committed small public inputs the vectors ship with; a
+  // 'worstCase' run (dense, near-r inputs through the SAME lockings) is added per entry
+  // as those vectors land. For proof-size-INDEPENDENT entries (singletons, baselines)
+  // worstCase ~matches smallProof; for chunked covenants it jumps ~5-6×, which the two
+  // keys make visible side by side.
   benchmarks: {
     smallProof: {
       opCost: r.totalOperationCost,

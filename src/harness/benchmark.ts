@@ -4,10 +4,12 @@
 //   3. budget fit     - does each step fit one standard BCH input's op-cost budget?
 // Results are grouped into separate leaderboards by (proofSystem, structure).
 // Correctness gates the cost numbers.
+import { bchGroth16Bls12381Chunked } from '../implementations/bch-groth16-bls12381-chunked.js';
 import { bchGroth16Bls12381Singleton } from '../implementations/bch-groth16-bls12381-singleton.js';
 import { bchGroth16Chunked } from '../implementations/bch-groth16-chunked.js';
 import { bchGroth16Singleton } from '../implementations/bch-groth16-singleton.js';
 import { bchMultistepDemo } from '../implementations/bch-multistep-demo.js';
+import { bchPairingBls12381Chunked } from '../implementations/bch-pairing-bls12381-chunked.js';
 import { bchPairingBls12381Singleton } from '../implementations/bch-pairing-bls12381-singleton.js';
 import { bchPairingChunked } from '../implementations/bch-pairing-chunked.js';
 import { bchPairingSingleton } from '../implementations/bch-pairing-singleton.js';
@@ -40,7 +42,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchMultistepDemo];
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
   const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode, step.covenant);
