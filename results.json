@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-19T20:43:33.474Z",
+  "generatedAt": "2026-06-21T08:37:34.653Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -36,28 +36,16 @@
       "id": "bch-groth16-chunked",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 1592781,
+      "bytes": 1543293,
       "bchCompatible": true
     }
   },
   "history": [
     {
-      "t": "2026-06-19T16:30:00.000Z",
-      "score": 2019396,
+      "t": "2026-06-21T08:37:34.653Z",
+      "score": 1543293,
       "id": "bch-groth16-chunked",
-      "steps": 169
-    },
-    {
-      "t": "2026-06-19T20:00:00.000Z",
-      "score": 1759196,
-      "id": "bch-groth16-chunked",
-      "steps": 125
-    },
-    {
-      "t": "2026-06-19T20:43:33.474Z",
-      "score": 1592781,
-      "id": "bch-groth16-chunked",
-      "steps": 116
+      "steps": 123
     }
   ],
   "entries": [
@@ -91,6 +79,14 @@
         ],
         "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~64× one input's op-cost budget"
       },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)"
+      },
+      "tokenSafety": null,
       "source": "BSV mainnet tx e4cd...514c (proof) spending 79a5...4940:0 (verifier)"
     },
     {
@@ -123,6 +119,14 @@
         ],
         "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~125× one input's op-cost budget"
       },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)"
+      },
+      "tokenSafety": null,
       "source": "BSV mainnet tx 24e8...bf24 (proof) spending 320b...725f:0 (verifier)"
     },
     {
@@ -151,7 +155,51 @@
         ],
         "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~157× one input's op-cost budget"
       },
-      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract (Groth16Verify, singleton/pairing/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BN254 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bn254. Same curve as scrypt-bn256 -> ~543x smaller bytecode, but ~1.26B op-cost (~157 BCH inputs); ~21.7 KB does NOT fit one input -- motivates the chunked multi-tx verifier."
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract (Groth16Verify, singleton/bn254/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BN254 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bn254. Same curve as scrypt-bn256 -> ~543x smaller bytecode, but ~1.26B op-cost (~157 BCH inputs); ~21.7 KB does NOT fit one input -- motivates the chunked multi-tx verifier."
+    },
+    {
+      "id": "bch-groth16-bls12381-singleton",
+      "name": "BCH Groth16 verifier singleton, BLS12-381 (vk_x on-chain + full pairing, single-tx)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "score": 24574,
+      "secondary": {
+        "opCost": 1480425493,
+        "steps": 1,
+        "heaviestStepOpCost": 1480425493,
+        "inputsForHeaviestStep": 185
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": false,
+        "blockers": [
+          "script-size",
+          "op-cost"
+        ],
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~185× one input's op-cost budget"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on BLS12-381 -- the SAME curve as nchain (Groth16Verify, singleton/bls12-381/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) (M-twist Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bls12-381. ~1.48B op-cost (~185 BCH inputs); ~24 KB does NOT fit one input -- the honest baseline vs the nchain single-tx reference."
     },
     {
       "id": "bch-groth16-chunked",
@@ -162,11 +210,11 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 1592781,
+      "score": 1543293,
       "secondary": {
-        "opCost": 788816439,
-        "steps": 116,
-        "heaviestStepOpCost": 7871554,
+        "opCost": 754559825,
+        "steps": 123,
+        "heaviestStepOpCost": 7893884,
         "inputsForHeaviestStep": 1
       },
       "bsvSingleton": false,
@@ -175,6 +223,18 @@
         "compatible": true,
         "blockers": [],
         "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": false,
+        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier split across transactions so EVERY step fits one BCH input. vk_x = IC0+in0*IC1+in1*IC2 computed on-chain (Shamir/Straus, public inputs at RUNTIME) -> 4 single-pair Miller chains -> combine -> final exponentiation -> assert product == Fp12 ONE. State carried as hash256 commitments of the live values, verified on entry/exit each step. Verified vs @noble/curves (boundary == golden millerHex, verdict == golden). BCH-compatible counterpart of bch-groth16-singleton (~1.26B op-cost, ~157 inputs, single-tx, not BCH-compatible). Same BN254 curve as scrypt-bn256."
     },
@@ -187,11 +247,11 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 13793,
+      "score": 13799,
       "secondary": {
-        "opCost": 76016294,
+        "opCost": 76016561,
         "steps": 1,
-        "heaviestStepOpCost": 76016294,
+        "heaviestStepOpCost": 76016561,
         "inputsForHeaviestStep": 10
       },
       "bsvSingleton": false,
@@ -203,7 +263,50 @@
         ],
         "detail": "heaviest step ~10× one input's op-cost budget"
       },
-      "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract (monolithic baseline, VkX/singleton/vkx.cash). Two inlined 254-iteration double-and-add scalar mults over Jacobian-projective coords + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked, like the chunked entries). ~76M op-cost -> ~10 BCH inputs; does NOT fit BCH in a single input (real-VM op-cost density limit) -- this is why the chunked multi-tx entries exist."
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)"
+      },
+      "tokenSafety": null,
+      "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract (monolithic baseline, VkX/singleton/bn254/vkx.cash). Two inlined 254-iteration double-and-add scalar mults over Jacobian-projective coords + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked, like the chunked entries). ~76M op-cost -> ~10 BCH inputs; does NOT fit BCH in a single input (real-VM op-cost density limit) -- this is why the chunked multi-tx entries exist."
+    },
+    {
+      "id": "bch-vkx-bls12381-singleton",
+      "name": "BCH vk_x singleton, BLS12-381 (Groth16 checkpoint #1, full vk_x in ONE contract, single-tx)",
+      "category": "partial",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16 vk_x (BCH-native)",
+      "score": 14057,
+      "secondary": {
+        "opCost": 101433542,
+        "steps": 1,
+        "heaviestStepOpCost": 101433542,
+        "inputsForHeaviestStep": 13
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": false,
+        "blockers": [
+          "op-cost"
+        ],
+        "detail": "heaviest step ~13× one input's op-cost budget"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)"
+      },
+      "tokenSafety": null,
+      "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract on BLS12-381 (VkX/singleton/bls12-381/vkx.cash). Two inlined 255-iteration double-and-add scalar mults over Jacobian-projective coords (b-independent) + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked). ~101M op-cost -> ~13 BCH inputs; does NOT fit one input (real-VM op-cost density limit). Verified vs @noble/curves bls12-381."
     },
     {
       "id": "bch-vkx-chunked-twoloop",
@@ -228,6 +331,14 @@
         "blockers": [],
         "detail": "every step fits BCH per-tx limits"
       },
+      "generality": {
+        "binding": "baked",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "instance-specific: the proof is baked into the program; a different proof needs it regenerated"
+      },
+      "tokenSafety": null,
       "source": "BCH-native CashScript baseline: original two separate double-and-add scalar mults (term0 = input0*IC1, term1 = input1*IC2), each a 254-iteration MSB-first loop split into byte-budgeted chunks; 9-coord carried state (accX,accY,accZ,bX,bY,bZ,rX,rY,rZ); inlined EC (no multi-return functions); in-script Fermat inverse for affine conversion (no zInv witness); blind 10,000-byte zero-padded unlocking for per-input budget -- simpler baseline."
     },
     {
@@ -253,7 +364,89 @@
         "blockers": [],
         "detail": "every step fits BCH per-tx limits"
       },
+      "generality": {
+        "binding": "baked",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "instance-specific: the proof is baked into the program; a different proof needs it regenerated"
+      },
+      "tokenSafety": null,
       "source": "BCH-native CashScript: Shamir/Straus + multi-return EC functions + tuned padding. Shamir/Straus shared doublings (single 254-iter MSB-first loop), RUNTIME public inputs (input0/input1 carried in the hash-chained state and bit-tested in-script via a 2-bit Shamir select over VK consts {IC1,IC2,T}), verified-inverse-on-stack, tuned per-chunk padding for per-input budget. The EC ops jacDouble/jacAdd/selectPoint are MULTI-VALUE-RETURN reusable functions (returns (int,int,int) -> OP_DEFINE/OP_INVOKE) defined ONCE per chunk, and each chunk LOOPS over its bit-range (body compiled once) so per-chunk bytecode is ~1.5KB and op-cost (not size) binds -> 3 chunks, ~23KB total, ~14.3M op-cost"
+    },
+    {
+      "id": "bch-vkx-chunked-covenant",
+      "name": "BCH vk_x aggregation chunked covenant (Groth16 checkpoint #1, multi-tx, runtime-general)",
+      "category": "partial",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "multi-tx",
+      "proofSystem": "Groth16 vk_x (BCH-native)",
+      "score": 32101,
+      "secondary": {
+        "opCost": 12566536,
+        "steps": 10,
+        "heaviestStepOpCost": 3374810,
+        "inputsForHeaviestStep": 1
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": false,
+        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
+      },
+      "source": "BCH-native CashScript: vk_x = IC0 + in0*IC1 + in1*IC2 (Shamir/Straus G1 double-and-add over the public-input bits) split across transactions so every step fits one BCH input. GENERIC covenant — the Jacobian accumulator and the public inputs ride in the token NFT commitment (no baked instance), so one fixed locking aggregates ANY public inputs. The runtime-general counterpart of bch-vkx-chunked-shamir; identical to the first 3 chunks of bch-groth16-chunked."
+    },
+    {
+      "id": "bch-vkx-bls12381-chunked-covenant",
+      "name": "BCH vk_x aggregation chunked covenant, BLS12-381 (Groth16 checkpoint #1, multi-tx, runtime-general)",
+      "category": "partial",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "multi-tx",
+      "proofSystem": "Groth16 vk_x (BCH-native)",
+      "score": 38971,
+      "secondary": {
+        "opCost": 12107826,
+        "steps": 13,
+        "heaviestStepOpCost": 2565266,
+        "inputsForHeaviestStep": 1
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": false,
+        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
+      },
+      "source": "BCH-native CashScript: vk_x = IC0 + in0*IC1 + in1*IC2 (Shamir/Straus G1 double-and-add over the public-input bits) on BLS12-381, split across transactions so every step fits one BCH input. GENERIC covenant — the Jacobian accumulator and the public inputs ride in the token NFT commitment (no baked instance), so one fixed locking aggregates ANY public inputs. MAGNITUDE-INDEPENDENT: tiles all 255 scalar-field positions with worst-case-sized windows (EVM ecMul-equivalent, full-width). The BLS12-381 counterpart of bch-vkx-chunked-covenant; same curve as nchain."
     },
     {
       "id": "bch-pairing-singleton",
@@ -281,7 +474,51 @@
         ],
         "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~151× one input's op-cost budget"
       },
-      "source": "BCH-native CashScript: the FULL pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta)==1 in ONE contract (GrothPairing, singleton/pairing/verify.cash). BN254 field tower (Fp2/Fp6/Fp12), four optimal-ate Miller loops (6x+2, divisive twist, mul034 lines, psi Q1/Q2), product, and final exponentiation ((p^12-1)/r, cyclotomic exp). RUNTIME pair inputs; the contract require()s the product == Fp12 ONE (the verdict is intrinsic). Verified vs @noble/curves bn254 (Miller boundary == golden millerHex; verdict == golden). ~1.21B op-cost -> ~151 BCH inputs; ~20 KB contract does NOT fit BCH in one input -- this is why the chunked multi-tx pairing exists."
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)"
+      },
+      "tokenSafety": null,
+      "source": "BCH-native CashScript: the FULL pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta)==1 in ONE contract (GrothPairing, singleton/bn254/verify.cash). BN254 field tower (Fp2/Fp6/Fp12), four optimal-ate Miller loops (6x+2, divisive twist, mul034 lines, psi Q1/Q2), product, and final exponentiation ((p^12-1)/r, cyclotomic exp). RUNTIME pair inputs; the contract require()s the product == Fp12 ONE (the verdict is intrinsic). Verified vs @noble/curves bn254 (Miller boundary == golden millerHex; verdict == golden). ~1.21B op-cost -> ~151 BCH inputs; ~20 KB contract does NOT fit BCH in one input -- this is why the chunked multi-tx pairing exists."
+    },
+    {
+      "id": "bch-pairing-bls12381-singleton",
+      "name": "BCH Groth16 pairing singleton, BLS12-381 (4 Miller loops + final exp, single-tx)",
+      "category": "partial",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16 pairing (BCH-native)",
+      "score": 21008,
+      "secondary": {
+        "opCost": 1379001528,
+        "steps": 1,
+        "heaviestStepOpCost": 1379001528,
+        "inputsForHeaviestStep": 172
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": false,
+        "blockers": [
+          "script-size",
+          "op-cost"
+        ],
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~172× one input's op-cost budget"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)"
+      },
+      "tokenSafety": null,
+      "source": "BCH-native CashScript: the FULL BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta)==1 in ONE contract (GrothVerify, singleton/bls12-381/verify.cash). BLS12-381 field tower (Fp2/Fp6/Fp12, xi=1+u), four optimal-ate Miller loops (M-twist, mul014 lines, |x| NAF, final conjugate), product, and the Hayashida-Scott final exponentiation. RUNTIME pair inputs; require()s the product == 1. Verified vs @noble/curves bls12-381. ~1.38B op-cost (~172 BCH inputs); ~19.8 KB does NOT fit one input -- the pairing milestone on the same curve as nchain."
     },
     {
       "id": "bch-pairing-chunked",
@@ -292,11 +529,11 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 1186979,
+      "score": 1140668,
       "secondary": {
-        "opCost": 586826189,
+        "opCost": 561192937,
         "steps": 89,
-        "heaviestStepOpCost": 7798019,
+        "heaviestStepOpCost": 7459904,
         "inputsForHeaviestStep": 1
       },
       "bsvSingleton": false,
@@ -305,6 +542,18 @@
         "compatible": true,
         "blockers": [],
         "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": false,
+        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
       },
       "source": "BCH-native CashScript: the BN254 Groth16 Miller boundary e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) split across transactions so EVERY step fits one BCH input (op-cost <=8,032,800, scripts <=10,000 B). 4 single-pair optimal-ate Miller chains (f in Fp12 + running G2 point R, hash256-committed, ~5 KB/chunk, NAF steps unrolled with the digit baked so op-cost binds not size) + a combine step (boundary = f0*f1*f2*f3). Verified vs @noble/curves: combine boundary == golden millerHex. Multi-tx counterpart of bch-pairing-singleton (which needs ~151 inputs); here every step is BCH-compatible. Reaches the miller-boundary checkpoint (the full verdict is bch-groth16-chunked)."
     },
@@ -331,6 +580,14 @@
         "blockers": [],
         "detail": "every step fits BCH per-tx limits"
       },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": false,
+        "proofsTested": 1,
+        "proofsPassed": 1,
+        "detail": "runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)"
+      },
+      "tokenSafety": null,
       "source": "synthetic; mirrors multi-step-computation.md"
     }
   ]
