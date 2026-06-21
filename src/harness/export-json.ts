@@ -78,12 +78,21 @@ const entryOf = (r: BenchmarkResult) => ({
   proofSystem: r.impl.proofSystem,
   // headline score = total on-chain bytes (lower is better)
   score: r.totalBytes,
-  // secondary metrics (shown on hover / row expand)
-  secondary: {
-    opCost: r.totalOperationCost,
-    steps: r.stepCount,
-    heaviestStepOpCost: r.maxStepOperationCost,
-    inputsForHeaviestStep: r.inputsForHeaviestStep,
+  // op-cost benchmarks, keyed by the PROOF SCENARIO measured. Op-cost is proof-size
+  // dependent for chunk-sized covenant verifiers (the chunk windows are sized for a
+  // given proof's public inputs), so collapsing it to one number is misleading. Every
+  // entry carries the 'smallProof' scenario (the committed small public inputs the
+  // vectors ship with); a 'worstCase' scenario (full-width, all-bits-set planning
+  // inputs) is added per entry as those vectors land. For proof-size-INDEPENDENT
+  // entries (singletons, baselines) worstCase ~matches smallProof; for chunked
+  // covenants it jumps ~5-6×, which the two keys make visible side by side.
+  benchmarks: {
+    smallProof: {
+      opCost: r.totalOperationCost,
+      steps: r.stepCount,
+      heaviestStepOpCost: r.maxStepOperationCost,
+      inputsForHeaviestStep: r.inputsForHeaviestStep,
+    },
   },
   // BSV prior art: a single huge transaction that is correct but does not fit BCH.
   // Only the seeded BSV verifiers carry this framing (not BCH-native sub-steps).
@@ -157,7 +166,7 @@ const main = async () => {
   if (bestBchNative !== undefined) {
     const last = history[history.length - 1];
     if (last === undefined || last.score !== bestBchNative.score) {
-      history.push({ t: generatedAt, score: bestBchNative.score, id: bestBchNative.id, steps: bestBchNative.secondary.steps });
+      history.push({ t: generatedAt, score: bestBchNative.score, id: bestBchNative.id, steps: bestBchNative.benchmarks.smallProof.steps });
       writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2) + '\n');
     }
   }

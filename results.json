@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-21T08:37:34.653Z",
+  "generatedAt": "2026-06-21T08:59:57.536Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -63,11 +63,13 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "score": 522477,
-      "secondary": {
-        "opCost": 510467864,
-        "steps": 1,
-        "heaviestStepOpCost": 510467864,
-        "inputsForHeaviestStep": 64
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 510467864,
+          "steps": 1,
+          "heaviestStepOpCost": 510467864,
+          "inputsForHeaviestStep": 64
+        }
       },
       "bsvSingleton": true,
       "bsvOpReturn": false,
@@ -103,11 +105,13 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "score": 11717684,
-      "secondary": {
-        "opCost": 997792165,
-        "steps": 1,
-        "heaviestStepOpCost": 997792165,
-        "inputsForHeaviestStep": 125
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 997792165,
+          "steps": 1,
+          "heaviestStepOpCost": 997792165,
+          "inputsForHeaviestStep": 125
+        }
       },
       "bsvSingleton": true,
       "bsvOpReturn": true,
@@ -139,11 +143,13 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "score": 21933,
-      "secondary": {
-        "opCost": 1259938241,
-        "steps": 1,
-        "heaviestStepOpCost": 1259938241,
-        "inputsForHeaviestStep": 157
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 1259938241,
+          "steps": 1,
+          "heaviestStepOpCost": 1259938241,
+          "inputsForHeaviestStep": 157
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -175,11 +181,13 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "score": 24574,
-      "secondary": {
-        "opCost": 1480425493,
-        "steps": 1,
-        "heaviestStepOpCost": 1480425493,
-        "inputsForHeaviestStep": 185
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 1480425493,
+          "steps": 1,
+          "heaviestStepOpCost": 1480425493,
+          "inputsForHeaviestStep": 185
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -211,11 +219,13 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "score": 1543293,
-      "secondary": {
-        "opCost": 754559825,
-        "steps": 123,
-        "heaviestStepOpCost": 7893884,
-        "inputsForHeaviestStep": 1
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 754559825,
+          "steps": 123,
+          "heaviestStepOpCost": 7893884,
+          "inputsForHeaviestStep": 1
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -248,11 +258,13 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 13799,
-      "secondary": {
-        "opCost": 76016561,
-        "steps": 1,
-        "heaviestStepOpCost": 76016561,
-        "inputsForHeaviestStep": 10
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 76016561,
+          "steps": 1,
+          "heaviestStepOpCost": 76016561,
+          "inputsForHeaviestStep": 10
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -283,11 +295,13 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 14057,
-      "secondary": {
-        "opCost": 101433542,
-        "steps": 1,
-        "heaviestStepOpCost": 101433542,
-        "inputsForHeaviestStep": 13
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 101433542,
+          "steps": 1,
+          "heaviestStepOpCost": 101433542,
+          "inputsForHeaviestStep": 13
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -318,11 +332,13 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 183458,
-      "secondary": {
-        "opCost": 85206922,
-        "steps": 16,
-        "heaviestStepOpCost": 7487485,
-        "inputsForHeaviestStep": 1
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 85206922,
+          "steps": 16,
+          "heaviestStepOpCost": 7487485,
+          "inputsForHeaviestStep": 1
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -351,11 +367,13 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 22671,
-      "secondary": {
-        "opCost": 14269163,
-        "steps": 3,
-        "heaviestStepOpCost": 7278495,
-        "inputsForHeaviestStep": 1
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 14269163,
+          "steps": 3,
+          "heaviestStepOpCost": 7278495,
+          "inputsForHeaviestStep": 1
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -384,11 +402,13 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 32101,
-      "secondary": {
-        "opCost": 12566536,
-        "steps": 10,
-        "heaviestStepOpCost": 3374810,
-        "inputsForHeaviestStep": 1
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 12566536,
+          "steps": 10,
+          "heaviestStepOpCost": 3374810,
+          "inputsForHeaviestStep": 1
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -421,11 +441,13 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 38971,
-      "secondary": {
-        "opCost": 12107826,
-        "steps": 13,
-        "heaviestStepOpCost": 2565266,
-        "inputsForHeaviestStep": 1
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 12107826,
+          "steps": 13,
+          "heaviestStepOpCost": 2565266,
+          "inputsForHeaviestStep": 1
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -458,11 +480,13 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "score": 20735,
-      "secondary": {
-        "opCost": 1211701878,
-        "steps": 1,
-        "heaviestStepOpCost": 1211701878,
-        "inputsForHeaviestStep": 151
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 1211701878,
+          "steps": 1,
+          "heaviestStepOpCost": 1211701878,
+          "inputsForHeaviestStep": 151
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -494,11 +518,13 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "score": 21008,
-      "secondary": {
-        "opCost": 1379001528,
-        "steps": 1,
-        "heaviestStepOpCost": 1379001528,
-        "inputsForHeaviestStep": 172
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 1379001528,
+          "steps": 1,
+          "heaviestStepOpCost": 1379001528,
+          "inputsForHeaviestStep": 172
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -530,11 +556,13 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "score": 1140668,
-      "secondary": {
-        "opCost": 561192937,
-        "steps": 89,
-        "heaviestStepOpCost": 7459904,
-        "inputsForHeaviestStep": 1
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 561192937,
+          "steps": 89,
+          "heaviestStepOpCost": 7459904,
+          "inputsForHeaviestStep": 1
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
@@ -567,11 +595,13 @@
       "structure": "multi-tx",
       "proofSystem": "demo (hash-chained state)",
       "score": 228,
-      "secondary": {
-        "opCost": 3894,
-        "steps": 3,
-        "heaviestStepOpCost": 1298,
-        "inputsForHeaviestStep": 1
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 3894,
+          "steps": 3,
+          "heaviestStepOpCost": 1298,
+          "inputsForHeaviestStep": 1
+        }
       },
       "bsvSingleton": false,
       "bsvOpReturn": false,
