@@ -10,6 +10,8 @@
     "fetch:scrypt-bn256": "tsx src/fetch-data.ts scrypt-bn256",
     "benchmark": "tsx --max-old-space-size=8192 src/harness/benchmark.ts",
     "benchmark:json": "tsx --max-old-space-size=8192 src/harness/export-json.ts",
+    "gen:multiproof": "node src/bch/gen-multiproof.mjs",
+    "gen:multiproof-bls": "node src/bch/gen-multiproof-bls12381.mjs",
     "checkpoints": "tsx src/checkpoints/demo.ts",
     "checkpoints:pairing-gen": "tsx src/checkpoints/gen-pairing-vectors.ts",
     "checkpoints:pairing": "tsx src/checkpoints/pairing-check.ts",
