@@ -170,6 +170,9 @@ export interface StepMetrics {
   label: string;
   lockingBytes: number;
   unlockingBytes: number;
+  /** dead-weight zero-padding bytes in the unlocking (the trailing all-zero push that buys
+   * op-cost budget); 0 for unpadded steps (e.g. singletons). */
+  padBytes: number;
   operationCost: number;
   instructionCount: number;
   accepted: boolean;
@@ -211,6 +214,8 @@ export interface BenchmarkResult {
   checkpointStats: CheckpointStat[];
   stepCount: number;
   totalBytes: number;
+  /** total dead-weight zero-padding bytes across all steps (subset of totalBytes) */
+  totalPadBytes: number;
   totalOperationCost: number;
   maxStepOperationCost: number;
   /** every step's op-cost fits one standard BCH input's budget */

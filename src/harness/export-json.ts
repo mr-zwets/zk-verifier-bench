@@ -18,17 +18,39 @@ import { STANDARD_UNLOCKING_CAP } from './vm.js';
 const SCHEMA_VERSION = 1;
 const SIZE_CAP = STANDARD_UNLOCKING_CAP; // 10,000 B per locking/unlocking script
 
-// Accumulating time-series of the best BCH-native (fitting) full verifier, for the
-// score-history chart. Committed and appended to whenever that best score changes.
+// Accumulating time-series for the score-history chart, ONE file holding two interleaved
+// series tagged by `fits`: the best BCH-native (fitting) full verifier, and the smallest
+// NON-fitting single-tx "singleton" ideal — their gap over time is the chunking tax.
 const HISTORY_FILE = 'score-history.json';
-interface HistoryPoint { t: string; score: number; id: string; steps: number }
+interface HistoryPoint { t: string; score: number; id: string; steps: number; fits: boolean }
 const loadHistory = (): HistoryPoint[] => {
   if (!existsSync(HISTORY_FILE)) return [];
   try {
-    return JSON.parse(readFileSync(HISTORY_FILE, 'utf8')) as HistoryPoint[];
+    const arr = JSON.parse(readFileSync(HISTORY_FILE, 'utf8')) as HistoryPoint[];
+    // legacy points predate the `fits` flag; they only ever recorded the fitting series.
+    return arr.map((p) => ({ ...p, fits: p.fits ?? true }));
   } catch {
     return [];
   }
+};
+// append best-per-curve points, deduped per (curve, fits) so each curve+series forms its
+// own independent line against that track's most recent point.
+type Best = { score: number; id: string; steps: number; curve: string; fits: boolean };
+const recordHistory = (bests: Best[], curveOfId: (id: string) => string, t: string): HistoryPoint[] => {
+  const series = loadHistory();
+  let changed = false;
+  for (const best of bests) {
+    let last: HistoryPoint | undefined;
+    for (let i = series.length - 1; i >= 0; i--) {
+      if (series[i].fits === best.fits && curveOfId(series[i].id) === best.curve) { last = series[i]; break; }
+    }
+    if (last === undefined || last.score !== best.score) {
+      series.push({ t, score: best.score, id: best.id, steps: best.steps, fits: best.fits });
+      changed = true;
+    }
+  }
+  if (changed) writeFileSync(HISTORY_FILE, JSON.stringify(series, null, 2) + '\n');
+  return series;
 };
 
 type Category = 'full' | 'partial' | 'demo';
@@ -78,6 +100,10 @@ const entryOf = (r: BenchmarkResult) => ({
   proofSystem: r.impl.proofSystem,
   // headline score = total on-chain bytes (lower is better)
   score: r.totalBytes,
+  // dead-weight zero-padding: bytes appended to unlockings purely to buy op-cost budget,
+  // and their share of the total. A big slice of the chunking overhead; 0 for unpadded
+  // singletons (proof in the witness, no covenant padding).
+  padding: { bytes: r.totalPadBytes, fraction: r.totalBytes > 0 ? r.totalPadBytes / r.totalBytes : 0 },
   // op-cost benchmarks, keyed by the PROOF SCENARIO actually RUN. Even though the
   // chunked covenant lockings are now worst-case SIZED (the fixed step graph can
   // verify ANY public input < r), the measured op-cost still depends on the specific
@@ -185,17 +211,26 @@ const main = async () => {
     .filter((e) => !e.official)
     .sort((a, b) => a.score - b.score)[0];
 
-  // accumulate the score-history time-series: append a point when the best fitting
-  // verifier's score changes (deduped against the last recorded score).
+  // accumulate the score-history time-series, per curve so each curve draws its own line.
+  // Two series: the best FITTING (BCH-native) verifier, and the smallest NON-fitting
+  // singleton (the single-tx ideal that busts the limits) — their gap is the chunking tax.
   const generatedAt = new Date().toISOString();
-  const history = loadHistory();
-  if (bestBchNative !== undefined) {
-    const last = history[history.length - 1];
-    if (last === undefined || last.score !== bestBchNative.score) {
-      history.push({ t: generatedAt, score: bestBchNative.score, id: bestBchNative.id, steps: bestBchNative.benchmarks.smallProof.steps });
-      writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2) + '\n');
-    }
-  }
+  const curveOfId = (id: string): string => entries.find((e) => e.id === id)?.curve ?? 'BN254';
+  const curvesPresent = [...new Set(full.map((e) => e.curve))];
+  const smallestPerCurve = (pred: (e: Entry) => boolean, fits: boolean): Best[] =>
+    curvesPresent
+      .map((c) => full.filter((e) => e.curve === c && pred(e)).sort((a, b) => a.score - b.score)[0])
+      .filter((e): e is Entry => e !== undefined)
+      .map((e) => ({ score: e.score, id: e.id, steps: e.benchmarks.smallProof.steps, curve: e.curve, fits }));
+
+  const history = recordHistory(
+    [
+      ...smallestPerCurve((e) => e.bch.compatible && e.generality.runtimeGeneral, true),
+      ...smallestPerCurve((e) => !e.official && !e.bch.compatible, false),
+    ],
+    curveOfId,
+    generatedAt,
+  );
 
   const artifact = {
     schema: SCHEMA_VERSION,

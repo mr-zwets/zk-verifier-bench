@@ -25,6 +25,8 @@ import { scryptBn256 } from '../implementations/scrypt-bn256.js';
 
 import { pathToFileURL } from 'node:url';
 
+import { authenticationInstructionIsMalformed, decodeAuthenticationInstructions, encodeAuthenticationInstruction } from '@bitauth/libauth';
+
 import { tamperProof } from './tamper.js';
 import type { BenchmarkResult, Implementation, Step, StepMetrics } from './types.js';
 import { createLoosenedVm, createRealVm, evaluatePair, standardInputBudget, type Bch2026Vm } from './vm.js';
@@ -44,12 +46,26 @@ const limitReason = (error: string): string => {
 
 export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchMultistepDemo];
 
+// Zero-padding accounting: the chunked covenant steps append one big all-zero push to each
+// unlocking purely to buy op-cost budget ((41+len)*800). It is the LAST push and is all
+// zeros, so its full encoded length (push opcode + data) is dead weight. Returns 0 when the
+// final instruction is not an all-zero data push (e.g. singletons, whose last push is a real
+// proof limb). Uses libauth to parse the script rather than hand-decoding push opcodes.
+const trailingZeroPadBytes = (script: Uint8Array): number => {
+  const last = decodeAuthenticationInstructions(script).at(-1);
+  if (last === undefined || authenticationInstructionIsMalformed(last) || !('data' in last)) return 0;
+  const data = last.data as Uint8Array;
+  if (data.length === 0 || data.some((b) => b !== 0)) return 0;
+  return encodeAuthenticationInstruction(last).length;
+};
+
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
   const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode, step.covenant);
   return {
     label: step.label,
     lockingBytes: step.lockingBytecode.length,
     unlockingBytes: step.unlockingBytecode.length,
+    padBytes: trailingZeroPadBytes(step.unlockingBytecode),
     operationCost: o.operationCost,
     instructionCount: o.instructionCount,
     accepted: bsv ? o.bsvAccepted : o.accepted,
@@ -94,6 +110,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       label: s.label,
       lockingBytes: s.lockingBytecode.length,
       unlockingBytes: s.unlockingBytecode.length,
+      padBytes: trailingZeroPadBytes(s.unlockingBytecode),
       operationCost: 0,
       instructionCount: 0,
       accepted: false,
@@ -109,6 +126,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       checkpointStats: [],
       stepCount: steps.length,
       totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
+      totalPadBytes: steps.reduce((a, s) => a + s.padBytes, 0),
       totalOperationCost: 0, maxStepOperationCost: 0,
       fitsStandardBudget: false, inputsForHeaviestStep: 0,
       bchCompatible: oversize === 0,
@@ -210,6 +228,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     checkpointStats,
     stepCount: steps.length,
     totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
+    totalPadBytes: steps.reduce((a, s) => a + s.padBytes, 0),
     totalOperationCost: opCosts.reduce((a, b) => a + b, 0),
     maxStepOperationCost,
     fitsStandardBudget: steps.every((s) => s.operationCost <= budget),

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-22T03:42:08.518Z",
+  "generatedAt": "2026-06-22T07:59:08.528Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -26,44 +26,132 @@
       "bytes": 10000
     },
     "leader": {
-      "id": "bch-groth16-singleton",
+      "id": "bch-groth16-bls12381-singleton",
       "label": "BCH-native full verifier",
-      "curve": "BN254",
-      "bytes": 21933,
+      "curve": "BLS12-381",
+      "bytes": 20975,
       "bchCompatible": false
     },
     "current": {
       "id": "bch-groth16-chunked",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 1007005,
+      "bytes": 738099,
       "bchCompatible": true
     }
   },
   "history": [
     {
-      "t": "2026-06-21T08:37:34.653Z",
-      "score": 1543293,
-      "id": "bch-groth16-chunked",
-      "steps": 123
+      "t": "2026-06-19T13:12:28.674Z",
+      "score": 21933,
+      "id": "bch-groth16-singleton",
+      "steps": 1,
+      "fits": false
     },
     {
-      "t": "2026-06-21T09:59:29.801Z",
+      "t": "2026-06-19T14:26:36.800Z",
+      "score": 1759196,
+      "id": "bch-groth16-chunked",
+      "steps": 125,
+      "fits": true
+    },
+    {
+      "t": "2026-06-19T20:43:33.474Z",
+      "score": 1592781,
+      "id": "bch-groth16-chunked",
+      "steps": 116,
+      "fits": true
+    },
+    {
+      "t": "2026-06-20T07:56:19.216Z",
+      "score": 24574,
+      "id": "bch-groth16-bls12381-singleton",
+      "steps": 1,
+      "fits": false
+    },
+    {
+      "t": "2026-06-20T07:56:19.216Z",
+      "score": 1548532,
+      "id": "bch-groth16-chunked",
+      "steps": 115,
+      "fits": true
+    },
+    {
+      "t": "2026-06-20T09:08:37.731Z",
+      "score": 1531509,
+      "id": "bch-groth16-chunked",
+      "steps": 116,
+      "fits": true
+    },
+    {
+      "t": "2026-06-21T10:15:36.548Z",
       "score": 1469450,
       "id": "bch-groth16-bls12381-chunked",
-      "steps": 116
+      "steps": 116,
+      "fits": true
     },
     {
       "t": "2026-06-21T10:58:17.655Z",
       "score": 1347828,
       "id": "bch-groth16-chunked",
-      "steps": 103
+      "steps": 103,
+      "fits": true
+    },
+    {
+      "t": "2026-06-22T03:42:08.518Z",
+      "score": 1154532,
+      "id": "bch-groth16-bls12381-chunked",
+      "steps": 100,
+      "fits": true
     },
     {
       "t": "2026-06-22T03:42:08.518Z",
       "score": 1007005,
       "id": "bch-groth16-chunked",
-      "steps": 85
+      "steps": 85,
+      "fits": true
+    },
+    {
+      "t": "2026-06-22T05:46:14.081Z",
+      "score": 950105,
+      "id": "bch-groth16-bls12381-chunked",
+      "steps": 86,
+      "fits": true
+    },
+    {
+      "t": "2026-06-22T05:46:14.081Z",
+      "score": 20975,
+      "id": "bch-groth16-bls12381-singleton",
+      "steps": 1,
+      "fits": false
+    },
+    {
+      "t": "2026-06-22T05:46:14.081Z",
+      "score": 770817,
+      "id": "bch-groth16-chunked",
+      "steps": 66,
+      "fits": true
+    },
+    {
+      "t": "2026-06-22T05:46:14.081Z",
+      "score": 21042,
+      "id": "bch-groth16-singleton",
+      "steps": 1,
+      "fits": false
+    },
+    {
+      "t": "2026-06-22T07:24:47.321Z",
+      "score": 928447,
+      "id": "bch-groth16-bls12381-chunked",
+      "steps": 84,
+      "fits": true
+    },
+    {
+      "t": "2026-06-22T07:24:47.321Z",
+      "score": 738099,
+      "id": "bch-groth16-chunked",
+      "steps": 63,
+      "fits": true
     }
   ],
   "entries": [
@@ -81,6 +169,10 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "score": 522477,
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 510467864,
@@ -129,6 +221,10 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "score": 11717684,
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 997792165,
@@ -172,13 +268,17 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 21933,
+      "score": 21042,
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
       "benchmarks": {
         "smallProof": {
-          "opCost": 1259938241,
+          "opCost": 1175084042,
           "steps": 1,
-          "heaviestStepOpCost": 1259938241,
-          "inputsForHeaviestStep": 157
+          "heaviestStepOpCost": 1175084042,
+          "inputsForHeaviestStep": 147
         }
       },
       "bsvSingleton": false,
@@ -189,7 +289,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~157× one input's op-cost budget"
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~147× one input's op-cost budget"
       },
       "generality": {
         "binding": "runtime",
@@ -216,13 +316,17 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 24574,
+      "score": 20975,
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
       "benchmarks": {
         "smallProof": {
-          "opCost": 1480425493,
+          "opCost": 1349690204,
           "steps": 1,
-          "heaviestStepOpCost": 1480425493,
-          "inputsForHeaviestStep": 185
+          "heaviestStepOpCost": 1349690204,
+          "inputsForHeaviestStep": 169
         }
       },
       "bsvSingleton": false,
@@ -233,7 +337,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~185× one input's op-cost budget"
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~169× one input's op-cost budget"
       },
       "generality": {
         "binding": "runtime",
@@ -260,18 +364,22 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 1007005,
+      "score": 738099,
+      "padding": {
+        "bytes": 442859,
+        "fraction": 0.5999994580672783
+      },
       "benchmarks": {
         "smallProof": {
-          "opCost": 558566873,
-          "steps": 85,
-          "heaviestStepOpCost": 7895718,
+          "opCost": 409511954,
+          "steps": 63,
+          "heaviestStepOpCost": 7877865,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
-          "opCost": 607438084,
-          "steps": 85,
-          "heaviestStepOpCost": 7895931,
+          "opCost": 452407417,
+          "steps": 63,
+          "heaviestStepOpCost": 7878082,
           "inputsForHeaviestStep": 1
         }
       },
@@ -312,6 +420,10 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 13799,
+      "padding": {
+        "bytes": 9990,
+        "fraction": 0.7239655047467207
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 76016561,
@@ -355,6 +467,10 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 14057,
+      "padding": {
+        "bytes": 9995,
+        "fraction": 0.7110336487159422
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 101433542,
@@ -398,6 +514,10 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 183458,
+      "padding": {
+        "bytes": 155760,
+        "fraction": 0.8490226645880801
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 85206922,
@@ -439,6 +559,10 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "score": 22671,
+      "padding": {
+        "bytes": 17755,
+        "fraction": 0.7831591019363945
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 14269163,
@@ -479,18 +603,22 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 31754,
+      "score": 28231,
+      "padding": {
+        "bytes": 14806,
+        "fraction": 0.5244589281286529
+      },
       "benchmarks": {
         "smallProof": {
-          "opCost": 12508732,
-          "steps": 10,
-          "heaviestStepOpCost": 3393780,
+          "opCost": 11628149,
+          "steps": 9,
+          "heaviestStepOpCost": 2775179,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
-          "opCost": 61347693,
-          "steps": 10,
-          "heaviestStepOpCost": 7624596,
+          "opCost": 54488762,
+          "steps": 9,
+          "heaviestStepOpCost": 7636044,
           "inputsForHeaviestStep": 1
         }
       },
@@ -530,12 +658,16 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 36724,
+      "score": 34822,
+      "padding": {
+        "bytes": 14739,
+        "fraction": 0.4232669002354833
+      },
       "benchmarks": {
         "smallProof": {
-          "opCost": 12033923,
+          "opCost": 11383998,
           "steps": 12,
-          "heaviestStepOpCost": 3339737,
+          "heaviestStepOpCost": 2725331,
           "inputsForHeaviestStep": 1
         }
       },
@@ -576,6 +708,10 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "score": 20735,
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 1211701878,
@@ -620,6 +756,10 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "score": 21008,
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 1379001528,
@@ -663,18 +803,22 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 602807,
+      "score": 435518,
+      "padding": {
+        "bytes": 255370,
+        "fraction": 0.5863592319950036
+      },
       "benchmarks": {
         "smallProof": {
-          "opCost": 337186517,
-          "steps": 47,
-          "heaviestStepOpCost": 7489768,
+          "opCost": 242361334,
+          "steps": 33,
+          "heaviestStepOpCost": 7603552,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
-          "opCost": 337196010,
-          "steps": 47,
-          "heaviestStepOpCost": 7490474,
+          "opCost": 242374403,
+          "steps": 33,
+          "heaviestStepOpCost": 7604978,
           "inputsForHeaviestStep": 1
         }
       },
@@ -714,12 +858,16 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 1117808,
+      "score": 893625,
+      "padding": {
+        "bytes": 475832,
+        "fraction": 0.5324739124353056
+      },
       "benchmarks": {
         "smallProof": {
-          "opCost": 639930978,
-          "steps": 88,
-          "heaviestStepOpCost": 7643560,
+          "opCost": 516217604,
+          "steps": 72,
+          "heaviestStepOpCost": 7687778,
           "inputsForHeaviestStep": 1
         }
       },
@@ -759,12 +907,16 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 1154532,
+      "score": 928447,
+      "padding": {
+        "bytes": 490571,
+        "fraction": 0.5283780334257098
+      },
       "benchmarks": {
         "smallProof": {
-          "opCost": 651964901,
-          "steps": 100,
-          "heaviestStepOpCost": 7643560,
+          "opCost": 527601602,
+          "steps": 84,
+          "heaviestStepOpCost": 7687778,
           "inputsForHeaviestStep": 1
         }
       },
@@ -805,6 +957,10 @@
       "structure": "multi-tx",
       "proofSystem": "demo (hash-chained state)",
       "score": 228,
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
       "benchmarks": {
         "smallProof": {
           "opCost": 3894,
