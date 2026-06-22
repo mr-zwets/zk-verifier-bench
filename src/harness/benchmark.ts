@@ -12,6 +12,10 @@ import { bchMultistepDemo } from '../implementations/bch-multistep-demo.js';
 import { bchPairingBls12381Chunked } from '../implementations/bch-pairing-bls12381-chunked.js';
 import { bchPairingBls12381Singleton } from '../implementations/bch-pairing-bls12381-singleton.js';
 import { bchPairingChunked } from '../implementations/bch-pairing-chunked.js';
+import { bchPairingIntratx } from '../implementations/bch-pairing-intratx.js';
+import { bchGroth16Intratx } from '../implementations/bch-groth16-intratx.js';
+import { bchPairingBls12381Intratx } from '../implementations/bch-pairing-bls12381-intratx.js';
+import { bchGroth16Bls12381Intratx } from '../implementations/bch-groth16-bls12381-intratx.js';
 import { bchPairingSingleton } from '../implementations/bch-pairing-singleton.js';
 import { bchVkxBls12381ChunkedCovenant } from '../implementations/bch-vkx-bls12381-chunked-covenant.js';
 import { bchVkxChunkedCovenant } from '../implementations/bch-vkx-chunked-covenant.js';
@@ -44,7 +48,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchPairingIntratx, bchGroth16Intratx, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchMultistepDemo];
 
 // Zero-padding accounting: the chunked covenant steps append one big all-zero push to each
 // unlocking purely to buy op-cost budget ((41+len)*800). It is the LAST push and is all
@@ -59,13 +63,48 @@ const trailingZeroPadBytes = (script: Uint8Array): number => {
   return encodeAuthenticationInstruction(last).length;
 };
 
+const varintLen = (n: number): number => (n < 0xfd ? 1 : n <= 0xffff ? 3 : n <= 0xffffffff ? 5 : 9);
+const TXN_ENVELOPE = 4 /* version */ + 4 /* locktime */;
+const INPUT_FIXED = 36 /* outpoint */ + 4 /* sequence */;
+
+// Serialized transaction overhead this step adds that the script-byte total does NOT
+// already count (locking + unlocking are counted separately). Folded into the score so
+// the comparison is fair across structures: a single-tx verifier pays one tx's overhead,
+// a covenant chain pays it per step (its real recurring cost). Models:
+//   - covenant step  -> its own 1-in/1-out token tx; includes the CashToken output prefix
+//     (category + NFT commitment carrying the threaded state); EXCLUDES the perpetuated
+//     output locking (that is the next step's locking, already counted).
+//   - intra-tx step  -> all steps share ONE tx; the shared envelope + single OP_RETURN
+//     output are attributed to input 0, every input pays its outpoint/sequence/varint.
+//   - single-tx step -> one tx, one input, one standard (P2PKH, 25 B) output.
+const stepTxOverhead = (step: Step): number => {
+  const inputOv = INPUT_FIXED + varintLen(step.unlockingBytecode.length);
+  if (step.intraTx !== undefined) {
+    const sharedOnFirst =
+      step.intraTx.index === 0
+        ? TXN_ENVELOPE + varintLen(step.intraTx.inputs.length) + varintLen(1) + (8 + varintLen(1) + 1)
+        : 0;
+    return sharedOnFirst + inputOv;
+  }
+  if (step.covenant !== undefined) {
+    const prefix =
+      1 /* PREFIX_TOKEN */ + step.covenant.category.length + 1 /* bitfield */ +
+      varintLen(step.covenant.outCommitment.length) + step.covenant.outCommitment.length;
+    const outputOv = 8 /* value */ + varintLen(prefix + step.covenant.outLockingBytecode.length) + prefix;
+    return TXN_ENVELOPE + varintLen(1) + varintLen(1) + inputOv + outputOv;
+  }
+  const p2pkh = 25;
+  return TXN_ENVELOPE + varintLen(1) + varintLen(1) + inputOv + (8 + varintLen(p2pkh) + p2pkh);
+};
+
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
-  const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode, step.covenant);
+  const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode, step.covenant, step.intraTx);
   return {
     label: step.label,
     lockingBytes: step.lockingBytecode.length,
     unlockingBytes: step.unlockingBytecode.length,
     padBytes: trailingZeroPadBytes(step.unlockingBytecode),
+    txOverheadBytes: stepTxOverhead(step),
     operationCost: o.operationCost,
     instructionCount: o.instructionCount,
     accepted: bsv ? o.bsvAccepted : o.accepted,
@@ -76,7 +115,7 @@ const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
 /** A run is rejected if at least one of its steps does not accept. */
 const runRejects = (vm: Bch2026Vm, run: Step[], bsv: boolean): boolean =>
   run.some((s) => {
-    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant);
+    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx);
     return !(bsv ? o.bsvAccepted : o.accepted);
   });
 
@@ -111,6 +150,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       lockingBytes: s.lockingBytecode.length,
       unlockingBytes: s.unlockingBytecode.length,
       padBytes: trailingZeroPadBytes(s.unlockingBytecode),
+      txOverheadBytes: stepTxOverhead(s),
       operationCost: 0,
       instructionCount: 0,
       accepted: false,
@@ -127,6 +167,8 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       stepCount: steps.length,
       totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
       totalPadBytes: steps.reduce((a, s) => a + s.padBytes, 0),
+      totalTxOverheadBytes: steps.reduce((a, s) => a + s.txOverheadBytes, 0),
+      txCount: scenario.valid.some((s) => s.intraTx !== undefined) ? 1 : steps.length,
       totalOperationCost: 0, maxStepOperationCost: 0,
       fitsStandardBudget: false, inputsForHeaviestStep: 0,
       bchCompatible: oversize === 0,
@@ -165,7 +207,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
 
   // BCH compatibility: replay the valid run on the REAL BCH 2026 VM (consensus limits).
   const realVm = createRealVm();
-  const realOutcomes = scenario.valid.map((s) => evaluatePair(realVm, s.lockingBytecode, s.unlockingBytecode, s.covenant));
+  const realOutcomes = scenario.valid.map((s) => evaluatePair(realVm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx));
   const firstFail = realOutcomes.find((o) => !o.accepted);
   const bchCompatible = firstFail === undefined && validPassed;
   const bchIncompatibleReason = firstFail?.error === undefined ? undefined : limitReason(firstFail.error);
@@ -229,6 +271,8 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     stepCount: steps.length,
     totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
     totalPadBytes: steps.reduce((a, s) => a + s.padBytes, 0),
+    totalTxOverheadBytes: steps.reduce((a, s) => a + s.txOverheadBytes, 0),
+    txCount: scenario.valid.some((s) => s.intraTx !== undefined) ? 1 : steps.length,
     totalOperationCost: opCosts.reduce((a, b) => a + b, 0),
     maxStepOperationCost,
     fitsStandardBudget: steps.every((s) => s.operationCost <= budget),

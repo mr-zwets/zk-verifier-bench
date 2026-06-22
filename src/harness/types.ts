@@ -188,6 +188,12 @@ export interface StepMetrics {
   /** dead-weight zero-padding bytes in the unlocking (the trailing all-zero push that buys
    * op-cost budget); 0 for unpadded steps (e.g. singletons). */
   padBytes: number;
+  /** serialized transaction overhead this step adds that the script-byte score does NOT
+   * count: tx envelope (version/locktime/counts), the spent outpoint + sequence, script-
+   * length varints, and — for a covenant step — the CashToken output prefix that carries
+   * the threaded state. Excludes the perpetuated output locking (counted as the NEXT
+   * step's locking). For an intra-tx bundle the shared envelope+output land on input 0. */
+  txOverheadBytes: number;
   operationCost: number;
   instructionCount: number;
   accepted: boolean;
@@ -231,6 +237,13 @@ export interface BenchmarkResult {
   totalBytes: number;
   /** total dead-weight zero-padding bytes across all steps (subset of totalBytes) */
   totalPadBytes: number;
+  /** total serialized transaction overhead across all steps, ON TOP of totalBytes (envelope
+   * + outpoints + token prefixes + varints). The recurring per-tx cost of a covenant chain;
+   * ~one tx's worth for a single-tx verifier. true on-chain size ≈ totalBytes + this. */
+  totalTxOverheadBytes: number;
+  /** number of transactions the run spans: one per step for a covenant chain, 1 for an
+   * intra-tx bundle or a single-tx verifier. */
+  txCount: number;
   totalOperationCost: number;
   maxStepOperationCost: number;
   /** every step's op-cost fits one standard BCH input's budget */

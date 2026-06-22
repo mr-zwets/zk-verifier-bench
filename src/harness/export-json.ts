@@ -98,10 +98,19 @@ const entryOf = (r: BenchmarkResult) => ({
   curve: r.impl.field,
   structure: r.impl.structure,
   proofSystem: r.impl.proofSystem,
-  // headline score = total on-chain bytes (lower is better)
-  score: r.totalBytes,
+  // headline score = full on-chain footprint (lower is better): the verifier scripts PLUS
+  // the serialized transaction overhead (envelope + outpoints + CashToken prefixes + varints).
+  // Folding tx overhead in makes structures comparable — a covenant chain pays it once PER
+  // STEP (its real recurring cost), a single-tx verifier pays it once. `size` breaks it down.
+  score: r.totalBytes + r.totalTxOverheadBytes,
+  size: {
+    scriptBytes: r.totalBytes,
+    txOverheadBytes: r.totalTxOverheadBytes,
+    transactions: r.txCount,
+    total: r.totalBytes + r.totalTxOverheadBytes,
+  },
   // dead-weight zero-padding: bytes appended to unlockings purely to buy op-cost budget,
-  // and their share of the total. A big slice of the chunking overhead; 0 for unpadded
+  // and their share of the SCRIPT bytes. A big slice of the chunking overhead; 0 for unpadded
   // singletons (proof in the witness, no covenant padding).
   padding: { bytes: r.totalPadBytes, fraction: r.totalBytes > 0 ? r.totalPadBytes / r.totalBytes : 0 },
   // op-cost benchmarks, keyed by the PROOF SCENARIO actually RUN. Even though the
