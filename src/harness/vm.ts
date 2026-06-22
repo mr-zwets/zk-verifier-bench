@@ -90,6 +90,16 @@ export interface CovenantContext {
   outLockingBytecode: Uint8Array; // tx.outputs[0] locking (next chunk; the perpetuation target)
 }
 
+/** Intra-transaction linked-input context. The whole chunked computation is the
+ * inputs of ONE transaction; chunk `index` reads its siblings' witnesses via
+ * introspection (OP_INPUTBYTECODE) to carry state forward. The runner builds a
+ * transaction from every input's (locking, unlocking) and evaluates input `index`
+ * against it, so `tx.inputs[i].unlockingBytecode` resolves to the real sibling. */
+export interface IntraTxContext {
+  index: number;
+  inputs: { lockingBytecode: Uint8Array; unlockingBytecode: Uint8Array }[];
+}
+
 /** Evaluate unlocking + locking as a synthetic spend and report acceptance + metrics.
  * With a covenant context the spend is driven through a token-carrying tx so the
  * contract's NFT-commitment / output introspection resolves. */
@@ -98,13 +108,32 @@ export const evaluatePair = (
   lockingBytecode: Uint8Array,
   unlockingBytecode: Uint8Array,
   covenant?: CovenantContext,
+  intraTx?: IntraTxContext,
 ): EvalOutcome => {
   const mkToken = (commitment: Uint8Array) => ({
     amount: 0n,
     category: covenant!.category,
     nft: { capability: covenant!.capability, commitment },
   });
-  const program = covenant
+  const intraTxProgram = intraTx && {
+    inputIndex: intraTx.index,
+    sourceOutputs: intraTx.inputs.map((i) => ({ lockingBytecode: i.lockingBytecode, valueSatoshis: 1000n })),
+    transaction: {
+      version: 2,
+      inputs: intraTx.inputs.map((i, n) => ({
+        outpointTransactionHash: new Uint8Array(32),
+        outpointIndex: n,
+        sequenceNumber: 0,
+        unlockingBytecode: i.unlockingBytecode,
+      })),
+      // a single OP_RETURN output keeps the synthetic tx well-formed (no value carried)
+      outputs: [{ lockingBytecode: Uint8Array.from([0x6a]), valueSatoshis: 1000n }],
+      locktime: 0,
+    },
+  };
+  const program = intraTxProgram
+    ? intraTxProgram
+    : covenant
     ? {
         inputIndex: 0,
         sourceOutputs: [{ lockingBytecode, valueSatoshis: 1000n, token: mkToken(covenant.inCommitment) }],

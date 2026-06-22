@@ -33,6 +33,21 @@ export interface Step {
     outCommitment: Uint8Array;
     outLockingBytecode: Uint8Array;
   };
+  /**
+   * Intra-transaction linked-input context. Set when this step is ONE INPUT of a
+   * SINGLE transaction whose inputs carry the chunked computation forward by reading
+   * each other's witnesses (OP_INPUTBYTECODE) instead of an NFT-commitment hand-off.
+   * `index` is this step's input index; `inputs` is the full ordered list of every
+   * input's (locking, unlocking) in the shared tx (the SAME array object across all
+   * steps of the run). The harness evaluates this input against a transaction built
+   * from `inputs`, so a chunk's `tx.inputs[idx±1].unlockingBytecode` introspection
+   * resolves to its real sibling. State is passed as raw, arbitrary-size byte blobs
+   * (no 128-byte token-commitment limit, no hashing), bound by direct byte equality.
+   */
+  intraTx?: {
+    index: number;
+    inputs: { lockingBytecode: Uint8Array; unlockingBytecode: Uint8Array }[];
+  };
 }
 
 export interface CheckpointStat {
