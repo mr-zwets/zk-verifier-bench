@@ -16,5 +16,11 @@
     "score": 1347828,
     "id": "bch-groth16-chunked",
     "steps": 103
+  },
+  {
+    "t": "2026-06-22T03:42:08.518Z",
+    "score": 1007005,
+    "id": "bch-groth16-chunked",
+    "steps": 85
   }
 ]
