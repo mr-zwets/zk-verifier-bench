@@ -105,6 +105,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       invalidRejected: 0, invalidTotal: 0, pass: false, bsvOpReturn: false, steps,
       proofBinding: impl.proofBinding ?? 'runtime', proofsTested: 1, proofsPassed: 0, runtimeGeneral: false,
       ...tokenSafetyOf(scenario, impl),
+      inputValidation: { tested: 0, rejected: 0, enforced: false },
       checkpointStats: [],
       stepCount: steps.length,
       totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
@@ -163,6 +164,11 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       : []);
   const invalidRejected = invalidRuns.filter((run) => runRejects(vm, run, bsv)).length;
 
+  // EIP-197 input validation: adversarial-point runs (off-curve / off-subgroup) must reject
+  const inputRuns = scenario.invalidInputs ?? [];
+  const inputRejected = inputRuns.filter((run) => runRejects(vm, run, bsv)).length;
+  const inputValidation = { tested: inputRuns.length, rejected: inputRejected, enforced: inputRuns.length > 0 && inputRejected === inputRuns.length };
+
   const opCosts = steps.map((s) => s.operationCost);
   const maxStepOperationCost = opCosts.length ? Math.max(...opCosts) : 0;
   const budget = standardInputBudget();
@@ -198,6 +204,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     proofsPassed,
     runtimeGeneral,
     ...tokenSafetyOf(scenario, impl),
+    inputValidation,
     bsvOpReturn: bsv,
     steps,
     checkpointStats,
@@ -300,6 +307,9 @@ const main = async () => {
         if (r.tokenThreaded) {
           console.log(`    > token safety: ${r.tokenSafetyEnforced ? 'ENFORCED' : 'NOT enforced'} — state is threaded through the NFT commitment` +
             (r.tokenSafetyEnforced ? '' : ', but category continuity / capability are not pinned (a real deployment must enforce them)'));
+        }
+        if (r.inputValidation.tested > 0) {
+          console.log(`    > input validation: ${r.inputValidation.enforced ? 'ENFORCED' : 'NOT enforced'} — ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected (EIP-197 on-curve + G2-subgroup)`);
         }
       }
       const ms = r.impl.milestone;

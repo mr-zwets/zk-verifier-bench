@@ -141,6 +141,20 @@ const entryOf = (r: BenchmarkResult) => ({
             : 'state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)',
       }
     : null,
+  // EIP-197 input validation: does the verifier reject structurally-invalid points
+  // (off-curve, or G2 off the order-r subgroup) before pairing them? Empirically
+  // confirmed by running adversarial-point inputs (Scenario.invalidInputs).
+  inputValidation: {
+    enforced: r.inputValidation.enforced,
+    tested: r.inputValidation.tested,
+    rejected: r.inputValidation.rejected,
+    detail:
+      r.inputValidation.tested === 0
+        ? 'not exercised — no adversarial-point inputs provided for this entry'
+        : r.inputValidation.enforced
+          ? `on-curve + G2-subgroup checks enforced: ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected`
+          : `NOT enforced: only ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points rejected — raw points reach the pairing`,
+  },
   source: r.impl.source,
 });
 

@@ -69,6 +69,15 @@ export interface Scenario {
   worstCaseProof?: Step[];
   /** explicit invalid runs; each is a full step list that must fail at some step */
   invalid?: Step[][];
+  /**
+   * Adversarial INPUT runs: well-formed witnesses that supply a structurally-invalid
+   * curve point — a G1/G2 point off the curve, or a G2 point on-curve but OUTSIDE the
+   * order-r subgroup. A verifier with EIP-197-style input validation (on-curve +
+   * subgroup checks, like ecPairing) REJECTS all of these; one that feeds raw points
+   * into the pairing may accept them. The harness runs them to empirically grade
+   * input validation (BenchmarkResult.inputValidation). Each must be REJECTED.
+   */
+  invalidInputs?: Step[][];
   /** if true, the harness derives invalid runs by bit-flipping each step's witness */
   tamperable?: boolean;
   /**
@@ -190,6 +199,10 @@ export interface BenchmarkResult {
   /** token-threading entries only: does the covenant enforce token safety (category
    * continuity + capability constraint)? null when not token-threaded. */
   tokenSafetyEnforced: boolean | null;
+  /** EIP-197 input validation: how many adversarial-point runs (off-curve /
+   * off-subgroup, from Scenario.invalidInputs) were run, and how many the verifier
+   * rejected. `enforced` = at least one tested and ALL rejected. */
+  inputValidation: { tested: number; rejected: number; enforced: boolean };
   /** correctness was judged under the BSV post-Genesis OP_RETURN-terminator rule
    * (the valid run halts at a reachable OP_RETURN, which fails on strict BCH) */
   bsvOpReturn: boolean;

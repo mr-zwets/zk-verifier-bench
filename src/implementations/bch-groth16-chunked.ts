@@ -31,7 +31,7 @@ interface RawStep {
   covenant?: { category: string; capability: 'none' | 'mutable' | 'minting'; inCommitment: string; outCommitment: string; outLockingBytecode: string };
 }
 const v = JSON.parse(readFileSync('src/bch/groth16-chunked-vectors.json', 'utf8')) as {
-  steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[];
+  steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalidInputs?: RawStep[][];
 };
 
 // map a raw (hex) step -> Step, carrying the token-covenant context (state lives in
@@ -84,6 +84,9 @@ export const bchGroth16Chunked: Implementation = {
     // first vk_x step and at the final verdict step.
     const tampered = (i: number): Step[] => [{ ...valid[i]!, unlockingBytecode: hexToBin(v.steps[i]!.invalidUnlocking) }];
     const invalid: Step[][] = [tampered(0), tampered(valid.length - 1)];
-    return { valid, extraValidProofs, worstCaseProof, invalid };
+    // adversarial INPUT runs (off-curve / off-subgroup B) — the EIP-197 validation
+    // prologue must reject them (empirically grades BenchmarkResult.inputValidation).
+    const invalidInputs: Step[][] = (v.invalidInputs ?? []).map((run) => run.map(toStep));
+    return { valid, extraValidProofs, worstCaseProof, invalid, invalidInputs };
   },
 };
