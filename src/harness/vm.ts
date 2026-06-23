@@ -223,5 +223,17 @@ export const STANDARD_UNLOCKING_CAP = 10_000;
 export const realOpCostBudget = (unlockingLen: number): number =>
   (DENSITY_CONTROL_BASE + unlockingLen) * OP_COST_BUDGET_PER_BYTE;
 
+/**
+ * True iff `locking` is a P2SH20 redeem-hash envelope: OP_HASH160 <20-byte hash>
+ * OP_EQUAL (0xa9 0x14 …20… 0x87, 23 bytes total). P2SH20 hides the contract behind a
+ * 160-bit hash, which is collision-vulnerable at only ~2^80 work — cheap enough to
+ * incentivise forging a second redeem script for a contract holding real value (the
+ * reason CashScript defaults to p2sh32 and warns p2sh20 is "cryptographically insecure
+ * for a large subset of smart contracts"). Entries must wrap in P2SH32 (OP_HASH256
+ * <32-byte> OP_EQUAL) or deploy bare/P2S, so the harness flags any P2SH20 locking and
+ * disallows the entry. */
+export const isP2sh20Locking = (locking: Uint8Array): boolean =>
+  locking.length === 23 && locking[0] === 0xa9 && locking[1] === 0x14 && locking[22] === 0x87;
+
 /** Budget of one input at the standard unlocking cap. */
 export const standardInputBudget = (): number => realOpCostBudget(STANDARD_UNLOCKING_CAP);

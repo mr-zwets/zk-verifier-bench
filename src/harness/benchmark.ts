@@ -40,6 +40,7 @@ import {
   createRealVm,
   createStandardVm,
   evaluatePair,
+  isP2sh20Locking,
   standardInputBudget,
   MAX_STANDARD_LOCKING_BYTECODE,
   MAX_STANDARD_UNLOCKING_BYTECODE,
@@ -116,6 +117,19 @@ const stepTxOverhead = (step: Step): number => {
   }
   const p2pkh = 25;
   return TXN_ENVELOPE + varintLen(1) + varintLen(1) + inputOv + (8 + varintLen(p2pkh) + p2pkh);
+};
+
+// Envelope-security gate: an entry that hides any step's contract behind a P2SH20 hash
+// (OP_HASH160 <20B> OP_EQUAL) is DISALLOWED — the 160-bit hash is collision-vulnerable at
+// ~2^80 work, cheap enough to forge a second redeem for a funded contract. This is a
+// competition rule, not a protocol one (P2SH20 is consensus-valid + relayable), so it is
+// scored separately from bchCompatible/standardness and folded into `pass`. P2SH32, bare,
+// and P2S deployments all pass.
+const packagingSecurity = (steps: Step[]): { secure: boolean; reason?: string } => {
+  const n = steps.filter((s) => isP2sh20Locking(s.lockingBytecode)).length;
+  return n === 0
+    ? { secure: true }
+    : { secure: false, reason: `${n}/${steps.length} step(s) use an insecure P2SH20 envelope (OP_HASH160, ~2^80 collision security) — use P2SH32` };
 };
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
@@ -204,9 +218,12 @@ const tokenSafetyOf = (
 };
 
 export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementation['load']>>): BenchmarkResult => {
+  // Envelope-security gate (applies to executed AND profile-only entries): disallow P2SH20.
+  const env = packagingSecurity(scenario.valid);
   // Profile-only: size-decidable, not executed (e.g. tx-introspection covenants
   // we cannot drive in a synthetic context). BCH compat == every script fits the cap.
   if (scenario.profileOnly) {
+    const profileEnv = env;
     const steps: StepMetrics[] = scenario.valid.map((s) => ({
       label: s.label,
       lockingBytes: s.lockingBytecode.length,
@@ -237,6 +254,8 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       bchIncompatibleReason: oversize > 0 ? `script-size: ${oversize}/${steps.length} steps over ${SCRIPT_SIZE_CAP / 1000}KB` : undefined,
       fitsBchStandardness: false,
       bchStandardnessReason: 'profile-only (not executed)',
+      securePackaging: profileEnv.secure,
+      insecurePackagingReason: profileEnv.reason,
     };
   }
 
@@ -333,7 +352,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     validPassed,
     invalidRejected,
     invalidTotal: invalidRuns.length,
-    pass: validPassed && worstCaseAccepted && invalidRuns.length > 0 && invalidRejected === invalidRuns.length,
+    pass: validPassed && worstCaseAccepted && invalidRuns.length > 0 && invalidRejected === invalidRuns.length && env.secure,
     proofBinding,
     proofsTested,
     proofsPassed,
@@ -357,6 +376,8 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     bchIncompatibleReason,
     fitsBchStandardness: std.fits,
     bchStandardnessReason: std.reason,
+    securePackaging: env.secure,
+    insecurePackagingReason: env.reason,
   };
 };
 
@@ -396,10 +417,11 @@ const main = async () => {
       results.push(r);
       console.log(
         r.profileOnly ? 'profile-only (size)'
-          : r.pass ? 'PASS'
-            : r.worstCase?.accepted === false ? 'FAIL (worst-case proof rejected)'
-              : r.validPassed ? 'valid-only (no reject test)'
-                : 'FAIL',
+          : !r.securePackaging ? 'DISALLOWED (insecure P2SH20 envelope)'
+            : r.pass ? 'PASS'
+              : r.worstCase?.accepted === false ? 'FAIL (worst-case proof rejected)'
+                : r.validPassed ? 'valid-only (no reject test)'
+                  : 'FAIL',
       );
     } catch (e) {
       console.log(`ERROR: ${(e as Error).message}`);
@@ -426,13 +448,15 @@ const main = async () => {
     for (const r of rs) {
       const correctness = r.profileOnly
         ? 'profile (size)'
-        : r.pass
-          ? `PASS (${r.invalidRejected}/${r.invalidTotal}✗${r.bsvOpReturn ? ', BSV OP_RETURN' : ''})`
-          : r.worstCase?.accepted === false
-            ? 'FAIL (worst-case✗)'
-            : r.validPassed
-              ? 'valid-only'
-              : 'FAIL';
+        : !r.securePackaging
+          ? 'DISALLOWED (P2SH20)'
+          : r.pass
+            ? `PASS (${r.invalidRejected}/${r.invalidTotal}✗${r.bsvOpReturn ? ', BSV OP_RETURN' : ''})`
+            : r.worstCase?.accepted === false
+              ? 'FAIL (worst-case✗)'
+              : r.validPassed
+                ? 'valid-only'
+                : 'FAIL';
       const compat = r.bchCompatible ? 'yes' : `no: ${r.bchIncompatibleReason ?? 'limit'}`;
       const at10kb = r.profileOnly ? '-' : r.inputsForHeaviestStep <= 1 ? '1' : `~${r.inputsForHeaviestStep}`;
       console.log(cols([
@@ -442,6 +466,9 @@ const main = async () => {
       ]));
       for (const c of r.checkpointStats) {
         console.log(`    > reach "${c.label}" @ step ${c.atStep}: ${fmt(c.cumulativeOpCost)} op-cost, ${fmt(c.cumulativeBytes)} B`);
+      }
+      if (!r.securePackaging) {
+        console.log(`    > packaging: DISALLOWED — ${r.insecurePackagingReason}`);
       }
       if (!r.profileOnly) {
         console.log(`    > standardness: ${r.fitsBchStandardness ? 'standard — relayable under default mempool policy' : `non-standard (${r.bchStandardnessReason ?? 'relay limit'}); valid at consensus, must be mined directly`}`);

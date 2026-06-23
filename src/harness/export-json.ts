@@ -199,6 +199,17 @@ const entryOf = (r: BenchmarkResult) => ({
           ? `on-curve + G2-subgroup checks enforced: ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected`
           : `NOT enforced: only ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points rejected — raw points reach the pairing`,
   },
+  // envelope security: a contract hidden behind an insecure P2SH20 hash (OP_HASH160,
+  // ~2^80 collision security) is DISALLOWED — it must use P2SH32, or deploy bare / P2S.
+  // `secure: false` disqualifies the entry (it is excluded from the frontier leaders and
+  // the score-history below). Orthogonal to BCH compatibility: P2SH20 is itself valid +
+  // relayable, this is the competition's cryptographic-security rule.
+  packaging: {
+    secure: r.securePackaging,
+    detail: r.securePackaging
+      ? 'securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)'
+      : `DISALLOWED: ${r.insecurePackagingReason}`,
+  },
   source: r.impl.source,
 });
 
@@ -221,12 +232,13 @@ const main = async () => {
   // AND verifies any proof at runtime. Instance-specific (baked) artifacts fit but are
   // excluded, so neither the frontier "current" nor the score-history records them.
   const bestBchNative = full
-    .filter((e) => e.bch.compatible && e.generality.runtimeGeneral)
+    .filter((e) => e.bch.compatible && e.generality.runtimeGeneral && e.packaging.secure)
     .sort((a, b) => a.score - b.score)[0];
   // smallest BCH-native (non-baseline) full verifier: the current frontier leader,
-  // whether or not it already fits BCH per-tx limits
+  // whether or not it already fits BCH per-tx limits. A P2SH20-packaged entry is
+  // disqualified, so it can never be the leader.
   const leader = full
-    .filter((e) => !e.official)
+    .filter((e) => !e.official && e.packaging.secure)
     .sort((a, b) => a.score - b.score)[0];
 
   // accumulate the score-history time-series, per curve so each curve draws its own line.
@@ -243,8 +255,8 @@ const main = async () => {
 
   const history = recordHistory(
     [
-      ...smallestPerCurve((e) => e.bch.compatible && e.generality.runtimeGeneral, true),
-      ...smallestPerCurve((e) => !e.official && !e.bch.compatible, false),
+      ...smallestPerCurve((e) => e.bch.compatible && e.generality.runtimeGeneral && e.packaging.secure, true),
+      ...smallestPerCurve((e) => !e.official && !e.bch.compatible && e.packaging.secure, false),
     ],
     curveOfId,
     generatedAt,

@@ -292,5 +292,14 @@ export interface BenchmarkResult {
   fitsBchStandardness: boolean;
   /** short reason standardness fails (e.g. the size cap that is exceeded); undefined when it fits */
   bchStandardnessReason?: string;
+  /**
+   * No step hides its contract behind an insecure P2SH20 envelope (OP_HASH160 <20B>
+   * OP_EQUAL). P2SH20's 160-bit hash is collision-vulnerable at ~2^80 work, so it is
+   * DISALLOWED for entries (use P2SH32, or deploy bare / P2S). false => the entry is
+   * disqualified (folded into `pass`); orthogonal to consensus/standardness, since
+   * P2SH20 is itself valid and relayable on BCH — this is a competition security rule. */
+  securePackaging: boolean;
+  /** short reason the packaging is disallowed (how many steps use P2SH20); undefined when secure */
+  insecurePackagingReason?: string;
   error?: string;
 }
