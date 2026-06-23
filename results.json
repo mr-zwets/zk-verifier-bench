@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-23T22:08:04.272Z",
+  "generatedAt": "2026-06-24T01:33:31.590Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -33,10 +33,10 @@
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-chunked",
+      "id": "bch-groth16-chunked-covenant",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 447146,
+      "bytes": 402287,
       "bchCompatible": true
     }
   },
@@ -214,6 +214,20 @@
       "score": 447146,
       "id": "bch-groth16-chunked",
       "steps": 54,
+      "fits": true
+    },
+    {
+      "t": "2026-06-23T21:18:25.038Z",
+      "score": 402287,
+      "id": "bch-groth16-chunked-covenant",
+      "steps": 49,
+      "fits": true
+    },
+    {
+      "t": "2026-06-23T21:18:25.038Z",
+      "score": 555307,
+      "id": "bch-groth16-bls12381-chunked-covenant",
+      "steps": 69,
       "fits": true
     }
   ],
@@ -553,22 +567,22 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 472510,
+      "score": 402287,
       "size": {
-        "scriptBytes": 466123,
-        "txOverheadBytes": 6387,
+        "scriptBytes": 395998,
+        "txOverheadBytes": 6289,
         "transactions": 49,
-        "total": 472510
+        "total": 402287
       },
       "padding": {
-        "bytes": 196042,
-        "fraction": 0.4205799756716575
+        "bytes": 124055,
+        "fraction": 0.3132717842009303
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 305694803,
+          "opCost": 305653600,
           "steps": 49,
-          "heaviestStepOpCost": 7919438,
+          "heaviestStepOpCost": 7917713,
           "inputsForHeaviestStep": 1
         }
       },
@@ -579,8 +593,8 @@
         "blockers": [],
         "detail": "every step fits BCH per-tx limits",
         "standard": {
-          "fits": false,
-          "detail": "49/49 locking >201 B; a step is non-standard under the standard VM"
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
         }
       },
       "generality": {
@@ -1309,22 +1323,22 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 634540,
+      "score": 555307,
       "size": {
-        "scriptBytes": 625533,
-        "txOverheadBytes": 9007,
+        "scriptBytes": 546438,
+        "txOverheadBytes": 8869,
         "transactions": 69,
-        "total": 634540
+        "total": 555307
       },
       "padding": {
-        "bytes": 261747,
-        "fraction": 0.41843835577019917
+        "bytes": 180030,
+        "fraction": 0.32946098184972494
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 420452801,
+          "opCost": 420414446,
           "steps": 69,
-          "heaviestStepOpCost": 7791832,
+          "heaviestStepOpCost": 7790727,
           "inputsForHeaviestStep": 1
         }
       },
@@ -1335,8 +1349,8 @@
         "blockers": [],
         "detail": "every step fits BCH per-tx limits",
         "standard": {
-          "fits": false,
-          "detail": "69/69 locking >201 B; a step is non-standard under the standard VM"
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
         }
       },
       "generality": {
