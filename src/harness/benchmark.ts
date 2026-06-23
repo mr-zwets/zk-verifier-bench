@@ -234,22 +234,28 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
   const budget = standardInputBudget();
 
   // worst-case proof run (dense near-r inputs through the SAME lockings): measure its
-  // op-cost separately so the proof-size dependence is visible. Only recorded if every
-  // step actually accepts (a real worst-case run, not a broken one).
+  // op-cost separately so the proof-size dependence is visible. The worst-case proof is a
+  // VALID proof (asserted to accept on the singleton when the vectors are generated), so
+  // its acceptance is a correctness property of the verifier under test, not just a
+  // profiling input — record the outcome unconditionally (including a rejection) and fold
+  // it into `pass`. A worst-case proof exercises field-arithmetic edge cases (lazy-
+  // reduction overflow, bias bounds, near-modulus operands), so a silent drop here would
+  // hide exactly the completeness bugs it is most likely to expose.
   const wcRun = scenario.worstCaseProof ?? [];
   let worstCase: BenchmarkResult['worstCase'];
+  let worstCaseAccepted = true; // vacuously true when no worst-case run was provided
   if (wcRun.length > 0) {
     const wcSteps = wcRun.map((s) => runStep(vm, s, bsv));
-    if (wcSteps.every((s) => s.accepted)) {
-      const wcOps = wcSteps.map((s) => s.operationCost);
-      const wcMax = Math.max(...wcOps);
-      worstCase = {
-        stepCount: wcSteps.length,
-        totalOperationCost: wcOps.reduce((a, b) => a + b, 0),
-        maxStepOperationCost: wcMax,
-        inputsForHeaviestStep: Math.ceil(wcMax / budget),
-      };
-    }
+    worstCaseAccepted = wcSteps.every((s) => s.accepted);
+    const wcOps = wcSteps.map((s) => s.operationCost);
+    const wcMax = Math.max(...wcOps);
+    worstCase = {
+      accepted: worstCaseAccepted,
+      stepCount: wcSteps.length,
+      totalOperationCost: wcOps.reduce((a, b) => a + b, 0),
+      maxStepOperationCost: wcMax,
+      inputsForHeaviestStep: Math.ceil(wcMax / budget),
+    };
   }
   return {
     impl,
@@ -258,7 +264,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     validPassed,
     invalidRejected,
     invalidTotal: invalidRuns.length,
-    pass: validPassed && invalidRuns.length > 0 && invalidRejected === invalidRuns.length,
+    pass: validPassed && worstCaseAccepted && invalidRuns.length > 0 && invalidRejected === invalidRuns.length,
     proofBinding,
     proofsTested,
     proofsPassed,
@@ -317,7 +323,13 @@ const main = async () => {
       const scenario = await impl.load();
       const r = benchmark(impl, scenario);
       results.push(r);
-      console.log(r.profileOnly ? 'profile-only (size)' : r.pass ? 'PASS' : r.validPassed ? 'valid-only (no reject test)' : 'FAIL');
+      console.log(
+        r.profileOnly ? 'profile-only (size)'
+          : r.pass ? 'PASS'
+            : r.worstCase?.accepted === false ? 'FAIL (worst-case proof rejected)'
+              : r.validPassed ? 'valid-only (no reject test)'
+                : 'FAIL',
+      );
     } catch (e) {
       console.log(`ERROR: ${(e as Error).message}`);
     }
@@ -345,9 +357,11 @@ const main = async () => {
         ? 'profile (size)'
         : r.pass
           ? `PASS (${r.invalidRejected}/${r.invalidTotal}✗${r.bsvOpReturn ? ', BSV OP_RETURN' : ''})`
-          : r.validPassed
-            ? 'valid-only'
-            : 'FAIL';
+          : r.worstCase?.accepted === false
+            ? 'FAIL (worst-case✗)'
+            : r.validPassed
+              ? 'valid-only'
+              : 'FAIL';
       const compat = r.bchCompatible ? 'yes' : `no: ${r.bchIncompatibleReason ?? 'limit'}`;
       const at10kb = r.profileOnly ? '-' : r.inputsForHeaviestStep <= 1 ? '1' : `~${r.inputsForHeaviestStep}`;
       console.log(cols([

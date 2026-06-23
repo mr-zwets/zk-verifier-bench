@@ -133,6 +133,7 @@ const entryOf = (r: BenchmarkResult) => ({
     ...(r.worstCase
       ? {
           worstCase: {
+            accepted: r.worstCase.accepted,
             opCost: r.worstCase.totalOperationCost,
             steps: r.worstCase.stepCount,
             heaviestStepOpCost: r.worstCase.maxStepOperationCost,

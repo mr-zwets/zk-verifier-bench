@@ -254,9 +254,12 @@ export interface BenchmarkResult {
    * Op-cost of the WORST-CASE proof run (dense near-r public inputs), when the scenario
    * supplies one. Same step graph as the valid run (worst-case-sized windows), but the
    * op-cost reflects a dense proof — proof-size dependent for chunked covenants (~5-6×
-   * the vk_x stage), ~unchanged for proof-size-independent verifiers. undefined when no
-   * worst-case run was provided or it did not fully accept. */
+   * the vk_x stage), ~unchanged for proof-size-independent verifiers. undefined only when
+   * no worst-case run was provided. `accepted` reports whether every worst-case step was
+   * accepted by the verifier under test — a valid worst-case proof that rejects is a
+   * completeness bug, and folds into the overall `pass`. */
   worstCase?: {
+    accepted: boolean;
     stepCount: number;
     totalOperationCost: number;
     maxStepOperationCost: number;
