@@ -60,17 +60,26 @@ const limitReason = (error: string): string => {
 
 export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchPairingIntratx, bchGroth16Intratx, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchMultistepDemo];
 
-// Zero-padding accounting: the chunked covenant steps append one big all-zero push to each
-// unlocking purely to buy op-cost budget ((41+len)*800). It is the LAST push and is all
-// zeros, so its full encoded length (push opcode + data) is dead weight. Returns 0 when the
-// final instruction is not an all-zero data push (e.g. singletons, whose last push is a real
-// proof limb). Uses libauth to parse the script rather than hand-decoding push opcodes.
-const trailingZeroPadBytes = (script: Uint8Array): number => {
-  const last = decodeAuthenticationInstructions(script).at(-1);
-  if (last === undefined || authenticationInstructionIsMalformed(last) || !('data' in last)) return 0;
-  const data = last.data as Uint8Array;
-  if (data.length === 0 || data.some((b) => b !== 0)) return 0;
-  return encodeAuthenticationInstruction(last).length;
+// Zero-padding accounting: the chunked/intra-tx steps append one big all-zero push to each
+// unlocking purely to buy op-cost budget ((41+len)*800). Its full encoded length (push
+// opcode + data) is dead weight. The pad's POSITION varies by deployment:
+//   - bare scripts (shamir, twoloop, bls12-381 covenant) put the pad LAST;
+//   - P2SH deployments (pairing/groth16 chunked + intra-tx) push the redeem script LAST, so
+//     the pad sits BEFORE it (second-to-last) — an earlier "trailing-instruction-only" check
+//     missed these entirely and reported 0 padding for ~all P2SH vectors.
+// So we sum every NON-EMPTY all-zero data push wherever it sits. This is unambiguous: VM
+// numbers are minimally encoded, so a real arg of value 0 is OP_0 (empty data, skipped), and
+// no genuine arg/blob/redeem push is all-zero with length >= 1. Returns 0 for unpadded steps
+// (e.g. singletons, whose pushes are real proof limbs). Uses libauth to parse the script.
+const zeroPadBytes = (script: Uint8Array): number => {
+  let total = 0;
+  for (const ins of decodeAuthenticationInstructions(script)) {
+    if (authenticationInstructionIsMalformed(ins) || !('data' in ins)) continue;
+    const data = ins.data as Uint8Array;
+    if (data.length === 0 || data.some((b) => b !== 0)) continue;
+    total += encodeAuthenticationInstruction(ins).length;
+  }
+  return total;
 };
 
 const varintLen = (n: number): number => (n < 0xfd ? 1 : n <= 0xffff ? 3 : n <= 0xffffffff ? 5 : 9);
@@ -113,7 +122,7 @@ const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
     label: step.label,
     lockingBytes: step.lockingBytecode.length,
     unlockingBytes: step.unlockingBytecode.length,
-    padBytes: trailingZeroPadBytes(step.unlockingBytecode),
+    padBytes: zeroPadBytes(step.unlockingBytecode),
     txOverheadBytes: stepTxOverhead(step),
     operationCost: o.operationCost,
     instructionCount: o.instructionCount,
@@ -200,7 +209,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       label: s.label,
       lockingBytes: s.lockingBytecode.length,
       unlockingBytes: s.unlockingBytecode.length,
-      padBytes: trailingZeroPadBytes(s.unlockingBytecode),
+      padBytes: zeroPadBytes(s.unlockingBytecode),
       txOverheadBytes: stepTxOverhead(s),
       operationCost: 0,
       instructionCount: 0,

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-23T11:53:43.597Z",
+  "generatedAt": "2026-06-23T12:17:38.622Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -237,7 +237,11 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~64× one input's op-cost budget"
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~64× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; 1/1 unlocking >10,000 B; a step is non-standard under the standard VM"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -295,7 +299,11 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~125× one input's op-cost budget"
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~125× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -349,7 +357,11 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~147× one input's op-cost budget"
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~147× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -403,7 +415,11 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~169× one input's op-cost budget"
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~169× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -438,8 +454,8 @@
         "total": 528004
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 222999,
+        "fraction": 0.4289456929235185
       },
       "benchmarks": {
         "smallProof": {
@@ -461,7 +477,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -518,7 +538,11 @@
         "blockers": [
           "op-cost"
         ],
-        "detail": "heaviest step ~10× one input's op-cost budget"
+        "detail": "heaviest step ~10× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -571,7 +595,11 @@
         "blockers": [
           "op-cost"
         ],
-        "detail": "heaviest step ~13× one input's op-cost budget"
+        "detail": "heaviest step ~13× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -622,7 +650,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "16/16 locking >201 B"
+        }
       },
       "generality": {
         "binding": "baked",
@@ -673,7 +705,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "3/3 locking >201 B"
+        }
       },
       "generality": {
         "binding": "baked",
@@ -708,8 +744,8 @@
         "total": 17614
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 2794,
+        "fraction": 0.1698170546404911
       },
       "benchmarks": {
         "smallProof": {
@@ -731,7 +767,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -786,7 +826,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "12/12 locking >201 B"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -844,7 +888,11 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~151× one input's op-cost budget"
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~151× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -898,7 +946,11 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~172× one input's op-cost budget"
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~172× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -933,8 +985,8 @@
         "total": 310014
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 124751,
+        "fraction": 0.40800701210438356
       },
       "benchmarks": {
         "smallProof": {
@@ -956,7 +1008,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -995,8 +1051,8 @@
         "total": 662153
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 233200,
+        "fraction": 0.35719482588283946
       },
       "benchmarks": {
         "smallProof": {
@@ -1011,7 +1067,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -1050,8 +1110,8 @@
         "total": 685951
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 235055,
+        "fraction": 0.3481703117246691
       },
       "benchmarks": {
         "smallProof": {
@@ -1066,7 +1126,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -1105,8 +1169,8 @@
         "total": 307951
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 115528,
+        "fraction": 0.37691183379443544
       },
       "benchmarks": {
         "smallProof": {
@@ -1128,7 +1192,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "tx 307,192 B > 100,000 B standard size"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -1163,8 +1231,8 @@
         "total": 525640
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 209506,
+        "fraction": 0.4006532660433611
       },
       "benchmarks": {
         "smallProof": {
@@ -1186,7 +1254,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "tx 524,191 B > 100,000 B standard size"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -1221,8 +1293,8 @@
         "total": 657413
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 239583,
+        "fraction": 0.366168574821526
       },
       "benchmarks": {
         "smallProof": {
@@ -1237,7 +1309,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "tx 655,757 B > 100,000 B standard size"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -1272,8 +1348,8 @@
         "total": 683115
       },
       "padding": {
-        "bytes": 0,
-        "fraction": 0
+        "bytes": 241314,
+        "fraction": 0.3551435429583963
       },
       "benchmarks": {
         "smallProof": {
@@ -1288,7 +1364,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "tx 681,183 B > 100,000 B standard size"
+        }
       },
       "generality": {
         "binding": "runtime",
@@ -1339,7 +1419,11 @@
       "bch": {
         "compatible": true,
         "blockers": [],
-        "detail": "every step fits BCH per-tx limits"
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
       },
       "generality": {
         "binding": "runtime",

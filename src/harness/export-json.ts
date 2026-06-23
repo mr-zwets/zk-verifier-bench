@@ -116,9 +116,10 @@ const entryOf = (r: BenchmarkResult) => ({
     transactions: r.txCount,
     total: r.totalBytes + r.totalTxOverheadBytes,
   },
-  // dead-weight zero-padding: bytes appended to unlockings purely to buy op-cost budget,
-  // and their share of the SCRIPT bytes. A big slice of the chunking overhead; 0 for unpadded
-  // singletons (proof in the witness, no covenant padding).
+  // dead-weight zero-padding: all-zero push bytes added to unlockings purely to buy op-cost
+  // budget (wherever they sit — last in bare scripts, second-to-last under P2SH), and their
+  // share of the SCRIPT bytes. A big slice of the chunking overhead; 0 for unpadded singletons
+  // (proof in the witness, no covenant padding).
   padding: { bytes: r.totalPadBytes, fraction: r.totalBytes > 0 ? r.totalPadBytes / r.totalBytes : 0 },
   // op-cost benchmarks, keyed by the PROOF SCENARIO actually RUN. Even though the
   // chunked covenant lockings are now worst-case SIZED (the fixed step graph can

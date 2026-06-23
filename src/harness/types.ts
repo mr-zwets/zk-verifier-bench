@@ -185,8 +185,9 @@ export interface StepMetrics {
   label: string;
   lockingBytes: number;
   unlockingBytes: number;
-  /** dead-weight zero-padding bytes in the unlocking (the trailing all-zero push that buys
-   * op-cost budget); 0 for unpadded steps (e.g. singletons). */
+  /** dead-weight zero-padding bytes in the unlocking: every all-zero push that buys op-cost
+   * budget, wherever it sits (bare scripts pad LAST; P2SH deployments push the redeem script
+   * last so the pad is second-to-last). 0 for unpadded steps (e.g. singletons). */
   padBytes: number;
   /** serialized transaction overhead this step adds that the script-byte score does NOT
    * count: tx envelope (version/locktime/counts), the spent outpoint + sequence, script-
