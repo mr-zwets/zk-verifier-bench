@@ -100,10 +100,18 @@ const isTruthy = (v: Uint8Array | undefined): boolean =>
  */
 export interface CovenantContext {
   category: Uint8Array; // 32-byte token category (the thread id)
-  capability: 'none' | 'mutable' | 'minting';
+  capability: 'none' | 'mutable' | 'minting'; // capability of tx.outputs[0] (the perpetuated/terminating token)
   inCommitment: Uint8Array; // NFT commitment of the spent UTXO  = hash256(incoming state)
   outCommitment: Uint8Array; // NFT commitment of tx.outputs[0]   = hash256(outgoing state)
   outLockingBytecode: Uint8Array; // tx.outputs[0] locking (next chunk; the perpetuation target)
+  // --- OPTIONAL, covenant-thread extensions (default => the legacy 1-in/1-out shape) ---
+  // A minting-baton-genesis chunk spends a MINTING baton (not the thread token) and
+  // emits TWO outputs: [0] the freshly-minted thread token, [1] the recreated baton relocked
+  // to the chunk itself. Set when the chunk's input capability differs from output[0]'s.
+  inputCapability?: 'none' | 'mutable' | 'minting'; // capability of the SPENT input token (default = `capability`)
+  // The second output (a baton recreation), present only on a genesis chunk. The baton has
+  // no commitment and is relocked to `lockingBytecode` (custody pinned to the validating chunk).
+  secondOutputBaton?: boolean;
 }
 
 /** Intra-transaction linked-input context. The whole chunked computation is the
@@ -126,10 +134,13 @@ export const evaluatePair = (
   covenant?: CovenantContext,
   intraTx?: IntraTxContext,
 ): EvalOutcome => {
-  const mkToken = (commitment: Uint8Array) => ({
+  const mkToken = (
+    capability: 'none' | 'mutable' | 'minting',
+    commitment: Uint8Array,
+  ) => ({
     amount: 0n,
     category: covenant!.category,
-    nft: { capability: covenant!.capability, commitment },
+    nft: { capability, commitment },
   });
   const intraTxProgram = intraTx && {
     inputIndex: intraTx.index,
@@ -147,20 +158,31 @@ export const evaluatePair = (
       locktime: 0,
     },
   };
+  // Covenant-thread extensions: a genesis chunk spends a MINTING baton (inputCapability) and
+  // emits [thread token, recreated baton]; a terminal chunk strips capability (output 'none').
+  // When neither is set this is exactly the legacy 1-in/1-out mutable->mutable shape.
+  const inCap = covenant?.inputCapability ?? covenant?.capability ?? 'mutable';
+  const inValue = covenant?.secondOutputBaton ? 3000n : 1000n;
+  const covOutputs = covenant
+    ? covenant.secondOutputBaton
+      ? [
+          { lockingBytecode: covenant.outLockingBytecode, valueSatoshis: 1000n, token: mkToken(covenant.capability, covenant.outCommitment) },
+          { lockingBytecode, valueSatoshis: 1000n, token: mkToken('minting', new Uint8Array(0)) },
+        ]
+      : [{ lockingBytecode: covenant.outLockingBytecode, valueSatoshis: 1000n, token: mkToken(covenant.capability, covenant.outCommitment) }]
+    : [];
   const program = intraTxProgram
     ? intraTxProgram
     : covenant
     ? {
         inputIndex: 0,
-        sourceOutputs: [{ lockingBytecode, valueSatoshis: 1000n, token: mkToken(covenant.inCommitment) }],
+        sourceOutputs: [{ lockingBytecode, valueSatoshis: inValue, token: mkToken(inCap, covenant.inCommitment) }],
         transaction: {
           version: 2,
           inputs: [
             { outpointTransactionHash: new Uint8Array(32), outpointIndex: 0, sequenceNumber: 0, unlockingBytecode },
           ],
-          outputs: [
-            { lockingBytecode: covenant.outLockingBytecode, valueSatoshis: 1000n, token: mkToken(covenant.outCommitment) },
-          ],
+          outputs: covOutputs,
           locktime: 0,
         },
       }

@@ -28,10 +28,20 @@ export interface Step {
    */
   covenant?: {
     category: Uint8Array;
+    /** capability of tx.outputs[0] (the perpetuated / minted / terminating token) */
     capability: 'none' | 'mutable' | 'minting';
     inCommitment: Uint8Array;
     outCommitment: Uint8Array;
     outLockingBytecode: Uint8Array;
+    /**
+     * Covenant-thread extensions (optional; default => the legacy 1-in/1-out mutable shape).
+     * A baton-genesis chunk SPENDS a minting baton (inputCapability='minting') and emits a
+     * second output recreating the baton (secondOutputBaton=true); a terminal chunk spends
+     * the mutable thread token (inputCapability='mutable') and strips to an immutable
+     * (capability='none') verdict output. See harness/vm.ts evaluatePair.
+     */
+    inputCapability?: 'none' | 'mutable' | 'minting';
+    secondOutputBaton?: boolean;
   };
   /**
    * Intra-transaction linked-input context. Set when this step is ONE INPUT of a
@@ -136,7 +146,7 @@ export interface Implementation {
   /**
    * For a token-threading covenant entry (its steps carry `Step.covenant`): does the
    * covenant actually enforce TOKEN SAFETY, i.e. that the carried state token cannot
-   * be swapped or forged across the thread? A safe deployment must either pin the
+   * be swapped or substituted across the thread? A safe deployment must either pin the
    * category and require a perpetuated MUTABLE (non-minting) commitment, or mint a
    * fresh IMMUTABLE token each step with the new commitment bound by the covenant.
    * That means introspecting and require()-ing, at minimum:
