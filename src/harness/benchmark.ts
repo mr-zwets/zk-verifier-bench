@@ -307,7 +307,14 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       : []);
   const invalidRejected = invalidRuns.filter((run) => runRejects(vm, run, bsv)).length;
 
-  // EIP-197 input validation: adversarial-point runs (off-curve / off-subgroup) must reject
+  // EIP-197 input validation: adversarial-point runs (off-curve / off-subgroup) must reject.
+  // ONLY counts as a demonstration when the bad point is rejected at an ISOLATED validation
+  // step (a chunked g2check stage), BEFORE it can reach the pairing — that is what
+  // Scenario.invalidInputs supplies. A naive point-swap in a FULL (single-tx) verifier is
+  // rejected by the verification equation itself (a wrong B makes e(-A,B)·… ≠ 1) regardless
+  // of whether on-curve/subgroup checks exist, so it does NOT discriminate and is NOT used
+  // here (see harness/adversarial.ts). A full verifier with no isolated adversarial run is
+  // reported as NOT DEMONSTRATED.
   const inputRuns = scenario.invalidInputs ?? [];
   const inputRejected = inputRuns.filter((run) => runRejects(vm, run, bsv)).length;
   const inputValidation = { tested: inputRuns.length, rejected: inputRejected, enforced: inputRuns.length > 0 && inputRejected === inputRuns.length };
@@ -486,8 +493,14 @@ const main = async () => {
           console.log(`    > token safety: ${r.tokenSafetyEnforced ? 'ENFORCED' : 'NOT enforced'} — state is threaded through the NFT commitment` +
             (r.tokenSafetyEnforced ? '' : ', but category continuity / capability are not pinned (a real deployment must enforce them)'));
         }
+        const isFullGroth16 = r.impl.proofSystem === 'Groth16' && r.impl.milestone === undefined && r.impl.demo !== true;
         if (r.inputValidation.tested > 0) {
-          console.log(`    > input validation: ${r.inputValidation.enforced ? 'ENFORCED' : 'NOT enforced'} — ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected (EIP-197 on-curve + G2-subgroup)`);
+          console.log(`    > input validation: ${r.inputValidation.enforced ? 'ENFORCED' : 'NOT enforced'} — ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected at an isolated check (EIP-197 on-curve + G2-subgroup)`);
+        } else if (isFullGroth16) {
+          const why = r.impl.structure === 'single-tx'
+            ? 'single-tx: a swapped point is caught by the pairing equation, not a validation check, so rejection here would not prove on-curve/subgroup validation'
+            : 'no isolated adversarial-point run (off-curve / off-subgroup) supplied';
+          console.log(`    > input validation: NOT DEMONSTRATED — ${why}`);
         }
       }
       const ms = r.impl.milestone;

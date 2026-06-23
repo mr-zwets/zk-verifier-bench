@@ -234,9 +234,13 @@ export interface BenchmarkResult {
   /** token-threading entries only: does the covenant enforce token safety (category
    * continuity + capability constraint)? null when not token-threaded. */
   tokenSafetyEnforced: boolean | null;
-  /** EIP-197 input validation: how many adversarial-point runs (off-curve /
-   * off-subgroup, from Scenario.invalidInputs) were run, and how many the verifier
-   * rejected. `enforced` = at least one tested and ALL rejected. */
+  /** EIP-197 input validation: how many ISOLATED adversarial-point runs (off-curve /
+   * off-subgroup, from Scenario.invalidInputs — a chunked g2check stage that rejects the bad
+   * point at the check, before the pairing) were run, and how many the verifier rejected.
+   * `enforced` = at least one tested and ALL rejected. `tested === 0` on a full Groth16
+   * verifier means input validation is NOT DEMONSTRATED — note a naive point-swap in a
+   * single-tx verifier is caught by the verification equation, so it can't demonstrate
+   * validation (see harness/adversarial.ts). */
   inputValidation: { tested: number; rejected: number; enforced: boolean };
   /** correctness was judged under the BSV post-Genesis OP_RETURN-terminator rule
    * (the valid run halts at a reachable OP_RETURN, which fails on strict BCH) */

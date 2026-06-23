@@ -27,7 +27,7 @@ interface RawStep {
   covenant?: { category: string; capability: 'none' | 'mutable' | 'minting'; inCommitment: string; outCommitment: string; outLockingBytecode: string };
 }
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-chunked-vectors.json', 'utf8')) as {
-  steps: RawStep[]; extraValidProofs?: RawStep[][];
+  steps: RawStep[]; extraValidProofs?: RawStep[][]; invalidInputs?: RawStep[][];
 };
 
 const toStep = (s: RawStep): Step => ({
@@ -56,7 +56,9 @@ export const bchGroth16Bls12381Chunked: Implementation = {
   structure: 'multi-tx',
   proofBinding: 'runtime',
   source:
-    'BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — vk_x = IC0 + ' +
+    'BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — a G2 input-validation ' +
+    'prologue (EIP-197: on-curve A/B/C + the prime-order-subgroup test psi(B)==[-x]B) then ' +
+    'vk_x = IC0 + ' +
     'in0*IC1 + in1*IC2 (public-input aggregation) then e(-A,B)*e(alpha,beta)*' +
     'e(vk_x,gamma)*e(C,delta) via 4 Miller loops + combine + final exponentiation, ' +
     'asserting the verdict == Fp12 ONE — split across transactions so EVERY step fits ' +
@@ -70,6 +72,9 @@ export const bchGroth16Bls12381Chunked: Implementation = {
     const extraValidProofs: Step[][] = (v.extraValidProofs ?? []).map((run) => run.map(toStep));
     const tampered = (i: number): Step[] => [{ ...valid[i]!, unlockingBytecode: hexToBin(v.steps[i]!.invalidUnlocking) }];
     const invalid: Step[][] = [tampered(0), tampered(valid.length - 1)];
-    return { valid, extraValidProofs, invalid };
+    // adversarial INPUT runs (off-curve A, on-curve off-subgroup B) — the g2check prologue's
+    // on-curve + psi(B)==[-x]B subgroup checks must reject them (grades inputValidation).
+    const invalidInputs: Step[][] = (v.invalidInputs ?? []).map((run) => run.map(toStep));
+    return { valid, extraValidProofs, invalid, invalidInputs };
   },
 };

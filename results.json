@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-23T20:45:11.688Z",
+  "generatedAt": "2026-06-23T22:08:04.272Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -276,7 +276,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -342,7 +342,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -401,10 +401,10 @@
       },
       "tokenSafety": null,
       "inputValidation": {
-        "enforced": true,
-        "tested": 3,
-        "rejected": 3,
-        "detail": "on-curve + G2-subgroup checks enforced: 3/3 adversarial points (off-curve / off-subgroup) rejected"
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -466,7 +466,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -536,7 +536,7 @@
         "enforced": true,
         "tested": 1,
         "rejected": 1,
-        "detail": "on-curve + G2-subgroup checks enforced: 1/1 adversarial points (off-curve / off-subgroup) rejected"
+        "detail": "on-curve + G2-subgroup checks enforced: 1/1 adversarial points (off-curve / off-subgroup) rejected at an isolated check"
       },
       "packaging": {
         "secure": true,
@@ -599,7 +599,7 @@
         "enforced": true,
         "tested": 2,
         "rejected": 2,
-        "detail": "on-curve + G2-subgroup checks enforced: 2/2 adversarial points (off-curve / off-subgroup) rejected"
+        "detail": "on-curve + G2-subgroup checks enforced: 2/2 adversarial points (off-curve / off-subgroup) rejected at an isolated check"
       },
       "packaging": {
         "secure": true,
@@ -660,7 +660,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -721,7 +721,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -780,7 +780,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -839,7 +839,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -909,7 +909,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -972,7 +972,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1034,7 +1034,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1096,7 +1096,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1166,7 +1166,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1229,7 +1229,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1246,22 +1246,22 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 685365,
+      "score": 713762,
       "size": {
-        "scriptBytes": 674529,
-        "txOverheadBytes": 10836,
-        "transactions": 84,
-        "total": 685365
+        "scriptBytes": 702539,
+        "txOverheadBytes": 11223,
+        "transactions": 87,
+        "total": 713762
       },
       "padding": {
-        "bytes": 269316,
-        "fraction": 0.3992652650960893
+        "bytes": 292161,
+        "fraction": 0.4158644573468519
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 527772934,
-          "steps": 84,
-          "heaviestStepOpCost": 7687938,
+          "opCost": 549962374,
+          "steps": 87,
+          "heaviestStepOpCost": 7701185,
           "inputsForHeaviestStep": 1
         }
       },
@@ -1289,16 +1289,16 @@
         "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
       },
       "inputValidation": {
-        "enforced": false,
-        "tested": 0,
-        "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "enforced": true,
+        "tested": 2,
+        "rejected": 2,
+        "detail": "on-curve + G2-subgroup checks enforced: 2/2 adversarial points (off-curve / off-subgroup) rejected at an isolated check"
       },
       "packaging": {
         "secure": true,
         "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
       },
-      "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — vk_x = IC0 + in0*IC1 + in1*IC2 (public-input aggregation) then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) via 4 Miller loops + combine + final exponentiation, asserting the verdict == Fp12 ONE — split across transactions so EVERY step fits one BCH input. Proof-agnostic covenant: all state + proof-derived points + public inputs ride in the token NFT commitment (48-byte limbs), so one fixed set of lockings verifies any proof (confirmed via extraValidProofs). Verified vs @noble/curves bls12-381. The BLS12-381 counterpart of bch-groth16-chunked; the BCH-compatible full Groth16 verifier on the nchain curve."
+      "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — a G2 input-validation prologue (EIP-197: on-curve A/B/C + the prime-order-subgroup test psi(B)==[-x]B) then vk_x = IC0 + in0*IC1 + in1*IC2 (public-input aggregation) then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) via 4 Miller loops + combine + final exponentiation, asserting the verdict == Fp12 ONE — split across transactions so EVERY step fits one BCH input. Proof-agnostic covenant: all state + proof-derived points + public inputs ride in the token NFT commitment (48-byte limbs), so one fixed set of lockings verifies any proof (confirmed via extraValidProofs). Verified vs @noble/curves bls12-381. The BLS12-381 counterpart of bch-groth16-chunked; the BCH-compatible full Groth16 verifier on the nchain curve."
     },
     {
       "id": "bch-groth16-bls12381-chunked-covenant",
@@ -1355,7 +1355,7 @@
         "enforced": true,
         "tested": 2,
         "rejected": 2,
-        "detail": "on-curve + G2-subgroup checks enforced: 2/2 adversarial points (off-curve / off-subgroup) rejected"
+        "detail": "on-curve + G2-subgroup checks enforced: 2/2 adversarial points (off-curve / off-subgroup) rejected at an isolated check"
       },
       "packaging": {
         "secure": true,
@@ -1421,7 +1421,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1487,7 +1487,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1546,7 +1546,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1605,7 +1605,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,
@@ -1664,7 +1664,7 @@
         "enforced": false,
         "tested": 0,
         "rejected": 0,
-        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
       },
       "packaging": {
         "secure": true,

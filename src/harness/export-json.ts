@@ -194,9 +194,9 @@ const entryOf = (r: BenchmarkResult) => ({
     rejected: r.inputValidation.rejected,
     detail:
       r.inputValidation.tested === 0
-        ? 'not exercised — no adversarial-point inputs provided for this entry'
+        ? 'NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)'
         : r.inputValidation.enforced
-          ? `on-curve + G2-subgroup checks enforced: ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected`
+          ? `on-curve + G2-subgroup checks enforced: ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected at an isolated check`
           : `NOT enforced: only ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points rejected — raw points reach the pairing`,
   },
   // envelope security: a contract hidden behind an insecure P2SH20 hash (OP_HASH160,
