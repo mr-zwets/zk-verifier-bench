@@ -42,7 +42,7 @@ export const bchGroth16Bls12381Intratx: Implementation = {
     '<=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) ' +
     'transaction. Same chunk math as bch-groth16-bls12381-chunked; one fixed set of ' +
     'input scripts verifies any proof for the VK (proof in the witness). Deployed as ' +
-    'P2SH so each chunk\'s redeem rides in the scriptSig, where it counts toward the ' +
+    'P2SH32 so each chunk\'s redeem rides in the scriptSig, where it counts toward the ' +
     'op-cost budget and offsets the pad (~27% fewer on-chain bytes than bare-script).',
   load: async () => ({
     valid: toRun(v.steps),

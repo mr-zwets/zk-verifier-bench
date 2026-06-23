@@ -46,7 +46,7 @@ export const bchPairingIntratx: Implementation = {
     '(OP_INPUTBYTECODE) — no NFT commitment, no hashing, no 128-byte state limit. Every ' +
     'input fits one BCH budget (op-cost <=8,032,800, <=10,000 B); the whole boundary is ' +
     'one non-standard (<1 MB) transaction. Same chunk math as bch-pairing-chunked. ' +
-    'Deployed as P2SH so each chunk\'s redeem rides in the scriptSig, where it counts ' +
+    'Deployed as P2SH32 so each chunk\'s redeem rides in the scriptSig, where it counts ' +
     'toward the op-cost budget and offsets the pad (~30% fewer on-chain bytes than ' +
     'bare-script). Reaches the miller-boundary checkpoint (full verdict: bch-groth16-intratx).',
   load: async () => {

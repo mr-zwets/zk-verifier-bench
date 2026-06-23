@@ -62,7 +62,7 @@ export const bchGroth16Intratx: Implementation = {
     'chunk math as bch-groth16-chunked; one fixed set of input scripts verifies any ' +
     'proof for the VK (proof in the witness). Single-transaction counterpart of the ' +
     'multi-tx bch-groth16-chunked and the non-deployable bch-groth16-singleton. ' +
-    'Deployed as P2SH so each chunk\'s redeem rides in the scriptSig, where it counts ' +
+    'Deployed as P2SH32 so each chunk\'s redeem rides in the scriptSig, where it counts ' +
     'toward the op-cost budget and offsets the pad (~30% fewer on-chain bytes than a ' +
     'bare-script deployment; the same lever applies to the multi-tx covenant chunks).',
   load: async () => {

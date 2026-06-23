@@ -38,7 +38,7 @@ export const bchPairingBls12381Intratx: Implementation = {
     'unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT commitment, no hashing. ' +
     'The easy-part inverse rides as an uncommitted witness. Every input fits one BCH ' +
     'budget; the whole pairing is one non-standard (<1 MB) transaction. Same chunk math ' +
-    'as bch-pairing-bls12381-chunked. Deployed as P2SH so each chunk\'s redeem rides ' +
+    'as bch-pairing-bls12381-chunked. Deployed as P2SH32 so each chunk\'s redeem rides ' +
     'in the scriptSig, where it counts toward the op-cost budget and offsets the pad ' +
     '(~27% fewer on-chain bytes than bare-script).',
   load: async () => ({
