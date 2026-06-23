@@ -49,6 +49,22 @@ export const createLoosenedVm = () =>
  * that exceeds the op-cost budget, stack depth, etc. will NOT validate here. */
 export const createRealVm = () => createVirtualMachineBch2026(false);
 
+/** Real BCH 2026 VM in STANDARD (mempool-relay) mode — libauth's `standard=true`
+ * toggle. Enforces the stricter standard per-input script rules (push-only scriptSig,
+ * standard pubkey/signature encodings, clean stack) on top of consensus. NOTE: this
+ * toggle is per-INPUT only; transaction-level relay policy (the 100,000-byte standard
+ * max tx size, the 201/10,000-byte standard script caps) is NOT applied by evaluate()
+ * — those are checked explicitly against the constants below. */
+export const createStandardVm = () => createVirtualMachineBch2026(true);
+
+// --- BCH 2026 standard (relay-policy) limits, from ConsensusBch2026Overrides ---
+/** Max standard locking bytecode (scriptPubKey) length; a longer output is non-standard. */
+export const MAX_STANDARD_LOCKING_BYTECODE = 201;
+/** Max standard unlocking bytecode (scriptSig) length. */
+export const MAX_STANDARD_UNLOCKING_BYTECODE = 10_000;
+/** Max standard serialized transaction size; a larger tx is not relayed (must be mined directly). */
+export const MAX_STANDARD_TRANSACTION_SIZE = 100_000;
+
 export type Bch2026Vm = ReturnType<typeof createLoosenedVm>;
 
 export interface EvalOutcome {

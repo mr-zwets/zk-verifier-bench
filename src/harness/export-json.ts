@@ -83,7 +83,14 @@ const bchCell = (r: BenchmarkResult) => {
       ]
         .filter(Boolean)
         .join('; ');
-  return { compatible: r.bchCompatible, blockers, detail };
+  // standardness is strictly stronger than consensus compatibility: a consensus-valid
+  // verifier can still be non-standard (e.g. an intra-tx bundle is one ~626 KB tx, over
+  // the 100 KB standard size, so it must be mined directly rather than relayed).
+  const standard = {
+    fits: r.fitsBchStandardness,
+    detail: r.fitsBchStandardness ? 'relayable under standard mempool policy' : r.bchStandardnessReason ?? 'non-standard',
+  };
+  return { compatible: r.bchCompatible, blockers, detail, standard };
 };
 
 const isBsvSeed = (r: BenchmarkResult): boolean =>

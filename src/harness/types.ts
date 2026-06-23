@@ -269,5 +269,17 @@ export interface BenchmarkResult {
   bchCompatible: boolean;
   /** short reason the first incompatible step failed on the real VM */
   bchIncompatibleReason?: string;
+  /**
+   * The valid run is relayable under BCH 2026 STANDARD (mempool) policy — strictly
+   * stronger than `bchCompatible` (consensus). Requires ALL of: every step validates
+   * under the libauth standard instruction set (createVirtualMachineBch2026(true) —
+   * push-only scriptSig, standard encodings, clean stack); every locking <= 201 B and
+   * every unlocking <= 10,000 B (standard script caps); and every transaction <=
+   * 100,000 B (standard max tx size). A consensus-valid verifier can still be
+   * non-standard: e.g. the intra-tx bundle is one ~626 KB transaction — fine per input,
+   * but over the standard size, so it must be mined directly rather than relayed. */
+  fitsBchStandardness: boolean;
+  /** short reason standardness fails (e.g. the size cap that is exceeded); undefined when it fits */
+  bchStandardnessReason?: string;
   error?: string;
 }

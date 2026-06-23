@@ -33,7 +33,17 @@ import { authenticationInstructionIsMalformed, decodeAuthenticationInstructions,
 
 import { tamperProof } from './tamper.js';
 import type { BenchmarkResult, Implementation, Step, StepMetrics } from './types.js';
-import { createLoosenedVm, createRealVm, evaluatePair, standardInputBudget, type Bch2026Vm } from './vm.js';
+import {
+  createLoosenedVm,
+  createRealVm,
+  createStandardVm,
+  evaluatePair,
+  standardInputBudget,
+  MAX_STANDARD_LOCKING_BYTECODE,
+  MAX_STANDARD_UNLOCKING_BYTECODE,
+  MAX_STANDARD_TRANSACTION_SIZE,
+  type Bch2026Vm,
+} from './vm.js';
 
 /** Map a real-VM limit error to a short tag for the table. */
 const limitReason = (error: string): string => {
@@ -129,6 +139,47 @@ const tryTamper = (witness: Uint8Array): Uint8Array | undefined => {
 
 const SCRIPT_SIZE_CAP = 10_000; // BCH maximumBytecodeLength (per locking/unlocking script)
 
+/** BCH 2026 standard (mempool-relay) check, strictly stronger than consensus
+ * (`bchCompatible`). Combines libauth's per-input standard toggle with the
+ * transaction-level relay limits the VM does NOT enforce on its own:
+ *   - every step validates under the STANDARD instruction set (push-only scriptSig,
+ *     standard encodings, clean stack);
+ *   - every locking <= 201 B and every unlocking <= 10,000 B (standard script caps);
+ *   - every transaction <= 100,000 B serialized (standard max tx size).
+ * The serialized tx size reuses the harness tx-overhead model: a single-tx / intra-tx
+ * bundle is ONE tx (sum of scriptSigs + shared overhead — lockings live in the funding
+ * UTXOs, not the spend); a covenant chain is one small tx per step. */
+const standardness = (
+  scenario: Awaited<ReturnType<Implementation['load']>>,
+  steps: StepMetrics[],
+  txCount: number,
+  totalTxOverheadBytes: number,
+  bsv: boolean,
+): { fits: boolean; reason?: string } => {
+  const overLock = steps.filter((s) => s.lockingBytes > MAX_STANDARD_LOCKING_BYTECODE).length;
+  const overUnlock = steps.filter((s) => s.unlockingBytes > MAX_STANDARD_UNLOCKING_BYTECODE).length;
+  const txBytes =
+    txCount === 1
+      ? steps.reduce((a, s) => a + s.unlockingBytes, 0) + totalTxOverheadBytes
+      : Math.max(0, ...steps.map((s) => s.unlockingBytes + s.lockingBytes + s.txOverheadBytes));
+
+  const vm = createStandardVm();
+  const evalRejects = scenario.valid.some((s) => {
+    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx);
+    return !(bsv ? o.bsvAccepted : o.accepted);
+  });
+
+  const reasons = [
+    overLock ? `${overLock}/${steps.length} locking >${MAX_STANDARD_LOCKING_BYTECODE} B` : null,
+    overUnlock ? `${overUnlock}/${steps.length} unlocking >${MAX_STANDARD_UNLOCKING_BYTECODE.toLocaleString('en-US')} B` : null,
+    txBytes > MAX_STANDARD_TRANSACTION_SIZE
+      ? `tx ${txBytes.toLocaleString('en-US')} B > ${MAX_STANDARD_TRANSACTION_SIZE.toLocaleString('en-US')} B standard size`
+      : null,
+    evalRejects ? 'a step is non-standard under the standard VM' : null,
+  ].filter(Boolean);
+  return { fits: reasons.length === 0, reason: reasons.length ? reasons.join('; ') : undefined };
+};
+
 /** Token-threading safety: a step that carries state through an NFT commitment
  * (Step.covenant) is only safe if the covenant pins the token (category continuity
  * + capability constraint). Default FALSE for any covenant entry until that is
@@ -173,6 +224,8 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       fitsStandardBudget: false, inputsForHeaviestStep: 0,
       bchCompatible: oversize === 0,
       bchIncompatibleReason: oversize > 0 ? `script-size: ${oversize}/${steps.length} steps over ${SCRIPT_SIZE_CAP / 1000}KB` : undefined,
+      fitsBchStandardness: false,
+      bchStandardnessReason: 'profile-only (not executed)',
     };
   }
 
@@ -257,6 +310,11 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       inputsForHeaviestStep: Math.ceil(wcMax / budget),
     };
   }
+  const totalTxOverheadBytes = steps.reduce((a, s) => a + s.txOverheadBytes, 0);
+  const txCount = scenario.valid.some((s) => s.intraTx !== undefined) ? 1 : steps.length;
+  // BCH standard (relay) policy: stricter than the consensus `bchCompatible` above.
+  const std = standardness(scenario, steps, txCount, totalTxOverheadBytes, bsv);
+
   return {
     impl,
     profileOnly: false,
@@ -277,8 +335,8 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     stepCount: steps.length,
     totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
     totalPadBytes: steps.reduce((a, s) => a + s.padBytes, 0),
-    totalTxOverheadBytes: steps.reduce((a, s) => a + s.txOverheadBytes, 0),
-    txCount: scenario.valid.some((s) => s.intraTx !== undefined) ? 1 : steps.length,
+    totalTxOverheadBytes,
+    txCount,
     totalOperationCost: opCosts.reduce((a, b) => a + b, 0),
     maxStepOperationCost,
     fitsStandardBudget: steps.every((s) => s.operationCost <= budget),
@@ -286,6 +344,8 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     worstCase,
     bchCompatible,
     bchIncompatibleReason,
+    fitsBchStandardness: std.fits,
+    bchStandardnessReason: std.reason,
   };
 };
 
@@ -371,6 +431,9 @@ const main = async () => {
       ]));
       for (const c of r.checkpointStats) {
         console.log(`    > reach "${c.label}" @ step ${c.atStep}: ${fmt(c.cumulativeOpCost)} op-cost, ${fmt(c.cumulativeBytes)} B`);
+      }
+      if (!r.profileOnly) {
+        console.log(`    > standardness: ${r.fitsBchStandardness ? 'standard — relayable under default mempool policy' : `non-standard (${r.bchStandardnessReason ?? 'relay limit'}); valid at consensus, must be mined directly`}`);
       }
       if (!r.profileOnly) {
         if (r.proofBinding === 'baked') {
