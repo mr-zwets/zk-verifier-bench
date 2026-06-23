@@ -7,13 +7,17 @@
 //   require( e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1 )  (chunked pairing)
 //
 // The ordered steps are: the vk_x Shamir/Straus chunks (public inputs at RUNTIME,
-// asserting vk_x == the point the pairing uses) → 4 single-pair optimal-ate Miller
-// chains → combine (boundary = f0*f1*f2*f3) → final exponentiation → a final step
-// asserting the product == Fp12 ONE. State is carried between steps as a hash256
-// commitment of the live values (the vk_x accumulator, or the Fp12 `f` + running
-// G2 point, or the live final-exp temporaries) and re-supplied in the witness,
-// verified on entry and exit. Verified against @noble/curves: the boundary matches
-// the golden millerHex and the verdict matches the golden valid/invalid.
+// asserting vk_x == the point the pairing uses) → ONE batched 4-pair optimal-ate
+// Miller loop (shared f squared once per step; the folded f IS the boundary, no
+// separate combine) → final exponentiation → a final step asserting the product ==
+// Fp12 ONE. The Miller loop is PREPARED-VK: the three fixed VK G2 points (β, γ, δ)
+// have their per-step line coefficients precomputed off-chain and baked into the
+// chunks, so only the runtime e(-A,B) pair does on-chain G2 (pointDouble/pointAdd)
+// and only its accumulator R0 is carried in state. State is carried between steps as
+// a hash256 commitment of the live values (the vk_x accumulator, or the Fp12 `f` +
+// running G2 point R0, or the live final-exp temporaries) and re-supplied in the
+// witness, verified on entry and exit. Verified against @noble/curves: the boundary
+// matches the golden millerHex and the verdict matches the golden valid/invalid.
 //
 // This is the BCH-compatible counterpart of bch-groth16-singleton (~1.26B op-cost,
 // ~157 inputs, single-tx, NOT BCH-compatible): same complete verifier, but here
@@ -65,8 +69,10 @@ export const bchGroth16Chunked: Implementation = {
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier split across transactions ' +
     'so EVERY step fits one BCH input. vk_x = IC0+in0*IC1+in1*IC2 computed on-chain ' +
-    '(Shamir/Straus, public inputs at RUNTIME) -> 4 single-pair Miller chains -> ' +
-    'combine -> final exponentiation -> assert product == Fp12 ONE. State carried as ' +
+    '(Shamir/Straus, public inputs at RUNTIME) -> ONE batched 4-pair optimal-ate Miller ' +
+    'loop (prepared-VK: the fixed VK G2 points beta/gamma/delta have baked line ' +
+    'coefficients, so only the runtime e(-A,B) pair does on-chain G2) -> final ' +
+    'exponentiation -> assert product == Fp12 ONE. State carried as ' +
     'hash256 commitments of the live values, verified on entry/exit each step. ' +
     'Verified vs @noble/curves (boundary == golden millerHex, verdict == golden). ' +
     'BCH-compatible counterpart of bch-groth16-singleton (~1.26B op-cost, ~157 ' +

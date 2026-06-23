@@ -166,5 +166,12 @@
     "id": "bch-groth16-chunked-covenant",
     "steps": 49,
     "fits": true
+  },
+  {
+    "t": "2026-06-23T20:25:52.201Z",
+    "score": 447146,
+    "id": "bch-groth16-chunked",
+    "steps": 54,
+    "fits": true
   }
 ]
