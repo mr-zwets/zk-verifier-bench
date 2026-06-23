@@ -110,5 +110,47 @@
     "id": "bch-groth16-chunked",
     "steps": 63,
     "fits": true
+  },
+  {
+    "t": "2026-06-22T11:57:45.520Z",
+    "score": 685951,
+    "id": "bch-groth16-bls12381-chunked",
+    "steps": 84,
+    "fits": true
+  },
+  {
+    "t": "2026-06-22T11:57:45.520Z",
+    "score": 528004,
+    "id": "bch-groth16-chunked",
+    "steps": 63,
+    "fits": true
+  },
+  {
+    "t": "2026-06-22T12:16:32.843Z",
+    "score": 683115,
+    "id": "bch-groth16-bls12381-intratx",
+    "steps": 84,
+    "fits": true
+  },
+  {
+    "t": "2026-06-22T12:16:32.843Z",
+    "score": 525640,
+    "id": "bch-groth16-intratx",
+    "steps": 63,
+    "fits": true
+  },
+  {
+    "t": "2026-06-23T11:45:09.299Z",
+    "score": 21062,
+    "id": "bch-groth16-bls12381-singleton",
+    "steps": 1,
+    "fits": false
+  },
+  {
+    "t": "2026-06-23T11:45:09.299Z",
+    "score": 21129,
+    "id": "bch-groth16-singleton",
+    "steps": 1,
+    "fits": false
   }
 ]

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-22T07:59:08.528Z",
+  "generatedAt": "2026-06-23T11:53:43.597Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -11,14 +11,14 @@
       "id": "scrypt-bn256",
       "label": "BSV sCrypt · BN254 · huge singleton · ✗ BCH",
       "curve": "BN254",
-      "bytes": 11717684,
+      "bytes": 11717771,
       "bchCompatible": false
     },
     "nchain": {
       "id": "nchain",
       "label": "BSV nChain · BLS12-381 · huge singleton · ✗ BCH",
       "curve": "BLS12-381",
-      "bytes": 522477,
+      "bytes": 522564,
       "bchCompatible": false
     },
     "bchPerTxCap": {
@@ -29,14 +29,14 @@
       "id": "bch-groth16-bls12381-singleton",
       "label": "BCH-native full verifier",
       "curve": "BLS12-381",
-      "bytes": 20975,
+      "bytes": 21062,
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-chunked",
+      "id": "bch-groth16-intratx",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 738099,
+      "bytes": 525640,
       "bchCompatible": true
     }
   },
@@ -152,6 +152,48 @@
       "id": "bch-groth16-chunked",
       "steps": 63,
       "fits": true
+    },
+    {
+      "t": "2026-06-22T11:57:45.520Z",
+      "score": 685951,
+      "id": "bch-groth16-bls12381-chunked",
+      "steps": 84,
+      "fits": true
+    },
+    {
+      "t": "2026-06-22T11:57:45.520Z",
+      "score": 528004,
+      "id": "bch-groth16-chunked",
+      "steps": 63,
+      "fits": true
+    },
+    {
+      "t": "2026-06-22T12:16:32.843Z",
+      "score": 683115,
+      "id": "bch-groth16-bls12381-intratx",
+      "steps": 84,
+      "fits": true
+    },
+    {
+      "t": "2026-06-22T12:16:32.843Z",
+      "score": 525640,
+      "id": "bch-groth16-intratx",
+      "steps": 63,
+      "fits": true
+    },
+    {
+      "t": "2026-06-23T11:45:09.299Z",
+      "score": 21062,
+      "id": "bch-groth16-bls12381-singleton",
+      "steps": 1,
+      "fits": false
+    },
+    {
+      "t": "2026-06-23T11:45:09.299Z",
+      "score": 21129,
+      "id": "bch-groth16-singleton",
+      "steps": 1,
+      "fits": false
     }
   ],
   "entries": [
@@ -168,7 +210,13 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 522477,
+      "score": 522564,
+      "size": {
+        "scriptBytes": 522477,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 522564
+      },
       "padding": {
         "bytes": 0,
         "fraction": 0
@@ -220,7 +268,13 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 11717684,
+      "score": 11717771,
+      "size": {
+        "scriptBytes": 11717684,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 11717771
+      },
       "padding": {
         "bytes": 0,
         "fraction": 0
@@ -268,7 +322,13 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 21042,
+      "score": 21129,
+      "size": {
+        "scriptBytes": 21042,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 21129
+      },
       "padding": {
         "bytes": 0,
         "fraction": 0
@@ -316,7 +376,13 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 20975,
+      "score": 21062,
+      "size": {
+        "scriptBytes": 20975,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 21062
+      },
       "padding": {
         "bytes": 0,
         "fraction": 0
@@ -364,22 +430,29 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 738099,
+      "score": 528004,
+      "size": {
+        "scriptBytes": 519877,
+        "txOverheadBytes": 8127,
+        "transactions": 63,
+        "total": 528004
+      },
       "padding": {
-        "bytes": 442859,
-        "fraction": 0.5999994580672783
+        "bytes": 0,
+        "fraction": 0
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 409511954,
+          "opCost": 409771321,
           "steps": 63,
-          "heaviestStepOpCost": 7877865,
+          "heaviestStepOpCost": 7883238,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
-          "opCost": 452407417,
+          "accepted": true,
+          "opCost": 452666840,
           "steps": 63,
-          "heaviestStepOpCost": 7878082,
+          "heaviestStepOpCost": 7883455,
           "inputsForHeaviestStep": 1
         }
       },
@@ -419,7 +492,13 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 13799,
+      "score": 13886,
+      "size": {
+        "scriptBytes": 13799,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 13886
+      },
       "padding": {
         "bytes": 9990,
         "fraction": 0.7239655047467207
@@ -466,16 +545,22 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 14057,
+      "score": 14006,
+      "size": {
+        "scriptBytes": 13919,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 14006
+      },
       "padding": {
         "bytes": 9995,
-        "fraction": 0.7110336487159422
+        "fraction": 0.7180831956318701
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 101433542,
+          "opCost": 97157398,
           "steps": 1,
-          "heaviestStepOpCost": 101433542,
+          "heaviestStepOpCost": 97157398,
           "inputsForHeaviestStep": 13
         }
       },
@@ -513,7 +598,13 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 183458,
+      "score": 184850,
+      "size": {
+        "scriptBytes": 183458,
+        "txOverheadBytes": 1392,
+        "transactions": 16,
+        "total": 184850
+      },
       "padding": {
         "bytes": 155760,
         "fraction": 0.8490226645880801
@@ -558,7 +649,13 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 22671,
+      "score": 22932,
+      "size": {
+        "scriptBytes": 22671,
+        "txOverheadBytes": 261,
+        "transactions": 3,
+        "total": 22932
+      },
       "padding": {
         "bytes": 17755,
         "fraction": 0.7831591019363945
@@ -603,22 +700,29 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 28231,
+      "score": 17614,
+      "size": {
+        "scriptBytes": 16453,
+        "txOverheadBytes": 1161,
+        "transactions": 9,
+        "total": 17614
+      },
       "padding": {
-        "bytes": 14806,
-        "fraction": 0.5244589281286529
+        "bytes": 0,
+        "fraction": 0
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 11628149,
+          "opCost": 11647105,
           "steps": 9,
-          "heaviestStepOpCost": 2775179,
+          "heaviestStepOpCost": 2777155,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
-          "opCost": 54488762,
+          "accepted": true,
+          "opCost": 54507773,
           "steps": 9,
-          "heaviestStepOpCost": 7636044,
+          "heaviestStepOpCost": 7638021,
           "inputsForHeaviestStep": 1
         }
       },
@@ -658,7 +762,13 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
-      "score": 34822,
+      "score": 36394,
+      "size": {
+        "scriptBytes": 34822,
+        "txOverheadBytes": 1572,
+        "transactions": 12,
+        "total": 36394
+      },
       "padding": {
         "bytes": 14739,
         "fraction": 0.4232669002354833
@@ -707,7 +817,13 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 20735,
+      "score": 20822,
+      "size": {
+        "scriptBytes": 20735,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 20822
+      },
       "padding": {
         "bytes": 0,
         "fraction": 0
@@ -755,7 +871,13 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 21008,
+      "score": 21095,
+      "size": {
+        "scriptBytes": 21008,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 21095
+      },
       "padding": {
         "bytes": 0,
         "fraction": 0
@@ -803,22 +925,29 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 435518,
+      "score": 310014,
+      "size": {
+        "scriptBytes": 305757,
+        "txOverheadBytes": 4257,
+        "transactions": 33,
+        "total": 310014
+      },
       "padding": {
-        "bytes": 255370,
-        "fraction": 0.5863592319950036
+        "bytes": 0,
+        "fraction": 0
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 242361334,
+          "opCost": 242509989,
           "steps": 33,
-          "heaviestStepOpCost": 7603552,
+          "heaviestStepOpCost": 7608220,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
-          "opCost": 242374403,
+          "accepted": true,
+          "opCost": 242523059,
           "steps": 33,
-          "heaviestStepOpCost": 7604978,
+          "heaviestStepOpCost": 7609646,
           "inputsForHeaviestStep": 1
         }
       },
@@ -858,16 +987,22 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 893625,
+      "score": 662153,
+      "size": {
+        "scriptBytes": 652865,
+        "txOverheadBytes": 9288,
+        "transactions": 72,
+        "total": 662153
+      },
       "padding": {
-        "bytes": 475832,
-        "fraction": 0.5324739124353056
+        "bytes": 0,
+        "fraction": 0
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 516217604,
+          "opCost": 516502321,
           "steps": 72,
-          "heaviestStepOpCost": 7687778,
+          "heaviestStepOpCost": 7691741,
           "inputsForHeaviestStep": 1
         }
       },
@@ -907,16 +1042,22 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 928447,
+      "score": 685951,
+      "size": {
+        "scriptBytes": 675115,
+        "txOverheadBytes": 10836,
+        "transactions": 84,
+        "total": 685951
+      },
       "padding": {
-        "bytes": 490571,
-        "fraction": 0.5283780334257098
+        "bytes": 0,
+        "fraction": 0
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 527601602,
+          "opCost": 527919407,
           "steps": 84,
-          "heaviestStepOpCost": 7687778,
+          "heaviestStepOpCost": 7691741,
           "inputsForHeaviestStep": 1
         }
       },
@@ -948,6 +1089,224 @@
       "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — vk_x = IC0 + in0*IC1 + in1*IC2 (public-input aggregation) then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) via 4 Miller loops + combine + final exponentiation, asserting the verdict == Fp12 ONE — split across transactions so EVERY step fits one BCH input. Proof-agnostic covenant: all state + proof-derived points + public inputs ride in the token NFT commitment (48-byte limbs), so one fixed set of lockings verifies any proof (confirmed via extraValidProofs). Verified vs @noble/curves bls12-381. The BLS12-381 counterpart of bch-groth16-chunked; the BCH-compatible full Groth16 verifier on the nchain curve."
     },
     {
+      "id": "bch-pairing-intratx",
+      "name": "BCH Groth16 pairing intra-tx linked (Miller boundary in one transaction, BCH-compatible)",
+      "category": "partial",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16 pairing (BCH-native)",
+      "score": 307951,
+      "size": {
+        "scriptBytes": 306512,
+        "txOverheadBytes": 1439,
+        "transactions": 1,
+        "total": 307951
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 243042313,
+          "steps": 33,
+          "heaviestStepOpCost": 7625000,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 243055429,
+          "steps": 33,
+          "heaviestStepOpCost": 7626407,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+      },
+      "source": "BCH-native CashScript: the BN254 Groth16 Miller boundary computed as the INPUTS of ONE transaction. Each batched-Miller chunk carries its incoming state (f in Fp12 + 4 running G2 points + pair points) as a raw byte blob and binds the chain by forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT commitment, no hashing, no 128-byte state limit. Every input fits one BCH budget (op-cost <=8,032,800, <=10,000 B); the whole boundary is one non-standard (<1 MB) transaction. Same chunk math as bch-pairing-chunked. Deployed as P2SH so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad (~30% fewer on-chain bytes than bare-script). Reaches the miller-boundary checkpoint (full verdict: bch-groth16-intratx)."
+    },
+    {
+      "id": "bch-groth16-intratx",
+      "name": "BCH Groth16 intra-tx linked (whole verifier in one transaction, BCH-compatible)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "score": 525640,
+      "size": {
+        "scriptBytes": 522911,
+        "txOverheadBytes": 2729,
+        "transactions": 1,
+        "total": 525640
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 411712780,
+          "steps": 63,
+          "heaviestStepOpCost": 7896400,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 454828972,
+          "steps": 63,
+          "heaviestStepOpCost": 7899272,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+      },
+      "source": "BCH-native CashScript: the full BN254 Groth16 verifier (validate G2 inputs -> vk_x -> batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1) laid out as the INPUTS of ONE transaction. Each input carries its incoming state as a raw byte blob and binds the chain by forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT-commitment hand-off, no hashing, no 128-byte state limit, arbitrary intermediate size. Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-chunked; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Single-transaction counterpart of the multi-tx bch-groth16-chunked and the non-deployable bch-groth16-singleton. Deployed as P2SH so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad (~30% fewer on-chain bytes than a bare-script deployment; the same lever applies to the multi-tx covenant chunks)."
+    },
+    {
+      "id": "bch-pairing-bls12381-intratx",
+      "name": "BCH BLS12-381 Groth16 pairing intra-tx linked (one transaction, BCH-compatible)",
+      "category": "partial",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16 pairing (BCH-native)",
+      "score": 657413,
+      "size": {
+        "scriptBytes": 654297,
+        "txOverheadBytes": 3116,
+        "transactions": 1,
+        "total": 657413
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 517507743,
+          "steps": 72,
+          "heaviestStepOpCost": 7711142,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+      },
+      "source": "BCH-native CashScript: the BLS12-381 Groth16 pairing (batched 4-pair optimal-ate Miller -> final exponentiation -> verdict == Fp12 ONE) computed as the INPUTS of ONE transaction. Each chunk carries its incoming state as a raw 48-byte-limb blob and binds the chain by forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT commitment, no hashing. The easy-part inverse rides as an uncommitted witness. Every input fits one BCH budget; the whole pairing is one non-standard (<1 MB) transaction. Same chunk math as bch-pairing-bls12381-chunked. Deployed as P2SH so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad (~27% fewer on-chain bytes than bare-script)."
+    },
+    {
+      "id": "bch-groth16-bls12381-intratx",
+      "name": "BCH BLS12-381 Groth16 intra-tx linked (whole verifier in one transaction, BCH-compatible)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "score": 683115,
+      "size": {
+        "scriptBytes": 679483,
+        "txOverheadBytes": 3632,
+        "transactions": 1,
+        "total": 683115
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 529961597,
+          "steps": 84,
+          "heaviestStepOpCost": 7711142,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits"
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "not exercised — no adversarial-point inputs provided for this entry"
+      },
+      "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier (vk_x -> batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1) laid out as the INPUTS of ONE transaction. Each input carries its incoming state as a raw 48-byte-limb blob and binds the chain by forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT-commitment hand-off, no hashing, arbitrary intermediate size. The easy-part inverse rides as an uncommitted witness. Every input fits one BCH budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-bls12381-chunked; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Deployed as P2SH so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad (~27% fewer on-chain bytes than bare-script)."
+    },
+    {
       "id": "bch-multistep-demo",
       "name": "BCH multi-step demo (hash-chained state)",
       "category": "demo",
@@ -956,7 +1315,13 @@
       "curve": "-",
       "structure": "multi-tx",
       "proofSystem": "demo (hash-chained state)",
-      "score": 228,
+      "score": 483,
+      "size": {
+        "scriptBytes": 228,
+        "txOverheadBytes": 255,
+        "transactions": 3,
+        "total": 483
+      },
       "padding": {
         "bytes": 0,
         "fraction": 0
