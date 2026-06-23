@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-23T12:17:38.622Z",
+  "generatedAt": "2026-06-23T16:19:41.277Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -33,10 +33,10 @@
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-intratx",
+      "id": "bch-groth16-chunked-covenant",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 525640,
+      "bytes": 472510,
       "bchCompatible": true
     }
   },
@@ -194,6 +194,20 @@
       "id": "bch-groth16-singleton",
       "steps": 1,
       "fits": false
+    },
+    {
+      "t": "2026-06-23T16:19:41.277Z",
+      "score": 634540,
+      "id": "bch-groth16-bls12381-chunked-covenant",
+      "steps": 69,
+      "fits": true
+    },
+    {
+      "t": "2026-06-23T16:19:41.277Z",
+      "score": 472510,
+      "id": "bch-groth16-chunked-covenant",
+      "steps": 49,
+      "fits": true
     }
   ],
   "entries": [
@@ -502,6 +516,65 @@
         "detail": "on-curve + G2-subgroup checks enforced: 1/1 adversarial points (off-curve / off-subgroup) rejected"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier split across transactions so EVERY step fits one BCH input. vk_x = IC0+in0*IC1+in1*IC2 computed on-chain (Shamir/Straus, public inputs at RUNTIME) -> 4 single-pair Miller chains -> combine -> final exponentiation -> assert product == Fp12 ONE. State carried as hash256 commitments of the live values, verified on entry/exit each step. Verified vs @noble/curves (boundary == golden millerHex, verdict == golden). BCH-compatible counterpart of bch-groth16-singleton (~1.26B op-cost, ~157 inputs, single-tx, not BCH-compatible). Same BN254 curve as scrypt-bn256."
+    },
+    {
+      "id": "bch-groth16-chunked-covenant",
+      "name": "BCH Groth16 verifier, chunked, covenant-threaded (48 chunks: baton genesis + transcript + forward-chain, BCH-compatible)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "multi-tx",
+      "proofSystem": "Groth16",
+      "score": 472510,
+      "size": {
+        "scriptBytes": 466123,
+        "txOverheadBytes": 6387,
+        "transactions": 49,
+        "total": 472510
+      },
+      "padding": {
+        "bytes": 196042,
+        "fraction": 0.4205799756716575
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 305694803,
+          "steps": 49,
+          "heaviestStepOpCost": 7919438,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "49/49 locking >201 B; a step is non-standard under the standard VM"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": true,
+        "detail": "covenant pins category + capability and perpetuates the commitment"
+      },
+      "inputValidation": {
+        "enforced": true,
+        "tested": 2,
+        "rejected": 2,
+        "detail": "on-curve + G2-subgroup checks enforced: 2/2 adversarial points (off-curve / off-subgroup) rejected"
+      },
+      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in 48 covenant-threaded chunks with a transcript-bound cross-step thread. g2check EIP-197 input validation (baton genesis) -> vk_x runtime MSM -> baked-G2 + prepared-VK optimal-ate Miller -> final exponentiation (witnessed fp12 inverse) -> verdict==1. State threaded as transcript-anchored NFT commitments (T0=hash(A,B,C), T1=hash(T0,in0,in1,vk_x)), forward-chain locking pins, a minting-baton category genesis, and shared-tower relocation (tower fns hash-bound in the witness). The pairing is bound to the validated/computed points; chunks run in order, each pinned to the next, with the token category anchored (adversarial_covenant.mjs: 81/0). BCH-compatible: every step validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts <= 10,000 B)."
     },
     {
       "id": "bch-vkx-singleton",
@@ -1151,6 +1224,65 @@
         "detail": "not exercised — no adversarial-point inputs provided for this entry"
       },
       "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — vk_x = IC0 + in0*IC1 + in1*IC2 (public-input aggregation) then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) via 4 Miller loops + combine + final exponentiation, asserting the verdict == Fp12 ONE — split across transactions so EVERY step fits one BCH input. Proof-agnostic covenant: all state + proof-derived points + public inputs ride in the token NFT commitment (48-byte limbs), so one fixed set of lockings verifies any proof (confirmed via extraValidProofs). Verified vs @noble/curves bls12-381. The BLS12-381 counterpart of bch-groth16-chunked; the BCH-compatible full Groth16 verifier on the nchain curve."
+    },
+    {
+      "id": "bch-groth16-bls12381-chunked-covenant",
+      "name": "BCH Groth16 verifier, chunked, BLS12-381, covenant-threaded (68 chunks: baton genesis + transcript + forward-chain, BCH-compatible)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "multi-tx",
+      "proofSystem": "Groth16",
+      "score": 634540,
+      "size": {
+        "scriptBytes": 625533,
+        "txOverheadBytes": 9007,
+        "transactions": 69,
+        "total": 634540
+      },
+      "padding": {
+        "bytes": 261747,
+        "fraction": 0.41843835577019917
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 420452801,
+          "steps": 69,
+          "heaviestStepOpCost": 7791832,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "69/69 locking >201 B; a step is non-standard under the standard VM"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": true,
+        "detail": "covenant pins category + capability and perpetuates the commitment"
+      },
+      "inputValidation": {
+        "enforced": true,
+        "tested": 2,
+        "rejected": 2,
+        "detail": "on-curve + G2-subgroup checks enforced: 2/2 adversarial points (off-curve / off-subgroup) rejected"
+      },
+      "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in 68 covenant-threaded chunks with a transcript-bound cross-step thread. g2check EIP-197 input validation ([|x|]B==psi(B), baton genesis) -> vk_x runtime MSM -> baked-G2 + prepared-VK optimal-ate Miller -> final exponentiation (witnessed fp12 inverse) -> verdict==Fp12.ONE. State threaded as transcript-anchored NFT commitments (T0=hash(A,B,C), T1=hash(T0,in0,in1,vk)), forward-chain locking pins, a minting-baton category genesis, shared-tower relocation + single-hash-bind (tower fns hash-bound in the witness), and the BLS witnessed-inverse final exponentiation. The pairing is bound to the validated/computed points; chunks run in order, each pinned to the next, with the token category anchored (adversarial_covenant.mjs: 110/0). BCH-compatible: every step validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts <= 10,000 B)."
     },
     {
       "id": "bch-pairing-intratx",

@@ -152,5 +152,19 @@
     "id": "bch-groth16-singleton",
     "steps": 1,
     "fits": false
+  },
+  {
+    "t": "2026-06-23T16:19:41.277Z",
+    "score": 634540,
+    "id": "bch-groth16-bls12381-chunked-covenant",
+    "steps": 69,
+    "fits": true
+  },
+  {
+    "t": "2026-06-23T16:19:41.277Z",
+    "score": 472510,
+    "id": "bch-groth16-chunked-covenant",
+    "steps": 49,
+    "fits": true
   }
 ]
