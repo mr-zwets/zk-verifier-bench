@@ -37,13 +37,22 @@ const loadHistory = (): HistoryPoint[] => {
 // append best-per-curve points, deduped per (curve, fits) so each curve+series forms its
 // own independent line against that track's most recent point.
 type Best = { score: number; id: string; steps: number; transactions: number; curve: string; fits: boolean };
-const recordHistory = (bests: Best[], curveOfId: (id: string) => string, t: string): HistoryPoint[] => {
+const recordHistory = (
+  bests: Best[],
+  curveOfId: (id: string) => string,
+  standardOf: (id: string) => boolean,
+  t: string,
+): HistoryPoint[] => {
   const series = loadHistory();
   let changed = false;
   for (const best of bests) {
+    // each track is keyed by (series, curve, standardness): within the fitting series the
+    // standard-relayable frontier and the non-standard frontier are recorded independently,
+    // so a smaller non-standard verifier never hides the smallest standard one (and vice versa).
+    const bestStandard = standardOf(best.id);
     let last: HistoryPoint | undefined;
     for (let i = series.length - 1; i >= 0; i--) {
-      if (series[i].fits === best.fits && curveOfId(series[i].id) === best.curve) { last = series[i]; break; }
+      if (series[i].fits === best.fits && curveOfId(series[i].id) === best.curve && standardOf(series[i].id) === bestStandard) { last = series[i]; break; }
     }
     if (last === undefined || last.score !== best.score) {
       series.push({ t, score: best.score, id: best.id, steps: best.steps, transactions: best.transactions, fits: best.fits });
@@ -243,10 +252,12 @@ const main = async () => {
     .sort((a, b) => a.score - b.score)[0];
 
   // accumulate the score-history time-series, per curve so each curve draws its own line.
-  // Two series: the best FITTING (BCH-native) verifier, and the smallest NON-fitting
-  // singleton (the single-tx ideal that busts the limits) — their gap is the chunking tax.
+  // The FITTING (BCH-native) series is tracked as two frontiers — smallest standard-relayable
+  // and smallest non-standard-but-compatible — plus the smallest NON-fitting singleton (the
+  // single-tx ideal that busts the limits); the singleton-vs-fitting gap is the chunking tax.
   const generatedAt = new Date().toISOString();
   const curveOfId = (id: string): string => entries.find((e) => e.id === id)?.curve ?? 'BN254';
+  const standardOf = (id: string): boolean => entries.find((e) => e.id === id)?.bch.standard.fits ?? false;
   const curvesPresent = [...new Set(full.map((e) => e.curve))];
   const smallestPerCurve = (pred: (e: Entry) => boolean, fits: boolean): Best[] =>
     curvesPresent
@@ -256,10 +267,14 @@ const main = async () => {
 
   const history = recordHistory(
     [
-      ...smallestPerCurve((e) => e.bch.compatible && e.generality.runtimeGeneral && e.packaging.secure, true),
+      // fitting series, split by standardness so each frontier is recorded independently
+      ...smallestPerCurve((e) => e.bch.compatible && e.bch.standard.fits && e.generality.runtimeGeneral && e.packaging.secure, true),
+      ...smallestPerCurve((e) => e.bch.compatible && !e.bch.standard.fits && e.generality.runtimeGeneral && e.packaging.secure, true),
+      // singleton ideal: smallest verifier that busts the BCH limits entirely
       ...smallestPerCurve((e) => !e.official && !e.bch.compatible && e.packaging.secure, false),
     ],
     curveOfId,
+    standardOf,
     generatedAt,
   );
 

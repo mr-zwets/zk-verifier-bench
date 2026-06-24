@@ -129,7 +129,7 @@
   },
   {
     "t": "2026-06-22T11:57:45.520Z",
-    "score": 685951,
+    "score": 713761,
     "id": "bch-groth16-bls12381-chunked",
     "steps": 84,
     "transactions": 84,
@@ -205,6 +205,14 @@
     "id": "bch-groth16-grouped",
     "steps": 54,
     "transactions": 6,
+    "fits": true
+  },
+  {
+    "t": "2026-06-24T13:52:38.228Z",
+    "score": 711201,
+    "id": "bch-groth16-bls12381-grouped",
+    "steps": 87,
+    "transactions": 9,
     "fits": true
   }
 ]
