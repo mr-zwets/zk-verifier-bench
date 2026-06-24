@@ -124,6 +124,21 @@ export interface IntraTxContext {
   inputs: { lockingBytecode: Uint8Array; unlockingBytecode: Uint8Array }[];
 }
 
+/** Grouped (multi-tx, multi-input) context — the hybrid of intra-tx and covenant. The
+ * computation is a handful of standard transactions; within one group tx the inputs bind by
+ * OP_INPUTBYTECODE forward-checks, across groups the state rides a CashToken NFT commitment.
+ * The runner builds ONE token-carrying tx for the group (input[0] optionally spends `inToken`,
+ * output[0] optionally creates `outToken`) and evaluates input `index` against it. */
+export interface GroupedContext {
+  group: number;
+  index: number;
+  inputs: { lockingBytecode: Uint8Array; unlockingBytecode: Uint8Array }[];
+  category: Uint8Array;
+  inToken?: { capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array };
+  outToken?: { capability: 'none' | 'mutable'; commitment: Uint8Array };
+  outLockingBytecode?: Uint8Array;
+}
+
 /** Evaluate unlocking + locking as a synthetic spend and report acceptance + metrics.
  * With a covenant context the spend is driven through a token-carrying tx so the
  * contract's NFT-commitment / output introspection resolves. */
@@ -133,6 +148,7 @@ export const evaluatePair = (
   unlockingBytecode: Uint8Array,
   covenant?: CovenantContext,
   intraTx?: IntraTxContext,
+  grouped?: GroupedContext,
 ): EvalOutcome => {
   const mkToken = (
     capability: 'none' | 'mutable' | 'minting',
@@ -158,6 +174,33 @@ export const evaluatePair = (
       locktime: 0,
     },
   };
+  // Grouped: a multi-input token-carrying tx. input[0] optionally spends the incoming-state
+  // token (covInHash binds it); output[0] optionally carries the outgoing-state token (covout
+  // commits it). All other inputs are plain; the OP_INPUTBYTECODE forward-checks resolve to the
+  // real siblings within this group's tx.
+  const gTok = (t?: { capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array }) =>
+    t ? { amount: 0n, category: grouped!.category, nft: { capability: t.capability, commitment: t.commitment } } : undefined;
+  const groupedProgram = grouped && {
+    inputIndex: grouped.index,
+    sourceOutputs: grouped.inputs.map((i, n) => ({
+      lockingBytecode: i.lockingBytecode,
+      valueSatoshis: 1000n,
+      token: n === 0 ? gTok(grouped.inToken) : undefined,
+    })),
+    transaction: {
+      version: 2,
+      inputs: grouped.inputs.map((i, n) => ({
+        outpointTransactionHash: new Uint8Array(32),
+        outpointIndex: n,
+        sequenceNumber: 0,
+        unlockingBytecode: i.unlockingBytecode,
+      })),
+      outputs: grouped.outToken
+        ? [{ lockingBytecode: grouped.outLockingBytecode ?? Uint8Array.from([0x6a]), valueSatoshis: 1000n, token: gTok(grouped.outToken) }]
+        : [{ lockingBytecode: Uint8Array.from([0x6a]), valueSatoshis: 1000n }],
+      locktime: 0,
+    },
+  };
   // Covenant-thread extensions: a genesis chunk spends a MINTING baton (inputCapability) and
   // emits [thread token, recreated baton]; a terminal chunk strips capability (output 'none').
   // When neither is set this is exactly the legacy 1-in/1-out mutable->mutable shape.
@@ -171,7 +214,9 @@ export const evaluatePair = (
         ]
       : [{ lockingBytecode: covenant.outLockingBytecode, valueSatoshis: 1000n, token: mkToken(covenant.capability, covenant.outCommitment) }]
     : [];
-  const program = intraTxProgram
+  const program = groupedProgram
+    ? groupedProgram
+    : intraTxProgram
     ? intraTxProgram
     : covenant
     ? {

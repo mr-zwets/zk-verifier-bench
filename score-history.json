@@ -4,6 +4,7 @@
     "score": 21933,
     "id": "bch-groth16-singleton",
     "steps": 1,
+    "transactions": 1,
     "fits": false
   },
   {
@@ -11,6 +12,7 @@
     "score": 1759196,
     "id": "bch-groth16-chunked",
     "steps": 125,
+    "transactions": 125,
     "fits": true
   },
   {
@@ -18,6 +20,7 @@
     "score": 1592781,
     "id": "bch-groth16-chunked",
     "steps": 116,
+    "transactions": 116,
     "fits": true
   },
   {
@@ -25,6 +28,7 @@
     "score": 24574,
     "id": "bch-groth16-bls12381-singleton",
     "steps": 1,
+    "transactions": 1,
     "fits": false
   },
   {
@@ -32,6 +36,7 @@
     "score": 1548532,
     "id": "bch-groth16-chunked",
     "steps": 115,
+    "transactions": 115,
     "fits": true
   },
   {
@@ -39,6 +44,7 @@
     "score": 1531509,
     "id": "bch-groth16-chunked",
     "steps": 116,
+    "transactions": 116,
     "fits": true
   },
   {
@@ -46,6 +52,7 @@
     "score": 1469450,
     "id": "bch-groth16-bls12381-chunked",
     "steps": 116,
+    "transactions": 116,
     "fits": true
   },
   {
@@ -53,6 +60,7 @@
     "score": 1347828,
     "id": "bch-groth16-chunked",
     "steps": 103,
+    "transactions": 103,
     "fits": true
   },
   {
@@ -60,6 +68,7 @@
     "score": 1154532,
     "id": "bch-groth16-bls12381-chunked",
     "steps": 100,
+    "transactions": 100,
     "fits": true
   },
   {
@@ -67,6 +76,7 @@
     "score": 1007005,
     "id": "bch-groth16-chunked",
     "steps": 85,
+    "transactions": 85,
     "fits": true
   },
   {
@@ -74,6 +84,7 @@
     "score": 950105,
     "id": "bch-groth16-bls12381-chunked",
     "steps": 86,
+    "transactions": 86,
     "fits": true
   },
   {
@@ -81,6 +92,7 @@
     "score": 20975,
     "id": "bch-groth16-bls12381-singleton",
     "steps": 1,
+    "transactions": 1,
     "fits": false
   },
   {
@@ -88,6 +100,7 @@
     "score": 770817,
     "id": "bch-groth16-chunked",
     "steps": 66,
+    "transactions": 66,
     "fits": true
   },
   {
@@ -95,6 +108,7 @@
     "score": 21042,
     "id": "bch-groth16-singleton",
     "steps": 1,
+    "transactions": 1,
     "fits": false
   },
   {
@@ -102,6 +116,7 @@
     "score": 928447,
     "id": "bch-groth16-bls12381-chunked",
     "steps": 84,
+    "transactions": 84,
     "fits": true
   },
   {
@@ -109,6 +124,7 @@
     "score": 738099,
     "id": "bch-groth16-chunked",
     "steps": 63,
+    "transactions": 63,
     "fits": true
   },
   {
@@ -116,6 +132,7 @@
     "score": 685951,
     "id": "bch-groth16-bls12381-chunked",
     "steps": 84,
+    "transactions": 84,
     "fits": true
   },
   {
@@ -123,6 +140,7 @@
     "score": 528004,
     "id": "bch-groth16-chunked",
     "steps": 63,
+    "transactions": 63,
     "fits": true
   },
   {
@@ -130,6 +148,7 @@
     "score": 683115,
     "id": "bch-groth16-bls12381-intratx",
     "steps": 84,
+    "transactions": 1,
     "fits": true
   },
   {
@@ -137,6 +156,7 @@
     "score": 525640,
     "id": "bch-groth16-intratx",
     "steps": 63,
+    "transactions": 1,
     "fits": true
   },
   {
@@ -144,6 +164,7 @@
     "score": 21062,
     "id": "bch-groth16-bls12381-singleton",
     "steps": 1,
+    "transactions": 1,
     "fits": false
   },
   {
@@ -151,6 +172,7 @@
     "score": 21129,
     "id": "bch-groth16-singleton",
     "steps": 1,
+    "transactions": 1,
     "fits": false
   },
   {
@@ -158,6 +180,7 @@
     "score": 634540,
     "id": "bch-groth16-bls12381-chunked-covenant",
     "steps": 69,
+    "transactions": 69,
     "fits": true
   },
   {
@@ -165,6 +188,7 @@
     "score": 472510,
     "id": "bch-groth16-chunked-covenant",
     "steps": 49,
+    "transactions": 49,
     "fits": true
   },
   {
@@ -172,6 +196,15 @@
     "score": 447215,
     "id": "bch-groth16-chunked",
     "steps": 54,
+    "transactions": 54,
+    "fits": true
+  },
+  {
+    "t": "2026-06-24T12:00:28.419Z",
+    "score": 445787,
+    "id": "bch-groth16-grouped",
+    "steps": 54,
+    "transactions": 6,
     "fits": true
   }
 ]

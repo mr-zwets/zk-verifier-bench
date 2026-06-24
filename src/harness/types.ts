@@ -58,6 +58,33 @@ export interface Step {
     index: number;
     inputs: { lockingBytecode: Uint8Array; unlockingBytecode: Uint8Array }[];
   };
+  /**
+   * Grouped (multi-tx, multi-input) context. Set when this step is ONE INPUT of one of a
+   * HANDFUL of standard (<100,000 B) transactions that together run the chunked computation.
+   * It is the hybrid of `intraTx` and `covenant`: WITHIN a group transaction the inputs bind
+   * each other by OP_INPUTBYTECODE forward-checks (intra-tx), and ACROSS group transactions the
+   * running state rides a CashToken NFT commitment (covenant) — a group's last chunk commits
+   * hash256(outBlob) to output[0], the next group's first chunk binds its inBlob via
+   * tx.inputs[0].nftCommitment. The token thread chains all groups in order.
+   *
+   * `group` is this input's transaction index; `index` its position within that group's tx;
+   * `inputs` the full ordered input list of THIS group's tx (the SAME array across the group's
+   * steps), so a chunk's tx.inputs[idx±1] introspection resolves to its real sibling. The
+   * token fields drive the cross-group hand-off: `inToken` is spent by input[0] of the group
+   * (undefined => no spent token), `outToken` is created at output[0] (undefined => terminal
+   * group, the thread token is burned), `outLockingBytecode` is output[0]'s locking when a
+   * token is created. The harness builds one synthetic token-carrying tx per group and
+   * evaluates input `index` against it.
+   */
+  grouped?: {
+    group: number;
+    index: number;
+    inputs: { lockingBytecode: Uint8Array; unlockingBytecode: Uint8Array }[];
+    category: Uint8Array;
+    inToken?: { capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array };
+    outToken?: { capability: 'none' | 'mutable'; commitment: Uint8Array };
+    outLockingBytecode?: Uint8Array;
+  };
 }
 
 export interface CheckpointStat {

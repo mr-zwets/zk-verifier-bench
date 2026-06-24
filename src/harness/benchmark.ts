@@ -16,6 +16,7 @@ import { bchPairingBls12381Singleton } from '../implementations/bch-pairing-bls1
 import { bchPairingChunked } from '../implementations/bch-pairing-chunked.js';
 import { bchPairingIntratx } from '../implementations/bch-pairing-intratx.js';
 import { bchGroth16Intratx } from '../implementations/bch-groth16-intratx.js';
+import { bchGroth16Grouped } from '../implementations/bch-groth16-grouped.js';
 import { bchPairingBls12381Intratx } from '../implementations/bch-pairing-bls12381-intratx.js';
 import { bchGroth16Bls12381Intratx } from '../implementations/bch-groth16-bls12381-intratx.js';
 import { bchPairingSingleton } from '../implementations/bch-pairing-singleton.js';
@@ -61,7 +62,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchGroth16ChunkedCovenant, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchGroth16Bls12381ChunkedCovenant, bchPairingIntratx, bchGroth16Intratx, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchGroth16ChunkedCovenant, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchGroth16Bls12381ChunkedCovenant, bchPairingIntratx, bchGroth16Intratx, bchGroth16Grouped, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchMultistepDemo];
 
 // Zero-padding accounting: the chunked/intra-tx steps append one big all-zero push to each
 // unlocking purely to buy op-cost budget ((41+len)*800). Its full encoded length (push
@@ -99,8 +100,35 @@ const INPUT_FIXED = 36 /* outpoint */ + 4 /* sequence */;
 //   - intra-tx step  -> all steps share ONE tx; the shared envelope + single OP_RETURN
 //     output are attributed to input 0, every input pays its outpoint/sequence/varint.
 //   - single-tx step -> one tx, one input, one standard (P2PKH, 25 B) output.
+// Number of transactions a run spans: one per group (grouped), one (intra-tx bundle),
+// or one per step (covenant chain / would-be single-tx).
+const txCountOf = (valid: Step[]): number =>
+  valid.some((s) => s.grouped !== undefined)
+    ? new Set(valid.filter((s) => s.grouped).map((s) => s.grouped!.group)).size
+    : valid.some((s) => s.intraTx !== undefined)
+    ? 1
+    : valid.length;
+
 const stepTxOverhead = (step: Step): number => {
   const inputOv = INPUT_FIXED + varintLen(step.unlockingBytecode.length);
+  if (step.grouped !== undefined) {
+    // interior inputs add only their outpoint/sequence/script-length; the FIRST input of each
+    // group also carries the shared tx envelope + the single group output. The output is either
+    // the perpetuated token (its locking is the next chunk's, already counted as that step's
+    // locking, so excluded like the covenant model) or, for the terminal group, an OP_RETURN.
+    const g = step.grouped;
+    if (g.index !== 0) return inputOv;
+    let outputOv: number;
+    if (g.outToken !== undefined) {
+      const prefix =
+        1 /* PREFIX_TOKEN */ + g.category.length + 1 /* bitfield */ +
+        varintLen(g.outToken.commitment.length) + g.outToken.commitment.length;
+      outputOv = 8 /* value */ + varintLen(prefix + (g.outLockingBytecode?.length ?? 1)) + prefix;
+    } else {
+      outputOv = 8 + varintLen(1) + 1; // OP_RETURN verdict output
+    }
+    return TXN_ENVELOPE + varintLen(g.inputs.length) + varintLen(1) + inputOv + outputOv;
+  }
   if (step.intraTx !== undefined) {
     const sharedOnFirst =
       step.intraTx.index === 0
@@ -133,7 +161,7 @@ const packagingSecurity = (steps: Step[]): { secure: boolean; reason?: string } 
 };
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
-  const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode, step.covenant, step.intraTx);
+  const o = evaluatePair(vm, step.lockingBytecode, step.unlockingBytecode, step.covenant, step.intraTx, step.grouped);
   return {
     label: step.label,
     lockingBytes: step.lockingBytecode.length,
@@ -150,7 +178,7 @@ const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
 /** A run is rejected if at least one of its steps does not accept. */
 const runRejects = (vm: Bch2026Vm, run: Step[], bsv: boolean): boolean =>
   run.some((s) => {
-    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx);
+    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx, s.grouped);
     return !(bsv ? o.bsvAccepted : o.accepted);
   });
 
@@ -183,14 +211,30 @@ const standardness = (
 ): { fits: boolean; reason?: string } => {
   const overLock = steps.filter((s) => s.lockingBytes > MAX_STANDARD_LOCKING_BYTECODE).length;
   const overUnlock = steps.filter((s) => s.unlockingBytes > MAX_STANDARD_UNLOCKING_BYTECODE).length;
-  const txBytes =
-    txCount === 1
-      ? steps.reduce((a, s) => a + s.unlockingBytes, 0) + totalTxOverheadBytes
-      : Math.max(0, ...steps.map((s) => s.unlockingBytes + s.lockingBytes + s.txOverheadBytes));
+  // Largest single transaction in the run (the 100,000-byte standard cap applies per tx):
+  //   - grouped: each group is one tx; its size = sum of its inputs' scriptSig (unlocking) +
+  //     that group's tx overhead (envelope + outpoints + the single token/OP_RETURN output).
+  //     Lockings live in the funding UTXOs, not the spend.
+  //   - intra-tx bundle (txCount 1): the one tx = sum of all unlockings + overhead.
+  //   - covenant chain: max single 1-in/1-out step tx.
+  const grouped = scenario.valid.some((s) => s.grouped !== undefined);
+  let txBytes: number;
+  if (grouped) {
+    const byGroup = new Map<number, number>();
+    scenario.valid.forEach((s, i) => {
+      const g = s.grouped!.group;
+      byGroup.set(g, (byGroup.get(g) ?? 0) + steps[i]!.unlockingBytes + steps[i]!.txOverheadBytes);
+    });
+    txBytes = Math.max(0, ...byGroup.values());
+  } else if (txCount === 1) {
+    txBytes = steps.reduce((a, s) => a + s.unlockingBytes, 0) + totalTxOverheadBytes;
+  } else {
+    txBytes = Math.max(0, ...steps.map((s) => s.unlockingBytes + s.lockingBytes + s.txOverheadBytes));
+  }
 
   const vm = createStandardVm();
   const evalRejects = scenario.valid.some((s) => {
-    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx);
+    const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx, s.grouped);
     return !(bsv ? o.bsvAccepted : o.accepted);
   });
 
@@ -213,7 +257,9 @@ const tokenSafetyOf = (
   scenario: Awaited<ReturnType<Implementation['load']>>,
   impl: Implementation,
 ): { tokenThreaded: boolean; tokenSafetyEnforced: boolean | null } => {
-  const tokenThreaded = scenario.valid.some((s) => s.covenant !== undefined);
+  // covenant steps thread state through an NFT commitment; grouped steps thread the
+  // cross-group hand-off through one too (the within-group links are sibling introspection).
+  const tokenThreaded = scenario.valid.some((s) => s.covenant !== undefined || s.grouped !== undefined);
   return { tokenThreaded, tokenSafetyEnforced: tokenThreaded ? impl.tokenSafetyEnforced ?? false : null };
 };
 
@@ -247,7 +293,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
       totalPadBytes: steps.reduce((a, s) => a + s.padBytes, 0),
       totalTxOverheadBytes: steps.reduce((a, s) => a + s.txOverheadBytes, 0),
-      txCount: scenario.valid.some((s) => s.intraTx !== undefined) ? 1 : steps.length,
+      txCount: txCountOf(scenario.valid),
       totalOperationCost: 0, maxStepOperationCost: 0,
       fitsStandardBudget: false, inputsForHeaviestStep: 0,
       bchCompatible: oversize === 0,
@@ -290,7 +336,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
 
   // BCH compatibility: replay the valid run on the REAL BCH 2026 VM (consensus limits).
   const realVm = createRealVm();
-  const realOutcomes = scenario.valid.map((s) => evaluatePair(realVm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx));
+  const realOutcomes = scenario.valid.map((s) => evaluatePair(realVm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx, s.grouped));
   const firstFail = realOutcomes.find((o) => !o.accepted);
   const bchCompatible = firstFail === undefined && validPassed;
   const bchIncompatibleReason = firstFail?.error === undefined ? undefined : limitReason(firstFail.error);
@@ -348,7 +394,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     };
   }
   const totalTxOverheadBytes = steps.reduce((a, s) => a + s.txOverheadBytes, 0);
-  const txCount = scenario.valid.some((s) => s.intraTx !== undefined) ? 1 : steps.length;
+  const txCount = txCountOf(scenario.valid);
   // BCH standard (relay) policy: stricter than the consensus `bchCompatible` above.
   const std = standardness(scenario, steps, txCount, totalTxOverheadBytes, bsv);
 

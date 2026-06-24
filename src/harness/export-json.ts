@@ -22,20 +22,21 @@ const SIZE_CAP = STANDARD_UNLOCKING_CAP; // 10,000 B per locking/unlocking scrip
 // series tagged by `fits`: the best BCH-native (fitting) full verifier, and the smallest
 // NON-fitting single-tx "singleton" ideal — their gap over time is the chunking tax.
 const HISTORY_FILE = 'score-history.json';
-interface HistoryPoint { t: string; score: number; id: string; steps: number; fits: boolean }
+interface HistoryPoint { t: string; score: number; id: string; steps: number; transactions: number; fits: boolean }
 const loadHistory = (): HistoryPoint[] => {
   if (!existsSync(HISTORY_FILE)) return [];
   try {
     const arr = JSON.parse(readFileSync(HISTORY_FILE, 'utf8')) as HistoryPoint[];
-    // legacy points predate the `fits` flag; they only ever recorded the fitting series.
-    return arr.map((p) => ({ ...p, fits: p.fits ?? true }));
+    // legacy points predate the `fits` flag (fitting-only series) and the `transactions`
+    // field; the file is backfilled, so the ?? fallbacks only guard a stale/partial read.
+    return arr.map((p) => ({ ...p, fits: p.fits ?? true, transactions: p.transactions ?? p.steps }));
   } catch {
     return [];
   }
 };
 // append best-per-curve points, deduped per (curve, fits) so each curve+series forms its
 // own independent line against that track's most recent point.
-type Best = { score: number; id: string; steps: number; curve: string; fits: boolean };
+type Best = { score: number; id: string; steps: number; transactions: number; curve: string; fits: boolean };
 const recordHistory = (bests: Best[], curveOfId: (id: string) => string, t: string): HistoryPoint[] => {
   const series = loadHistory();
   let changed = false;
@@ -45,7 +46,7 @@ const recordHistory = (bests: Best[], curveOfId: (id: string) => string, t: stri
       if (series[i].fits === best.fits && curveOfId(series[i].id) === best.curve) { last = series[i]; break; }
     }
     if (last === undefined || last.score !== best.score) {
-      series.push({ t, score: best.score, id: best.id, steps: best.steps, fits: best.fits });
+      series.push({ t, score: best.score, id: best.id, steps: best.steps, transactions: best.transactions, fits: best.fits });
       changed = true;
     }
   }
@@ -251,7 +252,7 @@ const main = async () => {
     curvesPresent
       .map((c) => full.filter((e) => e.curve === c && pred(e)).sort((a, b) => a.score - b.score)[0])
       .filter((e): e is Entry => e !== undefined)
-      .map((e) => ({ score: e.score, id: e.id, steps: e.benchmarks.smallProof.steps, curve: e.curve, fits }));
+      .map((e) => ({ score: e.score, id: e.id, steps: e.benchmarks.smallProof.steps, transactions: e.size.transactions, curve: e.curve, fits }));
 
   const history = recordHistory(
     [
