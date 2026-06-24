@@ -214,5 +214,29 @@
     "steps": 87,
     "transactions": 9,
     "fits": true
+  },
+  {
+    "t": "2026-06-24T15:02:52.927Z",
+    "score": 445519,
+    "id": "bch-groth16-intratx",
+    "steps": 54,
+    "transactions": 1,
+    "fits": true
+  },
+  {
+    "t": "2026-06-24T15:02:52.927Z",
+    "score": 20183,
+    "id": "bch-groth16-bls12381-singleton",
+    "steps": 1,
+    "transactions": 1,
+    "fits": false
+  },
+  {
+    "t": "2026-06-24T15:02:52.927Z",
+    "score": 20243,
+    "id": "bch-groth16-singleton",
+    "steps": 1,
+    "transactions": 1,
+    "fits": false
   }
 ]
