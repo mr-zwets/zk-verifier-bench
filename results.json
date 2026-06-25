@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-25T14:44:26.966Z",
+  "generatedAt": "2026-06-25T15:22:56.504Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -1781,8 +1781,8 @@
       },
       "tokenSafety": {
         "threaded": true,
-        "enforced": false,
-        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
+        "enforced": true,
+        "detail": "covenant pins category + capability and perpetuates the commitment"
       },
       "inputValidation": {
         "enforced": false,
@@ -1851,8 +1851,8 @@
       },
       "tokenSafety": {
         "threaded": true,
-        "enforced": false,
-        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
+        "enforced": true,
+        "detail": "covenant pins category + capability and perpetuates the commitment"
       },
       "inputValidation": {
         "enforced": false,
@@ -2032,8 +2032,8 @@
       },
       "tokenSafety": {
         "threaded": true,
-        "enforced": false,
-        "detail": "state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)"
+        "enforced": true,
+        "detail": "covenant pins category + capability and perpetuates the commitment"
       },
       "inputValidation": {
         "enforced": false,

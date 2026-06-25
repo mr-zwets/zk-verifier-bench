@@ -68,6 +68,13 @@ export const bchGroth16GroupedResidue: Implementation = {
   field: 'BN254',
   structure: 'multi-tx',
   proofBinding: 'runtime',
+  // The cross-group hand-off pins the token thread exactly like the covenant build: each group's
+  // last chunk commits hash256(outBlob) to output[0] AND requires tx.outputs[0].tokenCategory ==
+  // tx.inputs[0].tokenCategory (category continuity), and the next group's first chunk binds its
+  // inBlob to the spent token's commitment. Mutable token perpetuated end-to-end (genesis included)
+  // — the "fixed category + perpetuated mutable commitment" model. Within a group the links are
+  // sibling introspection (no token). Same enforcement as bch-groth16-chunked-covenant-residue.
+  tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier packed with the ' +
     'grouped method. fast-G2 endomorphism subgroup check (ePrint 2022/348, 4 chunks) -> GLV vk_x ' +

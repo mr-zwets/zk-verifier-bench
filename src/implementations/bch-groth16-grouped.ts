@@ -80,6 +80,13 @@ export const bchGroth16Grouped: Implementation = {
   field: 'BN254',
   structure: 'multi-tx',
   proofBinding: 'runtime',
+  // Cross-group hand-off pins the token thread: each group's last chunk requires
+  // tx.outputs[0].nftCommitment == hash256(outBlob) AND tx.outputs[0].tokenCategory ==
+  // tx.inputs[0].tokenCategory (category + capability continuity — the BCH tokenCategory
+  // introspection includes the capability byte), perpetuated mutable end-to-end. Verified
+  // adversarially: the covout chunk rejects a wrong category / capability / commitment / missing
+  // output token. Same enforcement as bch-groth16-grouped-residue and the covenant builds.
+  tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: the full BN254 Groth16 verifier (validate G2 inputs -> vk_x -> ' +
     'batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1), the 54 ' +
