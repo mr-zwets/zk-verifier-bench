@@ -278,5 +278,13 @@
     "steps": 33,
     "transactions": 3,
     "fits": true
+  },
+  {
+    "t": "2026-06-26T06:45:54.485Z",
+    "score": 264043,
+    "id": "bch-groth16-intratx-residue",
+    "steps": 33,
+    "transactions": 1,
+    "fits": true
   }
 ]

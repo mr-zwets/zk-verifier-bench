@@ -18,6 +18,7 @@ import { bchPairingBls12381Singleton } from '../implementations/bch-pairing-bls1
 import { bchPairingChunked } from '../implementations/bch-pairing-chunked.js';
 import { bchPairingIntratx } from '../implementations/bch-pairing-intratx.js';
 import { bchGroth16Intratx } from '../implementations/bch-groth16-intratx.js';
+import { bchGroth16IntratxResidue } from '../implementations/bch-groth16-intratx-residue.js';
 import { bchGroth16Grouped } from '../implementations/bch-groth16-grouped.js';
 import { bchGroth16GroupedResidue } from '../implementations/bch-groth16-grouped-residue.js';
 import { bchGroth16Bls12381Grouped } from '../implementations/bch-groth16-bls12381-grouped.js';
@@ -66,7 +67,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchGroth16ChunkedCovenant, bchGroth16ChunkedCovenantResidue, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchGroth16Bls12381ChunkedCovenant, bchGroth16Bls12381ChunkedCovenantResidue, bchPairingIntratx, bchGroth16Intratx, bchGroth16Grouped, bchGroth16GroupedResidue, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchGroth16Bls12381Grouped, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16Bls12381Singleton, bchGroth16Chunked, bchGroth16ChunkedCovenant, bchGroth16ChunkedCovenantResidue, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchGroth16Bls12381ChunkedCovenant, bchGroth16Bls12381ChunkedCovenantResidue, bchPairingIntratx, bchGroth16Intratx, bchGroth16IntratxResidue, bchGroth16Grouped, bchGroth16GroupedResidue, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchGroth16Bls12381Grouped, bchMultistepDemo];
 
 // Zero-padding accounting: the chunked/intra-tx steps append one big all-zero push to each
 // unlocking purely to buy op-cost budget ((41+len)*800). Its full encoded length (push
