@@ -302,5 +302,21 @@
     "steps": 1,
     "transactions": 1,
     "fits": false
+  },
+  {
+    "t": "2026-06-26T09:01:47.689Z",
+    "score": 261650,
+    "id": "bch-groth16-grouped-residue",
+    "steps": 33,
+    "transactions": 3,
+    "fits": true
+  },
+  {
+    "t": "2026-06-26T09:01:47.689Z",
+    "score": 261536,
+    "id": "bch-groth16-intratx-residue",
+    "steps": 33,
+    "transactions": 1,
+    "fits": true
   }
 ]
