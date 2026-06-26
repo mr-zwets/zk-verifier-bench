@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-26T06:45:54.485Z",
+  "generatedAt": "2026-06-26T08:02:27.489Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -26,10 +26,10 @@
       "bytes": 10000
     },
     "leader": {
-      "id": "bch-groth16-bls12381-singleton",
+      "id": "bch-groth16-singleton",
       "label": "BCH-native full verifier",
-      "curve": "BLS12-381",
-      "bytes": 20183,
+      "curve": "BN254",
+      "bytes": 15954,
       "bchCompatible": false
     },
     "current": {
@@ -328,6 +328,22 @@
       "steps": 33,
       "transactions": 1,
       "fits": true
+    },
+    {
+      "t": "2026-06-26T08:02:27.489Z",
+      "score": 16335,
+      "id": "bch-groth16-bls12381-singleton",
+      "steps": 1,
+      "transactions": 1,
+      "fits": false
+    },
+    {
+      "t": "2026-06-26T08:02:27.489Z",
+      "score": 15954,
+      "id": "bch-groth16-singleton",
+      "steps": 1,
+      "transactions": 1,
+      "fits": false
     }
   ],
   "entries": [
@@ -472,12 +488,12 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 20243,
+      "score": 15954,
       "size": {
-        "scriptBytes": 20156,
+        "scriptBytes": 15867,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 20243
+        "total": 15954
       },
       "padding": {
         "bytes": 0,
@@ -485,10 +501,10 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 995458721,
+          "opCost": 888690550,
           "steps": 1,
-          "heaviestStepOpCost": 995458721,
-          "inputsForHeaviestStep": 124
+          "heaviestStepOpCost": 888690550,
+          "inputsForHeaviestStep": 111
         }
       },
       "bsvSingleton": false,
@@ -499,7 +515,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~124× one input's op-cost budget",
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~111× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -534,12 +550,12 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 20183,
+      "score": 16335,
       "size": {
-        "scriptBytes": 20096,
+        "scriptBytes": 16248,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 20183
+        "total": 16335
       },
       "padding": {
         "bytes": 0,
@@ -547,10 +563,10 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 1306628051,
+          "opCost": 1193462285,
           "steps": 1,
-          "heaviestStepOpCost": 1306628051,
-          "inputsForHeaviestStep": 163
+          "heaviestStepOpCost": 1193462285,
+          "inputsForHeaviestStep": 149
         }
       },
       "bsvSingleton": false,
@@ -561,7 +577,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~163× one input's op-cost budget",
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~149× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -1165,12 +1181,12 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 16733,
+      "score": 12861,
       "size": {
-        "scriptBytes": 16646,
+        "scriptBytes": 12774,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 16733
+        "total": 12861
       },
       "padding": {
         "bytes": 0,
@@ -1178,10 +1194,10 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 892694258,
+          "opCost": 792937279,
           "steps": 1,
-          "heaviestStepOpCost": 892694258,
-          "inputsForHeaviestStep": 112
+          "heaviestStepOpCost": 792937279,
+          "inputsForHeaviestStep": 99
         }
       },
       "bsvSingleton": false,
@@ -1192,7 +1208,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~112× one input's op-cost budget",
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~99× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -1227,12 +1243,12 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 16828,
+      "score": 12980,
       "size": {
-        "scriptBytes": 16741,
+        "scriptBytes": 12893,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 16828
+        "total": 12980
       },
       "padding": {
         "bytes": 0,
@@ -1240,10 +1256,10 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 1209479085,
+          "opCost": 1096313319,
           "steps": 1,
-          "heaviestStepOpCost": 1209479085,
-          "inputsForHeaviestStep": 151
+          "heaviestStepOpCost": 1096313319,
+          "inputsForHeaviestStep": 137
         }
       },
       "bsvSingleton": false,
@@ -1254,7 +1270,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~151× one input's op-cost budget",
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~137× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"

@@ -286,5 +286,21 @@
     "steps": 33,
     "transactions": 1,
     "fits": true
+  },
+  {
+    "t": "2026-06-26T08:02:27.489Z",
+    "score": 16335,
+    "id": "bch-groth16-bls12381-singleton",
+    "steps": 1,
+    "transactions": 1,
+    "fits": false
+  },
+  {
+    "t": "2026-06-26T08:02:27.489Z",
+    "score": 15954,
+    "id": "bch-groth16-singleton",
+    "steps": 1,
+    "transactions": 1,
+    "fits": false
   }
 ]
