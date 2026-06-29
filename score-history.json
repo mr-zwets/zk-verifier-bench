@@ -350,5 +350,13 @@
     "steps": 1,
     "transactions": 1,
     "fits": false
+  },
+  {
+    "t": "2026-06-29T07:29:54.819Z",
+    "score": 9135,
+    "id": "bch-groth16-singleton-opcode-optimized",
+    "steps": 1,
+    "transactions": 1,
+    "fits": false
   }
 ]

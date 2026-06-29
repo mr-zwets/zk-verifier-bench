@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-06-28T12:37:44.696Z",
+  "generatedAt": "2026-06-29T07:29:54.819Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -26,10 +26,10 @@
       "bytes": 10000
     },
     "leader": {
-      "id": "bch-groth16-singleton",
+      "id": "bch-groth16-singleton-opcode-optimized",
       "label": "BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 15000,
+      "bytes": 9135,
       "bchCompatible": false
     },
     "current": {
@@ -392,6 +392,14 @@
       "steps": 1,
       "transactions": 1,
       "fits": false
+    },
+    {
+      "t": "2026-06-29T07:29:54.819Z",
+      "score": 9135,
+      "id": "bch-groth16-singleton-opcode-optimized",
+      "steps": 1,
+      "transactions": 1,
+      "fits": false
     }
   ],
   "entries": [
@@ -588,6 +596,67 @@
         "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract (Groth16Verify, singleton/bn254/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BN254 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bn254. Same curve as scrypt-bn256 -> ~543x smaller bytecode, but ~1.26B op-cost (~157 BCH inputs); ~21.7 KB does NOT fit one input -- motivates the chunked multi-tx verifier."
+    },
+    {
+      "id": "bch-groth16-singleton-opcode-optimized",
+      "name": "BCH Groth16 verifier singleton, opcode-optimized (stack-scheduling recompile)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "score": 9135,
+      "size": {
+        "scriptBytes": 9048,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 9135
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 734478561,
+          "steps": 1,
+          "heaviestStepOpCost": 734478561,
+          "inputsForHeaviestStep": 92
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": false,
+        "blockers": [
+          "op-cost"
+        ],
+        "detail": "heaviest step ~92× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+      },
+      "source": "Same complete Groth16 verifier as bch-groth16-singleton (Groth16Verify, singleton/bn254/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the locking bytecode is a custom decompile->reschedule->recompile of the cashc output. It eliminates cashc's altstack park/restore (its emitReplace reassignment routine, ~2,150 alt-ops in the Miller loop alone), minimizes ROLL/PICK depth addressing, and folds adjacent stack ops into multi-item ops -- 14,641 -> ~9,675 B (~34% smaller, under the 10,000-byte standard cap). Identical semantics + runtime witnesses; each subroutine differential- tested vs the cashc original. Op-cost ~750M unchanged, so still not one-input-standard. Pipeline: singleton/bn254/recompiler/."
     },
     {
       "id": "bch-groth16-singleton-minop",
