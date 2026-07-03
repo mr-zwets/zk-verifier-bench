@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-03T15:19:58.644Z",
+  "generatedAt": "2026-07-03T15:30:35.189Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -1586,22 +1586,22 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
-      "score": 661423,
+      "score": 660776,
       "size": {
-        "scriptBytes": 652135,
+        "scriptBytes": 651488,
         "txOverheadBytes": 9288,
         "transactions": 72,
-        "total": 661423
+        "total": 660776
       },
       "padding": {
-        "bytes": 267461,
-        "fraction": 0.4101313378364909
+        "bytes": 271227,
+        "fraction": 0.4163192568397269
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 516355560,
+          "opCost": 515903905,
           "steps": 72,
-          "heaviestStepOpCost": 7687938,
+          "heaviestStepOpCost": 7665181,
           "inputsForHeaviestStep": 1
         }
       },
