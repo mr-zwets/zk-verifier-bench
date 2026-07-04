@@ -390,5 +390,37 @@
     "steps": 33,
     "transactions": 1,
     "fits": true
+  },
+  {
+    "t": "2026-07-04T12:52:13.869Z",
+    "score": 257810,
+    "id": "bch-groth16-grouped-residue",
+    "steps": 33,
+    "transactions": 3,
+    "fits": true
+  },
+  {
+    "t": "2026-07-04T12:52:13.869Z",
+    "score": 257696,
+    "id": "bch-groth16-intratx-residue",
+    "steps": 33,
+    "transactions": 1,
+    "fits": true
+  },
+  {
+    "t": "2026-07-04T12:52:13.869Z",
+    "score": 14931,
+    "id": "bch-groth16-bls12381-singleton",
+    "steps": 1,
+    "transactions": 1,
+    "fits": false
+  },
+  {
+    "t": "2026-07-04T12:52:13.869Z",
+    "score": 8744,
+    "id": "bch-groth16-singleton-opcode-optimized",
+    "steps": 1,
+    "transactions": 1,
+    "fits": false
   }
 ]
