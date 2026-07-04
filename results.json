@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-04T12:52:13.869Z",
+  "generatedAt": "2026-07-04T13:05:00.000Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -26,10 +26,10 @@
       "bytes": 10000
     },
     "leader": {
-      "id": "bch-groth16-singleton-opcode-optimized",
+      "id": "bch-groth16-bls12381-singleton-genpow",
       "label": "BCH-native full verifier",
-      "curve": "BN254",
-      "bytes": 8744,
+      "curve": "BLS12-381",
+      "bytes": 3715,
       "bchCompatible": false
     },
     "current": {
@@ -464,6 +464,22 @@
       "steps": 1,
       "transactions": 1,
       "fits": false
+    },
+    {
+      "t": "2026-07-04T13:05:00.000Z",
+      "score": 3715,
+      "id": "bch-groth16-bls12381-singleton-genpow",
+      "steps": 1,
+      "transactions": 1,
+      "fits": false
+    },
+    {
+      "t": "2026-07-04T13:05:00.000Z",
+      "score": 4651,
+      "id": "bch-groth16-singleton-genpow",
+      "steps": 1,
+      "transactions": 1,
+      "fits": false
     }
   ],
   "entries": [
@@ -723,6 +739,67 @@
       "source": "Same complete Groth16 verifier as bch-groth16-singleton (Groth16Verify, singleton/bn254/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the locking bytecode is a custom decompile->reschedule->recompile of the cashc output. It eliminates cashc's altstack park/restore (its emitReplace reassignment routine, ~2,150 alt-ops in the Miller loop alone), minimizes ROLL/PICK depth addressing, and folds adjacent stack ops into multi-item ops -- 14,641 -> ~9,675 B (~34% smaller, under the 10,000-byte standard cap). Identical semantics + runtime witnesses; each subroutine differential- tested vs the cashc original. Op-cost ~750M unchanged, so still not one-input-standard. Pipeline: singleton/bn254/recompiler/."
     },
     {
+      "id": "bch-groth16-singleton-genpow",
+      "name": "BCH Groth16 verifier singleton, BN254 genpow (full final-exp f^E, full EIP-197 incl. G2 subgroup, source-reproducible 4,292 B)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "score": 4651,
+      "size": {
+        "scriptBytes": 4564,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 4651
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 5206615819,
+          "steps": 1,
+          "heaviestStepOpCost": 5206615819,
+          "inputsForHeaviestStep": 649
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": false,
+        "blockers": [
+          "op-cost"
+        ],
+        "detail": "heaviest step ~649× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+      },
+      "source": "BCH-native CashScript: the SMALLEST source-REPRODUCIBLE complete Groth16 verifier on BN254 (genpow-src/groth16.cash, genpow). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, forms the RAW product of four optimal-ate Miller loops e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta), and require()s a textbook full final exponentiation finalExpPow(product) == Fp12.ONE (f^E, E = (p^12-1)/r derived in-source via the Lean-licensed ederive-deriv.mjs). Byte win from a Karatsuba->schoolbook lever, Lean-proven equivalent (sqr === mul-on-the-diagonal). FULL EIP-197 soundness: explicit on-curve checks on A, C (G1) and B (G2) AND the G2 SUBGROUP membership check [6x^2]B == psi(B) -- so the verifier is NON-MALLEABLE, a STRICTLY STRONGER posture than the BLS singleton and than subgroup-skipping verifiers. Sound (vk_x recomputed on-chain; a swapped proof or tampered input fails f^E==1). Locking 4,292 B (sha256 61c451d0...8494c83) vs the 8,756-score mr-zwets opcode-optimized singleton and 21,661 B (baseline cashc). Byte-exact reproducible from source: cashc -> 11,964 baseline; replay.mjs + nodeorders.json -> optimized_search.hex; deterministic cse/inline/renumber tail -> 4,292; gate.mjs 3-check --lineage OVERALL PASS. Like every singleton it does NOT fit one standard input, so it is op-cost-waived / non-runnable-as-one-input and >201 B non-standard -- the win is purely byte size. Verified accept-valid 4/4, reject-invalid 4/4, crown-vs-baseline differential 4/4 on the loosened BCH-2026 VM."
+    },
+    {
       "id": "bch-groth16-singleton-minop",
       "name": "BCH Groth16 verifier singleton — op-optimized (lazy tower + residue + fast-G2 + GLV)",
       "category": "full",
@@ -845,6 +922,67 @@
         "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on BLS12-381 -- the SAME curve as nchain (Groth16Verify, singleton/bls12-381/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) (M-twist Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bls12-381. ~1.48B op-cost (~185 BCH inputs); ~24 KB does NOT fit one input -- the honest baseline vs the nchain single-tx reference."
+    },
+    {
+      "id": "bch-groth16-bls12381-singleton-genpow",
+      "name": "BCH Groth16 verifier singleton, BLS12-381 genpow (full final-exp f^E, witness-free, 3,425 B, source-reproducible)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "score": 3715,
+      "size": {
+        "scriptBytes": 3630,
+        "txOverheadBytes": 85,
+        "transactions": 1,
+        "total": 3715
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 20713603989,
+          "steps": 1,
+          "heaviestStepOpCost": 20713603989,
+          "inputsForHeaviestStep": 2579
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": false,
+        "blockers": [
+          "op-cost"
+        ],
+        "detail": "heaviest step ~2579× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+      },
+      "source": "BCH-native CashScript: the SMALLEST known complete Groth16 verifier on BLS12-381 (groth16_residue.cash, genpow). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, forms the RAW product of four optimal-ate Miller loops e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta), and require()s a textbook full final exponentiation finalExpPow(product) == Fp12.ONE (f^E, E = (p^12-1)/r, the Lean-licensed E-derivation spliced in via bls_ederive_E.mjs). WITNESS-FREE: the unlocking carries only the proof points (A,B,C compressed) + the two public inputs -- no residue/cofactor witness. Sound (vk_x recomputed on-chain; a swapped proof or tampered public input fails f^E==1). Locking 3,425 B, harness score 3,715 vs the 14,952 of bch-groth16-bls12381-singleton on the SAME curve in THIS harness (same-harness -75.2%); byte-exact reproducible from source (reproduce.sh). The genpow ladder trades op-cost up for bytes down: like every singleton it does NOT fit one standard input, so it is op-waived / non-runnable-as-one-input -- the win is purely byte size. Verified vs @noble/curves bls12-381 (millerProduct^E == Fp12.ONE asserted for every valid vector). No BLS G1/G2 subgroup check (inherited singleton posture, same as the competitor): off-subgroup A/C are accepted but provably harmless (torsion pairs to 1, statement unchanged) = proof malleability only, no false-statement forgery."
     },
     {
       "id": "bch-groth16-chunked",
