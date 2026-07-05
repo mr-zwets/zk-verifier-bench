@@ -464,11 +464,29 @@ const padR = (s: string, w: number) => s.padEnd(w);
 const padL = (s: string, w: number) => s.padStart(w);
 
 const main = async () => {
-  const includeDemos = process.argv.includes('--demos');
-  const registry = includeDemos ? REGISTRY : REGISTRY.filter((i) => i.demo !== true);
+  const cliArgs = process.argv.slice(2);
+  const includeDemos = cliArgs.includes('--demos');
+  // Positional args are case-insensitive substring filters on the implementation id,
+  // OR'd together: `pnpm benchmark genpow`, `pnpm benchmark singleton chunked`.
+  // A filter selects from the FULL registry, so explicitly matching a demo id shows
+  // it without --demos; with no filter, demos stay hidden unless --demos is given.
+  const filters = cliArgs.filter((a) => !a.startsWith('--')).map((a) => a.toLowerCase());
+  const registry =
+    filters.length > 0
+      ? REGISTRY.filter((i) => filters.some((f) => i.id.toLowerCase().includes(f)))
+      : includeDemos
+        ? REGISTRY
+        : REGISTRY.filter((i) => i.demo !== true);
+  if (filters.length > 0 && registry.length === 0) {
+    console.error(`no implementation id matches: ${filters.join(', ')}\navailable ids:`);
+    for (const i of REGISTRY) console.error(`  ${i.id}`);
+    process.exit(1);
+  }
   console.log(
     `benchmarking ${registry.length} implementation(s) on the BCH 2026 VM (limits loosened)` +
-    (includeDemos ? '' : '  [demos hidden; --demos to show]') + '\n',
+    (filters.length > 0
+      ? `  [filtered: ${filters.join(', ')}]`
+      : includeDemos ? '' : '  [demos hidden; --demos to show]') + '\n',
   );
   const results: BenchmarkResult[] = [];
   for (const impl of registry) {

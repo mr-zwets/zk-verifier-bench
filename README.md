@@ -64,7 +64,7 @@ an implementation.
 
 | script | what |
 |--------|------|
-| `pnpm benchmark` | run all registered implementations and print the leaderboards |
+| `pnpm benchmark [id-filter ...]` | run registered implementations and print the leaderboards; positional args are substring filters on the id (e.g. `pnpm benchmark genpow`) |
 | `pnpm checkpoints` | compute/validate the BN254 golden checkpoints (vk_x + Miller boundary) |
 | `pnpm fetch[:nchain\|:scrypt-bn256]` | download raw tx hex artifacts from WhatsOnChain |
 | `pnpm nchain:extract` | disassemble the nChain verifier to an opcode listing |

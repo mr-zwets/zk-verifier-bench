@@ -24,7 +24,11 @@ limits, so a single-tx Groth16 verifier like nChain reports **BCH compatible: no
 (its 39,876-byte unlocking alone exceeds the 10,000-byte script-size limit),
 while the multi-step demo reports **yes**.
 
-Run it: `pnpm benchmark`.
+Run it: `pnpm benchmark`. To run a subset, pass one or more substring filters on
+the implementation id (`pnpm benchmark genpow`, `pnpm benchmark singleton chunked`);
+`--demos` includes the demo entries, and a filter that explicitly matches a demo id
+shows it without `--demos`. The JSON exporter (`pnpm benchmark:json`) intentionally
+takes no filter: `results.json` and `score-history.json` are complete artifacts.
 
 ## The contract
 
