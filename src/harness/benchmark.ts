@@ -443,10 +443,24 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
   };
 };
 
+/** Implementations skipped in full runs because they are too slow/expensive to evaluate
+ * (for now: the genpow verifiers). SKIP_IMPLS is a comma-separated, case-insensitive list
+ * of id substrings; set SKIP_IMPLS='' to run everything. Explicit positive CLI filters
+ * (`pnpm benchmark genpow`) bypass the skip. */
+const skipFilters = (process.env.SKIP_IMPLS ?? 'genpow')
+  .split(',')
+  .map((s) => s.trim().toLowerCase())
+  .filter((s) => s.length > 0);
+export const isSkipped = (id: string): boolean => skipFilters.some((f) => id.toLowerCase().includes(f));
+
 /** Run every registered implementation and return its BenchmarkResult (no printing).
- * Shared by the CLI table and the JSON exporter. Demos are excluded by default. */
+ * Shared by the CLI table and the JSON exporter. Demos are excluded by default;
+ * SKIP_IMPLS-matched implementations (default: genpow) are excluded too. */
 export const computeResults = async (includeDemos = false): Promise<BenchmarkResult[]> => {
-  const registry = includeDemos ? REGISTRY : REGISTRY.filter((i) => i.demo !== true);
+  const registry = (includeDemos ? REGISTRY : REGISTRY.filter((i) => i.demo !== true))
+    .filter((i) => !isSkipped(i.id));
+  const skipped = REGISTRY.filter((i) => isSkipped(i.id));
+  if (skipped.length > 0) console.error(`skipping (SKIP_IMPLS): ${skipped.map((i) => i.id).join(', ')}`);
   const results: BenchmarkResult[] = [];
   for (const impl of registry) {
     try {
@@ -471,12 +485,13 @@ const main = async () => {
   // A filter selects from the FULL registry, so explicitly matching a demo id shows
   // it without --demos; with no filter, demos stay hidden unless --demos is given.
   const filters = cliArgs.filter((a) => !a.startsWith('--')).map((a) => a.toLowerCase());
+  // explicit positive filters bypass SKIP_IMPLS (so `pnpm benchmark genpow` still works)
   const registry =
     filters.length > 0
       ? REGISTRY.filter((i) => filters.some((f) => i.id.toLowerCase().includes(f)))
-      : includeDemos
+      : (includeDemos
         ? REGISTRY
-        : REGISTRY.filter((i) => i.demo !== true);
+        : REGISTRY.filter((i) => i.demo !== true)).filter((i) => !isSkipped(i.id));
   if (filters.length > 0 && registry.length === 0) {
     console.error(`no implementation id matches: ${filters.join(', ')}\navailable ids:`);
     for (const i of REGISTRY) console.error(`  ${i.id}`);

@@ -12,7 +12,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 import type { BenchmarkResult } from './types.js';
-import { computeResults } from './benchmark.js';
+import { computeResults, isSkipped } from './benchmark.js';
 import { STANDARD_UNLOCKING_CAP } from './vm.js';
 
 const SCHEMA_VERSION = 1;
@@ -235,6 +235,20 @@ const main = async () => {
   // include demos so the artifact is complete; the site filters by category.
   const results = await computeResults(true);
   const entries = results.map(entryOf).filter((e) => !SITE_EXCLUDE.has(e.id));
+
+  // SKIP_IMPLS-matched implementations (e.g. the genpow verifiers, too slow to re-run
+  // every time) are not re-evaluated; carry their last-known entries forward from the
+  // existing artifact so the entry list and everything derived from it (frontier leader,
+  // score history) stays complete rather than silently dropping them.
+  if (existsSync(outfile)) {
+    try {
+      const previous = JSON.parse(readFileSync(outfile, 'utf8')) as { entries?: Entry[] };
+      const have = new Set(entries.map((e) => e.id));
+      for (const entry of previous.entries ?? []) {
+        if (!have.has(entry.id) && isSkipped(entry.id)) entries.push(entry);
+      }
+    } catch { /* unreadable previous artifact: proceed with fresh entries only */ }
+  }
 
   const byId = (id: string) => entries.find((e) => e.id === id);
   const full = entries.filter((e) => e.category === 'full');
