@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-06T08:40:02.056Z",
+  "generatedAt": "2026-07-06T11:31:24.019Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -2469,6 +2469,69 @@
         "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
       },
       "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier (g2check EIP-197 input validation -> vk_x -> batched 4-pair Miller -> final exponentiation -> assert verdict==1), the ~87 chunks packed into ~9 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-bls12381-intratx and bch-groth16-bls12381-chunked: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a CashToken NFT commitment — a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds its inBlob via tx.inputs[0].nftCommitment == hash256(inBlob). The token thread chains the groups in order. Unlike the ~87-tx covenant chain (far past the default 50-deep mempool ancestor limit) and the single ~0.7 MB intra-tx bundle (non-standard, mine-direct), every grouped tx is under the 100,000-byte standard size and the run is ~9 deep — relayable under default standard policy. 48-byte limbs, 4-R Miller state, easy-part inverses as uncommitted witnesses. Same chunk math as bch-groth16-bls12381-chunked / -intratx; one fixed set of lockings verifies any proof for the VK. Deployed P2SH32."
+    },
+    {
+      "id": "bch-groth16-bls12381-grouped-residue",
+      "name": "BCH BLS12-381 Groth16 verifier, grouped + residue (47 chunks in ~5 standard <100KB transactions: GLV vk_x, fused Miller, witnessed-residue tail; intra-tx forward-checks within each tx, CashToken hand-off across them)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "multi-tx",
+      "proofSystem": "Groth16",
+      "score": 370686,
+      "size": {
+        "scriptBytes": 368301,
+        "txOverheadBytes": 2385,
+        "transactions": 5,
+        "total": 370686
+      },
+      "padding": {
+        "bytes": 113534,
+        "fraction": 0.3082641643655597
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 279578026,
+          "steps": 47,
+          "heaviestStepOpCost": 7688817,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": {
+        "threaded": true,
+        "enforced": true,
+        "detail": "covenant pins category + capability and perpetuates the commitment"
+      },
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+      },
+      "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier with the witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381), packed grouped. Chunk graph: g2check EIP-197 G2 subgroup validation -> GLV 4-scalar 128-bit vk_x Straus (baked subset-sum table) -> c^-|x|-FUSED prepared-VK batched Miller (e(alpha,beta) baked as a constant, (vk_x,gamma)/(C,delta) line coeffs baked, only e(-A,B) runs on-chain G2 arithmetic; c^-|x| folded into the shared f) -> witnessed-residue tail (the 23-chunk Hayashida-Scott hard part collapses to a ((w^|x|)*w)^9 mu_(27A) witness-subgroup walk + the fF*w == frob(c,1) verdict, lambda = p + |x|). The ~47 chunks are packed into ~5 STANDARD (<100,000 B) transactions: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a mutable CashToken NFT commitment (a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds tx.inputs[0].nftCommitment == hash256(inBlob)). Unlike the ~49-tx covenant-residue chain (against the default 50-deep mempool ancestor limit), every grouped tx is under the 100,000-byte standard size and the run is ~5 deep -- relayable under default standard policy. 48-byte limbs; c,cInv thread through the fused Miller as constant witness; w is an uncommitted tail witness. One fixed set of lockings verifies any proof for the VK. Deployed P2SH32."
     },
     {
       "id": "bch-multistep-demo",
