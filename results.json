@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-06T11:31:24.019Z",
+  "generatedAt": "2026-07-06T18:16:17.190Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -495,6 +495,14 @@
       "id": "bch-groth16-intratx-residue",
       "steps": 33,
       "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-06T18:16:17.190Z",
+      "score": 339297,
+      "id": "bch-groth16-bls12381-grouped-residue",
+      "steps": 42,
+      "transactions": 5,
       "fits": true
     }
   ],
@@ -2479,22 +2487,22 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 370686,
+      "score": 339297,
       "size": {
-        "scriptBytes": 368301,
-        "txOverheadBytes": 2385,
+        "scriptBytes": 337127,
+        "txOverheadBytes": 2170,
         "transactions": 5,
-        "total": 370686
+        "total": 339297
       },
       "padding": {
-        "bytes": 113534,
-        "fraction": 0.3082641643655597
+        "bytes": 94431,
+        "fraction": 0.28010512358844
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 279578026,
-          "steps": 47,
-          "heaviestStepOpCost": 7688817,
+          "opCost": 257478234,
+          "steps": 42,
+          "heaviestStepOpCost": 7484752,
           "inputsForHeaviestStep": 1
         }
       },

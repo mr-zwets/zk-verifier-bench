@@ -454,5 +454,13 @@
     "steps": 33,
     "transactions": 1,
     "fits": true
+  },
+  {
+    "t": "2026-07-06T18:16:17.190Z",
+    "score": 339297,
+    "id": "bch-groth16-bls12381-grouped-residue",
+    "steps": 42,
+    "transactions": 5,
+    "fits": true
   }
 ]
