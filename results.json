@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-06T18:30:29.176Z",
+  "generatedAt": "2026-07-07T07:02:13.559Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -901,12 +901,12 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 70438,
+      "score": 67368,
       "size": {
-        "scriptBytes": 70351,
+        "scriptBytes": 67281,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 70438
+        "total": 67368
       },
       "padding": {
         "bytes": 0,
@@ -914,10 +914,10 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 317641365,
+          "opCost": 256767041,
           "steps": 1,
-          "heaviestStepOpCost": 317641365,
-          "inputsForHeaviestStep": 40
+          "heaviestStepOpCost": 256767041,
+          "inputsForHeaviestStep": 32
         }
       },
       "bsvSingleton": false,
@@ -928,7 +928,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~40× one input's op-cost budget",
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~32× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
