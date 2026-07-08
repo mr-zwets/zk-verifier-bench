@@ -56,10 +56,11 @@ export const bchGroth16Bls12381Singleton: Implementation = {
     'Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. ' +
     'VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated ' +
     'in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves ' +
-    'bls12-381. Locking is the size-objective rescheduled compile with repeated ' +
-    'instruction sequences outlined into OP_DEFINE bodies (~6.6 KB). ~1.05B ' +
-    'op-cost (~132 BCH inputs) does NOT fit one input -- the honest baseline vs ' +
-    'the nchain single-tx reference.',
+    'bls12-381. Locking is plain compiler output (size objective + ' +
+    'rescheduleStacks, no post-passes; ~9.2 KB) -- the honest baseline vs the ' +
+    'nchain single-tx reference, and the other end of the bytesize-vs-opcost ' +
+    'tradeoff from the -opcode-optimized entry. ~1.04B op-cost (~129 BCH ' +
+    'inputs) does NOT fit one input.',
   load: async () => {
     const valid: Step[] = [
       {

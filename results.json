@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-08T20:02:34.964Z",
+  "generatedAt": "2026-07-08T20:24:14.122Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -840,12 +840,12 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 7091,
+      "score": 9703,
       "size": {
-        "scriptBytes": 7004,
+        "scriptBytes": 9616,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 7091
+        "total": 9703
       },
       "padding": {
         "bytes": 0,
@@ -853,9 +853,70 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 1053950332,
+          "opCost": 1035345670,
           "steps": 1,
-          "heaviestStepOpCost": 1053950332,
+          "heaviestStepOpCost": 1035345670,
+          "inputsForHeaviestStep": 129
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": false,
+        "blockers": [
+          "op-cost"
+        ],
+        "detail": "heaviest step ~129× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+      },
+      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on BLS12-381 -- the SAME curve as nchain (Groth16Verify, singleton/bls12-381/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) (M-twist Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bls12-381. Locking is plain compiler output (size objective + rescheduleStacks, no post-passes; ~9.2 KB) -- the honest baseline vs the nchain single-tx reference, and the other end of the bytesize-vs-opcost tradeoff from the -opcode-optimized entry. ~1.04B op-cost (~129 BCH inputs) does NOT fit one input."
+    },
+    {
+      "id": "bch-groth16-bls12381-singleton-opcode-optimized",
+      "name": "BCH Groth16 verifier singleton, BLS12-381, opcode-optimized (recompile + outlining)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "score": 6912,
+      "size": {
+        "scriptBytes": 6825,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 6912
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 1058137922,
+          "steps": 1,
+          "heaviestStepOpCost": 1058137922,
           "inputsForHeaviestStep": 132
         }
       },
@@ -890,7 +951,7 @@
         "secure": true,
         "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
       },
-      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on BLS12-381 -- the SAME curve as nchain (Groth16Verify, singleton/bls12-381/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) (M-twist Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bls12-381. Locking is the size-objective rescheduled compile with repeated instruction sequences outlined into OP_DEFINE bodies (~6.6 KB). ~1.05B op-cost (~132 BCH inputs) does NOT fit one input -- the honest baseline vs the nchain single-tx reference."
+      "source": "Same complete BLS12-381 Groth16 verifier as bch-groth16-bls12381-singleton (Groth16Verify, singleton/bls12-381/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the locking bytecode is byte-optimized: the smaller of a custom decompile->reschedule->recompile of the cashc output and the rescheduled compile, then repeated instruction sequences outlined into OP_DEFINE bodies. Identical semantics + runtime witnesses; each subroutine differential-tested and every outline rewrite verified accept/reject. The plain entry keeps the other end of the bytesize-vs-opcost tradeoff. Pipeline: singleton/bls12-381/build_vectors_optimized.mjs + singleton/bn254/recompiler/."
     },
     {
       "id": "bch-groth16-bls12381-singleton-minop",
