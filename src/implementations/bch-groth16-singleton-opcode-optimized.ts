@@ -3,10 +3,11 @@
 // but with the locking bytecode opcode-optimized: a custom decompile -> reschedule ->
 // recompile pass over the cashc output that eliminates cashc's altstack park/restore in
 // loops/branches, minimizes ROLL/PICK addressing, and folds adjacent stack ops into
-// multi-item ops. Semantics are identical (same runtime witnesses, same verdict); only
-// the stack scheduling changes -> ~34% smaller bytecode (14,641 -> ~9,675 B), which also
-// drops under BCH's 10,000-byte standard script-size cap. Op-cost is essentially unchanged
-// (~750M), so it still does not fit one input -- the win is purely byte size.
+// multi-item ops, followed by an auto-outlining pass that factors repeated instruction
+// sequences into OP_DEFINE bodies. Semantics are identical (same runtime witnesses, same
+// verdict) -> 14,131 -> 6,314 B (-55%), far under BCH's 10,000-byte standard script-size
+// cap. Op-cost grows slightly from the outline call overhead (~750M -> ~796M), so it
+// still does not fit one input -- the win is purely byte size.
 //
 // Every rewritten subroutine is differential-tested against the cashc original on the
 // loosened BCH-2026 VM, and the whole contract is verified accept-valid / reject-tampered.
@@ -43,12 +44,14 @@ export const bchGroth16SingletonOpcodeOptimized: Implementation = {
     'Same complete Groth16 verifier as bch-groth16-singleton (Groth16Verify, ' +
     'singleton/bn254/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, then ' +
     'e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the locking bytecode is a ' +
-    'custom decompile->reschedule->recompile of the cashc output. It eliminates cashc\'s ' +
-    'altstack park/restore (its emitReplace reassignment routine, ~2,150 alt-ops in the ' +
-    'Miller loop alone), minimizes ROLL/PICK depth addressing, and folds adjacent stack ' +
-    'ops into multi-item ops -- 14,641 -> ~9,675 B (~34% smaller, under the 10,000-byte ' +
-    'standard cap). Identical semantics + runtime witnesses; each subroutine differential- ' +
-    'tested vs the cashc original. Op-cost ~750M unchanged, so still not one-input-standard. ' +
+    'custom decompile->reschedule->recompile of the cashc output plus an auto-outlining ' +
+    'pass. It eliminates cashc\'s altstack park/restore (its emitReplace reassignment ' +
+    'routine, ~2,150 alt-ops in the Miller loop alone), minimizes ROLL/PICK depth ' +
+    'addressing, folds adjacent stack ops into multi-item ops, and outlines repeated ' +
+    'instruction sequences into OP_DEFINE bodies -- 14,131 -> 6,314 B (-55%, far under ' +
+    'the 10,000-byte standard cap). Identical semantics + runtime witnesses; each ' +
+    'subroutine differential-tested vs the cashc original and every outline rewrite ' +
+    'verified accept/reject. Op-cost ~796M, so still not one-input-standard. ' +
     'Pipeline: singleton/bn254/recompiler/.',
   load: async () => {
     const valid: Step[] = [
