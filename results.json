@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-09T14:27:11.905Z",
+  "generatedAt": "2026-07-09T14:43:56.219Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -692,6 +692,13 @@
           "steps": 1,
           "heaviestStepOpCost": 746905617,
           "inputsForHeaviestStep": 93
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 803681564,
+          "steps": 1,
+          "heaviestStepOpCost": 803681564,
+          "inputsForHeaviestStep": 101
         }
       },
       "bsvSingleton": false,
@@ -754,6 +761,13 @@
           "steps": 1,
           "heaviestStepOpCost": 795881022,
           "inputsForHeaviestStep": 100
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 853679463,
+          "steps": 1,
+          "heaviestStepOpCost": 853679463,
+          "inputsForHeaviestStep": 107
         }
       },
       "bsvSingleton": false,
@@ -1010,6 +1024,13 @@
           "steps": 1,
           "heaviestStepOpCost": 256767041,
           "inputsForHeaviestStep": 32
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 285866084,
+          "steps": 1,
+          "heaviestStepOpCost": 285866084,
+          "inputsForHeaviestStep": 36
         }
       },
       "bsvSingleton": false,

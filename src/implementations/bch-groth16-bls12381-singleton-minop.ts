@@ -32,6 +32,7 @@ const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-minop-vect
 
 const mp = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-minop-multiproof-vectors.json', 'utf8')) as {
   proofs: { publicInputs: string[]; unlocking: string; invalidUnlocking: string; committed: boolean }[];
+  worstCaseProof?: { unlocking: string };
 };
 
 export const bchGroth16Bls12381SingletonMinOp: Implementation = {
@@ -68,6 +69,11 @@ export const bchGroth16Bls12381SingletonMinOp: Implementation = {
     const extraValidProofs: Step[][] = mp.proofs
       .filter((p) => !p.committed)
       .map((p) => [{ ...valid[0]!, unlockingBytecode: hexToBin(p.unlocking) }]);
-    return { valid, invalid, extraValidProofs };
+    // worst-case run: dense (near-r) proof through the SAME locking; GLV vk_x is proof-dependent, so
+    // this is the apples-to-apples op-cost vs the chunked BLS entries.
+    const worstCaseProof: Step[] | undefined = mp.worstCaseProof
+      ? [{ ...valid[0]!, unlockingBytecode: hexToBin(mp.worstCaseProof.unlocking) }]
+      : undefined;
+    return { valid, invalid, extraValidProofs, worstCaseProof };
   },
 };

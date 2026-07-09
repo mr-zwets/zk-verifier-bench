@@ -31,6 +31,7 @@ const v = JSON.parse(readFileSync('src/bch/groth16-singleton-opcode-optimized-ve
 const mp = JSON.parse(readFileSync('src/bch/groth16-singleton-opcode-optimized-multiproof-vectors.json', 'utf8')) as {
   lockingOK: string;
   proofs: { publicInputs: string[]; unlocking: string; invalidUnlocking: string; committed: boolean }[];
+  worstCaseProof?: { unlocking: string };
 };
 
 export const bchGroth16SingletonOpcodeOptimized: Implementation = {
@@ -68,7 +69,12 @@ export const bchGroth16SingletonOpcodeOptimized: Implementation = {
     const extraValidProofs: Step[][] = mp.proofs
       .filter((p) => !p.committed)
       .map((p) => [{ ...valid[0]!, unlockingBytecode: hexToBin(p.unlocking) }]);
+    // worst-case run: dense (near-r) proof through the SAME locking; vk_x is proof-dependent (see
+    // bch-groth16-singleton). Keeps the op-cost column apples-to-apples with the chunked entries.
+    const worstCaseProof: Step[] | undefined = mp.worstCaseProof
+      ? [{ ...valid[0]!, unlockingBytecode: hexToBin(mp.worstCaseProof.unlocking) }]
+      : undefined;
 
-    return { valid, invalid, extraValidProofs };
+    return { valid, invalid, extraValidProofs, worstCaseProof };
   },
 };

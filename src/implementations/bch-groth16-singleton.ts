@@ -42,6 +42,7 @@ const v = JSON.parse(readFileSync('src/bch/groth16-singleton-vectors.json', 'utf
 const mp = JSON.parse(readFileSync('src/bch/groth16-singleton-multiproof-vectors.json', 'utf8')) as {
   lockingOK: string;
   proofs: { publicInputs: string[]; unlocking: string; invalidUnlocking: string; committed: boolean }[];
+  worstCaseProof?: { unlocking: string };
 };
 
 export const bchGroth16Singleton: Implementation = {
@@ -80,10 +81,18 @@ export const bchGroth16Singleton: Implementation = {
       .filter((p) => !p.committed)
       .map((p) => [{ ...valid[0]!, unlockingBytecode: hexToBin(p.unlocking) }]);
 
+    // worst-case run: the dense (near-r) proof from the multiproof fixture, through the SAME
+    // locking. vk_x is a variable-scalar MSM, so op-cost is proof-DEPENDENT (dense inputs pay for
+    // an add nearly every iteration). Without this the entry was measured on the committed proof
+    // only, understating its op-cost by ~57M versus the same-proof number a chunked entry reports.
+    const worstCaseProof: Step[] | undefined = mp.worstCaseProof
+      ? [{ ...valid[0]!, unlockingBytecode: hexToBin(mp.worstCaseProof.unlocking) }]
+      : undefined;
+
     // NOTE: input validation for this SINGLE-TX verifier is not benchmarked. groth16.cash
     // does enforce the on-curve + [6x^2]B==psi(B) subgroup checks, but a swapped point is
     // also rejected by the verification equation, so a naive adversarial-input run can't
     // DEMONSTRATE the checks (see harness/adversarial.ts). It shows NOT DEMONSTRATED.
-    return { valid, invalid, extraValidProofs };
+    return { valid, invalid, extraValidProofs, worstCaseProof };
   },
 };
