@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-09T14:43:56.219Z",
+  "generatedAt": "2026-07-09T15:04:39.098Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -564,6 +564,7 @@
           "inputsForHeaviestStep": 64
         }
       },
+      "opCostBudget": 31933600,
       "bsvSingleton": true,
       "bsvOpReturn": false,
       "bch": {
@@ -631,6 +632,7 @@
           "inputsForHeaviestStep": 125
         }
       },
+      "opCostBudget": 253600,
       "bsvSingleton": true,
       "bsvOpReturn": true,
       "bch": {
@@ -701,6 +703,7 @@
           "inputsForHeaviestStep": 101
         }
       },
+      "opCostBudget": 250400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -770,6 +773,7 @@
           "inputsForHeaviestStep": 107
         }
       },
+      "opCostBudget": 250400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -839,6 +843,7 @@
           "inputsForHeaviestStep": 25
         }
       },
+      "opCostBudget": 1032000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -902,6 +907,7 @@
           "inputsForHeaviestStep": 129
         }
       },
+      "opCostBudget": 350400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -964,6 +970,7 @@
           "inputsForHeaviestStep": 132
         }
       },
+      "opCostBudget": 350400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1033,6 +1040,7 @@
           "inputsForHeaviestStep": 36
         }
       },
+      "opCostBudget": 1384000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1103,6 +1111,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 300099200,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1167,6 +1176,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 311242400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1231,6 +1241,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 219858400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1295,6 +1306,7 @@
           "inputsForHeaviestStep": 8
         }
       },
+      "opCostBudget": 8032800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1357,6 +1369,7 @@
           "inputsForHeaviestStep": 11
         }
       },
+      "opCostBudget": 8032800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1419,6 +1432,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 128524800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1479,6 +1493,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 9938400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1546,6 +1561,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 10054400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1610,6 +1626,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 8961600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1674,6 +1691,7 @@
           "inputsForHeaviestStep": 83
         }
       },
+      "opCostBudget": 666400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1736,6 +1754,7 @@
           "inputsForHeaviestStep": 119
         }
       },
+      "opCostBudget": 973600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1805,6 +1824,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 171688000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1869,6 +1889,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 512222400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1933,6 +1954,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 549264000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1997,6 +2019,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 429725600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2061,6 +2084,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 287366400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2132,6 +2156,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 171616800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2199,6 +2224,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 299013600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2266,6 +2292,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 190784000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2333,6 +2360,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 192600000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2400,6 +2428,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 298934400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2471,6 +2500,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 190734400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2535,6 +2565,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 511329600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2595,6 +2626,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 527656800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2655,6 +2687,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 269988800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2715,6 +2748,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 549847200,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2779,6 +2813,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 269903200,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2843,6 +2878,7 @@
           "inputsForHeaviestStep": 1
         }
       },
+      "opCostBudget": 108000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {

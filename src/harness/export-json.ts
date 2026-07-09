@@ -13,7 +13,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 import type { BenchmarkResult } from './types.js';
 import { computeResults, isSkipped } from './benchmark.js';
-import { STANDARD_UNLOCKING_CAP, SPEC_SCRIPT_SIZE_CAP } from './vm.js';
+import { STANDARD_UNLOCKING_CAP, SPEC_SCRIPT_SIZE_CAP, realOpCostBudget, specOpCostBudget } from './vm.js';
 
 const SCHEMA_VERSION = 1;
 const SIZE_CAP = STANDARD_UNLOCKING_CAP; // 10,000 B per locking/unlocking script
@@ -174,6 +174,16 @@ const entryOf = (r: BenchmarkResult) => ({
         }
       : {}),
   },
+  // Total op-cost budget these deployed contracts actually hold: the sum over inputs of
+  // (densityControlBase + this input's unlocking bytecode length) * 800 — base 41 on the
+  // current BCH_2026 VM, 10,000 on bch-spec. Uses each input's REAL unlocking length (redeem
+  // script + unlocking script, incl. any op-cost padding; not the script-size cap), so it is
+  // the true ceiling the total op-cost is measured against. Proof-independent, so it sits
+  // outside `benchmarks`.
+  opCostBudget: r.steps.reduce(
+    (a, s) => a + (r.impl.vm === 'bch-spec' ? specOpCostBudget : realOpCostBudget)(s.unlockingBytes),
+    0,
+  ),
   // BSV prior art: a single huge transaction that is correct but does not fit BCH.
   // Only the seeded BSV verifiers carry this framing (not BCH-native sub-steps).
   bsvSingleton: isBsvSeed(r) && r.impl.structure === 'single-tx' && r.validPassed && !r.bchCompatible,
