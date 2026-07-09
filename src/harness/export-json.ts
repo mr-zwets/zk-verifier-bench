@@ -13,7 +13,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 import type { BenchmarkResult } from './types.js';
 import { computeResults, isSkipped } from './benchmark.js';
-import { STANDARD_UNLOCKING_CAP } from './vm.js';
+import { STANDARD_UNLOCKING_CAP, SPEC_SCRIPT_SIZE_CAP } from './vm.js';
 
 const SCHEMA_VERSION = 1;
 const SIZE_CAP = STANDARD_UNLOCKING_CAP; // 10,000 B per locking/unlocking script
@@ -63,7 +63,10 @@ const recordHistory = (
   return series;
 };
 
-type Category = 'full' | 'partial' | 'demo';
+// 'spec' = a full verifier that targets the PROPOSED bch-spec upgrade (100 kB scripts), NOT
+// current BCH. It gets its own category so it is not ranked on the current-BCH 'full' leaderboard
+// / frontier (a spec entry plays by different consensus limits — an apples-to-oranges comparison).
+type Category = 'full' | 'spec' | 'partial' | 'demo';
 
 // Entries the harness still benchmarks (e.g. for the normalized vs-sCrypt op-cost
 // comparison) but the website should not list. bch-vkx-scalarmult is a single
@@ -73,6 +76,7 @@ const SITE_EXCLUDE = new Set(['bch-vkx-scalarmult']);
 
 const categoryOf = (r: BenchmarkResult): Category => {
   if (r.impl.demo === true) return 'demo';
+  if (r.impl.vm === 'bch-spec') return 'spec'; // proposed-upgrade verifier, its own leaderboard
   return r.impl.proofSystem === 'Groth16' ? 'full' : 'partial';
 };
 
@@ -81,14 +85,18 @@ const categoryOf = (r: BenchmarkResult): Category => {
 // step's locking OR unlocking exceeds the 10,000-byte cap. op-cost: the heaviest
 // step needs more than one standard input's budget.
 const bchCell = (r: BenchmarkResult) => {
-  const scriptSize = r.steps.some((s) => s.lockingBytes > SIZE_CAP || s.unlockingBytes > SIZE_CAP);
+  // A bch-spec entry is graded against the 100 kB spec cap; a current-BCH entry against 10 kB.
+  const sizeCap = r.impl.vm === 'bch-spec' ? SPEC_SCRIPT_SIZE_CAP : SIZE_CAP;
+  const scriptSize = r.steps.some((s) => s.lockingBytes > sizeCap || s.unlockingBytes > sizeCap);
   const opCost = r.inputsForHeaviestStep > 1;
   const blockers = [...(scriptSize ? ['script-size'] : []), ...(opCost ? ['op-cost'] : [])];
-  const overByBytes = r.steps.filter((s) => s.lockingBytes > SIZE_CAP || s.unlockingBytes > SIZE_CAP).length;
+  const overByBytes = r.steps.filter((s) => s.lockingBytes > sizeCap || s.unlockingBytes > sizeCap).length;
   const detail = r.bchCompatible
-    ? 'every step fits BCH per-tx limits'
+    ? r.impl.vm === 'bch-spec'
+      ? 'every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH'
+      : 'every step fits BCH per-tx limits'
     : [
-        scriptSize ? `${overByBytes}/${r.stepCount} step(s) over the ${SIZE_CAP.toLocaleString('en-US')} B script cap` : null,
+        scriptSize ? `${overByBytes}/${r.stepCount} step(s) over the ${sizeCap.toLocaleString('en-US')} B script cap` : null,
         opCost ? `heaviest step ~${r.inputsForHeaviestStep}× one input's op-cost budget` : null,
       ]
         .filter(Boolean)
@@ -115,6 +123,9 @@ const entryOf = (r: BenchmarkResult) => ({
   curve: r.impl.field,
   structure: r.impl.structure,
   proofSystem: r.impl.proofSystem,
+  // Which BCH VM the entry targets: 'bch-2026' (current chain) or 'bch-spec' (proposed 100 kB-
+  // script upgrade). Lets the site badge/segregate spec entries (also carried by `category: spec`).
+  vmTarget: r.impl.vm ?? 'bch-2026',
   // headline score = full on-chain footprint (lower is better): the verifier scripts PLUS
   // the serialized transaction overhead (envelope + outpoints + CashToken prefixes + varints).
   // Folding tx overhead in makes structures comparable — a covenant chain pays it once PER

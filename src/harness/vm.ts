@@ -8,6 +8,7 @@ import {
   createTestAuthenticationProgramBch,
   createVirtualMachine,
   createVirtualMachineBch2026,
+  createVirtualMachineBchSpec,
   ripemd160,
   secp256k1,
   sha1,
@@ -57,6 +58,14 @@ export const createRealVm = () => createVirtualMachineBch2026(false);
  * — those are checked explicitly against the constants below. */
 export const createStandardVm = () => createVirtualMachineBch2026(true);
 
+/** Real PROPOSED bch-spec VM (non-standard mode). The spec upgrade raises the per-script
+ * consensus cap to 100,000 B and the density-control base to 10,000 (so an input's op-cost
+ * budget is (10000 + unlockingLen) * 800). Entries with `vm: 'bch-spec'` are graded here
+ * instead of the current-BCH BCH_2026 VM. */
+export const createRealVmSpec = () => createVirtualMachineBchSpec(false);
+/** bch-spec VM in STANDARD (relay-policy) mode. */
+export const createStandardVmSpec = () => createVirtualMachineBchSpec(true);
+
 // --- BCH 2026 standard (relay-policy) limits, from ConsensusBch2026Overrides ---
 /** Max standard locking bytecode (scriptPubKey) length; a longer output is non-standard. */
 export const MAX_STANDARD_LOCKING_BYTECODE = 201;
@@ -66,6 +75,10 @@ export const MAX_STANDARD_UNLOCKING_BYTECODE = 10_000;
 export const MAX_STANDARD_TRANSACTION_SIZE = 100_000;
 
 export type Bch2026Vm = ReturnType<typeof createLoosenedVm>;
+/** Any BCH VM the harness evaluates against. The bch-spec VM carries a superset program state
+ * (extra metrics), so its full type is not assignable to Bch2026Vm; evaluatePair only calls
+ * `.evaluate` and reads stack/error/metrics, which both share. */
+export type AnyBchVm = Bch2026Vm | ReturnType<typeof createRealVmSpec>;
 
 export interface EvalOutcome {
   /** strict BCH acceptance: clean exit, single truthy item, no error */
@@ -143,7 +156,7 @@ export interface GroupedContext {
  * With a covenant context the spend is driven through a token-carrying tx so the
  * contract's NFT-commitment / output introspection resolves. */
 export const evaluatePair = (
-  vm: Bch2026Vm,
+  vm: AnyBchVm,
   lockingBytecode: Uint8Array,
   unlockingBytecode: Uint8Array,
   covenant?: CovenantContext,
@@ -267,6 +280,19 @@ export const STANDARD_UNLOCKING_CAP = 10_000;
 /** Op-cost budget a single BCH input grants for the given unlocking length. */
 export const realOpCostBudget = (unlockingLen: number): number =>
   (DENSITY_CONTROL_BASE + unlockingLen) * OP_COST_BUDGET_PER_BYTE;
+
+// --- proposed bch-spec op-cost budget reasoning (ConsensusBchSpec overrides) ---
+/** bch-spec densityControlBaseLength (raised from 41 to 10,000). */
+const SPEC_DENSITY_CONTROL_BASE = 10_000;
+/** bch-spec per-script maximumBytecodeLength (raised from 10,000 to 100,000). */
+export const SPEC_SCRIPT_SIZE_CAP = 100_000;
+/** bch-spec maximumStandardUnlockingBytecodeLength (raised to 100,000). */
+export const SPEC_STANDARD_UNLOCKING_CAP = 100_000;
+/** Op-cost budget one bch-spec input grants for the given unlocking length. */
+export const specOpCostBudget = (unlockingLen: number): number =>
+  (SPEC_DENSITY_CONTROL_BASE + unlockingLen) * OP_COST_BUDGET_PER_BYTE;
+/** Budget of one bch-spec input at the spec script cap: (10000+100000)*800 = 88,000,000. */
+export const specInputBudget = (): number => specOpCostBudget(SPEC_SCRIPT_SIZE_CAP);
 
 /**
  * True iff `locking` is a P2SH20 redeem-hash envelope: OP_HASH160 <20-byte hash>

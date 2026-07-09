@@ -171,6 +171,16 @@ export interface Implementation {
    */
   proofBinding?: 'runtime' | 'baked';
   /**
+   * Which BCH VM the entry targets, deciding the consensus limits it is graded against:
+   *   'bch-2026' (default) - the current-BCH VM: per-script cap 10,000 B, op-cost budget
+   *                          (41 + unlockingLen) * 800.
+   *   'bch-spec'           - the PROPOSED bch-spec upgrade: per-script cap 100,000 B,
+   *                          op-cost budget (10,000 + unlockingLen) * 800. Such an entry
+   *                          is NOT valid on current BCH; the harness replays it on the
+   *                          spec VM and sizes its op-cost budget with the spec formula.
+   */
+  vm?: 'bch-2026' | 'bch-spec';
+  /**
    * For a token-threading covenant entry (its steps carry `Step.covenant`): does the
    * covenant actually enforce TOKEN SAFETY, i.e. that the carried state token cannot
    * be swapped or substituted across the thread? A safe deployment must either pin the

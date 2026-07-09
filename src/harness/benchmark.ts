@@ -25,6 +25,7 @@ import { bchPairingChunked } from '../implementations/bch-pairing-chunked.js';
 import { bchPairingIntratx } from '../implementations/bch-pairing-intratx.js';
 import { bchGroth16Intratx } from '../implementations/bch-groth16-intratx.js';
 import { bchGroth16IntratxResidue } from '../implementations/bch-groth16-intratx-residue.js';
+import { bchGroth16IntratxResidueLarge } from '../implementations/bch-groth16-intratx-residue-large.js';
 import { bchGroth16Grouped } from '../implementations/bch-groth16-grouped.js';
 import { bchGroth16GroupedResidue } from '../implementations/bch-groth16-grouped-residue.js';
 import { bchGroth16Bls12381Grouped } from '../implementations/bch-groth16-bls12381-grouped.js';
@@ -52,10 +53,15 @@ import type { BenchmarkResult, Implementation, Step, StepMetrics } from './types
 import {
   createLoosenedVm,
   createRealVm,
+  createRealVmSpec,
   createStandardVm,
+  createStandardVmSpec,
   evaluatePair,
   isP2sh20Locking,
   standardInputBudget,
+  specInputBudget,
+  SPEC_SCRIPT_SIZE_CAP,
+  SPEC_STANDARD_UNLOCKING_CAP,
   MAX_STANDARD_LOCKING_BYTECODE,
   MAX_STANDARD_UNLOCKING_BYTECODE,
   MAX_STANDARD_TRANSACTION_SIZE,
@@ -75,7 +81,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16SingletonOpcodeOptimized, bchGroth16SingletonGenpow, bchGroth16SingletonMinOp, bchGroth16Bls12381Singleton, bchGroth16Bls12381SingletonOpcodeOptimized, bchGroth16Bls12381SingletonGenpow, bchGroth16Bls12381SingletonMinOp, bchGroth16Chunked, bchGroth16ChunkedCovenant, bchGroth16ChunkedCovenantResidue, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchGroth16Bls12381ChunkedCovenant, bchGroth16Bls12381ChunkedCovenantResidue, bchPairingIntratx, bchGroth16Intratx, bchGroth16IntratxResidue, bchGroth16Grouped, bchGroth16GroupedResidue, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchGroth16Bls12381IntratxResidue, bchGroth16Bls12381Grouped, bchGroth16Bls12381GroupedResidue, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16SingletonOpcodeOptimized, bchGroth16SingletonGenpow, bchGroth16SingletonMinOp, bchGroth16Bls12381Singleton, bchGroth16Bls12381SingletonOpcodeOptimized, bchGroth16Bls12381SingletonGenpow, bchGroth16Bls12381SingletonMinOp, bchGroth16Chunked, bchGroth16ChunkedCovenant, bchGroth16ChunkedCovenantResidue, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchGroth16Bls12381ChunkedCovenant, bchGroth16Bls12381ChunkedCovenantResidue, bchPairingIntratx, bchGroth16Intratx, bchGroth16IntratxResidue, bchGroth16IntratxResidueLarge, bchGroth16Grouped, bchGroth16GroupedResidue, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchGroth16Bls12381IntratxResidue, bchGroth16Bls12381Grouped, bchGroth16Bls12381GroupedResidue, bchMultistepDemo];
 
 // Zero-padding accounting: the chunked/intra-tx steps append one big all-zero push to each
 // unlocking purely to buy op-cost budget ((41+len)*800). Its full encoded length (push
@@ -221,9 +227,13 @@ const standardness = (
   txCount: number,
   totalTxOverheadBytes: number,
   bsv: boolean,
+  isSpec: boolean,
 ): { fits: boolean; reason?: string } => {
+  // bch-spec raises the standard per-input unlocking cap to 100,000 B (the tx-size cap is
+  // unchanged at 100,000 B); grade a spec entry against its own standard limits + VM.
+  const maxStdUnlock = isSpec ? SPEC_STANDARD_UNLOCKING_CAP : MAX_STANDARD_UNLOCKING_BYTECODE;
   const overLock = steps.filter((s) => s.lockingBytes > MAX_STANDARD_LOCKING_BYTECODE).length;
-  const overUnlock = steps.filter((s) => s.unlockingBytes > MAX_STANDARD_UNLOCKING_BYTECODE).length;
+  const overUnlock = steps.filter((s) => s.unlockingBytes > maxStdUnlock).length;
   // Largest single transaction in the run (the 100,000-byte standard cap applies per tx):
   //   - grouped: each group is one tx; its size = sum of its inputs' scriptSig (unlocking) +
   //     that group's tx overhead (envelope + outpoints + the single token/OP_RETURN output).
@@ -245,7 +255,7 @@ const standardness = (
     txBytes = Math.max(0, ...steps.map((s) => s.unlockingBytes + s.lockingBytes + s.txOverheadBytes));
   }
 
-  const vm = createStandardVm();
+  const vm = isSpec ? createStandardVmSpec() : createStandardVm();
   const evalRejects = scenario.valid.some((s) => {
     const o = evaluatePair(vm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx, s.grouped);
     return !(bsv ? o.bsvAccepted : o.accepted);
@@ -253,7 +263,7 @@ const standardness = (
 
   const reasons = [
     overLock ? `${overLock}/${steps.length} locking >${MAX_STANDARD_LOCKING_BYTECODE} B` : null,
-    overUnlock ? `${overUnlock}/${steps.length} unlocking >${MAX_STANDARD_UNLOCKING_BYTECODE.toLocaleString('en-US')} B` : null,
+    overUnlock ? `${overUnlock}/${steps.length} unlocking >${maxStdUnlock.toLocaleString('en-US')} B` : null,
     txBytes > MAX_STANDARD_TRANSACTION_SIZE
       ? `tx ${txBytes.toLocaleString('en-US')} B > ${MAX_STANDARD_TRANSACTION_SIZE.toLocaleString('en-US')} B standard size`
       : null,
@@ -318,6 +328,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     };
   }
 
+  const isSpec = impl.vm === 'bch-spec'; // grade against the proposed bch-spec VM + limits
   const bsv = scenario.bsvOpReturnTerminator === true;
   const vm = createLoosenedVm();
   const steps = scenario.valid.map((s) => runStep(vm, s, bsv));
@@ -347,8 +358,10 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     }
   });
 
-  // BCH compatibility: replay the valid run on the REAL BCH 2026 VM (consensus limits).
-  const realVm = createRealVm();
+  // BCH compatibility: replay the valid run on the REAL consensus VM (BCH 2026, or the
+  // proposed bch-spec VM for a spec-targeted entry). `bchCompatible` therefore means "valid
+  // on the VM this entry targets" — a bch-spec entry is NOT valid on current-BCH BCH_2026.
+  const realVm = isSpec ? createRealVmSpec() : createRealVm();
   const realOutcomes = scenario.valid.map((s) => evaluatePair(realVm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx, s.grouped));
   const firstFail = realOutcomes.find((o) => !o.accepted);
   const bchCompatible = firstFail === undefined && validPassed;
@@ -380,7 +393,9 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
 
   const opCosts = steps.map((s) => s.operationCost);
   const maxStepOperationCost = opCosts.length ? Math.max(...opCosts) : 0;
-  const budget = standardInputBudget();
+  // Per-input op-cost budget at the entry's script cap: BCH_2026 (41+10000)*800 = 8,032,800,
+  // or bch-spec (10000+100000)*800 = 88,000,000.
+  const budget = isSpec ? specInputBudget() : standardInputBudget();
 
   // worst-case proof run (dense near-r inputs through the SAME lockings): measure its
   // op-cost separately so the proof-size dependence is visible. The worst-case proof is a
@@ -409,7 +424,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
   const totalTxOverheadBytes = steps.reduce((a, s) => a + s.txOverheadBytes, 0);
   const txCount = txCountOf(scenario.valid);
   // BCH standard (relay) policy: stricter than the consensus `bchCompatible` above.
-  const std = standardness(scenario, steps, txCount, totalTxOverheadBytes, bsv);
+  const std = standardness(scenario, steps, txCount, totalTxOverheadBytes, bsv, isSpec);
 
   return {
     impl,
@@ -527,10 +542,11 @@ const main = async () => {
     }
   }
 
-  // group into separate leaderboards by proof system + structure
+  // group into separate leaderboards by proof system + structure; a bch-spec (proposed-upgrade)
+  // entry gets its own track so it is not ranked against current-BCH verifiers (different limits).
   const tracks = new Map<string, BenchmarkResult[]>();
   for (const r of results) {
-    const key = `${r.impl.proofSystem}  [${r.impl.structure}]`;
+    const key = `${r.impl.proofSystem}  [${r.impl.structure}]${r.impl.vm === 'bch-spec' ? '  · bch-spec (proposed 100 kB scripts)' : ''}`;
     (tracks.get(key) ?? tracks.set(key, []).get(key)!).push(r);
   }
 
@@ -568,6 +584,9 @@ const main = async () => {
       }
       if (!r.securePackaging) {
         console.log(`    > packaging: DISALLOWED — ${r.insecurePackagingReason}`);
+      }
+      if (r.impl.vm === 'bch-spec') {
+        console.log(`    > VM target: PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000+len)x800 = up to 88,000,000/input) — NOT valid on current BCH (BCH_2026 caps scripts at 10,000 B). "BCH compatible" above = validates on the bch-spec VM.`);
       }
       if (!r.profileOnly) {
         console.log(`    > standardness: ${r.fitsBchStandardness ? 'standard — relayable under default mempool policy' : `non-standard (${r.bchStandardnessReason ?? 'relay limit'}); valid at consensus, must be mined directly`}`);

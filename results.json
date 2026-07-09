@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-09T07:54:08.694Z",
+  "generatedAt": "2026-07-09T12:01:43.516Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -544,6 +544,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 522564,
       "size": {
         "scriptBytes": 522477,
@@ -610,6 +611,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 11717771,
       "size": {
         "scriptBytes": 11717684,
@@ -672,6 +674,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 8874,
       "size": {
         "scriptBytes": 8787,
@@ -733,6 +736,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 6673,
       "size": {
         "scriptBytes": 6586,
@@ -794,6 +798,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 67248,
       "size": {
         "scriptBytes": 67161,
@@ -856,6 +861,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 9703,
       "size": {
         "scriptBytes": 9616,
@@ -917,6 +923,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 6912,
       "size": {
         "scriptBytes": 6825,
@@ -978,6 +985,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 67368,
       "size": {
         "scriptBytes": 67281,
@@ -1040,6 +1048,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 381151,
       "size": {
         "scriptBytes": 374830,
@@ -1110,6 +1119,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 472510,
       "size": {
         "scriptBytes": 466123,
@@ -1173,6 +1183,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 279219,
       "size": {
         "scriptBytes": 274607,
@@ -1236,6 +1247,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 12555,
       "size": {
         "scriptBytes": 12468,
@@ -1297,6 +1309,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 12763,
       "size": {
         "scriptBytes": 12676,
@@ -1358,6 +1371,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 184850,
       "size": {
         "scriptBytes": 183458,
@@ -1417,6 +1431,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 14859,
       "size": {
         "scriptBytes": 14685,
@@ -1476,6 +1491,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 13552,
       "size": {
         "scriptBytes": 12520,
@@ -1546,6 +1562,7 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 28033,
       "size": {
         "scriptBytes": 26461,
@@ -1609,6 +1626,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 7387,
       "size": {
         "scriptBytes": 7300,
@@ -1670,6 +1688,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 7538,
       "size": {
         "scriptBytes": 7451,
@@ -1731,6 +1750,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 217562,
       "size": {
         "scriptBytes": 214466,
@@ -1801,6 +1821,7 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 649134,
       "size": {
         "scriptBytes": 639846,
@@ -1864,6 +1885,7 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 697281,
       "size": {
         "scriptBytes": 686058,
@@ -1927,6 +1949,7 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 634540,
       "size": {
         "scriptBytes": 625533,
@@ -1990,6 +2013,7 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 365203,
       "size": {
         "scriptBytes": 358914,
@@ -2053,6 +2077,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 215429,
       "size": {
         "scriptBytes": 214377,
@@ -2119,6 +2144,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 375526,
       "size": {
         "scriptBytes": 373485,
@@ -2185,6 +2211,7 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 239684,
       "size": {
         "scriptBytes": 238288,
@@ -2243,6 +2270,73 @@
       "source": "BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier laid out as the INPUTS of ONE transaction. Same forward-checking as bch-groth16-intratx (each input carries its incoming state as a raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, no 128-byte state limit), but it runs the residue chunk graph: fast-G2 endo subgroup check (ePrint 2022/348, 4 chunks), GLV vk_x MSM (5 chunks), c^-(6x+2)-FUSED batched Miller with e(alpha,beta) precomputed/skipped (23 chunks), and a witnessed-residue final-exponentiation TAIL collapsing the hard exponentiation to ONE chunk — 33 inputs total (vs 54 for the plain intra-tx build), ~263 KB / ~202M op. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-grouped-residue; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad."
     },
     {
+      "id": "bch-groth16-intratx-residue-large",
+      "name": "BCH Groth16 intra-tx linked + residue, LARGE 100 kB scripts (whole verifier in ~7 inputs of one transaction, PROPOSED bch-spec)",
+      "category": "spec",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "vmTarget": "bch-spec",
+      "score": 196365,
+      "size": {
+        "scriptBytes": 196040,
+        "txOverheadBytes": 325,
+        "transactions": 1,
+        "total": 196365
+      },
+      "padding": {
+        "bytes": 119774,
+        "fraction": 0.610967149561314
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 178190856,
+          "steps": 7,
+          "heaviestStepOpCost": 81377075,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 193057951,
+          "steps": 7,
+          "heaviestStepOpCost": 81382165,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH",
+        "standard": {
+          "fits": false,
+          "detail": "tx 196,120 B > 100,000 B standard size"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+      },
+      "source": "BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-intratx-residue (each input carries its incoming state as a raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, no 128-byte state limit) and the same residue chunk graph (fast-G2 endo subgroup check, GLV vk_x MSM, c^-(6x+2)-FUSED batched Miller with e(alpha,beta) precomputed/skipped, witnessed-residue final-exp TAIL), but each chunk fills a 100 kB input instead of 10 kB, collapsing the verifier from 33 inputs to ~7 (g2check 1, GLV vk_x 2, fused Miller 3, residue tail 1), ~196 kB / ~178M op. Op-cost and bytes are conserved; this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget."
+    },
+    {
       "id": "bch-groth16-grouped",
       "name": "BCH Groth16 verifier, grouped (54 chunks in ~6 standard <100KB transactions: intra-tx forward-checks within each tx, CashToken hand-off across them)",
       "category": "full",
@@ -2251,6 +2345,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 375771,
       "size": {
         "scriptBytes": 373386,
@@ -2321,6 +2416,7 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 239794,
       "size": {
         "scriptBytes": 238226,
@@ -2391,6 +2487,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
+      "vmTarget": "bch-2026",
       "score": 641846,
       "size": {
         "scriptBytes": 638730,
@@ -2450,6 +2547,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 662699,
       "size": {
         "scriptBytes": 659067,
@@ -2509,6 +2607,7 @@
       "curve": "BLS12-381",
       "structure": "single-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 339060,
       "size": {
         "scriptBytes": 337234,
@@ -2568,6 +2667,7 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 691236,
       "size": {
         "scriptBytes": 686787,
@@ -2631,6 +2731,7 @@
       "curve": "BLS12-381",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
       "score": 339297,
       "size": {
         "scriptBytes": 337127,
@@ -2694,6 +2795,7 @@
       "curve": "-",
       "structure": "multi-tx",
       "proofSystem": "demo (hash-chained state)",
+      "vmTarget": "bch-2026",
       "score": 483,
       "size": {
         "scriptBytes": 228,
