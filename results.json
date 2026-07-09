@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-09T12:01:43.516Z",
+  "generatedAt": "2026-07-09T12:37:36.855Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -2279,28 +2279,28 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-spec",
-      "score": 196365,
+      "score": 194018,
       "size": {
-        "scriptBytes": 196040,
-        "txOverheadBytes": 325,
+        "scriptBytes": 193736,
+        "txOverheadBytes": 282,
         "transactions": 1,
-        "total": 196365
+        "total": 194018
       },
       "padding": {
-        "bytes": 119774,
-        "fraction": 0.610967149561314
+        "bytes": 119771,
+        "fraction": 0.6182175744311847
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 178190856,
-          "steps": 7,
+          "opCost": 178134755,
+          "steps": 6,
           "heaviestStepOpCost": 81377075,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 193057951,
-          "steps": 7,
+          "opCost": 192939315,
+          "steps": 6,
           "heaviestStepOpCost": 81382165,
           "inputsForHeaviestStep": 1
         }
@@ -2313,7 +2313,7 @@
         "detail": "every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH",
         "standard": {
           "fits": false,
-          "detail": "tx 196,120 B > 100,000 B standard size"
+          "detail": "tx 193,808 B > 100,000 B standard size"
         }
       },
       "generality": {

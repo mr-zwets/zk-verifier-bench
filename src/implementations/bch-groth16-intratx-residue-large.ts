@@ -12,13 +12,14 @@
 // therefore collapses to ~one fat input per stage floor:
 //
 //   fast-G2 subgroup check   1 input
-//   GLV vk_x MSM             2 inputs   (the tiny zinv/assert final chunk stays separate)
-//   c^-(6x+2)-fused Miller   3 inputs   (161M op / ~80M byte-bound per input)
+//   GLV vk_x MSM             1 input    (one 128-iter loop window; op-bound at ~21M << 88M)
+//   c^-(6x+2)-fused Miller   3 inputs   (~148M op op-bound; the boundary/handoff chunk can't merge
+//                                        into its predecessor — the fork compiler dead-var-rejects it)
 //   residue final-exp tail   1 input
 //                            --------
-//                            7 inputs   (one non-standard <1 MB transaction)
+//                            6 inputs   (one non-standard <1 MB transaction)
 //
-// ~196 kB / ~178M op over 7 inputs (vs ~263 kB / ~202M over 33 for the current-BCH residue build).
+// ~194 kB / ~178M op over 6 inputs (vs ~263 kB / ~202M over 33 for the current-BCH residue build).
 // Op-cost and bytes are conserved — this is a STRUCTURAL simplification (fewer, fatter UTXOs in
 // one tx), not a resource reduction. Every input fits its own bch-spec budget (op-cost <=
 // 88,000,000, scripts <= 100,000 B); deployed as P2SH32 so each chunk redeem rides in the scriptSig
@@ -52,7 +53,7 @@ const toRun = (raw: RawStep[]): Step[] => {
 
 export const bchGroth16IntratxResidueLarge: Implementation = {
   id: 'bch-groth16-intratx-residue-large',
-  name: 'BCH Groth16 intra-tx linked + residue, LARGE 100 kB scripts (whole verifier in ~7 inputs of one transaction, PROPOSED bch-spec)',
+  name: 'BCH Groth16 intra-tx linked + residue, LARGE 100 kB scripts (whole verifier in 6 inputs of one transaction, PROPOSED bch-spec)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
@@ -67,8 +68,8 @@ export const bchGroth16IntratxResidueLarge: Implementation = {
     'NFT-commitment hand-off, no hashing, no 128-byte state limit) and the same residue chunk ' +
     'graph (fast-G2 endo subgroup check, GLV vk_x MSM, c^-(6x+2)-FUSED batched Miller with ' +
     'e(alpha,beta) precomputed/skipped, witnessed-residue final-exp TAIL), but each chunk fills a ' +
-    '100 kB input instead of 10 kB, collapsing the verifier from 33 inputs to ~7 (g2check 1, GLV ' +
-    'vk_x 2, fused Miller 3, residue tail 1), ~196 kB / ~178M op. Op-cost and bytes are conserved; ' +
+    '100 kB input instead of 10 kB, collapsing the verifier from 33 inputs to 6 (g2check 1, GLV ' +
+    'vk_x 1, fused Miller 3, residue tail 1), ~194 kB / ~178M op. Op-cost and bytes are conserved; ' +
     'this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. ' +
     'The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in ' +
     'the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. ' +
