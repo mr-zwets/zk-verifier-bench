@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-09T06:33:30.328Z",
+  "generatedAt": "2026-07-09T07:54:08.694Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -36,7 +36,7 @@
       "id": "bch-groth16-intratx-residue",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 241518,
+      "bytes": 239684,
       "bchCompatible": true
     }
   },
@@ -510,6 +510,22 @@
       "score": 339060,
       "id": "bch-groth16-bls12381-intratx-residue",
       "steps": 42,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-09T07:54:08.694Z",
+      "score": 239794,
+      "id": "bch-groth16-grouped-residue",
+      "steps": 32,
+      "transactions": 3,
+      "fits": true
+    },
+    {
+      "t": "2026-07-09T07:54:08.694Z",
+      "score": 239684,
+      "id": "bch-groth16-intratx-residue",
+      "steps": 32,
       "transactions": 1,
       "fits": true
     }
@@ -2103,29 +2119,29 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 377980,
+      "score": 375526,
       "size": {
-        "scriptBytes": 375853,
-        "txOverheadBytes": 2127,
+        "scriptBytes": 373485,
+        "txOverheadBytes": 2041,
         "transactions": 1,
-        "total": 377980
+        "total": 375526
       },
       "padding": {
-        "bytes": 132660,
-        "fraction": 0.3529571401585194
+        "bytes": 132951,
+        "fraction": 0.3559741355074501
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294694950,
-          "steps": 49,
+          "opCost": 294625987,
+          "steps": 47,
           "heaviestStepOpCost": 7447703,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 332098018,
-          "steps": 49,
-          "heaviestStepOpCost": 7448033,
+          "opCost": 332018383,
+          "steps": 47,
+          "heaviestStepOpCost": 7664635,
           "inputsForHeaviestStep": 1
         }
       },
@@ -2137,7 +2153,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 376,265 B > 100,000 B standard size"
+          "detail": "tx 373,881 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2169,28 +2185,28 @@
       "curve": "BN254",
       "structure": "single-tx",
       "proofSystem": "Groth16",
-      "score": 241518,
+      "score": 239684,
       "size": {
-        "scriptBytes": 240079,
-        "txOverheadBytes": 1439,
+        "scriptBytes": 238288,
+        "txOverheadBytes": 1396,
         "transactions": 1,
-        "total": 241518
+        "total": 239684
       },
       "padding": {
-        "bytes": 51099,
-        "fraction": 0.21284243936370945
+        "bytes": 51610,
+        "fraction": 0.21658665144698852
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 181512304,
-          "steps": 33,
+          "opCost": 181456241,
+          "steps": 32,
           "heaviestStepOpCost": 7241401,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 196419057,
-          "steps": 33,
+          "opCost": 196360935,
+          "steps": 32,
           "heaviestStepOpCost": 7242125,
           "inputsForHeaviestStep": 1
         }
@@ -2203,7 +2219,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 240,363 B > 100,000 B standard size"
+          "detail": "tx 238,564 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2235,29 +2251,29 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 378195,
+      "score": 375771,
       "size": {
-        "scriptBytes": 375724,
-        "txOverheadBytes": 2471,
+        "scriptBytes": 373386,
+        "txOverheadBytes": 2385,
         "transactions": 5,
-        "total": 378195
+        "total": 375771
       },
       "padding": {
-        "bytes": 132520,
-        "fraction": 0.3527057095101724
+        "bytes": 132841,
+        "fraction": 0.3557739176080517
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294622587,
-          "steps": 49,
+          "opCost": 294545341,
+          "steps": 47,
           "heaviestStepOpCost": 7447703,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 332025653,
-          "steps": 49,
-          "heaviestStepOpCost": 7448033,
+          "opCost": 331923583,
+          "steps": 47,
+          "heaviestStepOpCost": 7664635,
           "inputsForHeaviestStep": 1
         }
       },
@@ -2305,28 +2321,28 @@
       "curve": "BN254",
       "structure": "multi-tx",
       "proofSystem": "Groth16",
-      "score": 241628,
+      "score": 239794,
       "size": {
-        "scriptBytes": 240017,
-        "txOverheadBytes": 1611,
+        "scriptBytes": 238226,
+        "txOverheadBytes": 1568,
         "transactions": 3,
-        "total": 241628
+        "total": 239794
       },
       "padding": {
-        "bytes": 51029,
-        "fraction": 0.21260577375769216
+        "bytes": 51540,
+        "fraction": 0.21634918102977846
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 181471250,
-          "steps": 33,
+          "opCost": 181415082,
+          "steps": 32,
           "heaviestStepOpCost": 7241401,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 196378000,
-          "steps": 33,
+          "opCost": 196319767,
+          "steps": 32,
           "heaviestStepOpCost": 7242125,
           "inputsForHeaviestStep": 1
         }
