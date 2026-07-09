@@ -24,6 +24,7 @@ const v = JSON.parse(readFileSync('src/bch/groth16-singleton-minop-vectors.json'
   lockingOK: string;
   unlocking: string;
   invalidUnlocking: string;
+  worstCaseUnlocking: string;
 };
 
 const mp = JSON.parse(readFileSync('src/bch/groth16-singleton-minop-multiproof-vectors.json', 'utf8')) as {
@@ -60,6 +61,9 @@ export const bchGroth16SingletonMinOp: Implementation = {
     const extraValidProofs: Step[][] = mp.proofs
       .filter((p) => !p.committed)
       .map((p) => [{ ...valid[0]!, unlockingBytecode: hexToBin(p.unlocking) }]);
-    return { valid, invalid, extraValidProofs };
+    // worst-case run: the same dense (near-r) proof the chunked entries measure, through the SAME
+    // locking. Makes the op-cost column apples-to-apples (this GLV-based singleton is proof-DEPENDENT).
+    const worstCaseProof: Step[] = [{ ...valid[0]!, unlockingBytecode: hexToBin(v.worstCaseUnlocking) }];
+    return { valid, invalid, extraValidProofs, worstCaseProof };
   },
 };

@@ -149,9 +149,12 @@ const entryOf = (r: BenchmarkResult) => ({
   // input pays for all of them. So one number is misleading — we key by the proof run.
   // 'smallProof' is the committed small public inputs the vectors ship with; a
   // 'worstCase' run (dense, near-r inputs through the SAME lockings) is added per entry
-  // as those vectors land. For proof-size-INDEPENDENT entries (singletons, baselines)
-  // worstCase ~matches smallProof; for chunked covenants it jumps ~5-6×, which the two
-  // keys make visible side by side.
+  // as those vectors land. NOTE: any GLV/Shamir vk_x verifier is proof-DEPENDENT (the MSM
+  // does an add nearly every iteration for dense scalars), so its worstCase jumps ~15M over
+  // smallProof — this holds for the GLV singletons too, not just the chunked entries. Every
+  // runtime-general entry should therefore ship a worstCaseProof so the column is apples-to-
+  // apples; measuring one entry on committed and another on worst-case is the mismatch that
+  // makes a singleton look cheaper than an equivalent chunked build when it is not.
   benchmarks: {
     smallProof: {
       opCost: r.totalOperationCost,
