@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-09T16:41:09.841Z",
+  "generatedAt": "2026-07-13T17:39:37.235Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -595,7 +595,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BSV mainnet tx e4cd...514c (proof) spending 79a5...4940:0 (verifier)"
     },
@@ -663,7 +663,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BSV mainnet tx 24e8...bf24 (proof) spending 320b...725f:0 (verifier)"
     },
@@ -733,7 +733,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract (Groth16Verify, singleton/bn254/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BN254 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bn254. Same curve as scrypt-bn256 -> ~543x smaller bytecode, but ~1.26B op-cost (~157 BCH inputs); ~21.7 KB does NOT fit one input -- motivates the chunked multi-tx verifier."
     },
@@ -803,7 +803,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "Same complete Groth16 verifier as bch-groth16-singleton (Groth16Verify, singleton/bn254/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the locking bytecode is a custom decompile->reschedule->recompile of the cashc output plus an auto-outlining pass. It eliminates cashc's altstack park/restore (its emitReplace reassignment routine, ~2,150 alt-ops in the Miller loop alone), minimizes ROLL/PICK depth addressing, folds adjacent stack ops into multi-item ops, and outlines repeated instruction sequences into OP_DEFINE bodies -- 14,131 -> 6,314 B (-55%, far under the 10,000-byte standard cap). Identical semantics + runtime witnesses; each subroutine differential-tested vs the cashc original and every outline rewrite verified accept/reject. Op-cost ~796M, so still not one-input-standard. Pipeline: singleton/bn254/recompiler/."
     },
@@ -874,7 +874,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract, op-optimized. Lazy field tower for the Miller loop (deferred reductions); witnessed-residue final exponentiation (ePrint 2024/640) replacing the hard part; e(alpha,beta) baked (3 runtime Miller loops); fast-endo 63-bit G2 subgroup check (ePrint 2022/348); GLV 4-scalar vk_x. All extra inputs (c,cInv,w; zinv; GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bn254. Single-tx like bch-groth16-singleton but ~53% less op-cost. Still over the 10,000 B / per-input op limits."
     },
@@ -937,7 +937,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on BLS12-381 -- the SAME curve as nchain (Groth16Verify, singleton/bls12-381/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) (M-twist Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bls12-381. Locking is plain compiler output (size objective + rescheduleStacks, no post-passes; ~9.2 KB) -- the honest baseline vs the nchain single-tx reference, and the other end of the bytesize-vs-opcost tradeoff from the -opcode-optimized entry. ~1.04B op-cost (~129 BCH inputs) does NOT fit one input."
     },
@@ -1000,7 +1000,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "Same complete BLS12-381 Groth16 verifier as bch-groth16-bls12381-singleton (Groth16Verify, singleton/bls12-381/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the locking bytecode is byte-optimized: the smaller of a custom decompile->reschedule->recompile of the cashc output and the rescheduled compile, then repeated instruction sequences outlined into OP_DEFINE bodies. Identical semantics + runtime witnesses; each subroutine differential-tested and every outline rewrite verified accept/reject. The plain entry keeps the other end of the bytesize-vs-opcost tradeoff. Pipeline: singleton/bls12-381/build_vectors_optimized.mjs + singleton/bn254/recompiler/."
     },
@@ -1071,7 +1071,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in ONE contract, op-optimized — same curve as nchain. Lazy field tower for the Miller loop; witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381: lambda = p+|x|, w gated to mu_27A on-chain) replacing the hard part; e(alpha,beta) baked and the (vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); psi 64-bit G2 subgroup check; phi(P)==[-x^2]P G1 subgroup checks for A and C (the G1 cofactor is nontrivial on BLS12-381); GLV 4-scalar vk_x. All extra inputs (c,cInv,w; GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain; all proof points curve- and subgroup-checked). Verified vs @noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~78% less op-cost. Still over the 10,000 B / per-input op limits."
     },
@@ -1143,7 +1143,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier split across transactions so EVERY step fits one BCH input. vk_x = IC0+in0*IC1+in1*IC2 computed on-chain (Shamir/Straus, public inputs at RUNTIME) -> ONE batched 4-pair optimal-ate Miller loop (prepared-VK: the fixed VK G2 points beta/gamma/delta have baked line coefficients, so only the runtime e(-A,B) pair does on-chain G2) -> final exponentiation -> assert product == Fp12 ONE. State carried as hash256 commitments of the live values, verified on entry/exit each step. Verified vs @noble/curves (boundary == golden millerHex, verdict == golden). BCH-compatible counterpart of bch-groth16-singleton (~1.26B op-cost, ~157 inputs, single-tx, not BCH-compatible). Same BN254 curve as scrypt-bn256."
     },
@@ -1208,7 +1208,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in 48 covenant-threaded chunks with a transcript-bound cross-step thread. g2check EIP-197 input validation (baton genesis) -> vk_x runtime MSM -> baked-G2 + prepared-VK optimal-ate Miller -> final exponentiation (witnessed fp12 inverse) -> verdict==1. State threaded as transcript-anchored NFT commitments (T0=hash(A,B,C), T1=hash(T0,in0,in1,vk_x)), forward-chain locking pins, a minting-baton category genesis, and shared-tower relocation (tower fns hash-bound in the witness). The pairing is bound to the validated/computed points; chunks run in order, each pinned to the next, with the token category anchored (adversarial_covenant.mjs: 81/0). BCH-compatible: every step validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts <= 10,000 B)."
     },
@@ -1273,7 +1273,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in 36 covenant-threaded chunks with a transcript-bound cross-step thread, using two op-cost levers over the 48-chunk baseline. g2check EIP-197 input validation via the FAST-G2 endomorphism subgroup check (ePrint 2022/348, baton genesis, 4 chunks) -> vk_x runtime MSM (8 chunks) -> baked-G2 + prepared-VK optimal-ate Miller with the c^-(6x+2) residue factor FUSED into the loop (23 chunks) -> witnessed-residue final-exponentiation tail (ePrint 2024/640: c per-limb canonical + c·cInv==ONE + w in Fp6/27-coset + c transcript-bound; verdict fF·w·c^q2==c^q·c^q3, 1 chunk). State threaded as transcript-anchored NFT commitments (T0=hash(A,B,C), T1=hash(T0,in0,in1,vk_x)), forward-chain locking pins, a minting-baton category genesis, and shared-tower relocation. The pairing is bound to the validated/computed points; chunks run in order, each pinned to the next, category anchored. BCH-compatible: every step validates on the real BCH 2026 standard VM (op-cost <= 8,032,800, scripts <= 10,000 B)."
     },
@@ -1336,7 +1336,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract (monolithic baseline, VkX/singleton/bn254/vkx.cash). Two inlined 254-iteration double-and-add scalar mults over Jacobian-projective coords + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked, like the chunked entries). ~76M op-cost -> ~10 BCH inputs; does NOT fit BCH in a single input (real-VM op-cost density limit) -- this is why the chunked multi-tx entries exist."
     },
@@ -1399,7 +1399,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract on BLS12-381 (VkX/singleton/bls12-381/vkx.cash). Two inlined 255-iteration double-and-add scalar mults over Jacobian-projective coords (b-independent) + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked). ~101M op-cost -> ~13 BCH inputs; does NOT fit one input (real-VM op-cost density limit). Verified vs @noble/curves bls12-381."
     },
@@ -1460,7 +1460,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript baseline: original two separate double-and-add scalar mults (term0 = input0*IC1, term1 = input1*IC2), each a 254-iteration MSB-first loop split into byte-budgeted chunks; 9-coord carried state (accX,accY,accZ,bX,bY,bZ,rX,rY,rZ); inlined EC (no multi-return functions); in-script Fermat inverse for affine conversion (no zInv witness); blind 10,000-byte zero-padded unlocking for per-input budget -- simpler baseline."
     },
@@ -1521,7 +1521,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: Shamir/Straus + multi-return EC functions + tuned padding. Shamir/Straus shared doublings (single 254-iter MSB-first loop), RUNTIME public inputs (input0/input1 carried in the hash-chained state and bit-tested in-script via a 2-bit Shamir select over VK consts {IC1,IC2,T}), verified-inverse-on-stack, tuned per-chunk padding for per-input budget. The EC ops jacDouble/jacAdd/selectPoint are MULTI-VALUE-RETURN reusable functions (returns (int,int,int) -> OP_DEFINE/OP_INVOKE) defined ONCE per chunk, and each chunk LOOPS over its bit-range (body compiled once) so per-chunk bytecode is ~1.5KB and op-cost (not size) binds -> 3 chunks, ~23KB total, ~14.3M op-cost"
     },
@@ -1593,7 +1593,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: vk_x = IC0 + in0*IC1 + in1*IC2 (Shamir/Straus G1 double-and-add over the public-input bits) split across transactions so every step fits one BCH input. GENERIC covenant — the Jacobian accumulator and the public inputs ride in the token NFT commitment (no baked instance), so one fixed locking aggregates ANY public inputs. The runtime-general counterpart of bch-vkx-chunked-shamir; identical to the first 3 chunks of bch-groth16-chunked."
     },
@@ -1658,7 +1658,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: vk_x = IC0 + in0*IC1 + in1*IC2 (Shamir/Straus G1 double-and-add over the public-input bits) on BLS12-381, split across transactions so every step fits one BCH input. GENERIC covenant — the Jacobian accumulator and the public inputs ride in the token NFT commitment (no baked instance), so one fixed locking aggregates ANY public inputs. MAGNITUDE-INDEPENDENT: tiles all 255 scalar-field positions with worst-case-sized windows (EVM ecMul-equivalent, full-width). The BLS12-381 counterpart of bch-vkx-chunked-covenant; same curve as nchain."
     },
@@ -1721,7 +1721,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the FULL pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta)==1 in ONE contract (GrothPairing, singleton/bn254/verify.cash). BN254 field tower (Fp2/Fp6/Fp12), four optimal-ate Miller loops (6x+2, divisive twist, mul034 lines, psi Q1/Q2), product, and final exponentiation ((p^12-1)/r, cyclotomic exp). RUNTIME pair inputs; the contract require()s the product == Fp12 ONE (the verdict is intrinsic). Verified vs @noble/curves bn254 (Miller boundary == golden millerHex; verdict == golden). ~1.21B op-cost -> ~151 BCH inputs; ~20 KB contract does NOT fit BCH in one input -- this is why the chunked multi-tx pairing exists."
     },
@@ -1784,7 +1784,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the FULL BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta)==1 in ONE contract (GrothVerify, singleton/bls12-381/verify.cash). BLS12-381 field tower (Fp2/Fp6/Fp12, xi=1+u), four optimal-ate Miller loops (M-twist, mul014 lines, |x| NAF, final conjugate), product, and the Hayashida-Scott final exponentiation. RUNTIME pair inputs; require()s the product == 1. Verified vs @noble/curves bls12-381. ~1.38B op-cost (~172 BCH inputs); ~19.8 KB does NOT fit one input -- the pairing milestone on the same curve as nchain."
     },
@@ -1856,7 +1856,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the BN254 Groth16 Miller boundary e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) split across transactions so EVERY step fits one BCH input (op-cost <=8,032,800, scripts <=10,000 B). 4 single-pair optimal-ate Miller chains (f in Fp12 + running G2 point R, hash256-committed, ~5 KB/chunk, NAF steps unrolled with the digit baked so op-cost binds not size) + a combine step (boundary = f0*f1*f2*f3). Verified vs @noble/curves: combine boundary == golden millerHex. Multi-tx counterpart of bch-pairing-singleton (which needs ~151 inputs); here every step is BCH-compatible. Reaches the miller-boundary checkpoint (the full verdict is bch-groth16-chunked)."
     },
@@ -1921,7 +1921,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the BLS12-381 Groth16 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) — 4 single-pair optimal-ate Miller loops + a combine (boundary = f0*f1*f2*f3) + the BLS/Hayashida-Scott final exponentiation -> verdict == Fp12 ONE — split across transactions so EVERY step fits one BCH input. Proof-agnostic covenant: Miller f+R / live final-exp values + proof-derived points ride in the token NFT commitment (48-byte limbs); the easy-part Fermat inverse is a verified unlocking witness. Verified vs @noble/curves bls12-381. Multi-tx counterpart of bch-pairing-bls12381-singleton; same curve as nchain."
     },
@@ -1986,7 +1986,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — a G2 input-validation prologue (EIP-197: on-curve A/B/C + the prime-order-subgroup test psi(B)==[-x]B) then vk_x = IC0 + in0*IC1 + in1*IC2 (public-input aggregation) then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) via 4 Miller loops + combine + final exponentiation, asserting the verdict == Fp12 ONE — split across transactions so EVERY step fits one BCH input. Proof-agnostic covenant: all state + proof-derived points + public inputs ride in the token NFT commitment (48-byte limbs), so one fixed set of lockings verifies any proof (confirmed via extraValidProofs). Verified vs @noble/curves bls12-381. The BLS12-381 counterpart of bch-groth16-chunked; the BCH-compatible full Groth16 verifier on the nchain curve."
     },
@@ -2051,7 +2051,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in 68 covenant-threaded chunks with a transcript-bound cross-step thread. g2check EIP-197 input validation ([|x|]B==psi(B), baton genesis) -> vk_x runtime MSM -> baked-G2 + prepared-VK optimal-ate Miller -> final exponentiation (witnessed fp12 inverse) -> verdict==Fp12.ONE. State threaded as transcript-anchored NFT commitments (T0=hash(A,B,C), T1=hash(T0,in0,in1,vk)), forward-chain locking pins, a minting-baton category genesis, shared-tower relocation + single-hash-bind (tower fns hash-bound in the witness), and the BLS witnessed-inverse final exponentiation. The pairing is bound to the validated/computed points; chunks run in order, each pinned to the next, with the token category anchored (adversarial_covenant.mjs: 110/0). BCH-compatible: every step validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts <= 10,000 B)."
     },
@@ -2116,7 +2116,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the complete BLS12-381 Groth16 verifier in 49 covenant-threaded chunks with a transcript-bound cross-step thread, using the witnessed-residue final-exp lever. g2check [|x|]B==psi(B) G2-subgroup check (baton genesis, 4 chunks) -> vk_x runtime MSM (12 chunks) -> baked-G2 + prepared-VK 64-NAF Miller with c^-|x| fused into the loop (32 chunks) -> inverse-free witnessed-residue final-exponentiation tail (ePrint 2024/640, c per-limb canonical + c·cInv==ONE + w in Fp6; verdict Frob(c,1)==fF·w, 1 chunk). State threaded as transcript-anchored NFT commitments (T0=hash(A,B,C), T1=hash(T0,in0,in1,vk_x)), forward-chain locking pins, a minting-baton category genesis, and shared-tower relocation. BCH-compatible: every step validates on the real BCH 2026 standard VM (op-cost <= 8,032,800, scripts <= 10,000 B)."
     },
@@ -2184,7 +2184,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the BN254 Groth16 Miller boundary computed as the INPUTS of ONE transaction. Each batched-Miller chunk carries its incoming state (f in Fp12 + 4 running G2 points + pair points) as a raw byte blob and binds the chain by forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT commitment, no hashing, no 128-byte state limit. Every input fits one BCH budget (op-cost <=8,032,800, <=10,000 B); the whole boundary is one non-standard (<1 MB) transaction. Same chunk math as bch-pairing-chunked. Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad (~30% fewer on-chain bytes than bare-script). Reaches the miller-boundary checkpoint (full verdict: bch-groth16-intratx)."
     },
@@ -2252,9 +2252,77 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the full BN254 Groth16 verifier (validate G2 inputs -> vk_x -> batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1) laid out as the INPUTS of ONE transaction. Each input carries its incoming state as a raw byte blob and binds the chain by forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT-commitment hand-off, no hashing, no 128-byte state limit, arbitrary intermediate size. Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-chunked; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Single-transaction counterpart of the multi-tx bch-groth16-chunked and the non-deployable bch-groth16-singleton. Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad (~30% fewer on-chain bytes than a bare-script deployment; the same lever applies to the multi-tx covenant chunks)."
+    },
+    {
+      "id": "bch-groth16-intratx-authenticated-p2s",
+      "name": "BCH Groth16 intra-tx, authenticated P2S dispatcher (embeddable-pattern prototype)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
+      "score": 375949,
+      "size": {
+        "scriptBytes": 373908,
+        "txOverheadBytes": 2041,
+        "transactions": 1,
+        "total": 375949
+      },
+      "padding": {
+        "bytes": 132951,
+        "fraction": 0.35557142398664915
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 294834349,
+          "steps": 47,
+          "heaviestStepOpCost": 7451115,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 332226745,
+          "steps": 47,
+          "heaviestStepOpCost": 7666230,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "opCostBudget": 299013600,
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": false,
+          "detail": "tx 373,881 B > 100,000 B standard size"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 2,
+        "proofsPassed": 2,
+        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "type": "p2s"
+      },
+      "source": "Authenticated P2S (bare/pay-to-script, not P2SH) dispatcher variant of the 47-input BN254 Groth16 intra-transaction verifier. Each original 35-byte P2SH32 locking is replaced by a 44-byte bare dispatcher — OP_DUP OP_HASH256 <hash256(body)> OP_EQUALVERIFY <999> OP_DEFINE <999> OP_INVOKE — that authenticates the stage body (still the final push of the byte-identical unlocking, now ordinary data rather than a P2SH redeem script) before invoking it. Modified bodies and valid bodies from other stages are rejected at the hash check. Bare lockings <=201 bytes are relay-standard. Standalone this only emulates P2SH32 semantics at +9 bytes per input — not a size improvement; the point is that the pattern is ordinary bytecode and therefore embeddable inside larger scripts, where P2SH authentication cannot go."
     },
     {
       "id": "bch-groth16-intratx-residue",
@@ -2320,7 +2388,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier laid out as the INPUTS of ONE transaction. Same forward-checking as bch-groth16-intratx (each input carries its incoming state as a raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, no 128-byte state limit), but it runs the residue chunk graph: fast-G2 endo subgroup check (ePrint 2022/348, 4 chunks), GLV vk_x MSM (5 chunks), c^-(6x+2)-FUSED batched Miller with e(alpha,beta) precomputed/skipped (23 chunks), and a witnessed-residue final-exponentiation TAIL collapsing the hard exponentiation to ONE chunk — 33 inputs total (vs 54 for the plain intra-tx build), ~263 KB / ~202M op. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-grouped-residue; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad."
     },
@@ -2388,7 +2456,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-intratx-residue (each input carries its incoming state as a raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, no 128-byte state limit) and the same residue chunk graph (fast-G2 endo subgroup check, GLV vk_x MSM, c^-(6x+2)-FUSED batched Miller with e(alpha,beta) precomputed/skipped, witnessed-residue final-exp TAIL), but each chunk fills a 100 kB input instead of 10 kB, collapsing the verifier from 33 inputs to 5 (g2check 1, GLV vk_x 1, fused Miller 3 with the residue final-exp verdict folded into the last one), ~191 kB / ~178M op. Op-cost and bytes are conserved; this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget."
     },
@@ -2460,7 +2528,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the full BN254 Groth16 verifier (validate G2 inputs -> vk_x -> batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1), the 54 chunks packed into ~6 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-intratx and bch-groth16-chunked: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a CashToken NFT commitment — a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds its inBlob via tx.inputs[0].nftCommitment == hash256(inBlob). The token thread chains the groups in order. Unlike the 54-tx covenant chain (which exceeds the default 50-deep mempool ancestor limit) and the single 0.5 MB intra-tx bundle (non-standard, mine-direct), every grouped tx is under the 100,000-byte standard size and the run is ~6 deep — relayable under default standard policy. Same chunk math as bch-groth16-chunked / -intratx; one fixed set of lockings verifies any proof for the VK. Deployed P2SH32 (each chunk's redeem rides in the scriptSig, counting toward the op-cost budget)."
     },
@@ -2532,7 +2600,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier packed with the grouped method. fast-G2 endomorphism subgroup check (ePrint 2022/348, 4 chunks) -> GLV vk_x (each public input decomposed k1+k2*lambda via the G1 endomorphism, a 4-scalar ~128-bit Straus over baked {IC1,phiIC1,IC2,phiIC2}, witnesses range-checked + bound k1+k2*lambda==in mod r; ~halves the MSM, 5 chunks) -> c^-(6x+2)-FUSED batched Miller with e(alpha,beta) PRECOMPUTED (pair 1 is a VK constant: its Miller value is baked and multiplied in once instead of folding ~88 lines) and the residue witness c,cInv threaded through every chunk -> witnessed-residue final-exp TAIL (ePrint 2024/640: c canonical + c*cInv==ONE + w in the cubic coset {1,w27,w27^2}; verdict fF*w*c^q2 == c^q*c^q3), 1 chunk. 33 chunks in 3 STANDARD (<100,000 B) transactions: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a CashToken NFT commitment. Fewer transactions than the 50-chunk / 6-tx plain grouped build, and far under the 36-tx residue covenant chain. One fixed set of lockings verifies any proof for the VK. Deployed P2SH32. Every step validates on the real BCH 2026 standard VM (op-cost <= 8,032,800, scripts <= 10,000 B)."
     },
@@ -2593,7 +2661,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the BLS12-381 Groth16 pairing (batched 4-pair optimal-ate Miller -> final exponentiation -> verdict == Fp12 ONE) computed as the INPUTS of ONE transaction. Each chunk carries its incoming state as a raw 48-byte-limb blob and binds the chain by forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT commitment, no hashing. The easy-part inverse rides as an uncommitted witness. Every input fits one BCH budget; the whole pairing is one non-standard (<1 MB) transaction. Same chunk math as bch-pairing-bls12381-chunked. Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad (~27% fewer on-chain bytes than bare-script)."
     },
@@ -2654,7 +2722,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier (vk_x -> batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1) laid out as the INPUTS of ONE transaction. Each input carries its incoming state as a raw 48-byte-limb blob and binds the chain by forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT-commitment hand-off, no hashing, arbitrary intermediate size. The easy-part inverse rides as an uncommitted witness. Every input fits one BCH budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-bls12381-chunked; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad (~27% fewer on-chain bytes than bare-script)."
     },
@@ -2715,7 +2783,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the residue-optimized full BLS12-381 Groth16 verifier laid out as the INPUTS of ONE transaction. Same forward-checking as bch-groth16-bls12381-intratx (each input carries its incoming state as a raw 48-byte-limb blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, arbitrary intermediate size), but it runs the residue chunk graph: GLV vk_x MSM (6 chunks), c^-|x|-FUSED batched Miller with e(alpha,beta) baked and only e(-A,B) running on-chain G2 arithmetic (30 chunks; the G2 on-curve + prime-order-subgroup validation is FUSED into the first/last Miller chunks, reusing the running R_B=[|x|]B the loop already walks), and a witnessed-residue final-exponentiation TAIL collapsing the Hayashida-Scott hard part to a mu_27A ((w^|x|)*w)^9 walk + fF*w==frob(c,1) verdict (6 chunks) — 42 inputs total (vs 87 for the plain intra-tx build). The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail; w enters the tail as an uncommitted witness. Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-bls12381-grouped-residue; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad."
     },
@@ -2776,7 +2844,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the residue-optimized full BLS12-381 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-bls12381-intratx-residue (each input carries its incoming state as a raw 48-byte-limb blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, arbitrary intermediate size) and the same residue chunk graph (GLV vk_x MSM, c^-|x|-FUSED batched Miller with e(alpha,beta) baked and the G2 on-curve+prime-order-subgroup validation fused into the first/last Miller chunks, witnessed-residue mu_27A final-exp TAIL), but each chunk fills a 100 kB input instead of 10 kB, collapsing the verifier from 42 inputs to 5 (GLV vk_x 1, fused Miller 3, residue walk+finalize tail 1), ~272 kB / ~251M op. Op-cost and bytes are conserved; this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, mu_27A membership on w); the verdict is fF*w==frob(c,1). Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget."
     },
@@ -2841,7 +2909,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier (g2check EIP-197 input validation -> vk_x -> batched 4-pair Miller -> final exponentiation -> assert verdict==1), the ~87 chunks packed into ~9 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-bls12381-intratx and bch-groth16-bls12381-chunked: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a CashToken NFT commitment — a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds its inBlob via tx.inputs[0].nftCommitment == hash256(inBlob). The token thread chains the groups in order. Unlike the ~87-tx covenant chain (far past the default 50-deep mempool ancestor limit) and the single ~0.7 MB intra-tx bundle (non-standard, mine-direct), every grouped tx is under the 100,000-byte standard size and the run is ~9 deep — relayable under default standard policy. 48-byte limbs, 4-R Miller state, easy-part inverses as uncommitted witnesses. Same chunk math as bch-groth16-bls12381-chunked / -intratx; one fixed set of lockings verifies any proof for the VK. Deployed P2SH32."
     },
@@ -2906,7 +2974,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier with the witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381), packed grouped. Chunk graph: g2check EIP-197 G2 subgroup validation -> GLV 4-scalar 128-bit vk_x Straus (baked subset-sum table) -> c^-|x|-FUSED prepared-VK batched Miller (e(alpha,beta) baked as a constant, (vk_x,gamma)/(C,delta) line coeffs baked, only e(-A,B) runs on-chain G2 arithmetic; c^-|x| folded into the shared f) -> witnessed-residue tail (the 23-chunk Hayashida-Scott hard part collapses to a ((w^|x|)*w)^9 mu_(27A) witness-subgroup walk + the fF*w == frob(c,1) verdict, lambda = p + |x|). The ~47 chunks are packed into ~5 STANDARD (<100,000 B) transactions: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a mutable CashToken NFT commitment (a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds tx.inputs[0].nftCommitment == hash256(inBlob)). Unlike the ~49-tx covenant-residue chain (against the default 50-deep mempool ancestor limit), every grouped tx is under the 100,000-byte standard size and the run is ~5 deep -- relayable under default standard policy. 48-byte limbs; c,cInv thread through the fused Miller as constant witness; w is an uncommitted tail witness. One fixed set of lockings verifies any proof for the VK. Deployed P2SH32."
     },
@@ -2967,7 +3035,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "synthetic; mirrors multi-step-computation.md"
     },
@@ -3028,7 +3096,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the SMALLEST source-REPRODUCIBLE complete Groth16 verifier on BN254 (genpow-src/groth16.cash, genpow). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, forms the RAW product of four optimal-ate Miller loops e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta), and require()s a textbook full final exponentiation finalExpPow(product) == Fp12.ONE (f^E, E = (p^12-1)/r derived in-source via the Lean-licensed ederive-deriv.mjs). Byte win from a Karatsuba->schoolbook lever, Lean-proven equivalent (sqr === mul-on-the-diagonal). FULL EIP-197 soundness: explicit on-curve checks on A, C (G1) and B (G2) AND the G2 SUBGROUP membership check [6x^2]B == psi(B) -- so the verifier is NON-MALLEABLE, a STRICTLY STRONGER posture than the BLS singleton and than subgroup-skipping verifiers. Sound (vk_x recomputed on-chain; a swapped proof or tampered input fails f^E==1). Locking 4,292 B (sha256 61c451d0...8494c83) vs the 8,756-score mr-zwets opcode-optimized singleton and 21,661 B (baseline cashc). Byte-exact reproducible from source: cashc -> 11,964 baseline; replay.mjs + nodeorders.json -> optimized_search.hex; deterministic cse/inline/renumber tail -> 4,292; gate.mjs 3-check --lineage OVERALL PASS. Like every singleton it does NOT fit one standard input, so it is op-cost-waived / non-runnable-as-one-input and >201 B non-standard -- the win is purely byte size. Verified accept-valid 4/4, reject-invalid 4/4, crown-vs-baseline differential 4/4 on the loosened BCH-2026 VM."
     },
@@ -3089,7 +3157,7 @@
       },
       "packaging": {
         "secure": true,
-        "detail": "securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)"
+        "type": "p2s"
       },
       "source": "BCH-native CashScript: the SMALLEST known complete Groth16 verifier on BLS12-381 (groth16_residue.cash, genpow). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, forms the RAW product of four optimal-ate Miller loops e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta), and require()s a textbook full final exponentiation finalExpPow(product) == Fp12.ONE (f^E, E = (p^12-1)/r, the Lean-licensed E-derivation spliced in via bls_ederive_E.mjs). WITNESS-FREE: the unlocking carries only the proof points (A,B,C compressed) + the two public inputs -- no residue/cofactor witness. Sound (vk_x recomputed on-chain; a swapped proof or tampered public input fails f^E==1). Locking 3,425 B, harness score 3,715 vs the 14,952 of bch-groth16-bls12381-singleton on the SAME curve in THIS harness (same-harness -75.2%); byte-exact reproducible from source (reproduce.sh). The genpow ladder trades op-cost up for bytes down: like every singleton it does NOT fit one standard input, so it is op-waived / non-runnable-as-one-input -- the win is purely byte size. Verified vs @noble/curves bls12-381 (millerProduct^E == Fp12.ONE asserted for every valid vector). No BLS G1/G2 subgroup check (inherited singleton posture, same as the competitor): off-subgroup A/C are accepted but provably harmless (torsion pairs to 1, statement unchanged) = proof malleability only, no false-statement forgery."
     }
