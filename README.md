@@ -183,6 +183,15 @@ results.json          committed leaderboard export (consumed by the website)
 score-history.json    committed per-run score history
 ```
 
+## Contributing
+
+External verifier submissions are welcome — several leaderboard entries
+arrived as PRs. A submission is vectors JSON + an implementation module + a
+one-line registry edit; your contract source and build tooling can stay
+private, because the harness grades behavior (correctness gates, multiproof
+generality, worst-case runs) rather than source. See
+[CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Related repos
 
 - [`groth16_cashscript`](https://github.com/mr-zwets/groth16_cashscript) —
