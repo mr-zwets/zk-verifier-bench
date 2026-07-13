@@ -15,9 +15,10 @@
 // checks c*cInv==ONE, c canonical, exact w membership in {1,w27,w27^2}, and the residue
 // equation fF*(w*c^q2) == (c*c^q2)^q. It uses the same chunk math as
 // bch-groth16-grouped-residue, laid out as the inputs of one non-standard (<1 MB)
-// transaction rather than token-threaded standard transactions.
+// transaction rather than token-threaded standard transactions. The four GLV chunks read one
+// hash-bound fixed lookup table carried by the final GLV input rather than embedding four copies.
 //
-// Result: ~231 KB / ~180M op over 27 inputs (vs ~523 KB / 411M over 54 for plain intratx),
+// Result: ~228 KB / ~180M op over 27 inputs (vs ~523 KB / 411M over 54 for plain intratx),
 // each input fitting one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B).
 //
 // Vectors: groth16_contract/chunked/intratx/build_vectors_residue.mjs ->
@@ -62,7 +63,8 @@ export const bchGroth16IntratxResidue: Implementation = {
     'subgroup check (ePrint 2022/348, 3 chunks), GLV vk_x MSM (4 chunks), c^-(6x+2)-FUSED ' +
     'batched Miller with e(alpha,beta) precomputed/skipped (20 chunks). Its terminal chunk ' +
     'also checks the witnessed-residue verdict, for 27 inputs total (vs 54 for the plain ' +
-    'intra-tx build), ~231 KB / ~180M op. The residue witness (c, cInv) threads through ' +
+    'intra-tx build), ~228 KB / ~180M op. The four GLV chunks share one hash-bound fixed ' +
+    'lookup table carried by the final GLV input. The residue witness (c, cInv) threads through ' +
     'every Miller chunk; the terminal checks c*cInv==ONE, c canonical, exact w membership ' +
     'in {1,w27,w27^2}, and fF*(w*c^q2) == (c*c^q2)^q. ' +
     'Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the ' +

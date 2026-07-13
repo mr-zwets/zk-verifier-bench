@@ -9,7 +9,8 @@
 //   - c^-(6x+2)-FUSED batched Miller whose terminal chunk also checks the witnessed-residue
 //     verdict fF*(w*c^q2) == (c*c^q2)^q, eliminating a separate final-exp tail input.
 // Net: the full verifier in 27 chunks packed into 3 STANDARD (<100,000 B) transactions (vs the
-// 50-chunk / 6-tx plain grouped build). One fixed set of lockings verifies any proof for the VK.
+// 50-chunk / 6-tx plain grouped build). The four GLV chunks share one hash-bound fixed lookup
+// table carried by the final GLV input. One fixed set of lockings verifies any proof for the VK.
 //
 // Vectors: groth16_contract/chunked/grouped/build_vectors_residue.mjs ->
 // src/bch/groth16-grouped-residue-vectors.json.
@@ -80,7 +81,8 @@ export const bchGroth16GroupedResidue: Implementation = {
     'grouped method. fast-G2 endomorphism subgroup check (ePrint 2022/348, 3 chunks) -> GLV vk_x ' +
     '(each public input decomposed k1+k2*lambda via the G1 endomorphism, a 4-scalar ~128-bit ' +
     'Straus over baked {IC1,phiIC1,IC2,phiIC2}, witnesses range-checked + bound k1+k2*lambda==in ' +
-    'mod r; ~halves the MSM, 4 chunks) -> c^-(6x+2)-FUSED batched Miller with e(alpha,beta) PRECOMPUTED (pair 1 is a VK ' +
+    'mod r; ~halves the MSM, 4 chunks sharing one hash-bound fixed lookup table carried by the ' +
+    'final GLV input) -> c^-(6x+2)-FUSED batched Miller with e(alpha,beta) PRECOMPUTED (pair 1 is a VK ' +
     'constant: its Miller value is baked and multiplied in once instead of folding ~88 lines) and ' +
     'the residue witness c,cInv threaded through every chunk; the terminal Miller chunk also ' +
     'checks the witnessed-residue verdict (ePrint 2024/640: c canonical + c*cInv==ONE + exact ' +
