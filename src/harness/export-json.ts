@@ -114,6 +114,60 @@ const bchCell = (r: BenchmarkResult) => {
 const isBsvSeed = (r: BenchmarkResult): boolean =>
   r.impl.reference === true || /BSV mainnet/.test(r.impl.source);
 
+// Rolled-up soundness for the entry — the single "is this a valid verifier" signal the
+// per-dimension cells (bch / generality / inputValidation / packaging) never summarized. Also the
+// home of the cross-stage stapling result (folded in here rather than a separate top-level cell,
+// since it is purely a correctness concern). Mirrors the harness `pass` gate, reasons kept legible:
+//   'fail'       - a hard defect: the valid run is not fully accepted, an invalid run is wrongly
+//                  accepted, the worst-case proof is rejected, packaging is insecure, or a
+//                  cross-stage staple is accepted. `failures` names each. DISQUALIFIED — excluded
+//                  from the frontier leaders and score-history.
+//   'valid-only' - the valid run passes but the entry shipped no invalid fixtures, so rejection
+//                  was never exercised (correct as far as tested, not the same as proven sound).
+//   'pass'       - valid run accepted AND every negative fixture rejected.
+const correctnessOf = (r: BenchmarkResult) => {
+  const csb = r.crossStageBinding;
+  const failures = [
+    !r.validPassed ? 'valid run not fully accepted' : null,
+    r.invalidTotal > 0 && r.invalidRejected < r.invalidTotal
+      ? `${r.invalidTotal - r.invalidRejected}/${r.invalidTotal} invalid run(s) wrongly accepted`
+      : null,
+    r.worstCase?.accepted === false ? 'worst-case proof rejected (completeness)' : null,
+    csb.unboundSeams > 0
+      ? `cross-stage staple accepted (${csb.unboundSeams}/${csb.seamsTested} seam(s))`
+      : null,
+    !r.securePackaging ? 'insecure P2SH20 packaging' : null,
+  ].filter((x): x is string => x !== null);
+  const verdict: 'pass' | 'fail' | 'valid-only' =
+    failures.length > 0 ? 'fail' : r.invalidTotal > 0 ? 'pass' : 'valid-only';
+  return {
+    verdict,
+    validAccepted: r.validPassed,
+    invalid: { tested: r.invalidTotal, rejected: r.invalidRejected },
+    worstCaseAccepted: r.worstCase?.accepted ?? null,
+    // Cross-stage stapling (multi-stage soundness): can one proof's stage be spliced onto another
+    // proof's remaining stages inside one transaction? A verifier that binds every stage to one
+    // proof rejects every such hybrid; an accepted hybrid is a soundness hole (a stage output that
+    // nothing later ties to the proof the rest of the run consumes). Tested by building hybrid runs
+    // from two distinct valid proofs at each seam (benchmark.ts crossStageStaple). bound=false is a
+    // `fail`; bound=null = N/A (single-tx, or a covenant/grouped token hand-off the harness cannot
+    // staple-test yet — neither credited nor penalized).
+    crossStageBinding: {
+      applicable: csb.applicable,
+      bound: csb.applicable ? csb.unboundSeams === 0 : null,
+      seamsTested: csb.seamsTested,
+      unboundSeams: csb.unboundSeams,
+      ...(csb.firstUnboundSeam ? { firstUnboundSeam: csb.firstUnboundSeam } : {}),
+      detail: !csb.applicable
+        ? 'not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet'
+        : csb.unboundSeams === 0
+          ? `every stage bound to one proof: ${csb.seamsTested} seams staple-tested with a 2nd distinct proof, all rejected`
+          : `UNBOUND: ${csb.unboundSeams}/${csb.seamsTested} seam(s) accept a spliced 2-proof hybrid (first at "${csb.firstUnboundSeam}") — one proof's stage can be stapled onto another proof's remaining stages`,
+    },
+    failures,
+  };
+};
+
 const entryOf = (r: BenchmarkResult) => ({
   id: r.impl.id,
   name: r.impl.name,
@@ -126,6 +180,11 @@ const entryOf = (r: BenchmarkResult) => ({
   // Which BCH VM the entry targets: 'bch-2026' (current chain) or 'bch-spec' (proposed 100 kB-
   // script upgrade). Lets the site badge/segregate spec entries (also carried by `category: spec`).
   vmTarget: r.impl.vm ?? 'bch-2026',
+  // Rolled-up soundness: verdict (pass | fail | valid-only), the underlying valid/invalid-run and
+  // worst-case data, the folded-in cross-stage stapling result, and a `failures` summary. The
+  // single headline "is this a valid verifier" signal the per-dimension cells never summarized;
+  // `verdict: 'fail'` disqualifies the entry from the frontier leaders / score-history (see main()).
+  correctness: correctnessOf(r),
   // headline score = full on-chain footprint (lower is better): the verifier scripts PLUS
   // the serialized transaction overhead (envelope + outpoints + CashToken prefixes + varints).
   // Folding tx overhead in makes structures comparable — a covenant chain pays it once PER
@@ -280,13 +339,13 @@ const main = async () => {
   // AND verifies any proof at runtime. Instance-specific (baked) artifacts fit but are
   // excluded, so neither the frontier "current" nor the score-history records them.
   const bestBchNative = full
-    .filter((e) => e.bch.compatible && e.generality.runtimeGeneral && e.packaging.secure)
+    .filter((e) => e.bch.compatible && e.generality.runtimeGeneral && e.packaging.secure && e.correctness?.verdict !== 'fail')
     .sort((a, b) => a.score - b.score)[0];
   // smallest BCH-native (non-baseline) full verifier: the current frontier leader,
   // whether or not it already fits BCH per-tx limits. A P2SH20-packaged entry is
   // disqualified, so it can never be the leader.
   const leader = full
-    .filter((e) => !e.official && e.packaging.secure)
+    .filter((e) => !e.official && e.packaging.secure && e.correctness?.verdict !== 'fail')
     .sort((a, b) => a.score - b.score)[0];
 
   // accumulate the score-history time-series, per curve so each curve draws its own line.
@@ -306,8 +365,8 @@ const main = async () => {
   const history = recordHistory(
     [
       // fitting series, split by standardness so each frontier is recorded independently
-      ...smallestPerCurve((e) => e.bch.compatible && e.bch.standard.fits && e.generality.runtimeGeneral && e.packaging.secure, true),
-      ...smallestPerCurve((e) => e.bch.compatible && !e.bch.standard.fits && e.generality.runtimeGeneral && e.packaging.secure, true),
+      ...smallestPerCurve((e) => e.bch.compatible && e.bch.standard.fits && e.generality.runtimeGeneral && e.packaging.secure && e.correctness?.verdict !== 'fail', true),
+      ...smallestPerCurve((e) => e.bch.compatible && !e.bch.standard.fits && e.generality.runtimeGeneral && e.packaging.secure && e.correctness?.verdict !== 'fail', true),
       // singleton ideal: smallest verifier that busts the BCH limits entirely
       ...smallestPerCurve((e) => !e.official && !e.bch.compatible && e.packaging.secure, false),
     ],
