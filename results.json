@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-13T17:39:37.235Z",
+  "generatedAt": "2026-07-13T21:04:00.177Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -33,10 +33,10 @@
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-intratx-residue",
+      "id": "bch-groth16-grouped-residue",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 239684,
+      "bytes": 239794,
       "bchCompatible": true
     }
   },
@@ -545,6 +545,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 522564,
       "size": {
         "scriptBytes": 522477,
@@ -613,6 +630,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 11717771,
       "size": {
         "scriptBytes": 11717684,
@@ -677,6 +711,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 8874,
       "size": {
         "scriptBytes": 8787,
@@ -747,6 +798,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 6673,
       "size": {
         "scriptBytes": 6586,
@@ -817,6 +885,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 67248,
       "size": {
         "scriptBytes": 67161,
@@ -888,6 +973,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 9703,
       "size": {
         "scriptBytes": 9616,
@@ -951,6 +1053,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 6912,
       "size": {
         "scriptBytes": 6825,
@@ -1014,6 +1133,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 67368,
       "size": {
         "scriptBytes": 67281,
@@ -1085,6 +1221,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 381151,
       "size": {
         "scriptBytes": 374830,
@@ -1157,6 +1310,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 4,
+          "rejected": 4
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 472510,
       "size": {
         "scriptBytes": 466123,
@@ -1222,6 +1392,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 4,
+          "rejected": 4
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 279219,
       "size": {
         "scriptBytes": 274607,
@@ -1287,6 +1474,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 12555,
       "size": {
         "scriptBytes": 12468,
@@ -1350,6 +1554,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 12763,
       "size": {
         "scriptBytes": 12676,
@@ -1413,6 +1634,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 184850,
       "size": {
         "scriptBytes": 183458,
@@ -1474,6 +1712,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 14859,
       "size": {
         "scriptBytes": 14685,
@@ -1535,6 +1790,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 13552,
       "size": {
         "scriptBytes": 12520,
@@ -1607,6 +1879,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 vk_x (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 28033,
       "size": {
         "scriptBytes": 26461,
@@ -1672,6 +1961,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 7387,
       "size": {
         "scriptBytes": 7300,
@@ -1735,6 +2041,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 1,
+          "rejected": 1
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 7538,
       "size": {
         "scriptBytes": 7451,
@@ -1798,6 +2121,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 217562,
       "size": {
         "scriptBytes": 214466,
@@ -1870,6 +2210,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 649134,
       "size": {
         "scriptBytes": 639846,
@@ -1935,6 +2292,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 697281,
       "size": {
         "scriptBytes": 686058,
@@ -2000,6 +2374,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 4,
+          "rejected": 4
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 634540,
       "size": {
         "scriptBytes": 625533,
@@ -2065,6 +2456,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 4,
+          "rejected": 4
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 365203,
       "size": {
         "scriptBytes": 358914,
@@ -2130,6 +2538,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 215429,
       "size": {
         "scriptBytes": 214377,
@@ -2198,6 +2623,26 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "fail",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": false,
+          "seamsTested": 46,
+          "unboundSeams": 1,
+          "firstUnboundSeam": "g2check bits[62,63) [x0]B-endo==psi(B) | vk_x [0,43)",
+          "detail": "UNBOUND: 1/46 seam(s) accept a spliced 2-proof hybrid (first at \"g2check bits[62,63) [x0]B-endo==psi(B) | vk_x [0,43)\") — one proof's stage can be stapled onto another proof's remaining stages"
+        },
+        "failures": [
+          "cross-stage staple accepted (1/46 seam(s))"
+        ]
+      },
       "score": 375526,
       "size": {
         "scriptBytes": 373485,
@@ -2266,6 +2711,26 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "fail",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 4,
+          "rejected": 4
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": false,
+          "seamsTested": 46,
+          "unboundSeams": 1,
+          "firstUnboundSeam": "g2check bits[62,63) [x0]B-endo==psi(B) | vk_x [0,43)",
+          "detail": "UNBOUND: 1/46 seam(s) accept a spliced 2-proof hybrid (first at \"g2check bits[62,63) [x0]B-endo==psi(B) | vk_x [0,43)\") — one proof's stage can be stapled onto another proof's remaining stages"
+        },
+        "failures": [
+          "cross-stage staple accepted (1/46 seam(s))"
+        ]
+      },
       "score": 375949,
       "size": {
         "scriptBytes": 373908,
@@ -2334,6 +2799,26 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "fail",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": false,
+          "seamsTested": 31,
+          "unboundSeams": 1,
+          "firstUnboundSeam": "g2check bits[62,63) [x0]B-endo==psi(B) | GLV vk_x [0,34)",
+          "detail": "UNBOUND: 1/31 seam(s) accept a spliced 2-proof hybrid (first at \"g2check bits[62,63) [x0]B-endo==psi(B) | GLV vk_x [0,34)\") — one proof's stage can be stapled onto another proof's remaining stages"
+        },
+        "failures": [
+          "cross-stage staple accepted (1/31 seam(s))"
+        ]
+      },
       "score": 239684,
       "size": {
         "scriptBytes": 238288,
@@ -2402,6 +2887,26 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-spec",
+      "correctness": {
+        "verdict": "fail",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": false,
+          "seamsTested": 4,
+          "unboundSeams": 1,
+          "firstUnboundSeam": "g2check bits[0,63) [x0]B-endo==psi(B) | GLV vk_x final -> assert vk_x",
+          "detail": "UNBOUND: 1/4 seam(s) accept a spliced 2-proof hybrid (first at \"g2check bits[0,63) [x0]B-endo==psi(B) | GLV vk_x final -> assert vk_x\") — one proof's stage can be stapled onto another proof's remaining stages"
+        },
+        "failures": [
+          "cross-stage staple accepted (1/4 seam(s))"
+        ]
+      },
       "score": 191164,
       "size": {
         "scriptBytes": 190925,
@@ -2470,6 +2975,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 375771,
       "size": {
         "scriptBytes": 373386,
@@ -2542,6 +3064,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 239794,
       "size": {
         "scriptBytes": 238226,
@@ -2614,6 +3153,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16 pairing (BCH-native)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": true,
+          "seamsTested": 71,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 71 seams staple-tested with a 2nd distinct proof, all rejected"
+        },
+        "failures": []
+      },
       "score": 641846,
       "size": {
         "scriptBytes": 638730,
@@ -2675,6 +3231,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": true,
+          "seamsTested": 83,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 83 seams staple-tested with a 2nd distinct proof, all rejected"
+        },
+        "failures": []
+      },
       "score": 662699,
       "size": {
         "scriptBytes": 659067,
@@ -2736,6 +3309,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": true,
+          "seamsTested": 41,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 41 seams staple-tested with a 2nd distinct proof, all rejected"
+        },
+        "failures": []
+      },
       "score": 339060,
       "size": {
         "scriptBytes": 337234,
@@ -2797,6 +3387,23 @@
       "structure": "single-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-spec",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": true,
+          "seamsTested": 4,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 4 seams staple-tested with a 2nd distinct proof, all rejected"
+        },
+        "failures": []
+      },
       "score": 271893,
       "size": {
         "scriptBytes": 271654,
@@ -2858,6 +3465,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 691236,
       "size": {
         "scriptBytes": 686787,
@@ -2923,6 +3547,23 @@
       "structure": "multi-tx",
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 2,
+          "rejected": 2
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 339297,
       "size": {
         "scriptBytes": 337127,
@@ -2988,6 +3629,23 @@
       "structure": "multi-tx",
       "proofSystem": "demo (hash-chained state)",
       "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 3,
+          "rejected": 3
+        },
+        "worstCaseAccepted": null,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
       "score": 483,
       "size": {
         "scriptBytes": 228,
