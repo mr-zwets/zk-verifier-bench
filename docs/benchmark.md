@@ -106,11 +106,8 @@ whatever the scripts enforce (e.g. the hash256 chain in the demo).
 
 ## Metrics
 
-Why bytes rank but op-cost is reported with equal weight, and why the same
-verifier is graded under three rule sets (consensus, standardness, bch-spec),
-is covered in the README's *Why these measures* section: the harness exists to
-decompose where the cost comes from — cryptography, VM limits, or relay
-policy — not just to rank.
+(For why op-cost and the consensus/standard/bch-spec gaps are measured at
+all, see *Why these measures* in the README.)
 
 - **score** = total on-chain bytes: locking + unlocking + per-structure
   serialized-tx overhead (`txOverheadBytes` — envelope, outpoints, varints,

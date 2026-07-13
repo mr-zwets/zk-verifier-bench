@@ -28,6 +28,14 @@ This harness grades all of them on a level field: one primary score (total
 on-chain bytes — bytes are fees), hard correctness gates, and secondary columns
 for op-cost and deployability.
 
+Groth16 itself is not the end goal — it requires a circuit-specific trusted
+setup and, being pairing-based, is not post-quantum safe. But it is the
+industry-standard succinct verifier (smallest proofs, cheapest verification),
+which makes it the right first target: building it tests the practical
+viability of ZKPs on BCH and surfaces the BCH-specific problems any proof
+system will hit — chunking, multi-tx state hand-off, op-cost padding — along
+with the tooling to solve them.
+
 Two real BSV mainnet verifiers (`nchain`, BLS12-381; `scrypt-bn256`, BN254) are
 included as reference baselines — they established the starting point and show
 that a monolithic single-tx verifier cannot run within BCH's limits — but the
@@ -66,45 +74,19 @@ counterparts.
 
 ## Why these measures
 
-The harness is not just a ranking — it decomposes *where* the cost of on-chain
-proof verification comes from: the cryptography, the VM limits, or relay
-policy. That decomposition is the evidence base for deciding what future
-upgrades and tooling are actually needed.
+Bytes rank because they are what a user pays in fees, but two secondary
+measures carry the project's findings:
 
-**Bytes are the score; op-cost is the explanation.** Bytes are what a user
-pays in fees, so they rank. But op-cost is the constraint that *shapes* every
-entry: the per-input budget scales with script length
-(`(41 + len) × 800`), so compute-dense verifier code must buy budget by
-appending zero-padding — the largest slice of the chunking overhead is
-op-cost showing up as bytes. Reporting op-cost alongside size keeps the
-bytes-vs-compute trade honest: the smallest singletons (`genpow`) hit their
-byte floor only by ignoring compute entirely, while `minop` spends ~15× the
-bytes to minimize op-cost — ranking on bytes alone would hide that a "small"
-entry can be un-runnable. The single-input builds therefore form a Pareto
-frontier, and the *op-cost-optimized* end of it — not the byte floor — is the
-honest baseline for what chunking costs. Worst-case op-cost (dense proofs) is
-also the number protocol discussions need: it sizes what a
-base-instruction-cost cut or a budget-formula change would actually save.
-
-**Consensus vs standardness vs bch-spec are three different deployability
-questions, and the gaps between them are findings.**
-
-- **real VM (consensus)** — could a miner include it at all?
-- **standard VM (relay)** — can anyone deploy it today through the public
-  mempool? The gap between the two isolates the cost of relay *policy*,
-  separate from consensus: an intra-tx bundle is consensus-valid but
-  non-standard, and restructuring the same work into the grouped form (a
-  handful of standard transactions) is what standardness costs in bytes.
-- **bch-spec VM** — the same verifier graded under the proposed CHIP-2025-01
-  TXv5 limits (100 kB scripts, `(10,000 + len) × 800` budget), isolating
-  exactly how much of the overhead today's limits account for (the BN254
-  residue verifier collapses from ~32 inputs to 5) without touching the
-  cryptography. Spec entries sit in their own category so the current-BCH
-  ranking stays clean.
-
-Running one verifier under all three rule sets side by side is the point: it
-turns "BCH can't do X" / "just raise the limits" debates into measured
-numbers.
+- **Op-cost.** The per-input budget scales with script length, so entries buy
+  compute with zero-padding, and the smallest-byte builds are only small
+  because they ignore compute. Reporting op-cost keeps the byte score honest
+  and shows what a budget-formula change would save.
+- **The consensus / standard / bch-spec categories.** Each rule set has a
+  different optimal design, so each is benchmarked in its own right: intra-tx
+  bundles are the best shape when only consensus matters, the grouped form is
+  what standard relay demands, and the proposed TXv5 limits admit a much
+  flatter split (~5 inputs instead of ~32). Comparing the winners shows what
+  each rule change is worth.
 
 ## Entry families
 
