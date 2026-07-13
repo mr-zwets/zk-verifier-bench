@@ -1,7 +1,7 @@
 {
   "name": "zk-verifier-bench",
   "version": "1.0.0",
-  "description": "Benchmark ZKP (Groth16/STARK) verifiers on the Bitcoin Cash VM: correctness, size, op-cost, and BCH compatibility.",
+  "description": "Benchmark Groth16 verifiers on the Bitcoin Cash VM: correctness, on-chain bytes, op-cost, standardness, and BCH compatibility.",
   "type": "module",
   "main": "index.js",
   "scripts": {

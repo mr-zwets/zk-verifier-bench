@@ -1,5 +1,13 @@
 # Groth16 verifier checkpoint #1 — `vk_x` (public-input aggregation)
 
+> **Historical note (June 2026).** This is the original design note from before
+> the vk_x entries existed. Everything it sketches has since been built and
+> registered: `bch-vkx-singleton`, `bch-vkx-bls12381-singleton`, the chunked
+> forms (`bch-vkx-chunked-twoloop`, `-shamir`, `-covenant`,
+> `bch-vkx-bls12381-chunked-covenant`), and the GLV vk_x used inside the
+> residue builds. Kept for the measurement methodology and vector-regeneration
+> steps.
+
 `vk_x = IC0 + input0*IC1 + input1*IC2` over BN254/alt_bn128 (G1). This is
 `prepareVerificationInput` in `groth16_contract/groth16.cash`, the first
 checkpoint of the BCH Groth16 verifier.
@@ -42,14 +50,7 @@ checkpoint of the BCH Groth16 verifier.
 - Per-scalarMult sub-checkpoint: locking 2041 B, operationCost 39 407 049
   (≈5 inputs). Two of them ≈ the full 76 M, consistent.
 
-## Becoming harness checkpoint #1
-`benchmark.ts` should register vk_x as the first checkpoint by importing the
-locking/unlocking vectors here and calling `evaluatePair(createRealVm(), …)`
-for the consensus verdict and `createLoosenedVm()` for math + metrics, then
-reporting `operationCost` and `ceil(operationCost / standardInputBudget())`.
-The `vkx-scalarmult` vectors are the natural per-input chunk unit.
-
-## Chunking sketch (not built)
+## Chunking sketch (as originally proposed)
 Because vk_x needs ~10 inputs, a real on-chain verifier splits the two
 double-and-add scalar multiplies into per-bit-range steps, carrying the running
 Jacobian accumulator (and base point) between inputs as state. State is
@@ -59,8 +60,7 @@ range and hands off. The final input does the single inverse → affine and the
 equality check. One `vkx-scalarmult` step ≈ one chunk's worth of op-cost.
 
 ## Status
-Full vk_x is correct on the BCH 2026 VM (accepts the py_ecc-correct point, rejects
-wrong) at ~76M op-cost (~10 inputs). The `vkx-scalarmult` sub-step is registered as
-the per-step chunk unit; the full vk_x can be registered as a multi-input checkpoint
-once its vectors are regenerated (note: cashc pushes ctor/unlocking args in reverse
-declaration order).
+Superseded — see the historical note at the top. The full vk_x and its chunked
+forms are registered in `REGISTRY` (`src/harness/benchmark.ts`) and appear in
+the `partial` leaderboard category. (Implementation gotcha that remains
+relevant: cashc pushes ctor/unlocking args in reverse declaration order.)

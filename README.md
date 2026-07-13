@@ -1,156 +1,202 @@
 # zk-verifier-bench
 
-A benchmark harness for **zero-knowledge-proof verifiers on the Bitcoin Cash VM**.
-It takes a verifier implementation (its opcode program + a curve/field and proof
-vectors), and on the BCH 2026 virtual machine (libauth) it:
+A benchmark harness for **Groth16 proof verifiers on the Bitcoin Cash VM**.
+Every entry is executed on the BCH 2026 virtual machine (libauth); the harness
 
-1. **proves correctness** — the valid proof is ACCEPTED and invalid proofs are
-   REJECTED;
-2. **measures cost** — locking/unlocking byte size and op-cost; and
-3. **checks BCH compatibility** — replays the run on the *real* BCH 2026 VM
-   (consensus limits) to see whether it actually validates.
+1. **proves correctness** — the valid proof run is ACCEPTED, and tampered,
+   worst-case, and adversarial-input runs are REJECTED;
+2. **measures cost** — total on-chain bytes (the score), op-cost, serialized-tx
+   overhead, and dead-weight padding; and
+3. **checks deployability** — consensus limits, mempool standardness, and
+   packaging on the real BCH VMs.
 
-Implementations can be **single-transaction** or **multi-transaction** (state
-carried across steps, the way BCH must split heavy work). Results are grouped
-into separate leaderboards by proof system and structure.
+Results are exported (`pnpm benchmark:json`) as `results.json` +
+`score-history.json`, which feed a public leaderboard website. The verifier
+contracts themselves — the CashScript source, the chunk generators, and the
+design writeups — live in the open-source companion repo
+[`groth16_cashscript`](https://github.com/mr-zwets/groth16_cashscript).
 
 ## Why
 
-BSV runs a Groth16 verifier in one ~0.5 MB transaction because it removed
-Bitcoin's script/transaction limits. BCH kept those limits, so the same verifier
-cannot run in a single transaction and must be split across a chain of
-transactions. This harness quantifies that: it runs the real on-chain BSV
-verifiers, shows they are **not BCH-compatible** as-is, and provides the rails to
-build and benchmark BCH-native (multi-step) verifiers against them. It is the
-experimental companion to the comparison writeup in the `groth16_contract` repo.
+BCH keeps Bitcoin's per-input consensus limits: a 10,000-byte script-size cap
+and an op-cost budget of `(41 + unlockingLength) × 800` (≈8M for a max-size
+input). A full Groth16 pairing check — the Fp→Fp2→Fp6→Fp12 field tower, the
+Miller loop, the final exponentiation — does not fit in one input, so a
+deployable verifier must be split across many inputs and/or transactions.
+There are several ways to do that split, and several ways to shrink each piece.
+This harness grades all of them on a level field: one primary score (total
+on-chain bytes — bytes are fees), hard correctness gates, and secondary columns
+for op-cost and deployability.
+
+Two real BSV mainnet verifiers (`nchain`, BLS12-381; `scrypt-bn256`, BN254) are
+included as reference baselines — they established the starting point and show
+that a monolithic single-tx verifier cannot run within BCH's limits — but the
+benchmark's focus is the BCH-native entries competing below them.
 
 ## Quick start
 
 ```
 pnpm install
-pnpm fetch:nchain     # download the real nChain verifier + proof from WhatsOnChain
+pnpm fetch            # download the reference verifier artifacts from WhatsOnChain
 pnpm benchmark        # run the leaderboards
+pnpm benchmark:json   # export results.json + score-history.json (no filters)
 ```
 
-Current output:
+`pnpm benchmark` takes positional substring filters on the entry id
+(`pnpm benchmark genpow`, `pnpm benchmark singleton chunked`); `--demos`
+includes the demo entries.
 
-```
-### Groth16  [single-tx]
-nchain               BLS12-381   PASS (1/1✗)   1   522,477  510,467,864  510,467,864  no (script-size; ~64 steps by op-cost)
+## Leaderboards
 
-### demo (hash-chained state)  [multi-tx]
-bch-multistep-demo   -           PASS (3/3✗)   3       228        3,894        1,298  yes
-```
+Entries are grouped by **category** and **curve**; the score is **total
+on-chain bytes** (locking + unlocking + serialized-tx overhead, with dead-weight
+zero-padding reported separately). Lower is better. Current numbers live in
+`results.json` — the README deliberately doesn't hard-code them.
 
-The real BSV Groth16 verifier is functionally correct but **not BCH-compatible**
-(its 39,876-byte unlocking alone exceeds BCH's 10,000-byte script-size limit,
-and its op-cost is ~64x a single input's budget). A properly chunked multi-step
-run keeps every step inside the limits.
+| category | meaning |
+|----------|---------|
+| `full` | a complete Groth16 verifier |
+| `partial` | a sub-verifier milestone (`vkx-*`: the public-input MSM; `pairing-*`: the pairing check) |
+| `spec` | a full verifier targeting the **proposed** bch-spec VM (see below), kept out of the current-BCH ranking |
+| `demo` | toy entries validating harness mechanics |
+
+Both curves are covered throughout: **BN254** (32-byte field elements) and
+**BLS12-381** (48-byte), so each reference verifier has same-curve BCH
+counterparts.
+
+## Entry families
+
+~40 entries are registered (`REGISTRY` in `src/harness/benchmark.ts`); they
+factor into families along two axes — *deployment structure* and *optimization
+variant*:
+
+| family | ids | structure |
+|--------|-----|-----------|
+| references | `nchain`, `scrypt-bn256` | real BSV mainnet verifiers, single-tx; fail BCH limits |
+| singletons | `bch-groth16[-bls12381]-singleton[-opcode-optimized\|-genpow\|-minop]` | full verifier in ONE script — runtime-general correctness oracles; exceed one input's op-cost budget on current BCH |
+| chunked / covenant | `…-chunked`, `…-chunked-covenant[-residue]` | computation split into chunks; state threaded through an NFT commitment across a chain of transactions |
+| intra-tx | `…-intratx[-residue]` | all chunks are inputs of ONE (non-standard) transaction, binding each other via `OP_INPUTBYTECODE` |
+| grouped | `…-grouped[-residue]` | the hybrid: intra-tx binding inside a handful of standard (<100 kB) transactions, NFT hand-off between them — the deployable form |
+| spec | `…-intratx-residue-large` | 100,000-byte-script builds for the proposed bch-spec VM |
+| partials | `bch-vkx-*`, `bch-pairing-*` | vk_x MSM and pairing-check milestones in the same structures |
+| demo | `bch-multistep-demo` | hash-chained multi-tx demo |
+
+Optimization variants, roughly in the order they were developed:
+**opcode-optimized** (size-golfed codegen), **genpow** (smallest
+source-reproducible singleton), **minop** (op-cost-minimized, trading bytes for
+budget), **residue** (replaces the final-exponentiation hard part with a
+witnessed `c^λ` residue check — the single biggest score win), and **GLV**
+(endomorphism-split vk_x MSM inside the residue builds).
 
 ## How it works
 
-Two VMs (see `src/harness/vm.ts`):
+The unit of execution is a `Step` (one locking + unlocking pair = one input's
+script evaluation). A single-tx verifier is one step; covenant, intra-tx, and
+grouped entries are ordered step lists whose cross-step continuity the harness
+reproduces faithfully (synthetic token-carrying transactions for covenants, a
+real shared transaction for intra-tx/grouped inputs). See `docs/benchmark.md`
+for the full contract.
 
-- a **loosened** BCH 2026 VM (every resource ceiling lifted) to prove correctness
-  and measure op-cost even for oversized verifiers, and
-- the **real** BCH 2026 VM (consensus limits) to decide BCH compatibility.
+Five VMs (`src/harness/vm.ts`):
 
-The unit of execution is a `Step` (one locking + unlocking pair = one
-transaction's evaluation). A single-tx verifier is one step; a multi-tx verifier
-is an ordered list. See `docs/benchmark.md` for the full contract and how to add
-an implementation.
+- **loosened** BCH 2026 VM — every resource ceiling lifted; proves correctness
+  and measures op-cost even for oversized entries;
+- **real** BCH 2026 VM — consensus limits; decides `BCH compatible`;
+- **standard** BCH 2026 VM — mempool-relay policy; decides standardness;
+- **real + standard bch-spec VMs** — the proposed upgrade (100,000-byte
+  scripts, op-cost budget `(10,000 + len) × 800`); grades `vm: 'bch-spec'`
+  entries only.
+
+### Grading dimensions
+
+Beyond accept/reject on the committed proof, entries are graded on:
+
+- **proof-generality** — for `proofBinding: 'runtime'` entries the harness runs
+  several distinct valid proofs minted under the same verifying key against the
+  one fixed locking (N/N must verify); a baked entry would accept only its own.
+  See `docs/proof-generality.md`.
+- **worst-case proof** — a dense, near-r-input proof run through the same
+  locking, so op-cost claims hold at the worst case, not just the committed
+  proof.
+- **input validation** — adversarial witnesses carrying off-curve or
+  out-of-subgroup points must be rejected (EIP-197-style on-curve + subgroup
+  checks).
+- **standardness** — does every step also relay (`fitsBchStandardness`), or is
+  the entry consensus-valid but non-standard (e.g. bare intra-tx bundles)?
+- **secure packaging** — P2SH20-packaged entries are flagged (collision-attack
+  surface).
+- **honest byte accounting** — all-zero padding pushes (bought op-cost budget)
+  and per-structure serialized-tx overhead are folded into the score so
+  single-tx, covenant-chain, and grouped entries compare fairly.
+
+## Not every Groth16 is alike
+
+Cross-entry totals mix factors that have nothing to do with implementation
+quality:
+
+- **Curve.** BLS12-381 field elements are 1.5× BN254's; bigger curve, bigger
+  scripts. Compare within a curve line first.
+- **Statement.** Each verifies a different circuit with a different verifying
+  key and public-input count (which sets the vk_x MSM size).
+- **Deployment model — proof at runtime vs baked per-proof.** The references
+  and the singletons are *runtime-general*: the proof arrives push-only in the
+  unlocking at spend time, so one deployed program verifies any proof for its
+  circuit. The chunked / intra-tx / grouped entries are *instance-specific*:
+  proof material is baked into the chunk scripts, so a different proof requires
+  regenerating the chunks. Both genuinely verify on-chain, but they are
+  different artifacts; the harness reports `proofBinding` per entry and proves
+  the distinction empirically via the multi-proof sweep.
+
+So a cross-entry "N× larger" on totals is indicative, not a clean benchmark;
+per-milestone comparisons are normalized instead (same scalar, fixed-iteration
+loops — see `docs/checkpoints.md`).
 
 ## Scripts
 
 | script | what |
 |--------|------|
-| `pnpm benchmark [id-filter ...]` | run registered implementations and print the leaderboards; positional args are substring filters on the id (e.g. `pnpm benchmark genpow`) |
+| `pnpm benchmark [id-filter ...]` | run entries and print the leaderboards |
+| `pnpm benchmark:json` | export `results.json` + `score-history.json` (complete, unfiltered) |
+| `pnpm gen:multiproof` / `gen:multiproof-bls` | mint extra distinct valid proofs under the fixed VK (proof-generality) |
 | `pnpm checkpoints` | compute/validate the BN254 golden checkpoints (vk_x + Miller boundary) |
-| `pnpm fetch[:nchain\|:scrypt-bn256]` | download raw tx hex artifacts from WhatsOnChain |
-| `pnpm nchain:extract` | disassemble the nChain verifier to an opcode listing |
-| `pnpm nchain:run` / `nchain:verify` | run / accept-reject the nChain verifier in detail |
-| `pnpm scrypt-bn256:run` / `scrypt-bn256:verify` | run / accept-reject the sCrypt BN256 verifier |
-| `pnpm bch:fp-mul` | measure a single BN254 field multiply's op-cost on BCH |
+| `pnpm checkpoints:pairing-gen` / `checkpoints:pairing` / `checkpoints:pairing-basis` | pairing-milestone vectors, grading, Fp12-basis probe |
+| `pnpm bch:fp-mul` | measure a single BN254 field multiply's op-cost |
+| `pnpm bch:vkx` / `bch:vkx-scalarmult` / `bch:vkx-scalarmult-sweep` | standalone vk_x measurements |
+| `pnpm fetch[:nchain\|:scrypt-bn256]` | download reference artifacts from WhatsOnChain |
+| `pnpm nchain:extract` / `nchain:run` / `nchain:verify` | reference verifier tooling |
+| `pnpm scrypt-bn256:extract` / `:run` / `:verify` / `:find-vkx` | reference verifier tooling |
 | `pnpm typecheck` | `tsc --noEmit` |
 
 ## Layout
 
 ```
-src/harness/          types, VM(s), tamper, benchmark runner
-src/implementations/  one module per verifier (registered in benchmark.ts)
-src/checkpoints/      off-chain BN254 golden checkpoints (vk_x, Miller boundary)
-src/nchain/           detailed nChain extract/run/verify scripts
-src/scrypt-bn256/     sCrypt BN256 extract/run/verify scripts
-src/bch/              BCH primitive measurements (fp-mul)
-data/<impl>/          SOURCE.md provenance (raw hex + listings are gitignored, re-fetchable)
-docs/                 benchmark.md, scrypt.md, checkpoints.md
+src/harness/          types, VMs, tamper, benchmark runner, JSON exporter
+src/implementations/  one module per entry (registered in benchmark.ts)
+src/bch/              BCH-native vectors (committed JSON) + primitive measurements
+src/checkpoints/      off-chain BN254 golden checkpoints (vk_x, Miller boundary, pairing)
+src/nchain/           nChain reference extract/run/verify
+src/scrypt-bn256/     sCrypt reference extract/run/verify
+data/<impl>/          SOURCE.md provenance (raw hex is gitignored, re-fetchable)
+docs/                 benchmark.md, checkpoints.md, proof-generality.md,
+                      pairing-checker.md, scrypt.md
+results.json          committed leaderboard export (consumed by the website)
+score-history.json    committed per-run score history
 ```
 
-## Implementations
+## Related repos
 
-| id | track | state |
-|----|-------|-------|
-| `nchain` | Groth16 / single-tx | real BSV mainnet verifier (BLS12-381) |
-| `scrypt-bn256` | Groth16 / single-tx | real BSV mainnet verifier (BN254, same curve as `BN256.cash`); accepts/rejects via `pnpm scrypt-bn256:verify` |
-| `bch-vkx-scalarmult` | Groth16 vk_x (BCH-native) / single-tx | first BCH-native step (vk_x scalar-mult sub-step); normalized vs scrypt-bn256 at the same scalar |
-| `bch-multistep-demo` | demo / multi-tx | hash-chained-state demo validating the multi-tx path |
-
-Next target: a BCH-native BN254 Groth16 verifier as a multi-tx implementation, so
-the harness can report step by step when it becomes BCH-compatible.
-
-## Not every Groth16 is alike
-
-The Groth16 entries are not interchangeable. Comparing their *totals* mixes
-several factors that have nothing to do with implementation quality:
-
-- **Curve.** `nchain` is BLS12-381 (48-byte field elements); `scrypt-bn256` is
-  BN254 (32-byte). Our BCH work covers **both** — the BN254 line is the same-curve
-  match for `scrypt-bn256`, the BLS12-381 line for `nchain` — so each reference has
-  a same-curve BCH counterpart. A bigger curve means bigger, costlier scripts.
-- **Statement / circuit.** Each verifies a different proof for a different
-  circuit, with a different verifying key and a different number of public inputs
-  (which sets the size of the vk_x multi-scalar-multiplication).
-- **Optimization.** Precomputed pairings (e.g. `e(alpha,beta)` folded into the
-  VK), affine vs projective coordinates, window sizes, etc.
-- **Codegen.** BSV scripts are fully unrolled; BCH uses loops and functions, so
-  the same work compiles to far smaller bytecode.
-- **Deployment model — proof at runtime vs baked per-proof.** The references
-  (`nchain`, `scrypt-bn256`) and our **singleton** entries are *runtime-general*:
-  the proof (A,B,C) arrives push-only in the unlocking script at spend time, so one
-  deployed verifier validates any proof for that circuit. Our **chunked** entries
-  are *instance-specific*: the proof points are baked into the chunk scripts (the
-  public inputs are recomputed on-chain but pinned to the baked vk_x), so a
-  different proof requires regenerating the chunks. Both genuinely verify on-chain
-  — an invalid proof cannot satisfy the chain — but a per-proof-compiled multi-tx
-  chain and a runtime-general single script are different artifacts, so their byte
-  totals are not directly comparable.
-
-  The benchmark **proves this empirically** rather than just asserting it. Each
-  entry carries a `proofBinding` (`runtime` / `baked`), and for the verifiers we
-  control the trusted setup of, the harness mints several *distinct* valid proofs
-  under the **same** verifying key (fresh public inputs + A,B, with C solved in the
-  exponent — `singleton/{bn254,bls12-381}/gen_multiproof.mjs`) and runs them all
-  against the one fixed locking. The singleton entries verify **every** minted proof
-  (reported as "runtime-general — one fixed locking verifies N/N distinct proofs"),
-  while a `baked` entry would accept only the one it was compiled for. So if an
-  entry claimed runtime-generality but had the proof baked in, the multi-proof run
-  would catch it — it accepts 1/N. (The references run a single real mainnet proof,
-  so they are runtime-general *by construction* — proof in the unlocking witness —
-  rather than by the N/N sweep.) See [docs/proof-generality.md](docs/proof-generality.md)
-  for the construction (how the extra proofs are minted under one fixed VK).
-
-So a cross-entry "Nx larger / cheaper" on totals is *indicative, not a clean
-benchmark*. An apples-to-apples result needs the same curve, statement, inputs,
-and deployment model; that is why per-milestone comparisons are normalized (e.g. vk_x measured
-at the same scalar, both loops fixed-iteration, so the gap reflects per-operation
-efficiency rather than input size — see `docs/checkpoints.md`).
+- [`groth16_cashscript`](https://github.com/mr-zwets/groth16_cashscript) —
+  the verifier contracts (CashScript source, `singleton/` and `chunked/`
+  generators) and the design docs (`verifiers.md`, compiler-fork and
+  stack-rescheduler writeups). This repo consumes its generated vectors.
+- The leaderboard website that renders `results.json` (closed source).
 
 ## Notes
 
-- libauth `@bitauth/libauth@3.1.0-next.8` provides the BCH 2023/2025/2026 VMs;
-  `@noble/curves` provides the off-chain BN254 reference for the checkpoints.
-- A step can be tagged `checkpoint: "vk_x"`; the benchmark then reports the
-  cumulative op-cost + bytes to reach it, so implementations compete on the
-  in-between metrics, not just the total. See `docs/checkpoints.md`.
+- libauth `@bitauth/libauth@3.1.0-next.8` provides the BCH 2023/2025/2026 VMs
+  and the bch-spec VM; `@noble/curves` provides the off-chain BN254/BLS12-381
+  references.
+- A step can be tagged `checkpoint: "<label>"`; the benchmark then reports the
+  cumulative op-cost + bytes to reach it (`docs/checkpoints.md`).
 - Large raw-hex and disassembly artifacts are gitignored; each `data/<impl>/`
   folder keeps a `SOURCE.md` with provenance and the commands to regenerate.
