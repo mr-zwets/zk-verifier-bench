@@ -5,21 +5,20 @@
 // tx.inputs[idx+1].unlockingBytecode, OP_INPUTBYTECODE — equals its recomputed output), but
 // it runs the residue-optimized chunk graph instead of the plain one:
 //
-//   fast-G2 endo subgroup check (ePrint 2022/348)            4 chunks   (== plain build)
-//   GLV vk_x MSM (4-scalar ~128-bit Straus)                  5 chunks   (was 9, plain)
-//   c^-(6x+2)-FUSED Miller, e(alpha,beta) precomputed        23 chunks  (skips pair 1)
-//   witnessed-residue final-exp TAIL (verdict in ONE chunk)  1 chunk    (was 12, plain)
+//   fast-G2 endo subgroup check (ePrint 2022/348)            3 chunks
+//   GLV vk_x MSM (4-scalar ~128-bit Straus)                  4 chunks   (was 9, plain)
+//   c^-(6x+2)-FUSED Miller + terminal residue verdict        20 chunks  (skips pair 1)
 //                                                            ---------
-//                                                            33 inputs  (plain intratx: 54)
+//                                                            27 inputs  (plain intratx: 54)
 //
-// The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked
-// in the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is the residue
-// equation fF*w*c^q2 == c^q*c^q3. Cross-stage soundness links are bound where layouts allow
-// (vk_x into the fused-Miller genesis input; the fused-Miller boundary [fF,c,cInv] into the
-// residue tail). Same chunk math as bch-groth16-grouped-residue, but laid out as the inputs
-// of one non-standard (<1 MB) transaction rather than token-threaded standard transactions.
+// The residue witness (c, cInv) threads through every fused-Miller chunk. Its terminal chunk
+// checks c*cInv==ONE, c canonical, exact w membership in {1,w27,w27^2}, and the residue
+// equation fF*(w*c^q2) == (c*c^q2)^q. It uses the same chunk math as
+// bch-groth16-grouped-residue, laid out as the inputs of one non-standard (<1 MB)
+// transaction rather than token-threaded standard transactions. The four GLV chunks read one
+// hash-bound fixed lookup table carried by the final GLV input rather than embedding four copies.
 //
-// Result: ~263 KB / ~202M op over 33 inputs (vs ~523 KB / 411M over 54 for plain intratx),
+// Result: ~228 KB / ~180M op over 27 inputs (vs ~523 KB / 411M over 54 for plain intratx),
 // each input fitting one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B).
 //
 // Vectors: groth16_contract/chunked/intratx/build_vectors_residue.mjs ->
@@ -61,12 +60,13 @@ export const bchGroth16IntratxResidue: Implementation = {
     'carries its incoming state as a raw byte blob and binds the chain via ' +
     'tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no ' +
     'hashing, no 128-byte state limit), but it runs the residue chunk graph: fast-G2 endo ' +
-    'subgroup check (ePrint 2022/348, 4 chunks), GLV vk_x MSM (5 chunks), c^-(6x+2)-FUSED ' +
-    'batched Miller with e(alpha,beta) precomputed/skipped (23 chunks), and a witnessed-' +
-    'residue final-exponentiation TAIL collapsing the hard exponentiation to ONE chunk — 33 ' +
-    'inputs total (vs 54 for the plain intra-tx build), ~263 KB / ~202M op. The residue ' +
-    'witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail ' +
-    '(c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. ' +
+    'subgroup check (ePrint 2022/348, 3 chunks), GLV vk_x MSM (4 chunks), c^-(6x+2)-FUSED ' +
+    'batched Miller with e(alpha,beta) precomputed/skipped (20 chunks). Its terminal chunk ' +
+    'also checks the witnessed-residue verdict, for 27 inputs total (vs 54 for the plain ' +
+    'intra-tx build), ~228 KB / ~180M op. The four GLV chunks share one hash-bound fixed ' +
+    'lookup table carried by the final GLV input. The residue witness (c, cInv) threads through ' +
+    'every Miller chunk; the terminal checks c*cInv==ONE, c canonical, exact w membership ' +
+    'in {1,w27,w27^2}, and fF*(w*c^q2) == (c*c^q2)^q. ' +
     'Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the ' +
     'whole verifier is one non-standard (<1 MB) transaction. Same chunk math as ' +
     'bch-groth16-grouped-residue; one fixed set of input scripts verifies any proof for the VK ' +
