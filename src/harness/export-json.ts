@@ -233,16 +233,16 @@ const entryOf = (r: BenchmarkResult) => ({
           ? `on-curve + G2-subgroup checks enforced: ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected at an isolated check`
           : `NOT enforced: only ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points rejected — raw points reach the pairing`,
   },
-  // envelope security: a contract hidden behind an insecure P2SH20 hash (OP_HASH160,
-  // ~2^80 collision security) is DISALLOWED — it must use P2SH32, or deploy bare / P2S.
+  // envelope security: `type` is what the steps' lockings actually are (p2sh32 | p2s |
+  // p2sh20 | mixed). A contract hidden behind an insecure P2SH20 hash (OP_HASH160,
+  // ~2^80 collision security) is DISALLOWED — it must use P2SH32, or deploy bare (P2S).
   // `secure: false` disqualifies the entry (it is excluded from the frontier leaders and
   // the score-history below). Orthogonal to BCH compatibility: P2SH20 is itself valid +
   // relayable, this is the competition's cryptographic-security rule.
   packaging: {
     secure: r.securePackaging,
-    detail: r.securePackaging
-      ? 'securely packaged (P2SH32, bare, or P2S — no insecure P2SH20 envelope)'
-      : `DISALLOWED: ${r.insecurePackagingReason}`,
+    type: r.packagingType,
+    ...(r.securePackaging ? {} : { detail: `DISALLOWED: ${r.insecurePackagingReason}` }),
   },
   source: r.impl.source,
 });

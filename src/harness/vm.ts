@@ -306,5 +306,17 @@ export const specInputBudget = (): number => specOpCostBudget(SPEC_SCRIPT_SIZE_C
 export const isP2sh20Locking = (locking: Uint8Array): boolean =>
   locking.length === 23 && locking[0] === 0xa9 && locking[1] === 0x14 && locking[22] === 0x87;
 
+/** True iff `locking` is a P2SH32 redeem-hash envelope: OP_HASH256 <32-byte hash>
+ * OP_EQUAL (0xaa 0x20 …32… 0x87, 35 bytes total). */
+export const isP2sh32Locking = (locking: Uint8Array): boolean =>
+  locking.length === 35 && locking[0] === 0xaa && locking[1] === 0x20 && locking[34] === 0x87;
+
+/** How one locking script packages its contract: a P2SH20/P2SH32 redeem-hash envelope,
+ * or a direct (bare / pay-to-script) locking where the program is the locking itself. */
+export type LockingEnvelope = 'p2sh20' | 'p2sh32' | 'p2s';
+
+export const lockingEnvelope = (locking: Uint8Array): LockingEnvelope =>
+  isP2sh20Locking(locking) ? 'p2sh20' : isP2sh32Locking(locking) ? 'p2sh32' : 'p2s';
+
 /** Budget of one input at the standard unlocking cap. */
 export const standardInputBudget = (): number => realOpCostBudget(STANDARD_UNLOCKING_CAP);

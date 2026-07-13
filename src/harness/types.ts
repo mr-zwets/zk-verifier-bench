@@ -248,6 +248,10 @@ export interface StepMetrics {
   error: string | undefined;
 }
 
+/** How an entry's contracts are packaged on-chain: P2SH20/P2SH32 redeem-hash envelopes,
+ * bare pay-to-script ('p2s', the program IS the locking), or 'mixed' when steps differ. */
+export type PackagingType = 'p2sh20' | 'p2sh32' | 'p2s' | 'mixed';
+
 export interface BenchmarkResult {
   impl: Implementation;
   /** size-only entry: not executed (sizes + size-based BCH compat only) */
@@ -340,6 +344,8 @@ export interface BenchmarkResult {
    * disqualified (folded into `pass`); orthogonal to consensus/standardness, since
    * P2SH20 is itself valid and relayable on BCH — this is a competition security rule. */
   securePackaging: boolean;
+  /** what the steps' lockings actually are: one envelope form, or 'mixed' when steps differ */
+  packagingType: PackagingType;
   /** short reason the packaging is disallowed (how many steps use P2SH20); undefined when secure */
   insecurePackagingReason?: string;
   error?: string;

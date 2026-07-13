@@ -51,7 +51,7 @@ import { pathToFileURL } from 'node:url';
 import { authenticationInstructionIsMalformed, decodeAuthenticationInstructions, encodeAuthenticationInstruction } from '@bitauth/libauth';
 
 import { tamperProof } from './tamper.js';
-import type { BenchmarkResult, Implementation, Step, StepMetrics } from './types.js';
+import type { BenchmarkResult, Implementation, PackagingType, Step, StepMetrics } from './types.js';
 import {
   createLoosenedVm,
   createRealVm,
@@ -60,9 +60,9 @@ import {
   createStandardVmSpec,
   evaluatePair,
   isP2sh20Locking,
+  lockingEnvelope,
   standardInputBudget,
   specInputBudget,
-  SPEC_SCRIPT_SIZE_CAP,
   SPEC_STANDARD_UNLOCKING_CAP,
   MAX_STANDARD_LOCKING_BYTECODE,
   MAX_STANDARD_UNLOCKING_BYTECODE,
@@ -172,13 +172,15 @@ const stepTxOverhead = (step: Step): number => {
 // (OP_HASH160 <20B> OP_EQUAL) is DISALLOWED — the 160-bit hash is collision-vulnerable at
 // ~2^80 work, cheap enough to forge a second redeem for a funded contract. This is a
 // competition rule, not a protocol one (P2SH20 is consensus-valid + relayable), so it is
-// scored separately from bchCompatible/standardness and folded into `pass`. P2SH32, bare,
-// and P2S deployments all pass.
-const packagingSecurity = (steps: Step[]): { secure: boolean; reason?: string } => {
+// scored separately from bchCompatible/standardness and folded into `pass`. P2SH32 and
+// bare (P2S) deployments pass. Also classifies WHAT the entry uses (one form or 'mixed').
+const packagingSecurity = (steps: Step[]): { secure: boolean; type: PackagingType; reason?: string } => {
+  const forms = new Set(steps.map((s) => lockingEnvelope(s.lockingBytecode)));
+  const type: PackagingType = forms.size === 1 ? [...forms][0]! : 'mixed';
   const n = steps.filter((s) => isP2sh20Locking(s.lockingBytecode)).length;
   return n === 0
-    ? { secure: true }
-    : { secure: false, reason: `${n}/${steps.length} step(s) use an insecure P2SH20 envelope (OP_HASH160, ~2^80 collision security) — use P2SH32` };
+    ? { secure: true, type }
+    : { secure: false, type, reason: `${n}/${steps.length} step(s) use an insecure P2SH20 envelope (OP_HASH160, ~2^80 collision security) — use P2SH32` };
 };
 
 const runStep = (vm: Bch2026Vm, step: Step, bsv: boolean): StepMetrics => {
@@ -326,6 +328,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       fitsBchStandardness: false,
       bchStandardnessReason: 'profile-only (not executed)',
       securePackaging: profileEnv.secure,
+      packagingType: profileEnv.type,
       insecurePackagingReason: profileEnv.reason,
     };
   }
@@ -460,6 +463,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     fitsBchStandardness: std.fits,
     bchStandardnessReason: std.reason,
     securePackaging: env.secure,
+    packagingType: env.type,
     insecurePackagingReason: env.reason,
   };
 };
