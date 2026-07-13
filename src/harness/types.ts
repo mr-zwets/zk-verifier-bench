@@ -283,6 +283,16 @@ export interface BenchmarkResult {
    * single-tx verifier is caught by the verification equation, so it can't demonstrate
    * validation (see harness/adversarial.ts). */
   inputValidation: { tested: number; rejected: number; enforced: boolean };
+  /**
+   * Cross-stage stapling gate (multi-stage soundness). A chunked verifier must bind every
+   * stage to ONE proof: splicing one proof's stage onto another proof's remaining stages in a
+   * single transaction must be REJECTED. Tested by building hybrid runs from two distinct
+   * valid proofs (`valid` + `extraValidProofs[0]`) at each seam. `unboundSeams > 0` means a
+   * stage output is a free island (not bound to the proof the rest of the run consumes) — a
+   * soundness hole that folds into `pass`. `applicable` is false for single-tx verifiers and
+   * for covenant/grouped entries whose token hand-off the harness cannot staple-test (N/A does
+   * not penalize). See harness/benchmark.ts crossStageStaple. */
+  crossStageBinding: { applicable: boolean; seamsTested: number; unboundSeams: number; firstUnboundSeam?: string };
   /** correctness was judged under the BSV post-Genesis OP_RETURN-terminator rule
    * (the valid run halts at a reachable OP_RETURN, which fails on strict BCH) */
   bsvOpReturn: boolean;

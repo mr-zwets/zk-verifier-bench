@@ -51,7 +51,7 @@ import { pathToFileURL } from 'node:url';
 import { authenticationInstructionIsMalformed, decodeAuthenticationInstructions, encodeAuthenticationInstruction } from '@bitauth/libauth';
 
 import { tamperProof } from './tamper.js';
-import type { BenchmarkResult, Implementation, PackagingType, Step, StepMetrics } from './types.js';
+import type { BenchmarkResult, Implementation, PackagingType, Scenario, Step, StepMetrics } from './types.js';
 import {
   createLoosenedVm,
   createRealVm,
@@ -205,6 +205,73 @@ const runRejects = (vm: Bch2026Vm, run: Step[], bsv: boolean): boolean =>
     return !(bsv ? o.bsvAccepted : o.accepted);
   });
 
+/**
+ * Cross-stage stapling invariant (a soundness gate for multi-stage verifiers).
+ *
+ * A chunked verifier splits one proof's verification across many inputs/stages (validate
+ * inputs -> vk_x MSM -> Miller/pairing -> final-exp). Correctness of each stage in ISOLATION
+ * is not enough: every stage must be bound to the SAME proof. If a stage's output is a free
+ * island — nothing later reads it, or it is not byte-equal-checked against the proof the rest
+ * of the run consumes — an attacker can "staple" one proof's stage onto another proof's
+ * remaining stages in a single transaction (e.g. run proof #0's G2-subgroup check but proof
+ * #1's Miller loop), and the verifier accepts a proof no single stage actually validated end
+ * to end. The tamper test (flip one witness limb) does NOT catch this: it breaks a LOCAL
+ * forward-check and is rejected regardless of whether the stages are cross-bound.
+ *
+ * The test needs two DISTINCT valid proofs under the SAME lockings — exactly what
+ * `extraValidProofs` already provides. For each seam k it builds a hybrid run whose inputs
+ * [0,k) are proof #0 and [k,n) are proof #1, and asserts the hybrid is REJECTED. A verifier
+ * that binds every stage rejects at some cross-boundary check; one with an unbound seam
+ * accepts the hybrid — that seam is the vulnerability.
+ *
+ * Scope: intra-tx bundles only (`Step.intraTx` — one shared transaction where sibling
+ * introspection is LIVE, so a spliced input is really read by its neighbours at eval time).
+ * Covenant / grouped runs thread state through per-proof NFT commitments the harness bakes and
+ * does not enforce continuity on across steps, so a staple there cannot be evaluated soundly
+ * without first modelling the token hand-off — left as N/A rather than mis-graded.
+ *
+ * Only proof#0-side inputs [0,k) can reject: introspection is forward (a chunk reads
+ * `tx.inputs[j>idx]`), so a cross-boundary mismatch is always raised by the lower-indexed
+ * (proof #0) reader. Those inputs are evaluated in reverse from the seam so a bound seam
+ * short-circuits at its boundary input; only a genuinely unbound seam evaluates the whole
+ * prefix.
+ */
+interface CrossStageBinding {
+  applicable: boolean;
+  seamsTested: number;
+  unboundSeams: number;
+  firstUnboundSeam?: string;
+}
+const crossStageStaple = (vm: Bch2026Vm, scenario: Scenario, bsv: boolean): CrossStageBinding => {
+  const base = scenario.valid;
+  const other = scenario.extraValidProofs?.[0];
+  const distinctStages = new Set(base.map((s) => s.checkpoint).filter((c) => c !== undefined)).size;
+  const isIntraTx = base.length > 1 && base.every((s) => s.intraTx !== undefined);
+  // Need a shared-tx bundle, a second distinct proof under the same lockings, and >= 2 named
+  // stages for "cross-stage" to mean anything.
+  if (!isIntraTx || other === undefined || other.length !== base.length || distinctStages < 2) {
+    return { applicable: false, seamsTested: 0, unboundSeams: 0 };
+  }
+  let unboundSeams = 0;
+  let firstUnboundSeam: string | undefined;
+  for (let k = 1; k < base.length; k++) {
+    const hybrid = base.map((s, i) => ({
+      lockingBytecode: s.lockingBytecode,
+      unlockingBytecode: (i < k ? base[i]! : other[i]!).unlockingBytecode,
+    }));
+    let rejected = false;
+    for (let i = k - 1; i >= 0 && !rejected; i--) {
+      const o = evaluatePair(vm, hybrid[i]!.lockingBytecode, hybrid[i]!.unlockingBytecode, undefined, { index: i, inputs: hybrid }, undefined);
+      rejected = !(bsv ? o.bsvAccepted : o.accepted);
+    }
+    if (!rejected) {
+      unboundSeams += 1;
+      firstUnboundSeam ??= `${base[k - 1]!.label} | ${base[k]!.label}`;
+    }
+  }
+  return { applicable: true, seamsTested: base.length - 1, unboundSeams, firstUnboundSeam };
+};
+
 const tryTamper = (witness: Uint8Array): Uint8Array | undefined => {
   try {
     return tamperProof(witness);
@@ -315,6 +382,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       proofBinding: impl.proofBinding ?? 'runtime', proofsTested: 1, proofsPassed: 0, runtimeGeneral: false,
       ...tokenSafetyOf(scenario, impl),
       inputValidation: { tested: 0, rejected: 0, enforced: false },
+      crossStageBinding: { applicable: false, seamsTested: 0, unboundSeams: 0 },
       checkpointStats: [],
       stepCount: steps.length,
       totalBytes: steps.reduce((a, s) => a + s.lockingBytes + s.unlockingBytes, 0),
@@ -396,6 +464,10 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
   const inputRejected = inputRuns.filter((run) => runRejects(vm, run, bsv)).length;
   const inputValidation = { tested: inputRuns.length, rejected: inputRejected, enforced: inputRuns.length > 0 && inputRejected === inputRuns.length };
 
+  // Cross-stage stapling: every stage must be bound to ONE proof (see crossStageStaple). An
+  // unbound seam is a soundness hole and fails the entry; N/A entries don't count against it.
+  const crossStageBinding = crossStageStaple(vm, scenario, bsv);
+
   const opCosts = steps.map((s) => s.operationCost);
   const maxStepOperationCost = opCosts.length ? Math.max(...opCosts) : 0;
   // Per-input op-cost budget at the entry's script cap: BCH_2026 (41+10000)*800 = 8,032,800,
@@ -438,7 +510,8 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     validPassed,
     invalidRejected,
     invalidTotal: invalidRuns.length,
-    pass: validPassed && worstCaseAccepted && invalidRuns.length > 0 && invalidRejected === invalidRuns.length && env.secure,
+    pass: validPassed && worstCaseAccepted && invalidRuns.length > 0 && invalidRejected === invalidRuns.length && env.secure && crossStageBinding.unboundSeams === 0,
+    crossStageBinding,
     proofBinding,
     proofsTested,
     proofsPassed,
@@ -502,6 +575,46 @@ const fmt = (n: number) => n.toLocaleString();
 const padR = (s: string, w: number) => s.padEnd(w);
 const padL = (s: string, w: number) => s.padStart(w);
 
+/**
+ * The single correctness verdict for an entry, evaluated in precedence order (first match
+ * wins). Both the live progress line and the results table derive their label from this, so
+ * the ranking — and where a new gate like the cross-stage staple slots in — lives in ONE place.
+ */
+type Verdict = 'profile' | 'insecure-packaging' | 'pass' | 'worst-case-fail' | 'cross-stage-fail' | 'valid-only' | 'fail';
+const verdictOf = (r: BenchmarkResult): Verdict => {
+  if (r.profileOnly) return 'profile';
+  if (!r.securePackaging) return 'insecure-packaging';
+  if (r.pass) return 'pass';
+  if (r.worstCase?.accepted === false) return 'worst-case-fail';
+  if (r.crossStageBinding.unboundSeams > 0) return 'cross-stage-fail';
+  if (r.validPassed) return 'valid-only';
+  return 'fail';
+};
+
+/** One-line status printed as each entry finishes (verbose phrasing). */
+const progressLabel = (r: BenchmarkResult): string => ({
+  profile: 'profile-only (size)',
+  'insecure-packaging': 'DISALLOWED (insecure P2SH20 envelope)',
+  pass: 'PASS',
+  'worst-case-fail': 'FAIL (worst-case proof rejected)',
+  'cross-stage-fail': 'FAIL (cross-stage staple accepted)',
+  'valid-only': 'valid-only (no reject test)',
+  fail: 'FAIL',
+}[verdictOf(r)]);
+
+/** Compact `correctness` cell for the results table (some verdicts carry counts). */
+const correctnessCell = (r: BenchmarkResult): string => {
+  switch (verdictOf(r)) {
+    case 'profile': return 'profile (size)';
+    case 'insecure-packaging': return 'DISALLOWED (P2SH20)';
+    case 'pass': return `PASS (${r.invalidRejected}/${r.invalidTotal}✗${r.bsvOpReturn ? ', BSV OP_RETURN' : ''})`;
+    case 'worst-case-fail': return 'FAIL (worst-case✗)';
+    case 'cross-stage-fail': return 'FAIL (cross-stage staple)';
+    case 'valid-only': return 'valid-only';
+    case 'fail': return 'FAIL';
+  }
+};
+
 const main = async () => {
   const cliArgs = process.argv.slice(2);
   const includeDemos = cliArgs.includes('--demos');
@@ -535,14 +648,7 @@ const main = async () => {
       const scenario = await impl.load();
       const r = benchmark(impl, scenario);
       results.push(r);
-      console.log(
-        r.profileOnly ? 'profile-only (size)'
-          : !r.securePackaging ? 'DISALLOWED (insecure P2SH20 envelope)'
-            : r.pass ? 'PASS'
-              : r.worstCase?.accepted === false ? 'FAIL (worst-case proof rejected)'
-                : r.validPassed ? 'valid-only (no reject test)'
-                  : 'FAIL',
-      );
+      console.log(progressLabel(r));
     } catch (e) {
       console.log(`ERROR: ${(e as Error).message}`);
     }
@@ -567,17 +673,7 @@ const main = async () => {
     console.log(header);
     console.log('-'.repeat(header.length));
     for (const r of rs) {
-      const correctness = r.profileOnly
-        ? 'profile (size)'
-        : !r.securePackaging
-          ? 'DISALLOWED (P2SH20)'
-          : r.pass
-            ? `PASS (${r.invalidRejected}/${r.invalidTotal}✗${r.bsvOpReturn ? ', BSV OP_RETURN' : ''})`
-            : r.worstCase?.accepted === false
-              ? 'FAIL (worst-case✗)'
-              : r.validPassed
-                ? 'valid-only'
-                : 'FAIL';
+      const correctness = correctnessCell(r);
       const compat = r.bchCompatible ? 'yes' : `no: ${r.bchIncompatibleReason ?? 'limit'}`;
       const at10kb = r.profileOnly ? '-' : r.inputsForHeaviestStep <= 1 ? '1' : `~${r.inputsForHeaviestStep}`;
       console.log(cols([
@@ -618,6 +714,12 @@ const main = async () => {
             ? 'single-tx: a swapped point is caught by the pairing equation, not a validation check, so rejection here would not prove on-curve/subgroup validation'
             : 'no isolated adversarial-point run (off-curve / off-subgroup) supplied';
           console.log(`    > input validation: NOT DEMONSTRATED — ${why}`);
+        }
+        const csb = r.crossStageBinding;
+        if (csb.applicable) {
+          console.log(csb.unboundSeams === 0
+            ? `    > cross-stage binding: BOUND — every stage is pinned to one proof (${csb.seamsTested} seams staple-tested with a 2nd distinct proof, all rejected)`
+            : `    > cross-stage binding: UNBOUND — ${csb.unboundSeams}/${csb.seamsTested} seam(s) accept a spliced 2-proof hybrid (first at "${csb.firstUnboundSeam}"): one proof's stage can be stapled onto another proof's remaining stages`);
         }
       }
       const ms = r.impl.milestone;
