@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-13T21:13:25.432Z",
+  "generatedAt": "2026-07-13T22:30:58.285Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -2571,33 +2571,33 @@
         },
         "failures": []
       },
-      "score": 215429,
+      "score": 215428,
       "size": {
-        "scriptBytes": 214377,
+        "scriptBytes": 214376,
         "txOverheadBytes": 1052,
         "transactions": 1,
-        "total": 215429
+        "total": 215428
       },
       "padding": {
-        "bytes": 53090,
-        "fraction": 0.2476478353554719
+        "bytes": 53533,
+        "fraction": 0.24971545322237565
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 169660624,
+          "opCost": 169660200,
           "steps": 24,
           "heaviestStepOpCost": 7275633,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 169670211,
+          "opCost": 169669787,
           "steps": 24,
           "heaviestStepOpCost": 7276649,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 171616800,
+      "opCostBudget": 171616000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2606,7 +2606,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 214,589 B > 100,000 B standard size"
+          "detail": "tx 214,588 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2640,52 +2640,49 @@
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
       "correctness": {
-        "verdict": "fail",
+        "verdict": "pass",
         "validAccepted": true,
         "invalid": {
-          "tested": 2,
-          "rejected": 2
+          "tested": 6,
+          "rejected": 6
         },
         "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
-          "bound": false,
-          "seamsTested": 46,
-          "unboundSeams": 1,
-          "firstUnboundSeam": "g2check bits[62,63) [x0]B-endo==psi(B) | vk_x [0,43)",
-          "detail": "UNBOUND: 1/46 seam(s) accept a spliced 2-proof hybrid (first at \"g2check bits[62,63) [x0]B-endo==psi(B) | vk_x [0,43)\") — one proof's stage can be stapled onto another proof's remaining stages"
+          "bound": true,
+          "seamsTested": 45,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 45 seams staple-tested with a 2nd distinct proof, all rejected"
         },
-        "failures": [
-          "cross-stage staple accepted (1/46 seam(s))"
-        ]
+        "failures": []
       },
-      "score": 375526,
+      "score": 375168,
       "size": {
-        "scriptBytes": 373485,
-        "txOverheadBytes": 2041,
+        "scriptBytes": 373170,
+        "txOverheadBytes": 1998,
         "transactions": 1,
-        "total": 375526
+        "total": 375168
       },
       "padding": {
-        "bytes": 132951,
-        "fraction": 0.3559741355074501
+        "bytes": 134666,
+        "fraction": 0.36087038079159633
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294625987,
-          "steps": 47,
-          "heaviestStepOpCost": 7447703,
+          "opCost": 294477766,
+          "steps": 46,
+          "heaviestStepOpCost": 7829101,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 332018383,
-          "steps": 47,
-          "heaviestStepOpCost": 7664635,
+          "opCost": 331870049,
+          "steps": 46,
+          "heaviestStepOpCost": 7828850,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 299013600,
+      "opCostBudget": 298756800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2694,7 +2691,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 373,881 B > 100,000 B standard size"
+          "detail": "tx 373,558 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2728,52 +2725,49 @@
       "proofSystem": "Groth16",
       "vmTarget": "bch-2026",
       "correctness": {
-        "verdict": "fail",
+        "verdict": "pass",
         "validAccepted": true,
         "invalid": {
-          "tested": 4,
-          "rejected": 4
+          "tested": 8,
+          "rejected": 8
         },
         "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
-          "bound": false,
-          "seamsTested": 46,
-          "unboundSeams": 1,
-          "firstUnboundSeam": "g2check bits[62,63) [x0]B-endo==psi(B) | vk_x [0,43)",
-          "detail": "UNBOUND: 1/46 seam(s) accept a spliced 2-proof hybrid (first at \"g2check bits[62,63) [x0]B-endo==psi(B) | vk_x [0,43)\") — one proof's stage can be stapled onto another proof's remaining stages"
+          "bound": true,
+          "seamsTested": 45,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 45 seams staple-tested with a 2nd distinct proof, all rejected"
         },
-        "failures": [
-          "cross-stage staple accepted (1/46 seam(s))"
-        ]
+        "failures": []
       },
-      "score": 375949,
+      "score": 375582,
       "size": {
-        "scriptBytes": 373908,
-        "txOverheadBytes": 2041,
+        "scriptBytes": 373584,
+        "txOverheadBytes": 1998,
         "transactions": 1,
-        "total": 375949
+        "total": 375582
       },
       "padding": {
-        "bytes": 132951,
-        "fraction": 0.35557142398664915
+        "bytes": 134666,
+        "fraction": 0.3604704698274016
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294834349,
-          "steps": 47,
-          "heaviestStepOpCost": 7451115,
+          "opCost": 294685155,
+          "steps": 46,
+          "heaviestStepOpCost": 7831172,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 332226745,
-          "steps": 47,
-          "heaviestStepOpCost": 7666230,
+          "opCost": 332077438,
+          "steps": 46,
+          "heaviestStepOpCost": 7830921,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 299013600,
+      "opCostBudget": 298756800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2782,7 +2776,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 373,881 B > 100,000 B standard size"
+          "detail": "tx 373,558 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2901,52 +2895,49 @@
       "proofSystem": "Groth16",
       "vmTarget": "bch-spec",
       "correctness": {
-        "verdict": "fail",
+        "verdict": "pass",
         "validAccepted": true,
         "invalid": {
-          "tested": 2,
-          "rejected": 2
+          "tested": 6,
+          "rejected": 6
         },
         "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
-          "bound": false,
-          "seamsTested": 4,
-          "unboundSeams": 1,
-          "firstUnboundSeam": "g2check bits[0,63) [x0]B-endo==psi(B) | GLV vk_x final -> assert vk_x",
-          "detail": "UNBOUND: 1/4 seam(s) accept a spliced 2-proof hybrid (first at \"g2check bits[0,63) [x0]B-endo==psi(B) | GLV vk_x final -> assert vk_x\") — one proof's stage can be stapled onto another proof's remaining stages"
+          "bound": true,
+          "seamsTested": 3,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 3 seams staple-tested with a 2nd distinct proof, all rejected"
         },
-        "failures": [
-          "cross-stage staple accepted (1/4 seam(s))"
-        ]
+        "failures": []
       },
-      "score": 191164,
+      "score": 188463,
       "size": {
-        "scriptBytes": 190925,
-        "txOverheadBytes": 239,
+        "scriptBytes": 188267,
+        "txOverheadBytes": 196,
         "transactions": 1,
-        "total": 191164
+        "total": 188463
       },
       "padding": {
-        "bytes": 119768,
-        "fraction": 0.627303915149928
+        "bytes": 121153,
+        "fraction": 0.6435169201187675
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 177952241,
-          "steps": 5,
-          "heaviestStepOpCost": 81377075,
+          "opCost": 177794648,
+          "steps": 4,
+          "heaviestStepOpCost": 85956307,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 192756304,
-          "steps": 5,
-          "heaviestStepOpCost": 81382165,
+          "opCost": 192610326,
+          "steps": 4,
+          "heaviestStepOpCost": 85961341,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 192600000,
+      "opCostBudget": 182501600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2955,7 +2946,7 @@
         "detail": "every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH",
         "standard": {
           "fits": false,
-          "detail": "tx 190,989 B > 100,000 B standard size"
+          "detail": "tx 188,323 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2992,8 +2983,8 @@
         "verdict": "pass",
         "validAccepted": true,
         "invalid": {
-          "tested": 2,
-          "rejected": 2
+          "tested": 6,
+          "rejected": 6
         },
         "worstCaseAccepted": true,
         "crossStageBinding": {
@@ -3005,33 +2996,33 @@
         },
         "failures": []
       },
-      "score": 375771,
+      "score": 375436,
       "size": {
-        "scriptBytes": 373386,
-        "txOverheadBytes": 2385,
-        "transactions": 5,
-        "total": 375771
+        "scriptBytes": 373008,
+        "txOverheadBytes": 2428,
+        "transactions": 6,
+        "total": 375436
       },
       "padding": {
-        "bytes": 132841,
-        "fraction": 0.3557739176080517
+        "bytes": 134494,
+        "fraction": 0.36056599322266547
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294545341,
-          "steps": 47,
-          "heaviestStepOpCost": 7447703,
+          "opCost": 294366144,
+          "steps": 46,
+          "heaviestStepOpCost": 7828993,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 331923583,
-          "steps": 47,
-          "heaviestStepOpCost": 7664635,
+          "opCost": 331758409,
+          "steps": 46,
+          "heaviestStepOpCost": 7828739,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 298934400,
+      "opCostBudget": 298627200,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
