@@ -64,6 +64,48 @@ Both curves are covered throughout: **BN254** (32-byte field elements) and
 **BLS12-381** (48-byte), so each reference verifier has same-curve BCH
 counterparts.
 
+## Why these measures
+
+The harness is not just a ranking — it decomposes *where* the cost of on-chain
+proof verification comes from: the cryptography, the VM limits, or relay
+policy. That decomposition is the evidence base for deciding what future
+upgrades and tooling are actually needed.
+
+**Bytes are the score; op-cost is the explanation.** Bytes are what a user
+pays in fees, so they rank. But op-cost is the constraint that *shapes* every
+entry: the per-input budget scales with script length
+(`(41 + len) × 800`), so compute-dense verifier code must buy budget by
+appending zero-padding — the largest slice of the chunking overhead is
+op-cost showing up as bytes. Reporting op-cost alongside size keeps the
+bytes-vs-compute trade honest: the smallest singletons (`genpow`) hit their
+byte floor only by ignoring compute entirely, while `minop` spends ~15× the
+bytes to minimize op-cost — ranking on bytes alone would hide that a "small"
+entry can be un-runnable. The single-input builds therefore form a Pareto
+frontier, and the *op-cost-optimized* end of it — not the byte floor — is the
+honest baseline for what chunking costs. Worst-case op-cost (dense proofs) is
+also the number protocol discussions need: it sizes what a
+base-instruction-cost cut or a budget-formula change would actually save.
+
+**Consensus vs standardness vs bch-spec are three different deployability
+questions, and the gaps between them are findings.**
+
+- **real VM (consensus)** — could a miner include it at all?
+- **standard VM (relay)** — can anyone deploy it today through the public
+  mempool? The gap between the two isolates the cost of relay *policy*,
+  separate from consensus: an intra-tx bundle is consensus-valid but
+  non-standard, and restructuring the same work into the grouped form (a
+  handful of standard transactions) is what standardness costs in bytes.
+- **bch-spec VM** — the same verifier graded under the proposed CHIP-2025-01
+  TXv5 limits (100 kB scripts, `(10,000 + len) × 800` budget), isolating
+  exactly how much of the overhead today's limits account for (the BN254
+  residue verifier collapses from ~32 inputs to 5) without touching the
+  cryptography. Spec entries sit in their own category so the current-BCH
+  ranking stays clean.
+
+Running one verifier under all three rule sets side by side is the point: it
+turns "BCH can't do X" / "just raise the limits" debates into measured
+numbers.
+
 ## Entry families
 
 ~40 entries are registered (`REGISTRY` in `src/harness/benchmark.ts`); they
