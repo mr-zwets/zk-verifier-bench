@@ -11,8 +11,7 @@ import type { Implementation } from '../harness/types.js';
 //
 // It is NOT a full verifier — its own leaderboard track. The full single-tx vk_x
 // (src/bch/vkx.ts) is correct but ~10 BCH inputs by op-cost (a multi-input
-// checkpoint); this scalarMult sub-step is the per-step chunk unit (see
-// src/bch/VKX-CHECKPOINT-NOTE.md).
+// checkpoint); this scalarMult sub-step is the per-step chunk unit.
 const v = JSON.parse(readFileSync('src/bch/vkx-scalarmult-vectors.json', 'utf8')) as {
   lockingOK: string;
   unlocking: string;
