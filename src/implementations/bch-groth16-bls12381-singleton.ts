@@ -16,8 +16,8 @@
 // A is negated in-script. require()s the product == Fp12 ONE. Sound: vk_x is
 // recomputed on-chain. Verified against @noble/curves bls12-381.
 //
-// Same curve (BLS12-381) as nchain -> a direct comparison. At ~967M op-cost
-// (~121 standard BCH inputs) and a 7,728-byte locking script it does not fit one
+// Same curve (BLS12-381) as nchain -> a direct comparison. At ~966M op-cost
+// (~121 standard BCH inputs) and a 7,698-byte locking script it does not fit one
 // input because of op-cost density. The honest
 // single-tx baseline that motivates a chunked (multi-tx) BLS verifier.
 //
@@ -59,9 +59,9 @@ export const bchGroth16Bls12381Singleton: Implementation = {
     'VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated ' +
     'in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves ' +
     'bls12-381. Locking is plain compiler output (size objective + ' +
-    'rescheduleStacks, no post-passes; 7,728-byte locking) -- the honest baseline vs the ' +
+    'rescheduleStacks, no post-passes; 7,698-byte locking) -- the honest baseline vs the ' +
     'nchain single-tx reference, and the other end of the bytesize-vs-opcost ' +
-    'tradeoff from the -opcode-optimized entry. ~967M op-cost (~121 BCH ' +
+    'tradeoff from the -opcode-optimized entry. ~966M op-cost (~121 BCH ' +
     'inputs) does NOT fit one input.',
   load: async () => {
     const valid: Step[] = [

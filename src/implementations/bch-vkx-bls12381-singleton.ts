@@ -13,7 +13,7 @@
 //
 // Accepts the correct inputs and rejects a tampered input or a wrong baked
 // expected. The loop skips leading-zero doublings, so op-cost varies with the
-// runtime inputs. The published vector is ~13.73M op-cost and needs ~2 standard
+// runtime inputs. The published vector is ~12.99M op-cost and needs ~2 standard
 // BCH inputs' worth of budget, so it does NOT fit one input on the real BCH 2026 VM.
 //
 // Vectors: groth16_contract/singleton/bls12-381/build_vectors_vkx.mjs ->
@@ -41,7 +41,7 @@ export const bchVkxBls12381Singleton: Implementation = {
     'contract on BLS12-381 (VkX/singleton/bls12-381/vkx.cash). One MSB-first ' +
     '255-iteration Shamir/Straus loop with an affine IC1/IC2/IC1+IC2 table ' +
     '(b-independent formulas) + one final Fermat inverse to affine; RUNTIME public ' +
-    'inputs (only expected vk_x baked). Published vector: ~13.73M op-cost -> ~2 BCH ' +
+    'inputs (only expected vk_x baked). Published vector: ~12.99M op-cost -> ~2 BCH ' +
     'inputs (runtime cost varies with scalar bits); does NOT fit one ' +
     'input (real-VM op-cost density limit). Verified vs @noble/curves bls12-381.',
   load: async () => {

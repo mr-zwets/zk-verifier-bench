@@ -17,7 +17,7 @@
 // It accepts the correct inputs (reproducing the baked vk_x) and rejects both a
 // tampered input and a wrong baked expected. The loop skips leading-zero
 // doublings, so op-cost varies with the runtime inputs. The published vector is
-// ~11.95M op-cost and needs ~2 standard BCH inputs' worth of budget, so it does
+// ~11.21M op-cost and needs ~2 standard BCH inputs' worth of budget, so it does
 // NOT fit one input: on the real BCH 2026 VM it fails the op-cost density limit
 // even with the unlocking zero-padded to the 10,000-byte cap. That is the honest
 // result, and the reason
@@ -48,7 +48,7 @@ export const bchVkxSingleton: Implementation = {
     'contract (monolithic baseline, VkX/singleton/bn254/vkx.cash). One MSB-first ' +
     '254-iteration Shamir/Straus loop with an affine IC1/IC2/IC1+IC2 table + ' +
     'one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x ' +
-    'baked, like the chunked entries). Published vector: ~11.95M op-cost -> ~2 BCH ' +
+    'baked, like the chunked entries). Published vector: ~11.21M op-cost -> ~2 BCH ' +
     'inputs (runtime cost varies with scalar bits); does NOT fit ' +
     'BCH in a single input (real-VM op-cost density limit) -- this is why the ' +
     'chunked multi-tx entries exist.',
