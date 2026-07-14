@@ -4,7 +4,7 @@
 //   vk_x = IC0 + input0*IC1 + input1*IC2   (G1 points on BN254/alt_bn128)
 //
 // The monolithic single-tx contract (groth16_contract/singleton/vkx.cash) is
-// ~76M op-cost — about 10 BCH inputs, so it cannot validate in one input. Here
+// ~61M op-cost — about 8 BCH inputs, so it cannot validate in one input. Here
 // a SINGLE 254-iteration MSB-first double-and-add (Shamir/Straus shared
 // doublings) is split into byte-budgeted windows; each chunk is its own
 // CashScript contract (compiled by the local cashc feat/reusable-functions
@@ -21,17 +21,14 @@
 // forward (the multi-step-computation.md hash-chained-state mechanism). The
 // FINAL chunk folds the constant IC0, does a verified inverse-on-stack -> affine
 // and require()s the result == the py_ecc-validated vk_x point (no outgoing
-// commit). Because only VK constants are baked (never the proof's inputs), the
-// verifier is proof-AGNOSTIC: the same chunk bytecode verifies any input pair.
+// commit). The public inputs execute at runtime, but every step's state commitment
+// is baked for this instance, so another input pair requires regenerating the chain.
 //
-// PADDING (so each chunk buys a full input's op-cost budget): a P2SH unlocking
-// must be PUSH-ONLY, so each chunk's unlocking is the incoming coords + inputs
-// (reverse declaration order, minimal pushes) followed by ONE big zero-PUSH that
-// pads the unlocking to ~10,000 bytes; the locking has a single OP_DROP prepended
-// to consume that padding push before the contract runs. Real-VM budget per
-// input = (41 + 10000) * 800 = 8,032,800; every chunk's op-cost is under it.
+// PADDING: each chunk's trailing unused zeroPadding parameter is pushed first,
+// followed by the incoming coords + inputs in reverse declaration order. Its length
+// is tuned to the minimum that buys the measured op-cost budget; no OP_DROP is needed.
 //
-// Vectors are built/measured by groth16_contract/chunked/build_vectors.mjs and
+// Vectors are built/measured by groth16_contract/chunked/shamir/build_vectors.mjs and
 // committed to src/bch/vkx-chunked-shamir-vectors.json. Standalone measurement +
 // validation runner: src/bch/vkx-chunked.ts (pnpm tsx src/bch/vkx-chunked.ts).
 //
@@ -75,16 +72,15 @@ export const bchVkxChunkedShamir: Implementation = {
   // per-step state commitments are baked for this instance -> instance-specific
   proofBinding: 'baked',
   source:
-    'BCH-native CashScript: Shamir/Straus + multi-return EC functions + tuned padding. ' +
-    'Shamir/Straus shared ' +
-    'doublings (single 254-iter MSB-first loop), RUNTIME public inputs (input0/' +
-    'input1 carried in the hash-chained state and bit-tested in-script via a 2-bit ' +
-    'Shamir select over VK consts {IC1,IC2,T}), verified-inverse-on-stack, ' +
-    'tuned per-chunk padding for per-input budget. The EC ops ' +
-    'jacDouble/jacAdd/selectPoint are MULTI-VALUE-RETURN reusable functions ' +
-    '(returns (int,int,int) -> OP_DEFINE/OP_INVOKE) defined ONCE per chunk, and ' +
-    'each chunk LOOPS over its bit-range (body compiled once) so per-chunk bytecode ' +
-    'is ~1.5KB and op-cost (not size) binds -> 3 chunks, ~23KB total, ~14.3M op-cost',
+    'BCH-native CashScript: Shamir/Straus shared doublings in one 254-iteration ' +
+    'MSB-first loop, split into two hash-chained steps. Public inputs are bit-tested ' +
+    'in-script through the baked affine VK table {IC1,IC2,IC1+IC2}; each conditional ' +
+    'addition uses the mixed Jacobian-affine formula. The final step folds affine IC0 ' +
+    'and verifies the supplied Jacobian inverse before asserting vk_x. Multi-return EC ' +
+    'functions are defined once per chunk, and padding is tuned to the measured per-input ' +
+    'budget. The state commitments are instance-specific: another input pair requires ' +
+    'regenerating the two-step chain. Current footprint: 14,250 script bytes and ' +
+    '9,325,906 op-cost.',
   load: async () => {
     const valid: Step[] = v.chunks.map((c) => {
       const tail = c.final ? ' +fold IC0 +verified-inverse->affine, assert vk_x' : '';
