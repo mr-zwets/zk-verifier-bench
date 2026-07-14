@@ -14,7 +14,7 @@
 //     unlike BN254 — two sparse |x|-walks per point; sound because z^2+z+1 at -x^2
 //     equals r, which no cofactor prime divides);
 //   - GLV vk_x: 4-scalar 128-bit Straus over a baked subset-sum table (gated k-decomp
-//     + zInv witnesses).
+//     + zInv witnesses), using mixed Jacobian-affine additions for the baked table.
 //
 // Source: groth16_contract/singleton/bls12-381/groth16_minop.cash (generated)
 // Vectors: groth16_contract/singleton/bls12-381/build_vectors_groth16_minop.mjs ->
@@ -49,7 +49,8 @@ export const bchGroth16Bls12381SingletonMinOp: Implementation = {
     'w gated to mu_27A on-chain) replacing the hard part; e(alpha,beta) baked and the ' +
     '(vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); ' +
     'psi 64-bit G2 subgroup check; phi(P)==[-x^2]P G1 subgroup checks for A and C (the G1 ' +
-    'cofactor is nontrivial on BLS12-381); GLV 4-scalar vk_x. All extra inputs (c,cInv,w; ' +
+    'cofactor is nontrivial on BLS12-381); GLV 4-scalar vk_x with mixed Jacobian-affine ' +
+    'fixed-table additions. All extra inputs (c,cInv,w; ' +
     'GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x ' +
     'recomputed on-chain; all proof points curve- and subgroup-checked). Verified vs ' +
     '@noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~78% less ' +
