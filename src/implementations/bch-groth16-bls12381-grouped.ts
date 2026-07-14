@@ -3,10 +3,10 @@
 //
 //   - bch-groth16-bls12381-chunked: 56 SEQUENTIAL transactions (one chunk each) — a chain
 //     far deeper than BCH's default 50-tx mempool ancestor/descendant limit.
-//   - bch-groth16-bls12381-intratx: the whole verifier in ONE 475,579-byte transaction — over the
+//   - bch-groth16-bls12381-intratx: the whole verifier in ONE 475,310-byte transaction — over the
 //     100,000-byte standard size, so non-standard (mine-direct).
 //   - bch-groth16-bls12381-grouped (this): the SAME 56 inputs packed into 6 STANDARD
-//     transactions, 475,561 bytes and 377,584,999 op-cost in total.
+//     transactions, 475,292 bytes and 377,556,467 op-cost in total.
 //
 // Mechanism (identical to the BN254 grouped, see bch-groth16-grouped): within each group tx the
 // inputs forward-check via OP_INPUTBYTECODE; across groups the running state rides a CashToken
@@ -79,7 +79,7 @@ export const bchGroth16Bls12381Grouped: Implementation = {
     'Only proof-derived B walks G2; gamma/delta lines and fixed e(alpha,beta) are baked. The ' +
     'first Miller input checks A/C and B on-curve; the last reuses R_B=[|x|]B for the guarded ' +
     'psi(B)==[-x]B subgroup check. The 56 inputs are packed into 6 STANDARD transactions: ' +
-    '475,561 bytes and 377,584,999 ' +
+    '475,292 bytes and 377,556,467 ' +
     'op-cost total. The hybrid of ' +
     'bch-groth16-bls12381-intratx and bch-groth16-bls12381-chunked: within each group tx the ' +
     'inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), ' +
@@ -88,7 +88,7 @@ export const bchGroth16Bls12381Grouped: Implementation = {
     'tx.inputs[0].nftCommitment == hash256(inBlob), while the boundary covenant also pins ' +
     'the actual successor P2SH32 locking. The token thread chains the groups in order. ' +
     'Unlike the 56-tx covenant chain (past the default 50-deep mempool ancestor limit) and ' +
-    'the single 475,579-byte intra-tx bundle (non-standard, mine-direct), every grouped tx ' +
+    'the single 475,310-byte intra-tx bundle (non-standard, mine-direct), every grouped tx ' +
     'is under the 100,000-byte standard size and the run is 6 deep — relayable under default standard ' +
     'policy. 48-byte limbs, f+R_B Miller state, easy-part inverses as uncommitted witnesses. Same ' +
     'chunk math as bch-groth16-bls12381-chunked / -intratx; one fixed set of lockings verifies ' +

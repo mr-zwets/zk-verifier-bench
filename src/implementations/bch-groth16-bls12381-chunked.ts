@@ -11,7 +11,7 @@
 // (48-byte limbs), so one fixed set of lockings verifies ANY proof. Every step
 // validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts
 // <= 10,000 B). Layout: 5 GLV vk_x + 29 input-validated Miller + 22 final-exp inputs =
-// 56 inputs, 484,865 bytes, 377,821,912 op-cost. Verified against @noble/curves.
+// 56 inputs, 484,519 bytes, 377,785,509 op-cost. Verified against @noble/curves.
 //
 // The BLS12-381 counterpart of bch-groth16-chunked (BN254); the only BCH-compatible
 // full Groth16 verifier on the nchain curve.
@@ -69,7 +69,7 @@ export const bchGroth16Bls12381Chunked: Implementation = {
     'folded once as its pre-conjugate Miller value. The first Miller input checks A/C and B ' +
     'on-curve; the last reuses R_B=[|x|]B for the guarded psi(B)==[-x]B subgroup check. ' +
     'Final exponentiation asserts Fp12 ONE. The 5 GLV vk_x + 29 Miller + 22 final-exp inputs ' +
-    'total 56 inputs, 484,865 bytes, and 377,821,912 op-cost; EVERY step fits ' +
+    'total 56 inputs, 484,519 bytes, and 377,785,509 op-cost; EVERY step fits ' +
     'one BCH input. Proof-agnostic covenant: all state + proof-derived points + public ' +
     'inputs ride in the token NFT commitment (48-byte limbs). vk_x emits the exact ' +
     '(-A,B,C,vk_x) stage, Miller derives f=1 and R_B=B, and every ' +
