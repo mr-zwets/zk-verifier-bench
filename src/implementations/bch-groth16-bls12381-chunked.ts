@@ -2,15 +2,16 @@
 // proof check on the same curve as nchain, every step fitting ONE BCH input.
 //
 //   vk_x = IC0 + in0*IC1 + in1*IC2                 (public-input aggregation, G1)
-//   then  e(-A,B) * e(alpha,beta) * e(vk_x,gamma) * e(C,delta)  via 4 Miller loops +
-//   combine + final exponentiation, asserting the verdict == Fp12 ONE.
+//   then  e(-A,B) * e(alpha,beta) * e(vk_x,gamma) * e(C,delta) via a prepared-VK
+//   Miller product + final exponentiation, asserting the verdict == Fp12 ONE.
 //
 // The vk_x chunks (bch-vkx-bls12381-chunked-covenant) prepended to the pairing
 // (bch-pairing-bls12381-chunked): a single proof-agnostic covenant chain where all
 // state + proof-derived points + public inputs ride in the token NFT commitment
 // (48-byte limbs), so one fixed set of lockings verifies ANY proof. Every step
 // validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts
-// <= 10,000 B). Verified against @noble/curves bls12-381 end to end.
+// <= 10,000 B). Layout: 11 vk_x + 3 G2-check + 30 Miller + 23 final-exp inputs =
+// 67 inputs, 516,697 bytes, 402,210,911 op-cost. Verified against @noble/curves.
 //
 // The BLS12-381 counterpart of bch-groth16-chunked (BN254); the only BCH-compatible
 // full Groth16 verifier on the nchain curve.
@@ -46,7 +47,7 @@ const toStep = (s: RawStep): Step => ({
 
 export const bchGroth16Bls12381Chunked: Implementation = {
   id: 'bch-groth16-bls12381-chunked',
-  name: 'BCH Groth16 full verifier chunked, BLS12-381 (vk_x + pairing + final exp -> verdict, multi-tx, BCH-compatible)',
+  name: 'BCH Groth16 full verifier chunked, BLS12-381 (prepared Miller, 67 inputs)',
   // FULL verifier -> the ranked 'Groth16' leaderboard (same as nchain, scrypt-bn256,
   // bch-groth16-singleton/chunked, bch-groth16-bls12381-singleton). nchain is the
   // BLS12-381 reference, so this is its direct BCH-native chunked competitor. (The
@@ -56,14 +57,19 @@ export const bchGroth16Bls12381Chunked: Implementation = {
   structure: 'multi-tx',
   proofBinding: 'runtime',
   source:
-    'BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — a G2 input-validation ' +
-    'prologue (EIP-197: on-curve A/B/C + the prime-order-subgroup test psi(B)==[-x]B) then ' +
+    'BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — canonical-range-checked ' +
     'vk_x = IC0 + ' +
-    'in0*IC1 + in1*IC2 (public-input aggregation) then e(-A,B)*e(alpha,beta)*' +
-    'e(vk_x,gamma)*e(C,delta) via 4 Miller loops + combine + final exponentiation, ' +
-    'asserting the verdict == Fp12 ONE — split across transactions so EVERY step fits ' +
+    'in0*IC1 + in1*IC2 (public-input aggregation), then an EIP-197 G2 input-validation ' +
+    'stage (on-curve A/B/C + psi(B)==[-x]B), then e(-A,B)*e(alpha,beta)*' +
+    'e(vk_x,gamma)*e(C,delta) via a prepared-VK Miller product: only B walks G2 ' +
+    'on-chain, gamma/delta line coefficients are baked, and fixed e(alpha,beta) is ' +
+    'folded once as its pre-conjugate Miller value. Final exponentiation asserts Fp12 ONE. ' +
+    'The 11 vk_x + 3 G2-check + 30 Miller + 23 final-exp inputs total 67 inputs, ' +
+    '516,697 bytes, and 402,210,911 op-cost; EVERY step fits ' +
     'one BCH input. Proof-agnostic covenant: all state + proof-derived points + public ' +
-    'inputs ride in the token NFT commitment (48-byte limbs), so one fixed set of ' +
+    'inputs ride in the token NFT commitment (48-byte limbs). vk_x emits the exact ' +
+    '(-A,B,C,vk_x) stage, G2 and Miller derive their accumulators from B, and every ' +
+    'nonterminal step pins the actual successor locking, so one fixed set of ' +
     'lockings verifies any proof (confirmed via extraValidProofs). Verified vs ' +
     '@noble/curves bls12-381. The BLS12-381 counterpart of bch-groth16-chunked; the ' +
     'BCH-compatible full Groth16 verifier on the nchain curve.',

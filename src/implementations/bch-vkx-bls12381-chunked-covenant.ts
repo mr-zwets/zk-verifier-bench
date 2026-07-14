@@ -10,8 +10,9 @@
 // inputs.
 //
 // MAGNITUDE-INDEPENDENT (full-width, EVM-equivalent): the MSM tiles all 255
-// scalar-field bit positions and the chunk windows are sized against a worst-case
-// all-bits-set input, so the deployed lockings verify ANY public input < r -- not
+// scalar-field bit positions and the chunk windows are sized against two canonical,
+// complementary scalars whose union exercises an add at every bit, so the deployed
+// lockings verify ANY public input < r -- not
 // only small inputs. The same property as Ethereum's ecMul precompile (flat cost,
 // no small-input optimization). Runtime-general confirmed via extraValidProofs =
 // a distinct public-input pair against identical lockings.
@@ -52,7 +53,8 @@ export const bchVkxBls12381ChunkedCovenant: Implementation = {
   field: 'BLS12-381',
   structure: 'multi-tx',
   // GENERIC covenant: accumulator + public inputs in the token NFT commitment, NOT
-  // baked. Full-width (all 255 scalar positions, worst-case-sized windows) so one
+  // baked. The first chunk range-checks both scalars and derives the infinity
+  // accumulator. Full-width (all 255 scalar positions, worst-case-sized windows) so one
   // fixed set of lockings aggregates ANY public inputs < r -- confirmed via
   // extraValidProofs = distinct inputs. (Token-safety pinning is a separate step;
   // tokenSafetyEnforced left at default.)
@@ -62,8 +64,9 @@ export const bchVkxBls12381ChunkedCovenant: Implementation = {
     'double-and-add over the public-input bits) on BLS12-381, split across ' +
     'transactions so every step fits one BCH input. GENERIC covenant — the Jacobian ' +
     'accumulator and the public inputs ride in the token NFT commitment (no baked ' +
-    'instance), so one fixed locking aggregates ANY public inputs. MAGNITUDE-' +
-    'INDEPENDENT: tiles all 255 scalar-field positions with worst-case-sized windows ' +
+    'instance), so one fixed locking aggregates ANY public inputs. The first chunk ' +
+    'enforces canonical Fr ranges and derives the infinity accumulator. MAGNITUDE-' +
+    'INDEPENDENT: tiles all 255 scalar-field positions with in-range worst-case-sized windows ' +
     '(EVM ecMul-equivalent, full-width). The BLS12-381 counterpart of ' +
     'bch-vkx-chunked-covenant; same curve as nchain.',
   load: async () => {
