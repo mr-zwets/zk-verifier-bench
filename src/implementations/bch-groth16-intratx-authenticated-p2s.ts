@@ -1,6 +1,6 @@
 // BCH-native Groth16 verifier — intra-transaction, authenticated P2S dispatcher.
 //
-// Same 47-input BN254 Groth16 intra-tx verifier as bch-groth16-intratx (byte-identical
+// Same 46-input BN254 Groth16 intra-tx verifier as bch-groth16-intratx (byte-identical
 // unlocking bytecodes, same successor links), but each stage's 35-byte P2SH32 locking
 // is replaced by a 44-byte bare (P2S — pay-to-script, NOT P2SH) dispatcher:
 //
@@ -54,7 +54,7 @@ export const bchGroth16IntratxAuthenticatedP2s: Implementation = {
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
-    'Authenticated P2S (bare/pay-to-script, not P2SH) dispatcher variant of the 47-input ' +
+    'Authenticated P2S (bare/pay-to-script, not P2SH) dispatcher variant of the 46-input ' +
     'BN254 Groth16 intra-transaction verifier. Each original 35-byte P2SH32 locking is ' +
     'replaced by a 44-byte bare dispatcher — OP_DUP OP_HASH256 <hash256(body)> ' +
     'OP_EQUALVERIFY <999> OP_DEFINE <999> OP_INVOKE — that authenticates the stage body ' +

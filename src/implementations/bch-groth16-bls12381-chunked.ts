@@ -8,8 +8,8 @@
 // The vk_x chunks (bch-vkx-bls12381-chunked-covenant) prepended to the pairing
 // (bch-pairing-bls12381-chunked): a single proof-agnostic covenant chain where all
 // state + proof-derived points + public inputs ride in the token NFT commitment
-// (48-byte limbs), so one fixed set of lockings verifies ANY proof. Every one of the
-// ~196 steps validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts
+// (48-byte limbs), so one fixed set of lockings verifies ANY proof. Every step
+// validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts
 // <= 10,000 B). Verified against @noble/curves bls12-381 end to end.
 //
 // The BLS12-381 counterpart of bch-groth16-chunked (BN254); the only BCH-compatible

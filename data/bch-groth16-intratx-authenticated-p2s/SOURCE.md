@@ -2,7 +2,7 @@
 
 ## Origin
 
-Derived from `src/bch/groth16-intratx-vectors.json` (the 47-input BN254 Groth16
+Derived from `src/bch/groth16-intratx-vectors.json` (the 46-input BN254 Groth16
 intra-tx verifier) by `tools/derive-groth16-intratx-authenticated-p2s.mts`.
 Unlocking bytecodes are copied byte-identical (stage bodies forward-check
 successor unlockings at fixed byte offsets); each 35-byte P2SH32 locking is
@@ -24,7 +24,8 @@ The dispatcher hash256-checks the supplied body against the committed digest
 before defining and invoking it. Two invalid runs added beyond the inherited
 witness tampers exercise exactly this: one byte flipped inside a stage body,
 and two stages' (valid, differing-digest) bodies swapped. The harness rejects
-all 4/4 invalid runs.
+all 8/8 invalid runs (the six inherited verifier failures plus both dispatcher
+authentication failures).
 
 ## Why P2S
 
@@ -51,14 +52,14 @@ must never define 999; the derivation script asserts this per body.
 From the harness (small proof / worst-case proof):
 
 ```text
-inputs: 47
-locking bytes: 2,068 (47 × 44)
-unlocking bytes: 371,840
-script bytes: 373,908
-tx overhead: 2,041
-score: 375,949 (+423 vs bch-groth16-intratx = 47 × (44 − 35))
-total op-cost: 294,834,349 / 332,226,745
-max step op-cost: 7,451,115 / 7,666,230 (budget 8,032,800)
+inputs: 46
+locking bytes: 2,024 (46 × 44)
+unlocking bytes: 367,430
+script bytes: 369,454
+tx overhead: 1,998
+score: 371,452 (+414 vs bch-groth16-intratx = 46 × (44 − 35))
+total op-cost: 294,489,881 / 329,784,051
+max step op-cost: 7,954,691 / 7,955,222 (budget 8,032,800)
 BCH compatible: yes; packaging: secure (bare P2S)
 ```
 

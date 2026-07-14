@@ -4,16 +4,17 @@
 //   vk_x = IC0 + input0*IC1 + input1*IC2   (G1 points on BLS12-381, b=4)
 //
 // The ENTIRE vk_x aggregation in ONE CashScript contract (VkX,
-// groth16_contract/singleton/bls12-381/vkx.cash): two 255-iteration double-and-add
-// scalar multiplies (input0*IC1, input1*IC2) over Jacobian-projective coordinates
-// (b-independent formulas), the folds, and a single final Fermat inverse to affine.
+// groth16_contract/singleton/bls12-381/vkx.cash): one 255-iteration MSB-first
+// Shamir/Straus loop over Jacobian-projective coordinates (b-independent formulas),
+// with a fixed affine table for IC1, IC2, and IC1+IC2, then a single final Fermat inverse.
 // Public inputs (input0,input1) at RUNTIME; only the expected vk_x affine point is
 // baked (constructor args expectedX/expectedY) -- the same honesty model as the
 // BN254 entries. Verified against @noble/curves bls12-381.
 //
 // Accepts the correct inputs and rejects a tampered input or a wrong baked
-// expected. At ~101M op-cost it needs ~13 standard BCH inputs' worth of budget, so
-// it does NOT fit one input on the real BCH 2026 VM (op-cost density limit).
+// expected. The loop skips leading-zero doublings, so op-cost varies with the
+// runtime inputs. The published vector is ~12.99M op-cost and needs ~2 standard
+// BCH inputs' worth of budget, so it does NOT fit one input on the real BCH 2026 VM.
 //
 // Vectors: groth16_contract/singleton/bls12-381/build_vectors_vkx.mjs ->
 // src/bch/vkx-bls12381-singleton-vectors.json.
@@ -37,10 +38,11 @@ export const bchVkxBls12381Singleton: Implementation = {
   structure: 'single-tx',
   source:
     'BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE ' +
-    'contract on BLS12-381 (VkX/singleton/bls12-381/vkx.cash). Two inlined ' +
-    '255-iteration double-and-add scalar mults over Jacobian-projective coords ' +
-    '(b-independent) + one final Fermat inverse to affine; RUNTIME public inputs ' +
-    '(only expected vk_x baked). ~101M op-cost -> ~13 BCH inputs; does NOT fit one ' +
+    'contract on BLS12-381 (VkX/singleton/bls12-381/vkx.cash). One MSB-first ' +
+    '255-iteration Shamir/Straus loop with an affine IC1/IC2/IC1+IC2 table ' +
+    '(b-independent formulas) + one final Fermat inverse to affine; RUNTIME public ' +
+    'inputs (only expected vk_x baked). Published vector: ~12.99M op-cost -> ~2 BCH ' +
+    'inputs (runtime cost varies with scalar bits); does NOT fit one ' +
     'input (real-VM op-cost density limit). Verified vs @noble/curves bls12-381.',
   load: async () => {
     const valid: Step[] = [
