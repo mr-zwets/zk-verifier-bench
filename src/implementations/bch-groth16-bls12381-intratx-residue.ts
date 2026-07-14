@@ -22,9 +22,8 @@
 //
 // The worst-case field contains a deterministic valid proof whose four GLV sub-scalars execute
 // an add at all 128 Straus positions. It maximized total op-cost among 32 full proofs and increased
-// the heaviest step versus the prior fixture. A separate 256-proof audit of these exact lockings
-// observed at least 386,489 op-cost of headroom; this is empirical stress coverage, not a claim of
-// a formal global arithmetic maximum.
+// the heaviest step versus the prior fixture. This is empirical stress coverage, not a claim of a
+// formal global arithmetic maximum.
 //
 // Vectors: groth16_contract/chunked/intratx/build_vectors_residue_bls.mjs ->
 // src/bch/groth16-bls12381-intratx-residue-vectors.json.
@@ -63,7 +62,7 @@ export const bchGroth16Bls12381IntratxResidue: Implementation = {
     'arithmetic (29 chunks; the G2 on-curve + prime-order-subgroup validation is FUSED into the ' +
     'first/last Miller chunks, reusing the running R_B=[|x|]B the loop already walks), and a ' +
     'witnessed-residue final-exponentiation TAIL collapsing the Hayashida-Scott hard part to a ' +
-    'mu_27A ((w^|x|)*w)^9 walk + fF*w==frob(c,1) verdict (5 chunks) — 39 inputs total (vs 87 for ' +
+    'mu_27A ((w^|x|)*w)^9 walk + fF*w==frob(c,1) verdict (5 chunks) — 39 inputs total (vs 83 for ' +
     'the plain intra-tx build). The residue witness (c, cInv) threads through every fused-Miller ' +
     'chunk and is re-checked in the tail; w enters the tail as an uncommitted witness. Every ' +
     'input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole ' +
@@ -72,7 +71,7 @@ export const bchGroth16Bls12381IntratxResidue: Implementation = {
     'the VK (proof in the witness). Deployed as P2SH32 so each chunk\'s redeem rides in the ' +
     'scriptSig, where it counts toward the op-cost budget and offsets the pad. The supplied ' +
     'worst-case run is a deterministic valid all-position GLV stress proof selected from 32 full ' +
-    'proofs; a separate 256-proof locking audit retained at least 386,489 op-cost of input headroom.',
+    'proofs; this is empirical stress coverage rather than a formal global arithmetic maximum.',
   load: async () => ({
     valid: toRun(v.steps),
     extraValidProofs: (v.extraValidProofs ?? []).map(toRun),

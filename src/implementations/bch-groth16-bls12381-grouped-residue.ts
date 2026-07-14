@@ -17,9 +17,8 @@
 // tx.inputs[0].nftCommitment == hash256(inBlob)); the token thread chains the groups in order.
 //
 // The worst-case field contains the same deterministic valid all-position GLV stress proof as the
-// intra-tx build. It maximized total op-cost among 32 full proofs and a separate 256-proof audit of
-// the exact shared-table lockings retained at least 386,489 op-cost of input headroom. The result is
-// explicitly empirical rather than a claim of a formal global arithmetic maximum.
+// intra-tx build. It maximized total op-cost among 32 full proofs; this is empirical stress
+// coverage rather than a claim of a formal global arithmetic maximum.
 //
 // Vectors: groth16_contract/chunked/grouped/build_vectors_residue_bls.mjs ->
 // src/bch/groth16-bls12381-grouped-residue-vectors.json.
@@ -93,8 +92,8 @@ export const bchGroth16Bls12381GroupedResidue: Implementation = {
     '-- relayable under default standard policy. 48-byte limbs; c,cInv thread through the fused Miller ' +
     'as constant witness; w is an uncommitted tail witness. One fixed set of lockings verifies any ' +
     'proof for the VK. Deployed P2SH32. The supplied worst-case run is a deterministic valid ' +
-    'all-position GLV stress proof selected from 32 full proofs; a separate 256-proof locking ' +
-    'audit retained at least 386,489 op-cost of input headroom.',
+    'all-position GLV stress proof selected from 32 full proofs; this is empirical stress ' +
+    'coverage rather than a formal global arithmetic maximum.',
   load: async () => {
     const valid = toRun(v.valid);
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);
