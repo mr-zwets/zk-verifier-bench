@@ -7,7 +7,7 @@
 // step's state commitment -> instance-specific), this is a GENERIC covenant: the
 // Jacobian accumulator + the public inputs live in the spent/created token's NFT
 // commitment, checked by introspection, so ONE fixed set of lockings aggregates
-// ANY public inputs. These are the same 8 vk_x chunks used by
+// ANY public inputs. These are the same 7 vk_x chunks used by
 // bch-groth16-chunked after its 3 input-validation chunks.
 //
 // Vectors: groth16_contract/chunked/pairing/build_vectors.mjs ->
@@ -47,16 +47,17 @@ export const bchVkxChunkedCovenant: Implementation = {
   structure: 'multi-tx',
   // GENERIC covenant: accumulator + public inputs in the token NFT commitment, NOT
   // baked. One fixed set of lockings aggregates any public inputs (confirmed via
-  // extraValidProofs = distinct inputs). (Token-safety pinning is a separate step;
-  // tokenSafetyEnforced left at default.)
+  // extraValidProofs = distinct inputs). Every output preserves the mutable token's
+  // category/capability; nonterminal steps also pin the actual successor locking.
   proofBinding: 'runtime',
+  tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: vk_x = IC0 + in0*IC1 + in1*IC2 (Shamir/Straus G1 ' +
     'double-and-add over the public-input bits) split across transactions so every ' +
     'step fits one BCH input. GENERIC covenant — the Jacobian accumulator and the ' +
     'public inputs ride in the token NFT commitment (no baked instance), so one ' +
     'fixed locking aggregates ANY public inputs. The runtime-general counterpart of ' +
-    'bch-vkx-chunked-shamir; identical to the 8 vk_x chunks in bch-groth16-chunked.',
+    'bch-vkx-chunked-shamir; identical to the 7 vk_x chunks in bch-groth16-chunked.',
   load: async () => {
     const valid: Step[] = v.steps.map(toStep);
     const extraValidProofs: Step[][] = (v.extraValidProofs ?? []).map((run) => run.map(toStep));

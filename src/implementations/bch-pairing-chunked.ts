@@ -9,8 +9,8 @@
 // end. Fixed-G2 line coefficients are baked, so only e(-A,B)'s R0 is carried and
 // updated on-chain. State is hash256-committed and re-supplied in the witness.
 //
-// This is the multi-tx counterpart of bch-pairing-singleton (~1.21B op-cost,
-// ~151 inputs, BCH-INcompatible): here every one of the 20 steps validates on
+// This is the multi-tx counterpart of the over-limit bch-pairing-singleton: here
+// every one of the 20 steps validates on
 // the real BCH 2026 VM. Reaches checkpoint "miller-boundary"; the final
 // exponentiation (verdict) is added on top of this boundary.
 //
@@ -54,9 +54,10 @@ export const bchPairingChunked: Implementation = {
   // GENERIC covenant chunks: the running state lives in the token NFT commitment,
   // NOT baked into the program. One fixed set of lockings verifies any proof; the
   // benchmark confirms it empirically via extraValidProofs (a distinct proof, same
-  // lockings). (Token-safety pinning of category/capability/single-token-flow is a
-  // separate hardening step; tokenSafetyEnforced is left at its default.)
+  // lockings). Each step pins category/capability and its actual successor P2SH32
+  // locking in the full verifier.
   proofBinding: 'runtime',
+  tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: the BN254 Groth16 Miller boundary e(-A,B)*e(alpha,beta)*' +
     'e(vk_x,gamma)*e(C,delta) split across transactions so EVERY step fits one ' +

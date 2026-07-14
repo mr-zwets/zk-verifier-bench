@@ -6,19 +6,19 @@
 // it runs the residue-optimized chunk graph instead of the plain one:
 //
 //   fast-G2 endo subgroup check (ePrint 2022/348)            3 chunks
-//   GLV vk_x MSM (4-scalar ~128-bit Straus)                  4 chunks   (was 9, plain)
+//   GLV vk_x MSM (4-scalar ~128-bit Straus)                  3 chunks
 //   c^-(6x+2)-FUSED Miller + terminal residue verdict        20 chunks  (skips pair 1)
 //                                                            ---------
-//                                                            27 inputs  (plain intratx: 54)
+//                                                            26 inputs  (plain intratx: 42)
 //
 // The residue witness (c, cInv) threads through every fused-Miller chunk. Its terminal chunk
 // checks c*cInv==ONE, c canonical, exact w membership in {1,w27,w27^2}, and the residue
 // equation fF*(w*c^q2) == (c*c^q2)^q. It uses the same chunk math as
 // bch-groth16-grouped-residue, laid out as the inputs of one non-standard (<1 MB)
-// transaction rather than token-threaded standard transactions. The four GLV chunks read one
-// hash-bound fixed lookup table carried by the final GLV input rather than embedding four copies.
+// transaction rather than token-threaded standard transactions. The three GLV chunks read one
+// hash-bound fixed lookup table carried by the final GLV input rather than embedding three copies.
 //
-// Result: ~228 KB / ~180M op over 27 inputs (vs ~523 KB / 411M over 54 for plain intratx),
+// Result: ~225 KB / ~180M op over 26 inputs (vs ~329 KB / ~262M over 42 for plain intratx),
 // each input fitting one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B).
 //
 // Vectors: groth16_contract/chunked/intratx/build_vectors_residue.mjs ->
@@ -29,7 +29,7 @@ import { hexToBin } from '@bitauth/libauth';
 import type { Implementation, Step } from '../harness/types.js';
 
 interface RawStep { label: string; locking: string; unlocking: string; checkpoint?: string }
-interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][] }
+interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][]; invalidInputs?: RawStep[][] }
 
 const v = JSON.parse(readFileSync('src/bch/groth16-intratx-residue-vectors.json', 'utf8')) as Vectors;
 
@@ -59,11 +59,11 @@ export const bchGroth16IntratxResidue: Implementation = {
     'the INPUTS of ONE transaction. Same forward-checking as bch-groth16-intratx (each input ' +
     'carries its incoming state as a raw byte blob and binds the chain via ' +
     'tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no ' +
-    'hashing, no 128-byte state limit), but it runs the residue chunk graph: fast-G2 endo ' +
-    'subgroup check (ePrint 2022/348, 3 chunks), GLV vk_x MSM (4 chunks), c^-(6x+2)-FUSED ' +
+    'hashing, no 128-byte state limit), but it runs the residue chunk graph: canonical-coordinate fast-G2 endo ' +
+    'subgroup check (ePrint 2022/348, 3 chunks), GLV vk_x MSM (3 chunks), c^-(6x+2)-FUSED ' +
     'batched Miller with e(alpha,beta) precomputed/skipped (20 chunks). Its terminal chunk ' +
-    'also checks the witnessed-residue verdict, for 27 inputs total (vs 54 for the plain ' +
-    'intra-tx build), ~228 KB / ~180M op. The four GLV chunks share one hash-bound fixed ' +
+    'also checks the witnessed-residue verdict, for 26 inputs total (vs 42 for the plain ' +
+    'intra-tx build), ~225 KB / ~180M op. The three GLV chunks share one hash-bound fixed ' +
     'lookup table carried by the final GLV input. The residue witness (c, cInv) threads through ' +
     'every Miller chunk; the terminal checks c*cInv==ONE, c canonical, exact w membership ' +
     'in {1,w27,w27^2}, and fF*(w*c^q2) == (c*c^q2)^q. ' +
@@ -77,6 +77,7 @@ export const bchGroth16IntratxResidue: Implementation = {
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);
     const worstCaseProof = v.worstCaseProof ? toRun(v.worstCaseProof) : undefined;
     const invalid = (v.invalid ?? []).map(toRun);
-    return { valid, extraValidProofs, worstCaseProof, invalid };
+    const invalidInputs = (v.invalidInputs ?? []).map(toRun);
+    return { valid, extraValidProofs, worstCaseProof, invalid, invalidInputs };
   },
 };
