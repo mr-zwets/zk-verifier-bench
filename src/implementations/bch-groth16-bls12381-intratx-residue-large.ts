@@ -6,7 +6,7 @@
 // final-exp tail), but each chunk is sized to a 100 kB unlocking instead of 10 kB.
 //
 // Why it needs bch-spec: current BCH (BCH_2026) caps every script at 10,000 B and grants an input
-// (41 + unlockingLen) * 800 op-cost, so ~257M op forces 42 inputs. The proposed bch-spec upgrade
+// (41 + unlockingLen) * 800 op-cost, so ~257M op forces 41 inputs. The proposed bch-spec upgrade
 // raises the per-script cap to 100,000 B and the density-control base to 10,000, so an input gets
 // (10000 + unlockingLen) * 800 = up to 88,000,000 op — ~11x. The SAME residue verifier therefore
 // collapses to ~one fat input per stage floor:
@@ -61,7 +61,7 @@ export const bchGroth16Bls12381IntratxResidueLarge: Implementation = {
     'same residue chunk graph (GLV vk_x MSM, c^-|x|-FUSED batched Miller with e(alpha,beta) baked ' +
     'and the G2 on-curve+prime-order-subgroup validation fused into the first/last Miller chunks, ' +
     'witnessed-residue mu_27A final-exp TAIL), but each chunk fills a 100 kB input instead of ' +
-    '10 kB, collapsing the verifier from 42 inputs to 5 (GLV vk_x 1, fused Miller 3, residue ' +
+    '10 kB, collapsing the verifier from 41 inputs to 5 (GLV vk_x 1, fused Miller 3, residue ' +
     'walk+finalize tail 1), ~272 kB / ~251M op. Op-cost and bytes are conserved; this is a structural simplification ' +
     '(fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads ' +
     'through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, mu_27A membership ' +

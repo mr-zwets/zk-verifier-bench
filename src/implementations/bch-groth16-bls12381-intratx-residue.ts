@@ -6,12 +6,12 @@
 // tx.inputs[idx+1].unlockingBytecode, OP_INPUTBYTECODE — equals its recomputed output), but it
 // runs the residue-optimized chunk graph instead of the plain one:
 //
-//   GLV vk_x MSM (4-scalar ~128-bit Straus, baked table)             6 chunks
+//   GLV vk_x MSM (4-scalar ~128-bit Straus, baked table)             5 chunks
 //   c^-|x|-FUSED batched Miller, e(alpha,beta) baked (cmul1); the G2  30 chunks
 //     on-curve + subgroup check is FUSED in (first/last chunks reuse R_B=[|x|]B)
 //   witnessed-residue final-exp TAIL: mu_27A ((w^|x|)*w)^9 walk       6 chunks (5 walk + finalize)
 //                                                                    ---------
-//                                                                    42 inputs
+//                                                                    41 inputs
 //
 // The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in
 // the tail; w enters the tail as an uncommitted witness. Cross-stage soundness links are bound
@@ -52,12 +52,12 @@ export const bchGroth16Bls12381IntratxResidue: Implementation = {
     'the INPUTS of ONE transaction. Same forward-checking as bch-groth16-bls12381-intratx (each ' +
     'input carries its incoming state as a raw 48-byte-limb blob and binds the chain via ' +
     'tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, ' +
-    'arbitrary intermediate size), but it runs the residue chunk graph: GLV vk_x MSM (6 chunks), ' +
+    'arbitrary intermediate size), but it runs the residue chunk graph: GLV vk_x MSM (5 chunks), ' +
     'c^-|x|-FUSED batched Miller with e(alpha,beta) baked and only e(-A,B) running on-chain G2 ' +
     'arithmetic (30 chunks; the G2 on-curve + prime-order-subgroup validation is FUSED into the ' +
     'first/last Miller chunks, reusing the running R_B=[|x|]B the loop already walks), and a ' +
     'witnessed-residue final-exponentiation TAIL collapsing the Hayashida-Scott hard part to a ' +
-    'mu_27A ((w^|x|)*w)^9 walk + fF*w==frob(c,1) verdict (6 chunks) — 42 inputs total (vs 87 for ' +
+    'mu_27A ((w^|x|)*w)^9 walk + fF*w==frob(c,1) verdict (6 chunks) — 41 inputs total (vs 87 for ' +
     'the plain intra-tx build). The residue witness (c, cInv) threads through every fused-Miller ' +
     'chunk and is re-checked in the tail; w enters the tail as an uncommitted witness. Every ' +
     'input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole ' +
