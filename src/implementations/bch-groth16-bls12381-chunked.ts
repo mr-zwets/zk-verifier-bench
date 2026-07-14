@@ -10,8 +10,8 @@
 // state + proof-derived points + public inputs ride in the token NFT commitment
 // (48-byte limbs), so one fixed set of lockings verifies ANY proof. Every step
 // validates on the real BCH 2026 VM (op-cost <= 8,032,800, scripts
-// <= 10,000 B). Layout: 11 vk_x + 29 input-validated Miller + 22 final-exp inputs =
-// 62 inputs, 486,512 bytes, 379,566,940 op-cost. Verified against @noble/curves.
+// <= 10,000 B). Layout: 5 GLV vk_x + 29 input-validated Miller + 22 final-exp inputs =
+// 56 inputs, 484,865 bytes, 377,821,912 op-cost. Verified against @noble/curves.
 //
 // The BLS12-381 counterpart of bch-groth16-chunked (BN254); the only BCH-compatible
 // full Groth16 verifier on the nchain curve.
@@ -28,7 +28,7 @@ interface RawStep {
   covenant?: { category: string; capability: 'none' | 'mutable' | 'minting'; inCommitment: string; outCommitment: string; outLockingBytecode: string };
 }
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-chunked-vectors.json', 'utf8')) as {
-  steps: RawStep[]; extraValidProofs?: RawStep[][]; invalidInputs?: RawStep[][];
+  steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalidInputs?: RawStep[][];
 };
 
 const toStep = (s: RawStep): Step => ({
@@ -47,7 +47,7 @@ const toStep = (s: RawStep): Step => ({
 
 export const bchGroth16Bls12381Chunked: Implementation = {
   id: 'bch-groth16-bls12381-chunked',
-  name: 'BCH Groth16 full verifier chunked, BLS12-381 (prepared Miller, 62 inputs)',
+  name: 'BCH Groth16 full verifier chunked, BLS12-381 (GLV + prepared Miller, 56 inputs)',
   // FULL verifier -> the ranked 'Groth16' leaderboard (same as nchain, scrypt-bn256,
   // bch-groth16-singleton/chunked, bch-groth16-bls12381-singleton). nchain is the
   // BLS12-381 reference, so this is its direct BCH-native chunked competitor. (The
@@ -58,14 +58,14 @@ export const bchGroth16Bls12381Chunked: Implementation = {
   proofBinding: 'runtime',
   source:
     'BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — canonical-range-checked ' +
-    'vk_x = IC0 + ' +
-    'in0*IC1 + in1*IC2 (public-input aggregation), then e(-A,B)*e(alpha,beta)*' +
+    'five-chunk GLV vk_x = IC0 + ' +
+    'in0*IC1 + in1*IC2 (public-input aggregation, with the fixed VK table embedded in each locking), then e(-A,B)*e(alpha,beta)*' +
     'e(vk_x,gamma)*e(C,delta) via an input-validated prepared-VK Miller product: only B walks G2 ' +
     'on-chain, gamma/delta line coefficients are baked, and fixed e(alpha,beta) is ' +
     'folded once as its pre-conjugate Miller value. The first Miller input checks A/C and B ' +
     'on-curve; the last reuses R_B=[|x|]B for the guarded psi(B)==[-x]B subgroup check. ' +
-    'Final exponentiation asserts Fp12 ONE. The 11 vk_x + 29 Miller + 22 final-exp inputs ' +
-    'total 62 inputs, 486,512 bytes, and 379,566,940 op-cost; EVERY step fits ' +
+    'Final exponentiation asserts Fp12 ONE. The 5 GLV vk_x + 29 Miller + 22 final-exp inputs ' +
+    'total 56 inputs, 484,865 bytes, and 377,821,912 op-cost; EVERY step fits ' +
     'one BCH input. Proof-agnostic covenant: all state + proof-derived points + public ' +
     'inputs ride in the token NFT commitment (48-byte limbs). vk_x emits the exact ' +
     '(-A,B,C,vk_x) stage, Miller derives f=1 and R_B=B, and every ' +
@@ -76,11 +76,12 @@ export const bchGroth16Bls12381Chunked: Implementation = {
   load: async () => {
     const valid: Step[] = v.steps.map(toStep);
     const extraValidProofs: Step[][] = (v.extraValidProofs ?? []).map((run) => run.map(toStep));
+    const worstCaseProof = v.worstCaseProof?.map(toStep);
     const tampered = (i: number): Step[] => [{ ...valid[i]!, unlockingBytecode: hexToBin(v.steps[i]!.invalidUnlocking) }];
     const invalid: Step[][] = [tampered(0), tampered(valid.length - 1)];
-    // Invalid input runs (off-curve A, on-curve off-subgroup B) exercise the fused
-    // on-curve + psi(B)==[-x]B subgroup checks (grades inputValidation).
+    // Invalid input runs cover the fused point/subgroup checks plus GLV range,
+    // decomposition, shared-table, and seam checks.
     const invalidInputs: Step[][] = (v.invalidInputs ?? []).map((run) => run.map(toStep));
-    return { valid, extraValidProofs, invalid, invalidInputs };
+    return { valid, extraValidProofs, worstCaseProof, invalid, invalidInputs };
   },
 };
