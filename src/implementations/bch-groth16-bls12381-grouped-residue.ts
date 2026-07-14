@@ -67,7 +67,7 @@ const toRun = (run: RawRun): Step[] => {
 
 export const bchGroth16Bls12381GroupedResidue: Implementation = {
   id: 'bch-groth16-bls12381-grouped-residue',
-  name: 'BCH BLS12-381 Groth16 verifier, grouped + residue (41 chunks in 5 standard <100KB transactions: GLV vk_x, fused Miller, witnessed-residue tail; intra-tx forward-checks within each tx, CashToken hand-off across them)',
+  name: 'BCH BLS12-381 Groth16 verifier, grouped + residue (39 chunks in 5 standard <100KB transactions: GLV vk_x, fused Miller, witnessed-residue tail; intra-tx forward-checks within each tx, CashToken hand-off across them)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'multi-tx',
@@ -83,7 +83,7 @@ export const bchGroth16Bls12381GroupedResidue: Implementation = {
     'c^-|x|-FUSED prepared-VK batched Miller (e(alpha,beta) baked as a constant, (vk_x,gamma)/(C,delta) ' +
     'line coeffs baked, only e(-A,B) runs on-chain G2 arithmetic; c^-|x| folded into the shared f) -> ' +
     'witnessed-residue tail (the 23-chunk Hayashida-Scott hard part collapses to a ((w^|x|)*w)^9 ' +
-    'mu_(27A) witness-subgroup walk + the fF*w == frob(c,1) verdict, lambda = p + |x|). The 41 chunks ' +
+    'mu_(27A) witness-subgroup walk + the fF*w == frob(c,1) verdict, lambda = p + |x|). The 39 chunks ' +
     'are packed into ~5 STANDARD (<100,000 B) transactions: within each group tx the inputs ' +
     'forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across ' +
     'groups the running state rides a mutable CashToken NFT commitment (a group\'s last chunk commits ' +
