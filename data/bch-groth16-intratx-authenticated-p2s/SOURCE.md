@@ -54,11 +54,11 @@ From the harness (small proof / worst-case proof):
 ```text
 inputs: 46
 locking bytes: 2,024 (46 × 44)
-unlocking bytes: 367,430
-script bytes: 369,454
+unlocking bytes: 367,138
+script bytes: 369,162
 tx overhead: 1,998
-score: 371,452 (+414 vs bch-groth16-intratx = 46 × (44 − 35))
-total op-cost: 294,489,881 / 329,784,051
+score: 371,160 (+414 vs bch-groth16-intratx = 46 × (44 − 35))
+total op-cost: 293,747,907 / 329,054,786
 max step op-cost: 7,954,691 / 7,955,222 (budget 8,032,800)
 BCH compatible: yes; packaging: secure (bare P2S)
 ```
