@@ -1,6 +1,6 @@
 // BCH-native Groth16 verifier — INTRA-TRANSACTION LINKED, the whole computation in
 // ONE transaction. Instead of the multi-tx covenant (bch-groth16-chunked), which
-// chains ~60 transactions and hands state forward through an NFT commitment
+// chains 44 transactions and hands state forward through an NFT commitment
 // (hash256 of the state, re-provided and re-hashed every step, capped at 128 bytes),
 // this lays the SAME chunked computation out as the INPUTS of a single transaction.
 //
@@ -13,7 +13,7 @@
 // links are bound where layouts allow (vk_x into the Miller genesis input; the Miller
 // boundary into the final-exponentiation genesis input).
 //
-// Result: ~60 inputs, each independently fitting one BCH input's op-cost budget
+// Result: 42 inputs, each independently fitting one BCH input's op-cost budget
 // (<=8,032,800) and 10,000-byte script cap, packed into one non-standard transaction
 // (<1 MB). The reused chunk math is identical to bch-groth16-chunked.
 //
@@ -52,7 +52,8 @@ export const bchGroth16Intratx: Implementation = {
   proofBinding: 'runtime',
   source:
     'BCH-native CashScript: the full BN254 Groth16 verifier (validate G2 inputs -> vk_x ' +
-    '-> batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1) ' +
+    '-> prepared batched Miller, with fixed e(alpha,beta) replaced by one multiply with ' +
+    'its precomputed raw Miller value -> final exponentiation -> assert product==1) ' +
     'laid out as the INPUTS of ONE transaction. Each input carries its incoming state as ' +
     'a raw byte blob and binds the chain by forward-checking its successor via ' +
     'tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT-' +

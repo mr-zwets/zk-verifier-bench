@@ -2,7 +2,7 @@
 
 ## Origin
 
-Derived from `src/bch/groth16-intratx-vectors.json` (the 46-input BN254 Groth16
+Derived from `src/bch/groth16-intratx-vectors.json` (the 42-input BN254 Groth16
 intra-tx verifier) by `tools/derive-groth16-intratx-authenticated-p2s.mts`.
 Unlocking bytecodes are copied byte-identical (stage bodies forward-check
 successor unlockings at fixed byte offsets); each 35-byte P2SH32 locking is
@@ -52,14 +52,14 @@ must never define 999; the derivation script asserts this per body.
 From the harness (small proof / worst-case proof):
 
 ```text
-inputs: 46
-locking bytes: 2,024 (46 × 44)
-unlocking bytes: 367,138
-script bytes: 369,162
-tx overhead: 1,998
-score: 371,160 (+414 vs bch-groth16-intratx = 46 × (44 − 35))
-total op-cost: 293,747,907 / 329,054,786
-max step op-cost: 7,954,691 / 7,955,222 (budget 8,032,800)
+inputs: 42
+locking bytes: 1,848 (42 × 44)
+unlocking bytes: 329,110
+script bytes: 330,958
+tx overhead: 1,826
+score: 332,784 (+378 vs bch-groth16-intratx = 42 × (44 − 35))
+total op-cost: 262,853,837 / 298,160,220
+max step op-cost: 7,954,688 / 7,955,222 (budget 8,032,800)
 BCH compatible: yes; packaging: secure (bare P2S)
 ```
 
