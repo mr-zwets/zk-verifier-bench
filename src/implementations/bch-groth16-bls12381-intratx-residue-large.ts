@@ -6,7 +6,7 @@
 // final-exp tail), but each chunk is sized to a 100 kB unlocking instead of 10 kB.
 //
 // Why it needs bch-spec: current BCH (BCH_2026) caps every script at 10,000 B and grants an input
-// (41 + unlockingLen) * 800 op-cost; the current 256.81M-op plan uses 39 inputs. The proposed
+// (41 + unlockingLen) * 800 op-cost; the current 256,960,795-op plan uses 39 inputs. The proposed
 // bch-spec upgrade raises the per-script cap to 100,000 B and the density-control base to 10,000,
 // so an input gets
 // (10000 + unlockingLen) * 800 = up to 88,000,000 op — ~11x. The SAME residue verifier therefore
@@ -18,7 +18,7 @@
 //                            --------
 //                            5 inputs   (one non-standard <1 MB transaction)
 //
-// 270,713 B / 250,648,934 op over 5 inputs (vs 324,320 B / 256,806,318 op over 39 for the
+// 270,812 B / 250,831,432 op over 5 inputs (vs 324,469 B / 256,960,795 op over 39 for the
 // current-BCH residue build). The arithmetic is unchanged; fewer state boundaries also remove
 // repeated checks and padding. Every input fits its own bch-spec budget (op-cost <= 88,000,000,
 // scripts <= 100,000 B); deployed as P2SH32 so each chunk redeem rides in the scriptSig where it
@@ -65,7 +65,7 @@ export const bchGroth16Bls12381IntratxResidueLarge: Implementation = {
     'and the G2 on-curve+prime-order-subgroup validation fused into the first/last Miller chunks, ' +
     'witnessed-residue mu_27A final-exp TAIL), but each chunk fills a 100 kB input instead of ' +
     '10 kB, collapsing the verifier from 39 inputs to 5 (GLV vk_x 1, fused Miller 3, residue ' +
-    'walk+finalize tail 1), 270,713 B / 250,648,934 op. The arithmetic is unchanged; fewer state ' +
+    'walk+finalize tail 1), 270,812 B / 250,831,432 op. The arithmetic is unchanged; fewer state ' +
     'boundaries also remove repeated checks and padding. The residue witness (c, cInv) threads ' +
     'through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, mu_27A membership ' +
     'on w); the verdict is fF*w==frob(c,1). Every input fits one bch-spec input budget (op-cost <= ' +
