@@ -34,7 +34,7 @@ import { hexToBin } from '@bitauth/libauth';
 import type { Implementation, Step } from '../harness/types.js';
 
 interface RawStep { label: string; locking: string; unlocking: string; checkpoint?: string }
-interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][] }
+interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][]; invalidInputs?: RawStep[][] }
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-intratx-residue-large-vectors.json', 'utf8')) as Vectors;
 
@@ -80,5 +80,6 @@ export const bchGroth16Bls12381IntratxResidueLarge: Implementation = {
     extraValidProofs: (v.extraValidProofs ?? []).map(toRun),
     worstCaseProof: v.worstCaseProof ? toRun(v.worstCaseProof) : undefined,
     invalid: (v.invalid ?? []).map(toRun),
+    invalidInputs: (v.invalidInputs ?? []).map(toRun),
   }),
 };

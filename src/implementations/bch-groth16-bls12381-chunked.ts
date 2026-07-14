@@ -56,6 +56,10 @@ export const bchGroth16Bls12381Chunked: Implementation = {
   field: 'BLS12-381',
   structure: 'multi-tx',
   proofBinding: 'runtime',
+  // Every nonterminal covenant step pins the token category, requires mutable capability,
+  // preserves the single NFT thread, and pins the successor locking. The vector generator
+  // rejects a wrong category or stripped capability for every such step.
+  tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier — canonical-range-checked ' +
     'five-chunk GLV vk_x = IC0 + ' +

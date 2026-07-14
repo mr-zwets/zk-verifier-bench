@@ -35,7 +35,7 @@ interface RawGroup {
   outLocking: string | null;
 }
 interface RawRun { steps: RawStep[]; groups: RawGroup[] }
-interface Vectors { category: string; valid: RawRun; extraValidProofs?: RawRun[]; worstCaseProof?: RawRun; invalid?: RawRun[] }
+interface Vectors { category: string; valid: RawRun; extraValidProofs?: RawRun[]; worstCaseProof?: RawRun; invalid?: RawRun[]; invalidInputs?: RawRun[] }
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-grouped-residue-vectors.json', 'utf8')) as Vectors;
 const CATEGORY = hexToBin(v.category);
@@ -99,6 +99,7 @@ export const bchGroth16Bls12381GroupedResidue: Implementation = {
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);
     const worstCaseProof = v.worstCaseProof ? toRun(v.worstCaseProof) : undefined;
     const invalid = (v.invalid ?? []).map(toRun);
-    return { valid, extraValidProofs, worstCaseProof, invalid };
+    const invalidInputs = (v.invalidInputs ?? []).map(toRun);
+    return { valid, extraValidProofs, worstCaseProof, invalid, invalidInputs };
   },
 };
