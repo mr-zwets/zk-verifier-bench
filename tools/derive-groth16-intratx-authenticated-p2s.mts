@@ -86,26 +86,25 @@ const dispatcher = (bodyDigestHex: string): string => `76aa20${bodyDigestHex}880
 
 // --- derive the primary run, sanity-checking the P2SH32 envelope hashes -----
 const primaryDigests: string[] = [];
-const deriveStep = (s: RawStep, where: string, index: number): RawStep => {
+const deriveStep = (s: RawStep, where: string): RawStep => {
   if (!(s.locking.length === 70 && s.locking.startsWith('aa20') && s.locking.endsWith('87')))
     fail(`${where}: source locking is not 35-byte P2SH32: ${s.locking}`);
   const unlocking = hexToBin(s.unlocking);
   const { data: body } = finalPush(unlocking, where);
   const digest = binToHex(hash256(body));
-  if (where.startsWith('steps') && digest !== s.locking.slice(4, 68))
+  if (digest !== s.locking.slice(4, 68))
     fail(`${where}: hash256(body) != P2SH32 envelope hash`);
   if (where.startsWith('steps')) {
     primaryDigests.push(digest);
-    if (definesReservedIdentifier(body)) fail(`${where}: body defines reserved identifier 999`);
-  } else if (digest !== primaryDigests[index])
-    fail(`${where}: body digest differs from primary step ${index}`);
+  }
+  if (definesReservedIdentifier(body)) fail(`${where}: body defines reserved identifier 999`);
   return { label: s.label, locking: dispatcher(digest), unlocking: s.unlocking, ...(s.checkpoint !== undefined ? { checkpoint: s.checkpoint } : {}) };
 };
 
-const steps = src.steps.map((s, i) => deriveStep(s, `steps[${i}]`, i));
-const extraValidProofs = (src.extraValidProofs ?? []).map((run, r) => run.map((s, i) => deriveStep(s, `extraValidProofs[${r}][${i}]`, i)));
-const worstCaseProof = (src.worstCaseProof ?? []).map((s, i) => deriveStep(s, `worstCaseProof[${i}]`, i));
-const invalid = (src.invalid ?? []).map((run, r) => run.map((s, i) => deriveStep(s, `invalid[${r}][${i}]`, i)));
+const steps = src.steps.map((s, i) => deriveStep(s, `steps[${i}]`));
+const extraValidProofs = (src.extraValidProofs ?? []).map((run, r) => run.map((s, i) => deriveStep(s, `extraValidProofs[${r}][${i}]`)));
+const worstCaseProof = (src.worstCaseProof ?? []).map((s, i) => deriveStep(s, `worstCaseProof[${i}]`));
+const invalid = (src.invalid ?? []).map((run, r) => run.map((s, i) => deriveStep(s, `invalid[${r}][${i}]`)));
 
 // --- new invalid run (a): modified-body — flip one byte inside one body push
 const replaceBody = (step: RawStep, newBody: Uint8Array): RawStep => {
