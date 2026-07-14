@@ -20,6 +20,12 @@
 // but laid out as the inputs of one non-standard (<1 MB) transaction rather than token-threaded
 // standard transactions.
 //
+// The worst-case field contains a deterministic valid proof whose four GLV sub-scalars execute
+// an add at all 128 Straus positions. It maximized total op-cost among 32 full proofs and increased
+// the heaviest step versus the prior fixture. A separate 256-proof audit of these exact lockings
+// observed at least 386,489 op-cost of headroom; this is empirical stress coverage, not a claim of
+// a formal global arithmetic maximum.
+//
 // Vectors: groth16_contract/chunked/intratx/build_vectors_residue_bls.mjs ->
 // src/bch/groth16-bls12381-intratx-residue-vectors.json.
 import { readFileSync } from 'node:fs';
@@ -64,7 +70,9 @@ export const bchGroth16Bls12381IntratxResidue: Implementation = {
     'verifier is one non-standard (<1 MB) transaction. Same chunk math as ' +
     'bch-groth16-bls12381-grouped-residue; one fixed set of input scripts verifies any proof for ' +
     'the VK (proof in the witness). Deployed as P2SH32 so each chunk\'s redeem rides in the ' +
-    'scriptSig, where it counts toward the op-cost budget and offsets the pad.',
+    'scriptSig, where it counts toward the op-cost budget and offsets the pad. The supplied ' +
+    'worst-case run is a deterministic valid all-position GLV stress proof selected from 32 full ' +
+    'proofs; a separate 256-proof locking audit retained at least 386,489 op-cost of input headroom.',
   load: async () => ({
     valid: toRun(v.steps),
     extraValidProofs: (v.extraValidProofs ?? []).map(toRun),

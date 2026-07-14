@@ -22,6 +22,8 @@
 // tx), not a resource reduction. Every input fits its own bch-spec budget (op-cost <= 88,000,000,
 // scripts <= 100,000 B); deployed as P2SH32 so each chunk redeem rides in the scriptSig where it
 // counts toward the op-cost budget. Graded against the real bch-spec VM (createVirtualMachineBchSpec).
+// Its worst-case field uses the same deterministic valid all-position stress proof as the 10 kB
+// builds and is separately executed against these five bch-spec lockings.
 //
 // Vectors: groth16_contract/chunked/intratx/build_vectors_residue_bls_large.mjs ->
 // src/bch/groth16-bls12381-intratx-residue-large-vectors.json.
@@ -69,7 +71,9 @@ export const bchGroth16Bls12381IntratxResidueLarge: Implementation = {
     '88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. ' +
     'NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec ' +
     'upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward ' +
-    'the op-cost budget.',
+    'the op-cost budget. The supplied worst-case run uses the same deterministic valid ' +
+    'all-position stress proof as the current-BCH builds and is executed separately against ' +
+    'these five bch-spec lockings.',
   load: async () => ({
     valid: toRun(v.steps),
     extraValidProofs: (v.extraValidProofs ?? []).map(toRun),
