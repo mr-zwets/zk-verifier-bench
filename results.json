@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-13T23:01:18.013Z",
+  "generatedAt": "2026-07-14T09:41:06.240Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -36,7 +36,7 @@
       "id": "bch-groth16-intratx-residue",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 229345,
+      "bytes": 226376,
       "bchCompatible": true
     }
   },
@@ -560,6 +560,38 @@
       "steps": 42,
       "transactions": 1,
       "fits": true
+    },
+    {
+      "t": "2026-07-14T07:58:56.010Z",
+      "score": 327661,
+      "id": "bch-groth16-bls12381-grouped-residue",
+      "steps": 41,
+      "transactions": 5,
+      "fits": true
+    },
+    {
+      "t": "2026-07-14T07:58:56.010Z",
+      "score": 226503,
+      "id": "bch-groth16-grouped-residue",
+      "steps": 26,
+      "transactions": 3,
+      "fits": true
+    },
+    {
+      "t": "2026-07-14T07:58:56.010Z",
+      "score": 327350,
+      "id": "bch-groth16-bls12381-intratx-residue",
+      "steps": 41,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-14T07:58:56.010Z",
+      "score": 226376,
+      "id": "bch-groth16-intratx-residue",
+      "steps": 26,
+      "transactions": 1,
+      "fits": true
     }
   ],
   "entries": [
@@ -1022,12 +1054,12 @@
         },
         "failures": []
       },
-      "score": 9703,
+      "score": 8182,
       "size": {
-        "scriptBytes": 9616,
+        "scriptBytes": 8095,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 9703
+        "total": 8182
       },
       "padding": {
         "bytes": 0,
@@ -1035,10 +1067,10 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 1035345670,
+          "opCost": 966416822,
           "steps": 1,
-          "heaviestStepOpCost": 1035345670,
-          "inputsForHeaviestStep": 129
+          "heaviestStepOpCost": 966416822,
+          "inputsForHeaviestStep": 121
         }
       },
       "opCostBudget": 350400,
@@ -1049,7 +1081,7 @@
         "blockers": [
           "op-cost"
         ],
-        "detail": "heaviest step ~129× one input's op-cost budget",
+        "detail": "heaviest step ~121× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -1073,7 +1105,7 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on BLS12-381 -- the SAME curve as nchain (Groth16Verify, singleton/bls12-381/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) (M-twist Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bls12-381. Locking is plain compiler output (size objective + rescheduleStacks, no post-passes; ~9.2 KB) -- the honest baseline vs the nchain single-tx reference, and the other end of the bytesize-vs-opcost tradeoff from the -opcode-optimized entry. ~1.04B op-cost (~129 BCH inputs) does NOT fit one input."
+      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on BLS12-381 -- the SAME curve as nchain (Groth16Verify, singleton/bls12-381/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 on-chain (one MSB-first Shamir/Straus pass with shared Jacobian doublings + Fermat inverse), then the full BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) (M-twist Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bls12-381. Locking is plain compiler output (size objective + rescheduleStacks, no post-passes; 7,698-byte locking) -- the honest baseline vs the nchain single-tx reference, and the other end of the bytesize-vs-opcost tradeoff from the -opcode-optimized entry. ~966M op-cost (~121 BCH inputs) does NOT fit one input."
     },
     {
       "id": "bch-groth16-bls12381-singleton-opcode-optimized",
@@ -1102,12 +1134,12 @@
         },
         "failures": []
       },
-      "score": 6912,
+      "score": 6273,
       "size": {
-        "scriptBytes": 6825,
+        "scriptBytes": 6186,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 6912
+        "total": 6273
       },
       "padding": {
         "bytes": 0,
@@ -1115,10 +1147,10 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 1058137922,
+          "opCost": 1003656243,
           "steps": 1,
-          "heaviestStepOpCost": 1058137922,
-          "inputsForHeaviestStep": 132
+          "heaviestStepOpCost": 1003656243,
+          "inputsForHeaviestStep": 125
         }
       },
       "opCostBudget": 350400,
@@ -1129,7 +1161,7 @@
         "blockers": [
           "op-cost"
         ],
-        "detail": "heaviest step ~132× one input's op-cost budget",
+        "detail": "heaviest step ~125× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -1153,11 +1185,11 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "Same complete BLS12-381 Groth16 verifier as bch-groth16-bls12381-singleton (Groth16Verify, singleton/bls12-381/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the locking bytecode is byte-optimized: the smaller of a custom decompile->reschedule->recompile of the cashc output and the rescheduled compile, then repeated instruction sequences outlined into OP_DEFINE bodies. Identical semantics + runtime witnesses; each subroutine differential-tested and every outline rewrite verified accept/reject. The plain entry keeps the other end of the bytesize-vs-opcost tradeoff. Pipeline: singleton/bls12-381/build_vectors_optimized.mjs + singleton/bn254/recompiler/."
+      "source": "Same complete BLS12-381 Groth16 verifier as bch-groth16-bls12381-singleton (Groth16Verify, singleton/bls12-381/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain in one shared-doubling Shamir/Straus pass, then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the locking bytecode is byte-optimized: the smaller of a custom decompile->reschedule->recompile of the cashc output and the rescheduled compile, then repeated instruction sequences outlined into OP_DEFINE bodies. Identical semantics + runtime witnesses; each subroutine differential-tested and every outline rewrite verified accept/reject. The plain entry keeps the other end of the bytesize-vs-opcost tradeoff. Pipeline: singleton/bls12-381/build_vectors_optimized.mjs + singleton/bn254/recompiler/."
     },
     {
       "id": "bch-groth16-bls12381-singleton-minop",
-      "name": "BCH Groth16 verifier singleton, BLS12-381 — op-optimized (lazy tower + residue + psi/phi checks + GLV)",
+      "name": "BCH Groth16 verifier singleton, BLS12-381 — op-optimized (lazy tower + residue + fused psi check + GLV)",
       "category": "full",
       "official": false,
       "solver": null,
@@ -1182,12 +1214,12 @@
         },
         "failures": []
       },
-      "score": 67368,
+      "score": 67250,
       "size": {
-        "scriptBytes": 67281,
+        "scriptBytes": 67163,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 67368
+        "total": 67250
       },
       "padding": {
         "bytes": 0,
@@ -1195,16 +1227,16 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 256767041,
+          "opCost": 256576154,
           "steps": 1,
-          "heaviestStepOpCost": 256767041,
+          "heaviestStepOpCost": 256576154,
           "inputsForHeaviestStep": 32
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 285866084,
+          "opCost": 283910144,
           "steps": 1,
-          "heaviestStepOpCost": 285866084,
+          "heaviestStepOpCost": 283910144,
           "inputsForHeaviestStep": 36
         }
       },
@@ -1241,7 +1273,7 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in ONE contract, op-optimized — same curve as nchain. Lazy field tower for the Miller loop; witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381: lambda = p+|x|, w gated to mu_27A on-chain) replacing the hard part; e(alpha,beta) baked and the (vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); psi 64-bit G2 subgroup check; phi(P)==[-x^2]P G1 subgroup checks for A and C (the G1 cofactor is nontrivial on BLS12-381); GLV 4-scalar vk_x. All extra inputs (c,cInv,w; GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain; all proof points curve- and subgroup-checked). Verified vs @noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~78% less op-cost. Still over the 10,000 B / per-input op limits."
+      "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in ONE contract, op-optimized — same curve as nchain. Lazy field tower for the Miller loop; witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381: lambda = p+|x|, w gated to mu_27A on-chain) replacing the hard part; e(alpha,beta) baked and the (vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); psi G2 subgroup check fused into the Miller tail; A and C checked on-curve, with their redundant G1 subgroup checks omitted because they are paired only against order-r G2 points; GLV 4-scalar vk_x with mixed Jacobian-affine fixed-table additions. All extra inputs (c,cInv,w; GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain; all proof points checked on-curve and B subgroup-checked). Verified vs @noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~78% less op-cost. Still over the 10,000 B / per-input op limits."
     },
     {
       "id": "bch-groth16-chunked",
@@ -1270,33 +1302,33 @@
         },
         "failures": []
       },
-      "score": 381151,
+      "score": 379866,
       "size": {
-        "scriptBytes": 374830,
-        "txOverheadBytes": 6321,
-        "transactions": 49,
-        "total": 381151
+        "scriptBytes": 373674,
+        "txOverheadBytes": 6192,
+        "transactions": 48,
+        "total": 379866
       },
       "padding": {
-        "bytes": 133123,
-        "fraction": 0.3551556705706587
+        "bytes": 133762,
+        "fraction": 0.35796442888721186
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294834061,
-          "steps": 49,
-          "heaviestStepOpCost": 7436279,
+          "opCost": 294435747,
+          "steps": 48,
+          "heaviestStepOpCost": 7809097,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 335799641,
-          "steps": 49,
-          "heaviestStepOpCost": 7436490,
+          "opCost": 333227138,
+          "steps": 48,
+          "heaviestStepOpCost": 7808843,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 300099200,
+      "opCostBudget": 299169600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1523,23 +1555,23 @@
         },
         "failures": []
       },
-      "score": 12555,
+      "score": 11170,
       "size": {
-        "scriptBytes": 12468,
+        "scriptBytes": 11083,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 12555
+        "total": 11170
       },
       "padding": {
         "bytes": 9990,
-        "fraction": 0.8012512030798845
+        "fraction": 0.9013804926463954
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 60645356,
+          "opCost": 11213220,
           "steps": 1,
-          "heaviestStepOpCost": 60645356,
-          "inputsForHeaviestStep": 8
+          "heaviestStepOpCost": 11213220,
+          "inputsForHeaviestStep": 2
         }
       },
       "opCostBudget": 8032800,
@@ -1550,7 +1582,7 @@
         "blockers": [
           "op-cost"
         ],
-        "detail": "heaviest step ~8× one input's op-cost budget",
+        "detail": "heaviest step ~2× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -1574,7 +1606,7 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract (monolithic baseline, VkX/singleton/bn254/vkx.cash). Two inlined 254-iteration double-and-add scalar mults over Jacobian-projective coords + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked, like the chunked entries). ~76M op-cost -> ~10 BCH inputs; does NOT fit BCH in a single input (real-VM op-cost density limit) -- this is why the chunked multi-tx entries exist."
+      "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract (monolithic baseline, VkX/singleton/bn254/vkx.cash). One MSB-first 254-iteration Shamir/Straus loop with an affine IC1/IC2/IC1+IC2 table + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked, like the chunked entries). Published vector: ~11.21M op-cost -> ~2 BCH inputs (runtime cost varies with scalar bits); does NOT fit BCH in a single input (real-VM op-cost density limit) -- this is why the chunked multi-tx entries exist."
     },
     {
       "id": "bch-vkx-bls12381-singleton",
@@ -1603,23 +1635,23 @@
         },
         "failures": []
       },
-      "score": 12763,
+      "score": 11411,
       "size": {
-        "scriptBytes": 12676,
+        "scriptBytes": 11324,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 12763
+        "total": 11411
       },
       "padding": {
         "bytes": 9995,
-        "fraction": 0.7884979488797728
+        "fraction": 0.8826386435888378
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 85425300,
+          "opCost": 12992145,
           "steps": 1,
-          "heaviestStepOpCost": 85425300,
-          "inputsForHeaviestStep": 11
+          "heaviestStepOpCost": 12992145,
+          "inputsForHeaviestStep": 2
         }
       },
       "opCostBudget": 8032800,
@@ -1630,7 +1662,7 @@
         "blockers": [
           "op-cost"
         ],
-        "detail": "heaviest step ~11× one input's op-cost budget",
+        "detail": "heaviest step ~2× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -1654,7 +1686,7 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract on BLS12-381 (VkX/singleton/bls12-381/vkx.cash). Two inlined 255-iteration double-and-add scalar mults over Jacobian-projective coords (b-independent) + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked). ~101M op-cost -> ~13 BCH inputs; does NOT fit one input (real-VM op-cost density limit). Verified vs @noble/curves bls12-381."
+      "source": "BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE contract on BLS12-381 (VkX/singleton/bls12-381/vkx.cash). One MSB-first 255-iteration Shamir/Straus loop with an affine IC1/IC2/IC1+IC2 table (b-independent formulas) + one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x baked). Published vector: ~12.99M op-cost -> ~2 BCH inputs (runtime cost varies with scalar bits); does NOT fit one input (real-VM op-cost density limit). Verified vs @noble/curves bls12-381."
     },
     {
       "id": "bch-vkx-chunked-twoloop",
@@ -1761,26 +1793,26 @@
         },
         "failures": []
       },
-      "score": 14859,
+      "score": 14424,
       "size": {
-        "scriptBytes": 14685,
+        "scriptBytes": 14250,
         "txOverheadBytes": 174,
         "transactions": 2,
-        "total": 14859
+        "total": 14424
       },
       "padding": {
-        "bytes": 12186,
-        "fraction": 0.8298263534218591
+        "bytes": 11856,
+        "fraction": 0.832
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 9601695,
+          "opCost": 9325906,
           "steps": 2,
-          "heaviestStepOpCost": 5409752,
+          "heaviestStepOpCost": 5324194,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 9938400,
+      "opCostBudget": 9674400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1810,7 +1842,7 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "BCH-native CashScript: Shamir/Straus + multi-return EC functions + tuned padding. Shamir/Straus shared doublings (single 254-iter MSB-first loop), RUNTIME public inputs (input0/input1 carried in the hash-chained state and bit-tested in-script via a 2-bit Shamir select over VK consts {IC1,IC2,T}), verified-inverse-on-stack, tuned per-chunk padding for per-input budget. The EC ops jacDouble/jacAdd/selectPoint are MULTI-VALUE-RETURN reusable functions (returns (int,int,int) -> OP_DEFINE/OP_INVOKE) defined ONCE per chunk, and each chunk LOOPS over its bit-range (body compiled once) so per-chunk bytecode is ~1.5KB and op-cost (not size) binds -> 3 chunks, ~23KB total, ~14.3M op-cost"
+      "source": "BCH-native CashScript: Shamir/Straus shared doublings in one 254-iteration MSB-first loop, split into two hash-chained steps. Public inputs are bit-tested in-script through the baked affine VK table {IC1,IC2,IC1+IC2}; each conditional addition uses the mixed Jacobian-affine formula. The final step folds affine IC0 and verifies the supplied Jacobian inverse before asserting vk_x. Multi-return EC functions are defined once per chunk, and padding is tuned to the measured per-input budget. The state commitments are instance-specific: another input pair requires regenerating the two-step chain. Current footprint: 14,250 script bytes and 9,325,906 op-cost."
     },
     {
       "id": "bch-vkx-chunked-covenant",
@@ -1839,33 +1871,33 @@
         },
         "failures": []
       },
-      "score": 13552,
+      "score": 12756,
       "size": {
-        "scriptBytes": 12520,
+        "scriptBytes": 11724,
         "txOverheadBytes": 1032,
         "transactions": 8,
-        "total": 13552
+        "total": 12756
       },
       "padding": {
-        "bytes": 3038,
-        "fraction": 0.2426517571884984
+        "bytes": 2659,
+        "fraction": 0.2267997270556124
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 8004707,
+          "opCost": 7812490,
           "steps": 8,
-          "heaviestStepOpCost": 3077367,
+          "heaviestStepOpCost": 2707063,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 48940528,
+          "opCost": 46574238,
           "steps": 8,
-          "heaviestStepOpCost": 6962312,
+          "heaviestStepOpCost": 7016053,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 10054400,
+      "opCostBudget": 9417600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1899,7 +1931,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: vk_x = IC0 + in0*IC1 + in1*IC2 (Shamir/Straus G1 double-and-add over the public-input bits) split across transactions so every step fits one BCH input. GENERIC covenant — the Jacobian accumulator and the public inputs ride in the token NFT commitment (no baked instance), so one fixed locking aggregates ANY public inputs. The runtime-general counterpart of bch-vkx-chunked-shamir; identical to the first 3 chunks of bch-groth16-chunked."
+      "source": "BCH-native CashScript: vk_x = IC0 + in0*IC1 + in1*IC2 (Shamir/Straus G1 double-and-add over the public-input bits) split across transactions so every step fits one BCH input. GENERIC covenant — the Jacobian accumulator and the public inputs ride in the token NFT commitment (no baked instance), so one fixed locking aggregates ANY public inputs. The runtime-general counterpart of bch-vkx-chunked-shamir; identical to the 8 vk_x chunks in bch-groth16-chunked."
     },
     {
       "id": "bch-vkx-bls12381-chunked-covenant",
@@ -1928,26 +1960,26 @@
         },
         "failures": []
       },
-      "score": 28033,
+      "score": 25729,
       "size": {
-        "scriptBytes": 26461,
-        "txOverheadBytes": 1572,
-        "transactions": 12,
-        "total": 28033
+        "scriptBytes": 24288,
+        "txOverheadBytes": 1441,
+        "transactions": 11,
+        "total": 25729
       },
       "padding": {
-        "bytes": 10421,
-        "fraction": 0.39382487434337327
+        "bytes": 10128,
+        "fraction": 0.41699604743083
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 7811161,
-          "steps": 12,
-          "heaviestStepOpCost": 2291188,
+          "opCost": 7610115,
+          "steps": 11,
+          "heaviestStepOpCost": 1612203,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 8961600,
+      "opCostBudget": 8688000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1956,7 +1988,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "12/12 locking >201 B"
+          "detail": "11/11 locking >201 B"
         }
       },
       "generality": {
@@ -2341,26 +2373,26 @@
         },
         "failures": []
       },
-      "score": 697281,
+      "score": 694422,
       "size": {
-        "scriptBytes": 686058,
-        "txOverheadBytes": 11223,
-        "transactions": 87,
-        "total": 697281
+        "scriptBytes": 683328,
+        "txOverheadBytes": 11094,
+        "transactions": 86,
+        "total": 694422
       },
       "padding": {
-        "bytes": 215626,
-        "fraction": 0.3142970419410604
+        "bytes": 214814,
+        "fraction": 0.3143644047953545
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 536354522,
-          "steps": 87,
+          "opCost": 536146952,
+          "steps": 86,
           "heaviestStepOpCost": 7690124,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 549264000,
+      "opCostBudget": 547075200,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2587,33 +2619,33 @@
         },
         "failures": []
       },
-      "score": 215428,
+      "score": 213326,
       "size": {
-        "scriptBytes": 214376,
+        "scriptBytes": 212274,
         "txOverheadBytes": 1052,
         "transactions": 1,
-        "total": 215428
+        "total": 213326
       },
       "padding": {
-        "bytes": 53533,
-        "fraction": 0.24971545322237565
+        "bytes": 51431,
+        "fraction": 0.24228591348916967
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 169660200,
+          "opCost": 169652050,
           "steps": 24,
-          "heaviestStepOpCost": 7275633,
+          "heaviestStepOpCost": 7275280,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 169669787,
+          "opCost": 169661637,
           "steps": 24,
-          "heaviestStepOpCost": 7276649,
+          "heaviestStepOpCost": 7276296,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 171616000,
+      "opCostBudget": 169934400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2622,7 +2654,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 214,588 B > 100,000 B standard size"
+          "detail": "tx 212,486 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2672,33 +2704,33 @@
         },
         "failures": []
       },
-      "score": 375168,
+      "score": 371038,
       "size": {
-        "scriptBytes": 373170,
+        "scriptBytes": 369040,
         "txOverheadBytes": 1998,
         "transactions": 1,
-        "total": 375168
+        "total": 371038
       },
       "padding": {
-        "bytes": 134666,
-        "fraction": 0.36087038079159633
+        "bytes": 130849,
+        "fraction": 0.3545659007153696
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294477766,
+          "opCost": 294282805,
           "steps": 46,
-          "heaviestStepOpCost": 7829101,
+          "heaviestStepOpCost": 7952801,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 331870049,
+          "opCost": 329576975,
           "steps": 46,
-          "heaviestStepOpCost": 7828850,
+          "heaviestStepOpCost": 7953332,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 298756800,
+      "opCostBudget": 295452800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2707,7 +2739,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 373,558 B > 100,000 B standard size"
+          "detail": "tx 369,428 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2757,33 +2789,33 @@
         },
         "failures": []
       },
-      "score": 375582,
+      "score": 371452,
       "size": {
-        "scriptBytes": 373584,
+        "scriptBytes": 369454,
         "txOverheadBytes": 1998,
         "transactions": 1,
-        "total": 375582
+        "total": 371452
       },
       "padding": {
-        "bytes": 134666,
-        "fraction": 0.3604704698274016
+        "bytes": 130849,
+        "fraction": 0.35416858391031086
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294685155,
+          "opCost": 294489881,
           "steps": 46,
-          "heaviestStepOpCost": 7831172,
+          "heaviestStepOpCost": 7954691,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 332077438,
+          "opCost": 329784051,
           "steps": 46,
-          "heaviestStepOpCost": 7830921,
+          "heaviestStepOpCost": 7955222,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 298756800,
+      "opCostBudget": 295452800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2792,7 +2824,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 373,558 B > 100,000 B standard size"
+          "detail": "tx 369,428 B > 100,000 B standard size; a step is non-standard under the standard VM"
         }
       },
       "generality": {
@@ -2813,7 +2845,7 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "Authenticated P2S (bare/pay-to-script, not P2SH) dispatcher variant of the 47-input BN254 Groth16 intra-transaction verifier. Each original 35-byte P2SH32 locking is replaced by a 44-byte bare dispatcher — OP_DUP OP_HASH256 <hash256(body)> OP_EQUALVERIFY <999> OP_DEFINE <999> OP_INVOKE — that authenticates the stage body (still the final push of the byte-identical unlocking, now ordinary data rather than a P2SH redeem script) before invoking it. Modified bodies and valid bodies from other stages are rejected at the hash check. Bare lockings <=201 bytes are relay-standard. Standalone this only emulates P2SH32 semantics at +9 bytes per input — not a size improvement; the point is that the pattern is ordinary bytecode and therefore embeddable inside larger scripts, where P2SH authentication cannot go."
+      "source": "Authenticated P2S (bare/pay-to-script, not P2SH) dispatcher variant of the 46-input BN254 Groth16 intra-transaction verifier. Each original 35-byte P2SH32 locking is replaced by a 44-byte bare dispatcher — OP_DUP OP_HASH256 <hash256(body)> OP_EQUALVERIFY <999> OP_DEFINE <999> OP_INVOKE — that authenticates the stage body (still the final push of the byte-identical unlocking, now ordinary data rather than a P2SH redeem script) before invoking it. Modified bodies and valid bodies from other stages are rejected at the hash check. Bare lockings <=201 bytes are relay-standard. Standalone this only emulates P2SH32 semantics at +9 bytes per input — not a size improvement; the point is that the pattern is ordinary bytecode and therefore embeddable inside larger scripts, where P2SH authentication cannot go."
     },
     {
       "id": "bch-groth16-intratx-residue",
@@ -2836,39 +2868,39 @@
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
-          "seamsTested": 26,
+          "seamsTested": 25,
           "unboundSeams": 0,
-          "detail": "every stage bound to one proof: 26 seams staple-tested with a 2nd distinct proof, all rejected"
+          "detail": "every stage bound to one proof: 25 seams staple-tested with a 2nd distinct proof, all rejected"
         },
         "failures": []
       },
-      "score": 229345,
+      "score": 226376,
       "size": {
-        "scriptBytes": 228164,
-        "txOverheadBytes": 1181,
+        "scriptBytes": 225238,
+        "txOverheadBytes": 1138,
         "transactions": 1,
-        "total": 229345
+        "total": 226376
       },
       "padding": {
-        "bytes": 73280,
-        "fraction": 0.3211724899633597
+        "bytes": 70802,
+        "fraction": 0.3143430504621778
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 180258594,
-          "steps": 27,
-          "heaviestStepOpCost": 7998186,
+          "opCost": 180061034,
+          "steps": 26,
+          "heaviestStepOpCost": 8006895,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 195109598,
-          "steps": 27,
-          "heaviestStepOpCost": 7999752,
+          "opCost": 194170201,
+          "steps": 26,
+          "heaviestStepOpCost": 8007253,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 182660800,
+      "opCostBudget": 180315200,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2877,7 +2909,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 228,400 B > 100,000 B standard size"
+          "detail": "tx 225,466 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2927,33 +2959,33 @@
         },
         "failures": []
       },
-      "score": 188463,
+      "score": 188011,
       "size": {
-        "scriptBytes": 188267,
+        "scriptBytes": 187815,
         "txOverheadBytes": 196,
         "transactions": 1,
-        "total": 188463
+        "total": 188011
       },
       "padding": {
-        "bytes": 121153,
-        "fraction": 0.6435169201187675
+        "bytes": 120754,
+        "fraction": 0.642941192130554
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 177794648,
+          "opCost": 177641365,
           "steps": 4,
-          "heaviestStepOpCost": 85956307,
+          "heaviestStepOpCost": 85955978,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 192610326,
+          "opCost": 191721793,
           "steps": 4,
-          "heaviestStepOpCost": 85961341,
+          "heaviestStepOpCost": 85961010,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 182501600,
+      "opCostBudget": 182140000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2962,7 +2994,7 @@
         "detail": "every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH",
         "standard": {
           "fits": false,
-          "detail": "tx 188,323 B > 100,000 B standard size"
+          "detail": "tx 187,871 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -2987,7 +3019,7 @@
     },
     {
       "id": "bch-groth16-grouped",
-      "name": "BCH Groth16 verifier, grouped (54 chunks in ~6 standard <100KB transactions: intra-tx forward-checks within each tx, CashToken hand-off across them)",
+      "name": "BCH Groth16 verifier, grouped (46 chunks in 5 standard <100KB transactions: intra-tx forward-checks within each tx, CashToken hand-off across them)",
       "category": "full",
       "official": false,
       "solver": null,
@@ -3012,33 +3044,33 @@
         },
         "failures": []
       },
-      "score": 375436,
+      "score": 371298,
       "size": {
-        "scriptBytes": 373008,
-        "txOverheadBytes": 2428,
-        "transactions": 6,
-        "total": 375436
+        "scriptBytes": 368956,
+        "txOverheadBytes": 2342,
+        "transactions": 5,
+        "total": 371298
       },
       "padding": {
-        "bytes": 134494,
-        "fraction": 0.36056599322266547
+        "bytes": 130762,
+        "fraction": 0.3544108240549009
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 294366144,
+          "opCost": 294193852,
           "steps": 46,
-          "heaviestStepOpCost": 7828993,
+          "heaviestStepOpCost": 7952801,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 331758409,
+          "opCost": 329488028,
           "steps": 46,
-          "heaviestStepOpCost": 7828739,
+          "heaviestStepOpCost": 7953332,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 298627200,
+      "opCostBudget": 295385600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3072,7 +3104,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: the full BN254 Groth16 verifier (validate G2 inputs -> vk_x -> batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1), the 54 chunks packed into ~6 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-intratx and bch-groth16-chunked: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a CashToken NFT commitment — a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds its inBlob via tx.inputs[0].nftCommitment == hash256(inBlob). The token thread chains the groups in order. Unlike the 54-tx covenant chain (which exceeds the default 50-deep mempool ancestor limit) and the single 0.5 MB intra-tx bundle (non-standard, mine-direct), every grouped tx is under the 100,000-byte standard size and the run is ~6 deep — relayable under default standard policy. Same chunk math as bch-groth16-chunked / -intratx; one fixed set of lockings verifies any proof for the VK. Deployed P2SH32 (each chunk's redeem rides in the scriptSig, counting toward the op-cost budget)."
+      "source": "BCH-native CashScript: the full BN254 Groth16 verifier (validate G2 inputs -> vk_x -> batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1), the 46 chunks packed into 5 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-intratx and bch-groth16-chunked: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a CashToken NFT commitment — a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds its inBlob via tx.inputs[0].nftCommitment == hash256(inBlob). The token thread chains the groups in order. Unlike the 46-tx covenant chain (which approaches the default 50-deep mempool ancestor limit) and the single 0.37 MB intra-tx bundle (non-standard, mine-direct), every grouped tx is under the 100,000-byte standard size and the run is 5 deep — relayable under default standard policy. Same chunk math as bch-groth16-chunked / -intratx; one fixed set of lockings verifies any proof for the VK. Deployed P2SH32 (each chunk's redeem rides in the scriptSig, counting toward the op-cost budget)."
     },
     {
       "id": "bch-groth16-grouped-residue",
@@ -3101,33 +3133,33 @@
         },
         "failures": []
       },
-      "score": 229449,
+      "score": 226503,
       "size": {
-        "scriptBytes": 228096,
-        "txOverheadBytes": 1353,
+        "scriptBytes": 225193,
+        "txOverheadBytes": 1310,
         "transactions": 3,
-        "total": 229449
+        "total": 226503
       },
       "padding": {
-        "bytes": 73204,
-        "fraction": 0.3209350448933782
+        "bytes": 70749,
+        "fraction": 0.3141705115167878
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 180207895,
-          "steps": 27,
-          "heaviestStepOpCost": 8002206,
+          "opCost": 180012137,
+          "steps": 26,
+          "heaviestStepOpCost": 8006895,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 195058889,
-          "steps": 27,
-          "heaviestStepOpCost": 8003772,
+          "opCost": 194121304,
+          "steps": 26,
+          "heaviestStepOpCost": 8007253,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 182606400,
+      "opCostBudget": 180279200,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3180,7 +3212,7 @@
           "tested": 2,
           "rejected": 2
         },
-        "worstCaseAccepted": null,
+        "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
@@ -3190,26 +3222,33 @@
         },
         "failures": []
       },
-      "score": 641846,
+      "score": 635316,
       "size": {
-        "scriptBytes": 638730,
+        "scriptBytes": 632200,
         "txOverheadBytes": 3116,
         "transactions": 1,
-        "total": 641846
+        "total": 635316
       },
       "padding": {
-        "bytes": 204935,
-        "fraction": 0.3208476194949353
+        "bytes": 198405,
+        "fraction": 0.3138326478962354
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 505431026,
+          "opCost": 505405174,
           "steps": 72,
-          "heaviestStepOpCost": 7690089,
+          "heaviestStepOpCost": 7689724,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 505408143,
+          "steps": 72,
+          "heaviestStepOpCost": 7688859,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 511329600,
+      "opCostBudget": 506105600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3218,7 +3257,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 639,326 B > 100,000 B standard size"
+          "detail": "tx 632,796 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -3258,36 +3297,43 @@
           "tested": 2,
           "rejected": 2
         },
-        "worstCaseAccepted": null,
+        "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
-          "seamsTested": 83,
+          "seamsTested": 82,
           "unboundSeams": 0,
-          "detail": "every stage bound to one proof: 83 seams staple-tested with a 2nd distinct proof, all rejected"
+          "detail": "every stage bound to one proof: 82 seams staple-tested with a 2nd distinct proof, all rejected"
         },
         "failures": []
       },
-      "score": 662699,
+      "score": 653083,
       "size": {
-        "scriptBytes": 659067,
-        "txOverheadBytes": 3632,
+        "scriptBytes": 649494,
+        "txOverheadBytes": 3589,
         "transactions": 1,
-        "total": 662699
+        "total": 653083
       },
       "padding": {
-        "bytes": 206335,
-        "fraction": 0.31307135693336186
+        "bytes": 198899,
+        "fraction": 0.30623685515185667
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 513123831,
-          "steps": 84,
-          "heaviestStepOpCost": 7690089,
+          "opCost": 512897213,
+          "steps": 83,
+          "heaviestStepOpCost": 7689724,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 576564714,
+          "steps": 83,
+          "heaviestStepOpCost": 7688859,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 527656800,
+      "opCostBudget": 519993600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3296,7 +3342,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 659,759 B > 100,000 B standard size"
+          "detail": "tx 650,178 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -3336,36 +3382,43 @@
           "tested": 3,
           "rejected": 3
         },
-        "worstCaseAccepted": null,
+        "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
-          "seamsTested": 41,
+          "seamsTested": 40,
           "unboundSeams": 0,
-          "detail": "every stage bound to one proof: 41 seams staple-tested with a 2nd distinct proof, all rejected"
+          "detail": "every stage bound to one proof: 40 seams staple-tested with a 2nd distinct proof, all rejected"
         },
         "failures": []
       },
-      "score": 332748,
+      "score": 327350,
       "size": {
-        "scriptBytes": 330922,
-        "txOverheadBytes": 1826,
+        "scriptBytes": 325567,
+        "txOverheadBytes": 1783,
         "transactions": 1,
-        "total": 332748
+        "total": 327350
       },
       "padding": {
-        "bytes": 95356,
-        "fraction": 0.2881524951499145
+        "bytes": 91781,
+        "fraction": 0.28191125021884894
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 257904839,
-          "steps": 42,
-          "heaviestStepOpCost": 7479060,
+          "opCost": 257714719,
+          "steps": 41,
+          "heaviestStepOpCost": 7478703,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 290538077,
+          "steps": 41,
+          "heaviestStepOpCost": 7637020,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 264939200,
+      "opCostBudget": 260650400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3374,7 +3427,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 331,278 B > 100,000 B standard size"
+          "detail": "tx 325,915 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -3395,7 +3448,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: the residue-optimized full BLS12-381 Groth16 verifier laid out as the INPUTS of ONE transaction. Same forward-checking as bch-groth16-bls12381-intratx (each input carries its incoming state as a raw 48-byte-limb blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, arbitrary intermediate size), but it runs the residue chunk graph: GLV vk_x MSM (6 chunks), c^-|x|-FUSED batched Miller with e(alpha,beta) baked and only e(-A,B) running on-chain G2 arithmetic (30 chunks; the G2 on-curve + prime-order-subgroup validation is FUSED into the first/last Miller chunks, reusing the running R_B=[|x|]B the loop already walks), and a witnessed-residue final-exponentiation TAIL collapsing the Hayashida-Scott hard part to a mu_27A ((w^|x|)*w)^9 walk + fF*w==frob(c,1) verdict (6 chunks) — 42 inputs total (vs 87 for the plain intra-tx build). The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail; w enters the tail as an uncommitted witness. Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-bls12381-grouped-residue; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad."
+      "source": "BCH-native CashScript: the residue-optimized full BLS12-381 Groth16 verifier laid out as the INPUTS of ONE transaction. Same forward-checking as bch-groth16-bls12381-intratx (each input carries its incoming state as a raw 48-byte-limb blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, arbitrary intermediate size), but it runs the residue chunk graph: GLV vk_x MSM (5 chunks), c^-|x|-FUSED batched Miller with e(alpha,beta) baked and only e(-A,B) running on-chain G2 arithmetic (30 chunks; the G2 on-curve + prime-order-subgroup validation is FUSED into the first/last Miller chunks, reusing the running R_B=[|x|]B the loop already walks), and a witnessed-residue final-exponentiation TAIL collapsing the Hayashida-Scott hard part to a mu_27A ((w^|x|)*w)^9 walk + fF*w==frob(c,1) verdict (6 chunks) — 41 inputs total (vs 87 for the plain intra-tx build). The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail; w enters the tail as an uncommitted witness. Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the whole verifier is one non-standard (<1 MB) transaction. Same chunk math as bch-groth16-bls12381-grouped-residue; one fixed set of input scripts verifies any proof for the VK (proof in the witness). Deployed as P2SH32 so each chunk's redeem rides in the scriptSig, where it counts toward the op-cost budget and offsets the pad. The supplied worst-case run is a deterministic valid all-position GLV stress proof selected from 32 full proofs; a separate 256-proof locking audit retained at least 386,489 op-cost of input headroom."
     },
     {
       "id": "bch-groth16-bls12381-intratx-residue-large",
@@ -3414,7 +3467,7 @@
           "tested": 2,
           "rejected": 2
         },
-        "worstCaseAccepted": null,
+        "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
@@ -3424,26 +3477,33 @@
         },
         "failures": []
       },
-      "score": 271893,
+      "score": 270974,
       "size": {
-        "scriptBytes": 271654,
+        "scriptBytes": 270735,
         "txOverheadBytes": 239,
         "transactions": 1,
-        "total": 271893
+        "total": 270974
       },
       "padding": {
-        "bytes": 195142,
-        "fraction": 0.7183476039373615
+        "bytes": 194276,
+        "fraction": 0.717587308622823
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 251091711,
+          "opCost": 250955325,
           "steps": 5,
-          "heaviestStepOpCost": 83815601,
+          "heaviestStepOpCost": 83814211,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 283671234,
+          "steps": 5,
+          "heaviestStepOpCost": 83816474,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 257183200,
+      "opCostBudget": 256448000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3452,7 +3512,7 @@
         "detail": "every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH",
         "standard": {
           "fits": false,
-          "detail": "tx 271,718 B > 100,000 B standard size"
+          "detail": "tx 270,799 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -3473,11 +3533,11 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: the residue-optimized full BLS12-381 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-bls12381-intratx-residue (each input carries its incoming state as a raw 48-byte-limb blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, arbitrary intermediate size) and the same residue chunk graph (GLV vk_x MSM, c^-|x|-FUSED batched Miller with e(alpha,beta) baked and the G2 on-curve+prime-order-subgroup validation fused into the first/last Miller chunks, witnessed-residue mu_27A final-exp TAIL), but each chunk fills a 100 kB input instead of 10 kB, collapsing the verifier from 42 inputs to 5 (GLV vk_x 1, fused Miller 3, residue walk+finalize tail 1), ~272 kB / ~251M op. Op-cost and bytes are conserved; this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, mu_27A membership on w); the verdict is fF*w==frob(c,1). Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget."
+      "source": "BCH-native CashScript: the residue-optimized full BLS12-381 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-bls12381-intratx-residue (each input carries its incoming state as a raw 48-byte-limb blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, arbitrary intermediate size) and the same residue chunk graph (GLV vk_x MSM, c^-|x|-FUSED batched Miller with e(alpha,beta) baked and the G2 on-curve+prime-order-subgroup validation fused into the first/last Miller chunks, witnessed-residue mu_27A final-exp TAIL), but each chunk fills a 100 kB input instead of 10 kB, collapsing the verifier from 41 inputs to 5 (GLV vk_x 1, fused Miller 3, residue walk+finalize tail 1), ~272 kB / ~251M op. Op-cost and bytes are conserved; this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, mu_27A membership on w); the verdict is fF*w==frob(c,1). Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget. The supplied worst-case run uses the same deterministic valid all-position stress proof as the current-BCH builds and is executed separately against these five bch-spec lockings."
     },
     {
       "id": "bch-groth16-bls12381-grouped",
-      "name": "BCH BLS12-381 Groth16 verifier, grouped (87 chunks in ~9 standard <100KB transactions: intra-tx forward-checks within each tx, CashToken hand-off across them)",
+      "name": "BCH BLS12-381 Groth16 verifier, grouped (86 chunks in 8 standard <100KB transactions: intra-tx forward-checks within each tx, CashToken hand-off across them)",
       "category": "full",
       "official": false,
       "solver": null,
@@ -3492,7 +3552,7 @@
           "tested": 2,
           "rejected": 2
         },
-        "worstCaseAccepted": null,
+        "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": false,
           "bound": null,
@@ -3502,26 +3562,33 @@
         },
         "failures": []
       },
-      "score": 691236,
+      "score": 681387,
       "size": {
-        "scriptBytes": 686787,
-        "txOverheadBytes": 4449,
-        "transactions": 9,
-        "total": 691236
+        "scriptBytes": 677067,
+        "txOverheadBytes": 4320,
+        "transactions": 8,
+        "total": 681387
       },
       "padding": {
-        "bytes": 229007,
-        "fraction": 0.3334469056636191
+        "bytes": 221425,
+        "fraction": 0.3270355814121793
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 535104005,
-          "steps": 87,
-          "heaviestStepOpCost": 7698856,
+          "opCost": 534902857,
+          "steps": 86,
+          "heaviestStepOpCost": 7689724,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 598548458,
+          "steps": 86,
+          "heaviestStepOpCost": 7688859,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 549847200,
+      "opCostBudget": 542066400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3555,11 +3622,11 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier (g2check EIP-197 input validation -> vk_x -> batched 4-pair Miller -> final exponentiation -> assert verdict==1), the ~87 chunks packed into ~9 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-bls12381-intratx and bch-groth16-bls12381-chunked: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a CashToken NFT commitment — a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds its inBlob via tx.inputs[0].nftCommitment == hash256(inBlob). The token thread chains the groups in order. Unlike the ~87-tx covenant chain (far past the default 50-deep mempool ancestor limit) and the single ~0.7 MB intra-tx bundle (non-standard, mine-direct), every grouped tx is under the 100,000-byte standard size and the run is ~9 deep — relayable under default standard policy. 48-byte limbs, 4-R Miller state, easy-part inverses as uncommitted witnesses. Same chunk math as bch-groth16-bls12381-chunked / -intratx; one fixed set of lockings verifies any proof for the VK. Deployed P2SH32."
+      "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier (g2check EIP-197 input validation -> vk_x -> batched 4-pair Miller -> final exponentiation -> assert verdict==1), the 86 chunks packed into 8 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-bls12381-intratx and bch-groth16-bls12381-chunked: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a CashToken NFT commitment — a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds its inBlob via tx.inputs[0].nftCommitment == hash256(inBlob). The token thread chains the groups in order. Unlike the 86-tx covenant chain (far past the default 50-deep mempool ancestor limit) and the single ~0.65 MB intra-tx bundle (non-standard, mine-direct), every grouped tx is under the 100,000-byte standard size and the run is 8 deep — relayable under default standard policy. 48-byte limbs, 4-R Miller state, easy-part inverses as uncommitted witnesses. Same chunk math as bch-groth16-bls12381-chunked / -intratx; one fixed set of lockings verifies any proof for the VK. Deployed P2SH32."
     },
     {
       "id": "bch-groth16-bls12381-grouped-residue",
-      "name": "BCH BLS12-381 Groth16 verifier, grouped + residue (47 chunks in ~5 standard <100KB transactions: GLV vk_x, fused Miller, witnessed-residue tail; intra-tx forward-checks within each tx, CashToken hand-off across them)",
+      "name": "BCH BLS12-381 Groth16 verifier, grouped + residue (41 chunks in 5 standard <100KB transactions: GLV vk_x, fused Miller, witnessed-residue tail; intra-tx forward-checks within each tx, CashToken hand-off across them)",
       "category": "full",
       "official": false,
       "solver": null,
@@ -3574,7 +3641,7 @@
           "tested": 3,
           "rejected": 3
         },
-        "worstCaseAccepted": null,
+        "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": false,
           "bound": null,
@@ -3584,26 +3651,33 @@
         },
         "failures": []
       },
-      "score": 332985,
+      "score": 327661,
       "size": {
-        "scriptBytes": 330815,
-        "txOverheadBytes": 2170,
+        "scriptBytes": 325534,
+        "txOverheadBytes": 2127,
         "transactions": 5,
-        "total": 332985
+        "total": 327661
       },
       "padding": {
-        "bytes": 95237,
-        "fraction": 0.28788597856808185
+        "bytes": 91736,
+        "fraction": 0.2818015936891385
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 257832767,
-          "steps": 42,
-          "heaviestStepOpCost": 7484752,
+          "opCost": 257643080,
+          "steps": 41,
+          "heaviestStepOpCost": 7481869,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 290466161,
+          "steps": 41,
+          "heaviestStepOpCost": 7637020,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 264853600,
+      "opCostBudget": 260624000,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3637,7 +3711,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier with the witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381), packed grouped. Chunk graph: g2check EIP-197 G2 subgroup validation -> GLV 4-scalar 128-bit vk_x Straus (baked subset-sum table) -> c^-|x|-FUSED prepared-VK batched Miller (e(alpha,beta) baked as a constant, (vk_x,gamma)/(C,delta) line coeffs baked, only e(-A,B) runs on-chain G2 arithmetic; c^-|x| folded into the shared f) -> witnessed-residue tail (the 23-chunk Hayashida-Scott hard part collapses to a ((w^|x|)*w)^9 mu_(27A) witness-subgroup walk + the fF*w == frob(c,1) verdict, lambda = p + |x|). The ~47 chunks are packed into ~5 STANDARD (<100,000 B) transactions: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a mutable CashToken NFT commitment (a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds tx.inputs[0].nftCommitment == hash256(inBlob)). Unlike the ~49-tx covenant-residue chain (against the default 50-deep mempool ancestor limit), every grouped tx is under the 100,000-byte standard size and the run is ~5 deep -- relayable under default standard policy. 48-byte limbs; c,cInv thread through the fused Miller as constant witness; w is an uncommitted tail witness. One fixed set of lockings verifies any proof for the VK. Deployed P2SH32."
+      "source": "BCH-native CashScript: the full BLS12-381 Groth16 verifier with the witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381), packed grouped. Chunk graph: g2check EIP-197 G2 subgroup validation -> GLV 4-scalar 128-bit vk_x Straus (baked subset-sum table) -> c^-|x|-FUSED prepared-VK batched Miller (e(alpha,beta) baked as a constant, (vk_x,gamma)/(C,delta) line coeffs baked, only e(-A,B) runs on-chain G2 arithmetic; c^-|x| folded into the shared f) -> witnessed-residue tail (the 23-chunk Hayashida-Scott hard part collapses to a ((w^|x|)*w)^9 mu_(27A) witness-subgroup walk + the fF*w == frob(c,1) verdict, lambda = p + |x|). The 41 chunks are packed into ~5 STANDARD (<100,000 B) transactions: within each group tx the inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state rides a mutable CashToken NFT commitment (a group's last chunk commits hash256(outBlob) to output[0], the next group's first chunk binds tx.inputs[0].nftCommitment == hash256(inBlob)). Unlike the ~49-tx covenant-residue chain (against the default 50-deep mempool ancestor limit), every grouped tx is under the 100,000-byte standard size and the run is ~5 deep -- relayable under default standard policy. 48-byte limbs; c,cInv thread through the fused Miller as constant witness; w is an uncommitted tail witness. One fixed set of lockings verifies any proof for the VK. Deployed P2SH32. The supplied worst-case run is a deterministic valid all-position GLV stress proof selected from 32 full proofs; a separate 256-proof locking audit retained at least 386,489 op-cost of input headroom."
     },
     {
       "id": "bch-multistep-demo",
