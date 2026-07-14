@@ -7,17 +7,18 @@
 //
 // The ENTIRE verifier in ONE CashScript contract (Groth16Verify,
 // groth16_contract/singleton/bls12-381/groth16.cash): the BLS12-381 field tower
-// (Fp2/Fp6/Fp12, xi = 1+u), the G1 scalar-mult for vk_x (Jacobian double-and-add +
-// a final Fermat inverse), four optimal-ate Miller loops (M-twist, |x| NAF, final
-// conjugate), their product, and the BLS (Hayashida-Scott) final exponentiation.
+// (Fp2/Fp6/Fp12, xi = 1+u), the G1 MSM for vk_x (one MSB-first Shamir/Straus
+// pass with shared doublings + a final Fermat inverse), four optimal-ate Miller
+// loops (M-twist, |x| NAF, final conjugate), their product, and the BLS
+// (Hayashida-Scott) final exponentiation.
 // The verifying key (alpha,beta,gamma,delta,IC) is hardcoded for the committed
 // instance; the proof (A,B,C) and public inputs (in0,in1) are supplied at RUNTIME.
 // A is negated in-script. require()s the product == Fp12 ONE. Sound: vk_x is
 // recomputed on-chain. Verified against @noble/curves bls12-381.
 //
-// Same curve (BLS12-381) as nchain -> a direct comparison. At ~1.48B op-cost
-// (~185 standard BCH inputs) and a ~24 KB contract it does NOT fit one input -- on
-// the real BCH 2026 VM it fails the 10,000-byte bytecode limit. The honest
+// Same curve (BLS12-381) as nchain -> a direct comparison. At ~967M op-cost
+// (~121 standard BCH inputs) and a 7,728-byte locking script it does not fit one
+// input because of op-cost density. The honest
 // single-tx baseline that motivates a chunked (multi-tx) BLS verifier.
 //
 // Vectors: groth16_contract/singleton/bls12-381/build_vectors_groth16.mjs ->
@@ -51,15 +52,16 @@ export const bchGroth16Bls12381Singleton: Implementation = {
     'BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on ' +
     'BLS12-381 -- the SAME curve as nchain (Groth16Verify, ' +
     'singleton/bls12-381/groth16.cash). Computes vk_x = IC0 + in0*IC1 + in1*IC2 ' +
-    'on-chain (G1 Jacobian double-and-add + Fermat inverse), then the full ' +
+    'on-chain (one MSB-first Shamir/Straus pass with shared Jacobian doublings + ' +
+    'Fermat inverse), then the full ' +
     'BLS12-381 pairing e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) (M-twist ' +
     'Miller, |x| NAF, conjugate, Hayashida-Scott final exp) and require()s == 1. ' +
     'VK hardcoded; proof (A,B,C) + public inputs (in0,in1) at RUNTIME; A negated ' +
     'in-script. Sound (vk_x recomputed on-chain). Verified vs @noble/curves ' +
     'bls12-381. Locking is plain compiler output (size objective + ' +
-    'rescheduleStacks, no post-passes; ~9.2 KB) -- the honest baseline vs the ' +
+    'rescheduleStacks, no post-passes; 7,728-byte locking) -- the honest baseline vs the ' +
     'nchain single-tx reference, and the other end of the bytesize-vs-opcost ' +
-    'tradeoff from the -opcode-optimized entry. ~1.04B op-cost (~129 BCH ' +
+    'tradeoff from the -opcode-optimized entry. ~967M op-cost (~121 BCH ' +
     'inputs) does NOT fit one input.',
   load: async () => {
     const valid: Step[] = [

@@ -1,5 +1,6 @@
 // BCH-native COMPLETE Groth16 verifier on BLS12-381, single-tx -- the SAME verifier as
-// bch-groth16-bls12381-singleton (vk_x computed on-chain, then the full pairing check),
+// bch-groth16-bls12381-singleton (vk_x computed in one shared-doubling
+// Shamir/Straus pass, then the full pairing check),
 // but with the locking bytecode byte-optimized: the smaller of the golf recompile
 // (groth16_contract/singleton/bn254/recompiler/, curve-agnostic) and the rescheduled
 // compile, followed by the auto-outlining pass that factors repeated instruction
@@ -42,7 +43,8 @@ export const bchGroth16Bls12381SingletonOpcodeOptimized: Implementation = {
   source:
     'Same complete BLS12-381 Groth16 verifier as bch-groth16-bls12381-singleton ' +
     '(Groth16Verify, singleton/bls12-381/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 ' +
-    'on-chain, then e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the ' +
+    'on-chain in one shared-doubling Shamir/Straus pass, then ' +
+    'e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1), but the ' +
     'locking bytecode is byte-optimized: the smaller of a custom ' +
     'decompile->reschedule->recompile of the cashc output and the rescheduled compile, ' +
     'then repeated instruction sequences outlined into OP_DEFINE bodies. Identical ' +
