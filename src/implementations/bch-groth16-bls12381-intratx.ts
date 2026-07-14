@@ -1,8 +1,8 @@
 // BCH-native BLS12-381 Groth16 verifier — INTRA-TRANSACTION LINKED, the whole
 // computation in ONE transaction (the BLS counterpart of bch-groth16-intratx). The
-// chunked verifier (vk_x -> G2 validation -> prepared-VK Miller product -> final exponentiation ->
-// assert product==1) is laid out as 67 INPUTS of a single transaction: 513,115 bytes,
-// 402,047,052 op-cost. Each chunk carries its incoming state as a raw 48-byte-limb
+// chunked verifier (vk_x -> input-validated prepared-VK Miller product -> final exponentiation ->
+// assert product==1) is laid out as 62 INPUTS of a single transaction: 483,320 bytes,
+// 379,271,083 op-cost. Each chunk carries its incoming state as a raw 48-byte-limb
 // blob and forward-checks its successor via
 // tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE) — no NFT-commitment hand-off,
 // no hashing, arbitrary intermediate size. The easy-part inverse rides as an
@@ -33,11 +33,13 @@ export const bchGroth16Bls12381Intratx: Implementation = {
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
-    'BCH-native CashScript: the full BLS12-381 Groth16 verifier uses 11 vk_x + 3 G2-check + ' +
-    '30 prepared Miller + 23 final-exp inputs. Only proof-derived B walks G2 on-chain; fixed ' +
-    'gamma/delta lines and e(alpha,beta) are manifest-bound VK constants. The 67 inputs total ' +
-    '513,115 bytes and 402,047,052 op-cost in ONE transaction. vk_x emits exactly ' +
-    '(-A,B,C,vk_x); G2 and Miller derive their accumulators from B, and every adjacent ' +
+    'BCH-native CashScript: the full BLS12-381 Groth16 verifier uses 11 vk_x + 29 ' +
+    'input-validated prepared Miller + 22 final-exp inputs. Only proof-derived B walks G2 ' +
+    'on-chain; fixed gamma/delta lines and e(alpha,beta) are manifest-bound VK constants. ' +
+    'The first Miller input checks A/C and B on-curve; the last reuses R_B=[|x|]B for the ' +
+    'guarded psi(B)==[-x]B subgroup check. The 62 inputs total 483,320 bytes and ' +
+    '379,271,083 op-cost in ONE transaction. vk_x emits exactly (-A,B,C,vk_x); Miller ' +
+    'derives f=1 and R_B=B, and every adjacent ' +
     'stage checks the entire successor blob. Each input carries state as a raw 48-byte-' +
     'limb blob and binds the chain by forward-checking its successor via ' +
     'tx.inputs[idx+1].unlockingBytecode introspection (OP_INPUTBYTECODE) — no NFT-' +

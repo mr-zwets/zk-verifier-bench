@@ -6,8 +6,8 @@
 //   e(-A,B) * e(alpha,beta) * e(vk_x,gamma) * e(C,delta)
 // uses one shared-squaring prepared-VK Miller trace. Only proof-derived B walks G2
 // on-chain; gamma/delta line coefficients are baked, and fixed e(alpha,beta) is folded
-// once as its pre-conjugate Miller value. The 30 Miller inputs feed 23 final-exponentiation
-// inputs: 53 total, 472,640 bytes, 373,094,102 op-cost. Miller genesis derives f=1 and
+// once as its pre-conjugate Miller value. The 29 Miller inputs feed 22 final-exponentiation
+// inputs: 51 total, 470,061 bytes, 372,314,128 op-cost. Miller genesis derives f=1 and
 // R_B=B from the exact (-A,B,C,vk_x) tuple. Each step carries its state
 // (Miller f in Fp12 + R_B, or the live final-exp Fp12 values) committed as
 // hash256(48-byte LE limbs) in the token NFT commitment and re-supplied in the
@@ -55,7 +55,7 @@ const toStep = (s: RawStep): Step => ({
 
 export const bchPairingBls12381Chunked: Implementation = {
   id: 'bch-pairing-bls12381-chunked',
-  name: 'BCH Groth16 pairing chunked, BLS12-381 (prepared Miller + final exponentiation, 53 inputs)',
+  name: 'BCH Groth16 pairing chunked, BLS12-381 (prepared Miller + final exponentiation, 51 inputs)',
   proofSystem: 'Groth16 pairing (BCH-native)',
   field: 'BLS12-381',
   structure: 'multi-tx',
@@ -73,8 +73,8 @@ export const bchPairingBls12381Chunked: Implementation = {
     'gamma/delta trajectories use baked line coefficients, and fixed e(alpha,beta) is ' +
     'folded once as its pre-conjugate Miller value before the final conjugation. The ' +
     'prepared boundary equals the raw four-pair boundary, with no combine stage. ' +
-    '30 Miller inputs plus 23 final-exponentiation inputs give 53 inputs, 472,640 bytes, ' +
-    'and 373,094,102 op-cost. Miller genesis derives f=1 and R_B=B from the exact ' +
+    '29 Miller inputs plus 22 final-exponentiation inputs give 51 inputs, 470,061 bytes, ' +
+    'and 372,314,128 op-cost. Miller genesis derives f=1 and R_B=B from the exact ' +
     '(-A,B,C,vk_x) state; pairing-only intentionally omits input validation. Proof-agnostic ' +
     'covenant: Miller f+R_B / live final-exp ' +
     'values + proof-derived points ride in the token NFT commitment (48-byte limbs); ' +

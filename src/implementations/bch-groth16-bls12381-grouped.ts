@@ -1,12 +1,12 @@
 // BCH-native BLS12-381 Groth16 verifier — GROUPED (multi-tx, multi-input), the BLS
 // counterpart of bch-groth16-grouped and the deployable middle ground between:
 //
-//   - bch-groth16-bls12381-chunked: 67 SEQUENTIAL transactions (one chunk each) — a chain
+//   - bch-groth16-bls12381-chunked: 62 SEQUENTIAL transactions (one chunk each) — a chain
 //     far deeper than BCH's default 50-tx mempool ancestor/descendant limit.
-//   - bch-groth16-bls12381-intratx: the whole verifier in ONE 513,115-byte transaction — over the
+//   - bch-groth16-bls12381-intratx: the whole verifier in ONE 483,320-byte transaction — over the
 //     100,000-byte standard size, so non-standard (mine-direct).
-//   - bch-groth16-bls12381-grouped (this): the SAME 67 inputs packed into 7 STANDARD
-//     transactions, 513,087 bytes and 401,923,270 op-cost in total.
+//   - bch-groth16-bls12381-grouped (this): the SAME 62 inputs packed into 7 STANDARD
+//     transactions, 483,303 bytes and 379,156,958 op-cost in total.
 //
 // Mechanism (identical to the BN254 grouped, see bch-groth16-grouped): within each group tx the
 // inputs forward-check via OP_INPUTBYTECODE; across groups the running state rides a CashToken
@@ -61,7 +61,7 @@ const toRun = (run: RawRun): Step[] => {
 
 export const bchGroth16Bls12381Grouped: Implementation = {
   id: 'bch-groth16-bls12381-grouped',
-  name: 'BCH BLS12-381 Groth16 verifier, grouped (67 inputs in 7 standard transactions)',
+  name: 'BCH BLS12-381 Groth16 verifier, grouped (62 inputs in 7 standard transactions)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'multi-tx',
@@ -69,15 +69,17 @@ export const bchGroth16Bls12381Grouped: Implementation = {
   // Cross-group hand-off pins the token thread: each group's last chunk requires
   // tx.outputs[0].nftCommitment == hash256(outBlob) AND tx.outputs[0].tokenCategory ==
   // tx.inputs[0].tokenCategory (category + capability continuity), perpetuated mutable end-to-end.
-  // Verified adversarially: the covout chunk rejects a wrong category / capability / commitment /
-  // missing output token. Same enforcement as bch-groth16-grouped-residue.
+  // Negative-case checks confirm that the covout chunk rejects a wrong category, capability,
+  // commitment, or missing output token. Same enforcement as bch-groth16-grouped-residue.
   tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: the full BLS12-381 Groth16 verifier (canonical-range-checked ' +
-    'vk_x -> EIP-197 G2 input validation -> prepared-VK Miller product -> final exponentiation ' +
+    'vk_x -> input-validated prepared-VK Miller product -> final exponentiation ' +
     '-> assert verdict==1). ' +
-    'Only proof-derived B walks G2; gamma/delta lines and fixed e(alpha,beta) are baked. ' +
-    'The 67 inputs are packed into 7 STANDARD transactions: 513,087 bytes and 401,923,270 ' +
+    'Only proof-derived B walks G2; gamma/delta lines and fixed e(alpha,beta) are baked. The ' +
+    'first Miller input checks A/C and B on-curve; the last reuses R_B=[|x|]B for the guarded ' +
+    'psi(B)==[-x]B subgroup check. The 62 inputs are packed into 7 STANDARD transactions: ' +
+    '483,303 bytes and 379,156,958 ' +
     'op-cost total. The hybrid of ' +
     'bch-groth16-bls12381-intratx and bch-groth16-bls12381-chunked: within each group tx the ' +
     'inputs forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), ' +
@@ -85,8 +87,8 @@ export const bchGroth16Bls12381Grouped: Implementation = {
     'commits hash256(outBlob) to output[0], the next group\'s first chunk binds its inBlob via ' +
     'tx.inputs[0].nftCommitment == hash256(inBlob), while the boundary covenant also pins ' +
     'the actual successor P2SH32 locking. The token thread chains the groups in order. ' +
-    'Unlike the 67-tx covenant chain (past the default 50-deep mempool ancestor limit) and ' +
-    'the single 513,115-byte intra-tx bundle (non-standard, mine-direct), every grouped tx ' +
+    'Unlike the 62-tx covenant chain (past the default 50-deep mempool ancestor limit) and ' +
+    'the single 483,320-byte intra-tx bundle (non-standard, mine-direct), every grouped tx ' +
     'is under the 100,000-byte standard size and the run is 7 deep — relayable under default standard ' +
     'policy. 48-byte limbs, f+R_B Miller state, easy-part inverses as uncommitted witnesses. Same ' +
     'chunk math as bch-groth16-bls12381-chunked / -intratx; one fixed set of lockings verifies ' +

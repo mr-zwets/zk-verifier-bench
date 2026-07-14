@@ -1,7 +1,7 @@
 // BCH-native BLS12-381 Groth16 pairing (prepared Miller + final exponentiation ->
 // verdict) — INTRA-TRANSACTION LINKED, in ONE transaction. The BLS counterpart of
-// bch-pairing-intratx: 30 prepared Miller + 23 final-exp chunks are the 53 INPUTS of
-// one transaction (467,890 bytes, 372,991,316 op-cost). Miller genesis derives f=1
+// bch-pairing-intratx: 29 prepared Miller + 22 final-exp chunks are the 51 INPUTS of
+// one transaction (465,462 bytes, 372,116,160 op-cost). Miller genesis derives f=1
 // and R_B=B from exactly (-A,B,C,vk_x). Each chunk carries its
 // incoming state as a raw 48-byte-limb blob and forward-checks
 // its successor via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE) — no NFT-
@@ -36,7 +36,7 @@ export const bchPairingBls12381Intratx: Implementation = {
     'BCH-native CashScript: the BLS12-381 Groth16 pairing uses a prepared-VK four-pair ' +
     'Miller product: only proof-derived B walks G2 on-chain, gamma/delta line coefficients ' +
     'are baked, and fixed e(alpha,beta) is folded once as its pre-conjugate Miller value. ' +
-    'The 30 Miller + 23 final-exp inputs total 53 inputs, 467,890 bytes, and 372,991,316 ' +
+    'The 29 Miller + 22 final-exp inputs total 51 inputs, 465,462 bytes, and 372,116,160 ' +
     'op-cost in ONE transaction. Miller genesis derives f=1 and R_B=B from exactly ' +
     '(-A,B,C,vk_x); pairing-only intentionally omits G1/G2 input validation. Each input ' +
     'carries state as a raw 48-byte-limb blob and ' +
