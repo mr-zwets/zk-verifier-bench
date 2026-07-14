@@ -4,9 +4,10 @@
 //   vk_x = IC0 + input0*IC1 + input1*IC2   (G1 points on BN254/alt_bn128)
 //
 // This is the ENTIRE vk_x aggregation in ONE CashScript contract (VkX,
-// groth16_contract/singleton/vkx.cash): two 254-iteration double-and-add scalar
-// multiplies (input0*IC1, input1*IC2) over Jacobian-projective coordinates, the
-// folds, and a single final Fermat inverse to affine. The public inputs
+// groth16_contract/singleton/vkx.cash): one 254-iteration MSB-first
+// Shamir/Straus loop over Jacobian-projective coordinates, with a fixed affine
+// table for IC1, IC2, and IC1+IC2, then a single final Fermat inverse to affine.
+// The public inputs
 // (input0,input1) are supplied at RUNTIME as spend() args and bit-tested in
 // script; only the expected vk_x affine point is baked (the constructor args
 // expectedX/expectedY), as the checkpoint comparison -- the SAME honesty model
@@ -14,10 +15,12 @@
 // build; verified against py_ecc.bn128.
 //
 // It accepts the correct inputs (reproducing the baked vk_x) and rejects both a
-// tampered input and a wrong baked expected. But at ~76M op-cost it needs ~10
-// standard BCH inputs' worth of budget, so it does NOT fit one input: on the
-// real BCH 2026 VM it fails the op-cost density limit even with the unlocking
-// zero-padded to the 10,000-byte cap. That is the honest result, and the reason
+// tampered input and a wrong baked expected. The loop skips leading-zero
+// doublings, so op-cost varies with the runtime inputs. The published vector is
+// ~11.95M op-cost and needs ~2 standard BCH inputs' worth of budget, so it does
+// NOT fit one input: on the real BCH 2026 VM it fails the op-cost density limit
+// even with the unlocking zero-padded to the 10,000-byte cap. That is the honest
+// result, and the reason
 // the chunked (multi-tx) entries exist.
 //
 // Vectors built/measured by groth16_contract/singleton/build_vectors.mjs ->
@@ -42,10 +45,11 @@ export const bchVkxSingleton: Implementation = {
   structure: 'single-tx',
   source:
     'BCH-native CashScript: the FULL vk_x = IC0 + input0*IC1 + input1*IC2 in ONE ' +
-    'contract (monolithic baseline, VkX/singleton/bn254/vkx.cash). Two inlined ' +
-    '254-iteration double-and-add scalar mults over Jacobian-projective coords + ' +
+    'contract (monolithic baseline, VkX/singleton/bn254/vkx.cash). One MSB-first ' +
+    '254-iteration Shamir/Straus loop with an affine IC1/IC2/IC1+IC2 table + ' +
     'one final Fermat inverse to affine; RUNTIME public inputs (only expected vk_x ' +
-    'baked, like the chunked entries). ~76M op-cost -> ~10 BCH inputs; does NOT fit ' +
+    'baked, like the chunked entries). Published vector: ~11.95M op-cost -> ~2 BCH ' +
+    'inputs (runtime cost varies with scalar bits); does NOT fit ' +
     'BCH in a single input (real-VM op-cost density limit) -- this is why the ' +
     'chunked multi-tx entries exist.',
   load: async () => {
