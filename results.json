@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-15T06:47:46.668Z",
+  "generatedAt": "2026-07-15T09:22:08.362Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -33,10 +33,10 @@
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-intratx-residue",
+      "id": "bch-groth16-intratx-general",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 100448,
+      "bytes": 95201,
       "bchCompatible": true
     }
   },
@@ -590,6 +590,14 @@
       "score": 330364,
       "id": "bch-groth16-intratx",
       "steps": 42,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-15T09:22:08.362Z",
+      "score": 95201,
+      "id": "bch-groth16-intratx-general",
+      "steps": 13,
       "transactions": 1,
       "fits": true
     }
@@ -3030,6 +3038,91 @@
         "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-intratx-residue (each input carries its incoming state as a raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, no 128-byte state limit) and the same residue chunk graph (canonical-coordinate fast-G2 endo subgroup check, GLV vk_x MSM, c^-(6x+2)-FUSED batched Miller with e(alpha,beta) precomputed/skipped, witnessed-residue final-exp TAIL), but each chunk fills a 100 kB input instead of 10 kB, collapsing the verifier from 26 inputs to 4 (g2check 1, GLV vk_x 1, fused Miller 2 with the residue final-exp verdict folded into the last one), ~188 kB / ~177M op. Op-cost and bytes are conserved; this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget."
+    },
+    {
+      "id": "bch-groth16-intratx-general",
+      "name": "BCH Groth16 intra-tx linked — tokenless + runtime-general (whole BN254 verifier in one standard-sized transaction)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 3,
+          "rejected": 3
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
+      "score": 95201,
+      "size": {
+        "scriptBytes": 94622,
+        "txOverheadBytes": 579,
+        "transactions": 1,
+        "total": 95201
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 58073984,
+          "steps": 13,
+          "heaviestStepOpCost": 5683050,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 58894139,
+          "steps": 13,
+          "heaviestStepOpCost": 5682784,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "opCostBudget": 75786400,
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "type": "mixed"
+      },
+      "source": "BCH-native CashScript: the full BN254 Groth16 verifier laid out as the 13 linked INPUTS of ONE transaction. Same intra-tx forward-checking as bch-groth16-intratx (each input carries its incoming state as a raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, no 128-byte state limit), but TOKENLESS (no CashToken/NFT covenant anywhere; state rides the scored unlocking witness) and RUNTIME-GENERAL with de-baked finalize add-points: the step-64 fixed-pair Frobenius points are re-derived on-chain from the psi chain q1=psi(B), q2=psi^2(B), q3=psi^3(B) and enforced == psi(witnessed B), so the genesis/finalize redeems are proof-independent and the 13 lockings are byte-identical across all proofs (lockConcatSha256 3c917b6756a6173e3d6593ed44a41b0daf091ffee4e819b846857daad9104e48). Graph: 1 lib front (2 B) + 9 gb3-narrow batched-Miller exec chunks + genesis (subgroup fold + vk_x ECIP-MSM merged in) + finalize (de-baked Frobenius) + c^-(6x+2)-fused close with terminal residue verdict. B is on-curve + order-r-subgroup checked on-chain (psi fold R_end==-psi^3(B)); off-subgroup B, wrong public input, and off-curve coordinates all reject. Deployed as P2SH32 so each input's redeem rides in the scriptSig (counting toward the op-cost budget). Every input fits one BCH input budget (scripts <= 10,000 B); the whole verifier is one transaction of ~94,779 B on the wire (score: Sigma lock 422 + Sigma unlock 94,200 = 94,622 B script bytes). One fixed set of input scripts verifies any proof for the canonical VK (proof supplied in the witness)."
     },
     {
       "id": "bch-groth16-grouped",

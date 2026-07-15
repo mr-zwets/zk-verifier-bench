@@ -550,5 +550,13 @@
     "steps": 42,
     "transactions": 1,
     "fits": true
+  },
+  {
+    "t": "2026-07-15T09:22:08.362Z",
+    "score": 95201,
+    "id": "bch-groth16-intratx-general",
+    "steps": 13,
+    "transactions": 1,
+    "fits": true
   }
 ]
