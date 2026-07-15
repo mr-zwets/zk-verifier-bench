@@ -21,16 +21,16 @@
 // lies in Fp6 and disappears in Q. A fixed r-torsion kernel shift makes every valid root finite
 // without changing its lambda power.
 //
-// Committed fixture: 90,442 benchmark script bytes; 90,550 serialized transaction bytes;
-// 90,935 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 70,662,495 op-cost.
-// Universal certificate: 99,284 serialized bytes; 79,387,771 op-cost; 716-byte relay margin.
+// Committed fixture: 90,456 benchmark script bytes; 90,564 serialized transaction bytes;
+// 90,949 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 70,663,907 op-cost.
+// Universal certificate: 99,285 serialized bytes; 79,389,147 op-cost; 715-byte relay margin.
 // Compiler: mr-zwets/cashscript compiler-optimizations @
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893
-// Vector SHA-256: 2e31e15602ac74e83b97d7d362e4e1d3685bf43eac80eb0987effe1db7bb0246
-// Locking graph SHA-256: f997efcb6ae47b70aea017220d53097669dc53218715bd3343950334425a6638
+// Vector SHA-256: be5f48aa8923c7d7a976436d31e41efa8e06f07a9505e719eb830c4a6ac35434
+// Locking graph SHA-256: 356c903265c0b741e9ab84ee656541fa3bfccaa8898ca1a6d2675526385e7d22
 // Locking-bytecode SHA-256 values, in input order:
-//   00 653689340ec23eb64fbae9a83c6bbd2ea58b2dbbbf631fcd6a9c5d18b10fe47e
-//   01 c8ab117bbec58018ea0f2f616c8f3674c528679417f8d9a9e1c9e5333c804614
+//   00 ca154cee2faafa76faaec62106be017510a117964924bfaab26d6d04b846b642
+//   01 13e2ed8d9c6f3030464b3cf7bf196bfa4d6889907f59164692649b121fcf5fea
 //   02 04bd2ab3a12d640c83c43add3350c622f747cd0fdaaa342ac49ed4a9e357eea7
 //   03 cd15b7761b96330f7b6b719d18a555b2ad6eee3c0622c7bed9149ffc66e9c4f1
 //   04 970cfa221f6158ebc3cf43af22fa7f94a2d4fa5d75332db9174e5186fd41c46c
@@ -84,6 +84,7 @@ export const bchGroth16IntratxResidue: Implementation = {
   source:
     'BCH-native CashScript: one runtime-proof BN254 verifier linked across 11 inputs of one ' +
     'transaction. Two grouped GLV vk_x inputs feed nine affine, unit-line Miller inputs. The GLV ' +
+    'inputs enforce exact state-push lengths so both inputs consume the same hash-bound table. ' +
     'stage carries the IC1/IC2 MSM projectively into Miller genesis, while e(IC0,gamma) and ' +
     'e(alpha,beta) are folded into the fixed Miller factor. G2 subgroup validation is fused into ' +
     'the Miller endpoint. Proof A and C use canonical normalized (u,v) coordinates, where (0,0) ' +
