@@ -1,16 +1,18 @@
 // OP-OPTIMIZED BCH-native Groth16 verifier singleton.
 //
-// Same complete verification as bch-groth16-singleton, with every chunked-verifier
+// Same complete verification as bch-groth16-singleton, with every torus-era
 // optimization that lowers OP-COST stacked on:
-//   - LAZY field tower for the Miller loop (deferred reductions ~31% cheaper op than
-//     the reduced tower — the single biggest lever);
-//   - witnessed-residue final exponentiation (ePrint 2024/640) — drops the ~250M-op
-//     hard-part final-exp for a cheap Frobenius tail (c,cInv,w gated witnesses);
-//   - e(alpha,beta) baked as a constant (only 3 runtime single-pair Miller loops);
-//   - fast-endo 63-bit G2 subgroup check (ePrint 2022/348) vs the 128-bit walk
-//     (witness zinv, gated);
-//   - GLV vk_x: 4-scalar ~128-bit Straus over a baked subset-sum table (witness
-//     k-decomposition + zInv, gated).
+//   - LAZY field tower for the Miller loop (deferred reductions);
+//   - quotient-torus residue check in Fp12*/Fp6* (six-limb canonical root u,
+//     [c]=[1+uW]): the c^-(6x+2) fold rides the Miller loop and the terminal is the
+//     cross-multiplied [f*c^(p^2)]=[c^p*c^(p^3)] with explicit [0:0] rejection —
+//     no hard-part final-exp, no w27 coset correction;
+//   - e(alpha,beta) baked as a torus constant (only the (-A,B) pair runs on-chain
+//     G2 arithmetic; vk_x/C unit lines baked);
+//   - affine runtime B with prover-witnessed slopes; the exact G2 subgroup check is
+//     the Miller-endpoint endomorphism relation (no separate subgroup walk);
+//   - GLV vk_x: 4-scalar Straus over a baked table with an affine witnessed-slope
+//     accumulator (witnessed top-bit-gated k-decomposition).
 //
 // Source: groth16_contract/singleton/bn254/groth16_minop.cash
 // Vectors: groth16_contract/singleton/bn254/build_vectors_groth16_minop.mjs ->
@@ -33,19 +35,21 @@ const mp = JSON.parse(readFileSync('src/bch/groth16-singleton-minop-multiproof-v
 
 export const bchGroth16SingletonMinOp: Implementation = {
   id: 'bch-groth16-singleton-minop',
-  name: 'BCH Groth16 verifier singleton — op-optimized (lazy tower + residue + fast-G2 + GLV)',
+  name: 'BCH Groth16 verifier singleton — op-optimized (lazy tower + quotient torus + fused G2 + affine GLV)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract, op-optimized. ' +
-    'Lazy field tower for the Miller loop (deferred reductions); witnessed-residue final ' +
-    'exponentiation (ePrint 2024/640) replacing the hard part; e(alpha,beta) baked (3 runtime ' +
-    'Miller loops); fast-endo 63-bit G2 subgroup check (ePrint 2022/348); GLV 4-scalar vk_x. ' +
-    'All extra inputs (c,cInv,w; zinv; GLV k-decomposition + zInv) are prover-supplied and gated ' +
-    'on-chain. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bn254. Single-tx like ' +
-    'bch-groth16-singleton but ~53% less op-cost. Still over the 10,000 B / per-input op limits.',
+    'Lazy field tower; quotient-torus residue check in Fp12*/Fp6* (six-limb canonical root, ' +
+    'c-fold riding the Miller loop, terminal [f*c^(p^2)]=[c^p*c^(p^3)] with [0:0] rejection); ' +
+    'e(alpha,beta) baked so only (-A,B) runs on-chain G2 arithmetic; affine runtime B with ' +
+    'witnessed slopes and the exact G2 subgroup check fused into the Miller endpoint; affine ' +
+    'witnessed-slope GLV 4-scalar vk_x. All witnesses (u, slopes, inverses, k-decomposition) are ' +
+    'prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain). Verified vs ' +
+    '@noble/curves bn254. Single-tx like bch-groth16-singleton but ~92% less op-cost — below the ' +
+    '13-input chunked torus total. Still over the 10,000 B / per-input op limits.',
   load: async () => {
     const valid: Step[] = [
       {

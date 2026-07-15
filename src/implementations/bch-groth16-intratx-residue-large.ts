@@ -1,29 +1,20 @@
-// BCH-native Groth16 verifier — INTRA-TRANSACTION LINKED + RESIDUE with LARGE (100 kB) input
-// scripts, targeting the PROPOSED bch-spec upgrade. Identical mechanism and residue chunk graph
-// to bch-groth16-intratx-residue (OP_INPUTBYTECODE forward-checking, no NFT commitment, no
-// hashing; fast-G2 endo subgroup check + GLV vk_x MSM + c^-(6x+2)-FUSED Miller with e(alpha,beta)
-// skipped + witnessed-residue final-exp tail), but each chunk is sized to a 100 kB unlocking
-// instead of 10 kB.
+// BCH-native Groth16 verifier — INTRA-TRANSACTION LINKED + QUOTIENT-TORUS RESIDUE with LARGE
+// (100 kB) input scripts, targeting the PROPOSED bch-spec upgrade. Identical mechanism and
+// quotient-torus chunk graph to bch-groth16-intratx-residue (OP_INPUTBYTECODE forward-checking,
+// GLV vk_x MSM, c^-(6x+2)-fused Miller in Fp12*/Fp6* with e(alpha,beta) precomputed, endpoint-
+// fused exact G2 subgroup check, terminal [f*c^(p^2)]=[c^p*c^(p^3)] with [0:0] rejection), but
+// re-planned at the 100 kB budget:
 //
-// Why it needs bch-spec: current BCH (BCH_2026) caps every script at 10,000 B and grants an
-// input (41 + unlockingLen) * 800 op-cost, so the current-BCH build uses 26 inputs. The proposed bch-spec
-// upgrade raises the per-script cap to 100,000 B and the density-control base to 10,000, so an
-// input gets (10000 + unlockingLen) * 800 = up to 88,000,000 op — ~11x. The SAME residue verifier
-// therefore collapses to ~one fat input per stage floor:
-//
-//   fast-G2 subgroup check   1 input
-//   GLV vk_x MSM             1 input    (one 128-iter loop window; op-bound at ~21M << 88M)
-//   c^-(6x+2)-fused Miller   2 inputs   (~148M op op-bound; the LAST Miller chunk has the residue
-//                                        final-exp verdict FUSED in, so it is terminal)
-//   residue final-exp tail   0 inputs   (folded into the final Miller chunk above)
+//   GLV vk_x MSM             1 input    (one 128-iter loop window; 5.2M op in a 2.3 kB unlock)
+//   fused Miller + verdict   1 input    (the whole unrolled torus walk, ~71.8M op)
 //                            --------
-//                            4 inputs   (one non-standard <1 MB transaction)
+//                            2 inputs   (one standard-relayable-on-spec transaction)
 //
-// ~188 kB / ~177M op over 4 inputs (vs ~225 kB / ~180M over 26 for the current-BCH residue build).
-// Op-cost and bytes are conserved — this is a STRUCTURAL simplification (fewer, fatter UTXOs in
-// one tx), not a resource reduction. Every input fits its own bch-spec budget (op-cost <=
-// 88,000,000, scripts <= 100,000 B); deployed as P2SH32 so each chunk redeem rides in the scriptSig
-// where it counts toward the op-cost budget. Graded against the real bch-spec VM (createVirtualMachineBchSpec).
+// 82,183 B / 77.0M op over 2 inputs (worst case 91.0M op) — below the current-BCH 13-input
+// frontier on every axis. Every input fits its own bch-spec budget ((10000 + unlockingLen) * 800
+// up to 88,000,000 op, scripts <= 100,000 B); deployed as P2SH32 so each chunk redeem rides in
+// the scriptSig where it counts toward the op-cost budget. Graded against the real bch-spec VM
+// (createVirtualMachineBchSpec).
 //
 // Vectors: groth16_contract/chunked/intratx/build_vectors_residue_large.mjs ->
 // src/bch/groth16-intratx-residue-large-vectors.json.
@@ -53,31 +44,26 @@ const toRun = (raw: RawStep[]): Step[] => {
 
 export const bchGroth16IntratxResidueLarge: Implementation = {
   id: 'bch-groth16-intratx-residue-large',
-  name: 'BCH Groth16 intra-tx linked + residue, LARGE 100 kB scripts (whole verifier in 4 inputs of one transaction, PROPOSED bch-spec)',
+  name: 'BCH Groth16 intra-tx quotient-torus residue, LARGE 100 kB scripts (whole verifier in 2 inputs of one transaction, PROPOSED bch-spec)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
   vm: 'bch-spec',
   source:
-    'BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier laid out as the ' +
-    'INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, ' +
-    'op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same ' +
-    'forward-checking as bch-groth16-intratx-residue (each input carries its incoming state as a ' +
-    'raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no ' +
-    'NFT-commitment hand-off, no hashing, no 128-byte state limit) and the same residue chunk ' +
-    'graph (canonical-coordinate fast-G2 endo subgroup check, GLV vk_x MSM, c^-(6x+2)-FUSED batched Miller with ' +
-    'e(alpha,beta) precomputed/skipped, witnessed-residue final-exp TAIL), but each chunk fills a ' +
-    '100 kB input instead of 10 kB, collapsing the verifier from 26 inputs to 4 (g2check 1, GLV ' +
-    'vk_x 1, fused Miller 2 with the residue final-exp verdict folded into the last one), ~188 kB / ' +
-    '~177M op. Op-cost and bytes are conserved; ' +
-    'this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. ' +
-    'The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in ' +
-    'the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. ' +
-    'Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the ' +
-    'whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, ' +
-    'which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each ' +
-    'chunk redeem rides in the scriptSig where it counts toward the op-cost budget.',
+    'BCH-native CashScript: the quotient-torus BN254 Groth16 verifier laid out as the INPUTS of ' +
+    'ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost ' +
+    'budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as ' +
+    'bch-groth16-intratx-residue (each input carries its incoming state as a raw byte blob and ' +
+    'binds the chain via tx.inputs[idx+1].unlockingBytecode introspection) and the same ' +
+    'quotient-torus graph (GLV vk_x MSM, c^-(6x+2)-fused Miller in Fp12*/Fp6* with e(alpha,beta) ' +
+    'precomputed, endpoint-fused exact G2 subgroup check, terminal cross-multiplied ' +
+    '[f*c^(p^2)]=[c^p*c^(p^3)] with projective-zero rejection), re-planned at the 100 kB budget ' +
+    'into 2 inputs (GLV vk_x 1, unrolled fused Miller + verdict 1): 82,183 B / 77.0M op, below ' +
+    'the current-BCH 13-input frontier on every axis. Each input fits its own bch-spec budget; ' +
+    'NOT valid on current BCH (BCH_2026 caps scripts at 10,000 B) — it requires the bch-spec ' +
+    'upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts ' +
+    'toward the op-cost budget.',
   load: async () => {
     const valid = toRun(v.steps);
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);
