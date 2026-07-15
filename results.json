@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-15T12:25:38.389Z",
+  "generatedAt": "2026-07-15T14:32:15.321Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -3559,7 +3559,7 @@
     },
     {
       "id": "bch-groth16-bls12381-intratx-residue-large",
-      "name": "BCH BLS12-381 Groth16 intra-tx linked + residue, LARGE 100 kB scripts (whole verifier in 5 inputs of one transaction, PROPOSED bch-spec)",
+      "name": "BCH BLS12-381 Groth16 intra-tx quotient-torus residue, LARGE 100 kB scripts (whole verifier in 3 inputs, PROPOSED bch-spec)",
       "category": "spec",
       "official": false,
       "solver": null,
@@ -3571,46 +3571,46 @@
         "verdict": "pass",
         "validAccepted": true,
         "invalid": {
-          "tested": 11,
-          "rejected": 11
+          "tested": 10,
+          "rejected": 10
         },
         "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
-          "seamsTested": 4,
+          "seamsTested": 2,
           "unboundSeams": 0,
-          "detail": "every stage bound to one proof: 4 seams staple-tested with a 2nd distinct proof, all rejected"
+          "detail": "every stage bound to one proof: 2 seams staple-tested with a 2nd distinct proof, all rejected"
         },
         "failures": []
       },
-      "score": 271039,
+      "score": 164579,
       "size": {
-        "scriptBytes": 270800,
-        "txOverheadBytes": 239,
+        "scriptBytes": 164426,
+        "txOverheadBytes": 153,
         "transactions": 1,
-        "total": 271039
+        "total": 164579
       },
       "padding": {
-        "bytes": 193260,
-        "fraction": 0.7136632200886263
+        "bytes": 97871,
+        "fraction": 0.5952282485738265
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 250855145,
-          "steps": 5,
-          "heaviestStepOpCost": 83814214,
+          "opCost": 149814405,
+          "steps": 3,
+          "heaviestStepOpCost": 81071258,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 283406626,
-          "steps": 5,
-          "heaviestStepOpCost": 83816477,
+          "opCost": 181547179,
+          "steps": 3,
+          "heaviestStepOpCost": 81077686,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 256500000,
+      "opCostBudget": 155456800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3619,7 +3619,7 @@
         "detail": "every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH",
         "standard": {
           "fits": false,
-          "detail": "tx 270,864 B > 100,000 B standard size"
+          "detail": "tx 164,474 B > 100,000 B standard size"
         }
       },
       "generality": {

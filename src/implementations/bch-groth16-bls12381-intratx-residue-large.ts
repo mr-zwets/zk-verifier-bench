@@ -34,7 +34,7 @@ import { hexToBin } from '@bitauth/libauth';
 import type { Implementation, Step } from '../harness/types.js';
 
 interface RawStep { label: string; locking: string; unlocking: string; checkpoint?: string }
-interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][]; invalidInputs?: RawStep[][] }
+interface Vectors { description?: string; steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][]; invalidInputs?: RawStep[][] }
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-intratx-residue-large-vectors.json', 'utf8')) as Vectors;
 
@@ -48,13 +48,13 @@ const toRun = (raw: RawStep[]): Step[] => {
 
 export const bchGroth16Bls12381IntratxResidueLarge: Implementation = {
   id: 'bch-groth16-bls12381-intratx-residue-large',
-  name: 'BCH BLS12-381 Groth16 intra-tx linked + residue, LARGE 100 kB scripts (whole verifier in 5 inputs of one transaction, PROPOSED bch-spec)',
+  name: 'BCH BLS12-381 Groth16 intra-tx quotient-torus residue, LARGE 100 kB scripts (whole verifier in 3 inputs, PROPOSED bch-spec)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
   vm: 'bch-spec',
-  source:
+  source: v.description ??
     'BCH-native CashScript: the residue-optimized full BLS12-381 Groth16 verifier laid out as the ' +
     'INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, ' +
     'op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same ' +
