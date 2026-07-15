@@ -1,80 +1,82 @@
-// BCH-native BLS12-381 Groth16 verifier in one current-BCH-valid transaction:
+// BCH-native fixed-VK BLS12-381 Groth16 verifier in one current-BCH standard transaction:
 //
-//   shared-table GLV vk_x MSM                                5 inputs
-//   c^-|x|-fused Miller + quotient-torus residue verdict    29 inputs
-//                                                            ---------
-//                                                            34 inputs
+//   width-six fixed-base comb for D                         2 inputs
+//   affine two-pair Miller + quotient-torus verdict        10 inputs
+//                                                           ---------
+//                                                           12 inputs
 //
-// Each input carries its incoming state as raw 48-byte limbs and uses OP_INPUTBYTECODE to require
-// the next input's witness to begin with its recomputed output. Miller genesis binds vk_x and the
-// canonical proof coordinates; the first and last Miller inputs fuse the curve and guarded G2
-// subgroup checks, and the fixed e(alpha,beta) Miller value is precomputed.
+// This repository's verification key has beta=5*G2.BASE, gamma=7*G2.BASE, and
+// delta=11*G2.BASE. Bilinearity therefore rewrites the four-pair Groth16 equation to
 //
-// The Miller accumulator lives in Q=Fp12*/Fp6*. A six-limb canonical u represents the finite
-// class [c]=[1+u*W], with [c^-1]=[1-u*W]. Q is cyclic of order p^6+1 and, for
-// lambda=p+|x|, gcd(lambda,p^6+1)=r. The lambda-power image is therefore exactly the kernel of
-// the final-exponent map on Q. The legacy correction w lies in Fp6 and disappears in the quotient.
-// The final Miller input checks [fF]=[frob(c,1)] by projective cross-product and explicitly rejects
-// [0:0], removing the separate residue-tail input. A fixed r-torsion shift makes a finite root
-// available for every accepting class without changing its lambda power. Since the final-exponent
-// result is r-torsion and gcd(r,p^6-1)=1, quotient acceptance is equivalent to the full pairing
-// verdict, not merely equality up to a nontrivial Fp6 element.
+//   e(-A, B) * e(D, G2.BASE) = 1,  D = 5*alpha + 7*vk_x + 11*C.
 //
-// Exact whole-transaction measurements (locking + unlocking is the leaderboard script-byte field):
-//   committed: 34 inputs, 195,413 script B, 196,895 score B, 195,705-B serialized spend,
-//              153,091,714 op, max input 5,445,782 op; consensus-valid, non-standard by tx size
-//   alternate: 34 inputs, 196,507 script B, 197,989 score B, 196,799-B serialized spend,
-//              153,981,740 op, max input 5,446,214 op; consensus-valid, non-standard by tx size
-//   dense:     34 inputs, 232,438 script B, 233,920 score B, 232,730-B serialized spend,
-//              185,038,859 op, max input 7,527,078 op; consensus-valid, non-standard by tx size
-// All three pass the BCH 2026 consensus VM. The committed vector also passes 11/11 invalid runs,
-// 3/3 isolated invalid-point runs, and all 33 adjacent-seam splice checks. The dense fixture is a
-// deterministic valid proof whose four GLV sub-scalars add at all 128 Straus positions; it is
-// empirical stress coverage, not a formal global arithmetic maximum.
+// A 43-iteration, width-six fixed-base comb computes the public-input term with 63 affine
+// table entries. The proof witness carries the invertible transformed point
+// T=11*C+5*alpha+7*IC0, and the final comb input adds T to the public-input term. The 6,048-byte
+// table is split across Miller inputs 6, 8, and 10; each carrier has an exact argument length,
+// and the final comb input reconstructs and hash256-pins the complete table.
+//
+// The Miller accumulator lives in Q=Fp12*/Fp6*. A canonical six-limb u represents the finite
+// class [c]=[1+u*W]. For lambda=p+|x|, gcd(lambda,p^6+1)=r, so the lambda-power image is exactly
+// the final-exponent kernel in Q. The terminal input checks [fF]=[frob(c,1)] using a nonzero
+// projective cross-product. A fixed r-torsion shift supplies a finite representative for every
+// accepting class without changing its lambda power. Because the final-exponent result is
+// r-torsion and gcd(r,p^6-1)=1, this quotient verdict is equivalent to the full pairing verdict.
+//
+// A and the transformed C term use canonical field encodings and on-curve gates. B additionally
+// passes the fused psi(B)==[-x]B order-r subgroup gate; canonical identity encodings are handled
+// explicitly. G1 subgroup walks are unnecessary here because A and C are paired only with order-r
+// G2 points, so their cofactor components contribute the identity to the reduced pairing.
+//
+// Input 0 is the graph entry. Every program requires the exact 12-input count and its exact input
+// index; every nonterminal program SHA-256-pins its immediate successor's full P2SH32 locking
+// bytecode. OP_INPUTBYTECODE then binds the exact state handoff. This terminal-to-root construction
+// is acyclic, and input 0 transitively commits to all eleven successors. The generator verifies all
+// eleven successor pins and asserts that the same locking graph accepts all 15 valid-domain fixtures.
+// This is a rooted transaction predicate: spending the designated input-0 verifier UTXO enforces
+// the complete graph; an individual suffix UTXO does not independently establish the full prefix.
+//
+// Exact comparison with the currently published 34-input entry:
+//                         published       this vector       reduction
+//   inputs                       34                12           64.71%
+//   script bytes            195,413            97,455           50.13%
+//   serialized bytes        195,705            97,571           50.14%
+//   leaderboard score       196,895            97,991           50.23%
+//   consensus op-cost   153,091,714        77,865,802           49.14%
+//
+// The exact funded transaction pays 97,571 satoshis (1 sat/byte), has hash256
+// 4daf3309ca4059d1f87d60582d2f56f9a2f315927a350a81c5debfc6f6cf6d45, and passes both
+// BCH 2026 consensus and default-policy VMs. Across the 15 valid fixtures, the largest concrete
+// input is 7,333,570 consensus / 7,345,602 standard op-cost and 9,142 unlocking bytes. The vector
+// includes 23 rejection fixtures plus three isolated point-validation fixtures.
+//
+// The source-pinned proof-independent resource certificate covers 40 control sites and all 78
+// required edges. Its all-canonical-input envelope is 98,570 serialized bytes (1,430-byte policy
+// margin), with every unlocking <=9,172 bytes and every consensus/standard input <=7,357,920 /
+// 7,369,952 op-cost. It also checks the independent standard hash-density bound and proves the
+// fixed-comb table entry used for the initial numeric envelope is componentwise maximal.
 //
 // Byte-exact provenance:
-//   source: groth16_cashscript commit 2831928fe224d252fc90dfc26ecfdf52f29e9399
-//   compiler: CashScript commit 1c707c1dbf87396b30ba5e0704b1db44475ce893
-//   vector sha256: 66f65ef80de990688b0647d77caf86d8e48ce84dae8dfb6ea014ea49aff611dc
-// Reproduce from the source checkout (the command pins current-BCH sizing and runs the algebra,
-// complete traces, valid proofs, invalid mutations, and both consensus/standard-policy VMs):
+//   source: groth16_cashscript commit 0819bb0ca786a6500eec6d9bebb5d2037d380c1a
+//   compiler: CashScript commit 1c707c1dbf87396b30ba5e0704b1db44475ce893 (enforced clean)
+//   vector sha256: 7868c0fde00dd7c9aedf50cf2679f18e039db5519afc28cd6b6e2b714ed7bb4b
+// Reproduce from the source checkout; the command regenerates the bytecode and vector, runs the
+// algebra/bounds/dual-VM suites, and finishes with the proof-independent resource certificate:
 //   VERIFIER_DIR=/path/to/zk-verifier-bench pnpm vectors:intratx:torus:bls
 //
 // sha256 of locking bytecode, in input order:
-//   00 96db84d0348659c4dea8ed67b9d473c26c094498bd0daeb2faadedea74bae053
-//   01 6d7a7d0841796b480f4369f275d59a9a92309b310ef50c24bffd08c61e2ee4d9
-//   02 55ee6ba9a9df78fc4b2dba081ad4e9899306321229c322a73598e0fd08a0c3f4
-//   03 fa1d48b9e13d4a93c572549ec4b2403ce07f1c2f57c8a7c34e686854b67c70b1
-//   04 1990490155fbe9c0ba6ea2bdfd26fbbaa8c9c968615ba9584861d0b4ae108928
-//   05 6f7cb06169210e468d034a8efc65b9c12893fed21165e11e278a11854440e049
-//   06 8e722926b6a762ac8af4d4c52f489a23094eb31ce7374053785bf62a00cd5bc3
-//   07 41d877bedcd9ca486cff76d28620766f32e38f087c8ea0e08c76e04c4b0ffa78
-//   08 57277b3e69f2517e57cc5fbfd9da0856b9405537af3f9724435c835024234d12
-//   09 581231861b00f0fefaa76e262ab4bfa700a6d285d7e0408edaa6c6a30c73882b
-//   10 8949a56d2ee52d22319f0ee562d846c92acb2880ad5b92f3bdef944c377219bd
-//   11 bf96954620f804a8ca3b962efc6c7a77b9aece0e0aebff368d064b48959a1f3b
-//   12 dec2c13ce89c3aa84af90e601042d0667b7396da1ec817f0ce637ea43447eabe
-//   13 2f0d018b4f4091e5fd1ff7829d971aa059d21269a77bd0698b04e87e7d298edb
-//   14 7df37bea01832d1801a3f6b77f7a0dc0b8c34836f5c83feed4a1727aebb9959e
-//   15 ee1013ed93223ca477f9ce201f3b2d251ed11ae72a8c2079982b64c94da78956
-//   16 8c449e3e73422222ff92f1a8b9bbf26d6ac993d6918f23a22bc9f609019fe7ae
-//   17 ca6e468b5f2fb695a9bd0ed001744208d9799a75d743d233b38fe3589a60586a
-//   18 206907bf8e7bdcebf979d1ab53b57573e107ef301e8c315b1ef4a4c110a3a49a
-//   19 140c15a09e90891c77a594c5f52b0cb91c08acc0c47dae77828e1c475404e7c4
-//   20 4ac13121c6cdfd00934a20ab6b55b400208b660511697f6efe35e1d818e4e796
-//   21 5fac8bd96a8653c63108c3e88c22b453605b53c886074f58e131924abb45d5a6
-//   22 cbde4541bcc29a63de7934d9ff51e1bf16ae4d9515af9833ae41ea359c81d60d
-//   23 0efed55d0d4086434d88eb78fb9faded88272794bb1d61fc316be3f8dc00b566
-//   24 120f957cd94ef7aa727538ea838570494bac55bd6d0851aaff4e507c857094d5
-//   25 13c2ab764c507c613ea142d459dd1999739f2e4efa3ad47b2a711f2466ab04e9
-//   26 e5d7f0f08c9dec2b603379809db3163fe7052515838601f0bcc50e731b75bf63
-//   27 102f1ede895ed77ebce2972b65fd231d218b76b2f29ae91b7fdcf437a48b054e
-//   28 b520898b02430fe7d3989dc0cd3bdf24458510dcd5827611c1190df06b342906
-//   29 609c8d0f45472415543c38a2cc1798bbfd7fe22ae0861039e872fb86da1da0b3
-//   30 154ec1a90c1e6fbf16cef7e7e6fbc5f4168011f1cee84bb0b9909f95c1a9137e
-//   31 fe852321114d44263c7f65f042c590705c3cf4eb6b689d83461e03ebe324c2e0
-//   32 9a64955755653b6de1d4facb7c7d0726b95a5594603023726fa630b778cec89a
-//   33 874bd21498da23d4b70471c124f8fa33a2d07fd9a09432a6cd0359dee8f80dd4
+//   00 be18f9846847a72ab3a6b28f56cbdc9f0d83c7f3b33cfbdcf095e5655aed666b
+//   01 1c48ba582aa280ffbc48f2f1d4ff8e72f0b1cb136866920d204217350dbbbb8d
+//   02 0a4719bb7083d8448b604f8c0f6e38ff10802e7949c1b0438b59c5f63da86393
+//   03 bf6ed068a4ce1b95e21044b1bcd0bd1e193c472461f0d2ab537c4f85835fb986
+//   04 c85d229a6661878951ebb80d028f6f96cb747534bf50d147651d5b6a8510795b
+//   05 7779a259b759a882dfed1fe0ecbbcc4ec2cb0f4e6561153cf15977da058a8b4a
+//   06 569df373c371788a16f8e0155c9aeab987a2264a9e4af261faf9f49218418d63
+//   07 5491de4be2d5a3ded15c5341f90f2b1dafd7405938f3ff0765af81f4a108c947
+//   08 37bdf10ac873d1e9abc39846f8b62716b77b166a26b3b1d0b2288fcd1bcae795
+//   09 89a1478cee0c0931666590a2bd2213ced05ddfddcec4a32fca3ed1a3f58e4eb5
+//   10 89523e72e7ecb6f529a6546fe00abb0a3def5743c17a983fd4ecc51077e56245
+//   11 df1b8665bacd0434a7d867a966d5beb9b70384f2031dabd847a53ce41f5cc595
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -95,23 +97,25 @@ const toRun = (raw: RawStep[]): Step[] => {
 
 export const bchGroth16Bls12381IntratxResidue: Implementation = {
   id: 'bch-groth16-bls12381-intratx-residue',
-  name: 'BCH BLS12-381 Groth16 intra-tx quotient-torus residue (34-input BCH-valid verifier)',
+  name: 'BCH BLS12-381 Groth16 fixed-VK quotient-torus (12-input standard one-tx verifier)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
-    'BCH-native CashScript: one runtime-proof BLS12-381 verifier linked across 34 inputs of one ' +
-    'transaction. Five shared-table GLV vk_x inputs feed 29 c^-|x|-fused prepared-Miller inputs; ' +
-    'the first and last Miller inputs fuse canonical point, curve, and G2 subgroup validation, ' +
-    'and e(alpha,beta) is precomputed. A canonical six-limb u represents [c]=[1+u*W] in ' +
-    'Fp12*/Fp6*, where gcd(p+|x|,p^6+1)=r makes the lambda-power image exactly the pairing ' +
-    'kernel. Constant root folds use two Fp6 products, and the final Miller input checks ' +
-    '[fF]=[frob(c,1)] with a nonzero projective representative, eliminating the separate tail. ' +
-    'OP_INPUTBYTECODE directly binds every state, the root, and both stage seams. One fixed ' +
-    'P2SH32 script set verifies any proof for the VK at runtime. Every input fits current BCH ' +
-    'script and op-cost limits; the 195,705-byte transaction is consensus-valid but non-standard ' +
-    'only by total size. The dense valid fixture exercises all 128 GLV Straus add positions.',
+    'BCH-native CashScript fixed-key verifier in one 12-input transaction. Bilinearity collapses ' +
+    'the four-pair equation to e(-A,B)*e(D,G2.BASE)=1, where D=5*alpha+7*vk_x+11*C. Two ' +
+    'width-six fixed-base-comb inputs assemble D, and ten affine two-pair Miller inputs finish a ' +
+    'quotient-torus residue verdict. Exact state and carrier lengths bind the 6,048-byte hash-pinned ' +
+    'comb table. The proof supplies the invertible transformed point 11*C+5*alpha+7*IC0. Every ' +
+    'script requires its exact input position and the exact transaction input ' +
+    'count; input 0 transitively SHA-256-pins every successor P2SH32 program while ' +
+    'OP_INPUTBYTECODE binds each state handoff. Canonical field, curve, identity, and G2 subgroup ' +
+    'gates cover the runtime proof domain. One locking graph accepts all canonical satisfying proofs ' +
+    'for this VK. The primary funded spend is 97,571 bytes at an exact 1 sat/byte fee and passes ' +
+    'both current-BCH consensus and default relay policy. A source-pinned proof-independent resource ' +
+    'certificate bounds all canonical inputs to 98,570 bytes and every standard input to 7,369,952 ' +
+    'op-cost.',
   load: async () => ({
     valid: toRun(v.steps),
     extraValidProofs: (v.extraValidProofs ?? []).map(toRun),
