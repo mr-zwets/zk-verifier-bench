@@ -117,19 +117,71 @@ const mint = () => {
   return { inputs: [in0, in1], A, B, C };
 };
 
-// WORST-CASE minter: dense public inputs (all of bits 0..252 set = 2^253-1, < r) so
-// the chunked vk_x MSM does a double+add at (nearly) every one of the 254 scalar
-// positions — the magnitude-independent worst case the chunk windows are sized for.
-// Still a VALID proof (C solved in the exponent, same as mint()), so it rides the
-// SAME lockings; only the op-cost differs (~5-6× the small-input proofs). This is the
-// proof the chunked covenants' benchmarks.worstCase is measured against.
+// The legacy scalar-density fixture keeps all bits 0..252 set for the original/Shamir
+// scalar loops. The grouped GLV fixtures below instead carry their exact four bounded
+// witnesses in [k10,k20,k11,k21] order, so their public inputs can be checked against
+// the BN254 endomorphism eigenvalue before source-contract generation.
 const WORST_INPUT = (1n << 253n) - 1n; // largest contiguous-low-bits value < r
-const mintWorst = () => {
-  const in0 = WORST_INPUT, in1 = WORST_INPUT;
+const GLV_LAMBDA = 4407920970296243842393367215006156084916469457145843978461n;
+const GLV_BOUND = 1n << 128n;
+const GLV_DENSE_SCALAR = GLV_BOUND - 1n;
+const GLV_DENSITY_SCALARS = [
+  GLV_DENSE_SCALAR, GLV_DENSE_SCALAR, GLV_DENSE_SCALAR, GLV_DENSE_SCALAR,
+];
+const GLV_DENSITY_INPUTS = [
+  modr(GLV_DENSITY_SCALARS[0] + GLV_DENSITY_SCALARS[1] * GLV_LAMBDA),
+  modr(GLV_DENSITY_SCALARS[2] + GLV_DENSITY_SCALARS[3] * GLV_LAMBDA),
+];
+const GLV_RESOURCE_SCALARS = [GLV_DENSE_SCALAR, 0n, 1n, 0n];
+const GLV_RESOURCE_INPUTS = [GLV_DENSE_SCALAR, 1n];
+
+[
+  { label: 'GLV density', inputs: GLV_DENSITY_INPUTS, scalars: GLV_DENSITY_SCALARS },
+  { label: 'GLV resource', inputs: GLV_RESOURCE_INPUTS, scalars: GLV_RESOURCE_SCALARS },
+].forEach(({ label, inputs, scalars }) => {
+  scalars.forEach((scalar, index) => {
+    if (scalar < 0n || scalar >= GLV_BOUND) {
+      throw new Error(`${label} scalar ${index} is outside [0, 2^128)`);
+    }
+  });
+  const reconstructed = [
+    modr(scalars[0] + scalars[1] * GLV_LAMBDA),
+    modr(scalars[2] + scalars[3] * GLV_LAMBDA),
+  ];
+  if (reconstructed[0] !== inputs[0] || reconstructed[1] !== inputs[1]) {
+    throw new Error(`${label} GLV witnesses do not reconstruct the public inputs`);
+  }
+});
+
+const mintFixture = (label, inputs) => {
+  const [in0, in1] = inputs;
   const a_s = randScalar(), b_s = randScalar();
   const vkx_s = modr(ic_s[0] + in0 * ic_s[1] + in1 * ic_s[2]);
   const c_s = modr((a_s * b_s - alpha_s * beta_s - vkx_s * gamma_s) * invr(delta_s));
-  return { inputs: [in0, in1], A: G1(a_s), B: G2(b_s), C: G1(c_s) };
+  const candidate = { inputs: [in0, in1], A: G1(a_s), B: G2(b_s), C: G1(c_s) };
+  const tampered = [candidate.inputs[0], modr(candidate.inputs[1] + 1n)];
+  if (!nobleVerify(candidate.A, candidate.B, candidate.C, candidate.inputs)) {
+    throw new Error(`${label} proof fails noble verify`);
+  }
+  if (nobleVerify(candidate.A, candidate.B, candidate.C, tampered)) {
+    throw new Error(`${label} tamper unexpectedly verifies`);
+  }
+  const unlocking = unlockingFor(proofArgs(
+    candidate.A, candidate.B, candidate.C, candidate.inputs,
+  ));
+  const invalidUnlocking = unlockingFor(proofArgs(
+    candidate.A, candidate.B, candidate.C, tampered,
+  ));
+  const good = evalPair(looseVm, locking, unlocking);
+  const bad = evalPair(looseVm, locking, invalidUnlocking);
+  if (!good.accepted) throw new Error(`${label} proof REJECTED by committed locking: ${good.error}`);
+  if (bad.accepted) throw new Error(`${label} tamper ACCEPTED by committed locking`);
+  console.log(`  ${label}: VM accept=${good.accepted} reject-tamper=${!bad.accepted} op-cost=${good.operationCost.toLocaleString()} inputs=(${candidate.inputs.join(',')})`);
+  return {
+    publicInputs: candidate.inputs.map(String),
+    unlocking: binToHex(unlocking),
+    invalidUnlocking: binToHex(invalidUnlocking),
+  };
 };
 
 // proof #0 is the COMMITTED instance (already in groth16-singleton-vectors.json);
@@ -166,24 +218,23 @@ for (let k = 0; k < EXTRA; k++) {
   });
 }
 
-// --- the worst-case proof: dense inputs, same VK, same locking ---
+// --- named density/resource proofs: same VK and locking ---
 console.log('=== minting the WORST-CASE proof (dense public inputs = 2^253-1) ===');
-const wc = mintWorst();
-const wcTampered = [wc.inputs[0], modr(wc.inputs[1] + 1n)];
-if (!nobleVerify(wc.A, wc.B, wc.C, wc.inputs)) throw new Error('worst-case proof fails noble verify');
-if (nobleVerify(wc.A, wc.B, wc.C, wcTampered)) throw new Error('worst-case tamper unexpectedly verifies');
-const wcUnlocking = unlockingFor(proofArgs(wc.A, wc.B, wc.C, wc.inputs));
-const wcInvalidUnlocking = unlockingFor(proofArgs(wc.A, wc.B, wc.C, wcTampered));
-const wcGood = evalPair(looseVm, locking, wcUnlocking);
-const wcBad = evalPair(looseVm, locking, wcInvalidUnlocking);
-if (!wcGood.accepted) throw new Error(`worst-case proof REJECTED by committed locking: ${wcGood.error}`);
-if (wcBad.accepted) throw new Error('worst-case tamper ACCEPTED by committed locking');
-console.log(`  worst-case: VM accept=${wcGood.accepted} reject-tamper=${!wcBad.accepted} op-cost=${wcGood.operationCost.toLocaleString()} inputs=(2^253-1, 2^253-1)`);
 const worstCaseProof = {
-  publicInputs: wc.inputs.map(String),
-  unlocking: binToHex(wcUnlocking),
-  invalidUnlocking: binToHex(wcInvalidUnlocking),
+  ...mintFixture('worst-case', [WORST_INPUT, WORST_INPUT]),
   worstCase: true,
+};
+
+console.log('=== minting the GLV-DENSITY proof (all four GLV witnesses = 2^128-1) ===');
+const glvDensityProof = {
+  ...mintFixture('GLV density', GLV_DENSITY_INPUTS),
+  glvScalars: GLV_DENSITY_SCALARS.map(String),
+};
+
+console.log('=== minting the GLV-RESOURCE proof (GLV witnesses = 2^128-1,0,1,0) ===');
+const glvResourceProof = {
+  ...mintFixture('GLV resource', GLV_RESOURCE_INPUTS),
+  glvScalars: GLV_RESOURCE_SCALARS.map(String),
 };
 
 const out = {
@@ -192,7 +243,8 @@ const out = {
     `${proofs.length} DISTINCT valid Groth16 proofs that all verify under ONE fixed locking (VK baked). ` +
     'Proof #0 is the committed instance; the rest are minted under the same VK (fresh public inputs + A,B, ' +
     'C solved in the exponent). Demonstrates the singleton verifier is RUNTIME-GENERAL: the program is not ' +
-    'specialized to a single proof. Each invalidUnlocking tampers public input[1] (+1) and must be rejected.',
+    'specialized to a single proof. Each invalidUnlocking tampers public input[1] (+1) and must be rejected. ' +
+    'Named GLV fixtures include their exact bounded witnesses for source-side reconstruction checks.',
   lockingOK: single.lockingOK,
   lockingBytes: single.lockingBytes,
   numProofs: proofs.length,
@@ -200,6 +252,10 @@ const out = {
   // dense-input proof for the chunked covenants' worst-case op-cost benchmark (the
   // chunk windows are sized for it). Same VK/locking; consumed by chunked build_vectors.
   worstCaseProof,
+  // All four bounded GLV scalars have every usable bit set.
+  glvDensityProof,
+  // Full-valid asymmetric resource fixture; the universal ceiling is certified separately.
+  glvResourceProof,
 };
 const outPath = 'src/bch/groth16-singleton-multiproof-vectors.json';
 writeFileSync(outPath, JSON.stringify(out, null, 2));
