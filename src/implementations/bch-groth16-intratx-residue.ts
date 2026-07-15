@@ -1,28 +1,44 @@
-// BCH-native Groth16 verifier — INTRA-TRANSACTION LINKED + RESIDUE, the whole computation
-// in ONE transaction. This is the residue-optimized counterpart of bch-groth16-intratx:
-// same single-tx forward-checking mechanism (each chunk is an INPUT whose witness carries
-// its incoming state as a raw byte blob, and it require()s the next input's blob — read via
-// tx.inputs[idx+1].unlockingBytecode, OP_INPUTBYTECODE — equals its recomputed output), but
-// it runs the residue-optimized chunk graph instead of the plain one:
+// BCH-native BN254 Groth16 verifier in one intra-transaction-linked transaction:
 //
-//   fast-G2 endo subgroup check (ePrint 2022/348)            3 chunks
-//   GLV vk_x MSM (4-scalar ~128-bit Straus)                  3 chunks
-//   c^-(6x+2)-FUSED Miller + terminal residue verdict        20 chunks  (skips pair 1)
-//                                                            ---------
-//                                                            26 inputs  (plain intratx: 42)
+//   GLV vk_x MSM                                            3 inputs
+//   c^-(6x+2)-fused Miller + quotient residue verdict      10 inputs
+//                                                          ---------
+//                                                          13 inputs
 //
-// The residue witness (c, cInv) threads through every fused-Miller chunk. Its terminal chunk
-// checks c*cInv==ONE, c canonical, exact w membership in {1,w27,w27^2}, and the residue
-// equation fF*(w*c^q2) == (c*c^q2)^q. It uses the same chunk math as
-// bch-groth16-grouped-residue, laid out as the inputs of one non-standard (<1 MB)
-// transaction rather than token-threaded standard transactions. The three GLV chunks read one
-// hash-bound fixed lookup table carried by the final GLV input rather than embedding three copies.
+// Every input forward-checks the next input's raw state with OP_INPUTBYTECODE. Miller genesis
+// validates canonical A/B/C, checks the curves, derives the normalized G1 line coordinates, and
+// binds the GLV result. Runtime B is affine; its post-loop endomorphism equation is an exact G2
+// subgroup check. The fixed e(alpha,beta) Miller value is precomputed.
 //
-// Result: ~225 KB / ~180M op over 26 inputs (vs ~329 KB / ~262M over 42 for plain intratx),
-// each input fitting one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B).
+// The Miller accumulator lives in Q=Fp12*/Fp6*. A six-limb canonical u represents
+// [c]=[1+u*W], where W is the Fp12/Fp6 tower basis; [c^-1]=[1-u*W]. Q has order p^6+1,
+// gcd(lambda,p^6+1)=r for lambda=6x+2+p-p^2+p^3, and the lambda-power image is exactly the
+// final-exponent kernel. The terminal input therefore accepts precisely when
+// [f*c^(p^2)]=[c^p*c^(p^3)], with [0:0] explicitly rejected. The older residue-coset correction
+// lies in Fp6 and disappears in Q. A fixed r-torsion kernel shift makes every valid root finite
+// without changing its lambda power.
 //
-// Vectors: groth16_contract/chunked/intratx/build_vectors_residue.mjs ->
-// src/bch/groth16-intratx-residue-vectors.json.
+// The committed fixture is 99,993 serialized bytes / 78,422,361 op and passes both whole BCH
+// 2026 consensus and standard-policy VMs. The second valid proof is 99,675 bytes and also
+// standard. The deliberately dense worst-case fixture is 117,563 bytes: consensus-valid, but
+// non-standard by transaction-size policy. Generated with cashc commit
+// 1c707c1dbf87396b30ba5e0704b1db44475ce893; regenerate from matched source/bench checkouts with:
+//   VERIFIER_DIR=/path/to/zk-verifier-bench pnpm vectors:intratx:torus
+//
+// sha256 of locking bytecode, in input order:
+//   00 7be53af85dd402078d76af115500284b8b6b5dbe4a4ace1cbc02b03f5cd463a8
+//   01 5a92c26a39b26d682bc6af1cd05227eb8e966f55fb8ffdb240cf34297b8e03ca
+//   02 d29c2435a6f84f672b4ea2532abf3fdc49f3e75d87c8b80e903cce1a9135c021
+//   03 b6b01b69c5ed729b3fd170831fad8a9263dbfac818fc8a89020ab165701131a5
+//   04 9a7eec44dbb8eab3ea82c50573a38dcf2739c0b6f0303ca26fb193fa248dad05
+//   05 13018eea4d0afcb3f8b0c5a36a55989e97c8bce543a68d5b84ed090b7c862d35
+//   06 c2a96ed9742ad23c866a1abc6397e48d630ad7b50abc76fecd80c6de08e88d6b
+//   07 f4c86dd86bc79c5e90d0c3a0ab3368f6e0a0dc730bee91675bb742a0b28487b1
+//   08 dc2e83b36af95428ae948072b991bbcc0ddaebdd4c594444e03da132578d7bc6
+//   09 9f41b794e71dccfe9fc09b66ec816bbc44c3ed4b180cb1594b4c5727206df52e
+//   10 c807054b6d30c1965fa5f6f8d83ba953f6cbd302c6747aa34d5e0f84c1558c7a
+//   11 eab2f927b5a555de99f480c4527749630ad6e46fa0e1edb8d9800504749d7cae
+//   12 efe013193488c58e179f3cc0720c0d6d5af40cfcd8c49ddabe741366c89e4beb
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -49,29 +65,21 @@ const toRun = (raw: RawStep[]): Step[] => {
 
 export const bchGroth16IntratxResidue: Implementation = {
   id: 'bch-groth16-intratx-residue',
-  name: 'BCH Groth16 intra-tx linked + residue (whole residue-optimized verifier in one transaction, BCH-compatible)',
+  name: 'BCH Groth16 intra-tx quotient-torus residue (13-input standard fixture)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
-    'BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier laid out as ' +
-    'the INPUTS of ONE transaction. Same forward-checking as bch-groth16-intratx (each input ' +
-    'carries its incoming state as a raw byte blob and binds the chain via ' +
-    'tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no ' +
-    'hashing, no 128-byte state limit), but it runs the residue chunk graph: canonical-coordinate fast-G2 endo ' +
-    'subgroup check (ePrint 2022/348, 3 chunks), GLV vk_x MSM (3 chunks), c^-(6x+2)-FUSED ' +
-    'batched Miller with e(alpha,beta) precomputed/skipped (20 chunks). Its terminal chunk ' +
-    'also checks the witnessed-residue verdict, for 26 inputs total (vs 42 for the plain ' +
-    'intra-tx build), ~225 KB / ~180M op. The three GLV chunks share one hash-bound fixed ' +
-    'lookup table carried by the final GLV input. The residue witness (c, cInv) threads through ' +
-    'every Miller chunk; the terminal checks c*cInv==ONE, c canonical, exact w membership ' +
-    'in {1,w27,w27^2}, and fF*(w*c^q2) == (c*c^q2)^q. ' +
-    'Every input fits one BCH input budget (op-cost <=8,032,800, scripts <=10,000 B); the ' +
-    'whole verifier is one non-standard (<1 MB) transaction. Same chunk math as ' +
-    'bch-groth16-grouped-residue; one fixed set of input scripts verifies any proof for the VK ' +
-    '(proof in the witness). Deployed as P2SH32 so each chunk\'s redeem rides in the scriptSig, ' +
-    'where it counts toward the op-cost budget and offsets the pad.',
+    'BCH-native CashScript: one runtime-proof BN254 verifier linked across 13 inputs of one ' +
+    'transaction. Three GLV vk_x inputs feed ten affine, unit-line Miller inputs; G2 subgroup ' +
+    'validation is fused into the Miller endpoint and e(alpha,beta) is precomputed. The six-limb ' +
+    'root u represents [c]=[1+u*W] in Fp12*/Fp6*, reducing each residue fold from three Fp6 ' +
+    'products to two. The terminal checks [f*c^(p^2)]=[c^p*c^(p^3)] with a nonzero projective ' +
+    'representative. OP_INPUTBYTECODE forward-binds every dynamic state and pins the canonical ' +
+    'root/proof context to Miller genesis. Each script fits current BCH limits. The committed ' +
+    'and second-proof transactions pass standard policy; the dense worst-case remains consensus ' +
+    'valid but exceeds standard transaction-size policy. Deployed as P2SH32.',
   load: async () => {
     const valid = toRun(v.steps);
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);
