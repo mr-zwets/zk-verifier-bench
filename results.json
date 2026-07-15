@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-15T14:32:15.321Z",
+  "generatedAt": "2026-07-15T15:31:41.767Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -33,10 +33,10 @@
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-intratx-general",
+      "id": "bch-groth16-intratx-residue",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 95201,
+      "bytes": 90949,
       "bchCompatible": true
     }
   },
@@ -598,6 +598,14 @@
       "score": 95201,
       "id": "bch-groth16-intratx-general",
       "steps": 13,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-15T15:31:41.767Z",
+      "score": 90949,
+      "id": "bch-groth16-intratx-residue",
+      "steps": 11,
       "transactions": 1,
       "fits": true
     }
@@ -2871,7 +2879,7 @@
     },
     {
       "id": "bch-groth16-intratx-residue",
-      "name": "BCH Groth16 intra-tx quotient-torus residue (13-input standard fixture)",
+      "name": "BCH Groth16 intra-tx quotient-torus residue (11-input standard fixture)",
       "category": "full",
       "official": false,
       "solver": null,
@@ -2883,46 +2891,46 @@
         "verdict": "pass",
         "validAccepted": true,
         "invalid": {
-          "tested": 23,
-          "rejected": 23
+          "tested": 34,
+          "rejected": 34
         },
         "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
-          "seamsTested": 12,
+          "seamsTested": 10,
           "unboundSeams": 0,
-          "detail": "every stage bound to one proof: 12 seams staple-tested with a 2nd distinct proof, all rejected"
+          "detail": "every stage bound to one proof: 10 seams staple-tested with a 2nd distinct proof, all rejected"
         },
         "failures": []
       },
-      "score": 100448,
+      "score": 90949,
       "size": {
-        "scriptBytes": 99869,
-        "txOverheadBytes": 579,
+        "scriptBytes": 90456,
+        "txOverheadBytes": 493,
         "transactions": 1,
-        "total": 100448
+        "total": 90949
       },
       "padding": {
-        "bytes": 8551,
-        "fraction": 0.08562216503619742
+        "bytes": 9247,
+        "fraction": 0.102226496860352
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 78422361,
-          "steps": 13,
-          "heaviestStepOpCost": 7981594,
+          "opCost": 70663907,
+          "steps": 11,
+          "heaviestStepOpCost": 7475846,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 92555028,
-          "steps": 13,
-          "heaviestStepOpCost": 7980716,
+          "opCost": 78524566,
+          "steps": 11,
+          "heaviestStepOpCost": 7478869,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 79957600,
+      "opCostBudget": 72417600,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2937,9 +2945,9 @@
       "generality": {
         "binding": "runtime",
         "runtimeGeneral": true,
-        "proofsTested": 2,
-        "proofsPassed": 2,
-        "detail": "runtime-general: one fixed locking verifies 2/2 distinct proofs (proof in the unlocking witness)"
+        "proofsTested": 12,
+        "proofsPassed": 12,
+        "detail": "runtime-general: one fixed locking verifies 12/12 distinct proofs (proof in the unlocking witness)"
       },
       "tokenSafety": null,
       "inputValidation": {
@@ -2952,7 +2960,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: one runtime-proof BN254 verifier linked across 13 inputs of one transaction. Three GLV vk_x inputs feed ten affine, unit-line Miller inputs; G2 subgroup validation is fused into the Miller endpoint and e(alpha,beta) is precomputed. The six-limb root u represents [c]=[1+u*W] in Fp12*/Fp6*, reducing each residue fold from three Fp6 products to two. The terminal checks [f*c^(p^2)]=[c^p*c^(p^3)] with a nonzero projective representative. OP_INPUTBYTECODE forward-binds every dynamic state and pins the canonical root/proof context to Miller genesis. Each script fits current BCH limits. The committed and second-proof transactions pass standard policy; the dense worst-case remains consensus valid but exceeds standard transaction-size policy. Deployed as P2SH32."
+      "source": "BCH-native CashScript: one runtime-proof BN254 verifier linked across 11 inputs of one transaction. Two grouped GLV vk_x inputs feed nine affine, unit-line Miller inputs. The GLV inputs enforce exact state-push lengths so both inputs consume the same hash-bound table. stage carries the IC1/IC2 MSM projectively into Miller genesis, while e(IC0,gamma) and e(alpha,beta) are folded into the fixed Miller factor. G2 subgroup validation is fused into the Miller endpoint. Proof A and C use canonical normalized (u,v) coordinates, where (0,0) is the identity. An identity B is represented by fixed G2.BASE and a zero first pairing multiplier, preserving the neutral pairing factor without an affine-infinity encoding. The six-limb root u represents [c]=[1+u*W] in Fp12*/Fp6*, reducing each residue fold from three Fp6 products to two. The terminal checks [f*c^(p^2)]=[c^p*c^(p^3)] with a nonzero projective representative. OP_INPUTBYTECODE forward-binds every dynamic state and pins the canonical root/proof context to Miller genesis. Executable certificates cover the projective handoff and universal nonzero-Y invariant; generated fixtures cover every combination of identity A, B, and C. Each script and complete fixture transaction is checked against current BCH consensus and standard relay policy. Deployed as P2SH32."
     },
     {
       "id": "bch-groth16-intratx-residue-large",
@@ -3640,7 +3648,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: the residue-optimized full BLS12-381 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-bls12381-intratx-residue (each input carries its incoming state as a raw 48-byte-limb blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, arbitrary intermediate size) and the same residue chunk graph (GLV vk_x MSM, c^-|x|-FUSED batched Miller with e(alpha,beta) baked and the G2 on-curve+prime-order-subgroup validation fused into the first/last Miller chunks, witnessed-residue mu_27A final-exp TAIL), but each chunk fills a 100 kB input instead of 10 kB, collapsing the verifier from 39 inputs to 5 (GLV vk_x 1, fused Miller 3, residue walk+finalize tail 1), 270,769 B / 250,833,313 op. Versus the prior vector, the GLV step saves 53 bytes / 5,483 op while the canonical-coordinate gate adds 10 bytes / 7,364 op: net -43 bytes / +1,881 op. The arithmetic is unchanged; fewer state boundaries also remove repeated checks and padding. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, mu_27A membership on w); the verdict is fF*w==frob(c,1). Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget. The supplied worst-case run uses the same deterministic valid all-position stress proof as the current-BCH builds and is executed separately against these five bch-spec lockings."
+      "source": "INTRA-TRANSACTION LINKED + QUOTIENT-TORUS RESIDUE full BLS12-381 Groth16 verifier targeting the proposed 100 kB-script VM. Its 3-input graph uses one stage-bound GLV vk_x input followed by c^-|x|-fused prepared Miller inputs; the final Miller input executes the quotient verdict. A canonical six-limb u represents the finite class [c]=[1+u*W] in Fp12*/Fp6*, so the legacy c/cInv/w handoff and separate final-exp tail disappear. The terminal checks [fF]=[frob(c,1)] by projective cross-product and rejects [0:0]. OP_INPUTBYTECODE binds handoffs without hashing. Every input fits the proposed per-input budget and 100,000-byte script cap, but this one-transaction benchmark is not valid under current BCH 10,000-byte script limits. Deployed P2SH32."
     },
     {
       "id": "bch-groth16-bls12381-grouped",
