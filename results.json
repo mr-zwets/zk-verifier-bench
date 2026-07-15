@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-15T09:22:08.362Z",
+  "generatedAt": "2026-07-15T12:25:38.389Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -949,7 +949,7 @@
     },
     {
       "id": "bch-groth16-singleton-minop",
-      "name": "BCH Groth16 verifier singleton — op-optimized (lazy tower + residue + fast-G2 + GLV)",
+      "name": "BCH Groth16 verifier singleton — op-optimized (lazy tower + quotient torus + fused G2 + affine GLV)",
       "category": "full",
       "official": false,
       "solver": null,
@@ -974,12 +974,12 @@
         },
         "failures": []
       },
-      "score": 67248,
+      "score": 58919,
       "size": {
-        "scriptBytes": 67161,
+        "scriptBytes": 58832,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 67248
+        "total": 58919
       },
       "padding": {
         "bytes": 0,
@@ -987,20 +987,20 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 179637190,
+          "opCost": 74243892,
           "steps": 1,
-          "heaviestStepOpCost": 179637190,
-          "inputsForHeaviestStep": 23
+          "heaviestStepOpCost": 74243892,
+          "inputsForHeaviestStep": 10
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 194605849,
+          "opCost": 88148099,
           "steps": 1,
-          "heaviestStepOpCost": 194605849,
-          "inputsForHeaviestStep": 25
+          "heaviestStepOpCost": 88148099,
+          "inputsForHeaviestStep": 11
         }
       },
-      "opCostBudget": 1032000,
+      "opCostBudget": 5990400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1009,7 +1009,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~23× one input's op-cost budget",
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~10× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -1033,7 +1033,7 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract, op-optimized. Lazy field tower for the Miller loop (deferred reductions); witnessed-residue final exponentiation (ePrint 2024/640) replacing the hard part; e(alpha,beta) baked (3 runtime Miller loops); fast-endo 63-bit G2 subgroup check (ePrint 2022/348); GLV 4-scalar vk_x. All extra inputs (c,cInv,w; zinv; GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bn254. Single-tx like bch-groth16-singleton but ~53% less op-cost. Still over the 10,000 B / per-input op limits."
+      "source": "BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract, op-optimized. Lazy field tower; quotient-torus residue check in Fp12*/Fp6* (six-limb canonical root, c-fold riding the Miller loop, terminal [f*c^(p^2)]=[c^p*c^(p^3)] with [0:0] rejection); e(alpha,beta) baked so only (-A,B) runs on-chain G2 arithmetic; affine runtime B with witnessed slopes and the exact G2 subgroup check fused into the Miller endpoint; affine witnessed-slope GLV 4-scalar vk_x. All witnesses (u, slopes, inverses, k-decomposition) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain). Verified vs @noble/curves bn254. Single-tx like bch-groth16-singleton but ~92% less op-cost — below the 13-input chunked torus total. Still over the 10,000 B / per-input op limits."
     },
     {
       "id": "bch-groth16-bls12381-singleton",
@@ -2956,7 +2956,7 @@
     },
     {
       "id": "bch-groth16-intratx-residue-large",
-      "name": "BCH Groth16 intra-tx linked + residue, LARGE 100 kB scripts (whole verifier in 4 inputs of one transaction, PROPOSED bch-spec)",
+      "name": "BCH Groth16 intra-tx quotient-torus residue, LARGE 100 kB scripts (whole verifier in 2 inputs of one transaction, PROPOSED bch-spec)",
       "category": "spec",
       "official": false,
       "solver": null,
@@ -2968,46 +2968,46 @@
         "verdict": "pass",
         "validAccepted": true,
         "invalid": {
-          "tested": 6,
-          "rejected": 6
+          "tested": 15,
+          "rejected": 15
         },
         "worstCaseAccepted": true,
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
-          "seamsTested": 3,
+          "seamsTested": 1,
           "unboundSeams": 0,
-          "detail": "every stage bound to one proof: 3 seams staple-tested with a 2nd distinct proof, all rejected"
+          "detail": "every stage bound to one proof: 1 seams staple-tested with a 2nd distinct proof, all rejected"
         },
         "failures": []
       },
-      "score": 187712,
+      "score": 82291,
       "size": {
-        "scriptBytes": 187516,
-        "txOverheadBytes": 196,
+        "scriptBytes": 82183,
+        "txOverheadBytes": 108,
         "transactions": 1,
-        "total": 187712
+        "total": 82291
       },
       "padding": {
-        "bytes": 121310,
-        "fraction": 0.646931461848589
+        "bytes": 30994,
+        "fraction": 0.3771339571444216
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 177175466,
-          "steps": 4,
-          "heaviestStepOpCost": 85939711,
+          "opCost": 76999337,
+          "steps": 2,
+          "heaviestStepOpCost": 71777696,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 191169063,
-          "steps": 4,
-          "heaviestStepOpCost": 85944745,
+          "opCost": 91026410,
+          "steps": 2,
+          "heaviestStepOpCost": 71779223,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 181900800,
+      "opCostBudget": 81690400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3015,8 +3015,8 @@
         "blockers": [],
         "detail": "every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH",
         "standard": {
-          "fits": false,
-          "detail": "tx 187,572 B > 100,000 B standard size"
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
         }
       },
       "generality": {
@@ -3029,15 +3029,15 @@
       "tokenSafety": null,
       "inputValidation": {
         "enforced": true,
-        "tested": 3,
-        "rejected": 3,
-        "detail": "on-curve + G2-subgroup checks enforced: 3/3 adversarial points (off-curve / off-subgroup) rejected at an isolated check"
+        "tested": 7,
+        "rejected": 7,
+        "detail": "on-curve + G2-subgroup checks enforced: 7/7 adversarial points (off-curve / off-subgroup) rejected at an isolated check"
       },
       "packaging": {
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-intratx-residue (each input carries its incoming state as a raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection — no NFT-commitment hand-off, no hashing, no 128-byte state limit) and the same residue chunk graph (canonical-coordinate fast-G2 endo subgroup check, GLV vk_x MSM, c^-(6x+2)-FUSED batched Miller with e(alpha,beta) precomputed/skipped, witnessed-residue final-exp TAIL), but each chunk fills a 100 kB input instead of 10 kB, collapsing the verifier from 26 inputs to 4 (g2check 1, GLV vk_x 1, fused Miller 2 with the residue final-exp verdict folded into the last one), ~188 kB / ~177M op. Op-cost and bytes are conserved; this is a structural simplification (fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, c canonical, w in {1,w27,w27^2}); the verdict is fF*w*c^q2 == c^q*c^q3. Every input fits one bch-spec input budget (op-cost <= 88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. NOT valid on current BCH (BCH_2026, which caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget."
+      "source": "BCH-native CashScript: the quotient-torus BN254 Groth16 verifier laid out as the INPUTS of ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as bch-groth16-intratx-residue (each input carries its incoming state as a raw byte blob and binds the chain via tx.inputs[idx+1].unlockingBytecode introspection) and the same quotient-torus graph (GLV vk_x MSM, c^-(6x+2)-fused Miller in Fp12*/Fp6* with e(alpha,beta) precomputed, endpoint-fused exact G2 subgroup check, terminal cross-multiplied [f*c^(p^2)]=[c^p*c^(p^3)] with projective-zero rejection), re-planned at the 100 kB budget into 2 inputs (GLV vk_x 1, unrolled fused Miller + verdict 1): 82,183 B / 77.0M op, below the current-BCH 13-input frontier on every axis. Each input fits its own bch-spec budget; NOT valid on current BCH (BCH_2026 caps scripts at 10,000 B) — it requires the bch-spec upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts toward the op-cost budget."
     },
     {
       "id": "bch-groth16-intratx-general",
