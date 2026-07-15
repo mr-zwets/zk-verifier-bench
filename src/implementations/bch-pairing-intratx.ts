@@ -1,8 +1,8 @@
 // BCH-native Groth16 PAIRING (Miller boundary) — INTRA-TRANSACTION LINKED. The
-// batched 4-pair optimal-ate Miller loop to the pre-final-exponentiation boundary
+// prepared batched optimal-ate calculation to the pre-final-exponentiation boundary
 //   e(-A,B) * e(alpha,beta) * e(vk_x,gamma) * e(C,delta)   (an Fp12)
-// computed as the INPUTS of ONE transaction. Each Miller chunk takes its incoming
-// (f in Fp12 + the 4 running G2 points + the pair points) as a raw byte blob, and
+// computed as the 20 INPUTS of ONE transaction. Each Miller chunk takes its incoming
+// (f in Fp12 + runtime R0 + the runtime pair points) as a raw byte blob, and
 // forward-checks its successor by reading tx.inputs[idx+1].unlockingBytecode
 // (OP_INPUTBYTECODE) and require()-ing it equals the recomputed outgoing blob — no
 // NFT-commitment hand-off, no hashing. Single-transaction counterpart of the multi-tx
@@ -40,8 +40,10 @@ export const bchPairingIntratx: Implementation = {
   proofBinding: 'runtime',
   source:
     'BCH-native CashScript: the BN254 Groth16 Miller boundary computed as the INPUTS of ' +
-    'ONE transaction. Each batched-Miller chunk carries its incoming state (f in Fp12 + ' +
-    '4 running G2 points + pair points) as a raw byte blob and binds the chain by ' +
+    'ONE transaction. A prepared batched loop shares each fp12Sqr across the three ' +
+    'runtime-dependent pairs; fixed e(alpha,beta) is omitted and its precomputed raw ' +
+    'Miller value is multiplied once at the end. Each chunk carries f, the runtime ' +
+    'e(-A,B) accumulator R0, and runtime points as a raw byte blob, binding the chain by ' +
     'forward-checking its successor via tx.inputs[idx+1].unlockingBytecode introspection ' +
     '(OP_INPUTBYTECODE) — no NFT commitment, no hashing, no 128-byte state limit. Every ' +
     'input fits one BCH budget (op-cost <=8,032,800, <=10,000 B); the whole boundary is ' +

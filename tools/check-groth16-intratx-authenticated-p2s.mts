@@ -1,7 +1,8 @@
 // Checker for src/bch/groth16-intratx-authenticated-p2s-vectors.json.
 //
 // Asserts STRUCTURE (byte totals are computed and printed, not hardcoded):
-//   - every run has the same step count as the primary run;
+//   - every valid run has the same step count as the primary run (invalid fixtures may
+//     intentionally isolate a shorter stage graph);
 //   - every locking is the 44-byte bare dispatcher
 //     76aa20<hash256(body)>8802e7038902e7038a;
 //   - every run's every stage body (final push of the unlocking) hashes to the
@@ -36,10 +37,10 @@ const vectors = JSON.parse(
 const stepCount = vectors.steps.length;
 
 const runs = [
-  { name: 'steps', steps: vectors.steps },
-  ...vectors.extraValidProofs.map((steps, i) => ({ name: `extraValidProofs[${i}]`, steps })),
-  { name: 'worstCaseProof', steps: vectors.worstCaseProof },
-  ...vectors.invalid.map((steps, i) => ({ name: `invalid[${i}]`, steps })),
+  { name: 'steps', steps: vectors.steps, fullLength: true },
+  ...vectors.extraValidProofs.map((steps, i) => ({ name: `extraValidProofs[${i}]`, steps, fullLength: true })),
+  { name: 'worstCaseProof', steps: vectors.worstCaseProof, fullLength: true },
+  ...vectors.invalid.map((steps, i) => ({ name: `invalid[${i}]`, steps, fullLength: false })),
 ];
 
 const bodyOf = (unlockingHex: string, where: string): Uint8Array => {
@@ -55,8 +56,9 @@ let unlockingBytes = 0;
 let maxUnlockingBytes = 0;
 
 for (const run of runs) {
-  if (run.steps.length !== stepCount)
+  if (run.fullLength && run.steps.length !== stepCount)
     throw new Error(`${run.name}: expected ${stepCount} steps, found ${run.steps.length}`);
+  if (run.steps.length === 0) throw new Error(`${run.name}: empty run`);
 
   run.steps.forEach((step, index) => {
     const where = `${run.name}[${index}]`;

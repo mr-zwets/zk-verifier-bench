@@ -115,9 +115,10 @@ const INPUT_FIXED = 36 /* outpoint */ + 4 /* sequence */;
 // already count (locking + unlocking are counted separately). Folded into the score so
 // the comparison is fair across structures: a single-tx verifier pays one tx's overhead,
 // a covenant chain pays it per step (its real recurring cost). Models:
-//   - covenant step  -> its own 1-in/1-out token tx; includes the CashToken output prefix
+//   - covenant step  -> its own token tx; includes the CashToken output prefix
 //     (category + NFT commitment carrying the threaded state); EXCLUDES the perpetuated
-//     output locking (that is the next step's locking, already counted).
+//     output locking (that is the next step's locking, already counted). A minting-genesis
+//     step also pays the complete second output that recreates its baton.
 //   - intra-tx step  -> all steps share ONE tx; the shared envelope + single OP_RETURN
 //     output are attributed to input 0, every input pays its outpoint/sequence/varint.
 //   - single-tx step -> one tx, one input, one standard (P2PKH, 25 B) output.
@@ -162,7 +163,14 @@ const stepTxOverhead = (step: Step): number => {
       1 /* PREFIX_TOKEN */ + step.covenant.category.length + 1 /* bitfield */ +
       varintLen(step.covenant.outCommitment.length) + step.covenant.outCommitment.length;
     const outputOv = 8 /* value */ + varintLen(prefix + step.covenant.outLockingBytecode.length) + prefix;
-    return TXN_ENVELOPE + varintLen(1) + varintLen(1) + inputOv + outputOv;
+    const batonPrefix = 1 /* PREFIX_TOKEN */ + step.covenant.category.length +
+      1 /* bitfield */ + varintLen(0) /* empty commitment */;
+    const batonOutputOv = step.covenant.secondOutputBaton
+      ? 8 /* value */ + varintLen(batonPrefix + step.lockingBytecode.length) +
+        batonPrefix + step.lockingBytecode.length
+      : 0;
+    const outputCount = step.covenant.secondOutputBaton ? 2 : 1;
+    return TXN_ENVELOPE + varintLen(1) + varintLen(outputCount) + inputOv + outputOv + batonOutputOv;
   }
   const p2pkh = 25;
   return TXN_ENVELOPE + varintLen(1) + varintLen(1) + inputOv + (8 + varintLen(p2pkh) + p2pkh);

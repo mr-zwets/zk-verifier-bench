@@ -17,9 +17,8 @@
 // tx.inputs[0].nftCommitment == hash256(inBlob)); the token thread chains the groups in order.
 //
 // The worst-case field contains the same deterministic valid all-position GLV stress proof as the
-// intra-tx build. It maximized total op-cost among 32 full proofs and a separate 256-proof audit of
-// the exact shared-table lockings retained at least 386,489 op-cost of input headroom. The result is
-// explicitly empirical rather than a claim of a formal global arithmetic maximum.
+// intra-tx build. It maximized total op-cost among 32 full proofs; this is empirical stress
+// coverage rather than a claim of a formal global arithmetic maximum.
 //
 // Vectors: groth16_contract/chunked/grouped/build_vectors_residue_bls.mjs ->
 // src/bch/groth16-bls12381-grouped-residue-vectors.json.
@@ -36,7 +35,7 @@ interface RawGroup {
   outLocking: string | null;
 }
 interface RawRun { steps: RawStep[]; groups: RawGroup[] }
-interface Vectors { category: string; valid: RawRun; extraValidProofs?: RawRun[]; worstCaseProof?: RawRun; invalid?: RawRun[] }
+interface Vectors { category: string; valid: RawRun; extraValidProofs?: RawRun[]; worstCaseProof?: RawRun; invalid?: RawRun[]; invalidInputs?: RawRun[] }
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-grouped-residue-vectors.json', 'utf8')) as Vectors;
 const CATEGORY = hexToBin(v.category);
@@ -67,7 +66,7 @@ const toRun = (run: RawRun): Step[] => {
 
 export const bchGroth16Bls12381GroupedResidue: Implementation = {
   id: 'bch-groth16-bls12381-grouped-residue',
-  name: 'BCH BLS12-381 Groth16 verifier, grouped + residue (41 chunks in 5 standard <100KB transactions: GLV vk_x, fused Miller, witnessed-residue tail; intra-tx forward-checks within each tx, CashToken hand-off across them)',
+  name: 'BCH BLS12-381 Groth16 verifier, grouped + residue (39 chunks in 5 standard <100KB transactions: GLV vk_x, fused Miller, witnessed-residue tail; intra-tx forward-checks within each tx, CashToken hand-off across them)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'multi-tx',
@@ -83,7 +82,7 @@ export const bchGroth16Bls12381GroupedResidue: Implementation = {
     'c^-|x|-FUSED prepared-VK batched Miller (e(alpha,beta) baked as a constant, (vk_x,gamma)/(C,delta) ' +
     'line coeffs baked, only e(-A,B) runs on-chain G2 arithmetic; c^-|x| folded into the shared f) -> ' +
     'witnessed-residue tail (the 23-chunk Hayashida-Scott hard part collapses to a ((w^|x|)*w)^9 ' +
-    'mu_(27A) witness-subgroup walk + the fF*w == frob(c,1) verdict, lambda = p + |x|). The 41 chunks ' +
+    'mu_(27A) witness-subgroup walk + the fF*w == frob(c,1) verdict, lambda = p + |x|). The 39 chunks ' +
     'are packed into ~5 STANDARD (<100,000 B) transactions: within each group tx the inputs ' +
     'forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across ' +
     'groups the running state rides a mutable CashToken NFT commitment (a group\'s last chunk commits ' +
@@ -93,13 +92,14 @@ export const bchGroth16Bls12381GroupedResidue: Implementation = {
     '-- relayable under default standard policy. 48-byte limbs; c,cInv thread through the fused Miller ' +
     'as constant witness; w is an uncommitted tail witness. One fixed set of lockings verifies any ' +
     'proof for the VK. Deployed P2SH32. The supplied worst-case run is a deterministic valid ' +
-    'all-position GLV stress proof selected from 32 full proofs; a separate 256-proof locking ' +
-    'audit retained at least 386,489 op-cost of input headroom.',
+    'all-position GLV stress proof selected from 32 full proofs; this is empirical stress ' +
+    'coverage rather than a formal global arithmetic maximum.',
   load: async () => {
     const valid = toRun(v.valid);
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);
     const worstCaseProof = v.worstCaseProof ? toRun(v.worstCaseProof) : undefined;
     const invalid = (v.invalid ?? []).map(toRun);
-    return { valid, extraValidProofs, worstCaseProof, invalid };
+    const invalidInputs = (v.invalidInputs ?? []).map(toRun);
+    return { valid, extraValidProofs, worstCaseProof, invalid, invalidInputs };
   },
 };

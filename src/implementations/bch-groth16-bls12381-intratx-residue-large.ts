@@ -6,8 +6,9 @@
 // final-exp tail), but each chunk is sized to a 100 kB unlocking instead of 10 kB.
 //
 // Why it needs bch-spec: current BCH (BCH_2026) caps every script at 10,000 B and grants an input
-// (41 + unlockingLen) * 800 op-cost, so ~257M op forces 41 inputs. The proposed bch-spec upgrade
-// raises the per-script cap to 100,000 B and the density-control base to 10,000, so an input gets
+// (41 + unlockingLen) * 800 op-cost; the current 256,954,915-op plan uses 39 inputs. The proposed
+// bch-spec upgrade raises the per-script cap to 100,000 B and the density-control base to 10,000,
+// so an input gets
 // (10000 + unlockingLen) * 800 = up to 88,000,000 op — ~11x. The SAME residue verifier therefore
 // collapses to ~one fat input per stage floor:
 //
@@ -17,9 +18,9 @@
 //                            --------
 //                            5 inputs   (one non-standard <1 MB transaction)
 //
-// ~272 kB / ~251M op over 5 inputs (vs ~337 kB / ~257M over 42 for the current-BCH residue build).
-// Op-cost and bytes are conserved — this is a STRUCTURAL simplification (fewer, fatter UTXOs in one
-// tx), not a resource reduction. Every input fits its own bch-spec budget (op-cost <= 88,000,000,
+// 270,769 B / 250,833,313 op over 5 inputs (vs 324,228 B / 256,954,915 op over 39 for the
+// current-BCH residue build). The arithmetic is unchanged; fewer state boundaries also remove
+// repeated checks and padding. Every input fits its own bch-spec budget (op-cost <= 88,000,000,
 // scripts <= 100,000 B); deployed as P2SH32 so each chunk redeem rides in the scriptSig where it
 // counts toward the op-cost budget. Graded against the real bch-spec VM (createVirtualMachineBchSpec).
 // Its worst-case field uses the same deterministic valid all-position stress proof as the 10 kB
@@ -33,7 +34,7 @@ import { hexToBin } from '@bitauth/libauth';
 import type { Implementation, Step } from '../harness/types.js';
 
 interface RawStep { label: string; locking: string; unlocking: string; checkpoint?: string }
-interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][] }
+interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][]; invalidInputs?: RawStep[][] }
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-intratx-residue-large-vectors.json', 'utf8')) as Vectors;
 
@@ -63,9 +64,11 @@ export const bchGroth16Bls12381IntratxResidueLarge: Implementation = {
     'same residue chunk graph (GLV vk_x MSM, c^-|x|-FUSED batched Miller with e(alpha,beta) baked ' +
     'and the G2 on-curve+prime-order-subgroup validation fused into the first/last Miller chunks, ' +
     'witnessed-residue mu_27A final-exp TAIL), but each chunk fills a 100 kB input instead of ' +
-    '10 kB, collapsing the verifier from 41 inputs to 5 (GLV vk_x 1, fused Miller 3, residue ' +
-    'walk+finalize tail 1), ~272 kB / ~251M op. Op-cost and bytes are conserved; this is a structural simplification ' +
-    '(fewer, fatter UTXOs) rather than a resource reduction. The residue witness (c, cInv) threads ' +
+    '10 kB, collapsing the verifier from 39 inputs to 5 (GLV vk_x 1, fused Miller 3, residue ' +
+    'walk+finalize tail 1), 270,769 B / 250,833,313 op. Versus the prior vector, the GLV step ' +
+    'saves 53 bytes / 5,483 op while the canonical-coordinate gate adds 10 bytes / 7,364 op: ' +
+    'net -43 bytes / +1,881 op. The arithmetic is unchanged; fewer state ' +
+    'boundaries also remove repeated checks and padding. The residue witness (c, cInv) threads ' +
     'through every fused-Miller chunk and is re-checked in the tail (c*cInv==ONE, mu_27A membership ' +
     'on w); the verdict is fF*w==frob(c,1). Every input fits one bch-spec input budget (op-cost <= ' +
     '88,000,000, scripts <= 100,000 B); the whole verifier is one non-standard (<1 MB) transaction. ' +
@@ -79,5 +82,6 @@ export const bchGroth16Bls12381IntratxResidueLarge: Implementation = {
     extraValidProofs: (v.extraValidProofs ?? []).map(toRun),
     worstCaseProof: v.worstCaseProof ? toRun(v.worstCaseProof) : undefined,
     invalid: (v.invalid ?? []).map(toRun),
+    invalidInputs: (v.invalidInputs ?? []).map(toRun),
   }),
 };

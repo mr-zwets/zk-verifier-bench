@@ -99,8 +99,8 @@ variant*:
 | references | `nchain`, `scrypt-bn256` | real BSV mainnet verifiers, single-tx; fail BCH limits |
 | singletons | `bch-groth16[-bls12381]-singleton[-opcode-optimized\|-genpow\|-minop]` | full verifier in ONE script — runtime-general correctness oracles; exceed one input's op-cost budget on current BCH |
 | chunked / covenant | `…-chunked`, `…-chunked-covenant[-residue]` | computation split into chunks; state threaded through an NFT commitment across a chain of transactions |
-| intra-tx | `…-intratx[-residue]` | all chunks are inputs of ONE (non-standard) transaction, binding each other via `OP_INPUTBYTECODE` |
-| grouped | `…-grouped[-residue]` | the hybrid: intra-tx binding inside a handful of standard (<100 kB) transactions, NFT hand-off between them — the deployable form |
+| intra-tx | `…-intratx[-residue]` | all chunks are inputs of ONE transaction, binding each other via `OP_INPUTBYTECODE`; the BN254 quotient-torus fixture is below standard policy's 100 kB transaction limit |
+| grouped | `…-grouped[-residue]` | the hybrid: intra-tx binding inside a handful of standard (<100 kB) transactions, with NFT hand-off between them; standard-relayable for graphs that exceed one standard transaction |
 | spec | `…-intratx-residue-large` | 100,000-byte-script builds for the proposed bch-spec VM |
 | partials | `bch-vkx-*`, `bch-pairing-*` | vk_x MSM and pairing-check milestones in the same structures |
 | demo | `bch-multistep-demo` | hash-chained multi-tx demo |

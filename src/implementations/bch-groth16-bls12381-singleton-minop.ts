@@ -27,6 +27,7 @@ const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-minop-vect
   lockingOK: string;
   unlocking: string;
   invalidUnlocking: string;
+  rangeInvalidUnlockings: { label: string; unlocking: string }[];
 };
 
 const mp = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-minop-multiproof-vectors.json', 'utf8')) as {
@@ -66,6 +67,11 @@ export const bchGroth16Bls12381SingletonMinOp: Implementation = {
     ];
     const invalid: Step[][] = [
       [{ ...valid[0]!, unlockingBytecode: hexToBin(v.invalidUnlocking) }],
+      ...v.rangeInvalidUnlockings.map(({ label, unlocking }) => [{
+        ...valid[0]!,
+        label: `${valid[0]!.label} (${label})`,
+        unlockingBytecode: hexToBin(unlocking),
+      }]),
     ];
     const extraValidProofs: Step[][] = mp.proofs
       .filter((p) => !p.committed)

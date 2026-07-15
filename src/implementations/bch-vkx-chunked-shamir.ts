@@ -79,8 +79,8 @@ export const bchVkxChunkedShamir: Implementation = {
     'and verifies the supplied Jacobian inverse before asserting vk_x. Multi-return EC ' +
     'functions are defined once per chunk, and padding is tuned to the measured per-input ' +
     'budget. The state commitments are instance-specific: another input pair requires ' +
-    'regenerating the two-step chain. Current footprint: 14,250 script bytes and ' +
-    '9,325,906 op-cost.',
+    'regenerating the two-step chain. Current footprint: 13,266 script bytes and ' +
+    '8,563,278 op-cost.',
   load: async () => {
     const valid: Step[] = v.chunks.map((c) => {
       const tail = c.final ? ' +fold IC0 +verified-inverse->affine, assert vk_x' : '';

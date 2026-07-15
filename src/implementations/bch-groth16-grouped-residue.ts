@@ -8,8 +8,8 @@
 //     ~63-bit [x0]B walk) -> 3 chunks (vs the 128-bit [6x^2]B walk's 8)
 //   - c^-(6x+2)-FUSED batched Miller whose terminal chunk also checks the witnessed-residue
 //     verdict fF*(w*c^q2) == (c*c^q2)^q, eliminating a separate final-exp tail input.
-// Net: the full verifier in 27 chunks packed into 3 STANDARD (<100,000 B) transactions (vs the
-// 50-chunk / 6-tx plain grouped build). The four GLV chunks share one hash-bound fixed lookup
+// Net: the full verifier in 26 chunks packed into 3 STANDARD (<100,000 B) transactions (vs the
+// 42-input / 5-tx plain grouped build). The three GLV chunks share one hash-bound fixed lookup
 // table carried by the final GLV input. One fixed set of lockings verifies any proof for the VK.
 //
 // Vectors: groth16_contract/chunked/grouped/build_vectors_residue.mjs ->
@@ -33,6 +33,7 @@ interface Vectors {
   extraValidProofs?: RawRun[];
   worstCaseProof?: RawRun;
   invalid?: RawRun[];
+  invalidInputs?: RawRun[];
 }
 
 const v = JSON.parse(readFileSync('src/bch/groth16-grouped-residue-vectors.json', 'utf8')) as Vectors;
@@ -64,7 +65,7 @@ const toRun = (run: RawRun): Step[] => {
 
 export const bchGroth16GroupedResidue: Implementation = {
   id: 'bch-groth16-grouped-residue',
-  name: 'BCH Groth16 verifier, grouped + RESIDUE (27 chunks in 3 standard <100KB transactions: fast-G2 endo + GLV vk_x + precomputed e(alpha,beta) + c^-(6x+2)-fused Miller with terminal residue verdict)',
+  name: 'BCH Groth16 verifier, grouped + RESIDUE (26 chunks in 3 standard <100KB transactions: fast-G2 endo + GLV vk_x + precomputed e(alpha,beta) + c^-(6x+2)-fused Miller with terminal residue verdict)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'multi-tx',
@@ -78,19 +79,19 @@ export const bchGroth16GroupedResidue: Implementation = {
   tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier packed with the ' +
-    'grouped method. fast-G2 endomorphism subgroup check (ePrint 2022/348, 3 chunks) -> GLV vk_x ' +
+    'grouped method. canonical-coordinate fast-G2 endomorphism subgroup check (ePrint 2022/348, 3 chunks) -> GLV vk_x ' +
     '(each public input decomposed k1+k2*lambda via the G1 endomorphism, a 4-scalar ~128-bit ' +
     'Straus over baked {IC1,phiIC1,IC2,phiIC2}, witnesses range-checked + bound k1+k2*lambda==in ' +
-    'mod r; ~halves the MSM, 4 chunks sharing one hash-bound fixed lookup table carried by the ' +
+    'mod r; ~halves the MSM, 3 chunks sharing one hash-bound fixed lookup table carried by the ' +
     'final GLV input) -> c^-(6x+2)-FUSED batched Miller with e(alpha,beta) PRECOMPUTED (pair 1 is a VK ' +
     'constant: its Miller value is baked and multiplied in once instead of folding ~88 lines) and ' +
     'the residue witness c,cInv threaded through every chunk; the terminal Miller chunk also ' +
     'checks the witnessed-residue verdict (ePrint 2024/640: c canonical + c*cInv==ONE + exact ' +
-    'w in the cubic coset {1,w27,w27^2}; fF*(w*c^q2) == (c*c^q2)^q). 27 chunks in 3 ' +
+    'w in the cubic coset {1,w27,w27^2}; fF*(w*c^q2) == (c*c^q2)^q). 26 chunks in 3 ' +
     'STANDARD (<100,000 B) transactions: within each group tx the inputs ' +
     'forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and ' +
     'across groups the running state rides a CashToken NFT commitment. Fewer transactions than ' +
-    'the 50-chunk / 6-tx plain grouped build, and far under the 36-tx residue covenant chain. ' +
+    'the 42-input / 5-tx plain grouped build. ' +
     'One fixed set of lockings verifies any proof for the VK. Deployed P2SH32. Every step ' +
     'validates on the real BCH 2026 standard VM (op-cost <= 8,032,800, scripts <= 10,000 B).',
   load: async () => {
@@ -98,6 +99,7 @@ export const bchGroth16GroupedResidue: Implementation = {
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);
     const worstCaseProof = v.worstCaseProof ? toRun(v.worstCaseProof) : undefined;
     const invalid = (v.invalid ?? []).map(toRun);
-    return { valid, extraValidProofs, worstCaseProof, invalid };
+    const invalidInputs = (v.invalidInputs ?? []).map(toRun);
+    return { valid, extraValidProofs, worstCaseProof, invalid, invalidInputs };
   },
 };

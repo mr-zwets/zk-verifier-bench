@@ -6,21 +6,23 @@
 //   vk_x = IC0 + in0*IC1 + in1*IC2                                  (chunked, G1)
 //   require( e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta) == 1 )  (chunked pairing)
 //
-// The ordered steps are: the vk_x Shamir/Straus chunks (public inputs at RUNTIME,
-// asserting vk_x == the point the pairing uses) → ONE batched 4-pair optimal-ate
-// Miller loop (shared f squared once per step; the folded f IS the boundary, no
-// separate combine) → final exponentiation → a final step asserting the product ==
-// Fp12 ONE. The Miller loop is PREPARED-VK: the three fixed VK G2 points (β, γ, δ)
+// The ordered steps are: vk_x Shamir/Straus chunks (public inputs at RUNTIME) →
+// G1/G2 curve and subgroup validation → ONE batched 4-pair optimal-ate Miller loop
+// (shared f squared once per step; the folded f IS the boundary, no separate combine)
+// → final exponentiation → a final step asserting the product == Fp12 ONE. The
+// Miller loop is PREPARED-VK: the three fixed VK G2 points (β, γ, δ)
 // have their per-step line coefficients precomputed off-chain and baked into the
 // chunks, so only the runtime e(-A,B) pair does on-chain G2 (pointDouble/pointAdd)
-// and only its accumulator R0 is carried in state. State is carried between steps as
-// a hash256 commitment of the live values (the vk_x accumulator, or the Fp12 `f` +
-// running G2 point R0, or the live final-exp temporaries) and re-supplied in the
-// witness, verified on entry and exit. Verified against @noble/curves: the boundary
-// matches the golden millerHex and the verdict matches the golden valid/invalid.
+// and only its accumulator R0 is carried in state. The fully fixed e(alpha,beta) pair
+// is omitted from the loop and its raw Miller value is multiplied into f once. State
+// is carried between steps as a hash256 commitment of the live values (the vk_x
+// accumulator, the Fp12 `f` + running G2 point R0, or the live final-exp temporaries)
+// and re-supplied in the witness, verified on entry and exit. Verified against
+// @noble/curves: the boundary matches the golden millerHex and the verdict matches
+// the golden valid/invalid.
 //
-// This is the BCH-compatible counterpart of bch-groth16-singleton (~1.26B op-cost,
-// ~157 inputs, single-tx, NOT BCH-compatible): same complete verifier, but here
+// This is the BCH-compatible counterpart of bch-groth16-singleton (single-tx and over
+// current BCH per-input limits): same complete verifier, but here
 // every step validates on the real BCH 2026 VM. Same BN254 curve as scrypt-bn256.
 //
 // Vectors: groth16_contract/chunked/pairing/build_vectors.mjs (run via
@@ -63,20 +65,24 @@ export const bchGroth16Chunked: Implementation = {
   // GENERIC covenant chunks: each step's running state lives in the token NFT
   // commitment, NOT baked into the program. One fixed set of lockings verifies any
   // proof; the benchmark confirms it empirically via extraValidProofs (a distinct
-  // proof, same lockings). (Token-safety pinning of category/capability/single-token
-  // is a separate hardening step; tokenSafetyEnforced is left at its default.)
+  // proof, same lockings). Each nonterminal contract pins the output token's
+  // category/capability and actual successor P2SH32 locking.
   proofBinding: 'runtime',
+  tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier split across transactions ' +
     'so EVERY step fits one BCH input. vk_x = IC0+in0*IC1+in1*IC2 computed on-chain ' +
-    '(Shamir/Straus, public inputs at RUNTIME) -> ONE batched 4-pair optimal-ate Miller ' +
+    '(Shamir/Straus, public inputs at RUNTIME) -> canonical-coordinate G1/G2 curve and subgroup validation -> ' +
+    'ONE prepared batched optimal-ate Miller ' +
     'loop (prepared-VK: the fixed VK G2 points beta/gamma/delta have baked line ' +
-    'coefficients, so only the runtime e(-A,B) pair does on-chain G2) -> final ' +
+    'coefficients, only the runtime e(-A,B) pair does on-chain G2, and fully fixed ' +
+    'e(alpha,beta) is replaced by one multiply with its precomputed raw Miller value) -> final ' +
     'exponentiation -> assert product == Fp12 ONE. State carried as ' +
-    'hash256 commitments of the live values, verified on entry/exit each step. ' +
+    'hash256 commitments of the live values, verified on entry/exit each step; every ' +
+    'nonterminal output is locked to the actual successor contract. ' +
     'Verified vs @noble/curves (boundary == golden millerHex, verdict == golden). ' +
-    'BCH-compatible counterpart of bch-groth16-singleton (~1.26B op-cost, ~157 ' +
-    'inputs, single-tx, not BCH-compatible). Same BN254 curve as scrypt-bn256.',
+    'BCH-compatible counterpart of the over-limit, single-tx bch-groth16-singleton. ' +
+    'Same BN254 curve as scrypt-bn256.',
   load: async () => {
     const valid: Step[] = v.steps.map(toStep);
     // additional DISTINCT proofs (same lockings, different state/commitments) -> the
@@ -90,7 +96,7 @@ export const bchGroth16Chunked: Implementation = {
     // first vk_x step and at the final verdict step.
     const tampered = (i: number): Step[] => [{ ...valid[i]!, unlockingBytecode: hexToBin(v.steps[i]!.invalidUnlocking) }];
     const invalid: Step[][] = [tampered(0), tampered(valid.length - 1)];
-    // adversarial INPUT runs (off-curve / off-subgroup B) — the EIP-197 validation
+    // invalid INPUT runs (off-curve / off-subgroup B) — the EIP-197 validation
     // prologue must reject them (empirically grades BenchmarkResult.inputValidation).
     const invalidInputs: Step[][] = (v.invalidInputs ?? []).map((run) => run.map(toStep));
     return { valid, extraValidProofs, worstCaseProof, invalid, invalidInputs };

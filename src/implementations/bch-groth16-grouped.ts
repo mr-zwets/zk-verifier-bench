@@ -1,11 +1,11 @@
 // BCH-native Groth16 verifier — GROUPED (multi-tx, multi-input), the deployable middle
 // ground between the two other chunked methods.
 //
-//   - bch-groth16-chunked / -covenant: 46 SEQUENTIAL transactions, one chunk each. That is a
-//     46-deep unconfirmed chain approaching BCH's default 50-tx mempool ancestor/descendant limit.
+//   - bch-groth16-chunked / -covenant: 43 SEQUENTIAL transactions, one chunk each. That is a
+//     43-deep unconfirmed chain approaching BCH's default 50-tx mempool ancestor/descendant limit.
 //   - bch-groth16-intratx: the whole verifier in ONE transaction. Fine at consensus, but the
-//     tx is ~0.37 MB — over the 100,000-byte standard size, so it is NON-standard (mine-direct).
-//   - bch-groth16-grouped (this): the SAME 46 chunks packed into 5 STANDARD (<100,000 B)
+//     tx is ~0.33 MB — over the 100,000-byte standard size, so it is NON-standard (mine-direct).
+//   - bch-groth16-grouped (this): 42 hash-free linked inputs packed into 5 STANDARD (<100,000 B)
 //     transactions. Comfortably under the chain limit AND relayable under standard policy.
 //
 // Mechanism — a hybrid of the other two. WITHIN each group transaction the chunks bind each
@@ -40,6 +40,7 @@ interface Vectors {
   extraValidProofs?: RawRun[];
   worstCaseProof?: RawRun;
   invalid?: RawRun[];
+  invalidInputs?: RawRun[];
 }
 
 const v = JSON.parse(readFileSync('src/bch/groth16-grouped-vectors.json', 'utf8')) as Vectors;
@@ -74,7 +75,7 @@ const toRun = (run: RawRun): Step[] => {
 
 export const bchGroth16Grouped: Implementation = {
   id: 'bch-groth16-grouped',
-  name: 'BCH Groth16 verifier, grouped (46 chunks in 5 standard <100KB transactions: intra-tx forward-checks within each tx, CashToken hand-off across them)',
+  name: 'BCH Groth16 verifier, grouped (42 inputs in 5 standard <100KB transactions: intra-tx forward-checks within each tx, CashToken hand-off across them)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'multi-tx',
@@ -82,20 +83,21 @@ export const bchGroth16Grouped: Implementation = {
   // Cross-group hand-off pins the token thread: each group's last chunk requires
   // tx.outputs[0].nftCommitment == hash256(outBlob) AND tx.outputs[0].tokenCategory ==
   // tx.inputs[0].tokenCategory (category + capability continuity — the BCH tokenCategory
-  // introspection includes the capability byte), perpetuated mutable end-to-end. Verified
-  // adversarially: the covout chunk rejects a wrong category / capability / commitment / missing
+  // introspection includes the capability byte), perpetuated mutable end-to-end. Explicit fixtures
+  // confirm the covout chunk rejects a wrong category / capability / commitment / missing
   // output token. Same enforcement as bch-groth16-grouped-residue and the covenant builds.
   tokenSafetyEnforced: true,
   source:
-    'BCH-native CashScript: the full BN254 Groth16 verifier (validate G2 inputs -> vk_x -> ' +
-    'batched 4-pair optimal-ate Miller -> final exponentiation -> assert product==1), the 46 ' +
-    'chunks packed into 5 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-intratx ' +
+    'BCH-native CashScript: the full BN254 Groth16 verifier (validate canonical-coordinate, on-curve, subgroup proof inputs -> vk_x -> ' +
+    'prepared batched Miller, with fixed e(alpha,beta) replaced by one multiply with its ' +
+    'precomputed raw Miller value -> final exponentiation -> assert product==1), the 42 ' +
+    'inputs packed into 5 STANDARD (<100,000 B) transactions. The hybrid of bch-groth16-intratx ' +
     'and bch-groth16-chunked: within each group tx the inputs forward-check each other via ' +
     'tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and across groups the running state ' +
     'rides a CashToken NFT commitment — a group\'s last chunk commits hash256(outBlob) to ' +
     'output[0], the next group\'s first chunk binds its inBlob via tx.inputs[0].nftCommitment == ' +
-    'hash256(inBlob). The token thread chains the groups in order. Unlike the 46-tx covenant ' +
-    'chain (which approaches the default 50-deep mempool ancestor limit) and the single 0.37 MB ' +
+    'hash256(inBlob). The token thread chains the groups in order. Unlike the 43-tx covenant ' +
+    'chain (which approaches the default 50-deep mempool ancestor limit) and the single 0.33 MB ' +
     'intra-tx bundle (non-standard, mine-direct), every grouped tx is under the 100,000-byte ' +
     'standard size and the run is 5 deep — relayable under default standard policy. Same chunk ' +
     'math as bch-groth16-chunked / -intratx; one fixed set of lockings verifies any proof for ' +
@@ -106,6 +108,7 @@ export const bchGroth16Grouped: Implementation = {
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);
     const worstCaseProof = v.worstCaseProof ? toRun(v.worstCaseProof) : undefined;
     const invalid = (v.invalid ?? []).map(toRun);
-    return { valid, extraValidProofs, worstCaseProof, invalid };
+    const invalidInputs = (v.invalidInputs ?? []).map(toRun);
+    return { valid, extraValidProofs, worstCaseProof, invalid, invalidInputs };
   },
 };
