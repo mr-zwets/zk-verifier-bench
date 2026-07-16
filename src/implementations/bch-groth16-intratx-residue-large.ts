@@ -1,23 +1,40 @@
-// BCH-native Groth16 verifier — INTRA-TRANSACTION LINKED + QUOTIENT-TORUS RESIDUE with LARGE
-// (100 kB) input scripts, targeting the PROPOSED bch-spec upgrade. Identical mechanism and
-// quotient-torus chunk graph to bch-groth16-intratx-residue (OP_INPUTBYTECODE forward-checking,
-// GLV vk_x MSM, c^-(6x+2)-fused Miller in Fp12*/Fp6* with e(alpha,beta) precomputed, endpoint-
-// fused exact G2 subgroup check, terminal [f*c^(p^2)]=[c^p*c^(p^3)] with [0:0] rejection), but
-// re-planned at the 100 kB budget:
+// BCH-native BN254 Groth16 verifier targeting the PROPOSED bch-spec 100 kB-script VM:
 //
-//   GLV vk_x MSM             1 input    (one 128-iter loop window; 5.2M op in a 2.3 kB unlock)
-//   fused Miller + verdict   1 input    (the whole unrolled torus walk, ~71.8M op)
+//   GLV vk_x MSM             1 input    (one 128-position four-scalar schedule)
+//   fused Miller + verdict   1 input    (the complete 348-operation quotient-torus trace)
 //                            --------
-//                            2 inputs   (one standard-relayable-on-spec transaction)
+//                            2 inputs   (one standard-relayable bch-spec transaction)
 //
-// 82,183 B / 77.0M op over 2 inputs (worst case 91.0M op) — below the current-BCH 13-input
-// frontier on every axis. Every input fits its own bch-spec budget ((10000 + unlockingLen) * 800
-// up to 88,000,000 op, scripts <= 100,000 B); deployed as P2SH32 so each chunk redeem rides in
-// the scriptSig where it counts toward the op-cost budget. Graded against the real bch-spec VM
-// (createVirtualMachineBchSpec).
+// The root fixes the exact input count and SHA-256-pins the terminal program; the terminal fixes
+// its position. OP_INPUTBYTECODE binds the projective vk_x handoff. The Miller input validates
+// canonical A/B/C encodings, curve relations, identity semantics, and the exact runtime-B subgroup
+// endpoint, then evaluates the complete prescribed four-pair equation. It folds only the ordinary
+// fixed-key e(alpha,beta) and e(IC0,gamma) factors; it does not use the fixture's published scalar
+// relations to collapse the statement.
 //
-// Vectors: groth16_contract/chunked/intratx/build_vectors_residue_large.mjs ->
-// src/bch/groth16-intratx-residue-large-vectors.json.
+// Committed fixture: 72,163 script B; 72,201 serialized B; 72,271 verifier.cash score;
+// 68,808,715 op. The dense worst-case fixture is 83,804 serialized B / 82,867,490 op.
+// All 13 accepting fixture families use the same locking graph and pass the bch-spec consensus
+// and standard-policy VMs with exact minimum-fee templates. This requires the proposed VM because
+// the terminal unlocking is 69,886 B; current BCH limits unlocking bytecode to 10,000 B.
+//
+// The prescribed checkpoint key is synthetic and publishes setup and IC scalars. These vectors
+// establish complete-equation execution and proposed-VM resource validity for that key; circuit
+// knowledge, production public-input binding, arbitrary-key verification, and independently
+// generated setup interoperability are outside this artifact's scope.
+//
+// Source: mr-zwets/groth16_cashscript @ 6819ad7908a66169897f3b9149e11278b261452b
+// Compiler: mr-zwets/cashscript compiler-optimizations @
+// 1c707c1dbf87396b30ba5e0704b1db44475ce893
+// Input fixture SHA-256:
+//   multiproof d513f1fe45d7aba20f289cbc38439d5ebdb05a9975950a5e32d2bf21239d4abc
+//   pairing checkpoint e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e
+// Vector SHA-256: 5f05de4e05c1d61df4ce72b601bf00da7ca239042e4b0921dbbf8b4e92ab8f1d
+// Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
+// ddbe6f7996fc20598c7469a277a29981c76e073da0f274602e988d482fffafa8
+// Locking-bytecode SHA-256 values, in input order:
+//   00 1ab4def616d8df48e27c9f7aef537fea2bfc90233a06b41217d4b127711ea768
+//   01 a9e8dd8ed9e14ad4d3d4f04883197db39ad65d87318dff386abdae5024590d0b
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -51,19 +68,22 @@ export const bchGroth16IntratxResidueLarge: Implementation = {
   proofBinding: 'runtime',
   vm: 'bch-spec',
   source:
-    'BCH-native CashScript: the quotient-torus BN254 Groth16 verifier laid out as the INPUTS of ' +
-    'ONE transaction, sized for the PROPOSED bch-spec upgrade (100,000-byte scripts, op-cost ' +
-    'budget (10000 + unlockingLen) * 800 = up to 88,000,000 per input). Same forward-checking as ' +
-    'bch-groth16-intratx-residue (each input carries its incoming state as a raw byte blob and ' +
-    'binds the chain via tx.inputs[idx+1].unlockingBytecode introspection) and the same ' +
-    'quotient-torus graph (GLV vk_x MSM, c^-(6x+2)-fused Miller in Fp12*/Fp6* with e(alpha,beta) ' +
-    'precomputed, endpoint-fused exact G2 subgroup check, terminal cross-multiplied ' +
-    '[f*c^(p^2)]=[c^p*c^(p^3)] with projective-zero rejection), re-planned at the 100 kB budget ' +
-    'into 2 inputs (GLV vk_x 1, unrolled fused Miller + verdict 1): 82,183 B / 77.0M op, below ' +
-    'the current-BCH 13-input frontier on every axis. Each input fits its own bch-spec budget; ' +
-    'NOT valid on current BCH (BCH_2026 caps scripts at 10,000 B) — it requires the bch-spec ' +
-    'upgrade. Deployed as P2SH32 so each chunk redeem rides in the scriptSig where it counts ' +
-    'toward the op-cost budget.',
+    'BCH-native CashScript: one runtime-proof BN254 verifier in two linked inputs of one ' +
+    'transaction, targeting the proposed bch-spec 100,000-byte-script VM. A 128-position ' +
+    'four-scalar GLV schedule computes the IC1/IC2 MSM projectively. One unrolled input then ' +
+    'validates canonical A/B/C encodings, curve relations, identity semantics, and the exact ' +
+    'runtime-B subgroup endpoint while executing the complete 348-operation quotient-torus ' +
+    'Miller trace and terminal relation. The fixed e(alpha,beta) and e(IC0,gamma) factors are ' +
+    'precomputed without using the fixture\'s published scalar relations to collapse the ' +
+    'four-pair equation. The root enforces the exact input count and pins the terminal locking ' +
+    'program; the terminal enforces its position; OP_INPUTBYTECODE binds the projective handoff; ' +
+    'both input blobs have exact widths. All accepting fixtures pass the bch-spec consensus and ' +
+    'standard-policy VMs with fee-funded deterministic templates. The 69,886-byte terminal ' +
+    'unlocking requires the proposed VM and exceeds current BCH\'s 10,000-byte limit. Deployed ' +
+    'as P2SH32. The prescribed checkpoint key is synthetic and publishes setup and IC scalars, ' +
+    'so this artifact establishes complete-equation execution and proposed-VM resource validity ' +
+    'for that key; it does not establish circuit knowledge, production public-input binding, ' +
+    'arbitrary-key verification, or independent-setup interoperability.',
   load: async () => {
     const valid = toRun(v.steps);
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);

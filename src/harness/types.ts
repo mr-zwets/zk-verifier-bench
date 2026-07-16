@@ -71,10 +71,11 @@ export interface Step {
    * `inputs` the full ordered input list of THIS group's tx (the SAME array across the group's
    * steps), so a chunk's tx.inputs[idx±1] introspection resolves to its real sibling. The
    * token fields drive the cross-group hand-off: `inToken` is spent by input[0] of the group
-   * (undefined => no spent token), `outToken` is created at output[0] (undefined => terminal
-   * group, the thread token is burned), `outLockingBytecode` is output[0]'s locking when a
-   * token is created. The harness builds one synthetic token-carrying tx per group and
-   * evaluates input `index` against it.
+   * (undefined => no spent token), optional `inputTokens` model tokens on other transaction
+   * inputs, `outToken` is created at output[0] (undefined => terminal group, the thread token
+   * is burned), and `outLockingBytecode` is output[0]'s locking when a token is created. The
+   * harness builds one synthetic token-carrying tx per group and evaluates input `index`
+   * against it.
    */
   grouped?: {
     group: number;
@@ -82,7 +83,8 @@ export interface Step {
     inputs: { lockingBytecode: Uint8Array; unlockingBytecode: Uint8Array }[];
     category: Uint8Array;
     inToken?: { capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array };
-    outToken?: { capability: 'none' | 'mutable'; commitment: Uint8Array };
+    inputTokens?: ({ capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array } | undefined)[];
+    outToken?: { capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array };
     outLockingBytecode?: Uint8Array;
   };
 }
