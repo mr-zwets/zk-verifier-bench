@@ -141,14 +141,16 @@ export interface IntraTxContext {
  * computation is a handful of standard transactions; within one group tx the inputs bind by
  * OP_INPUTBYTECODE forward-checks, across groups the state rides a CashToken NFT commitment.
  * The runner builds ONE token-carrying tx for the group (input[0] optionally spends `inToken`,
- * output[0] optionally creates `outToken`) and evaluates input `index` against it. */
+ * `inputTokens` can attach tokens to other inputs, output[0] optionally creates `outToken`) and
+ * evaluates input `index` against it. */
 export interface GroupedContext {
   group: number;
   index: number;
   inputs: { lockingBytecode: Uint8Array; unlockingBytecode: Uint8Array }[];
   category: Uint8Array;
   inToken?: { capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array };
-  outToken?: { capability: 'none' | 'mutable'; commitment: Uint8Array };
+  inputTokens?: ({ capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array } | undefined)[];
+  outToken?: { capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array };
   outLockingBytecode?: Uint8Array;
 }
 
@@ -189,8 +191,8 @@ export const evaluatePair = (
   };
   // Grouped: a multi-input token-carrying tx. input[0] optionally spends the incoming-state
   // token (covInHash binds it); output[0] optionally carries the outgoing-state token (covout
-  // commits it). All other inputs are plain; the OP_INPUTBYTECODE forward-checks resolve to the
-  // real siblings within this group's tx.
+  // commits it). inputTokens models sibling tokens for rejection fixtures; when absent, all
+  // siblings remain plain. OP_INPUTBYTECODE forward-checks resolve to the real siblings.
   const gTok = (t?: { capability: 'none' | 'mutable' | 'minting'; commitment: Uint8Array }) =>
     t ? { amount: 0n, category: grouped!.category, nft: { capability: t.capability, commitment: t.commitment } } : undefined;
   const groupedProgram = grouped && {
@@ -198,7 +200,7 @@ export const evaluatePair = (
     sourceOutputs: grouped.inputs.map((i, n) => ({
       lockingBytecode: i.lockingBytecode,
       valueSatoshis: 1000n,
-      token: n === 0 ? gTok(grouped.inToken) : undefined,
+      token: gTok(grouped.inputTokens?.[n] ?? (n === 0 ? grouped.inToken : undefined)),
     })),
     transaction: {
       version: 2,
