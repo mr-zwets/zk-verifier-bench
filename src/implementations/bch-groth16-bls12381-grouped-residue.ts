@@ -50,7 +50,7 @@
 // suite, not asserted as a proof-independent size ceiling for every possible witness.
 //
 // Byte-exact provenance:
-//   source: groth16_cashscript commit 868729e0814dd8f805e0b8bfe900e62da0d227ac
+//   source: groth16_cashscript commit 6819ad7908a66169897f3b9149e11278b261452b
 //   compiler: CashScript commit 1c707c1dbf87396b30ba5e0704b1db44475ce893
 //   vector sha256: ef0b7904285f635fd3294e1979b4f9e9dfc287ce6faacce43d8effecb83c17fa
 //   Miller manifest sha256: 5abe1c8516ea7e945973f1baef620f5f52bfd09484b11bc4afc08896ac5000ea
@@ -174,7 +174,7 @@ export const bchGroth16Bls12381GroupedResidue: Implementation = {
     'transaction in that suite passes BCH 2026 consensus and current standard policy, remains under ' +
     '100,000 bytes, and has an exact 1 sat/B fee template; the contracts do not constrain satoshi ' +
     'values. Byte-exact vectors reproduce from groth16_cashscript ' +
-    '868729e0814dd8f805e0b8bfe900e62da0d227ac and CashScript ' +
+    '6819ad7908a66169897f3b9149e11278b261452b and CashScript ' +
     '1c707c1dbf87396b30ba5e0704b1db44475ce893. The fixed benchmark key is synthetic and publishes ' +
     'its setup and IC scalars, so these vectors establish complete-equation execution and BCH ' +
     'packaging for that key, not circuit knowledge, secure application public-input binding, ' +

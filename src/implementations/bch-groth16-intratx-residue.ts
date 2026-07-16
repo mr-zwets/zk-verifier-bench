@@ -43,7 +43,7 @@
 // 88,890 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,575,152 op-cost.
 // Proof-independent relay encoding: 97,016 serialized bytes; 77,253,358 op-cost ceiling;
 // 2,984-byte standard-transaction margin.
-// Source: mr-zwets/groth16_cashscript @ dea977a6052feb67c2ef6216d0a30fb0248b8993
+// Source: mr-zwets/groth16_cashscript @ 6819ad7908a66169897f3b9149e11278b261452b
 // Compiler: mr-zwets/cashscript compiler-optimizations @
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893
 // Input fixture SHA-256:

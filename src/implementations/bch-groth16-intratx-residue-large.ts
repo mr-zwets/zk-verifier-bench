@@ -23,7 +23,7 @@
 // knowledge, production public-input binding, arbitrary-key verification, and independently
 // generated setup interoperability are outside this artifact's scope.
 //
-// Source: mr-zwets/groth16_cashscript @ 269571faf9dc998990d344977bfd8bba6f430207
+// Source: mr-zwets/groth16_cashscript @ 6819ad7908a66169897f3b9149e11278b261452b
 // Compiler: mr-zwets/cashscript compiler-optimizations @
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893
 // Input fixture SHA-256:

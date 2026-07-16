@@ -43,7 +43,7 @@
 // setup. Relayability is demonstrated for the 14 accepting fixture families; unlike the one-tx
 // track, this covenant entry does not claim a proof-independent relay ceiling for every valid proof.
 //
-// Reproduction: groth16_cashscript commit 27c5d5e4a9c7404bc79135b73832788991e7f19f,
+// Reproduction: groth16_cashscript commit 6819ad7908a66169897f3b9149e11278b261452b,
 // cashc commit
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893:
 //   VERIFIER_DIR=/path/to/zk-verifier-bench pnpm vectors:covenant:torus
@@ -134,7 +134,7 @@ export const bchGroth16ChunkedCovenantResidue: Implementation = {
     'ride in NFT commitments. Every nonterminal pins its successor P2SH32 locking; token category and ' +
     'capability are fixed; the genesis recreates its minting baton; the terminal emits an immutable NFT. ' +
     'Byte-exact vectors reproduce from groth16_cashscript commit ' +
-    '27c5d5e4a9c7404bc79135b73832788991e7f19f with the pinned input fixtures and cashc ' +
+    '6819ad7908a66169897f3b9149e11278b261452b with the pinned input fixtures and cashc ' +
     '1c707c1dbf87396b30ba5e0704b1db44475ce893. All 14 valid runs pass BCH 2026 consensus ' +
     'and standard policy under one locking graph. The companion source generator certifies exact ' +
     '1 satoshi-per-byte fee templates; the covenant contracts do not pin satoshi values. The prescribed ' +

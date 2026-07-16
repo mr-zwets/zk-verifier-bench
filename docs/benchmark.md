@@ -118,8 +118,9 @@ all, see *Why these measures* in the README.)
   proof run. For `vm: 'bch-spec'` entries the budget uses the spec formula.
 - **BCH compatible** = every step of the valid run validates on the real VM
   for the entry's target (`bch-2026` or `bch-spec`).
-- **standardness** = every step also passes the standard/relay VM. Intra-tx
-  bundles are consensus-valid but non-standard; grouped entries are standard.
+- **standardness** = every complete transaction also passes the standard/relay
+  VM. An intra-tx bundle can be standard when its total transaction size remains
+  below policy limits; grouped entries report standardness for every group.
 - **secure packaging** — P2SH20 packaging is flagged (collision-attack
   surface).
 - **Checkpoint cost.** Tag a step with `checkpoint: "<label>"` and the
