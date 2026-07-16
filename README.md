@@ -83,10 +83,10 @@ measures carry the project's findings:
   and shows what a budget-formula change would save.
 - **The consensus / standard / bch-spec categories.** Each rule set has a
   different optimal design, so each is benchmarked in its own right: intra-tx
-  bundles are the best shape when only consensus matters, the grouped form is
-  what standard relay demands, and the proposed TXv5 limits admit a much
-  flatter split (~5 inputs instead of ~32). Comparing the winners shows what
-  each rule change is worth.
+  bundles are best when the complete graph fits one standard transaction, the
+  grouped form preserves standard relay for graphs that exceed that limit, and
+  the proposed bch-spec limits admit a much flatter split. Comparing the
+  winners shows what each rule change is worth.
 
 ## Entry families
 
