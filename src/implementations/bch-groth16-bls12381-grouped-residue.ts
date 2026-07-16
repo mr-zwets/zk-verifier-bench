@@ -7,8 +7,8 @@
 // fixed-G2 gamma/delta line coefficients are ordinary VK preparation; the runtime terms are not
 // collapsed with the fixture's published scalar relations.
 //
-// The graph has five shared-table GLV vk_x inputs followed by 29 fused prepared-Miller inputs,
-// packed 11/13/10 into three transactions. The Miller accumulator lives in Q=Fp12*/Fp6*. A
+// The graph has five shared-table GLV vk_x inputs followed by 21 fused prepared-Miller inputs,
+// packed 9/9/8 into three transactions. The Miller accumulator lives in Q=Fp12*/Fp6*. A
 // canonical six-limb u represents the finite class [c]=[1+u*W]. For lambda=p+|x|,
 // gcd(lambda,p^6+1)=r, so the lambda-power image is exactly the final-exponent kernel in Q. The
 // final Miller input checks the projective Frobenius relation and rejects the zero representative.
@@ -20,7 +20,7 @@
 // components. Non-identity B is canonical, on-curve, and checked in the exact G2 subgroup; all-zero
 // B maps to a fixed G2 base paired with the effective G1 identity.
 //
-// OP_INPUTBYTECODE binds all 31 in-group successor states and lockings. Each group root fixes input
+// OP_INPUTBYTECODE binds all 23 in-group successor states and lockings. Each group root fixes input
 // index zero and the exact input count, requires input[0] to carry a mutable NFT, and excludes its
 // 32-byte category from every sibling input. The two cross-group hand-offs pin the successor P2SH32
 // locking and carry hash256(state); full tokenCategory equality pins category and mutable capability.
@@ -29,19 +29,21 @@
 // retained terminal token. A deployment designates the initial group-0 token UTXO as the graph root
 // and must retain control of that category's minting authority.
 //
-// Exact committed measurements: 206,055 script B; 207,709 challenge-score B; 206,589 serialized
-// spend B across 3 transactions (50,480 / 87,705 / 68,404); 162,247,773 op; maximum input
-// 5,845,574 op. The same 34 lockings accept ten measured runtime fixtures plus a separate valid
-// all-position GLV stress run. Across that accepting suite, the largest transaction is 87,708 B,
-// maximum input is 7,520,837 op, and maximum unlocking bytecode is 9,363 B; every transaction
+// Exact committed measurements: 204,424 script B; 205,734 challenge-score B; 204,894 serialized
+// spend B across 3 transactions (46,535 / 82,049 / 76,310); 160,953,436 op; maximum input
+// 8,004,501 op. The same 26 lockings accept ten measured runtime fixtures plus a separate valid
+// all-position GLV stress run. Across that accepting suite, the largest transaction is 83,356 B,
+// maximum input is 8,004,501 op, and maximum unlocking bytecode is 9,980 B; every transaction
 // passes the BCH 2026 consensus and current standard-policy VMs with an exact 1 sat/B fee template.
 // The contracts do not constrain satoshi values. The vectors also commit 27 rejecting runs and
 // four isolated point/range rejection runs, including finite off-curve C and complete token flow.
 //
-// The current published BLS grouped-residue entry at benchmark commit 5ee4140 scores 326,251 B
-// (324,210 script B, 39 inputs, 5 transactions, 256,896,867 op). This construction lowers that
-// standard-relayable BLS score by 118,542 B and op-cost by 94,649,094. It does not claim the overall
-// cross-curve record or a single-transaction result.
+// Against the immediate-upstream 34-input artifact, this schedule removes 8 inputs and lowers
+// score by 1,975 B, serialized size by 1,695 B, script bytes by 1,631 B, and total op-cost by
+// 1,294,337. In the measured accepting suite, the largest transaction falls from 87,708 B to
+// 83,356 B; maximum input cost rises to 8,004,501 op and maximum unlocking bytecode rises to
+// 9,980 B, both within current policy. It does not claim the overall cross-curve record or a
+// single-transaction result.
 //
 // The prescribed fixed benchmark key is synthetic and publishes its setup and IC scalars. These
 // vectors establish complete-equation execution and BCH transaction packaging for that key; they do
@@ -50,50 +52,42 @@
 // suite, not asserted as a proof-independent size ceiling for every possible witness.
 //
 // Byte-exact provenance:
-//   source: groth16_cashscript commit 6819ad7908a66169897f3b9149e11278b261452b
+//   source: groth16_cashscript commit 2b76007bec86727ccc0018dcb4ea9b905042a52f
 //   compiler: CashScript commit 1c707c1dbf87396b30ba5e0704b1db44475ce893
-//   vector sha256: ef0b7904285f635fd3294e1979b4f9e9dfc287ce6faacce43d8effecb83c17fa
-//   Miller manifest sha256: 5abe1c8516ea7e945973f1baef620f5f52bfd09484b11bc4afc08896ac5000ea
+//   vector sha256: eb8806c597a83048f7c6bfc66aaa0d0c9afc710d7890a6503b509e5f63f42441
+//   Miller manifest sha256: 3eb42b9b506752d76f09433de5b4fca59fe94ba2cfd079a12b827bc45110d888
 //   locking graph sha256 (UTF-8 concatenated locking-hex text):
-//     b5a1605f3e0c038d9c55db2de441e6f5a2a2cb8490ba7ccf28ec4caf827e1f07
+//     028335fbd7cfc80524a76b615b1cdaafba4713d47d059b40366a1cced4aea692
 // Reproduce from the source checkout:
 //   VERIFIER_DIR=/path/to/zk-verifier-bench BLS_QUOTIENT_TORUS=1 pnpm vectors:grouped:residue:bls
 //
 // sha256 of locking bytecode, in graph order:
-//   00 b9ba5d3cc057c890a61ab4e89f7be2d31af17122a474999d5c302b29cc7424f9
-//   01 cb53e635abbeea2242cf2f09a7025fa45e9667437d1bc3a7c765a59c590cacaf
-//   02 decf9551603cc0e6b227bab9f081c92b1ba865ba34e5d9f6307c810ec63f2226
-//   03 ee463a7bf79c269ff7561913be9e7b56d00c5c6d54a4fb4d19976908370047cb
-//   04 323f51b3c40a6d59f1cc57d1e2a49ff21626384cb5e3c6028d189cc298fb5a7d
-//   05 d89ee40fc4b1207bcba709b662d1e415ad8d12bce5300a346022fe19d7c00e1b
-//   06 64b92b5390f7064f4b3f45f7b0eeb1fd58f7fb1a2a4276f362f3fe64f5ace3a4
-//   07 7823ad52b8259d0867e3ce773f32fe00899f3cd2c2c2ae5707f6fde49e0b9c20
-//   08 b90d9688c3719644585c9c75dd79448a0f745a71590f5ec27fa4515304dd357a
-//   09 7bd9343cdbe5e0dc0021e98c0d1413124908a005eaf9cec448c13234d2653331
-//   10 16d82ca0c5358725fb042d472b5f9d5ceb2100e994ab6f6993ec9f850226937a
-//   11 c88d3dc56c33ebc71846627903bccd24de9eb4c468851a567ec4ebf3834c0f1d
-//   12 d3c0aeb77c253bf6164f1e3f18b48871dc8ab24d08a5c99d272fbe50de1eefae
-//   13 0c75f56a10c73f496f12228ead03faeb236545e9a3d5ee458910d5725ec5c74b
-//   14 7e750e8b5224372f0358d8b73b4e5d56e32bfbcea35a74f2f11a186b60a8c385
-//   15 ec214cbba3a1da84d8b974df7f4e15642587ffc420e0caab0332b52bf69a626a
-//   16 fee827afc0a347c25b6a2a2f802bd18182458aad6ea77e4ad9c1d9a7bebdff69
-//   17 dd39ecfcbda901ba47dfc083a8524cb77bacc96c943b6da3bd981556ed1398fc
-//   18 aaebe16cfcc2f960a59c5d1369fc8633304759f546b8f46a58e74a8445dc755c
-//   19 e0a69de8b292cd41630096d210589d9b10f184517c99cd132ab0e89d93c8a0b1
-//   20 72e54160a6fa59df27e1a078c66439305b3d7eb25614574bbbad70bed67691bb
-//   21 6e7b8f61187ddaaa3d25e070630f2d3c25c2a61d38f3bf56d78984f6bc730358
-//   22 5c1241feb3d9ce1dca924467b3cca221211fdcfc4398cbfce3bfe0427b4ba0b1
-//   23 d30eeb578a284d6bd96bc68d570d7fa74ed7c1f577b91841654a2719474ce89c
-//   24 066d4f2d7b7cf9e6e11191110cb9a8eb8960b304e86a9cba1cdd64e16cbe901c
-//   25 3fab7098020ef813a96856ea0ed8fdd0661aec371a4a1bbc77331fdeb9c2189f
-//   26 446f065faa7e9b2f65e6c36d9ffc6ce0b06ecb7b7d51b17fcbb8fa64c513c260
-//   27 5c24a366707d902b47c66ca089c214445979ecc4d126da22e104f8e4fcea244c
-//   28 3230f25a943f2a08334292a9b460e7df3af1160f5780cf81aa2b17641aac094f
-//   29 396de7f887accb8ceb58aea1ea795282b536fb6cf76ba04f37516a146a3c1b7b
-//   30 9227fa4109a1569ea7629e6dd59ebf01a9ab2b1afbc74892b5615e81c556c733
-//   31 55a6f21f2e2ba0137781219568c1a7aa2309db552d790819fb6f3301b0c4c080
-//   32 5dcf0e79df20bd36c7c3e77b03ea7102622bdba20c25d871efbd9feaf16aeafa
-//   33 6e0e9873101dd063b666e2177e842e9ecb15875c53ff61aa1c51d77395608d24
+//   00 34fb27f3ea859149f8e9e18e15d380e9b779a8099fa01d247c090a7f496965a1
+//   01 582933f9eb8e09cdd22fcb4a68ab43e935024340336c801ddf793939d1d058de
+//   02 40e8a96fff096e4dce75f9bb98b9b18e50ffddffb293b563e6d879235d0b1aba
+//   03 da8e6011a9f9183bdd8725f8bf7ab9346f384d659d03c8ff73315c8e313384e7
+//   04 fd61b736066bc21eace19784e06a5c90f516cfab8100f3cd091640e075e4553c
+//   05 55dc57f05fd7f91ca3d11ef8bae626a5280fe5f545492dea94052dbf7de862b4
+//   06 0c2eb086e4750da9ada0d9582e009f5131d267f28e3e1252920159cf7c4f0d98
+//   07 f54ec2af00b4896149078d06759bc80eb706ba94b9bee8c4bdaba05595f61ecf
+//   08 1fcafcfffac888ad4590fc26b94e0c200dc6433b9f6cac4184b7be8b69581020
+//   09 d6c072b8890e63813c6ca7a18f310f1d8c730f3ddf3843b155090cbcef146d94
+//   10 61e5a76e286544995001776c331f3b23d4c810552a91eb03750d4d1cf0a86fba
+//   11 3edffd34d79bd2699e602c65835a95f7b6bddd403efdc5ae119524ea5ff4741d
+//   12 34d9f81894cfd13b44da6fa24d449c2021eb123e871d97c76e392fc48893b1cc
+//   13 768c514c2bdffa204ce235a3b0ef7ad41d8854a574b52190c33fd527f20e1186
+//   14 ee9baf1cda573e948b266c7b9b8ad70bc2ee5af4d44695f6cd7eccc2588c8a32
+//   15 b25054b510be50ff5d6b3dd82ebb2da088963fe5bce909f2ef5de610e567c300
+//   16 52797daa4d66a062a7bc8834d1677e2a0b55e4b98b183c883f53be3d6f60b9cb
+//   17 614959aaf5b3c5eb18da45b898566d94ff7cf13ba63322a67bd55ea8528c0649
+//   18 f9a22f230b02a4e84df614945dc9c34dae367215dacf5f25723bce7e47925eca
+//   19 b84433d0fb275a0ab7a5e8891249ea3e0197a12cbb5685dc044efc7641b65f7b
+//   20 eacc6fe369c22b3d1bbe9f73da748419504f141c64f33113e722188c2fb300e9
+//   21 ea7d22dea1041379639096215ca37022667dc54c2bdf72764ea80f9d2fc040c5
+//   22 434d105d95b439a857c52b13715b62176c75ffbcc3e0a3708d4350b7b3a91346
+//   23 713f41dd7b68a23dc5bd573447ac960ede09da143ba4a5acb391d44cd6ed7d60
+//   24 1e239caf491eb8053c93092f68e5d06935ba83ca7efbec553e30823623a635e0
+//   25 2237117e28a0fb0333a9a27659a5ae119a7fb38bd918a53f59d8279717b971b7
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -143,7 +137,7 @@ const toRun = (run: RawRun): Step[] => {
 
 export const bchGroth16Bls12381GroupedResidue: Implementation = {
   id: 'bch-groth16-bls12381-grouped-residue',
-  name: 'BCH BLS12-381 Groth16 grouped quotient-torus verifier (34 inputs, 3 current-policy standard transactions)',
+  name: 'BCH BLS12-381 Groth16 grouped quotient-torus verifier (26 inputs, 3 current-policy standard transactions)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'multi-tx',
@@ -155,7 +149,7 @@ export const bchGroth16Bls12381GroupedResidue: Implementation = {
   source:
     'BCH-native CashScript: the complete four-pair BLS12-381 Groth16 equation for the same fixed ' +
     'benchmark VK as the published grouped entry, with runtime public inputs and runtime A/B/C. ' +
-    'Five shared-table GLV vk_x inputs feed 29 fused prepared-Miller inputs. The fixed ' +
+    'Five shared-table GLV vk_x inputs feed 21 fused prepared-Miller inputs. The fixed ' +
     'e(alpha,beta) Miller value and fixed-G2 gamma/delta line coefficients are ordinary VK ' +
     'preparation; runtime terms are not collapsed using the fixture\'s scalar relations. The ' +
     'accumulator lives in Fp12*/Fp6*, where one canonical six-limb u represents [c]=[1+u*W] and ' +
@@ -169,12 +163,12 @@ export const bchGroth16Bls12381GroupedResidue: Implementation = {
     'Across groups, mutable NFT commitments bind state, successor locking, category, and capability. ' +
     'Group roots exclude same-category sibling inputs and the terminal root burns the thread; the ' +
     'vectors replay capability stripping, minting-thread, sibling-token, and retained-terminal-token ' +
-    'rejections. One fixed 34-locking P2SH32 graph ' +
+    'rejections. One fixed 26-locking P2SH32 graph ' +
     'accepted ten measured runtime fixtures plus the separate all-position GLV stress run. Every ' +
     'transaction in that suite passes BCH 2026 consensus and current standard policy, remains under ' +
     '100,000 bytes, and has an exact 1 sat/B fee template; the contracts do not constrain satoshi ' +
     'values. Byte-exact vectors reproduce from groth16_cashscript ' +
-    '6819ad7908a66169897f3b9149e11278b261452b and CashScript ' +
+    '2b76007bec86727ccc0018dcb4ea9b905042a52f and CashScript ' +
     '1c707c1dbf87396b30ba5e0704b1db44475ce893. The fixed benchmark key is synthetic and publishes ' +
     'its setup and IC scalars, so these vectors establish complete-equation execution and BCH ' +
     'packaging for that key, not circuit knowledge, secure application public-input binding, ' +
