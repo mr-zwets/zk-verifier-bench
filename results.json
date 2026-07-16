@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-16T08:08:26.378Z",
+  "generatedAt": "2026-07-16T11:43:31.248Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -36,7 +36,7 @@
       "id": "bch-groth16-intratx-residue",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 88890,
+      "bytes": 88778,
       "bchCompatible": true
     }
   },
@@ -630,6 +630,22 @@
       "score": 88890,
       "id": "bch-groth16-intratx-residue",
       "steps": 11,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-16T11:43:31.248Z",
+      "score": 88778,
+      "id": "bch-groth16-intratx-residue",
+      "steps": 11,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-16T11:43:31.248Z",
+      "score": 193781,
+      "id": "bch-groth16-bls12381-intratx-residue",
+      "steps": 26,
       "transactions": 1,
       "fits": true
     }
@@ -1513,33 +1529,33 @@
         },
         "failures": []
       },
-      "score": 94376,
+      "score": 93984,
       "size": {
-        "scriptBytes": 92781,
+        "scriptBytes": 92389,
         "txOverheadBytes": 1595,
         "transactions": 12,
-        "total": 94376
+        "total": 93984
       },
       "padding": {
-        "bytes": 1052,
-        "fraction": 0.011338528362488009
+        "bytes": 627,
+        "fraction": 0.006786522205024408
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 70004192,
+          "opCost": 69897089,
           "steps": 12,
           "heaviestStepOpCost": 7899384,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 85480193,
+          "opCost": 85375802,
           "steps": 12,
           "heaviestStepOpCost": 7900716,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 74282400,
+      "opCostBudget": 73968800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1573,7 +1589,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: the complete runtime-proof Groth16 verifier in 12 covenant-threaded transactions. Three standalone GLV vk_x chunks begin at the minting-baton genesis and commit the raw proof tuple. A fused fourth transaction finishes the GLV MSM and immediately executes the first Miller prefix: it derives the B-identity flag from exactly the all-zero raw B encoding, maps only that case to G2.BASE, validates canonical A/B/C and the G1/G2 curve equations, and commits the first Miller state. There is no intermediate GLV-output/Miller-input covenant seam; the fused input commitment binds the partial GLV state and raw proof tuple, and its output commitment binds the resulting Miller state. Eight remaining affine/unit-line optimal-ate Miller chunks enforce the exact G2 subgroup endpoint and evaluate the accumulator in Fp12*/Fp6*. One canonical six-limb finite residue root replaces c/cInv plus the Fp6 coset witness; the terminal checks the exact quotient relation and rejects projective zero. Canonical state limbs ride in NFT commitments. Every nonterminal pins its successor P2SH32 locking; token category and capability are fixed; the genesis recreates its minting baton; the terminal emits an immutable NFT. Byte-exact vectors reproduce from groth16_cashscript commit 6819ad7908a66169897f3b9149e11278b261452b with the pinned input fixtures and cashc 1c707c1dbf87396b30ba5e0704b1db44475ce893. All 14 valid runs pass BCH 2026 consensus and standard policy under one locking graph. The companion source generator certifies exact 1 satoshi-per-byte fee templates; the covenant contracts do not pin satoshi values. The prescribed checkpoint key is synthetic and publishes its setup and IC scalars, so the vectors establish complete-equation execution and covenant validity for that key, not circuit knowledge, secure public-input-vector binding, or independent-setup interoperability. Relayability is measured across the accepting fixture suite; this track does not claim a proof-independent relay ceiling for every valid proof."
+      "source": "BCH-native CashScript: the complete runtime-proof Groth16 verifier in 12 covenant-threaded transactions. Three standalone GLV vk_x chunks begin at the minting-baton genesis and commit the raw proof tuple. A fused fourth transaction finishes the GLV MSM and immediately executes the first Miller prefix: it derives the B-identity flag from exactly the all-zero raw B encoding, maps only that case to G2.BASE, validates canonical A/B/C and the G1/G2 curve equations, and commits the first Miller state. There is no intermediate GLV-output/Miller-input covenant seam; the fused input commitment binds the partial GLV state and raw proof tuple, and its output commitment binds the resulting Miller state. Eight remaining affine/unit-line optimal-ate Miller chunks enforce the exact G2 subgroup endpoint and evaluate the accumulator in Fp12*/Fp6*. One canonical six-limb finite residue root replaces c/cInv plus the Fp6 coset witness; the terminal checks the exact quotient relation and rejects projective zero. Canonical state limbs ride in NFT commitments. Every nonterminal pins its successor P2SH32 locking; token category and capability are fixed; the genesis recreates its minting baton; the terminal emits an immutable NFT. Byte-exact vectors reproduce from groth16_cashscript commit b4d9780275d5f1545465c2dec9702e70ea621006 with the pinned input fixtures and cashc 1c707c1dbf87396b30ba5e0704b1db44475ce893. All 14 valid runs pass BCH 2026 consensus and standard policy under one locking graph. The companion source generator certifies exact 1 satoshi-per-byte fee templates; the covenant contracts do not pin satoshi values. The prescribed checkpoint key is synthetic and publishes its setup and IC scalars, so the vectors establish complete-equation execution and covenant validity for that key, not circuit knowledge, secure public-input-vector binding, or independent-setup interoperability. Relayability is measured across the accepting fixture suite; this track does not claim a proof-independent relay ceiling for every valid proof."
     },
     {
       "id": "bch-vkx-singleton",
@@ -2928,33 +2944,33 @@
         },
         "failures": []
       },
-      "score": 88890,
+      "score": 88778,
       "size": {
-        "scriptBytes": 88397,
+        "scriptBytes": 88285,
         "txOverheadBytes": 493,
         "transactions": 1,
-        "total": 88890
+        "total": 88778
       },
       "padding": {
-        "bytes": 4816,
-        "fraction": 0.05448148692828942
+        "bytes": 4765,
+        "fraction": 0.05397292858356459
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 68575152,
+          "opCost": 68471632,
           "steps": 11,
-          "heaviestStepOpCost": 7910486,
+          "heaviestStepOpCost": 7834045,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 76427465,
+          "opCost": 76325460,
           "steps": 11,
-          "heaviestStepOpCost": 7912719,
+          "heaviestStepOpCost": 7834960,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 70770400,
+      "opCostBudget": 70680800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -2984,11 +3000,11 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: one runtime-proof BN254 verifier linked across 11 inputs of one transaction. Two grouped GLV vk_x inputs feed nine affine, unit-line Miller inputs. The GLV inputs enforce exact state-push lengths so both consume the same hash-bound table. The second input carries the IC1/IC2 MSM projectively into Miller genesis, while e(IC0,gamma) and e(alpha,beta) are folded into the fixed Miller factor. G2 subgroup validation is fused into the Miller endpoint. Proof A and C use canonical normalized (u,v) coordinates, where (0,0) is the identity. An identity B is represented by fixed G2.BASE and a zero first pairing multiplier, preserving the neutral pairing factor without an affine-infinity encoding. The six-limb root u represents [c]=[1+u*W] in Fp12*/Fp6*, reducing each residue fold from three Fp6 products to two. The terminal checks [f*c^(p^2)]=[c^p*c^(p^3)] with a nonzero projective representative. OP_INPUTBYTECODE forward-binds every dynamic state. The root enforces the exact graph size, while each nonterminal input pins its immediate successor locking program at active index + 1. Inputs 2 through 6 use direct byte equality; the remaining edges bind the successor SHA-256. Ten hops force the root to position 0 and fix every successor; the final three programs retain redundant position gates because public cashc compiles them smaller. The designated input-0 verifier UTXO therefore commits transitively to the complete ordered graph. The quotient-torus Miller chunks use scoped raw affine kernels whose compiled probes, field equivalence, and integer ranges are checked by the source pipeline. Executable certificates also cover the projective handoff, nonzero-Y invariant, subgroup endpoint, quotient relation, and a proof-independent 97,016-byte standard relay encoding. Generated fixtures cover every combination of identity A, B, and C, exact layout changes, all successor programs, table alignment, state seams, slopes, points, and proof binding. The companion source pipeline checks complete transactions against current BCH consensus and standard script/size policy, and constructs exact minimum-fee templates. Deployed as P2SH32. The prescribed checkpoint key is synthetic and publishes its setup and IC scalars. The bytecode evaluates the complete four-pair equation without using those relations to collapse the statement, but these vectors do not establish circuit knowledge, secure public-input-vector binding, or interoperability with an independently generated setup."
+      "source": "BCH-native CashScript: one runtime-proof BN254 verifier linked across 11 inputs of one transaction. Two grouped GLV vk_x inputs feed nine affine, unit-line Miller inputs. The GLV inputs enforce exact state-push lengths so both consume the same hash-bound table. The second input carries the IC1/IC2 MSM projectively into Miller genesis, while e(IC0,gamma) and e(alpha,beta) are folded into the fixed Miller factor. G2 subgroup validation is fused into the Miller endpoint. Proof A and C use canonical normalized (u,v) coordinates, where (0,0) is the identity. An identity B is represented by fixed G2.BASE and a zero first pairing multiplier, preserving the neutral pairing factor without an affine-infinity encoding. The six-limb root u represents [c]=[1+u*W] in Fp12*/Fp6*, reducing each residue fold from three Fp6 products to two. The terminal checks [f*c^(p^2)]=[c^p*c^(p^3)] with a nonzero projective representative. OP_INPUTBYTECODE forward-binds every dynamic state. The root enforces the exact graph size, while each nonterminal input pins its immediate successor locking program at active index + 1. Inputs 2, 3, 5, and 6 use direct byte equality; the remaining edges bind the successor SHA-256. Ten hops force the root to position 0 and fix every successor; the final three programs retain redundant position gates because public cashc compiles them smaller. The designated input-0 verifier UTXO therefore commits transitively to the complete ordered graph. The quotient-torus Miller chunks use scoped raw affine kernels whose compiled probes, field equivalence, and integer ranges are checked by the source pipeline. Executable certificates also cover the projective handoff, nonzero-Y invariant, subgroup endpoint, quotient relation, and a proof-independent 98,730-byte standard relay encoding. Its grouped-GLV certificate charges the fallback at all 63 and 66 physical lookup slots without using setup or IC scalar relations. Generated fixtures cover every combination of identity A, B, and C, exact layout changes, all successor programs, table alignment, state seams, slopes, points, and proof binding. The companion source pipeline checks complete transactions against current BCH consensus and standard script/size policy, and constructs deterministic templates that fund at least the default minimum relay fee. Deployed as P2SH32. The prescribed checkpoint key is synthetic and publishes its setup and IC scalars for fixture generation. The bytecode evaluates the complete four-pair equation, and the verifier layout, cut selection, and resource certificate do not use those relations. These vectors do not establish circuit knowledge, secure public-input-vector binding, or interoperability with an independently generated setup."
     },
     {
       "id": "bch-groth16-intratx-residue-large",
-      "name": "BCH Groth16 intra-tx quotient-torus residue, LARGE 100 kB scripts (whole verifier in 2 inputs of one transaction, PROPOSED bch-spec)",
+      "name": "BCH Groth16 intra-tx quotient-torus residue, LARGE 100 kB scripts (whole verifier in 4 inputs of one transaction, PROPOSED bch-spec)",
       "category": "spec",
       "official": false,
       "solver": null,
@@ -3007,39 +3023,39 @@
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
-          "seamsTested": 1,
+          "seamsTested": 3,
           "unboundSeams": 0,
-          "detail": "every stage bound to one proof: 1 seams staple-tested with a 2nd distinct proof, all rejected"
+          "detail": "every stage bound to one proof: 3 seams staple-tested with a 2nd distinct proof, all rejected"
         },
         "failures": []
       },
-      "score": 72271,
+      "score": 58823,
       "size": {
-        "scriptBytes": 72163,
-        "txOverheadBytes": 108,
+        "scriptBytes": 58631,
+        "txOverheadBytes": 192,
         "transactions": 1,
-        "total": 72271
+        "total": 58823
       },
       "padding": {
-        "bytes": 21612,
-        "fraction": 0.29948865762232724
+        "bytes": 12,
+        "fraction": 0.00020466988453207347
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 68808715,
-          "steps": 2,
-          "heaviestStepOpCost": 63824583,
+          "opCost": 68317512,
+          "steps": 4,
+          "heaviestStepOpCost": 24336839,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 82867490,
-          "steps": 2,
-          "heaviestStepOpCost": 63830355,
+          "opCost": 82375653,
+          "steps": 4,
+          "heaviestStepOpCost": 24336918,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 73674400,
+      "opCostBudget": 78792800,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3069,7 +3085,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: one runtime-proof BN254 verifier in two linked inputs of one transaction, targeting the proposed bch-spec 100,000-byte-script VM. A 128-position four-scalar GLV schedule computes the IC1/IC2 MSM projectively. One unrolled input then validates canonical A/B/C encodings, curve relations, identity semantics, and the exact runtime-B subgroup endpoint while executing the complete 348-operation quotient-torus Miller trace and terminal relation. The fixed e(alpha,beta) and e(IC0,gamma) factors are precomputed without using the fixture's published scalar relations to collapse the four-pair equation. The root enforces the exact input count and pins the terminal locking program; the terminal enforces its position; OP_INPUTBYTECODE binds the projective handoff; both input blobs have exact widths. All accepting fixtures pass the bch-spec consensus and standard-policy VMs with fee-funded deterministic templates. The 69,886-byte terminal unlocking requires the proposed VM and exceeds current BCH's 10,000-byte limit. Deployed as P2SH32. The prescribed checkpoint key is synthetic and publishes setup and IC scalars, so this artifact establishes complete-equation execution and proposed-VM resource validity for that key; it does not establish circuit knowledge, production public-input binding, arbitrary-key verification, or independent-setup interoperability."
+      "source": "BCH-native CashScript: one runtime-proof BN254 verifier in four linked inputs of one transaction, targeting the proposed bch-spec 100,000-byte-script VM. A 128-position four-scalar GLV schedule computes the IC1/IC2 MSM projectively. Three linked inputs then validate canonical A/B/C encodings, curve relations, identity semantics, and the exact runtime-B subgroup endpoint while executing the complete 348-operation quotient-torus Miller trace and terminal relation. The fixed e(alpha,beta) and e(IC0,gamma) factors are precomputed without using the fixture's published scalar relations to collapse the four-pair equation. The root enforces the exact input count and pins the terminal locking program; the terminal enforces its position; OP_INPUTBYTECODE binds every state handoff; all input blobs have exact widths. All accepting fixtures pass the bch-spec consensus and standard-policy VMs with fee-funded deterministic templates. The 21,393-byte maximum unlocking requires the proposed VM and exceeds current BCH's 10,000-byte limit. Deployed as P2SH32. The prescribed checkpoint key is synthetic and publishes setup and IC scalars, so this artifact establishes complete-equation execution and proposed-VM resource validity for that key; it does not establish circuit knowledge, production public-input binding, arbitrary-key verification, or independent-setup interoperability."
     },
     {
       "id": "bch-groth16-intratx-general",
@@ -3506,7 +3522,7 @@
     },
     {
       "id": "bch-groth16-bls12381-intratx-residue",
-      "name": "BCH BLS12-381 Groth16 intra-tx quotient-torus residue (34-input BCH-valid verifier)",
+      "name": "BCH BLS12-381 Groth16 intra-tx quotient-torus residue (26-input consensus-valid verifier)",
       "category": "full",
       "official": false,
       "solver": null,
@@ -3525,39 +3541,39 @@
         "crossStageBinding": {
           "applicable": true,
           "bound": true,
-          "seamsTested": 33,
+          "seamsTested": 25,
           "unboundSeams": 0,
-          "detail": "every stage bound to one proof: 33 seams staple-tested with a 2nd distinct proof, all rejected"
+          "detail": "every stage bound to one proof: 25 seams staple-tested with a 2nd distinct proof, all rejected"
         },
         "failures": []
       },
-      "score": 196895,
+      "score": 193781,
       "size": {
-        "scriptBytes": 195413,
-        "txOverheadBytes": 1482,
+        "scriptBytes": 192643,
+        "txOverheadBytes": 1138,
         "transactions": 1,
-        "total": 196895
+        "total": 193781
       },
       "padding": {
-        "bytes": 18491,
-        "fraction": 0.09462522964183549
+        "bytes": 45049,
+        "fraction": 0.23384706425875842
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 153091714,
-          "steps": 34,
-          "heaviestStepOpCost": 5445782,
+          "opCost": 151669685,
+          "steps": 26,
+          "heaviestStepOpCost": 7296644,
           "inputsForHeaviestStep": 1
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 185038859,
-          "steps": 34,
-          "heaviestStepOpCost": 7527078,
+          "opCost": 183586905,
+          "steps": 26,
+          "heaviestStepOpCost": 7518110,
           "inputsForHeaviestStep": 1
         }
       },
-      "opCostBudget": 156493600,
+      "opCostBudget": 154239200,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -3566,7 +3582,7 @@
         "detail": "every step fits BCH per-tx limits",
         "standard": {
           "fits": false,
-          "detail": "tx 195,705 B > 100,000 B standard size"
+          "detail": "tx 192,871 B > 100,000 B standard size"
         }
       },
       "generality": {
@@ -3587,7 +3603,7 @@
         "secure": true,
         "type": "p2sh32"
       },
-      "source": "BCH-native CashScript: one runtime-proof BLS12-381 verifier linked across 34 inputs of one transaction. Five shared-table GLV vk_x inputs feed 29 c^-|x|-fused prepared-Miller inputs; the first and last Miller inputs fuse canonical point, curve, and G2 subgroup validation, and e(alpha,beta) is precomputed. A canonical six-limb u represents [c]=[1+u*W] in Fp12*/Fp6*, where gcd(p+|x|,p^6+1)=r makes the lambda-power image exactly the pairing kernel. Constant root folds use two Fp6 products, and the final Miller input checks [fF]=[frob(c,1)] with a nonzero projective representative, eliminating the separate tail. OP_INPUTBYTECODE directly binds every state, the root, and both stage seams. One fixed P2SH32 script set verifies any proof for the VK at runtime. Every input fits current BCH script and op-cost limits; the 195,705-byte transaction is consensus-valid but non-standard only by total size. The dense valid fixture exercises all 128 GLV Straus add positions."
+      "source": "BCH-native CashScript: the complete four-pair BLS12-381 equation linked across 26 inputs of one transaction. Five shared-table GLV vk_x inputs feed 21 c^-|x|-fused prepared-Miller inputs. Runtime A/C are canonically encoded and on-curve; runtime B is also checked in the exact G2 subgroup. The fixed e(alpha,beta) value and fixed-G2 gamma/delta lines use ordinary verification-key preparation; no setup-scalar relation collapses the equation. A canonical six-limb u represents [c]=[1+u*W] in Fp12*/Fp6*, where gcd(p+|x|,p^6+1)=r makes the lambda-power image exactly the pairing kernel. Constant root folds use two Fp6 products, and the final Miller input checks [fF]=[frob(c,1)] with a nonzero projective representative, eliminating the separate tail. OP_INPUTBYTECODE directly binds every state, the root, and both stage seams. One fixed P2SH32 script set verifies any proof for the VK at runtime. Every input fits current BCH script and op-cost limits; the exactly funded 192,871-byte transaction is consensus-valid and passes standard per-input script policy, but it is not standard-relayable because the complete transaction exceeds 100,000 bytes. The dense valid fixture exercises all 128 GLV Straus add positions."
     },
     {
       "id": "bch-groth16-bls12381-intratx-residue-large",
