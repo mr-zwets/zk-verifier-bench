@@ -4,11 +4,15 @@
 // nChain reference), with every op-lowering optimization from the BN254 min-op
 // variant ported to BLS12-381:
 //   - LAZY field tower for the Miller loop (deferred reductions);
-//   - witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381:
-//     lambda = p + |x|, tail fF*w == frob(c,1); the witness scaling group is mu_27A,
-//     A = (|x|+1)/3, verified on-chain via ((w^|x|)*w)^9 == 1);
-//   - ONE batched c^-|x|-fused Miller on the UNCONJUGATED boundary: only (-A,B) runs
-//     on-chain G2 arithmetic; e(alpha,beta) baked; (vk_x,gamma)/(C,delta) lines baked;
+//   - QUOTIENT-TORUS residue final exponentiation (ePrint 2024/640 in Fp12*/Fp6*,
+//     lambda = p + |x|): the root is ONE gated 6-limb witness u with [c] = [1+u*W]
+//     and [c^-1] = [1-u*W]; c-folds cost two Fp6 products (fp12MulTorus); the terminal
+//     checks the cross-multiplied quotient relation [fF] = [frob(c,1)] and rejects the
+//     vacuous [0:0] projective value. The legacy Fp6 correction w vanishes in the
+//     quotient (no w witness, no c*cInv==1 gate);
+//   - ONE batched c^-|x|-fused Miller on the UNCONJUGATED boundary (SSA emission):
+//     only (-A,B) runs on-chain G2 arithmetic; e(alpha,beta) baked as its torus
+//     coordinate; (vk_x,gamma)/(C,delta) lines baked;
 //   - psi(B) == [-x]B G2 subgroup check, fused into the Miller tail;
 //   - on-curve checks for A and C; their G1 subgroup checks are omitted because both
 //     points are paired only with order-r G2 points, so cofactor components pair trivially;
@@ -37,29 +41,30 @@ const mp = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-minop-mul
 
 export const bchGroth16Bls12381SingletonMinOp: Implementation = {
   id: 'bch-groth16-bls12381-singleton-minop',
-  name: 'BCH Groth16 verifier singleton, BLS12-381 — op-optimized (lazy tower + residue + fused psi check + GLV)',
+  name: 'BCH Groth16 verifier singleton, BLS12-381 — op-optimized (lazy tower + quotient torus + fused psi check + GLV)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
     'BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in ONE contract, ' +
-    'op-optimized — same curve as nchain. Lazy field tower for the Miller loop; witnessed-' +
-    'residue final exponentiation (ePrint 2024/640 adapted to BLS12-381: lambda = p+|x|, ' +
-    'w gated to mu_27A on-chain) replacing the hard part; e(alpha,beta) baked and the ' +
-    '(vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); ' +
+    'op-optimized — same curve as nchain. Lazy field tower for the Miller loop; QUOTIENT-' +
+    'TORUS residue final exponentiation (ePrint 2024/640 in Fp12*/Fp6*: lambda = p+|x|, one ' +
+    'gated 6-limb root u with [c]=[1+u*W], terminal [fF]=[frob(c,1)] cross-product with ' +
+    '[0:0] rejected) replacing the hard part; e(alpha,beta) baked as its torus coordinate and ' +
+    'the (vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); ' +
     'psi G2 subgroup check fused into the Miller tail; A and C checked on-curve, with ' +
     'their redundant G1 subgroup checks omitted because they are paired only against ' +
     'order-r G2 points; GLV 4-scalar vk_x with mixed Jacobian-affine ' +
-    'fixed-table additions. All extra inputs (c,cInv,w; ' +
+    'fixed-table additions. All extra inputs (torus root u; ' +
     'GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x ' +
     'recomputed on-chain; all proof points checked on-curve and B subgroup-checked). Verified vs ' +
-    '@noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~78% less ' +
+    '@noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~86% less ' +
     'op-cost. Still over the 10,000 B / per-input op limits.',
   load: async () => {
     const valid: Step[] = [
       {
-        label: 'op-optimized BLS12-381 Groth16 verify: lazy fused Miller + residue + fused psi + GLV (single tx)',
+        label: 'op-optimized BLS12-381 Groth16 verify: lazy fused Miller + quotient torus + fused psi + GLV (single tx)',
         lockingBytecode: hexToBin(v.lockingOK),
         unlockingBytecode: hexToBin(v.unlocking),
         checkpoint: 'verify',
