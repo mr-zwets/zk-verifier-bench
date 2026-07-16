@@ -26,14 +26,14 @@
 // P2SH32 locking; the terminal verdict NFT is immutable. The genesis recreates its minting baton
 // under the same locking and category.
 //
-// Committed proof: 92,781 script B; 94,376 harness-score B; 94,374 actually serialized B
-// across 12 transactions; 70,004,192 op. The second proof is 94,394 actual wire B and the
-// dense proof is 111,331 actual wire B. All 14 valid runs pass both BCH 2026 consensus and
+// Committed proof: 92,389 script B; 93,984 harness-score B; 93,982 actually serialized B
+// across 12 transactions; 69,897,089 op. The second proof is 93,997 actual wire B and the
+// dense proof is 110,941 actual wire B. All 14 valid runs pass both BCH 2026 consensus and
 // standard-policy VMs under the same lockings, and every individual transaction is at most
 // 10,127 bytes and 7,902,941 op-cost across the accepting suite. The companion source generator
 // certifies exact 1 satoshi-per-serialized-byte fee templates; the covenant contracts do not pin
-// satoshi values. The currently published entry is 104,901 script B / 106,754 harness-score B /
-// 106,752 actual wire B / 78,686,995 op across 14 transactions.
+// satoshi values. The preceding published entry is 92,781 script B / 94,376 harness-score B /
+// 94,374 actual wire B / 70,004,192 op across 12 transactions.
 // The harness's covenant overhead model is two bytes above actual serialization because it
 // includes an empty-commitment length byte for the baton and terminal NFT; every total is labeled.
 //
@@ -43,7 +43,7 @@
 // setup. Relayability is demonstrated for the 14 accepting fixture families; unlike the one-tx
 // track, this covenant entry does not claim a proof-independent relay ceiling for every valid proof.
 //
-// Reproduction: groth16_cashscript commit 6819ad7908a66169897f3b9149e11278b261452b,
+// Reproduction: groth16_cashscript commit ff93c9fbecdfc293d3ccb83a47fca8f58d628df0,
 // cashc commit
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893:
 //   VERIFIER_DIR=/path/to/zk-verifier-bench pnpm vectors:covenant:torus
@@ -51,22 +51,22 @@
 // Input fixture SHA-256:
 //   multiproof d513f1fe45d7aba20f289cbc38439d5ebdb05a9975950a5e32d2bf21239d4abc
 //   pairing checkpoint e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e
-// Vector SHA-256: b0ad2b1166503604ab0157d1f11bfca4c6aaf15da76b6f96ed7b9f501fd43a25
+// Vector SHA-256: a77b1166beeafbc0ff3bfc9d9c7c61942ac00e7a8b184a13d84c95a0bd7eb0d2
 // Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
-// 21b8555c00e5713ef857d066f20fc9b19337d9e6ad5c903d95f3d20de38a9e3d
+// 5020578322c3c25436f0c5edae26626bb1f0a70c0d6fa77613896d87cc892771
 //
 // sha256 of locking bytecode, in transaction order:
-//   00 55c8990d1b9502b1c79de68a6406a54ef3420095bb7d6169eb6565180f74e915
-//   01 6210f758fc2daadcc51a8dbb5cc76e61ffbc723e8cca4b631155b5fe4e4dfd02
-//   02 0efaf6e5565e0746d2bf5976da7796bb72980102b1b2b38f8f4f9724bb87a76b
-//   03 6b73ed2a4937b0023a667c095efb379eedc5b1f0dccb71174c961b71d88c4c0a
-//   04 80d9bfaa0ed9137d4c3ffbd80dfd95d82e0b76c9e86dc69738084edfbad82683
-//   05 700fa9d160082c6dec9f20efc132bfd0f191c4956d3436d87c577f7a234f4902
-//   06 e5fdeef6f11b697feef5e7480e3ff498c08f40ba7221b5fd69f79d6e61508938
-//   07 d923d485ec77b6032b5615b6e868a581dbd51dfa1848b306b203803c81de01bb
-//   08 ea87358a3fabf218a8ab0f3f16cea014bf0dce4783b844b103f9acb999119e78
-//   09 0e55b3a18d6c5a1e1494f4e00268c9b1476f2d0339302b00f77faca2d8087788
-//   10 7cd9f79339d655bb1d1a4bfee5dc7e03decf219fcf2139cb54ba0890e53d856b
+//   00 20b8adc9fc9340971ea5253b781d0ae5ede2e3c7b410c425df8deaef941f1346
+//   01 570e616589155709152c9229762ac7b47800223d08109c9ec786ab4b3b206b87
+//   02 db69fc09c118da6d40a2ca56726b86c592fad533014a090a85f754ca2acc52c3
+//   03 7a63de2e82dc7524a10b1a52c04007a3a5d198198ba6bab49231ed18de8446f0
+//   04 e1e20485b01221b5d73448ef2cb8360db097092f977acb42587432e066b3ff97
+//   05 426cf80c63792be0ee5e7ad01016a3cc1fea79740064674e42a1038cec9b16cf
+//   06 a1407fd6c1cb06164844a9fa2e7c661a90385c933be60e5894a2da5fab3a7d6b
+//   07 b495bd8f8979d9ed778aecfc37e58dd3746204a9c1c1c1c2ab67a852417c02dd
+//   08 316bc7e38904c7b94b6e6c6d7388c1cdb84e0039e54d59965744eb87c5ef4781
+//   09 c6df0a08f44299e8a166fd9b34b4c4fcbaa07b08a38ebc6de85cfeffd3c193df
+//   10 e7caf69566db1c8c47365329baefeacadca7aae76d33506a60ab079928cecf61
 //   11 f6fba8336b190db01a9bdd9b1cd2002293bc2d6c09d36e3c1a096be65c16ddb2
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
@@ -134,7 +134,7 @@ export const bchGroth16ChunkedCovenantResidue: Implementation = {
     'ride in NFT commitments. Every nonterminal pins its successor P2SH32 locking; token category and ' +
     'capability are fixed; the genesis recreates its minting baton; the terminal emits an immutable NFT. ' +
     'Byte-exact vectors reproduce from groth16_cashscript commit ' +
-    '6819ad7908a66169897f3b9149e11278b261452b with the pinned input fixtures and cashc ' +
+    'ff93c9fbecdfc293d3ccb83a47fca8f58d628df0 with the pinned input fixtures and cashc ' +
     '1c707c1dbf87396b30ba5e0704b1db44475ce893. All 14 valid runs pass BCH 2026 consensus ' +
     'and standard policy under one locking graph. The companion source generator certifies exact ' +
     '1 satoshi-per-byte fee templates; the covenant contracts do not pin satoshi values. The prescribed ' +
