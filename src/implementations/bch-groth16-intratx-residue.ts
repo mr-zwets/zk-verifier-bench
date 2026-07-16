@@ -7,7 +7,7 @@
 //
 // The designated input-0 verifier UTXO is the graph root. It requires exactly 11 inputs, and every
 // nonterminal input pins its immediate successor's complete locking program at active index + 1.
-// Inputs 2 through 6 use direct byte equality; the remaining edges pin the successor's SHA-256.
+// Inputs 2, 3, 5, and 6 use direct byte equality; the remaining edges pin the successor's SHA-256.
 // The ten hops force the root to index 0 and fix every successor position; the final three inputs
 // retain redundant position gates because public cashc compiles them smaller. Each handoff checks
 // the successor state with OP_INPUTBYTECODE. The two GLV
@@ -35,34 +35,36 @@
 // Fixture scope: verifier.cash's deterministic BN254 checkpoint key publishes its setup and IC
 // scalars so the harness can mint multiple satisfying equations without a circuit prover. The
 // bytecode still evaluates the complete four-pair equation and does not use those relations to
-// collapse the on-chain statement. These vectors therefore establish equation execution, runtime
-// witness handling, and BCH resource validity for the prescribed key; they do not establish circuit
-// knowledge, secure binding of the public-input vector, or independent-setup interoperability.
+// collapse the on-chain statement. The verifier layout, cut selection, and universal resource
+// certificate also avoid those scalar relations. These vectors therefore establish equation
+// execution, runtime witness handling, and BCH resource validity for the prescribed key; they do
+// not establish circuit knowledge, secure binding of the public-input vector, or independent-setup
+// interoperability.
 //
-// Committed fixture: 88,397 benchmark script bytes; 88,505 serialized transaction bytes;
-// 88,890 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,575,152 op-cost.
-// Proof-independent relay encoding: 97,016 serialized bytes; 77,253,358 op-cost ceiling;
-// 2,984-byte standard-transaction margin.
-// Source: mr-zwets/groth16_cashscript @ 6819ad7908a66169897f3b9149e11278b261452b
+// Committed fixture: 88,285 benchmark script bytes; 88,393 serialized transaction bytes;
+// 88,778 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,471,632 op-cost.
+// Proof-independent relay encoding: 98,730 serialized bytes; 78,624,129 op-cost ceiling;
+// 1,270-byte standard-transaction margin.
+// Source: mr-zwets/groth16_cashscript @ ca9794c341c2e187f64c13b2b2ac61398a4468b5
 // Compiler: mr-zwets/cashscript compiler-optimizations @
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893
 // Input fixture SHA-256:
 //   multiproof d513f1fe45d7aba20f289cbc38439d5ebdb05a9975950a5e32d2bf21239d4abc
 //   pairing checkpoint e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e
-// Vector SHA-256: 628ff17be61a1ab77f291fdc1612c7bfe0d1452871379208c1ffe639d4db25d5
+// Vector SHA-256: 45a46eaf9e7afc8271a670759ce2eb20436316e3cb53aadc1b1e0d4c6452d1f2
 // Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
-// b3650c298e64218852d3688936d84df57023154afc05a516fc4a5531f54464b1
+// cf6f11ca2d10eaf8fa5a7bbb401908908513a01e3270189aa8728965e28202ad
 // Synthetic zero-outpoint fixture serialization hash256:
-// d15dda8774fb48cefcdf92e60078052e6a5c8e6b95037922aae122ffb1882546
+// bf880d886a9ef46a6c771e9413f7655222439a0e276d66185ce813e2b08ff45c
 // Locking-bytecode SHA-256 values, in input order:
-//   00 2bacad65133c2be5d8a7e1e8164a768b9bfe404f7e80835853fbd6504637c9c3
-//   01 0afda9439b2c6d6a0e886dcc67fbce67c498db49f306206494233ac2b4ff19d5
-//   02 0ebc5160822ec831fbcd538eb216da655bda86c406ce3456cecf20f3c3db014d
-//   03 27c90ce11b729103cb67fb183a5bc74f3bd940a949b5a6e025ad445956bfc37c
-//   04 ba540858f909f1990d0e143fbfdfcd998c3808e382ef286f05356b3a9b3ebd86
-//   05 b2f72b0fc6c1b06550b5da74c16cde2786f51cd50eed821106a156c8a3fcf01d
-//   06 5b27feb38468c6a37d157ffc78a7e17235aeaac6191c31e4d91ff5e0a7dcb088
-//   07 16981c29d9fc44933fa18e8c3f7d85189444d1c15776fdc35e8988df6915a9cc
+//   00 d13cd41b5ca87e5d1923771b273d79a224511fab352aa9cd507f97e3924f293b
+//   01 9fb41b0b4bc2067f88b4c70125c5483073d00825083a9c3a83b5ba0a7d6dcf95
+//   02 43d70cf0741aa8181103ec578508a6248cb3c9713630999ed3ff1abba2960764
+//   03 d21cd8012a44f419559ed1baf825edbefa53c39860df7fbff39e67df3e93136f
+//   04 182a11dea88fe048739d370b77adebbf416ec17e4549058a8fe36ed6416b09d3
+//   05 732d217b96f80ddbee7adb3e9a68731cb702aac9c612ca39ced2202f9812f840
+//   06 f6abd0a99005dc963e3dd369272073263e11b499c60c4f743e15bcf953bf31f2
+//   07 e800a6425c3e3ec7a5e9751ca53feb3e0ef17e4b8f487bfdeeb8cdb3c9c6ab61
 //   08 8f8faa007f5bc7295cda7d704d6f6f7012980be3562bfb795bc954e1b6200600
 //   09 cbef6a1eeb2f397bdb8b0cc5a6648a6c93df4821c34fd161e0677c4c8eeb93f8
 //   10 b60c599ea00f46a68e46901ab29e97409abbb61f5e8b13a0f26f03aa116ba26c
@@ -121,21 +123,24 @@ export const bchGroth16IntratxResidue: Implementation = {
     '[f*c^(p^2)]=[c^p*c^(p^3)] with a nonzero projective representative. OP_INPUTBYTECODE ' +
     'forward-binds every dynamic state. The root enforces the exact graph size, while each ' +
     'nonterminal input pins its immediate successor locking program at active index + 1. Inputs ' +
-    '2 through 6 use direct byte equality; the remaining edges bind the successor SHA-256. Ten hops ' +
+    '2, 3, 5, and 6 use direct byte equality; the remaining edges bind the successor SHA-256. Ten hops ' +
     'force the root to position 0 and fix every successor; the final three programs retain ' +
     'redundant position gates because public cashc compiles them smaller. The designated input-0 ' +
     'verifier UTXO therefore commits transitively to the complete ordered graph. ' +
     'The quotient-torus Miller chunks use scoped raw affine kernels whose compiled probes, field ' +
     'equivalence, and integer ranges are checked by the source pipeline. Executable certificates ' +
     'also cover the projective handoff, nonzero-Y invariant, subgroup endpoint, quotient relation, ' +
-    'and a proof-independent 97,016-byte standard relay encoding. Generated fixtures cover every ' +
+    'and a proof-independent 98,730-byte standard relay encoding. Its grouped-GLV certificate ' +
+    'charges the fallback at all 63 and 66 physical lookup slots without using setup or IC scalar ' +
+    'relations. Generated fixtures cover every ' +
     'combination of identity A, B, and C, exact layout changes, all successor programs, table ' +
     'alignment, state seams, slopes, points, and proof binding. The companion source pipeline checks ' +
     'complete transactions against current BCH consensus and standard script/size policy, and ' +
     'constructs exact minimum-fee templates. Deployed ' +
-    'as P2SH32. The prescribed checkpoint key is synthetic and publishes its setup and IC scalars. ' +
-    'The bytecode evaluates the complete four-pair equation without using those relations to collapse ' +
-    'the statement, but these vectors do not establish circuit knowledge, secure public-input-vector ' +
+    'as P2SH32. The prescribed checkpoint key is synthetic and publishes its setup and IC scalars ' +
+    'for fixture generation. The bytecode evaluates the complete four-pair equation, and the verifier ' +
+    'layout, cut selection, and resource certificate do not use those relations. These vectors do ' +
+    'not establish circuit knowledge, secure public-input-vector ' +
     'binding, or interoperability with an independently generated setup.',
   load: async () => {
     const valid = toRun(v.steps);
