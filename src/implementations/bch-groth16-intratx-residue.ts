@@ -45,7 +45,7 @@
 // 88,778 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,471,632 op-cost.
 // Proof-independent relay encoding: 98,730 serialized bytes; 78,624,129 op-cost ceiling;
 // 1,270-byte standard-transaction margin.
-// Source: mr-zwets/groth16_cashscript @ ca9794c341c2e187f64c13b2b2ac61398a4468b5
+// Source: mr-zwets/groth16_cashscript @ b4d9780275d5f1545465c2dec9702e70ea621006
 // Compiler: mr-zwets/cashscript compiler-optimizations @
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893
 // Input fixture SHA-256:
@@ -136,7 +136,7 @@ export const bchGroth16IntratxResidue: Implementation = {
     'combination of identity A, B, and C, exact layout changes, all successor programs, table ' +
     'alignment, state seams, slopes, points, and proof binding. The companion source pipeline checks ' +
     'complete transactions against current BCH consensus and standard script/size policy, and ' +
-    'constructs exact minimum-fee templates. Deployed ' +
+    'constructs deterministic templates that fund at least the default minimum relay fee. Deployed ' +
     'as P2SH32. The prescribed checkpoint key is synthetic and publishes its setup and IC scalars ' +
     'for fixture generation. The bytecode evaluates the complete four-pair equation, and the verifier ' +
     'layout, cut selection, and resource certificate do not use those relations. These vectors do ' +

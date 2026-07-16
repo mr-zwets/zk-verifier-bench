@@ -3,7 +3,7 @@
 //   GLV vk_x MSM             1 input    (one 128-position four-scalar schedule)
 //   fused Miller + verdict   3 inputs   (the complete 348-operation quotient-torus trace)
 //                            --------
-//                            4 inputs   (one standard-relayable bch-spec transaction)
+//                            4 inputs   (one transaction passing the bch-spec standard-policy model)
 //
 // The root fixes the exact input count and SHA-256-pins the terminal program; the terminal fixes
 // its position. OP_INPUTBYTECODE binds the projective vk_x and complete Miller-state handoffs. The
@@ -15,7 +15,8 @@
 // Committed fixture: 58,631 script B; 58,683 serialized B; 58,823 verifier.cash score;
 // 68,317,512 op. The dense worst-case fixture is 70,144 serialized B / 82,375,653 op.
 // All 14 accepting fixture families use the same locking graph and pass the bch-spec consensus
-// and standard-policy VMs with exact minimum-fee templates. This requires the proposed VM because
+// and standard-policy VMs with default-minimum-fee-funded deterministic templates. This requires
+// the proposed VM because
 // the largest unlocking is 21,393 B; current BCH limits unlocking bytecode to 10,000 B.
 //
 // The prescribed checkpoint key is synthetic and publishes setup and IC scalars. These vectors
@@ -23,7 +24,7 @@
 // knowledge, production public-input binding, arbitrary-key verification, and independently
 // generated setup interoperability are outside this artifact's scope.
 //
-// Source: mr-zwets/groth16_cashscript @ abd909873f4223fc532ac555501d5857e0f04d13
+// Source: mr-zwets/groth16_cashscript @ b4d9780275d5f1545465c2dec9702e70ea621006
 // Compiler: mr-zwets/cashscript compiler-optimizations @
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893
 // Input fixture SHA-256:
