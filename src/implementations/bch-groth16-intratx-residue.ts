@@ -7,6 +7,7 @@
 //
 // The designated input-0 verifier UTXO is the graph root. It requires exactly 11 inputs, and every
 // nonterminal input pins its immediate successor's complete locking program at active index + 1.
+// Inputs 2 through 6 use direct byte equality; the remaining edges pin the successor's SHA-256.
 // The ten hops force the root to index 0 and fix every successor position; the final three inputs
 // retain redundant position gates because public cashc compiles them smaller. Each handoff checks
 // the successor state with OP_INPUTBYTECODE. The two GLV
@@ -38,29 +39,29 @@
 // witness handling, and BCH resource validity for the prescribed key; they do not establish circuit
 // knowledge, secure binding of the public-input vector, or independent-setup interoperability.
 //
-// Committed fixture: 88,402 benchmark script bytes; 88,510 serialized transaction bytes;
-// 88,895 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,579,470 op-cost.
-// Proof-independent relay encoding: 97,023 serialized bytes; 77,257,804 op-cost ceiling;
-// 2,977-byte standard-transaction margin.
-// Source: mr-zwets/groth16_cashscript @ d0245ba223f1112a69d12ce094dad5a3e0d19399
+// Committed fixture: 88,397 benchmark script bytes; 88,505 serialized transaction bytes;
+// 88,890 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,575,152 op-cost.
+// Proof-independent relay encoding: 97,016 serialized bytes; 77,253,358 op-cost ceiling;
+// 2,984-byte standard-transaction margin.
+// Source: mr-zwets/groth16_cashscript @ dea977a6052feb67c2ef6216d0a30fb0248b8993
 // Compiler: mr-zwets/cashscript compiler-optimizations @
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893
 // Input fixture SHA-256:
 //   multiproof d513f1fe45d7aba20f289cbc38439d5ebdb05a9975950a5e32d2bf21239d4abc
 //   pairing checkpoint e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e
-// Vector SHA-256: 5912892c4cf54a0ae5e1a80301e6f45b498f7fa091a5bff6c9ff4de7d6dad145
+// Vector SHA-256: 628ff17be61a1ab77f291fdc1612c7bfe0d1452871379208c1ffe639d4db25d5
 // Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
-// 4e9ebd37b5e58037e5b9b239c5740e9b2e383edaaa5710925bae5c679f8820f7
+// b3650c298e64218852d3688936d84df57023154afc05a516fc4a5531f54464b1
 // Synthetic zero-outpoint fixture serialization hash256:
-// c3286ef7f2b72f22435e61eb05473e24c8bec786ae20ff19b99c236308c04095
+// d15dda8774fb48cefcdf92e60078052e6a5c8e6b95037922aae122ffb1882546
 // Locking-bytecode SHA-256 values, in input order:
-//   00 5b7d1eb307d1a39bef32f1e5371911e48abcea5420845ecb0d26201b1e7ace0e
-//   01 d611f23c83e758cf14445bbe2c227cfb6f3aa9c198f77c5b44265ce8330bdb7a
-//   02 f220d39f65e78c19446c20e2b0745ebebc5a6ee71d298700bf8ebe58af2b528e
-//   03 112e5b214bc228084ab20f9813cdf6b959cdc136422cbfc958da5744fc7c4b52
-//   04 0faa228c0095bac51ecb2496f5cb81737ceeb90ea4413ca19dfaeb469e1cb595
-//   05 6d039c07ce71de6869103348a8dc186913f546bf4b13974247f6c62ef228f850
-//   06 39f04e503177493d9353a20253bd0fcc7666ca9de1c305967f518615a85ed11c
+//   00 2bacad65133c2be5d8a7e1e8164a768b9bfe404f7e80835853fbd6504637c9c3
+//   01 0afda9439b2c6d6a0e886dcc67fbce67c498db49f306206494233ac2b4ff19d5
+//   02 0ebc5160822ec831fbcd538eb216da655bda86c406ce3456cecf20f3c3db014d
+//   03 27c90ce11b729103cb67fb183a5bc74f3bd940a949b5a6e025ad445956bfc37c
+//   04 ba540858f909f1990d0e143fbfdfcd998c3808e382ef286f05356b3a9b3ebd86
+//   05 b2f72b0fc6c1b06550b5da74c16cde2786f51cd50eed821106a156c8a3fcf01d
+//   06 5b27feb38468c6a37d157ffc78a7e17235aeaac6191c31e4d91ff5e0a7dcb088
 //   07 16981c29d9fc44933fa18e8c3f7d85189444d1c15776fdc35e8988df6915a9cc
 //   08 8f8faa007f5bc7295cda7d704d6f6f7012980be3562bfb795bc954e1b6200600
 //   09 cbef6a1eeb2f397bdb8b0cc5a6648a6c93df4821c34fd161e0677c4c8eeb93f8
@@ -119,14 +120,15 @@ export const bchGroth16IntratxResidue: Implementation = {
     'Fp6 products to two. The terminal checks ' +
     '[f*c^(p^2)]=[c^p*c^(p^3)] with a nonzero projective representative. OP_INPUTBYTECODE ' +
     'forward-binds every dynamic state. The root enforces the exact graph size, while each ' +
-    'nonterminal input pins its immediate successor locking program at active index + 1. Ten hops ' +
+    'nonterminal input pins its immediate successor locking program at active index + 1. Inputs ' +
+    '2 through 6 use direct byte equality; the remaining edges bind the successor SHA-256. Ten hops ' +
     'force the root to position 0 and fix every successor; the final three programs retain ' +
     'redundant position gates because public cashc compiles them smaller. The designated input-0 ' +
     'verifier UTXO therefore commits transitively to the complete ordered graph. ' +
     'The quotient-torus Miller chunks use scoped raw affine kernels whose compiled probes, field ' +
     'equivalence, and integer ranges are checked by the source pipeline. Executable certificates ' +
     'also cover the projective handoff, nonzero-Y invariant, subgroup endpoint, quotient relation, ' +
-    'and a proof-independent 97,023-byte standard relay encoding. Generated fixtures cover every ' +
+    'and a proof-independent 97,016-byte standard relay encoding. Generated fixtures cover every ' +
     'combination of identity A, B, and C, exact layout changes, all successor programs, table ' +
     'alignment, state seams, slopes, points, and proof binding. The companion source pipeline checks ' +
     'complete transactions against current BCH consensus and standard script/size policy, and ' +
