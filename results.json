@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-16T11:43:31.248Z",
+  "generatedAt": "2026-07-16T12:43:55.806Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -1245,7 +1245,7 @@
     },
     {
       "id": "bch-groth16-bls12381-singleton-minop",
-      "name": "BCH Groth16 verifier singleton, BLS12-381 — op-optimized (lazy tower + residue + fused psi check + GLV)",
+      "name": "BCH Groth16 verifier singleton, BLS12-381 — op-optimized (lazy tower + quotient torus + fused psi check + GLV)",
       "category": "full",
       "official": false,
       "solver": null,
@@ -1270,12 +1270,12 @@
         },
         "failures": []
       },
-      "score": 67417,
+      "score": 59179,
       "size": {
-        "scriptBytes": 67330,
+        "scriptBytes": 59092,
         "txOverheadBytes": 87,
         "transactions": 1,
-        "total": 67417
+        "total": 59179
       },
       "padding": {
         "bytes": 0,
@@ -1283,20 +1283,20 @@
       },
       "benchmarks": {
         "smallProof": {
-          "opCost": 256588769,
+          "opCost": 149229220,
           "steps": 1,
-          "heaviestStepOpCost": 256588769,
-          "inputsForHeaviestStep": 32
+          "heaviestStepOpCost": 149229220,
+          "inputsForHeaviestStep": 19
         },
         "worstCase": {
           "accepted": true,
-          "opCost": 283922759,
+          "opCost": 175694397,
           "steps": 1,
-          "heaviestStepOpCost": 283922759,
-          "inputsForHeaviestStep": 36
+          "heaviestStepOpCost": 175694397,
+          "inputsForHeaviestStep": 22
         }
       },
-      "opCostBudget": 1384000,
+      "opCostBudget": 630400,
       "bsvSingleton": false,
       "bsvOpReturn": false,
       "bch": {
@@ -1305,7 +1305,7 @@
           "script-size",
           "op-cost"
         ],
-        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~32× one input's op-cost budget",
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~19× one input's op-cost budget",
         "standard": {
           "fits": false,
           "detail": "1/1 locking >201 B; a step is non-standard under the standard VM"
@@ -1329,7 +1329,7 @@
         "secure": true,
         "type": "p2s"
       },
-      "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in ONE contract, op-optimized — same curve as nchain. Lazy field tower for the Miller loop; witnessed-residue final exponentiation (ePrint 2024/640 adapted to BLS12-381: lambda = p+|x|, w gated to mu_27A on-chain) replacing the hard part; e(alpha,beta) baked and the (vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); psi G2 subgroup check fused into the Miller tail; A and C checked on-curve, with their redundant G1 subgroup checks omitted because they are paired only against order-r G2 points; GLV 4-scalar vk_x with mixed Jacobian-affine fixed-table additions. All extra inputs (c,cInv,w; GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain; all proof points checked on-curve and B subgroup-checked). Verified vs @noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~78% less op-cost. Still over the 10,000 B / per-input op limits."
+      "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in ONE contract, op-optimized — same curve as nchain. Lazy field tower for the Miller loop; QUOTIENT-TORUS residue final exponentiation (ePrint 2024/640 in Fp12*/Fp6*: lambda = p+|x|, one gated 6-limb root u with [c]=[1+u*W], terminal [fF]=[frob(c,1)] cross-product with [0:0] rejected) replacing the hard part; e(alpha,beta) baked as its torus coordinate and the (vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); psi G2 subgroup check fused into the Miller tail; A and C checked on-curve, with their redundant G1 subgroup checks omitted because they are paired only against order-r G2 points; GLV 4-scalar vk_x with mixed Jacobian-affine fixed-table additions. All extra inputs (torus root u; GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain; all proof points checked on-curve and B subgroup-checked). Verified vs @noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~86% less op-cost. Still over the 10,000 B / per-input op limits."
     },
     {
       "id": "bch-groth16-chunked",
