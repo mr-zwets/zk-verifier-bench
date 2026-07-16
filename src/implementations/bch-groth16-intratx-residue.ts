@@ -11,7 +11,7 @@
 // The ten hops force the root to index 0 and fix every successor position; the final three inputs
 // retain redundant position gates because public cashc compiles them smaller. Each handoff checks
 // the successor state with OP_INPUTBYTECODE. The two GLV
-// inputs execute a 43-position four-scalar schedule over one exact-length, hash-bound lookup table,
+// inputs execute a 64-position four-scalar schedule over one exact-length, hash-bound lookup table,
 // then hand the IC1/IC2 MSM to Miller genesis as projective (X,Y,Z). The fixed e(IC0,gamma) and
 // e(alpha,beta) Miller factors are precomputed. Proof A and C enter as canonical normalized (u,v)
 // coordinates, with (0,0) encoding the identity. An identity B is mapped to fixed G2.BASE together
@@ -41,29 +41,29 @@
 // not establish circuit knowledge, secure binding of the public-input vector, or independent-setup
 // interoperability.
 //
-// Committed fixture: 88,285 benchmark script bytes; 88,393 serialized transaction bytes;
-// 88,778 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,471,632 op-cost.
-// Proof-independent relay encoding: 98,730 serialized bytes; 78,624,129 op-cost ceiling;
-// 1,270-byte standard-transaction margin.
-// Source: mr-zwets/groth16_cashscript @ b4d9780275d5f1545465c2dec9702e70ea621006
+// Committed fixture: 86,795 benchmark script bytes; 86,903 serialized transaction bytes;
+// 87,288 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,384,800 op-cost.
+// Proof-independent relay encoding: 99,353 serialized bytes; 79,122,059 op-cost ceiling;
+// 647-byte standard-transaction margin.
+// Source: mr-zwets/groth16_cashscript @ b6926e03ebe18ce6faa0b6e2a406cbc4e24c4143
 // Compiler: mr-zwets/cashscript compiler-optimizations @
 // 1c707c1dbf87396b30ba5e0704b1db44475ce893
 // Input fixture SHA-256:
 //   multiproof d513f1fe45d7aba20f289cbc38439d5ebdb05a9975950a5e32d2bf21239d4abc
 //   pairing checkpoint e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e
-// Vector SHA-256: 45a46eaf9e7afc8271a670759ce2eb20436316e3cb53aadc1b1e0d4c6452d1f2
+// Vector SHA-256: f4062f68b5389a96914bfe9b03bb8f0c50d845270815b0c0b9880ed452c67b64
 // Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
-// cf6f11ca2d10eaf8fa5a7bbb401908908513a01e3270189aa8728965e28202ad
+// 00fdb00e1a5fd1806ff0621f0b83b244ddbe20ee9fbbeb76e3aa194047d62b3d
 // Synthetic zero-outpoint fixture serialization hash256:
-// bf880d886a9ef46a6c771e9413f7655222439a0e276d66185ce813e2b08ff45c
+// e7d8bad7b325128bcc11d2ac0741f65e4df6764ae631bca611d4bdec12e2f486
 // Locking-bytecode SHA-256 values, in input order:
-//   00 d13cd41b5ca87e5d1923771b273d79a224511fab352aa9cd507f97e3924f293b
-//   01 9fb41b0b4bc2067f88b4c70125c5483073d00825083a9c3a83b5ba0a7d6dcf95
-//   02 43d70cf0741aa8181103ec578508a6248cb3c9713630999ed3ff1abba2960764
-//   03 d21cd8012a44f419559ed1baf825edbefa53c39860df7fbff39e67df3e93136f
-//   04 182a11dea88fe048739d370b77adebbf416ec17e4549058a8fe36ed6416b09d3
-//   05 732d217b96f80ddbee7adb3e9a68731cb702aac9c612ca39ced2202f9812f840
-//   06 f6abd0a99005dc963e3dd369272073263e11b499c60c4f743e15bcf953bf31f2
+//   00 b563236055e03127fe2b36740fcaa0a9f2127836992e4f5693374c23ddb746fd
+//   01 ee1a833844fb4ea69d49ecd51258e190b6b91ab3f3252ee845bd3f1b9a058c46
+//   02 9750fb5862c6314c063a851e5e1dde09c364284757f58b05b68e0d2527b1869d
+//   03 03198eb9bda6013d1746f4d5446e275dbda7a665694a21c5a4c44150ec2604ae
+//   04 5ca3ea1015a5ba213be940d63b17d61e026e60157edaf7edd2c630d1f744b122
+//   05 e79bbd8a8dc53f478439643bbab4d5e26256c59763cd943a99ffce9bacf6fe5f
+//   06 4aba30bc2e06f67948a71724707fe7afc4fb12292572722555d38c53c3885f0b
 //   07 e800a6425c3e3ec7a5e9751ca53feb3e0ef17e4b8f487bfdeeb8cdb3c9c6ab61
 //   08 8f8faa007f5bc7295cda7d704d6f6f7012980be3562bfb795bc954e1b6200600
 //   09 cbef6a1eeb2f397bdb8b0cc5a6648a6c93df4821c34fd161e0677c4c8eeb93f8
@@ -130,8 +130,8 @@ export const bchGroth16IntratxResidue: Implementation = {
     'The quotient-torus Miller chunks use scoped raw affine kernels whose compiled probes, field ' +
     'equivalence, and integer ranges are checked by the source pipeline. Executable certificates ' +
     'also cover the projective handoff, nonzero-Y invariant, subgroup endpoint, quotient relation, ' +
-    'and a proof-independent 98,730-byte standard relay encoding. Its grouped-GLV certificate ' +
-    'charges the fallback at all 63 and 66 physical lookup slots without using setup or IC scalar ' +
+    'and a proof-independent 99,353-byte standard relay encoding. Its grouped-GLV certificate ' +
+    'charges the fallback at all 58 and 70 physical lookup slots without using setup or IC scalar ' +
     'relations. Generated fixtures cover every ' +
     'combination of identity A, B, and C, exact layout changes, all successor programs, table ' +
     'alignment, state seams, slopes, points, and proof binding. The companion source pipeline checks ' +
