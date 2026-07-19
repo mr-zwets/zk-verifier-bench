@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-19T08:17:49.978Z",
+  "generatedAt": "2026-07-19T08:41:15.786Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -33,10 +33,10 @@
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-intratx-direct-state-public",
+      "id": "bch-groth16-intratx-crown8-rawchain",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 83294,
+      "bytes": 77193,
       "bchCompatible": true
     }
   },
@@ -686,6 +686,14 @@
       "score": 90323,
       "id": "bch-groth16-bls12381-intratx-fs",
       "steps": 22,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-19T08:41:15.786Z",
+      "score": 77193,
+      "id": "bch-groth16-intratx-crown8-rawchain",
+      "steps": 8,
       "transactions": 1,
       "fits": true
     }
@@ -3299,6 +3307,91 @@
         "type": "p2sh32"
       },
       "source": "BCH-native CashScript: one runtime-proof BN254 verifier in four linked inputs of one transaction, targeting the proposed bch-spec 100,000-byte-script VM. A 128-position four-scalar GLV schedule computes the IC1/IC2 MSM projectively. Three linked inputs then validate canonical A/B/C encodings, curve relations, identity semantics, and the exact runtime-B subgroup endpoint while executing the complete 348-operation quotient-torus Miller trace and terminal relation. The fixed e(alpha,beta) and e(IC0,gamma) factors are precomputed without using the fixture's published scalar relations to collapse the four-pair equation. The root enforces the exact input count and pins the terminal locking program; the terminal enforces its position; OP_INPUTBYTECODE binds every state handoff; all input blobs have exact widths. All accepting fixtures pass the bch-spec consensus and standard-policy VMs with fee-funded deterministic templates. The 21,393-byte maximum unlocking requires the proposed VM and exceeds current BCH's 10,000-byte limit. Deployed as P2SH32. The prescribed checkpoint key is synthetic and publishes setup and IC scalars, so this artifact establishes complete-equation execution and proposed-VM resource validity for that key; it does not establish circuit knowledge, production public-input binding, arbitrary-key verification, or independent-setup interoperability."
+    },
+    {
+      "id": "bch-groth16-intratx-crown8-rawchain",
+      "name": "BCH BN254 Groth16 crown8 raw-chain",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 9,
+          "rejected": 9
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": true,
+          "seamsTested": 7,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 7 seams staple-tested with a 2nd distinct proof, all rejected"
+        },
+        "failures": []
+      },
+      "score": 77193,
+      "size": {
+        "scriptBytes": 76829,
+        "txOverheadBytes": 364,
+        "transactions": 1,
+        "total": 77193
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 58275057,
+          "steps": 8,
+          "heaviestStepOpCost": 7999114,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 58335785,
+          "steps": 8,
+          "heaviestStepOpCost": 7998271,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "opCostBudget": 61012000,
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 3,
+        "proofsPassed": 3,
+        "detail": "runtime-general: one fixed locking verifies 3/3 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "type": "mixed"
+      },
+      "source": "Eight-input P2SH32 BN254 Groth16 verifier with sibling-bytecode-bound raw Miller-chain records; corpus-pinned runtime vectors and targeted witness tamper plans."
     },
     {
       "id": "bch-groth16-intratx-general",
