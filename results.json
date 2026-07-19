@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-17T07:32:09.095Z",
+  "generatedAt": "2026-07-19T08:17:49.978Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -678,6 +678,14 @@
       "score": 83294,
       "id": "bch-groth16-intratx-direct-state-public",
       "steps": 10,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-19T08:17:49.978Z",
+      "score": 90323,
+      "id": "bch-groth16-bls12381-intratx-fs",
+      "steps": 22,
       "transactions": 1,
       "fits": true
     }
@@ -1362,6 +1370,94 @@
         "type": "p2s"
       },
       "source": "BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in ONE contract, op-optimized — same curve as nchain. Lazy field tower for the Miller loop; QUOTIENT-TORUS residue final exponentiation (ePrint 2024/640 in Fp12*/Fp6*: lambda = p+|x|, one gated 6-limb root u with [c]=[1+u*W], terminal [fF]=[frob(c,1)] cross-product with [0:0] rejected) replacing the hard part; e(alpha,beta) baked as its torus coordinate and the (vk_x,gamma)/(C,delta) line coefficients baked (only (-A,B) runs on-chain G2 math); psi G2 subgroup check fused into the Miller tail; A and C checked on-curve, with their redundant G1 subgroup checks omitted because they are paired only against order-r G2 points; GLV 4-scalar vk_x with mixed Jacobian-affine fixed-table additions. All extra inputs (torus root u; GLV k-decomposition + zInv) are prover-supplied and gated on-chain. Sound (vk_x recomputed on-chain; all proof points checked on-curve and B subgroup-checked). Verified vs @noble/curves bls12-381. Single-tx like bch-groth16-bls12381-singleton but ~86% less op-cost. Still over the 10,000 B / per-input op limits."
+    },
+    {
+      "id": "bch-groth16-bls12381-singleton-fs",
+      "name": "BCH Groth16 verifier singleton, BLS12-381 — Fiat-Shamir PIT (single-script qsplit tail-22)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 12,
+          "rejected": 12
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
+      "score": 124239,
+      "size": {
+        "scriptBytes": 124152,
+        "txOverheadBytes": 87,
+        "transactions": 1,
+        "total": 124239
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 58690636,
+          "steps": 1,
+          "heaviestStepOpCost": 58690636,
+          "inputsForHeaviestStep": 8
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 60575949,
+          "steps": 1,
+          "heaviestStepOpCost": 60575949,
+          "inputsForHeaviestStep": 8
+        }
+      },
+      "opCostBudget": 50436800,
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": false,
+        "blockers": [
+          "script-size",
+          "op-cost"
+        ],
+        "detail": "1/1 step(s) over the 10,000 B script cap; heaviest step ~8× one input's op-cost budget",
+        "standard": {
+          "fits": false,
+          "detail": "1/1 locking >201 B; 1/1 unlocking >10,000 B; a step is non-standard under the standard VM"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 10,
+        "proofsPassed": 10,
+        "detail": "runtime-general: one fixed locking verifies 10/10 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "type": "p2s"
+      },
+      "source": "BCH-native CashScript: the complete qsplit tail-22 BLS12-381 Groth16 verification in ONE contract. The script rebuilds the Fiat-Shamir commitment and quotient Merkle roots over its own witness arguments with OP_SHA256 and requires the beta/alpha challenges to equal the tagged hashes of those roots; the Fp6/torus Miller relations are checked by polynomial identity testing at those challenges with one prover-supplied 132-coefficient quotient (Fiat-Shamir PIT security model — see groth16_cashscript/verifiers.md). The 32-window public-VK GT table is Merkle-authenticated inline against baked window roots with leaf indices bound to the committed public-input bytes; the G2 walk, slope equations, psi subgroup check, and the lambda = p+|x| residue terminal stay exact. One identical proof-independent contract serves the full ten-fixture corpus. 60.58M worst-case op-cost vs the unconditional minop oracle’s 149.2M. Still over the 10,000 B / per-input op limits."
     },
     {
       "id": "bch-groth16-chunked",
@@ -3721,6 +3817,91 @@
         "type": "p2sh32"
       },
       "source": "BCH-native CashScript: the complete four-pair BLS12-381 equation linked across 24 inputs of one transaction. Five shared-table GLV vk_x inputs feed 19 c^-|x|-fused prepared-Miller inputs. Runtime A/C are canonically encoded and on-curve; runtime B is also checked in the exact G2 subgroup. The fixed e(alpha,beta) value and fixed-G2 gamma/delta lines use ordinary verification-key preparation; no setup-scalar relation collapses the equation. A canonical six-limb u represents [c]=[1+u*W] in Fp12*/Fp6*, where gcd(p+|x|,p^6+1)=r makes the lambda-power image exactly the pairing kernel. Constant root folds use two Fp6 products, and the final Miller input checks [fF]=[frob(c,1)] with a nonzero projective representative, eliminating the separate tail. OP_INPUTBYTECODE directly binds every state, the root, and both stage seams. One fixed P2SH32 script set verifies any proof for the VK at runtime. Every input fits current BCH script and op-cost limits; the exactly funded 192,529-byte transaction is consensus-valid and passes standard per-input script policy, but it is not standard-relayable because the complete transaction exceeds 100,000 bytes. The dense valid fixture exercises all 128 GLV Straus add positions."
+    },
+    {
+      "id": "bch-groth16-bls12381-intratx-fs",
+      "name": "BCH BLS12-381 Groth16 Fiat-Shamir PIT (22 inputs, one standard transaction)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BLS12-381",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 22,
+          "rejected": 22
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": false,
+          "bound": null,
+          "seamsTested": 0,
+          "unboundSeams": 0,
+          "detail": "not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet"
+        },
+        "failures": []
+      },
+      "score": 90323,
+      "size": {
+        "scriptBytes": 89357,
+        "txOverheadBytes": 966,
+        "transactions": 1,
+        "total": 90323
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 67899727,
+          "steps": 22,
+          "heaviestStepOpCost": 6724785,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 69750806,
+          "steps": 22,
+          "heaviestStepOpCost": 6723633,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "opCostBudget": 71591200,
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 9,
+        "proofsPassed": 9,
+        "detail": "runtime-general: one fixed locking verifies 9/9 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "type": "p2sh32"
+      },
+      "source": "Complete BLS12-381 Groth16 verification in one current-BCH standard transaction. The externally anchored coordinator commits to the 21 worker lockings, while worker inputs read the required siblings with OP_INPUTBYTECODE. The coordinator also pins the proof/public-input statement, every Miller-block payload, and one logical 132-coefficient quotient leaf. The quotient is carried as an exact 110-coefficient head plus 22-coefficient tail and evaluated in order. The public-input contribution is authenticated from a table derived only from public verification-key points; published synthetic VK scalar relations are limited to fixture generation. The terminal residue relation enforces the full four-pair Groth16 equation. B receives an exact G2 subgroup check. A/C are on-curve and equation-binding, while unique G1 subgroup encodings and the separate harness input-validation grade are not claimed. One locking set accepts all ten supplied equation-valid fixtures. The proof-independent resource certificate derives per-input ceilings from the exported bytecodes and covers both B branch classes."
     },
     {
       "id": "bch-groth16-bls12381-intratx-residue-large",
