@@ -1,9 +1,9 @@
 // BCH-native BN254 Groth16 verifier — crown8 raw-chain submission vectors.
 //
 // Bytecode provenance (sha256):
-//   exec[0..5] bc890390772483cfc243f36096d877b7a57c91756c95b12f787f2a07cc563c45
-//   genesis     ed9f2d96efea8ed93f145cefe542effd4b763ce475a8cb26a5d37535b13924b1
-//   terminal    b32a0dfb3d819177d813a8829e5b4f44a1851dee5d577f6b6e665c285d2636e6
+//   exec[0..5] ddc0ffe8267dd847032d4d7d72962fb0c5ed6e96f6d9b1365233615c91d3462a
+//   genesis     b746bd7ad5067ca597bc01d0641123cb5f7b07bebbb1247c08297f9219b52d57
+//   terminal    41954608e9a737bdac049b3c4f64ac230f59de7e6f6a567f23cbf561af20b3c8
 //
 // Construction: eight P2SH32 inputs in one transaction. Inputs 0..5 consume
 // and bind successive raw Miller-chain records through sibling unlocking-bytecode
@@ -108,7 +108,7 @@ const mutate = (mutation: Mutation): Step[] => {
   if (mutation.kind === 'executor-rawchain-bit') {
     if (mutation.input < 0 || mutation.input > 5) throw new Error('raw-chain mutation must target executor 0..5');
     const record = dataPushes(inputs[mutation.input]!.unlockingBytecode)[2];
-    if (record === undefined || ![576, 768].includes(record.length)) throw new Error('raw-chain record ABI drift');
+    if (record === undefined || ![576, 768, 602, 826].includes(record.length)) throw new Error('raw-chain record ABI drift');
     inputs[mutation.input]!.unlockingBytecode[record.start + record.length - 384]! ^= 1;
   } else if (mutation.kind === 'terminal-root-prefix-bit') {
     const prefix = dataPushes(inputs[7]!.unlockingBytecode)[2];
