@@ -1,4 +1,11 @@
 // Complete BLS12-381 Groth16 verification in one current-BCH standard transaction.
+//
+// Entry name: bch-groth16-bls12381-intratx-fs (intra-tx packing + Fiat-Shamir
+// polynomial-identity checking). The Fp6/torus relations are checked at
+// SHA-256-derived challenges rather than computed exactly, so this entry sits in
+// the separate Fiat-Shamir PIT security-model category defined in
+// groth16_cashscript/verifiers.md; the residue entries remain the unconditional
+// frontier. "qsplit tail-22" is the internal build codename.
 // Twenty-two P2SH32 inputs jointly enforce
 //
 //   e(-A, B) * e(alpha, beta) * e(vk_x, gamma) * e(C, delta) = 1,
@@ -37,7 +44,7 @@
 // VMs, remains below the 100,000-byte relay limit, and pays exactly 1 sat/byte.
 //
 // Source revision:
-//   groth16_cashscript commit 608f74747dc50def17c3b07a223585b330342124
+//   groth16_cashscript PR #14 commit 608f74747dc50def17c3b07a223585b330342124 (entry named at fd3c843)
 // Source artifact:
 //   groth16_cashscript/chunked/bls12-381/measure_d3_two_chart_binary.mjs
 //   sha256 f0c15ed60d1507542f40ea392478693b7e7b8ded73a666313ee82e748602c46d
@@ -90,7 +97,7 @@ interface Vectors {
 }
 
 const vectors = JSON.parse(readFileSync(
-  'src/bch/groth16-bls12381-intratx-residue-qsplit-vectors.json',
+  'src/bch/groth16-bls12381-intratx-fs-vectors.json',
   'utf8',
 )) as Vectors;
 
@@ -107,9 +114,9 @@ const toRun = (raw: RawStep[]): Step[] => {
   }));
 };
 
-export const bchGroth16Bls12381IntratxResidueQsplit: Implementation = {
-  id: 'bch-groth16-bls12381-intratx-residue-qsplit',
-  name: 'BCH BLS12-381 Groth16 q132 q-split (22 inputs, one standard transaction)',
+export const bchGroth16Bls12381IntratxFs: Implementation = {
+  id: 'bch-groth16-bls12381-intratx-fs',
+  name: 'BCH BLS12-381 Groth16 Fiat-Shamir PIT (22 inputs, one standard transaction)',
   proofSystem: 'Groth16',
   field: 'BLS12-381',
   structure: 'single-tx',
