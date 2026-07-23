@@ -654,21 +654,5 @@
     "steps": 8,
     "transactions": 1,
     "fits": true
-  },
-  {
-    "t": "2026-07-23T17:43:21.653Z",
-    "score": 193309,
-    "id": "bch-groth16-bls12381-intratx-residue",
-    "steps": 24,
-    "transactions": 1,
-    "fits": true
-  },
-  {
-    "t": "2026-07-23T17:43:21.653Z",
-    "score": 234022,
-    "id": "bch-groth16-intratx",
-    "steps": 31,
-    "transactions": 1,
-    "fits": true
   }
 ]
