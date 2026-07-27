@@ -1,10 +1,10 @@
-// BCH-native hash-STARK verifier, INTRA-TRANSACTION LINKED: a DEEP-ALI FRI-STARK over Goldilocks
+// BCH-native hash-STARK verifier, INTRA-TRANSACTION LINKED: a DEEP-ALI, AIR-based FRI-STARK over Goldilocks
 // verified by the 22 linked INPUTS of ONE transaction. No pairing, no elliptic curve, no trusted
 // setup: the only cryptographic assumption is the collision resistance of SHA256, which the BCH VM
 // provides natively.
 //
 // This is a different proof system from the Groth16 entries, so it opens its own leaderboard
-// (proofSystem: 'FRI-STARK', per the Implementation.proofSystem contract in harness/types.ts). It is
+// (proofSystem: 'AIR-based FRI-STARK', per the Implementation.proofSystem contract in harness/types.ts). It is
 // listed here because it exercises exactly the BCH-specific problems this benchmark was built to
 // surface: chunking across inputs, intra-transaction state hand-off, the per-input 10,000-byte cap,
 // and the op-cost density budget.
@@ -104,12 +104,12 @@ const toRun = (raw: RawStep[]): Step[] => {
 export const bchFriStarkGoldilocksIntratx: Implementation = {
   id: 'bch-fri-stark-goldilocks-intratx',
   name: 'BCH hash-STARK intra-tx linked, DEEP-ALI FRI over Goldilocks (transparent, no pairing, demo proving parameters)',
-  proofSystem: 'FRI-STARK',
+  proofSystem: 'AIR-based FRI-STARK',
   field: 'Goldilocks',
   structure: 'single-tx',
   proofBinding: 'baked',
   source:
-    'BCH-native hash-STARK: a DEEP-ALI FRI-STARK over Goldilocks with GF(p^2) challenges, laid out as ' +
+    'BCH-native hash-STARK: a DEEP-ALI, AIR-based FRI-STARK over Goldilocks with GF(p^2) challenges, laid out as ' +
     'the 22 linked INPUTS of ONE transaction. The statement is a Poseidon2 hash chain expressed as an ' +
     'AIR; the AIR residuals are batched into one composition polynomial, opened at an out-of-domain ' +
     'point (DEEP), and the resulting quotient is checked by FRI (fold 8). Input 0 carries the ' +
