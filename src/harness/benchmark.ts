@@ -51,6 +51,7 @@ import { bchVkxScalarmult } from '../implementations/bch-vkx-scalarmult.js';
 import { bchVkxSingleton } from '../implementations/bch-vkx-singleton.js';
 import { nchain } from '../implementations/nchain.js';
 import { scryptBn256 } from '../implementations/scrypt-bn256.js';
+import { bchFriStarkGoldilocksIntratx } from '../implementations/bch-fri-stark-goldilocks-intratx.js';
 
 import { pathToFileURL } from 'node:url';
 
@@ -89,7 +90,7 @@ const limitReason = (error: string): string => {
   return 'limit';
 };
 
-export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16SingletonOpcodeOptimized, bchGroth16SingletonGenpow, bchGroth16SingletonMinOp, bchGroth16Bls12381Singleton, bchGroth16Bls12381SingletonOpcodeOptimized, bchGroth16Bls12381SingletonGenpow, bchGroth16Bls12381SingletonMinOp, bchGroth16Bls12381SingletonFs, bchGroth16Chunked, bchGroth16ChunkedCovenant, bchGroth16ChunkedCovenantResidue, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchGroth16Bls12381ChunkedCovenant, bchGroth16Bls12381ChunkedCovenantResidue, bchPairingIntratx, bchGroth16Intratx, bchGroth16IntratxDirectStatePublic, bchGroth16IntratxAuthenticatedP2s, bchGroth16IntratxResidue, bchGroth16IntratxResidueLarge, bchGroth16IntratxCrown8Rawchain, bchGroth16IntratxPairfold7, bchGroth16IntratxGeneral, bchGroth16Grouped, bchGroth16GroupedResidue, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchGroth16Bls12381IntratxResidue, bchGroth16Bls12381IntratxFs, bchGroth16Bls12381IntratxResidueLarge, bchGroth16Bls12381Grouped, bchGroth16Bls12381GroupedResidue, bchMultistepDemo];
+export const REGISTRY: Implementation[] = [nchain, scryptBn256, bchGroth16Singleton, bchGroth16SingletonOpcodeOptimized, bchGroth16SingletonGenpow, bchGroth16SingletonMinOp, bchGroth16Bls12381Singleton, bchGroth16Bls12381SingletonOpcodeOptimized, bchGroth16Bls12381SingletonGenpow, bchGroth16Bls12381SingletonMinOp, bchGroth16Bls12381SingletonFs, bchGroth16Chunked, bchGroth16ChunkedCovenant, bchGroth16ChunkedCovenantResidue, bchVkxScalarmult, bchVkxSingleton, bchVkxBls12381Singleton, bchVkxChunkedTwoloop, bchVkxChunkedShamir, bchVkxChunkedCovenant, bchVkxBls12381ChunkedCovenant, bchPairingSingleton, bchPairingBls12381Singleton, bchPairingChunked, bchPairingBls12381Chunked, bchGroth16Bls12381Chunked, bchGroth16Bls12381ChunkedCovenant, bchGroth16Bls12381ChunkedCovenantResidue, bchPairingIntratx, bchGroth16Intratx, bchGroth16IntratxDirectStatePublic, bchGroth16IntratxAuthenticatedP2s, bchGroth16IntratxResidue, bchGroth16IntratxResidueLarge, bchGroth16IntratxCrown8Rawchain, bchGroth16IntratxPairfold7, bchGroth16IntratxGeneral, bchGroth16Grouped, bchGroth16GroupedResidue, bchPairingBls12381Intratx, bchGroth16Bls12381Intratx, bchGroth16Bls12381IntratxResidue, bchGroth16Bls12381IntratxFs, bchGroth16Bls12381IntratxResidueLarge, bchGroth16Bls12381Grouped, bchGroth16Bls12381GroupedResidue, bchMultistepDemo, bchFriStarkGoldilocksIntratx];
 
 // Zero-padding accounting: the chunked/intra-tx steps append one big all-zero push to each
 // unlocking purely to buy op-cost budget ((41+len)*800). Its full encoded length (push
