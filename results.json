@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-07-23T17:58:50.387Z",
+  "generatedAt": "2026-07-30T08:19:41.592Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -33,10 +33,10 @@
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-intratx-crown8-rawchain",
+      "id": "bch-groth16-intratx-pairfold7",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 77193,
+      "bytes": 54483,
       "bchCompatible": true
     }
   },
@@ -694,6 +694,30 @@
       "score": 77193,
       "id": "bch-groth16-intratx-crown8-rawchain",
       "steps": 8,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-30T08:19:41.592Z",
+      "score": 54483,
+      "id": "bch-groth16-intratx-pairfold7",
+      "steps": 7,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-30T08:19:41.592Z",
+      "score": 193309,
+      "id": "bch-groth16-bls12381-intratx-residue",
+      "steps": 24,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-07-30T08:19:41.592Z",
+      "score": 234022,
+      "id": "bch-groth16-intratx",
+      "steps": 31,
       "transactions": 1,
       "fits": true
     }
@@ -3392,6 +3416,91 @@
         "type": "mixed"
       },
       "source": "Eight-input P2SH32 BN254 Groth16 verifier with sibling-bytecode-bound raw Miller-chain records; corpus-pinned runtime vectors and targeted witness tamper plans."
+    },
+    {
+      "id": "bch-groth16-intratx-pairfold7",
+      "name": "BCH Groth16 intra-tx PairFold-7 dens-rich (score 54483)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 7,
+          "rejected": 7
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": true,
+          "seamsTested": 6,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 6 seams staple-tested with a 2nd distinct proof, all rejected"
+        },
+        "failures": []
+      },
+      "score": 54483,
+      "size": {
+        "scriptBytes": 54162,
+        "txOverheadBytes": 321,
+        "transactions": 1,
+        "total": 54483
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 42220349,
+          "steps": 7,
+          "heaviestStepOpCost": 7282288,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 42208466,
+          "steps": 7,
+          "heaviestStepOpCost": 7281584,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "opCostBudget": 43363200,
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": false,
+        "tested": 0,
+        "rejected": 0,
+        "detail": "NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)"
+      },
+      "packaging": {
+        "secure": true,
+        "type": "p2sh32"
+      },
+      "source": "BCH-native CashScript: seven P2SH32 inputs in one intra-transaction-linked BN254 Groth16 verifier (PairFold-7 dens-rich). Mixed Miller windows, fixed-G2 tables, densFuel=0 pure dens path, stock public-bench value=1000 / sequence=0 envelope. Score 54483 (scriptBytes 54162 + tx overhead 321); fitsBchStandardness=true."
     },
     {
       "id": "bch-groth16-intratx-general",
