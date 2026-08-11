@@ -13,6 +13,12 @@
 // bit-flip plans spanning each raw-chain executor plus the genesis/terminal roots.
 // Corpus provenance is pinned in the JSON artifact; the benchmark's stock 1000-sat,
 // sequence-0 intra-tx envelope is the deployment context used by these scripts.
+//
+// Size roadmap (mutation #1 — Miller rebalance): padBytes is already 0; the next
+// lever is moving ~1.13M op-cost from wall-bound exec0/1/4 into under-full exec2,
+// then shrinking donor unlocks. Expected mid-case savings ~1.2–1.4 KB. Plan +
+// checker: tools/crown8-rebalance-plan.mts (requires regenerating the six exec
+// programs from the private crown8 builder — not a pure JSON patch).
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -56,13 +62,40 @@ const inputsOf = (raw: RawStep[]): Input[] => {
   }));
 };
 
+/**
+ * Dense stage labels for the crown8 pipeline so the harness reports a full
+ * cumulative op-cost + byte profile (not just the four sparse milestones).
+ *
+ *   0 exec0     miller-start         first raw Miller-chain executor
+ *   1 exec1     miller-iter-group-1  intermediate Miller iteration group
+ *   2 exec2     miller-iter-group-2
+ *   3 exec3     miller-iter-group-3
+ *   4 exec4     miller-iter-group-4
+ *   5 exec5     miller-boundary      last Miller executor (pre-finalExp product)
+ *   6 genesis   proof-root           proof-root / cBlob binding
+ *   7 terminal  terminal-close       final pairing / residue close
+ */
+const checkpointOf = (index: number): string => {
+  switch (index) {
+    case 0: return 'miller-start';
+    case 1: return 'miller-iter-group-1';
+    case 2: return 'miller-iter-group-2';
+    case 3: return 'miller-iter-group-3';
+    case 4: return 'miller-iter-group-4';
+    case 5: return 'miller-boundary';
+    case 6: return 'proof-root';
+    case 7: return 'terminal-close';
+    default: throw new Error(`crown8 checkpoint index out of range: ${index}`);
+  }
+};
+
 const toRun = (raw: RawStep[]): Step[] => {
   const inputs = inputsOf(raw);
   return inputs.map((input, index) => ({
     label: raw[index]!.name,
     lockingBytecode: input.lockingBytecode,
     unlockingBytecode: input.unlockingBytecode,
-    checkpoint: index === 0 ? 'miller-start' : index === 5 ? 'miller-boundary' : index === 6 ? 'proof-root' : index === 7 ? 'terminal-close' : undefined,
+    checkpoint: checkpointOf(index),
     intraTx: { index, inputs },
   }));
 };
@@ -99,7 +132,7 @@ const runFromInputs = (inputs: Input[]): Step[] => inputs.map((input, index) => 
   label: vectors.valid[index]!.name,
   lockingBytecode: input.lockingBytecode,
   unlockingBytecode: input.unlockingBytecode,
-  checkpoint: index === 0 ? 'miller-start' : index === 5 ? 'miller-boundary' : index === 6 ? 'proof-root' : index === 7 ? 'terminal-close' : undefined,
+  checkpoint: checkpointOf(index),
   intraTx: { index, inputs },
 }));
 
