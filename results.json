@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "generatedAt": "2026-08-11T14:18:30.082Z",
+  "generatedAt": "2026-08-11T14:51:43.477Z",
   "statement": {
     "proofSystem": "Groth16",
     "curve": "BN254",
@@ -33,10 +33,10 @@
       "bchCompatible": false
     },
     "current": {
-      "id": "bch-groth16-intratx-pairfold5",
+      "id": "bch-groth16-intratx-pairfold5-pevalfuse",
       "label": "Best BCH-native full verifier",
       "curve": "BN254",
-      "bytes": 44968,
+      "bytes": 39691,
       "bchCompatible": true
     }
   },
@@ -725,6 +725,14 @@
       "t": "2026-08-11T14:18:30.082Z",
       "score": 44968,
       "id": "bch-groth16-intratx-pairfold5",
+      "steps": 5,
+      "transactions": 1,
+      "fits": true
+    },
+    {
+      "t": "2026-08-11T14:51:43.477Z",
+      "score": 39691,
+      "id": "bch-groth16-intratx-pairfold5-pevalfuse",
       "steps": 5,
       "transactions": 1,
       "fits": true
@@ -3594,6 +3602,91 @@
         "type": "p2sh32"
       },
       "source": "BCH-native CashScript: five P2SH32 inputs in one intra-transaction-linked BN254 Groth16 verifier (PairFold-5 peval dens-rich). Fixed-G2 xonly tables, peval pin, dens floors 9600/9400/9500, densDrop 1200, densFuel DROP dens-positive path, stock public-bench value=1000 / sequence=0 envelope. Score 44968 (scriptBytes 44733 + tx overhead 235); fitsBchStandardness expected true. Smaller than PairFold-7 frontier and the local PairFold-6 peval RC while dropping to five inputs."
+    },
+    {
+      "id": "bch-groth16-intratx-pairfold5-pevalfuse",
+      "name": "BCH Groth16 intra-tx PairFold-5 peval-fuse dens-rich (score 39691)",
+      "category": "full",
+      "official": false,
+      "solver": null,
+      "curve": "BN254",
+      "structure": "single-tx",
+      "proofSystem": "Groth16",
+      "vmTarget": "bch-2026",
+      "correctness": {
+        "verdict": "pass",
+        "validAccepted": true,
+        "invalid": {
+          "tested": 5,
+          "rejected": 5
+        },
+        "worstCaseAccepted": true,
+        "crossStageBinding": {
+          "applicable": true,
+          "bound": true,
+          "seamsTested": 4,
+          "unboundSeams": 0,
+          "detail": "every stage bound to one proof: 4 seams staple-tested with a 2nd distinct proof, all rejected"
+        },
+        "failures": []
+      },
+      "score": 39691,
+      "size": {
+        "scriptBytes": 39456,
+        "txOverheadBytes": 235,
+        "transactions": 1,
+        "total": 39691
+      },
+      "padding": {
+        "bytes": 0,
+        "fraction": 0
+      },
+      "benchmarks": {
+        "smallProof": {
+          "opCost": 30460315,
+          "steps": 5,
+          "heaviestStepOpCost": 6699552,
+          "inputsForHeaviestStep": 1
+        },
+        "worstCase": {
+          "accepted": true,
+          "opCost": 30436480,
+          "steps": 5,
+          "heaviestStepOpCost": 6698987,
+          "inputsForHeaviestStep": 1
+        }
+      },
+      "opCostBudget": 31588800,
+      "bsvSingleton": false,
+      "bsvOpReturn": false,
+      "bch": {
+        "compatible": true,
+        "blockers": [],
+        "detail": "every step fits BCH per-tx limits",
+        "standard": {
+          "fits": true,
+          "detail": "relayable under standard mempool policy"
+        }
+      },
+      "generality": {
+        "binding": "runtime",
+        "runtimeGeneral": true,
+        "proofsTested": 4,
+        "proofsPassed": 4,
+        "detail": "runtime-general: one fixed locking verifies 4/4 distinct proofs (proof in the unlocking witness)"
+      },
+      "tokenSafety": null,
+      "inputValidation": {
+        "enforced": true,
+        "tested": 4,
+        "rejected": 4,
+        "detail": "on-curve + G2-subgroup checks enforced: 4/4 adversarial points (off-curve / off-subgroup) rejected at an isolated check"
+      },
+      "packaging": {
+        "secure": true,
+        "type": "p2sh32"
+      },
+      "source": "BCH-native CashScript: five P2SH32 inputs in one intra-transaction-linked BN254 Groth16 verifier (PairFold-5 peval-fuse dens-rich). Fixed-G2 xonly tables, peval-fuse 32 B/event, dens floors 8318/7248/7750, densDrop 850, bqReserve 400, densFuel DROP dens-positive path, stock public-bench value=1000 / sequence=0 envelope. Score 39691 (scriptBytes 39456 + tx overhead 235); fitsBchStandardness true. Sibling of bch-groth16-intratx-pairfold5 (44968 RC); same 5-in topology, denser peval tables."
     },
     {
       "id": "bch-groth16-intratx-general",
