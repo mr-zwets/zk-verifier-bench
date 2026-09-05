@@ -36,47 +36,52 @@
 // conservative union bound is 160/(2^256-1), less than 161/2^256.
 //
 // Largest supplied valid fixture:
-//   22 inputs, 89,357 script B, 89,553 wire B, 90,323 challenge-score B
-//   69,798,359 consensus opcost, 70,171,351 standard opcost
+//   22 inputs, 78,982 script B, 79,178 wire B, 79,948 challenge-score B
+//   55,081,462 consensus opcost, 55,430,774 standard opcost
 // Committed fixture:
-//   67,899,727 consensus opcost, 68,272,719 standard opcost
+//   53,133,274 consensus opcost, 53,482,586 standard opcost
 // Every supplied valid fixture passes the current BCH consensus and standard
 // VMs, remains below the 100,000-byte relay limit, and pays exactly 1 sat/byte.
+// All density padding is zero. Six existing inputs authenticate ordered
+// 6/4/5/6/6/5 public-input batches; only the coordinator is compiled for size.
+//
+// PIC factor/path extraction uses one tuple split. Both original resource
+// classes pass with minimum universal margins 23,838 / 122,142.
 //
 // Source revision:
-//   groth16_cashscript PR #14 commit 608f74747dc50def17c3b07a223585b330342124 (entry named at fd3c843)
+//   groth16_cashscript d15ed7038b541593b0e57e6d0236ab730da73208 (local candidate)
 // Source artifact:
 //   groth16_cashscript/chunked/bls12-381/measure_d3_two_chart_binary.mjs
-//   sha256 f0c15ed60d1507542f40ea392478693b7e7b8ded73a666313ee82e748602c46d
+//   sha256 83d2b28f27ead5a89e595a9a645492cb677f68f0f05c001f3a86d555d9860024
 // Resource export sha256:
-//   254ee78bda438f4ec8589a30f1acd58a25b39fc10b156a37e9da8ca62db4b314
+//   d8195cb000a8488770a0cc9e038656e7bd3bbb68602d429abd3f7a68caa88ade
 // Benchmark vector sha256:
-//   9152db69265b2b15e8b5ef4720ecc6c6e3bcdf07a7847068e42a457d1692b102
+//   8de05bd09f1ffb648a508bc8bc8ec48e3b0cd0ca62b22708f9ced8a533fcdb40
 // Length-prefixed locking-set sha256:
-//   4cd6f93829da3708513aa61d408c0b2bd4bba851ba31abefaad573b82c1d0284
+//   4d7e68150d02a5f170cb3845bd117fed6af903ad8cddce16a132a2d8d70e51b3
 // Individual locking-bytecode sha256 values, input order:
-//   00 3bbb5ec2ea078faba879d73c4d49ac6e9fa3fa73cdc6036fca7d3b057ac0a16c
-//   01 6744cb960e516d9b07856f4b9bfde952ad96fd2e1ca8ed82787cf679a69d6f52
-//   02 fb5d0decba4702bb3a67305c62d22cd27d403b0727c93e1ebf4f5ce970bc2dac
-//   03 25897317dfec6df1a32ca958e896851109d68931a8d73b864382b7039b580254
-//   04 c853b9a548e87ed5ae51237890d868361e6abb009310b86edff87afd2cf11746
-//   05 656d3fb26eff72bd31eb5e705665fbcbf9283e0de2f689328a9b32ec3b5bcba3
-//   06 b114dcfe7229b8589f12fb6d38bd67dd5aba2583e6c52ac52182bb8dfef6fabd
-//   07 fa09fce3af578c5e90987d1cbc689355deb309e8c0f4484e6e4c5ec893174192
-//   08 15abd2b7f7a39d7ce0181233f310f4f3c197dc309836457cfdcb814f4a1b0dad
-//   09 90b9dbab56936980b727e6a2869db3b7de2889ec958a7574427a412e9038b5c1
-//   10 e058365c9d7520fdea54017d85bb4799e119238e889a8d9ad48ff6b9d8e33742
-//   11 98e78798c1938556e4c39c66ed27fa28e9165337cf11679159c65507be0c7114
-//   12 c930e6ff1164cbbed9316f2edf3f492cd9ec8f104d39fdb6e84aece9a72742f7
-//   13 1936ce59d28e70e9e51fd24b12d15ce33e19c7e881c695dfd46ff5473a5cac8a
-//   14 8886d29d6c1326f4b1c6075d48fa506b87a5d399ec7e9b28c538a258a3936adb
-//   15 9cad062b746bca7499004273194b47d87ddedf449790ffe8afeb5d95d278eb86
-//   16 29cd55f78e3c3a19099ef0ec96443ec923791175005114259ec81e04f11b9df1
-//   17 a03061d33e2be8dfabd7458010dfaedcb197fb8403552168ffa726e352bb1f2e
-//   18 e57e2e6cae522c71f49dcef07dc0c74b9630cdd55ebeae79924d3d0e68418d3d
-//   19 7503f8815e8f6cf58436c0d5feed9ff270ca7ab3141a903cb3fe020bed271651
-//   20 a4d77352be448f744dace5c909430e217d8d78fd5d609e12762aa5690ea4a323
-//   21 44bc6ac98b5d2617d1b47a1fdf0779de18492351f016118fb82f19fefe40be0f
+//   00 ab58add070158c4af0c40a23543cd45ab2823d90b2bdab4567571c763316315c
+//   01 c715b500676eb918ab411662d331d5451efd70beb9e8e51c594b669dd25c5940
+//   02 9071aef853a3bb359ad9cf42304dbb29b3676f5efc8f603d4c75bbf6199d4a5d
+//   03 6f4c7751aabad38a98ba7449fb29a4db0f5c0974308bb5f9e3c544b267a39eea
+//   04 8a231574ed2adb8e097affd1e0d2bba0ed8c0e826edaf94b29fbe2505886fdf8
+//   05 a9a597bc2dbabeb7b9ba8c02fa98d2765d1ed0924f196a9547ec9b8a6f1e4ff2
+//   06 e4362256fce64abe6dca0b372012964a09b9f62440b3d46e74f7d0695a6a6f38
+//   07 6de3cb1119b72100f0ffd779ce6d07f1025497ebc5e04cac3ea77c475cae90dd
+//   08 f02af931d5af4b757b5b3f4712b25402ac76e8cf86f023a5b58341c5466870df
+//   09 99b6fbd147a2a642ab0c2cc337a4d07cee342b27968bb9c1ed07c78882a65406
+//   10 8a62da8899eae7a8836b74101b1c18353c6f6aec48637a31fb1669f0badab658
+//   11 97139372935258e39201006dcacf7512d3f28b336be1ffd9eb5cfd57d81ab2c0
+//   12 3b46ec9d81f585cbdcb73a143a889eef773f92a731dcd84418a70a1dfcf1aa3e
+//   13 cda97fb735606de536ae5a70ddf9c723e64ab94b1c4637e08b3e86dd91415913
+//   14 842a58ada0a5dee081ffd493bcf9b0292cfe2402dc9e5480fc29adb2e228aa4f
+//   15 7c3b215e66363206a5a42cc9970ff5dad2a91c14a1a6e965252884f27a9f34dd
+//   16 5c26aa398ac98f166aa01241509fa66dc2a8adcb2b35c33b239d6d185c520303
+//   17 926a1190fd374eb5e8ecad3f5730adf4ffbe6b2f3949ddedca541c50cb0c825a
+//   18 7096d2214b75b4361ecbb4e894e0f05813d6903b98ccb1a9810e43f1ffce9a8e
+//   19 e2c40b6d99a73ac3c18048692af35956ad991f3715051eff65820aa9b1fa2ed0
+//   20 04ad7fcc1cd1f055ec2937ed578cf2ec3de0a6916449c275777e7bfcee5fcae9
+//   21 3a88cd65821c4121a34145a222a7805faf34f20dc25f4e2b37ce3a6abd434235
 import { readFileSync } from 'node:fs';
 
 import { hexToBin } from '@bitauth/libauth';
