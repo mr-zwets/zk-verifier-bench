@@ -726,5 +726,13 @@
     "steps": 1,
     "transactions": 1,
     "fits": false
+  },
+  {
+    "t": "2026-09-05T14:10:34.000Z",
+    "score": 33179,
+    "id": "bch-groth16-intratx-pairfold5-densless",
+    "steps": 5,
+    "transactions": 1,
+    "fits": true
   }
 ]
