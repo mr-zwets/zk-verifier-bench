@@ -26,19 +26,25 @@
 // pairing check uses that vk_x. A forged claim needs a forged w, which changes vk_x. Length/order/
 // sign pins do not change the statement; they reject alternate witnesses for the same statement.
 // Finite dense-witness sample: 30/30 deterministic proofs accept on standard BCH2026,
-// seed densless-msm-slim-v1; peak budgets 98.3 / 95.9 / 90.4 / 98.8 / 84.5 %.
+// seed densless-msm-slim-v1; peak budgets 98.1 / 95.7 / 90.2 / 98.3 / 83.8 %.
 // The order reader accepts minimally encoded variable-width numbers; default and explicit-full
 // exports match. Source regression includes a valid proof with a 31-byte terminal number.
 // Exact-byte attack file: the original 36 cases refreshed plus 8 issue39 cases (44 total),
 // re-encoded by GPT-6.1 Sol at Kallisti's request; upstream maintainer review remains pending.
-// Primary full-pinned score 35,143 = 34,908 script +235 overhead; no universal resource bound claimed.
-// First-use floating prime caches: 13 MADD sites and six selected DBL sites; full pins, zero padding.
-// Locking sha256:
-//   exec0+vkx-msm           9232671d582bca3a830aaa9b3c320f60113aa6b2bd6e4d715c042ec83010a500
-//   exec1+vkx-msm           9232671d582bca3a830aaa9b3c320f60113aa6b2bd6e4d715c042ec83010a500
-//   exec2+vkx-msm           9232671d582bca3a830aaa9b3c320f60113aa6b2bd6e4d715c042ec83010a500
-//   genesis+vkx-msm         09ee4f93c1b8913bccfd31dd7f83d6e56197424e1c17359738d748a7b035c7ea
-//   terminal+vkx-msm-final  ad86d37567945f43fa08fc8a828989eced4708cc263bf33c8d88d3f09b675958
+// Primary full-pinned score 35,125 = 34,890 script +235 overhead; no universal resource bound claimed.
+// Co8 with guarded floating prime caches: 13 MADD sites and six selected DBL sites; full pins, zero padding.
+// Optional raw-dbl/raw-madd/raw-both profiles score 35,282 / 35,496 / 35,636 bytes.
+// Consensus native costs: 24,830,569 / 24,690,991 / 24,669,602; all keep full pins and zero pads.
+// Raw-both alone uses MSM_SPLIT=27 MSM_CUTS=37,43,51,52; default/raw-dbl/raw-madd remain split31.
+// Raw-both retains DBL418/terminal copy and compacts executor cleanup; all pre-redeem values fixed.
+// Raw-both minimum sampled dense native input margin: 61,094; no changed-range universal cap claimed.
+// Each retains five core + short +30 archived dense proofs, 44 attacks and both native modes.
+// Default locking sha256:
+//   exec0+vkx-msm           b71630e7d38a0576de09894f8c231527e7fe73ba8e236ac94e2aebc27bb072ee
+//   exec1+vkx-msm           b71630e7d38a0576de09894f8c231527e7fe73ba8e236ac94e2aebc27bb072ee
+//   exec2+vkx-msm           b71630e7d38a0576de09894f8c231527e7fe73ba8e236ac94e2aebc27bb072ee
+//   genesis+vkx-msm         2e2ff6de1e924f24075897b87be8f8616be5a72b4476918f2f48e479371c1eaa
+//   terminal+vkx-msm-final  97769eb23ff1c3aa4d4dd1eba2a57ff5e9fe433ed600b5fa82273356c44135e6
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -59,10 +65,6 @@ interface Vectors {
   invalidInputs?: RawStep[][];
 }
 
-const vectors = JSON.parse(
-  readFileSync('src/bch/groth16-intratx-pairfold5-densless-msm-slim-vectors.json', 'utf8'),
-) as Vectors;
-
 const toRun = (raw: RawStep[]): Step[] => {
   const inputs = raw.map((step) => ({
     lockingBytecode: hexToBin(step.locking),
@@ -81,23 +83,39 @@ const toRun = (raw: RawStep[]): Step[] => {
   }));
 };
 
-export const bchGroth16IntratxPairfold5DenslessMsmSlim: Implementation = {
-  id: 'bch-groth16-intratx-pairfold5-densless-msm-slim',
-  // where the claimed public inputs live (public-input binding gate, harness/gates.ts)
-  publicInputs: [{ input: 4, push: 53, name: 'n0' }, { input: 4, push: 52, name: 'n1' }],
-  name: 'BCH Groth16 intra-tx PairFold-5 densless with sound vk_x MSM (slim MSM state)',
-  proofSystem: 'Groth16',
-  field: 'BN254',
-  structure: 'single-tx',
-  proofBinding: 'runtime',
-  source:
-    'PairFold-5 densless (chunked/bn254/densless-recovered) with the GLV Straus vk_x MSM in a slim state layout ' +
-    '(chunked/bn254/densless-msm-slim): claimed inputs are terminal pushes, witness bytes live only in the terminal state, ' +
-    'executors carry X, Y, Z. Five P2SH32 inputs, one standard transaction; the terminal pins input count and all worker lockings.',
-  load: async () => ({
-    valid: toRun(vectors.steps),
-    extraValidProofs: (vectors.extraValidProofs ?? []).map(toRun),
-    worstCaseProof: vectors.worstCaseProof ? toRun(vectors.worstCaseProof) : undefined,
-    invalid: (vectors.invalid ?? []).map(toRun),
-  }),
+const slim = (id: string, name: string, path: string): Implementation => {
+  const vectors = JSON.parse(readFileSync(path, 'utf8')) as Vectors;
+  return {
+    id,
+    // where the claimed public inputs live (public-input binding gate, harness/gates.ts)
+    publicInputs: [{ input: 4, push: 53, name: 'n0' }, { input: 4, push: 52, name: 'n1' }],
+    name,
+    proofSystem: 'Groth16',
+    field: 'BN254',
+    structure: 'single-tx',
+    proofBinding: 'runtime',
+    source:
+      'PairFold-5 densless (chunked/bn254/densless-recovered) with the GLV Straus vk_x MSM in a slim state layout ' +
+      '(chunked/bn254/densless-msm-slim): claimed inputs are terminal pushes, witness bytes live only in the terminal state, ' +
+      'executors carry X, Y, Z. Five P2SH32 inputs, one standard transaction; the terminal pins input count and all worker lockings.',
+    load: async () => ({
+      valid: toRun(vectors.steps),
+      extraValidProofs: (vectors.extraValidProofs ?? []).map(toRun),
+      worstCaseProof: vectors.worstCaseProof ? toRun(vectors.worstCaseProof) : undefined,
+      invalid: (vectors.invalid ?? []).map(toRun),
+    }),
+  };
 };
+
+const id = 'bch-groth16-intratx-pairfold5-densless-msm-slim';
+const name = 'BCH Groth16 intra-tx PairFold-5 densless with sound vk_x MSM (slim MSM state)';
+export const bchGroth16IntratxPairfold5DenslessMsmSlim = slim(
+  id, name, 'src/bch/groth16-intratx-pairfold5-densless-msm-slim-vectors.json',
+);
+
+// Larger helper bodies lower native cost; retain the smaller floating-cache entry.
+export const bchGroth16IntratxPairfold5DenslessMsmSlimCacheProfiles =
+  ['raw-dbl', 'raw-madd', 'raw-both'].map(profile => slim(
+    `${id}-${profile}`, `${name} (${profile})`,
+    `src/bch/groth16-intratx-pairfold5-densless-msm-slim-${profile}-vectors.json`,
+  ));
