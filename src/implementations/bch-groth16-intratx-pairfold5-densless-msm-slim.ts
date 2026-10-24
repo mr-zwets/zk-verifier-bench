@@ -1,3 +1,6 @@
+// WITHDRAWN full-verifier qualification; retained as a historical measurement artifact.
+// The vk_x MSM description is component-level and does not establish pairing soundness.
+// See https://github.com/mr-zwets/zk-verifier-bench/issues/49.
 // PairFold-5 densless with a sound vk_x, SLIM MSM state + malleability pins (kzKallisti).
 // Same pairing programs and GLV Straus vk_x MSM as bch-groth16-intratx-pairfold5-densless-msm;
 // MSM state layout is slim, and the terminal redeem prepends length/order/sign-bit pins.
@@ -91,6 +94,8 @@ export const bchGroth16IntratxPairfold5DenslessMsmSlim: Implementation = {
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
+    'WITHDRAWN full-verifier claim: the retained pairing/terminal construction has a confirmed correctness gap. ' +
+    'Historical program and measurement bytes are preserved; the vk_x MSM description is component-level. ' +
     'PairFold-5 densless (chunked/bn254/densless-recovered) with the GLV Straus vk_x MSM in a slim state layout ' +
     '(chunked/bn254/densless-msm-slim): claimed inputs are terminal pushes, witness bytes live only in the terminal state, ' +
     'executors carry X, Y, Z. Five P2SH32 inputs, one standard transaction; the terminal pins input count and all worker lockings.',

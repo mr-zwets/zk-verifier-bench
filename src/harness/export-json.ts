@@ -12,7 +12,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 import type { BenchmarkResult } from './types.js';
-import { computeResults, isSkipped } from './benchmark.js';
+import { computeResults, isSkipped, REGISTRY } from './benchmark.js';
 import { STANDARD_UNLOCKING_CAP, SPEC_SCRIPT_SIZE_CAP, realOpCostBudget, specOpCostBudget } from './vm.js';
 
 const SCHEMA_VERSION = 1;
@@ -335,19 +335,25 @@ const anchor = (e: Entry | undefined, label: string) =>
 const main = async () => {
   const outfile = process.argv[2] ?? 'results.json';
   // include demos so the artifact is complete; the site filters by category.
+  const registered = new Map(REGISTRY.map((implementation) => [implementation.id, implementation]));
   const results = await computeResults(true);
   const entries = results.map(entryOf).filter((e) => !SITE_EXCLUDE.has(e.id));
 
   // SKIP_IMPLS-matched implementations (e.g. the genpow verifiers, too slow to re-run
   // every time) are not re-evaluated; carry their last-known entries forward from the
-  // existing artifact so the entry list and everything derived from it (frontier leader,
+  // existing artifact only while their registered name/source metadata is unchanged,
+  // so the entry list and everything derived from it (frontier leader,
   // score history) stays complete rather than silently dropping them.
   if (existsSync(outfile)) {
     try {
       const previous = JSON.parse(readFileSync(outfile, 'utf8')) as { entries?: Entry[] };
       const have = new Set(entries.map((e) => e.id));
       for (const entry of previous.entries ?? []) {
-        if (!have.has(entry.id) && isSkipped(entry.id)) entries.push(entry);
+        const implementation = registered.get(entry.id);
+        if (
+          implementation !== undefined && implementation.name === entry.name && implementation.source === entry.source &&
+          !have.has(entry.id) && isSkipped(entry.id)
+        ) entries.push(entry);
       }
     } catch { /* unreadable previous artifact: proceed with fresh entries only */ }
   }
@@ -392,7 +398,7 @@ const main = async () => {
     curveOfId,
     standardOf,
     generatedAt,
-    (id) => entries.find((e) => e.id === id)?.correctness?.verdict !== 'fail',
+    (id) => registered.has(id) && entries.some((e) => e.id === id && e.correctness?.verdict !== 'fail'),
   );
 
   const artifact = {

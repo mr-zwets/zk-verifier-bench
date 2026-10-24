@@ -1,27 +1,18 @@
-// BCH-native Groth16 verifier — intra-transaction, authenticated P2S dispatcher.
+// Frozen authenticated42 correction: sixteen typed exact state-length predicates.
+// Original positive proof/public/state/table/padding bytes are retained verbatim;
+// only the selected stage-body pushes and matching 44-byte dispatcher digests change.
+// The complete ordered 42-program graph and public statement remain external premises.
 //
-// Same 42-input BN254 Groth16 intra-tx verifier as bch-groth16-intratx (byte-identical
-// unlocking bytecodes, same successor links), but each stage's 35-byte P2SH32 locking
-// is replaced by a 44-byte bare (P2S — pay-to-script, NOT P2SH) dispatcher:
+// Current original-positive observations: arithmetic oracle 126/126; declared BCH2026
+// consensus 126/126; declared standard 42/126 (84 operation-cost-density rejections).
+// These are per-input interpreter results, not whole-transaction/network admission.
+// Native and standard admission HOLD: this standalone descriptor is excluded from REGISTRY.
+// Archived negative suites are historical only and are not included or validated here.
 //
-//   OP_DUP OP_HASH256 <hash256(stage body)> OP_EQUALVERIFY
-//   <999> OP_DEFINE <999> OP_INVOKE
-//
-// The stage body stays as the final push of the unlocking — ordinary authenticated
-// data instead of a P2SH redeem script. The dispatcher hash-checks the exact body
-// before defining and invoking it, so modified bodies and valid bodies from other
-// stages are rejected. Identifier 999 is reserved for the dispatcher; bodies define
-// 0..24, and OP_DEFINE errors on redefinition. Bare lockings ≤201 bytes are
-// relay-standard on BCH, so the 44-byte dispatcher is standard.
-//
-// Standalone this only emulates P2SH32 semantics at +9 bytes per input — NOT a size
-// improvement. Its value is that the pattern is ordinary bytecode, so it can be
-// embedded inside larger scripts (P2SH authentication only exists as the whole
-// top-level locking pattern).
-//
-// Vectors: tools/derive-groth16-intratx-authenticated-p2s.mts ->
-// src/bch/groth16-intratx-authenticated-p2s-vectors.json
-// (derived from src/bch/groth16-intratx-vectors.json).
+// Reproduce the positive-only artifact with the public source tool:
+// node groth16_cashscript/chunked/intratx/repair_authenticated42.mjs \
+//   src/bch/groth16-intratx-authenticated-p2s-vectors.json \
+//   src/bch/groth16-intratx-authenticated-p2s-checked-vectors.json
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -30,7 +21,7 @@ import type { Implementation, Step } from '../harness/types.js';
 interface RawStep { label: string; locking: string; unlocking: string; checkpoint?: string }
 interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][] }
 
-const v = JSON.parse(readFileSync('src/bch/groth16-intratx-authenticated-p2s-vectors.json', 'utf8')) as Vectors;
+const v = JSON.parse(readFileSync('src/bch/groth16-intratx-authenticated-p2s-checked-vectors.json', 'utf8')) as Vectors;
 
 // Turn one run (an ordered list of chunk inputs) into Step[] sharing ONE inputs array,
 // so each step is evaluated against the same multi-input transaction (and its
@@ -64,22 +55,23 @@ export const bchGroth16IntratxAuthenticatedP2s: Implementation = {
     { input: 8, push: 0, offset: 96, encoding: 'le32', name: 'n0' },
     { input: 8, push: 0, offset: 128, encoding: 'le32', name: 'n1' },
   ],
-  name: 'BCH Groth16 intra-tx, authenticated P2S dispatcher (embeddable-pattern prototype)',
+  name: 'BCH Groth16 authenticated42 exact-frame correction (standalone; admission HOLD)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
-    'Authenticated P2S (bare/pay-to-script, not P2SH) dispatcher variant of the 42-input ' +
-    'BN254 Groth16 intra-transaction verifier. Each original 35-byte P2SH32 locking is ' +
-    'replaced by a 44-byte bare dispatcher — OP_DUP OP_HASH256 <hash256(body)> ' +
-    'OP_EQUALVERIFY <999> OP_DEFINE <999> OP_INVOKE — that authenticates the stage body ' +
-    '(still the final push of the byte-identical unlocking, now ordinary data rather ' +
-    'than a P2SH redeem script) before invoking it. Modified bodies and valid bodies ' +
-    'from other stages are rejected at the hash check. Bare lockings <=201 bytes are ' +
-    'relay-standard. Standalone this only emulates P2SH32 semantics at +9 bytes per ' +
-    'input — not a size improvement; the point is that the pattern is ordinary bytecode ' +
-    'and therefore embeddable inside larger scripts, where P2SH authentication cannot go.',
+    'Frozen 42-program BN254 verifier with sixteen typed exact state-length predicates ' +
+    'and authenticated DEFINE 999 / INVOKE dispatchers. The fixed original program set ' +
+    'and guard manifest own this artifact; the newer 31-input producer is unchanged. ' +
+    'Conditional finite accepted-equation soundness assumes the complete ordered graph, ' +
+    'public statement, finite point domain and standard pairing/hash premises. ' +
+    'All original positive argument and padding bytes are preserved. The three original ' +
+    'graphs pass 126/126 arithmetic-oracle and 126/126 declared-consensus input evaluations; ' +
+    'declared-standard acceptance is 42/126, with 84 cost-density rejections. These are ' +
+    'per-input observations. Whole-transaction and network admission remain HOLD. ' +
+    'This positive-only standalone descriptor is excluded from the default registry; ' +
+    'the archived negative suite is historical and has not been validated for this correction.',
   load: async () => {
     const valid = toRun(v.steps);
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);

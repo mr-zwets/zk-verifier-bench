@@ -61,6 +61,25 @@ on-chain bytes** (locking + unlocking + serialized-tx overhead, with dead-weight
 zero-padding reported separately). Lower is better. Current numbers live in
 `results.json` — the README deliberately doesn't hard-code them.
 
+The authenticated-P2S, grouped-residue, BLS12-381 intratx-residue, PairFold-5
+pevalfuse, and three densless-MSM (base/slim/spec) entries are withdrawn from
+full-verifier qualification and the default registry; see [benchmark issue
+#49](https://github.com/mr-zwets/zk-verifier-bench/issues/49) and [source issue
+#32](https://github.com/mr-zwets/groth16_cashscript/issues/32). The current feed
+excludes these seven entries. The obsolete BN254 and BLS12-381 genpow results
+are also removed pending separately qualified observations for [BN254 PR
+#47](https://github.com/mr-zwets/zk-verifier-bench/pull/47) and [BLS12-381 PR
+#48](https://github.com/mr-zwets/zk-verifier-bench/pull/48). Those corrected IDs
+remain registered with their stated mathematical scope and native resource
+holds; the old scores do not measure the corrected programs. No replacement
+score is inferred. All original numerical measurements remain in
+the [immutable historical export](https://github.com/mr-zwets/zk-verifier-bench/blob/86820022643b8832c4818967666c8cdaaaaa3b6e/results.json),
+and score-history points are retained as historical measurements, not current
+qualification. Separately corrected standalone profiles retain their stated
+scope and resource holds and are not registered by their presence on disk.
+A leaderboard deployment must consume the updated feed; this change does not
+claim that a deployed website has already updated.
+
 | category | meaning |
 |----------|---------|
 | `full` | a complete Groth16 verifier |

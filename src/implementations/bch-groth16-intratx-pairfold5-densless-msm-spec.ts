@@ -1,3 +1,6 @@
+// WITHDRAWN full-verifier qualification; retained as a historical measurement artifact.
+// The vk_x MSM description is component-level and does not establish pairing soundness.
+// See https://github.com/mr-zwets/zk-verifier-bench/issues/49.
 // bch-spec variant of bch-groth16-intratx-pairfold5-densless-msm, graded on the PROPOSED bch-spec VM
 // (100,000-byte scripts, op-cost budget (10,000 + unlocking) * 800 per input). With that base budget
 // the genesis input carries the whole vk_x MSM, checked against its own push 0, so the verifier is
@@ -57,6 +60,8 @@ export const bchGroth16IntratxPairfold5DenslessMsmSpec: Implementation = {
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
+    'WITHDRAWN full-verifier claim: the retained pairing/terminal construction has a confirmed correctness gap. ' +
+    'Historical program and measurement bytes are preserved; the vk_x MSM description is component-level. ' +
     'PairFold-5 densless (public-only reconstruction, chunked/bn254/densless-recovered) whose genesis carries ' +
     'a GLV Straus MSM recomputing vk_x from the claimed public inputs (chunked/bn254/densless-msm-spec); ' +
     'five P2SH32 inputs, one transaction, graded on the proposed bch-spec VM.',

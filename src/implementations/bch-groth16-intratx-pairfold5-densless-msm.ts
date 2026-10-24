@@ -1,3 +1,6 @@
+// WITHDRAWN full-verifier qualification; retained as a historical measurement artifact.
+// The vk_x MSM description is component-level and does not establish pairing soundness.
+// See https://github.com/mr-zwets/zk-verifier-bench/issues/49.
 // PairFold-5 densless with a SOUND vk_x: the reconstructed densless verifier (kallisti, withdrawn
 // bench PR #36 / source PR #17) with its dead vk_x predicate sliced out of genesis, plus a GLV
 // Straus MSM that recomputes vk_x = IC0 + n0*IC1 + n1*IC2 from the claimed public inputs, carried
@@ -58,6 +61,8 @@ export const bchGroth16IntratxPairfold5DenslessMsm: Implementation = {
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
+    'WITHDRAWN full-verifier claim: the retained pairing/terminal construction has a confirmed correctness gap. ' +
+    'Historical program and measurement bytes are preserved; the vk_x MSM description is component-level. ' +
     'PairFold-5 densless (public-only reconstruction, chunked/bn254/densless-recovered) plus ' +
     'a GLV Straus MSM that recomputes vk_x from the claimed public inputs (chunked/bn254/densless-msm), ' +
     'carried by the existing inputs as a chain of pinned states. Five P2SH32 inputs, one standard transaction; ' +

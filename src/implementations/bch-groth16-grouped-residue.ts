@@ -1,19 +1,19 @@
-// BCH-native Groth16 verifier — GROUPED + RESIDUE (multi-tx, multi-input). The residue-
-// optimized chunk graph packed with the grouped method, fewer transactions than plain grouped.
+// Frozen registered BN254 grouped26 correction: exact 228-byte table carrier at
+// input 5 and exact 1664-byte terminal owner at input 25. Original positive argument,
+// table, padding, group partition and NFT commitment/capability bytes are unchanged.
+// The complete ordered graph, public statement and designated zero-FT mutable NFT
+// lineage with valid ledger ancestry remain premises of the conditional theorem.
 //
-// Same grouped MECHANISM as bch-groth16-grouped (intra-tx OP_INPUTBYTECODE forward-checks
-// within each tx; CashToken NFT hand-off across groups), but the underlying chunk graph uses
-// two op-cost levers from the residue submission (ePrint 2022/348 + 2024/640):
-//   - fast-G2 endomorphism subgroup check ([x0+1]B + psi([x0]B) + psi^2([x0]B) == psi^3([2x0]B),
-//     ~63-bit [x0]B walk) -> 3 chunks (vs the 128-bit [6x^2]B walk's 8)
-//   - c^-(6x+2)-FUSED batched Miller whose terminal chunk also checks the witnessed-residue
-//     verdict fF*(w*c^q2) == (c*c^q2)^q, eliminating a separate final-exp tail input.
-// Net: the full verifier in 26 chunks packed into 3 STANDARD (<100,000 B) transactions (vs the
-// 42-input / 5-tx plain grouped build). The three GLV chunks share one hash-bound fixed lookup
-// table carried by the final GLV input. One fixed set of lockings verifies any proof for the VK.
+// Current original-positive observations: arithmetic oracle 78/78, declared BCH2026
+// consensus 78/78, declared standard 75/78 (three operation-cost-density rejections).
+// Native and standard admission HOLD; excluded from REGISTRY. No whole-transaction
+// or network acceptance is inferred. Archived negative suites remain historical.
+// This frozen repair does not execute or certify the current signed-Miller producer.
 //
-// Vectors: groth16_contract/chunked/grouped/build_vectors_residue.mjs ->
-// src/bch/groth16-grouped-residue-vectors.json.
+// Reproduce the positive-only artifact with the public source tool:
+// node groth16_cashscript/chunked/grouped/repair_registered26.mjs \
+//   src/bch/groth16-grouped-residue-vectors.json \
+//   src/bch/groth16-grouped-residue-checked-vectors.json
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -36,7 +36,7 @@ interface Vectors {
   invalidInputs?: RawRun[];
 }
 
-const v = JSON.parse(readFileSync('src/bch/groth16-grouped-residue-vectors.json', 'utf8')) as Vectors;
+const v = JSON.parse(readFileSync('src/bch/groth16-grouped-residue-checked-vectors.json', 'utf8')) as Vectors;
 const CATEGORY = hexToBin(v.category);
 
 const toRun = (run: RawRun): Step[] => {
@@ -81,7 +81,7 @@ export const bchGroth16GroupedResidue: Implementation = {
     { input: 5, push: 0, offset: 160, encoding: 'le32', name: 'n0' },
     { input: 5, push: 0, offset: 194, encoding: 'le32', name: 'n1' },
   ],
-  name: 'BCH Groth16 verifier, grouped + RESIDUE (26 chunks in 3 standard <100KB transactions: fast-G2 endo + GLV vk_x + precomputed e(alpha,beta) + c^-(6x+2)-fused Miller with terminal residue verdict)',
+  name: 'BCH Groth16 frozen grouped26 exact-frame correction (standalone; admission HOLD)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'multi-tx',
@@ -94,22 +94,17 @@ export const bchGroth16GroupedResidue: Implementation = {
   // sibling introspection (no token). Same enforcement as bch-groth16-chunked-covenant-residue.
   tokenSafetyEnforced: true,
   source:
-    'BCH-native CashScript: the residue-optimized full BN254 Groth16 verifier packed with the ' +
-    'grouped method. canonical-coordinate fast-G2 endomorphism subgroup check (ePrint 2022/348, 3 chunks) -> GLV vk_x ' +
-    '(each public input decomposed k1+k2*lambda via the G1 endomorphism, a 4-scalar ~128-bit ' +
-    'Straus over baked {IC1,phiIC1,IC2,phiIC2}, witnesses range-checked + bound k1+k2*lambda==in ' +
-    'mod r; ~halves the MSM, 3 chunks sharing one hash-bound fixed lookup table carried by the ' +
-    'final GLV input) -> c^-(6x+2)-FUSED batched Miller with e(alpha,beta) PRECOMPUTED (pair 1 is a VK ' +
-    'constant: its Miller value is baked and multiplied in once instead of folding ~88 lines) and ' +
-    'the residue witness c,cInv threaded through every chunk; the terminal Miller chunk also ' +
-    'checks the witnessed-residue verdict (ePrint 2024/640: c canonical + c*cInv==ONE + exact ' +
-    'w in the cubic coset {1,w27,w27^2}; fF*(w*c^q2) == (c*c^q2)^q). 26 chunks in 3 ' +
-    'STANDARD (<100,000 B) transactions: within each group tx the inputs ' +
-    'forward-check each other via tx.inputs[idx+1].unlockingBytecode (OP_INPUTBYTECODE), and ' +
-    'across groups the running state rides a CashToken NFT commitment. Fewer transactions than ' +
-    'the 42-input / 5-tx plain grouped build. ' +
-    'One fixed set of lockings verifies any proof for the VK. Deployed P2SH32. Every step ' +
-    'validates on the real BCH 2026 standard VM (op-cost <= 8,032,800, scripts <= 10,000 B).',
+    'Frozen 26-program BN254 grouped residue verifier with typed 228-byte table-carrier ' +
+    'and 1664-byte terminal-state predicates. All original positive proof, public-input, ' +
+    'state, table, padding, group and NFT metadata bytes are unchanged. Conditional finite ' +
+    'accepted-equation soundness requires the complete ordered graph, public statement, ' +
+    'finite point domain, designated zero-FT mutable NFT lineage and valid ledger ancestry. ' +
+    'The current signed-Miller producer is independently unverified by this artifact repair. ' +
+    'Three original graphs pass 78/78 arithmetic-oracle and 78/78 declared-consensus input ' +
+    'evaluations; declared-standard acceptance is 75/78, with three cost-density rejections. ' +
+    'These per-input observations do not establish whole-transaction/network admission. ' +
+    'This positive-only standalone descriptor is excluded from the default registry; ' +
+    'archived negative suites remain historical and are not validated for this correction.',
   load: async () => {
     const valid = toRun(v.valid);
     const extraValidProofs = (v.extraValidProofs ?? []).map(toRun);

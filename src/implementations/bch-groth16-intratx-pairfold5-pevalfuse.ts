@@ -1,7 +1,5 @@
-// Source-reconstructed PairFold-5 peval-fuse: 36,836 score bytes, five inputs.
-// Owning source: chunked/bn254/leader-recovered in groth16_cashscript.
-// Public-only witness production; fixed deployed VK/tag and declared semantics retained.
-// Official corpus and bounded independent review pass; no universal resource claim.
+// WITHDRAWN from the default registry: original equation ownership is unresolved.
+// The standalone deterministic successor also remains native resource HOLD.
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -48,17 +46,17 @@ export const bchGroth16IntratxPairfold5Pevalfuse: Implementation = {
   id: 'bch-groth16-intratx-pairfold5-pevalfuse',
   // where the claimed public inputs live (public-input binding gate, harness/gates.ts)
   publicInputs: [{ input: 3, push: 37, name: 'n0' }, { input: 3, push: 36, name: 'n1' }],
-  name: 'BCH Groth16 intra-tx PairFold-5 peval-fuse source-reconstructed (score 36836)',
+  name: 'WITHDRAWN BCH Groth16 intra-tx PairFold-5 peval-fuse (archived original)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
-    'Public-only source reconstruction in chunked/bn254/leader-recovered. ' +
-    'Five P2SH32 inputs, one standard transaction, 36,836 score bytes. ' +
-    'Preserves the deployed VK/tag, transcript, coefficient ordering and worker authentication. ' +
-    'Fixed deployment and finite-point/nonzero-denominator requirements remain; ' +
-    'historical compiler lineage and universal resource/soundness proof are not claimed.',
+    'WITHDRAWN from the default registry. These are the archived original native5 scripts; ' +
+    'their complete-equation soundness is not established. ' +
+    'The separate bch-groth16-intratx-pairfold5-pevalfuse-deterministic descriptor has a mandatory ' +
+    'complete-equation guard but remains standalone with native resource admission HOLD. ' +
+    'Original fixtures are retained unchanged for provenance; corrected-code observations do not apply to these scripts.',
   load: async () => ({
     valid: toRun(vectors.steps),
     extraValidProofs: (vectors.extraValidProofs ?? []).map(toRun),

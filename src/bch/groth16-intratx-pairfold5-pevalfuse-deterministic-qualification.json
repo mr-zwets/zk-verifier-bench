@@ -1,0 +1,40 @@
+{
+  "schema": "native5-deterministic-positive-packet/v1",
+  "status": "STANDALONE_ONLY_NATIVE_RESOURCE_HOLD",
+  "originalEntry": "bch-groth16-intratx-pairfold5-pevalfuse",
+  "correctedEntry": "bch-groth16-intratx-pairfold5-pevalfuse-deterministic",
+  "defaultRegistryEligible": false,
+  "sourceHead": "5aa48d80caec4ba0ab4c06df5cde70853b938659",
+  "benchmarkHead": "86820022643b8832c4818967666c8cdaaaaa3b6e",
+  "sourceProfile": "chunked/bn254/pairfold5-pevalfuse-deterministic",
+  "originalFixtureSha256": "898a83fe59c33392651aa09b83346486841ae3e0c5713982d2b4f5798ac87e12",
+  "staticCatalogSha256": "f2d6afdbeb47e29afcd674f97e6788838e0ab4af4e313e138633eaeb51af9316",
+  "historicalEvidence": {
+    "primaryResultSha256": "4b6d37faf0407641903830345c24c3442134fdef45bc1f16a3086674968d431e",
+    "primaryReceiptSha256": "cebd6a2c5dcfd54cc9299b801e468f6960048d2dc830a59d4daea14ae314244a",
+    "outerEquationSha256": "a6110a4558b5ec418c83e69e3b0e49aac603b0de56a9e8f413f94a21a23602c5",
+    "graphSha256": "327bebc0fa567e1b07cb04e6a85af4cf9f5b59253c75af9baa09ed5db461656f",
+    "sourceAssemblySha256": "f7c1abfcfa6430d69e8bfe82f428327ed3070babea223008432058314ca08fb5",
+    "independentOwnerReviewSha256": "0f04c28208d9ebf72ff1011cf7989e2460399916b4ee96d72c19aecc7a4e9c62",
+    "independentLoaderReviewSha256": "7e0d6ead9580460ab68744e84fe4ac270331e1319173c25f260470ded01046b9"
+  },
+  "observed": {
+    "originalPositiveGraphs": 5,
+    "arithmeticOracleAccepted": 25,
+    "arithmeticOracleEvaluations": 25,
+    "declaredNativeAccepted": 40,
+    "declaredNativeEvaluations": 50,
+    "declaredGenesisDensityFailures": 10,
+    "declaredCompleteGraphsAccepted": 0
+  },
+  "equation": "e(-A,B)*e(alpha,beta)*e(IC0+n0*IC1+n1*IC2,gamma)*e(C,delta)=1",
+  "mathematicalQualification": "The exact guarded programs enforce this fixed-VK equation under the pinned VM/hash/BN254 premises, externally anchored exact terminal locking and success of all five required inputs. Canonical coordinate/scalar guards and public MSM are checker-owned.",
+  "observationQualification": "The same recorded runner, libauth3.1.0-next.8 runtime, adapter and static catalog act on byte-identical current positive payloads. Current harness VM source and package/lock files match. Current checkout has no installed runtime; no fresh current-checkout execution or certification of a future install is claimed.",
+  "payloadPolicy": "Only existing five positive graphs. Original proof/public/state/auxiliary/table/padding instruction prefixes remain unchanged. Static executable pages/redeems/lockings are substituted in memory; no adapted fixture is serialized.",
+  "limitations": [
+    "Native resource admission HOLD; every declared native graph fails at genesis operation-cost density.",
+    "No independent legacy PIT/auxiliary/fixed-factor soundness credit.",
+    "No universal producer/retry totality or exceptional-input completeness.",
+    "No whole-transaction validity, relay, live network, circuit or trusted-setup theorem."
+  ]
+}
