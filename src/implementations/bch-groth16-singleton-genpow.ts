@@ -1,14 +1,13 @@
 // Source-assembled BN254 genpow with canonical G1 parity witnesses.
-// 4,183 locking bytes and a 208-byte witness; historical UE used 4,198/272.
+// 4,320 locking bytes and a 208-byte witness; historical UE used 4,198/272.
 // Owning source: singleton/bn254/genpow-reconstructed/{verifier.asm,build.mjs}.
-// Assembly SHA-256: 1a2437914b36d1128c5476a9361d52836c80e86ea4ac1c779480f3f6cc000e73.
-// Earlier source helper reductions and the guarded outline49 rotation cycle are now exported.
-// Candidate locking SHA-256: 332fdd4dbbd5468afc997a49571e15ed88d04c6dda6ccff5863e1dfb0568e3dd.
-// A/C y parity is decoded with the shared exponent-driven Fp routine;
-// exact archived y, original x and eight other raw witness pushes are preserved.
-// Decoder root checks replace the two former standalone G1 equations.
-// This changes the witness representation domain; no unrestricted byte-language
-// equivalence, native resource admission or new subgroup theorem is claimed.
+// Assembly SHA-256: fef9584108c9cfa0c05c8ca2ff99b6de1cdf744d6b65f1e084b8a5eb37dc7c19.
+// Corrected locking SHA-256: 022fea806c85f8008990ae244b80b87353f5aedd5555eb369cef63a28269f483.
+// Finite parity0/1 witnesses remain byte-identical. Parity2,x0 denotes neutral G1;
+// four zero B limbs denote neutral G2. Canonical coordinates and Fr inputs are guarded.
+// Complete MSM identity addition and neutral Miller units preserve the fixed-key equation.
+// Four unchanged positives passed the arithmetic oracle; all eight default native
+// consensus/standard executions rejected at operation-cost density. Native resource HOLD.
 import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
@@ -32,22 +31,20 @@ export const bchGroth16SingletonGenpow: Implementation = {
   id: 'bch-groth16-singleton-genpow',
   // where the claimed public inputs live (public-input binding gate, harness/gates.ts)
   publicInputs: [{ input: 0, push: 1, name: 'n0' }, { input: 0, push: 0, name: 'n1' }],
-  name: 'BCH Groth16 verifier singleton, BN254 genpow (shared P, range-checked inputs, source-assembled 4,183 B, G1 parity)',
+  name: 'BCH Groth16 verifier singleton, BN254 genpow (shared P, range-checked inputs, source-assembled 4,320 B, G1 parity)',
   proofSystem: 'Groth16',
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
   source:
     'Explicit symbolic assembly in singleton/bn254/genpow-reconstructed/verifier.asm. ' +
-    'The fixed proof A/C y coordinates use parity pushes, reducing the witness from 272 to 208 bytes. ' +
-    'The verifier reconstructs each canonical y with a shared posttest remaining-exponent loop, checks the ' +
-    'curve equation and requested parity, and retains the original x and remaining witness data. ' +
-    'The 4,183-byte program has sha256 332fdd4dbbd5468afc997a49571e15ed88d04c6dda6ccff5863e1dfb0568e3dd. ' +
-    'The 72-function program retains its 32-byte scalar guard, G2 checks and source-owned helpers. ' +
-    'Three rotations after successful depth-nine disposal guards are omitted because they form an identity. The power loop ' +
-    'shifts its remaining exponent before testing for zero; all archived proof and ' +
-    'public-input integers are preserved. The original CashScript/stackcert lineage remains missing. ' +
-    'Actual finite proof/cost gates are recorded separately; relaxed VM limits are required.',
+    'Original finite A/C parity witnesses and all proof/public bytes remain unchanged. ' +
+    'Canonical coordinate/Fr guards, complete MSM identity addition, and neutral G1/G2 Miller branches ' +
+    'bind the fixed-key equation, including neutral vk_x. The 72 helper IDs and 2,790-step final exponent ' +
+    'schedule are unchanged. Neutral G1 uses parity2,x0; neutral G2 uses four zero limbs. ' +
+    'All four unchanged 208-byte original positives passed the pinned arithmetic oracle. ' +
+    'All eight default BCH2026 consensus/standard runs rejected at operation-cost density. ' +
+    'Native resource HOLD remains; arithmetic-oracle success does not establish native or relay acceptance.',
   load: async () => {
     const valid: Step[] = [
       {
