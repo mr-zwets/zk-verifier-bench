@@ -22,7 +22,7 @@ Both stay native HOLD and BCH-incompatible (op-cost). The new status changes no 
 | rebuilt from source on main | `build.mjs` gives the same hash in both vector files | `cofactorPoints()` from `cofactor-points.mjs` gives the same hash |
 | source-file hashes in provenance | match verifier.asm, build.mjs and both fixtures on main | match all 9 .mjs files on main |
 | provenance revision | asm and builder hashes (no git rev, by design) | `sourceRevision b7338ea`, an ancestor of main. This fixes WF2 §3 nit 1 (it used to record `sourceBaseRevision 5aa48d8`) |
-| `pnpm benchmark genpow` | PASS (4/4 proofs, 9/9 public-input mutations rejected, as in WF2) | see the final line below |
+| `pnpm benchmark genpow` (27.5 min run) | PASS: valid accepted, invalid rejected, 4/4 distinct proofs, 9/9 public-input mutations rejected; 4,528 B, 5,519,652,719 op-cost, `no: op-cost` | PASS: same gates; 5,880 B, 25,609,641,017 op-cost, `no: op-cost` |
 | results.json on main | 4,613 (4,528 + 85), op-cost 5,519,652,719, unreviewed | 5,965, unreviewed |
 
 These are the same hashes REVIEW-WF2 §2/§3 reviewed, so the shipped artifact is the reviewed artifact.
@@ -128,4 +128,4 @@ Move both entries out of the "withdrawn" comment block in review-status.ts.
 - **Dead code:** `subgroupDeclarations` is gone, but `membership()` in `subgroup.mjs` is still unused.
 - **Cost (WF2 §3 issue 4):** projecting the fixed VK G2 points is wasted work. A psi check on B would be cheaper and stricter. This is an author choice and not a status blocker.
 
-Bench gate final line: see below.
+The bench gates pass for both. Their 'input validation NOT DEMONSTRATED' line is a single-tx harness limitation: it ships no invalidInputs. The decoder checks are covered by the rejection runs above.

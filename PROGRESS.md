@@ -7,5 +7,7 @@ Task: a read-only report on whether the corrected genpow singletons can be marke
 - [x] Both programs rebuilt from source on main, byte for byte.
 - [x] Ordinary rejection runs: tools/genpow-reject.mts. BN: 22 fast cases plus 3 full neutral runs. BLS: 24 fast cases. All rejected.
 - [x] Constructive soundness re-check by reading: identity, neutral points, G2 domain.
-- [ ] `pnpm benchmark genpow`: BN PASS, BLS running (slow, about 25.6B op-cost per run).
+- [x] `pnpm benchmark genpow`: both PASS (27.5 min).
+
+Done: report delivered. Nothing merged.
 - [x] NOTES.md written.
