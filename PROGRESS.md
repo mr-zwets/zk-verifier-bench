@@ -17,3 +17,5 @@ Kernels phase (SPEC.md section 8). Files: research/pq-hash/kernels/.
 Sources: groth16_cashscript wip/pq-hash-verifier, research/pq-hash/verifier (worktree work/pq-hash/verifier).
 This worktree: research/pq-hash/verifier/ = crosscheck.ts (this harness's own VM wrappers), crosscheck.json, results/
 (copies of the source repo's results), REPORT.md. Nothing registered; no REGISTRY/results.json/score-history changes.
+- REPORT.md: the Write tool refused the report file; its full text is in the Verifier phase's final output (orchestrator
+  places it at research/pq-hash/verifier/REPORT.md).
