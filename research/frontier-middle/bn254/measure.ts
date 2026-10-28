@@ -33,6 +33,11 @@ const DESIGNS: Record<string, { file: string; vm: 'bch-spec' | 'bch-2026'; name:
     source: 'groth16_cashscript wip/frontier-middle-build-bn254 research/frontier-middle/bn254/rolled-residue (research artifact, not ranked)',
     publicInputs: [{ input: 0, push: 0, name: 'n0', offset: 256, encoding: 'le32' }, { input: 0, push: 0, name: 'n1', offset: 288, encoding: 'le32' }],
   },
+  'research-bn254-t2-rolled-residue-mulc': {
+    file: 't2-rolled-residue-mulc-vectors.json', vm: 'bch-2026', name: 'RESEARCH T2 variant: F^2 through the shared MULC + GLUE (byte-lean)',
+    source: 'same, T2_SQR=mulc',
+    publicInputs: [{ input: 0, push: 0, name: 'n0', offset: 256, encoding: 'le32' }, { input: 0, push: 0, name: 'n1', offset: 288, encoding: 'le32' }],
+  },
 };
 // executed OP_DEFINE body bytes of one unlocking (P2SH32: the last push is the redeem; every OP_DEFINE runs once)
 const defineBodyBytes = (unlocking: Uint8Array): number => {
