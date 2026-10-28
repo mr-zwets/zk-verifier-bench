@@ -1,6 +1,6 @@
 # Track 2: the empty middle of the Groth16 frontier
 
-Date: 2026-10-28. Status: research. **Nothing here is a leaderboard entry.** The four new designs are on wip branches in groth16_cashscript and are not in REGISTRY, results.json or score-history.json. Each passed two internal reviews (soundness and measurement) with minor findings only. None has had an independent external review.
+Date: 2026-10-28. Status: **registered entries** (updated 2026-10-28). The four designs are now leaderboard entries as five ids (BN T2 is listed in two builds, because they are separate bytes vs op-cost Pareto points): `bch-groth16-sound-si-gls-dproj`, `bch-groth16-bls12381-sound-si-gls-dproj` (both `bch-spec`), `bch-groth16-singleton-rolled-residue`, `bch-groth16-singleton-rolled-residue-mulc` and `bch-groth16-bls12381-singleton-minop-rolled` (`bch-2026`). They have reviewStatus `reviewed` on two internal reviews per curve (soundness and measurement) plus a fix round for the minor findings; none has had an independent external review. Their sources are in groth16_cashscript under `research/frontier-middle/`.
 
 ## 1. Question and framing
 
@@ -170,19 +170,19 @@ At k = 50 and 100 the model's best designs (a lazy or reduced residue singleton 
 
 ## 5. Review outcomes
 
-Each curve had one soundness review and one measurement-reproduction review. All four verdicts were **pass**, and there were no blockers or majors. The minor findings below are open; none affects soundness.
+Each curve had one soundness review and one measurement-reproduction review. All four verdicts were **pass**, and there were no blockers or majors. The minor findings below were taken up in a fix round before registration (groth16_cashscript 5f2a55a, f903eed, 37e43ae); none affects soundness.
 
-| curve | review | verdict | open minor items |
+| curve | review | verdict | minor items (fix round) |
 |---|---|---|---|
 | BN254 | soundness | pass | T2 per-kernel random-point differential test (tested against a noble mirror, no limb-bound proof; affects liveness only); assert FE(MAB) = e(α,β); one README sentence on T1 script/model δ-line equivalence; note that WQ changes in T1; T2 guard-coverage negative vectors |
 | BN254 | measurement | pass | all numbers reproduced exactly. T1 sweep needs `VERIFIER_DIR`; k_min over the sweep is 2.73 / 1.63 (not 2.56 / 1.57); worst-witness T1 bytes 17.1 KB (−22% instead of −24%); T1 needs bch-spec caps; standard-mode op is +0.1%; mixed result-key schema |
 | BLS12-381 | soundness | pass | value-level trace test of the on-chain δ kernels against DPROJ; keep the order-13 vector as a projective-degeneracy rejection; state the E_A = 0 exactness lemma; T2 lazy-tower bound envelope not re-established for the rolled dataflow (liveness only) |
 | BLS12-381 | measurement | pass | all numbers reproduced exactly. T1 k_min over the sweep is about 1.65 / 2.50; T1 needs bch-spec caps; measure.mjs uses a 63 B overhead (stale 8,650 score in a side file) |
 
-Both reviews also flagged that groth16_cashscript main (6204686) still carries a stale `PROGRESS.md`, which the build branches overwrite. Do not merge those branches as they are.
+Both reviews also flagged a stale root `PROGRESS.md` on groth16_cashscript main (6204686). It was removed (a594976), and the sources were brought over without the build branches' work notes.
 
 ## 6. Limits and caveats
-- **Research artifacts only.** None of these is reviewed for the leaderboard or registered. Promotion would need independent review, the open minor items above, and a VM with a looser op budget, which no current or proposed ruleset has.
+- **Registered entries (2026-10-28).** All five ids are in REGISTRY, results.json and score-history.json with reviewStatus `reviewed`, on the two internal reviews above plus a fix round that closed the minor items in §5. They have had no independent external review. Every one is over the op budget of its target VM, so none is deployable on a current or proposed ruleset.
 - **libauth vs BCHN op-cost.** libauth charges 100 per OP_DEFINE; BCHN and bchd also charge the body bytes. The BCHN-adjusted figures add 1.3–3.2k per design, which is negligible here. Standard (relay) mode is about 0.1% above consensus.
 - **Proof dependence.** T2 vk_x is input-dependent: +8.8M (BN) and +25.5M (BLS) on dense inputs. T1 is nearly flat, but its unlocking grows with n_q (BN max-degree witness 17.1 KB).
 - **Size caps.** E_k ignores caps. T1, like today's SI-GLS single, needs bch-spec sizes (unlockings of 16.5–18.8 KB). T2 fits bch-2026 caps (BN redeem 9,128 / unlocking 9,678; BLS 7,840 / 8,590).
