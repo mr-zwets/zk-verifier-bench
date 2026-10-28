@@ -1,0 +1,23 @@
+valid accepted true undefined opCost 26,070,993 attributed 26,070,993
+unlocking pushes [{"len":2256,"enc":2259},{"len":11328,"enc":11331},{"len":12793,"enc":12796}] total 26386
+sections(bytes) {"init":0,"transcript":6702,"parse+checks":277,"powers":811,"gls-tables":1500,"loop-setup":575,"loop":173,"terminal":334,"final":145,"cleanup":7} funcs(bytes) {"P":49,"RD":14,"EV":45,"TM":111,"TA":78,"G1C":16,"DSTEP":190,"AFFDBL":284,"PROJDBL":445,"AFFADD":296,"PROJADD":614,"BND":79}
+unlocking+p2sh               39,970 {"(self)":"39,970"}
+prologue(OP_DEFINE)           5,833 {"(self)":"5,833"}
+transcript                   88,390 {"(self)":"88,242","P":"148"}
+parse+checks                370,676 {"RD":"174,030","(self)":"158,312","G1C":"38,334"}
+powers                      247,545 {"(self)":"192,467","EV":"55,078"}
+gls-tables                  641,677 {"TM":"373,768","EV":"223,216","(self)":"35,766","TA":"8,927"}
+loop-setup                   96,693 {"(self)":"96,693"}
+loop:entry                      100 {"(self)":"100"}
+loop:bdbl                13,983,433 {"PROJDBL":"12,381,919","AFFDBL":"1,525,706","(self)":"75,808"}
+loop:dstep                5,201,381 {"DSTEP":"5,157,349","(self)":"44,032"}
+loop:add                  1,693,270 {"PROJADD":"665,133","AFFADD":"460,395","DSTEP":"409,543","(self)":"158,199"}
+loop:digit                  116,061 {"(self)":"116,061"}
+loop:gls                    905,788 {"(self)":"905,788"}
+loop:bnd                  1,880,099 {"BND":"1,841,668","(self)":"38,431"}
+loop:loopend                161,396 {"(self)":"161,396"}
+terminal                    165,348 {"(self)":"165,348"}
+quotient                    420,900 {"(self)":"343,382","RD":"77,518"}
+cleanup                      52,433 {"(self)":"52,433"}
+incl {"#phase2":"26,031,023 /","PROJDBL":"12,381,919 /53","DSTEP":"5,566,892 /68","BND":"1,841,668 /32","AFFDBL":"1,525,706 /10","EV":"1,159,751 /42","PROJADD":"665,133 /2","RD":"626,990 /280","AFFADD":"460,395 /3","TM":"373,768 /4","P":"60,828 /411","G1C":"38,334 /2","#phase0":"26,677 /","#phase1":"13,293 /","TA":"8,927 /1"}
+defines 12 2221

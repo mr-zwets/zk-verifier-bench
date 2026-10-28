@@ -1,0 +1,51 @@
+{
+ "segments": {
+  "unlocking (push witnesses)": 1448,
+  "OP_DEFINE prelude": 36301,
+  "input checks (range, curve, twist)": 178946,
+  "Miller (-A,B) + fused [|x|]B walk": 187954968,
+  "G2 subgroup check (psi endpoint)": 178777,
+  "Miller (alpha,beta)": 187957433,
+  "Fp12 products + conj": 4237474,
+  "vk_x MSM (Straus loop + inverse + affine)": 73697901,
+  "Miller (vk_x,gamma)": 187956985,
+  "Miller (C,delta)": 187962204,
+  "final exp easy part": 11568712,
+  "final exp hard part": 224595151
+ },
+ "order": [
+  "unlocking (push witnesses)",
+  "OP_DEFINE prelude",
+  "input checks (range, curve, twist)",
+  "Miller (-A,B) + fused [|x|]B walk",
+  "G2 subgroup check (psi endpoint)",
+  "Miller (alpha,beta)",
+  "Fp12 products + conj",
+  "vk_x MSM (Straus loop + inverse + affine)",
+  "Miller (vk_x,gamma)",
+  "Miller (C,delta)",
+  "final exp easy part",
+  "final exp hard part"
+ ],
+ "mainBytes": {
+  "OP_DEFINE prelude": 3279,
+  "input checks (range, curve, twist)": 66,
+  "Miller (-A,B) + fused [|x|]B walk": 21,
+  "G2 subgroup check (psi endpoint)": 394,
+  "Miller (alpha,beta)": 5,
+  "vk_x MSM (Straus loop + inverse + affine)": 745,
+  "Miller (vk_x,gamma)": 5,
+  "Fp12 products + conj": 207,
+  "Miller (C,delta)": 3,
+  "final exp easy part": 216,
+  "final exp hard part": 534
+ },
+ "bodyBytes": {
+  "field tower (shared)": 481,
+  "input-check code": 24,
+  "Miller code": 889,
+  "vk_x code": 214,
+  "final-exp code": 506,
+  "outlined fragments": 700
+ }
+}
