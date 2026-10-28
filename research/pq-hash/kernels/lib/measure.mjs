@@ -103,9 +103,14 @@ export function runCase(c) {
   };
   // real BCH 2026 VM, P2SH32 with zero pad (pad pushed last, dropped first by the redeem)
   const redeem = asm('DROP', {raw: script});
-  const needOp = res.looseStd.total + 2 * 100 + defBytes + 400; // + DROP and pad push, BCHN define charge, margin
+  // the real spend also pays for pushing the inputs, the pad and the redeem, OP_DROP, the P2SH32 hash of the redeem
+  // (standard iteration cost) and BCHN's define charge; the pad itself adds 1 op-cost per byte and 800 budget per byte
+  const inBytes = c.inputs.reduce((a, x) => a + x.length + 100, 0);
+  const p2shIters = 2 + Math.floor((redeem.length + 8) / 64);
+  const needOp = res.looseStd.total + inBytes + 2 * (redeem.length + 100) + 100 + 192 * p2shIters + defBytes + 2000;
+  const needIt = res.looseStd.iters + p2shIters + 2;
   const baseU = pushes([...c.inputs, new Uint8Array(0), redeem]).length;
-  const U = Math.max(baseU, Math.ceil(needOp / 800) - 41, 2 * (res.looseStd.iters + 2) - 41);
+  const U = Math.max(baseU, Math.ceil((needOp - 41 * 800) / 799), 2 * needIt - 41);
   let pad = U - baseU, unl;
   for (let t = 0; t < 4; t++) { unl = pushes([...c.inputs, new Uint8Array(Math.max(0, pad)), redeem]); if (unl.length >= U) break; pad += U - unl.length; }
   if (unl.length > 10_000 || redeem.length > 10_000) out.real = 'over one standard input';

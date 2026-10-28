@@ -1,0 +1,299 @@
+[
+ {
+  "id": "K16",
+  "group": "rpo",
+  "notes": "functions via OP_DEFINE; 1 permutation = one 2-to-1 RPO hash (4-element = 32-byte digest)",
+  "name": "RPO permutation (Miden RPO256), inverse S-box computed (72-mul chain)",
+  "trials": 4,
+  "opStd": {
+   "min": 4964777,
+   "max": 4968139,
+   "mean": 4966796.25
+  },
+  "opCons": {
+   "min": 4964777,
+   "max": 4968139,
+   "mean": 4966796.25
+  },
+  "instr": {
+   "min": 23786,
+   "max": 23786,
+   "mean": 23786
+  },
+  "arith": {
+   "min": 2239043,
+   "max": 2242145,
+   "mean": 2240908.75
+  },
+  "pushed": {
+   "min": 347134,
+   "max": 347406,
+   "mean": 347287.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 1744,
+   "max": 1744,
+   "mean": 1744
+  },
+  "defBytes": 1135,
+  "prologueBytes": 1154,
+  "defineLibauth": 2640,
+  "defineBchn": 3775,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K16",
+  "group": "rpo",
+  "notes": "+672 proof bytes per permutation (84 x 8 B)",
+  "extra": {
+   "hintBytes": 672
+  },
+  "name": "RPO permutation, inverse S-box witnessed (84 hints of 8 B moved to the altstack; y^7 == x checked)",
+  "trials": 4,
+  "opStd": {
+   "min": 1053057,
+   "max": 1053771,
+   "mean": 1053526
+  },
+  "opCons": {
+   "min": 1053057,
+   "max": 1053771,
+   "mean": 1053526
+  },
+  "instr": {
+   "min": 5810,
+   "max": 5810,
+   "mean": 5810
+  },
+  "arith": {
+   "min": 378906,
+   "max": 379546,
+   "mean": 379335.5
+  },
+  "pushed": {
+   "min": 93151,
+   "max": 93225,
+   "mean": 93190.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 1828,
+   "max": 1828,
+   "mean": 1828
+  },
+  "defBytes": 569,
+  "prologueBytes": 586,
+  "defineLibauth": 2074,
+  "defineBchn": 2643,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K16",
+  "group": "rpo",
+  "notes": "",
+  "name": "RPO building block: MDS + ARK (Kronecker-packed circulant, 1 OP_MUL, 12 OP_MOD)",
+  "trials": 4,
+  "opStd": {
+   "min": 32322,
+   "max": 32466,
+   "mean": 32395
+  },
+  "opCons": {
+   "min": 32322,
+   "max": 32466,
+   "mean": 32395
+  },
+  "instr": {
+   "min": 128,
+   "max": 128,
+   "mean": 128
+  },
+  "arith": {
+   "min": 15387,
+   "max": 15509,
+   "mean": 15448.5
+  },
+  "pushed": {
+   "min": 4135,
+   "max": 4157,
+   "mean": 4146.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 363,
+   "max": 363,
+   "mean": 363
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K16",
+  "group": "rpo",
+  "notes": "",
+  "name": "RPO building block: S-box x^7 (one element)",
+  "trials": 4,
+  "opStd": {
+   "min": 2794,
+   "max": 2864,
+   "mean": 2836.5
+  },
+  "opCons": {
+   "min": 2794,
+   "max": 2864,
+   "mean": 2836.5
+  },
+  "instr": {
+   "min": 17,
+   "max": 17,
+   "mean": 17
+  },
+  "arith": {
+   "min": 929,
+   "max": 993,
+   "mean": 967.5
+  },
+  "pushed": {
+   "min": 165,
+   "max": 171,
+   "mean": 169
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 53,
+   "max": 53,
+   "mean": 53
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K16",
+  "group": "rpo",
+  "notes": "",
+  "name": "RPO building block: inverse S-box x^(1/7), 72-mul chain (one element)",
+  "trials": 4,
+  "opStd": {
+   "min": 49704,
+   "max": 50225,
+   "mean": 49967.5
+  },
+  "opCons": {
+   "min": 49704,
+   "max": 50225,
+   "mean": 49967.5
+  },
+  "instr": {
+   "min": 236,
+   "max": 236,
+   "mean": 236
+  },
+  "arith": {
+   "min": 22910,
+   "max": 23391,
+   "mean": 23153.25
+  },
+  "pushed": {
+   "min": 3194,
+   "max": 3234,
+   "mean": 3214.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 623,
+   "max": 623,
+   "mean": 623
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K4",
+  "group": "field",
+  "notes": "same code as the inverse S-box; an F_p inversion x^(p-2) has the same shape",
+  "name": "Goldilocks exponentiation by a fixed 64-bit exponent (the x^(1/7) chain above: 63 squarings + 9 mul)",
+  "trials": 4,
+  "opStd": {
+   "min": 49675,
+   "max": 50069,
+   "mean": 49902.75
+  },
+  "opCons": {
+   "min": 49675,
+   "max": 50069,
+   "mean": 49902.75
+  },
+  "instr": {
+   "min": 236,
+   "max": 236,
+   "mean": 236
+  },
+  "arith": {
+   "min": 22882,
+   "max": 23249,
+   "mean": 23094
+  },
+  "pushed": {
+   "min": 3193,
+   "max": 3220,
+   "mean": 3208.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 623,
+   "max": 623,
+   "mean": 623
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ }
+]

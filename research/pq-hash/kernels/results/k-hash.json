@@ -1,0 +1,1196 @@
+[
+ {
+  "id": "K17",
+  "group": "hash",
+  "notes": "2 digest iterations (64-byte message)",
+  "name": "SHA-256 node: OP_CAT + OP_SHA256 of two 32-byte children",
+  "trials": 16,
+  "opStd": {
+   "min": 680,
+   "max": 680,
+   "mean": 680
+  },
+  "opCons": {
+   "min": 424,
+   "max": 424,
+   "mean": 424
+  },
+  "instr": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 96,
+   "max": 96,
+   "mean": 96
+  },
+  "iters": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "bodyBytes": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K17",
+  "group": "hash",
+  "notes": "",
+  "name": "SHA-256 of one 64-byte item (OP_SHA256 only)",
+  "trials": 16,
+  "opStd": {
+   "min": 516,
+   "max": 516,
+   "mean": 516
+  },
+  "opCons": {
+   "min": 260,
+   "max": 260,
+   "mean": 260
+  },
+  "instr": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 32,
+   "max": 32,
+   "mean": 32
+  },
+  "iters": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "bodyBytes": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K17",
+  "group": "hash",
+  "notes": "",
+  "name": "SHA-256 of one 55-byte item (largest 1-iteration message)",
+  "trials": 16,
+  "opStd": {
+   "min": 324,
+   "max": 324,
+   "mean": 324
+  },
+  "opCons": {
+   "min": 196,
+   "max": 196,
+   "mean": 196
+  },
+  "instr": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 32,
+   "max": 32,
+   "mean": 32
+  },
+  "iters": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "bodyBytes": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "",
+  "name": "Merkle level (cur, sib, bit) -> parent, h=32, branch (NOTIF SWAP ENDIF)",
+  "trials": 16,
+  "opStd": {
+   "min": 980,
+   "max": 980,
+   "mean": 980
+  },
+  "opCons": {
+   "min": 724,
+   "max": 724,
+   "mean": 724
+  },
+  "instr": {
+   "min": 5,
+   "max": 5,
+   "mean": 5
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 96,
+   "max": 96,
+   "mean": 96
+  },
+  "iters": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "bodyBytes": {
+   "min": 5,
+   "max": 5,
+   "mean": 5
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "bit in {0,1}: 0 OP_ROLL is a no-op, 1 OP_ROLL is OP_SWAP",
+  "name": "Merkle level (cur, sib, bit) -> parent, h=32, branchless (bit OP_ROLL)",
+  "trials": 16,
+  "opStd": {
+   "min": 812,
+   "max": 813,
+   "mean": 812.4375
+  },
+  "opCons": {
+   "min": 556,
+   "max": 557,
+   "mean": 556.4375
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 128,
+   "max": 129,
+   "mean": 128.4375
+  },
+  "iters": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "",
+  "name": "Merkle level (cur, sib, bit) -> parent, h=25, branch (NOTIF SWAP ENDIF)",
+  "trials": 16,
+  "opStd": {
+   "min": 1107,
+   "max": 1107,
+   "mean": 1107
+  },
+  "opCons": {
+   "min": 979,
+   "max": 979,
+   "mean": 979
+  },
+  "instr": {
+   "min": 8,
+   "max": 8,
+   "mean": 8
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 115,
+   "max": 115,
+   "mean": 115
+  },
+  "iters": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "bodyBytes": {
+   "min": 9,
+   "max": 9,
+   "mean": 9
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "bit in {0,1}: 0 OP_ROLL is a no-op, 1 OP_ROLL is OP_SWAP",
+  "name": "Merkle level (cur, sib, bit) -> parent, h=25, branchless (bit OP_ROLL)",
+  "trials": 16,
+  "opStd": {
+   "min": 932,
+   "max": 933,
+   "mean": 932.5
+  },
+  "opCons": {
+   "min": 804,
+   "max": 805,
+   "mean": 804.5
+  },
+  "instr": {
+   "min": 6,
+   "max": 6,
+   "mean": 6
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 140,
+   "max": 141,
+   "mean": 140.5
+  },
+  "iters": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "bodyBytes": {
+   "min": 7,
+   "max": 7,
+   "mean": 7
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "unrolled; 1 split of the sibling blob, bit = idx mod 2, idx >>= 1",
+  "name": "auth path step with index bit (idx, cur, sibling blob) -> (idx>>1, parent, blob'), h=32",
+  "trials": 16,
+  "opStd": {
+   "min": 2223,
+   "max": 2226,
+   "mean": 2224.5
+  },
+  "opCons": {
+   "min": 1967,
+   "max": 1970,
+   "mean": 1968.5
+  },
+  "instr": {
+   "min": 16,
+   "max": 16,
+   "mean": 16
+  },
+  "arith": {
+   "min": 3,
+   "max": 4,
+   "mean": 3.5
+  },
+  "pushed": {
+   "min": 236,
+   "max": 238,
+   "mean": 237
+  },
+  "iters": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "bodyBytes": {
+   "min": 17,
+   "max": 17,
+   "mean": 17
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "per level: divide by 20",
+  "extra": {
+   "perLevel": 20
+  },
+  "name": "auth path, 20 levels, loop (OP_BEGIN ... OP_UNTIL on empty blob), h=32; root compared",
+  "trials": 8,
+  "opStd": {
+   "min": 61800,
+   "max": 61851,
+   "mean": 61823.625
+  },
+  "opCons": {
+   "min": 56680,
+   "max": 56731,
+   "mean": 56703.625
+  },
+  "instr": {
+   "min": 385,
+   "max": 385,
+   "mean": 385
+  },
+  "arith": {
+   "min": 37,
+   "max": 50,
+   "mean": 42.75
+  },
+  "pushed": {
+   "min": 15583,
+   "max": 15621,
+   "mean": 15600.875
+  },
+  "iters": {
+   "min": 40,
+   "max": 40,
+   "mean": 40
+  },
+  "bodyBytes": {
+   "min": 57,
+   "max": 57,
+   "mean": 57
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "per level: divide by 20",
+  "extra": {
+   "perLevel": 20
+  },
+  "name": "auth path, 20 levels, unrolled, h=32; root compared",
+  "trials": 8,
+  "opStd": {
+   "min": 55694,
+   "max": 55718,
+   "mean": 55706.375
+  },
+  "opCons": {
+   "min": 50574,
+   "max": 50598,
+   "mean": 50586.375
+  },
+  "instr": {
+   "min": 324,
+   "max": 324,
+   "mean": 324
+  },
+  "arith": {
+   "min": 45,
+   "max": 51,
+   "mean": 47.5
+  },
+  "pushed": {
+   "min": 15569,
+   "max": 15587,
+   "mean": 15578.875
+  },
+  "iters": {
+   "min": 40,
+   "max": 40,
+   "mean": 40
+  },
+  "bodyBytes": {
+   "min": 376,
+   "max": 376,
+   "mean": 376
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "per level: divide by 20",
+  "extra": {
+   "perLevel": 20
+  },
+  "name": "auth path, 20 levels, unrolled, siblings as separate pushes, branchless, h=32",
+  "trials": 8,
+  "opStd": {
+   "min": 38711,
+   "max": 38786,
+   "mean": 38756.25
+  },
+  "opCons": {
+   "min": 33591,
+   "max": 33666,
+   "mean": 33636.25
+  },
+  "instr": {
+   "min": 283,
+   "max": 283,
+   "mean": 283
+  },
+  "arith": {
+   "min": 27,
+   "max": 47,
+   "mean": 39.375
+  },
+  "pushed": {
+   "min": 2704,
+   "max": 2759,
+   "mean": 2736.875
+  },
+  "iters": {
+   "min": 40,
+   "max": 40,
+   "mean": 40
+  },
+  "bodyBytes": {
+   "min": 315,
+   "max": 315,
+   "mean": 315
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "unrolled; 1 split of the sibling blob, bit = idx mod 2, idx >>= 1",
+  "name": "auth path step with index bit (idx, cur, sibling blob) -> (idx>>1, parent, blob'), h=25",
+  "trials": 16,
+  "opStd": {
+   "min": 2318,
+   "max": 2325,
+   "mean": 2323.25
+  },
+  "opCons": {
+   "min": 2190,
+   "max": 2197,
+   "mean": 2195.25
+  },
+  "instr": {
+   "min": 19,
+   "max": 19,
+   "mean": 19
+  },
+  "arith": {
+   "min": 2,
+   "max": 4,
+   "mean": 3.4375
+  },
+  "pushed": {
+   "min": 224,
+   "max": 229,
+   "mean": 227.8125
+  },
+  "iters": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "bodyBytes": {
+   "min": 21,
+   "max": 21,
+   "mean": 21
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "per level: divide by 20",
+  "extra": {
+   "perLevel": 20
+  },
+  "name": "auth path, 20 levels, loop (OP_BEGIN ... OP_UNTIL on empty blob), h=25; root compared",
+  "trials": 8,
+  "opStd": {
+   "min": 61372,
+   "max": 61445,
+   "mean": 61420.5
+  },
+  "opCons": {
+   "min": 58812,
+   "max": 58885,
+   "mean": 58860.5
+  },
+  "instr": {
+   "min": 445,
+   "max": 445,
+   "mean": 445
+  },
+  "arith": {
+   "min": 31,
+   "max": 51,
+   "mean": 44.25
+  },
+  "pushed": {
+   "min": 13001,
+   "max": 13054,
+   "mean": 13036.25
+  },
+  "iters": {
+   "min": 20,
+   "max": 20,
+   "mean": 20
+  },
+  "bodyBytes": {
+   "min": 54,
+   "max": 54,
+   "mean": 54
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "per level: divide by 20",
+  "extra": {
+   "perLevel": 20
+  },
+  "name": "auth path, 20 levels, unrolled, h=25; root compared",
+  "trials": 8,
+  "opStd": {
+   "min": 55227,
+   "max": 55305,
+   "mean": 55285.5
+  },
+  "opCons": {
+   "min": 52667,
+   "max": 52745,
+   "mean": 52725.5
+  },
+  "instr": {
+   "min": 384,
+   "max": 384,
+   "mean": 384
+  },
+  "arith": {
+   "min": 28,
+   "max": 49,
+   "mean": 43.75
+  },
+  "pushed": {
+   "min": 12959,
+   "max": 13016,
+   "mean": 13001.75
+  },
+  "iters": {
+   "min": 20,
+   "max": 20,
+   "mean": 20
+  },
+  "bodyBytes": {
+   "min": 449,
+   "max": 449,
+   "mean": 449
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K6",
+  "group": "merkle",
+  "notes": "per level: divide by 20",
+  "extra": {
+   "perLevel": 20
+  },
+  "name": "auth path, 20 levels, unrolled, siblings as separate pushes, branchless, h=25",
+  "trials": 8,
+  "opStd": {
+   "min": 41146,
+   "max": 41194,
+   "mean": 41170.375
+  },
+  "opCons": {
+   "min": 38586,
+   "max": 38634,
+   "mean": 38610.375
+  },
+  "instr": {
+   "min": 343,
+   "max": 343,
+   "mean": 343
+  },
+  "arith": {
+   "min": 38,
+   "max": 52,
+   "mean": 44.875
+  },
+  "pushed": {
+   "min": 2968,
+   "max": 3002,
+   "mean": 2985.5
+  },
+  "iters": {
+   "min": 20,
+   "max": 20,
+   "mean": 20
+  },
+  "bodyBytes": {
+   "min": 388,
+   "max": 388,
+   "mean": 388
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K7",
+  "group": "merkle",
+  "notes": "8 values; per value: divide the parse part",
+  "name": "leaf hash + parse, 64 B (trace leaf: 4 points x 2 values), h=32",
+  "trials": 16,
+  "opStd": {
+   "min": 6911,
+   "max": 6916,
+   "mean": 6912.875
+  },
+  "opCons": {
+   "min": 6655,
+   "max": 6660,
+   "mean": 6656.875
+  },
+  "instr": {
+   "min": 59,
+   "max": 59,
+   "mean": 59
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 627,
+   "max": 632,
+   "mean": 628.875
+  },
+  "iters": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "bodyBytes": {
+   "min": 67,
+   "max": 67,
+   "mean": 67
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K7",
+  "group": "merkle",
+  "notes": "8 values; per value: divide the parse part",
+  "name": "leaf hash + parse, 64 B (trace leaf: 4 points x 2 values), h=25",
+  "trials": 16,
+  "opStd": {
+   "min": 7237,
+   "max": 7242,
+   "mean": 7239.625
+  },
+  "opCons": {
+   "min": 6981,
+   "max": 6986,
+   "mean": 6983.625
+  },
+  "instr": {
+   "min": 62,
+   "max": 62,
+   "mean": 62
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 653,
+   "max": 658,
+   "mean": 655.625
+  },
+  "iters": {
+   "min": 2,
+   "max": 2,
+   "mean": 2
+  },
+  "bodyBytes": {
+   "min": 71,
+   "max": 71,
+   "mean": 71
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K7",
+  "group": "merkle",
+  "notes": "24 values; per value: divide the parse part",
+  "name": "leaf hash + parse, 192 B (composition / FRI leaf: 24 values), h=32",
+  "trials": 16,
+  "opStd": {
+   "min": 21173,
+   "max": 21184,
+   "mean": 21177.75
+  },
+  "opCons": {
+   "min": 20661,
+   "max": 20672,
+   "mean": 20665.75
+  },
+  "instr": {
+   "min": 171,
+   "max": 171,
+   "mean": 171
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 3305,
+   "max": 3316,
+   "mean": 3309.75
+  },
+  "iters": {
+   "min": 4,
+   "max": 4,
+   "mean": 4
+  },
+  "bodyBytes": {
+   "min": 195,
+   "max": 195,
+   "mean": 195
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K7",
+  "group": "merkle",
+  "notes": "24 values; per value: divide the parse part",
+  "name": "leaf hash + parse, 192 B (composition / FRI leaf: 24 values), h=25",
+  "trials": 16,
+  "opStd": {
+   "min": 21500,
+   "max": 21507,
+   "mean": 21503
+  },
+  "opCons": {
+   "min": 20988,
+   "max": 20995,
+   "mean": 20991
+  },
+  "instr": {
+   "min": 174,
+   "max": 174,
+   "mean": 174
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 3332,
+   "max": 3339,
+   "mean": 3335
+  },
+  "iters": {
+   "min": 4,
+   "max": 4,
+   "mean": 4
+  },
+  "bodyBytes": {
+   "min": 199,
+   "max": 199,
+   "mean": 199
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K5",
+  "group": "transcript",
+  "notes": "",
+  "name": "E(d): 32-byte digest -> F_p^3 (v mod p, v div p mod p, v div p^2 mod p)",
+  "trials": 16,
+  "opStd": {
+   "min": 3147,
+   "max": 3205,
+   "mean": 3176.25
+  },
+  "opCons": {
+   "min": 3147,
+   "max": 3205,
+   "mean": 3176.25
+  },
+  "instr": {
+   "min": 17,
+   "max": 17,
+   "mean": 17
+  },
+  "arith": {
+   "min": 1216,
+   "max": 1266,
+   "mean": 1241.125
+  },
+  "pushed": {
+   "min": 231,
+   "max": 239,
+   "mean": 235.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 63,
+   "max": 63,
+   "mean": 63
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K5",
+  "group": "transcript",
+  "notes": "",
+  "name": "challenge from transcript: SHA256(t || \"a\" || u8 j) then E(d)",
+  "trials": 16,
+  "opStd": {
+   "min": 3707,
+   "max": 3763,
+   "mean": 3735.125
+  },
+  "opCons": {
+   "min": 3579,
+   "max": 3635,
+   "mean": 3607.125
+  },
+  "instr": {
+   "min": 20,
+   "max": 20,
+   "mean": 20
+  },
+  "arith": {
+   "min": 1216,
+   "max": 1265,
+   "mean": 1240.5625
+  },
+  "pushed": {
+   "min": 299,
+   "max": 306,
+   "mean": 302.5625
+  },
+  "iters": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "bodyBytes": {
+   "min": 68,
+   "max": 68,
+   "mean": 68
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K5",
+  "group": "transcript",
+  "notes": "u16 i pushed as a constant (unrolled per query)",
+  "name": "query index: SHA256(G || u16 i), first 4 bytes LE mod 2^21",
+  "trials": 16,
+  "opStd": {
+   "min": 1424,
+   "max": 1428,
+   "mean": 1427
+  },
+  "opCons": {
+   "min": 1296,
+   "max": 1300,
+   "mean": 1299
+  },
+  "instr": {
+   "min": 11,
+   "max": 11,
+   "mean": 11
+  },
+  "arith": {
+   "min": 15,
+   "max": 18,
+   "mean": 17.25
+  },
+  "pushed": {
+   "min": 117,
+   "max": 118,
+   "mean": 117.75
+  },
+  "iters": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "bodyBytes": {
+   "min": 17,
+   "max": 17,
+   "mean": 17
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K5",
+  "group": "transcript",
+  "notes": "u16 i pushed as a constant (unrolled per query)",
+  "name": "query index: SHA256(G || u16 i), first 4 bytes LE mod 2^19",
+  "trials": 16,
+  "opStd": {
+   "min": 1422,
+   "max": 1428,
+   "mean": 1426.5
+  },
+  "opCons": {
+   "min": 1294,
+   "max": 1300,
+   "mean": 1298.5
+  },
+  "instr": {
+   "min": 11,
+   "max": 11,
+   "mean": 11
+  },
+  "arith": {
+   "min": 14,
+   "max": 18,
+   "mean": 16.9375
+  },
+  "pushed": {
+   "min": 116,
+   "max": 118,
+   "mean": 117.5625
+  },
+  "iters": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "bodyBytes": {
+   "min": 17,
+   "max": 17,
+   "mean": 17
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K5",
+  "group": "transcript",
+  "notes": "mask 0xff000000 here (8-bit target, so the case can be ground in JS); the 28-bit mask ffffff f0 costs the same",
+  "name": "grinding: G = SHA256(t6 || nonce8), require top 28 bits zero (mask AND)",
+  "trials": 16,
+  "opStd": {
+   "min": 1342,
+   "max": 1342,
+   "mean": 1342
+  },
+  "opCons": {
+   "min": 1214,
+   "max": 1214,
+   "mean": 1214
+  },
+  "instr": {
+   "min": 10,
+   "max": 10,
+   "mean": 10
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 150,
+   "max": 150,
+   "mean": 150
+  },
+  "iters": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "bodyBytes": {
+   "min": 18,
+   "max": 18,
+   "mean": 18
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ }
+]
