@@ -76,7 +76,7 @@ owners supply reviewed locators; a different full witness alone is insufficient.
 
 Multi-input intra-transaction seam checks require an accepted, qualified distinct
 extra. Missing evidence is reported as untested (`bound: null`, correctness
-`valid-only`), rather than credited as a passing seam check. Missing named checkpoint boundaries also leave this sampler untested. A finite set of rejected seams does not prove universal
+`valid-only`), rather than credited as a passing seam check. Bundles with fewer than two named checkpoint boundaries have no seam to sample; the check is not applicable to them, as for covenant/grouped chains. A finite set of rejected seams does not prove universal
 stage binding. Covenant/grouped state continuity remains outside this seam check.
 
 The independently callable TXv5 grader also enforces honest-run program/context

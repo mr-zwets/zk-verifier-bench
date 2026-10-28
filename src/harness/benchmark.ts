@@ -299,9 +299,9 @@ const crossStageStaple = (vm: Bch2026Vm, scenario: Scenario, other: Step[] | und
   const isIntraTx = base.length > 1 && base.every((s) => s.intraTx !== undefined);
   if (!isIntraTx) return { applicable: false, seamsTested: 0, unboundSeams: 0 };
   const distinctStages = new Set(base.map((s) => s.checkpoint).filter((c) => c !== undefined)).size;
-  if (distinctStages < 2) {
-    return { applicable: true, seamsTested: 0, unboundSeams: 0, reason: 'no declared cross-stage checkpoint boundaries' };
-  }
+  // Without two named checkpoints there is no seam to sample: not applicable (as before #54),
+  // matching covenant/grouped chains, which this sampler never covers either.
+  if (distinctStages < 2) return { applicable: false, seamsTested: 0, unboundSeams: 0 };
   if (other === undefined) {
     return { applicable: true, seamsTested: 0, unboundSeams: 0, reason: 'no accepted, qualified distinct extra proof' };
   }
