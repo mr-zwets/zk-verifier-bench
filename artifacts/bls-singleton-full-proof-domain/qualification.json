@@ -1,0 +1,70 @@
+{
+  "schema": "bls-plain-singleton-full-proof-domain-qualification/v1",
+  "sourceRevision": "c0b0a824fc9018b4ef344d2b68538f7159ffffdd",
+  "sourceFile": "singleton/bls12-381/groth16_strict.cash",
+  "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
+  "sourceImports": {
+    "singleton/bls12-381/lib/FinalExp.cash": "d97f9d54b0818cc850fcca0a1abbf16ec556eb8ebb3c4598c54cd7ac49d0a9ef",
+    "singleton/bls12-381/lib/Fp.cash": "ba116b1921da9f14a665765483e62c5fb8c964364d7507f0341d8a16612e110f",
+    "singleton/bls12-381/lib/Fp12.cash": "27ddeea29485d6460b7431a7b056e94f20b91e693313dd7ddc81cd7432aba9ed",
+    "singleton/bls12-381/lib/Fp2.cash": "f882e69e6543110055a70dc24eccebc3e84560bc6cea1e792f5f6e49452301c8",
+    "singleton/bls12-381/lib/Fp6.cash": "4ce5e6274d6dafa1623204c6605f0c71bfad0465c43ee91b1fe580901dcb5323",
+    "singleton/bls12-381/lib/G2Check.cash": "6bd09601fa6112708009f82ea10e4ecfb917df3a73db91aa501598ab24dd2b08",
+    "singleton/bls12-381/lib/Miller.cash": "317f768d5125c2ceb6f0ab633cd68b0aeaa4bd88aa3d4457dbb1183414da5766"
+  },
+  "lockingSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+  "lockingBytes": 17465,
+  "positivePacketSha256": "5c07dbe90d46a088141b7c2a3d4437e26a954925666cd140417203a47db523b6",
+  "originalMultiproofFile": "src/bch/groth16-bls12381-singleton-multiproof-vectors.json",
+  "originalMultiproofSha256": "05468d396ddd410a08878cecfd482c33635e7d89e48e4661c462772f108ed2ea",
+  "compiler": {
+    "entry": "cashc/packages/cashc/dist/compiler.js",
+    "entrySha256": "5e92acd05a37bea1d71e0a5ae35fe0d79d437229e1ef6e354d94147e7375bd70",
+    "node": "v24.19.0",
+    "options": {
+      "optimizeFor": "opcost",
+      "rescheduleStacks": false,
+      "disableDefSinking": true,
+      "disableOptimisationCrossCheck": true
+    },
+    "selection": "One fixed policy; no byte-size objective, variant selection, padding change, or resource tuning."
+  },
+  "mathematicalChange": "External A/C use the unique (0,0) infinity sentinel; B uses the unique all-zero Fp2 coordinate tuple. Finite A/C require canonical curve coordinates and [r]P=O. Finite B retains its curve and strict-r endpoint test even when A=O, using fixed alpha solely for the subgroup walk. Every neutral pairing factor is the Fp12 unit.",
+  "domain": "All canonical points of G1 and G2 including infinity, under the documented uncompressed integer-coordinate sentinels; two canonical Fr public inputs, including neutral computed vk_x. Exact fixed synthetic VK only.",
+  "proofBoundary": "Complete conditional arithmetic equation composition for the exact fixed-key raw artifact, all canonical subgroup A/B/C points including infinity, and every canonical Fr public tuple. Pinned VM/field/curve/pairing premises and admissible execution remain.",
+  "nativeAdmission": "HOLD: this raw fixed-policy 17465-byte direct locking exceeds BCH2026 10000-byte locking admission and is not a standard output. No whole-transaction, relay or mainnet claim.",
+  "constraints": {
+    "existingPositiveProofsOnly": true,
+    "newProofGeneration": false,
+    "negativeCaseExecution": false,
+    "cybersecurityTesting": false,
+    "byteOptimization": false,
+    "registryAndScoresChanged": false
+  },
+  "neutralCaseFile": "neutral-case.json",
+  "neutralCaseSha256": "55e262ca14852e5653e10b1b240cbed0b543adfe372e742a5388bb60c676374a",
+  "existingPositiveProofs": 5,
+  "neutralCase": "One unchanged mathematical positive from benchmark PR14 extraValidProofs[13] under source PR7, decoded and canonically reencoded for the existing 10-int singleton ABI. Its public inputs are [1,r-1], and actual fixed-key aggregation is neutral. Four other positive unlockings are byte-identical to the original plain multiproof artifact.",
+  "replayToolSha256": "e546aabdd1368a6cd5b9e1690100f9ebca3e989ee74f831a581c6117700048d7",
+  "validation": {
+    "existingPositiveProofs": 5,
+    "arithmeticOracleAccepted": 5,
+    "consensusAccepted": 0,
+    "standardAccepted": 0,
+    "nativeFailure": "Actual evaluate error:17465-byte direct locking exceeds10000-byte maximum. Standard verify also reports nonstandard source output >201 bytes.",
+    "neutralCaseObserved": "The archived neutral-vkx case accepts in the same full arithmetic verifier as all four original singleton proofs.",
+    "fullNewWholeBytecodeTheorem": "CONDITIONALLY_CONFIRMED_FIXED_VK_FULL_SUBGROUP_POINT_DOMAIN_INCLUDING_INFINITY",
+    "newProofOrPublicInputCases": 0,
+    "auxiliaryReencoding": "One archived positive case, same mathematical proof and public inputs; official canonical VM-number pushes.",
+    "externalInfinityFixtureCoverage": "The newly added infinity branches are proved symbolically; the five existing proof fixtures have finite external points. No external-infinity proof fixture was generated."
+  },
+  "mathematicalDisposition": "mathematical-disposition.json",
+  "mathematicalDispositionSha256": "1d073609c51bb6600a48270cbbcfe2c2d663b46aa9dde1e4135c565b22d98642",
+  "compiledArtifactOrigin": {
+    "sourceRevision": "b4a14a8fb91e3bc25995f26334f04eb0cbd19072",
+    "sourceFile": "singleton/bls12-381/groth16.cash",
+    "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
+    "lockingSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+    "boundary": "Same strict source bytes, imports, compiler policy and raw locking artifact; source moved verbatim, no recompilation."
+  }
+}

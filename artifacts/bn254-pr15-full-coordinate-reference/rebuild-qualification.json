@@ -1,0 +1,28 @@
+{
+  "schema": "source15-full-coordinate-local-rebuild/v1",
+  "status": "PASS_DETERMINISTIC_LOCAL_REBUILD_EXACT_4681",
+  "source": {
+    "path": "singleton/bn254/pr15-full-coordinate-reference/verifier.asm",
+    "bytes": 25375,
+    "sha256": "32e947c07ce5566e5fe56f10ab70d43824b4a1af3dd21fb19b5073690569fd82",
+    "originalSourceRevision": "1e7c52ab3b6af132c3f3f87effd38821828c874d"
+  },
+  "sourceHelper": {
+    "reviewedOwner": "singleton/bn254/genpow-reconstructed/build.mjs",
+    "sha256": "f64f587523365c6a057263dfc71ccac258c75e22c736599ae8bbdd4677ddad04",
+    "localBuildSha256": "3206c562b1259032907e8762182b30217d800aecc7aeb783f58408c618374b44"
+  },
+  "libauth": {
+    "packageVersion": "3.1.0-next.8",
+    "packageSha256": "6b4e3b7f062b80782c62cb7732ed01571c5f163fd786af877c0ae5fdc33ec65e",
+    "entrySha256": "c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d"
+  },
+  "compiledArtifact": {
+    "path": "artifacts/bn254-pr15-full-coordinate-reference/verifier-4681.hex",
+    "bytes": 4681,
+    "sha256": "dc2b929c5645d3baaac4fb544ba7565bf54c34156532a715053432d4f9913782",
+    "functionCount": 62
+  },
+  "pairedArtifactDirectory": "artifacts/bn254-pr15-full-coordinate-reference",
+  "scope": "Exact function/call/end DSL projection for the reviewed BN254 full-coordinate candidate. No variant selection, proof generation, fixture production, or optimization."
+}

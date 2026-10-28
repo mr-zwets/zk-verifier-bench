@@ -1,0 +1,354 @@
+{
+  "schema": "bn254-legacy-slim-positive-replay/v2",
+  "status": "PASS_EXISTING_SLIM_POSITIVES_ORACLE_NATIVE_HOLD",
+  "positiveOnly": true,
+  "targetId": "bch-groth16-intratx-pairfold5-densless-msm-slim-equation-checked",
+  "catalogSha256": "51ef1509eca342bc931b1f92ef57fc1af719948654399faeef5e4a9986d337c0",
+  "sourceRepairHelperSha256": "cb676275cc4a8775151d9c4e12f9961f987c48afe5c633fa9a7faf6c567c9a77",
+  "runs": [
+    {
+      "name": "primary",
+      "mode": "oracle-loosened",
+      "inputs": 5,
+      "accepted": true,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operationCosts": [
+        4922864,
+        4569332,
+        4191791,
+        5026872,
+        5551953831
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6797,
+        9383
+      ]
+    },
+    {
+      "name": "primary",
+      "mode": "consensus",
+      "inputs": 5,
+      "accepted": false,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 10990 bytes."
+      ],
+      "operationCosts": [
+        4922864,
+        4569332,
+        4191791,
+        5026872,
+        0
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6797,
+        9383
+      ]
+    },
+    {
+      "name": "extra-0",
+      "mode": "oracle-loosened",
+      "inputs": 5,
+      "accepted": true,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operationCosts": [
+        3994825,
+        3949876,
+        3935167,
+        2002196,
+        5523243056
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6798,
+        9325
+      ]
+    },
+    {
+      "name": "extra-0",
+      "mode": "consensus",
+      "inputs": 5,
+      "accepted": false,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 10990 bytes."
+      ],
+      "operationCosts": [
+        3994825,
+        3949876,
+        3935167,
+        2002196,
+        0
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6798,
+        9325
+      ]
+    },
+    {
+      "name": "extra-1",
+      "mode": "oracle-loosened",
+      "inputs": 5,
+      "accepted": true,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operationCosts": [
+        3994409,
+        3897846,
+        3987552,
+        2002166,
+        5522841124
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6798,
+        9324
+      ]
+    },
+    {
+      "name": "extra-1",
+      "mode": "consensus",
+      "inputs": 5,
+      "accepted": false,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 10990 bytes."
+      ],
+      "operationCosts": [
+        3994409,
+        3897846,
+        3987552,
+        2002166,
+        0
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6798,
+        9324
+      ]
+    },
+    {
+      "name": "extra-2",
+      "mode": "oracle-loosened",
+      "inputs": 5,
+      "accepted": true,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operationCosts": [
+        3994892,
+        4053527,
+        4039393,
+        2001797,
+        5523451239
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6798,
+        9325
+      ]
+    },
+    {
+      "name": "extra-2",
+      "mode": "consensus",
+      "inputs": 5,
+      "accepted": false,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 10990 bytes."
+      ],
+      "operationCosts": [
+        3994892,
+        4053527,
+        4039393,
+        2001797,
+        0
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6798,
+        9325
+      ]
+    },
+    {
+      "name": "worst-case",
+      "mode": "oracle-loosened",
+      "inputs": 5,
+      "accepted": true,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operationCosts": [
+        4665872,
+        4258692,
+        4191954,
+        4349932,
+        5582699834
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6798,
+        9383
+      ]
+    },
+    {
+      "name": "worst-case",
+      "mode": "consensus",
+      "inputs": 5,
+      "accepted": false,
+      "errors": [
+        null,
+        null,
+        null,
+        null,
+        "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 10990 bytes."
+      ],
+      "operationCosts": [
+        4665872,
+        4258692,
+        4191954,
+        4349932,
+        0
+      ],
+      "lockingBytes": [
+        35,
+        35,
+        35,
+        35,
+        10990
+      ],
+      "unlockingBytes": [
+        6366,
+        6129,
+        6058,
+        6798,
+        9383
+      ]
+    }
+  ],
+  "fixtureRuns": 10,
+  "evaluatedInputs": 50,
+  "runnerSha256": "4b70111b8dbeb5292fbbe126334e9b6f8ac0e088d47bfc740d4964eef7cad051",
+  "scope": "Existing primary, extraValidProofs, and worstCaseProof only. No invalid fixtures, builders, producers, compiler variants, optimization, or cybersecurity execution."
+}

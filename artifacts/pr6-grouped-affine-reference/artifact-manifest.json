@@ -1,0 +1,28 @@
+{
+  "schema": "verifier.cash/pr6-grouped-affine-reference-artifacts/v1",
+  "status": "PINNED_EXISTING_COMPILED_COMPONENT_BYTES",
+  "programs": [
+    {
+      "file": "repaired-generic-affine-0.hex",
+      "sha256": "976d70be87b1f3f52076eda7cf38e6f53c299480a81c44fc19dec9886d3c521f",
+      "bytes": 2244,
+      "window": "[0,21)"
+    },
+    {
+      "file": "repaired-generic-affine-1.hex",
+      "sha256": "d807841a5ae74baa0347348e53402968b42eb24ec437ed83345007b40980dc3d",
+      "bytes": 2179,
+      "window": "[21,43)"
+    }
+  ],
+  "sourceBindings": {
+    "firstCashSha256": "9319c93c02a1a9f70c658cf92f95b0addbda4dbededaa74bca5b42d5426c9560",
+    "finalCashSha256": "4da51bc2b3bd53b74f5552b8d96c2f927951cb124a79f6a0767151f45de3dc0b",
+    "compiledWithCompilerHead": "1c707c1dbf87396b30ba5e0704b1db44475ce893",
+    "patchedGeneratorSha256": "c80b81a733b302f338a1a5a1b4b6ef2074515979a99eeaef03975527fc58848b"
+  },
+  "boundary": "Code artifacts only. These files are not proof bytes, witness bytes, archived fixtures, or a complete verifier claim.",
+  "sourceRepository": "mr-zwets/groth16_cashscript",
+  "sourceRevision": "651b59f989e0893a61111c9c55ceb6154572a324",
+  "sourceDirectory": "chunked/pairing/pr6-grouped-affine-reference"
+}

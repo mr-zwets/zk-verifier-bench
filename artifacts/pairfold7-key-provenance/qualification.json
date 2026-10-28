@@ -1,0 +1,25 @@
+{
+  "schema": "pairfold7-key-declaration-qualification/v1",
+  "status": "DECLARED_KEY_AND_TERMINAL_COEFFICIENT_COMPATIBILITY_CONFIRMED",
+  "key": "key.json",
+  "provenance": "provenance.json",
+  "checker": "check.mjs",
+  "verification": "verification.json",
+  "originalVectorUnchanged": true,
+  "coordinateRolesChecked": 20,
+  "directTerminalFactorCoefficientsMatched": 12,
+  "historicalExporterLink": "UNESTABLISHED",
+  "trustedSetupLineage": "UNESTABLISHED",
+  "historicalWithdrawalsUnchanged": true,
+  "fullVerifierSoundnessEstablishedByThisPacket": false,
+  "scope": "A pre-existing key declaration and the reviewed terminal coefficients are explicitly bound. This supplies a transparent key owner for the qualified reference; it does not recover the original exporter, setup transcript, or restore withdrawn historical algorithm/performance claims.",
+  "activity": {
+    "proofGeneration": false,
+    "newProofCases": 0,
+    "newPublicInputCases": 0,
+    "vmRuns": 0,
+    "negativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false
+  }
+}

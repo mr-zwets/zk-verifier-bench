@@ -1,0 +1,1044 @@
+{
+  "schema": "compiled-callee-semantics-transfer/v1",
+  "status": "EXACT_STATIC_IDENTIFIER_RENAMING_TRANSFER",
+  "toolSha256": "7e2f62d267007ed38ac2743c4fc6ef098ccd425858c6f4ff857aa8a03d2aba64",
+  "old": {
+    "path": "artifacts/bls-singleton-neutral-vkx/compiled-locking.hex",
+    "artifactSha256": "bec94008264eefa667247df1cbb3376299a5061cdcb5a1e4cda8b92c9a91abbb",
+    "bytes": 14246,
+    "definitions": [
+      {
+        "id": 0,
+        "bytes": 122,
+        "bodySha256": "15892c5fabc31ae79211399564470b33cead1e882f08b089e940a43344cdf12a",
+        "recursiveFingerprint": "c19ed146839eaa750a61cd7624a31b793fbf6a931b3e7d4b9847ec654aecec37"
+      },
+      {
+        "id": 1,
+        "bytes": 52,
+        "bodySha256": "bbf7ab9196f45d282113df4455e0602b016c18aa2ad7fb8eb1c2fb7f29579bac",
+        "recursiveFingerprint": "fc764460a0ddd406daa4bbf73a31bc2f0b8891ced7685e9528e3ddfeacfda36f"
+      },
+      {
+        "id": 2,
+        "bytes": 51,
+        "bodySha256": "43f7ec965c22dcdcb8bd06239876ff5a4a1f3eb22bbd5e8306fd8e5d6f9b87e1",
+        "recursiveFingerprint": "ab7cc05301ae3b81a94b21d6ef06dba9519b6ac1dd88a72de07c09050241def3"
+      },
+      {
+        "id": 3,
+        "bytes": 51,
+        "bodySha256": "1bbf6d103ddeb1cef605e69eafd20231d1c1b9cbc0c208b4a66a3308352244cf",
+        "recursiveFingerprint": "c226576499577c90a536c3bbd30c4ef952da91e0f73d4d31496908aa17a9911e"
+      },
+      {
+        "id": 4,
+        "bytes": 18,
+        "bodySha256": "e17433ce4b976c05385ab5e5f8ca6bc44c0fe90545e30d8d96f2aff77766a055",
+        "recursiveFingerprint": "f70be79a3b8fcdacd21b52a5ec1bb865e55ddeff2f5e5daf3d40c9c15ba40484"
+      },
+      {
+        "id": 5,
+        "bytes": 102,
+        "bodySha256": "c83029276fb4adb317126b0bf4b287a8342de83127d08175d77a6389e5631ea4",
+        "recursiveFingerprint": "67ff880347b420cb4287436334361904106449a5d7852db1a9930c1b2d50cccd"
+      },
+      {
+        "id": 6,
+        "bytes": 32,
+        "bodySha256": "0f3b5aa70ff21d9ddbce246144c7716899a353d33a0ede4db2539aeb28d415d8",
+        "recursiveFingerprint": "c157f635db19a1a6c0f62757d474770adb11dce9d744c34e02a073ed9af8350c"
+      },
+      {
+        "id": 8,
+        "bytes": 65,
+        "bodySha256": "9a2120d9b0a76c41b1a7f803f01f5887176db3622b3fe3e14df266d89c4069a9",
+        "recursiveFingerprint": "ca90b1b14645f0b807d35b61ea2d8bbf85fd46a571d2ad0e6363661e9309bd3d"
+      },
+      {
+        "id": 9,
+        "bytes": 338,
+        "bodySha256": "8ae66a95b84c4fbe4ff34571a44d606ea2e4ee220d1116b9d79e77e3aa86ffb1",
+        "recursiveFingerprint": "3cff364cc5272d15708cb49af2aa611cb03e4715b08dd894e10d9b439ee4de5a"
+      },
+      {
+        "id": 10,
+        "bytes": 310,
+        "bodySha256": "b8690cba8079f8d953084615a5c0cf96687f554c84230098e2002bb458f80e58",
+        "recursiveFingerprint": "53de0ad6997b5bafdbceff0bab6b727ea233092248ac75af13b685a132acd92b"
+      },
+      {
+        "id": 11,
+        "bytes": 113,
+        "bodySha256": "ab872e9175ba74fb88f772fb5ae0b523ab71ac512aafec4e527037eb730e98cb",
+        "recursiveFingerprint": "e37772a411eb16f1bac91c3462b48017a6a0cd42b3a83cebd304664dbbc0c1d5"
+      },
+      {
+        "id": 12,
+        "bytes": 101,
+        "bodySha256": "324d2e0f14913eed9a9e15b474e9545ad096add868426f60e003ffff75fb1042",
+        "recursiveFingerprint": "d57ec225dda0cb2c3ffd63326a080f7e6afc3d284d27fd863ec38c9696df112a"
+      },
+      {
+        "id": 13,
+        "bytes": 3823,
+        "bodySha256": "d80f73fd3a3f0cfdbbedeb5810fe41037f2936f5175af8ed45faaf07077b13d8",
+        "recursiveFingerprint": "5877e77ab35133a4a226cd48609a02b635ab006ac4c187b83a6b453ce93f0b75"
+      },
+      {
+        "id": 14,
+        "bytes": 116,
+        "bodySha256": "539203ee3ec681bb3d38f8b6d30ffecce6ebebb261b5b078c9693decd14f87af",
+        "recursiveFingerprint": "67ffb6659a1b1ec32685e20846460c9c3d01dede41a8fc213d483dda83525fa1"
+      },
+      {
+        "id": 15,
+        "bytes": 288,
+        "bodySha256": "5f586d5bccb09b35eb1cdf0581569848bf988c794cfe2fbd7af43c7b8e264118",
+        "recursiveFingerprint": "31155f3e63180ae8bc20d858e5bb5d50c5dd80d47728e6f0d4810b32def304ad"
+      },
+      {
+        "id": 16,
+        "bytes": 202,
+        "bodySha256": "7ee03010757c4993b373359eb2fd7c3861ee9849cc7531c8205dff48548fcd1e",
+        "recursiveFingerprint": "3e265b5258dee9462b9983952800c18e3c1aa483f649a6ec3a901b89c456d484"
+      },
+      {
+        "id": 17,
+        "bytes": 8,
+        "bodySha256": "0974f4f573ae5dae75a581024b4a160e1436606c928ec00172638ec37c715306",
+        "recursiveFingerprint": "39fa3ab5a9b07f61ad8ac4cc3726dcfbbab8bc83a69e799c1d19080ca6103acf"
+      },
+      {
+        "id": 18,
+        "bytes": 8,
+        "bodySha256": "d855206973bd307d2634f804f4bda831cd9f10d706907b2404fe8faebb6223bb",
+        "recursiveFingerprint": "928abffe56d74b0cb6a0ed1bca7f93e608cdbb186a2efbc1710dc8bc86c2058c"
+      },
+      {
+        "id": 19,
+        "bytes": 7,
+        "bodySha256": "1198eb1839575070a443e6866eebca3f6bdc3bdac6fa243b92aafffd02d92627",
+        "recursiveFingerprint": "d39a614126f0805999a7c5418d5355544ae6323bfa361bbfc55e140d5acd8868"
+      },
+      {
+        "id": 20,
+        "bytes": 8,
+        "bodySha256": "eaa6ba4de669f8c52030aa76824638009615f45f79c6885a3d433dfe3f06cb33",
+        "recursiveFingerprint": "397f8e8badcebe476b3124fa7381b65f8746e6e581dccc2e2d17626ce107d174"
+      },
+      {
+        "id": 21,
+        "bytes": 27,
+        "bodySha256": "57a32d111e8be3c5b373ffb36fd71ffa6771c8999e21b7709404889d9538f773",
+        "recursiveFingerprint": "1fb397c95a9f2e82e86e4e929dd18bb3d571d4255c30f4f076c580bedd2502d0"
+      },
+      {
+        "id": 22,
+        "bytes": 27,
+        "bodySha256": "8f2088041ad71796d7b5a787c84d28c7f02232fb0458f7e4072ffbfb8636a5b7",
+        "recursiveFingerprint": "4f75e1810d33a7b6a8d6b0939133022643bb615cd454042247fc9ccdb8ec9c8a"
+      },
+      {
+        "id": 23,
+        "bytes": 194,
+        "bodySha256": "636715b90bb7172795dbf91af3c0128bc595fd77025f67553357f960c7552ded",
+        "recursiveFingerprint": "7acba988f7a0f74740afa2a5b554db1fbd06b929a31ee1bd5026079d71cb4fcd"
+      },
+      {
+        "id": 24,
+        "bytes": 9,
+        "bodySha256": "0e3b8b42d66a163d7ffaec8aa8f1f99afa4e80afaeaf78c2bb57d8f2325b82d7",
+        "recursiveFingerprint": "892cb9cda004111983d9fcc826cd3b77939da80096920afa64fc0f3765faac98"
+      },
+      {
+        "id": 25,
+        "bytes": 16,
+        "bodySha256": "5740c234572f7c9f993a47ff22466649b110364ac7897326f082d3526a33a9c4",
+        "recursiveFingerprint": "9cf2f89efbb182c02951e9e973e896f2f58fa06bafc8407a8d4b82447cd916b5"
+      },
+      {
+        "id": 26,
+        "bytes": 5,
+        "bodySha256": "88f3aa27d46fc128d5548fef8963051df317f6d58155bb313666764a201a7210",
+        "recursiveFingerprint": "1a24eeaefcafc5d4c2719ead3309f543deca32bc89ae31fdf94b10ac6802e184"
+      },
+      {
+        "id": 27,
+        "bytes": 104,
+        "bodySha256": "9ea503fe73122001d70e72f8dfd3742ff3231d513b35cc6f81f7f595aa859c21",
+        "recursiveFingerprint": "2d2b82cda260258cd7a0f3ab3ebd3902a86ce75483151217a8a4a099c891ada3"
+      },
+      {
+        "id": 28,
+        "bytes": 102,
+        "bodySha256": "9f420f8a0a02dedb1b8956d3f2f75483aef66a28d6a0ceacbf30e1ffee1f7e6e",
+        "recursiveFingerprint": "7e558ee5f43292fe5d08266b901448437df9428ce08f4c008d89ba65b69ca8ae"
+      },
+      {
+        "id": 29,
+        "bytes": 252,
+        "bodySha256": "3a6545d8f2dcc57a50aa2d1ae401b8de3a863fce3c9610fcd5a3193423488594",
+        "recursiveFingerprint": "d4a5ba4be1374b4cc03e0664273567a55d90672a78212640e3a25b51ea672e2b"
+      },
+      {
+        "id": 30,
+        "bytes": 138,
+        "bodySha256": "f7c62323e6081bc9e553ad0a8f63b053ece77612b299a52cabc8bd97e8ce002e",
+        "recursiveFingerprint": "43193057a1149e89817ee374e61d3aa091e8b7165c591a73ded96871b0307397"
+      },
+      {
+        "id": 31,
+        "bytes": 31,
+        "bodySha256": "c10f2fd09a8c542dfadd6ef857f1029a0ca89415f67a31a1722a9ba8ea1701e6",
+        "recursiveFingerprint": "fccb09f7a166dfca884947dccf40f8c094cbec7a7ccc52e82ccda82b2fc9e2de"
+      },
+      {
+        "id": 32,
+        "bytes": 203,
+        "bodySha256": "55aa09c3e281f11cfb007e48ea913fca5c78ea4537fa88bb0b3bf01a431aca51",
+        "recursiveFingerprint": "df0f0e53be83b4692f692a451ab0bdf1a312246c1c285252559e3878e5e24774"
+      },
+      {
+        "id": 35,
+        "bytes": 39,
+        "bodySha256": "4d48375c40877af707bf3281f9f4ddda44f3ac4f62294fbbf6e3094df3aeb6ab",
+        "recursiveFingerprint": "0954d6dd15409574b771cadc944a9dcd84a95b5ebbc9db6ca8492d24f4d8ac6b"
+      },
+      {
+        "id": 36,
+        "bytes": 11,
+        "bodySha256": "2cc736bb8c160205c9ed37c04aa6331e089222d21f71dd1f6d5e298d7a610bf3",
+        "recursiveFingerprint": "f3300882c440b4fac0fcaaa2b6ef9ce0bf2a4da20c7ac275e1bc04b4c9620234"
+      },
+      {
+        "id": 39,
+        "bytes": 41,
+        "bodySha256": "505cde5f8ff34c5ab6ed1475b04b6a909ff8792d7441cbddbd2f07495226a391",
+        "recursiveFingerprint": "8faf02b493c3077a7510f677f4214e8baa625361c93cb364732b880eab30b9d7"
+      },
+      {
+        "id": 42,
+        "bytes": 291,
+        "bodySha256": "e38dd090942c47c182dd405e3a09f415f4b1da02e4647c185690f1b3c72e9bd8",
+        "recursiveFingerprint": "e503e29cea948e969422de84d6565801306801e1e63267bba9774bce6e686357"
+      },
+      {
+        "id": 43,
+        "bytes": 21,
+        "bodySha256": "e93765844a40d0edbf05cc2c51041de0296eb63b91d0bcd9a2223a2edb909ea6",
+        "recursiveFingerprint": "248f37e779e640b97e0299e77bd3073e1b946f819fbea7ac7c52cc0bd4218ad0"
+      },
+      {
+        "id": 44,
+        "bytes": 24,
+        "bodySha256": "abc410579e58fb6ae8f54cd830c9664df77b9d7b7369230b20dab5d6840d0626",
+        "recursiveFingerprint": "65d11baabcb7744020f458d2709f66e00bf6af5ecdeb953872fc9894a2af2c0f"
+      },
+      {
+        "id": 45,
+        "bytes": 1236,
+        "bodySha256": "229f76a8d79a3f1a0088b0ca676e632e901d3aa49fd637761deeb0a43c5a0f14",
+        "recursiveFingerprint": "4bd28f43d38ba715d1795fe35a7dae9d80575562a14c759d4a135ec7c70f1f1d"
+      },
+      {
+        "id": 47,
+        "bytes": 228,
+        "bodySha256": "27021150621cf86bff979184d6b6a01addd7c875453593346b9cd91fc8c11042",
+        "recursiveFingerprint": "a7f4e38b908b8a4942563f23fdb136cfaa08086e174ac7d583c7405d90e3f711"
+      },
+      {
+        "id": 48,
+        "bytes": 53,
+        "bodySha256": "4b1a22c1790b69c50554aee6a188bc761bc03979c1bb9ac04572f8637b7c7659",
+        "recursiveFingerprint": "c59a7a71c73adb9b5d3708cbca18f3be3ca58b2ae235d69b80a40f35cb1c6751"
+      },
+      {
+        "id": 50,
+        "bytes": 27,
+        "bodySha256": "bee731ca62e93a0d825aa8cf4b32e35223057004e4e9d5db5a4a5e12f54e7d73",
+        "recursiveFingerprint": "bc0818d746a6faa0ce74130bb43d2b5a7efa962a5ad76fb5bf73d3bdef5e255a"
+      }
+    ],
+    "mainInstructions": 3095,
+    "rawStaticInvokes": 358
+  },
+  "current": {
+    "path": "artifacts/bls-singleton-full-proof-domain/compiled-locking.hex",
+    "artifactSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+    "bytes": 17465,
+    "definitions": [
+      {
+        "id": 0,
+        "bytes": 320,
+        "bodySha256": "f527eecd02a97c259f3f3a3e23b47e8e38141a95d5ff24c0d32efda18d27ae63",
+        "recursiveFingerprint": "7e74f8e46fa04a90219ecf31054d8e57b153c4858e995720ff24e524a400f01f"
+      },
+      {
+        "id": 1,
+        "bytes": 52,
+        "bodySha256": "bbf7ab9196f45d282113df4455e0602b016c18aa2ad7fb8eb1c2fb7f29579bac",
+        "recursiveFingerprint": "fc764460a0ddd406daa4bbf73a31bc2f0b8891ced7685e9528e3ddfeacfda36f"
+      },
+      {
+        "id": 2,
+        "bytes": 51,
+        "bodySha256": "43f7ec965c22dcdcb8bd06239876ff5a4a1f3eb22bbd5e8306fd8e5d6f9b87e1",
+        "recursiveFingerprint": "ab7cc05301ae3b81a94b21d6ef06dba9519b6ac1dd88a72de07c09050241def3"
+      },
+      {
+        "id": 3,
+        "bytes": 51,
+        "bodySha256": "1bbf6d103ddeb1cef605e69eafd20231d1c1b9cbc0c208b4a66a3308352244cf",
+        "recursiveFingerprint": "c226576499577c90a536c3bbd30c4ef952da91e0f73d4d31496908aa17a9911e"
+      },
+      {
+        "id": 5,
+        "bytes": 65,
+        "bodySha256": "e0d6a9835f02d17e533e643afd9c995ff62c53287af1719ee13b257fa45727e7",
+        "recursiveFingerprint": "ca90b1b14645f0b807d35b61ea2d8bbf85fd46a571d2ad0e6363661e9309bd3d"
+      },
+      {
+        "id": 6,
+        "bytes": 102,
+        "bodySha256": "c83029276fb4adb317126b0bf4b287a8342de83127d08175d77a6389e5631ea4",
+        "recursiveFingerprint": "67ff880347b420cb4287436334361904106449a5d7852db1a9930c1b2d50cccd"
+      },
+      {
+        "id": 7,
+        "bytes": 310,
+        "bodySha256": "e1d71c1ba0144fdc7da103f9c50194e9bd5c861b63e7d3bccfb8906167ddb4ee",
+        "recursiveFingerprint": "53de0ad6997b5bafdbceff0bab6b727ea233092248ac75af13b685a132acd92b"
+      },
+      {
+        "id": 8,
+        "bytes": 18,
+        "bodySha256": "ee4806abc7028236d239a0bacf5f831444c3eaa3211073ba778d14ac0c22fdc9",
+        "recursiveFingerprint": "f70be79a3b8fcdacd21b52a5ec1bb865e55ddeff2f5e5daf3d40c9c15ba40484"
+      },
+      {
+        "id": 9,
+        "bytes": 32,
+        "bodySha256": "a3c67143859b1b9e85bd90475148bed9bb4f98e7dbda835a9a288ea9d63a2060",
+        "recursiveFingerprint": "c157f635db19a1a6c0f62757d474770adb11dce9d744c34e02a073ed9af8350c"
+      },
+      {
+        "id": 11,
+        "bytes": 338,
+        "bodySha256": "8ae66a95b84c4fbe4ff34571a44d606ea2e4ee220d1116b9d79e77e3aa86ffb1",
+        "recursiveFingerprint": "3cff364cc5272d15708cb49af2aa611cb03e4715b08dd894e10d9b439ee4de5a"
+      },
+      {
+        "id": 12,
+        "bytes": 113,
+        "bodySha256": "ab872e9175ba74fb88f772fb5ae0b523ab71ac512aafec4e527037eb730e98cb",
+        "recursiveFingerprint": "e37772a411eb16f1bac91c3462b48017a6a0cd42b3a83cebd304664dbbc0c1d5"
+      },
+      {
+        "id": 13,
+        "bytes": 101,
+        "bodySha256": "324d2e0f14913eed9a9e15b474e9545ad096add868426f60e003ffff75fb1042",
+        "recursiveFingerprint": "d57ec225dda0cb2c3ffd63326a080f7e6afc3d284d27fd863ec38c9696df112a"
+      },
+      {
+        "id": 14,
+        "bytes": 3823,
+        "bodySha256": "c286afe30fbdc5cb2a053503850a2726e89f5ddb297c8e27b4b7b670f81edf19",
+        "recursiveFingerprint": "5877e77ab35133a4a226cd48609a02b635ab006ac4c187b83a6b453ce93f0b75"
+      },
+      {
+        "id": 15,
+        "bytes": 116,
+        "bodySha256": "15fc670a67dab1ee88d1fc999ac1be0d48cb1c32ede94a4c0094b725d19e615c",
+        "recursiveFingerprint": "67ffb6659a1b1ec32685e20846460c9c3d01dede41a8fc213d483dda83525fa1"
+      },
+      {
+        "id": 16,
+        "bytes": 291,
+        "bodySha256": "648b3eba05159da9920f8023d36e4f6948d44d8cbb3a7eb50a93ec3871b59fab",
+        "recursiveFingerprint": "31155f3e63180ae8bc20d858e5bb5d50c5dd80d47728e6f0d4810b32def304ad"
+      },
+      {
+        "id": 17,
+        "bytes": 202,
+        "bodySha256": "df417f4bf6e146cf41d6d259f7f22b532511d2c4c44ae244d8109b755a95b241",
+        "recursiveFingerprint": "3e265b5258dee9462b9983952800c18e3c1aa483f649a6ec3a901b89c456d484"
+      },
+      {
+        "id": 18,
+        "bytes": 8,
+        "bodySha256": "0974f4f573ae5dae75a581024b4a160e1436606c928ec00172638ec37c715306",
+        "recursiveFingerprint": "39fa3ab5a9b07f61ad8ac4cc3726dcfbbab8bc83a69e799c1d19080ca6103acf"
+      },
+      {
+        "id": 19,
+        "bytes": 8,
+        "bodySha256": "34141b4431e881653047aac44d62f527077acb3363982d2f8502a314bc10c9d1",
+        "recursiveFingerprint": "928abffe56d74b0cb6a0ed1bca7f93e608cdbb186a2efbc1710dc8bc86c2058c"
+      },
+      {
+        "id": 20,
+        "bytes": 7,
+        "bodySha256": "861c8d8ba31c589f967660545adf38508593e8c95ac06951b8cb613e3198fed1",
+        "recursiveFingerprint": "d39a614126f0805999a7c5418d5355544ae6323bfa361bbfc55e140d5acd8868"
+      },
+      {
+        "id": 21,
+        "bytes": 8,
+        "bodySha256": "a0dff79b4be3942657d10befd294fac97e59e47924a454088e94c50687b2a255",
+        "recursiveFingerprint": "397f8e8badcebe476b3124fa7381b65f8746e6e581dccc2e2d17626ce107d174"
+      },
+      {
+        "id": 22,
+        "bytes": 27,
+        "bodySha256": "8f2088041ad71796d7b5a787c84d28c7f02232fb0458f7e4072ffbfb8636a5b7",
+        "recursiveFingerprint": "1fb397c95a9f2e82e86e4e929dd18bb3d571d4255c30f4f076c580bedd2502d0"
+      },
+      {
+        "id": 23,
+        "bytes": 27,
+        "bodySha256": "c00ad0f6fb4bbcb5d48dfb917c49cdc2789b10a1dc43295f780975a19740d991",
+        "recursiveFingerprint": "4f75e1810d33a7b6a8d6b0939133022643bb615cd454042247fc9ccdb8ec9c8a"
+      },
+      {
+        "id": 24,
+        "bytes": 194,
+        "bodySha256": "911212d561911911d35bead6be05532539dad5877c90f10a9ca48c546269f812",
+        "recursiveFingerprint": "7acba988f7a0f74740afa2a5b554db1fbd06b929a31ee1bd5026079d71cb4fcd"
+      },
+      {
+        "id": 25,
+        "bytes": 9,
+        "bodySha256": "0e3b8b42d66a163d7ffaec8aa8f1f99afa4e80afaeaf78c2bb57d8f2325b82d7",
+        "recursiveFingerprint": "892cb9cda004111983d9fcc826cd3b77939da80096920afa64fc0f3765faac98"
+      },
+      {
+        "id": 26,
+        "bytes": 16,
+        "bodySha256": "5e05c98d5203cb3bb8bca3883e0170150dd309376860e35488dc62038fce6b50",
+        "recursiveFingerprint": "9cf2f89efbb182c02951e9e973e896f2f58fa06bafc8407a8d4b82447cd916b5"
+      },
+      {
+        "id": 27,
+        "bytes": 5,
+        "bodySha256": "dd7b1bb7f99241ba6a461a3a915e95b7f9b6d84f80b6d6cc32fd38176be88d73",
+        "recursiveFingerprint": "1a24eeaefcafc5d4c2719ead3309f543deca32bc89ae31fdf94b10ac6802e184"
+      },
+      {
+        "id": 28,
+        "bytes": 104,
+        "bodySha256": "9ea503fe73122001d70e72f8dfd3742ff3231d513b35cc6f81f7f595aa859c21",
+        "recursiveFingerprint": "2d2b82cda260258cd7a0f3ab3ebd3902a86ce75483151217a8a4a099c891ada3"
+      },
+      {
+        "id": 29,
+        "bytes": 102,
+        "bodySha256": "a69c5e14cb8f0b9f1a6d1804818aa5b3eac02612473a6599f6b2b74552f469a0",
+        "recursiveFingerprint": "7e558ee5f43292fe5d08266b901448437df9428ce08f4c008d89ba65b69ca8ae"
+      },
+      {
+        "id": 30,
+        "bytes": 252,
+        "bodySha256": "beeb1f23cf8b39391dcb5a5b4b917c4cdd78a8cd016a95c1eb663d1ccd77b572",
+        "recursiveFingerprint": "d4a5ba4be1374b4cc03e0664273567a55d90672a78212640e3a25b51ea672e2b"
+      },
+      {
+        "id": 31,
+        "bytes": 138,
+        "bodySha256": "57fe62df0d40862744d92bf8e0866d9697305bf701b78c151cbe2fb9befba891",
+        "recursiveFingerprint": "43193057a1149e89817ee374e61d3aa091e8b7165c591a73ded96871b0307397"
+      },
+      {
+        "id": 32,
+        "bytes": 31,
+        "bodySha256": "dbc50f21957deee6756aa5afab68a83f532ea176ab1899809ec7d9dcca84277b",
+        "recursiveFingerprint": "fccb09f7a166dfca884947dccf40f8c094cbec7a7ccc52e82ccda82b2fc9e2de"
+      },
+      {
+        "id": 33,
+        "bytes": 203,
+        "bodySha256": "fc5e74ec1448be97828eb5459be33043ca2d719635f4223f33c91b8971a05ce1",
+        "recursiveFingerprint": "df0f0e53be83b4692f692a451ab0bdf1a312246c1c285252559e3878e5e24774"
+      },
+      {
+        "id": 36,
+        "bytes": 39,
+        "bodySha256": "3a8478f713234dff0f3524bcb187321b053e92c1400441e251df25a039163a1c",
+        "recursiveFingerprint": "0954d6dd15409574b771cadc944a9dcd84a95b5ebbc9db6ca8492d24f4d8ac6b"
+      },
+      {
+        "id": 37,
+        "bytes": 11,
+        "bodySha256": "846a0c6c51a6450efd8f486a2909f4636b0e7915dedee7b42a9c5daa93f4063f",
+        "recursiveFingerprint": "f3300882c440b4fac0fcaaa2b6ef9ce0bf2a4da20c7ac275e1bc04b4c9620234"
+      },
+      {
+        "id": 40,
+        "bytes": 42,
+        "bodySha256": "c9600074b02488275536c28f73caff23892e0553cf0e8201634d08f9393bab17",
+        "recursiveFingerprint": "8faf02b493c3077a7510f677f4214e8baa625361c93cb364732b880eab30b9d7"
+      },
+      {
+        "id": 43,
+        "bytes": 291,
+        "bodySha256": "24de01240827fa17a9e6008e5173a681314eab87f546719db3025c3dec86ea3b",
+        "recursiveFingerprint": "e503e29cea948e969422de84d6565801306801e1e63267bba9774bce6e686357"
+      },
+      {
+        "id": 44,
+        "bytes": 21,
+        "bodySha256": "440f3b8ff9cafe1b8e49caab9b33b831ca79eaebeb5592f1a4ee09c88c9140d9",
+        "recursiveFingerprint": "248f37e779e640b97e0299e77bd3073e1b946f819fbea7ac7c52cc0bd4218ad0"
+      },
+      {
+        "id": 45,
+        "bytes": 24,
+        "bodySha256": "240369309d53cfac7bd097e533c536f6c7af95f66e5c9e6e682bcfcab26ffd22",
+        "recursiveFingerprint": "65d11baabcb7744020f458d2709f66e00bf6af5ecdeb953872fc9894a2af2c0f"
+      },
+      {
+        "id": 46,
+        "bytes": 1236,
+        "bodySha256": "624a5d9e3d79851520dc934f9cceccebbd7b91571af8773181cb35ec26e5a2fa",
+        "recursiveFingerprint": "4bd28f43d38ba715d1795fe35a7dae9d80575562a14c759d4a135ec7c70f1f1d"
+      },
+      {
+        "id": 48,
+        "bytes": 228,
+        "bodySha256": "2ee7e080e8c22ab81ef743543d65bfc359a2cf52fd2232c87e0dfa58c920b4b0",
+        "recursiveFingerprint": "a7f4e38b908b8a4942563f23fdb136cfaa08086e174ac7d583c7405d90e3f711"
+      },
+      {
+        "id": 49,
+        "bytes": 53,
+        "bodySha256": "47f90f021a31846b1847f9d84a5497ca5aaf3b76222c078fb6a04b3f1b2d8200",
+        "recursiveFingerprint": "c59a7a71c73adb9b5d3708cbca18f3be3ca58b2ae235d69b80a40f35cb1c6751"
+      },
+      {
+        "id": 51,
+        "bytes": 27,
+        "bodySha256": "9d11b7916cbb613addae0fb13fb4a91031130c66d3a16e9ee1ef6aa0e11cb5c3",
+        "recursiveFingerprint": "bc0818d746a6faa0ce74130bb43d2b5a7efa962a5ad76fb5bf73d3bdef5e255a"
+      }
+    ],
+    "mainInstructions": 6047,
+    "rawStaticInvokes": 360
+  },
+  "matches": [
+    {
+      "oldId": 0,
+      "oldBodySha256": "15892c5fabc31ae79211399564470b33cead1e882f08b089e940a43344cdf12a",
+      "recursiveFingerprint": "c19ed146839eaa750a61cd7624a31b793fbf6a931b3e7d4b9847ec654aecec37",
+      "newMatches": []
+    },
+    {
+      "oldId": 1,
+      "oldBodySha256": "bbf7ab9196f45d282113df4455e0602b016c18aa2ad7fb8eb1c2fb7f29579bac",
+      "recursiveFingerprint": "fc764460a0ddd406daa4bbf73a31bc2f0b8891ced7685e9528e3ddfeacfda36f",
+      "newMatches": [
+        {
+          "id": 1,
+          "bodySha256": "bbf7ab9196f45d282113df4455e0602b016c18aa2ad7fb8eb1c2fb7f29579bac",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 2,
+      "oldBodySha256": "43f7ec965c22dcdcb8bd06239876ff5a4a1f3eb22bbd5e8306fd8e5d6f9b87e1",
+      "recursiveFingerprint": "ab7cc05301ae3b81a94b21d6ef06dba9519b6ac1dd88a72de07c09050241def3",
+      "newMatches": [
+        {
+          "id": 2,
+          "bodySha256": "43f7ec965c22dcdcb8bd06239876ff5a4a1f3eb22bbd5e8306fd8e5d6f9b87e1",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 3,
+      "oldBodySha256": "1bbf6d103ddeb1cef605e69eafd20231d1c1b9cbc0c208b4a66a3308352244cf",
+      "recursiveFingerprint": "c226576499577c90a536c3bbd30c4ef952da91e0f73d4d31496908aa17a9911e",
+      "newMatches": [
+        {
+          "id": 3,
+          "bodySha256": "1bbf6d103ddeb1cef605e69eafd20231d1c1b9cbc0c208b4a66a3308352244cf",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 4,
+      "oldBodySha256": "e17433ce4b976c05385ab5e5f8ca6bc44c0fe90545e30d8d96f2aff77766a055",
+      "recursiveFingerprint": "f70be79a3b8fcdacd21b52a5ec1bb865e55ddeff2f5e5daf3d40c9c15ba40484",
+      "newMatches": [
+        {
+          "id": 8,
+          "bodySha256": "ee4806abc7028236d239a0bacf5f831444c3eaa3211073ba778d14ac0c22fdc9",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 5,
+      "oldBodySha256": "c83029276fb4adb317126b0bf4b287a8342de83127d08175d77a6389e5631ea4",
+      "recursiveFingerprint": "67ff880347b420cb4287436334361904106449a5d7852db1a9930c1b2d50cccd",
+      "newMatches": [
+        {
+          "id": 6,
+          "bodySha256": "c83029276fb4adb317126b0bf4b287a8342de83127d08175d77a6389e5631ea4",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 6,
+      "oldBodySha256": "0f3b5aa70ff21d9ddbce246144c7716899a353d33a0ede4db2539aeb28d415d8",
+      "recursiveFingerprint": "c157f635db19a1a6c0f62757d474770adb11dce9d744c34e02a073ed9af8350c",
+      "newMatches": [
+        {
+          "id": 9,
+          "bodySha256": "a3c67143859b1b9e85bd90475148bed9bb4f98e7dbda835a9a288ea9d63a2060",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 8,
+      "oldBodySha256": "9a2120d9b0a76c41b1a7f803f01f5887176db3622b3fe3e14df266d89c4069a9",
+      "recursiveFingerprint": "ca90b1b14645f0b807d35b61ea2d8bbf85fd46a571d2ad0e6363661e9309bd3d",
+      "newMatches": [
+        {
+          "id": 5,
+          "bodySha256": "e0d6a9835f02d17e533e643afd9c995ff62c53287af1719ee13b257fa45727e7",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 9,
+      "oldBodySha256": "8ae66a95b84c4fbe4ff34571a44d606ea2e4ee220d1116b9d79e77e3aa86ffb1",
+      "recursiveFingerprint": "3cff364cc5272d15708cb49af2aa611cb03e4715b08dd894e10d9b439ee4de5a",
+      "newMatches": [
+        {
+          "id": 11,
+          "bodySha256": "8ae66a95b84c4fbe4ff34571a44d606ea2e4ee220d1116b9d79e77e3aa86ffb1",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 10,
+      "oldBodySha256": "b8690cba8079f8d953084615a5c0cf96687f554c84230098e2002bb458f80e58",
+      "recursiveFingerprint": "53de0ad6997b5bafdbceff0bab6b727ea233092248ac75af13b685a132acd92b",
+      "newMatches": [
+        {
+          "id": 7,
+          "bodySha256": "e1d71c1ba0144fdc7da103f9c50194e9bd5c861b63e7d3bccfb8906167ddb4ee",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 11,
+      "oldBodySha256": "ab872e9175ba74fb88f772fb5ae0b523ab71ac512aafec4e527037eb730e98cb",
+      "recursiveFingerprint": "e37772a411eb16f1bac91c3462b48017a6a0cd42b3a83cebd304664dbbc0c1d5",
+      "newMatches": [
+        {
+          "id": 12,
+          "bodySha256": "ab872e9175ba74fb88f772fb5ae0b523ab71ac512aafec4e527037eb730e98cb",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 12,
+      "oldBodySha256": "324d2e0f14913eed9a9e15b474e9545ad096add868426f60e003ffff75fb1042",
+      "recursiveFingerprint": "d57ec225dda0cb2c3ffd63326a080f7e6afc3d284d27fd863ec38c9696df112a",
+      "newMatches": [
+        {
+          "id": 13,
+          "bodySha256": "324d2e0f14913eed9a9e15b474e9545ad096add868426f60e003ffff75fb1042",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 13,
+      "oldBodySha256": "d80f73fd3a3f0cfdbbedeb5810fe41037f2936f5175af8ed45faaf07077b13d8",
+      "recursiveFingerprint": "5877e77ab35133a4a226cd48609a02b635ab006ac4c187b83a6b453ce93f0b75",
+      "newMatches": [
+        {
+          "id": 14,
+          "bodySha256": "c286afe30fbdc5cb2a053503850a2726e89f5ddb297c8e27b4b7b670f81edf19",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 14,
+      "oldBodySha256": "539203ee3ec681bb3d38f8b6d30ffecce6ebebb261b5b078c9693decd14f87af",
+      "recursiveFingerprint": "67ffb6659a1b1ec32685e20846460c9c3d01dede41a8fc213d483dda83525fa1",
+      "newMatches": [
+        {
+          "id": 15,
+          "bodySha256": "15fc670a67dab1ee88d1fc999ac1be0d48cb1c32ede94a4c0094b725d19e615c",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 15,
+      "oldBodySha256": "5f586d5bccb09b35eb1cdf0581569848bf988c794cfe2fbd7af43c7b8e264118",
+      "recursiveFingerprint": "31155f3e63180ae8bc20d858e5bb5d50c5dd80d47728e6f0d4810b32def304ad",
+      "newMatches": [
+        {
+          "id": 16,
+          "bodySha256": "648b3eba05159da9920f8023d36e4f6948d44d8cbb3a7eb50a93ec3871b59fab",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 16,
+      "oldBodySha256": "7ee03010757c4993b373359eb2fd7c3861ee9849cc7531c8205dff48548fcd1e",
+      "recursiveFingerprint": "3e265b5258dee9462b9983952800c18e3c1aa483f649a6ec3a901b89c456d484",
+      "newMatches": [
+        {
+          "id": 17,
+          "bodySha256": "df417f4bf6e146cf41d6d259f7f22b532511d2c4c44ae244d8109b755a95b241",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 17,
+      "oldBodySha256": "0974f4f573ae5dae75a581024b4a160e1436606c928ec00172638ec37c715306",
+      "recursiveFingerprint": "39fa3ab5a9b07f61ad8ac4cc3726dcfbbab8bc83a69e799c1d19080ca6103acf",
+      "newMatches": [
+        {
+          "id": 18,
+          "bodySha256": "0974f4f573ae5dae75a581024b4a160e1436606c928ec00172638ec37c715306",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 18,
+      "oldBodySha256": "d855206973bd307d2634f804f4bda831cd9f10d706907b2404fe8faebb6223bb",
+      "recursiveFingerprint": "928abffe56d74b0cb6a0ed1bca7f93e608cdbb186a2efbc1710dc8bc86c2058c",
+      "newMatches": [
+        {
+          "id": 19,
+          "bodySha256": "34141b4431e881653047aac44d62f527077acb3363982d2f8502a314bc10c9d1",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 19,
+      "oldBodySha256": "1198eb1839575070a443e6866eebca3f6bdc3bdac6fa243b92aafffd02d92627",
+      "recursiveFingerprint": "d39a614126f0805999a7c5418d5355544ae6323bfa361bbfc55e140d5acd8868",
+      "newMatches": [
+        {
+          "id": 20,
+          "bodySha256": "861c8d8ba31c589f967660545adf38508593e8c95ac06951b8cb613e3198fed1",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 20,
+      "oldBodySha256": "eaa6ba4de669f8c52030aa76824638009615f45f79c6885a3d433dfe3f06cb33",
+      "recursiveFingerprint": "397f8e8badcebe476b3124fa7381b65f8746e6e581dccc2e2d17626ce107d174",
+      "newMatches": [
+        {
+          "id": 21,
+          "bodySha256": "a0dff79b4be3942657d10befd294fac97e59e47924a454088e94c50687b2a255",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 21,
+      "oldBodySha256": "57a32d111e8be3c5b373ffb36fd71ffa6771c8999e21b7709404889d9538f773",
+      "recursiveFingerprint": "1fb397c95a9f2e82e86e4e929dd18bb3d571d4255c30f4f076c580bedd2502d0",
+      "newMatches": [
+        {
+          "id": 22,
+          "bodySha256": "8f2088041ad71796d7b5a787c84d28c7f02232fb0458f7e4072ffbfb8636a5b7",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 22,
+      "oldBodySha256": "8f2088041ad71796d7b5a787c84d28c7f02232fb0458f7e4072ffbfb8636a5b7",
+      "recursiveFingerprint": "4f75e1810d33a7b6a8d6b0939133022643bb615cd454042247fc9ccdb8ec9c8a",
+      "newMatches": [
+        {
+          "id": 23,
+          "bodySha256": "c00ad0f6fb4bbcb5d48dfb917c49cdc2789b10a1dc43295f780975a19740d991",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 23,
+      "oldBodySha256": "636715b90bb7172795dbf91af3c0128bc595fd77025f67553357f960c7552ded",
+      "recursiveFingerprint": "7acba988f7a0f74740afa2a5b554db1fbd06b929a31ee1bd5026079d71cb4fcd",
+      "newMatches": [
+        {
+          "id": 24,
+          "bodySha256": "911212d561911911d35bead6be05532539dad5877c90f10a9ca48c546269f812",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 24,
+      "oldBodySha256": "0e3b8b42d66a163d7ffaec8aa8f1f99afa4e80afaeaf78c2bb57d8f2325b82d7",
+      "recursiveFingerprint": "892cb9cda004111983d9fcc826cd3b77939da80096920afa64fc0f3765faac98",
+      "newMatches": [
+        {
+          "id": 25,
+          "bodySha256": "0e3b8b42d66a163d7ffaec8aa8f1f99afa4e80afaeaf78c2bb57d8f2325b82d7",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 25,
+      "oldBodySha256": "5740c234572f7c9f993a47ff22466649b110364ac7897326f082d3526a33a9c4",
+      "recursiveFingerprint": "9cf2f89efbb182c02951e9e973e896f2f58fa06bafc8407a8d4b82447cd916b5",
+      "newMatches": [
+        {
+          "id": 26,
+          "bodySha256": "5e05c98d5203cb3bb8bca3883e0170150dd309376860e35488dc62038fce6b50",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 26,
+      "oldBodySha256": "88f3aa27d46fc128d5548fef8963051df317f6d58155bb313666764a201a7210",
+      "recursiveFingerprint": "1a24eeaefcafc5d4c2719ead3309f543deca32bc89ae31fdf94b10ac6802e184",
+      "newMatches": [
+        {
+          "id": 27,
+          "bodySha256": "dd7b1bb7f99241ba6a461a3a915e95b7f9b6d84f80b6d6cc32fd38176be88d73",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 27,
+      "oldBodySha256": "9ea503fe73122001d70e72f8dfd3742ff3231d513b35cc6f81f7f595aa859c21",
+      "recursiveFingerprint": "2d2b82cda260258cd7a0f3ab3ebd3902a86ce75483151217a8a4a099c891ada3",
+      "newMatches": [
+        {
+          "id": 28,
+          "bodySha256": "9ea503fe73122001d70e72f8dfd3742ff3231d513b35cc6f81f7f595aa859c21",
+          "exactRawBody": true
+        }
+      ]
+    },
+    {
+      "oldId": 28,
+      "oldBodySha256": "9f420f8a0a02dedb1b8956d3f2f75483aef66a28d6a0ceacbf30e1ffee1f7e6e",
+      "recursiveFingerprint": "7e558ee5f43292fe5d08266b901448437df9428ce08f4c008d89ba65b69ca8ae",
+      "newMatches": [
+        {
+          "id": 29,
+          "bodySha256": "a69c5e14cb8f0b9f1a6d1804818aa5b3eac02612473a6599f6b2b74552f469a0",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 29,
+      "oldBodySha256": "3a6545d8f2dcc57a50aa2d1ae401b8de3a863fce3c9610fcd5a3193423488594",
+      "recursiveFingerprint": "d4a5ba4be1374b4cc03e0664273567a55d90672a78212640e3a25b51ea672e2b",
+      "newMatches": [
+        {
+          "id": 30,
+          "bodySha256": "beeb1f23cf8b39391dcb5a5b4b917c4cdd78a8cd016a95c1eb663d1ccd77b572",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 30,
+      "oldBodySha256": "f7c62323e6081bc9e553ad0a8f63b053ece77612b299a52cabc8bd97e8ce002e",
+      "recursiveFingerprint": "43193057a1149e89817ee374e61d3aa091e8b7165c591a73ded96871b0307397",
+      "newMatches": [
+        {
+          "id": 31,
+          "bodySha256": "57fe62df0d40862744d92bf8e0866d9697305bf701b78c151cbe2fb9befba891",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 31,
+      "oldBodySha256": "c10f2fd09a8c542dfadd6ef857f1029a0ca89415f67a31a1722a9ba8ea1701e6",
+      "recursiveFingerprint": "fccb09f7a166dfca884947dccf40f8c094cbec7a7ccc52e82ccda82b2fc9e2de",
+      "newMatches": [
+        {
+          "id": 32,
+          "bodySha256": "dbc50f21957deee6756aa5afab68a83f532ea176ab1899809ec7d9dcca84277b",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 32,
+      "oldBodySha256": "55aa09c3e281f11cfb007e48ea913fca5c78ea4537fa88bb0b3bf01a431aca51",
+      "recursiveFingerprint": "df0f0e53be83b4692f692a451ab0bdf1a312246c1c285252559e3878e5e24774",
+      "newMatches": [
+        {
+          "id": 33,
+          "bodySha256": "fc5e74ec1448be97828eb5459be33043ca2d719635f4223f33c91b8971a05ce1",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 35,
+      "oldBodySha256": "4d48375c40877af707bf3281f9f4ddda44f3ac4f62294fbbf6e3094df3aeb6ab",
+      "recursiveFingerprint": "0954d6dd15409574b771cadc944a9dcd84a95b5ebbc9db6ca8492d24f4d8ac6b",
+      "newMatches": [
+        {
+          "id": 36,
+          "bodySha256": "3a8478f713234dff0f3524bcb187321b053e92c1400441e251df25a039163a1c",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 36,
+      "oldBodySha256": "2cc736bb8c160205c9ed37c04aa6331e089222d21f71dd1f6d5e298d7a610bf3",
+      "recursiveFingerprint": "f3300882c440b4fac0fcaaa2b6ef9ce0bf2a4da20c7ac275e1bc04b4c9620234",
+      "newMatches": [
+        {
+          "id": 37,
+          "bodySha256": "846a0c6c51a6450efd8f486a2909f4636b0e7915dedee7b42a9c5daa93f4063f",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 39,
+      "oldBodySha256": "505cde5f8ff34c5ab6ed1475b04b6a909ff8792d7441cbddbd2f07495226a391",
+      "recursiveFingerprint": "8faf02b493c3077a7510f677f4214e8baa625361c93cb364732b880eab30b9d7",
+      "newMatches": [
+        {
+          "id": 40,
+          "bodySha256": "c9600074b02488275536c28f73caff23892e0553cf0e8201634d08f9393bab17",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 42,
+      "oldBodySha256": "e38dd090942c47c182dd405e3a09f415f4b1da02e4647c185690f1b3c72e9bd8",
+      "recursiveFingerprint": "e503e29cea948e969422de84d6565801306801e1e63267bba9774bce6e686357",
+      "newMatches": [
+        {
+          "id": 43,
+          "bodySha256": "24de01240827fa17a9e6008e5173a681314eab87f546719db3025c3dec86ea3b",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 43,
+      "oldBodySha256": "e93765844a40d0edbf05cc2c51041de0296eb63b91d0bcd9a2223a2edb909ea6",
+      "recursiveFingerprint": "248f37e779e640b97e0299e77bd3073e1b946f819fbea7ac7c52cc0bd4218ad0",
+      "newMatches": [
+        {
+          "id": 44,
+          "bodySha256": "440f3b8ff9cafe1b8e49caab9b33b831ca79eaebeb5592f1a4ee09c88c9140d9",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 44,
+      "oldBodySha256": "abc410579e58fb6ae8f54cd830c9664df77b9d7b7369230b20dab5d6840d0626",
+      "recursiveFingerprint": "65d11baabcb7744020f458d2709f66e00bf6af5ecdeb953872fc9894a2af2c0f",
+      "newMatches": [
+        {
+          "id": 45,
+          "bodySha256": "240369309d53cfac7bd097e533c536f6c7af95f66e5c9e6e682bcfcab26ffd22",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 45,
+      "oldBodySha256": "229f76a8d79a3f1a0088b0ca676e632e901d3aa49fd637761deeb0a43c5a0f14",
+      "recursiveFingerprint": "4bd28f43d38ba715d1795fe35a7dae9d80575562a14c759d4a135ec7c70f1f1d",
+      "newMatches": [
+        {
+          "id": 46,
+          "bodySha256": "624a5d9e3d79851520dc934f9cceccebbd7b91571af8773181cb35ec26e5a2fa",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 47,
+      "oldBodySha256": "27021150621cf86bff979184d6b6a01addd7c875453593346b9cd91fc8c11042",
+      "recursiveFingerprint": "a7f4e38b908b8a4942563f23fdb136cfaa08086e174ac7d583c7405d90e3f711",
+      "newMatches": [
+        {
+          "id": 48,
+          "bodySha256": "2ee7e080e8c22ab81ef743543d65bfc359a2cf52fd2232c87e0dfa58c920b4b0",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 48,
+      "oldBodySha256": "4b1a22c1790b69c50554aee6a188bc761bc03979c1bb9ac04572f8637b7c7659",
+      "recursiveFingerprint": "c59a7a71c73adb9b5d3708cbca18f3be3ca58b2ae235d69b80a40f35cb1c6751",
+      "newMatches": [
+        {
+          "id": 49,
+          "bodySha256": "47f90f021a31846b1847f9d84a5497ca5aaf3b76222c078fb6a04b3f1b2d8200",
+          "exactRawBody": false
+        }
+      ]
+    },
+    {
+      "oldId": 50,
+      "oldBodySha256": "bee731ca62e93a0d825aa8cf4b32e35223057004e4e9d5db5a4a5e12f54e7d73",
+      "recursiveFingerprint": "bc0818d746a6faa0ce74130bb43d2b5a7efa962a5ad76fb5bf73d3bdef5e255a",
+      "newMatches": [
+        {
+          "id": 51,
+          "bodySha256": "9d11b7916cbb613addae0fb13fb4a91031130c66d3a16e9ee1ef6aa0e11cb5c3",
+          "exactRawBody": false
+        }
+      ]
+    }
+  ],
+  "commonMainSuffix": {
+    "instructions": 1,
+    "oldStart": 3094,
+    "currentStart": 6046,
+    "qualification": "Exact normalized instructions only; transfer additionally requires actual equal stack operands and entry shape at this boundary."
+  },
+  "untransferredOldIds": [
+    0
+  ],
+  "activity": {
+    "compilerRuns": 0,
+    "vmRuns": 0,
+    "newProofCases": 0,
+    "negativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false
+  }
+}

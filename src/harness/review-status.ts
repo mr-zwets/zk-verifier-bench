@@ -154,7 +154,7 @@ export const REVIEW_STATUS: Record<string, ReviewStatus> = {
   // All hold under the disclosed FS-PIT (SHA-256 random-oracle) model with cofactor-equivalent A/C.
   'bch-groth16-bls12381-singleton-fs': {
     status: 'reviewed',
-    reason: 'Two independent reviews 2026-10-27: 53,825 B locking rebuilt byte-exact; FS-PIT transcript, exact B twist/psi subgroup walk, A/C curve checks, inputs < r and the Merkle-authenticated GT table hold under the SHA-256 random-oracle model (A/C cofactor malleability only).',
+    reason: 'Two independent reviews 2026-10-27: 53,825 B locking rebuilt byte-exact; FS-PIT transcript, exact B twist/psi subgroup walk, A/C curve checks, inputs < r and the Merkle-authenticated GT table hold under the SHA-256 random-oracle model (A/C cofactor malleability only). Bound: groth16_cashscript chunked/bls12-381/README.md section 5 with the singleton\'s numbers, (23*q_beta + 160*q_alpha)/2^256 + 3*N(N-1)/2^257 (same 24 relations, degrees 23/137, q132 quotient; N = q + fewer than 2^22 setup hashes; 1,104 verifier SHA-256 per spend).',
     refs: [`${SRC}/blob/main/singleton/bls12-381/README.md`],
   },
   'bch-groth16-bls12381-singleton-fs-spec': {

@@ -1,0 +1,42 @@
+{
+  "schema": "pairfold7-fixed-alpha-beta-factor-equality/v1",
+  "knownVk": {
+    "path": "early-pr-mathematics-v1/source15-singleton-callable-v1/fixed-vk-manifest-v1.json",
+    "sha256": "8193dff228d60159eb5875b366963070b9b615d9276cdafc30c07e6a2d8d6366"
+  },
+  "pairingCall": "@noble/curves bn254.pairing(alpha,beta,false)",
+  "flattenOrder": [
+    "c0.c0.c0", "c0.c0.c1", "c0.c1.c0", "c0.c1.c1",
+    "c0.c2.c0", "c0.c2.c1", "c1.c0.c0", "c1.c0.c1",
+    "c1.c1.c0", "c1.c1.c1", "c1.c2.c0", "c1.c2.c1"
+  ],
+  "terminalEncoding": {
+    "instructionCount": 12,
+    "instructionKind": "PUSH32",
+    "opcodeOffsets": [2206, 2239, 2276, 2313, 2350, 2387, 2424, 2461, 2498, 2535, 2572, 2609],
+    "dataOffsets": [2207, 2240, 2277, 2314, 2351, 2388, 2425, 2462, 2499, 2536, 2573, 2610],
+    "evaluation": "The source terminal block consumes the twelve coefficients as c0 + c1*t + ... + c11*t^11 using repeated multiply/add stack operations; it does not push a single 384-byte value."
+  },
+  "comparison": {
+    "computedBigEndianToVmReverse": true,
+    "limbResults": "12/12 exact",
+    "terminalRedeemFirstOpcodeOffset": 2206,
+    "terminalValueLength": 384,
+    "terminalValueSha256LittleEndian": "8ec88f41e55c2367c56c732f5c26ae676585b40da4ba7659e0e850257a792be6"
+  },
+  "computedBigEndian": [
+    "2f1424905cc9b9d56e5e0fed13cf11abe27e4eafa00068834c6b5bdbc0fdc0b4",
+    "07e340b92119c5ee55ebd76728d201c85046dbc630a194a97cf168cba4c54d55",
+    "253fcf1e6c82519a34bb1d10494b47ba7ac39b33723727f50f2f234d59a8aed1",
+    "2b09e24398d527e0f9e2d8ceb121af41d389a5db5368d6c0a9528cc79e9bb0f6",
+    "2ad8ae078c386c48db92d4aab1141299eaa6773624d93a7411b84eff860b1374",
+    "1ad02906490c993b741bb21bc789dfa5d2824b1e9718fe3285e6339983e969ed",
+    "0488c969a1787f85e4c4f01c3d0ca3e2f21fcf54fd6ccae3cf8fe03cba573fb1",
+    "02007053ba680b93e057e8541164a91d335f1b496b8dd4660a8609c7408eabae",
+    "0f4a0c2483e12d4a5b002c743fa3b8fd43be783e8bc0ea91f7c2afd24b0a00b1",
+    "174203764895337c80342dd7e35a43d1f39fec4ba703c026b93b64eee776305d",
+    "071f05796fa0d50bbf7254ddb702235d44d17f1d6202af28b201ccdd669d1a1d",
+    "0e1df5f53aba1008bd4d969c0d639a2fc3a4d54637bbe5187852187e618733ce"
+  ],
+  "qualification": "This proves the immutable terminal coefficient vector equals the raw fixed alpha-beta Miller factor. It does not by itself recover the original PR-27 individual alpha/beta declaration or establish full verifier soundness."
+}

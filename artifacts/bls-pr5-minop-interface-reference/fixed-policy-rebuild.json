@@ -1,0 +1,21 @@
+{
+  "schema": "bls-pr5-minop-fixed-policy-rebuild/v1",
+  "status": "HISTORICAL_COMPILE_RECORDED_FIXED_REBUILD_RECIPE_INCLUDED",
+  "purpose": "Record the exact policy needed to reproduce the frozen artifact without claiming a second build.",
+  "sourcePath": "singleton/bls12-381/pr5-minop-interface-reference/groth16_minop.cash",
+  "sourceSha256": "00641ad5178d450277a0738b999e43cc6fc87598e27cf547ed25a35871c883ae",
+  "compilerHead": "1c707c1dbf87396b30ba5e0704b1db44475ce893",
+  "compilerSourceIncluded": false,
+  "compilerVariants": 0,
+  "optimizationObjective": null,
+  "byteOptimization": false,
+  "expectedProgramSha256": "42ca73a63775c062898e97ecde2b9a3d57b5f292d11677341a9fe5d6063ae0d3",
+  "expectedProgramBytes": 64396,
+  "policy": "Rebuild only with the pinned source and compiler revision, preserving the 45-argument ABI and existing compile policy; do not select variants or optimize bytes.",
+  "qualification": "The frozen program is sealed independently by program.hex and program.json. This record is a future reproducibility instruction, not evidence that a new compilation was run in this package.",
+  "options": {
+    "rescheduleStacks": true
+  },
+  "rebuildScript": "singleton/bls12-381/pr5-minop-interface-reference/rebuild.mjs",
+  "rebuildScriptSha256": "8fc26031375ad2c45788d8e4ba56efcd66c28fabd0026bf6a1d23e905ade7c21"
+}

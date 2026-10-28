@@ -1,0 +1,118 @@
+{
+  "schema": "source15-benchmark32-full-coordinate-mathematical-disposition/v1",
+  "status": "CONDITIONALLY_QUALIFIED_CANONICAL_POINT_DOMAIN_NATIVE_HOLD",
+  "claim": "The 4681-byte candidate is mathematically qualified on the stated canonical EIP197 point-value and canonical Fr domain, subject to explicit curve, pairing, VM and application-ABI premises.",
+  "notClaimed": [
+    "formal independent proof",
+    "arbitrary setup or arbitrary fixed-key validity",
+    "Ethereum precompile transport or gas equivalence",
+    "native BCH2026 resource admission"
+  ],
+  "provenance": {
+    "sourcePr": "15",
+    "benchmarkPr": "32",
+    "sourceHead": "1e7c52ab3b6af132c3f3f87effd38821828c874d",
+    "benchmarkHead": "aede1967237b3d7e28f9ca74ab52232e7e6d5421",
+    "sourceAssemblySha256": "32e947c07ce5566e5fe56f10ab70d43824b4a1af3dd21fb19b5073690569fd82",
+    "lockingProgramSha256": "dc2b929c5645d3baaac4fb544ba7565bf54c34156532a715053432d4f9913782",
+    "lockingProgramBytes": 4681
+  },
+  "abi": {
+    "argumentSlotsBottomToTop": [
+      "n1",
+      "n0",
+      "Cy",
+      "Cx",
+      "Byi",
+      "Byr",
+      "Bxi",
+      "Bxr",
+      "Ay",
+      "Ax"
+    ],
+    "transport": "original ten Script-integer/full-coordinate BCH application ABI",
+    "canonicalPointEncoding": "G1 infinity is (0,0); G2 infinity is all four zero limbs"
+  },
+  "domain": {
+    "fieldPrime": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+    "scalarOrder": "21888242871839275222246405745257275088548364400416034343698204186575808495617",
+    "coordinates": "all eight coordinate limbs are in [0,p)",
+    "publicScalars": "both public scalars are in [0,r)",
+    "acceptedPoints": "finite canonical points and the specified neutral encodings for A, B, C and derived vk_x",
+    "equation": "e(-A,B)*e(alpha,beta)*e(IC0+n0*IC1+n1*IC2,gamma)*e(C,delta)=1"
+  },
+  "pointOwnership": {
+    "numericGuards": [
+      "Ax",
+      "Ay",
+      "Bxr",
+      "Bxi",
+      "Byr",
+      "Byi",
+      "Cx",
+      "Cy",
+      "n0",
+      "n1"
+    ],
+    "neutralMaskAndPairCallers": [
+      "(-A,B)",
+      "(alpha,beta)",
+      "(vk_x,gamma)",
+      "(C,delta)"
+    ],
+    "derivedVkX": "computed MSM is consumed by the third pairing caller with no finite-vk_x exclusion",
+    "endpointHandling": "zero-coordinate representatives and neutral pairing operands are handled by the candidate's explicit ownership contracts"
+  },
+  "fixedKeyLiteralRoleFingerprint": {
+    "owner": "main",
+    "bytes": 1944,
+    "sha256": "5171fbfc2fc1e59e58acf1eb18735e7576819480e693d1c494de86c9c15305af",
+    "roles": [
+      "P",
+      "alpha",
+      "beta",
+      "gamma",
+      "delta",
+      "IC0",
+      "IC1",
+      "IC2"
+    ],
+    "meaning": "The fixed-key literals and their caller placement are owned by the main body; the VK is not supplied as a mutable input."
+  },
+  "fingerprints": {
+    "main": {
+      "bytes": 1944,
+      "sha256": "5171fbfc2fc1e59e58acf1eb18735e7576819480e693d1c494de86c9c15305af"
+    },
+    "fpSubTopMinusNext": {
+      "id": 4,
+      "bytes": 9,
+      "sha256": "ef7a0656d42612b7cc7d4249ed839c17d90b364b6f4117fca110448d41e378d4"
+    },
+    "fpMul": {
+      "id": 1,
+      "bytes": 4,
+      "sha256": "bfcd1488edc62cd0833b6813c5890b72759862ffad0f691e523ae789d5b7c915"
+    },
+    "neutralPairHelper": {
+      "id": 40,
+      "bytes": 533,
+      "sha256": "1578428781095241aa3853e2b231314a4f790875cb0f653865caa198e69bc209"
+    },
+    "terminalPredicateHelper": {
+      "id": 62,
+      "bytes": 12,
+      "sha256": "810265c491b0a1198bfc5e6bb9b24cf3bff8a19d9da7fd11db9072915ecfcdd1"
+    }
+  },
+  "validation": {
+    "existingPositiveFixtures": 4,
+    "arithmeticOracleAccepted": 4,
+    "fixtureBytesChanged": false,
+    "newProofFixtures": 0,
+    "nativeConsensusAccepted": 0,
+    "nativeStandardAccepted": 0,
+    "nativeDisposition": "HOLD because unchanged BCH2026 operation-cost density limits reject all eight native evaluations"
+  },
+  "remainingGap": "The exact 4681-byte full-coordinate codec has no public source/benchmark successor. The merged compact 4320-byte BN254 artifact is a different codec and is not substituted here."
+}

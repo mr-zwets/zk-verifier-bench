@@ -16,6 +16,10 @@ A submission is a PR containing three things:
    notes and provenance in the header comment.
 3. **One line in `REGISTRY`** in `src/harness/benchmark.ts`.
 
+Include the [claims and assumptions sheet](docs/submission-claims.md) in the
+implementation header or PR. A reviewed disposition additionally requires the
+independent constructive review described below.
+
 Do **not** regenerate `results.json` / `score-history.json` — the maintainer
 re-exports them on merge (`pnpm benchmark:json`).
 
@@ -34,19 +38,24 @@ produced it — your CashScript source, your own compiler fork, a bytecode
 optimizer — can stay closed. Several listed entries were built with private
 tooling.
 
-That works because correctness is enforced empirically, not by review of your
-source:
+The harness supplies fixture and deployment evidence; it is not, by itself, a
+universal correctness proof. A reviewed entry must also state the mathematical
+claim and assumptions in [docs/submission-claims.md](docs/submission-claims.md):
 
 - the valid run must be ACCEPTED, and every invalid run REJECTED, on the
   loosened BCH 2026 VM;
-- if you claim `proofBinding: 'runtime'`, supply `extraValidProofs` — distinct
-  proofs under the same VK — and the harness verifies your one fixed locking
-  accepts all of them (a baked program can't fake this);
+- for `proofBinding: 'runtime'` entries whose setup permits minting, supply
+  `extraValidProofs` — distinct proofs under the same VK and ordered programs.
+  The harness executes the supplied runs; the submitter and reviewer must
+  check program identity, step counts and proof distinctness. It does not
+  enforce those comparisons. If only one proof is available, disclose that
+  coverage limit rather than claiming empirical generality;
 - adversarial `invalidInputs` (off-curve / out-of-subgroup points) must be
-  rejected if you claim input validation;
+  rejected if you claim input validation. Rejection alone does not identify
+  the rejecting predicate or prove that a domain check exists;
 - for chunked entries whose op-cost depends on the proof, supply a
-  `worstCaseProof` (dense, near-r public inputs) so your op-cost claim holds at
-  the worst case.
+  valid `worstCaseProof` (dense, near-r public inputs). It is a measured case,
+  not a universal worst-case theorem; that supplied run must accept.
 
 What you should publish even when the build is closed:
 
@@ -54,8 +63,12 @@ What you should publish even when the build is closed:
   artifact is pinned;
 - **a precise construction description** — which equation the script enforces,
   what is witnessed vs computed on-chain, and the soundness argument (why a
-  forged proof cannot satisfy it);
-- optionally, **a reproduction path**. Byte-exact reproducibility from source
+  forged proof cannot satisfy it), including the declared domain and auxiliary
+  existence assumptions;
+- **a claims/assumptions sheet** covering binding ownership, Fiat-Shamir query
+  order/error bounds, and script-enforced versus deployment premises;
+- optionally, **a public reproduction path**. Reviewers still need access to
+  reconstruct and rebuild the artifact. Byte-exact reproducibility from source
   (even source that lives in your own repo) is a stronger claim than a bare
   hash and is called out on the entry — see `bch-groth16-singleton-genpow.ts`
   for the pattern (baseline compile → deterministic transform chain → asserted
@@ -63,9 +76,13 @@ What you should publish even when the build is closed:
 
 ## What your entry must verify
 
-All entries verify the same fixed Groth16 statement as the existing BCH-native
-entries (two public inputs, `vk_x = IC0 + in0·IC1 + in1·IC2`), on BN254 or
-BLS12-381. The trusted setup, canonical proof, and the multiproof/worst-case
+For a BCH-native full Groth16 submission, use the published benchmark VK for
+the selected curve, BN254 or BLS12-381, with two public inputs and
+`vk_x = IC0 + in0·IC1 + in1·IC2`. Name that exact VK in the claim sheet;
+reference baselines may use different keys or statements. Label any restricted input
+or proof domain and give its soundness argument. Cofactor-equivalent handling
+is acceptable when stated; strict-subgroup enforcement is not a prerequisite.
+The trusted setup, canonical proof, and the multiproof/worst-case
 minting tools live in the companion repo
 [`groth16_cashscript`](https://github.com/mr-zwets/groth16_cashscript) (and
 `pnpm gen:multiproof[-bls]` here) — mint your extra proofs from there rather
@@ -83,13 +100,14 @@ ranked:
   (the standard-relayable hybrid). The harness builds the matching synthetic
   transactions; nothing to implement on your side beyond the step contexts.
 - **`proofBinding`** — `'runtime'` (proof in the witness; one deployment
-  verifies any proof) vs `'baked'` (proof compiled into the chunks). Claiming
-  `runtime` without surviving the multiproof sweep will be caught.
+  claims to verify any proof in its declared VK/domain) vs `'baked'` (proof
+  compiled into the chunks). Claiming `runtime` without surviving the supplied
+  multiproof sweep will be exposed by that coverage check.
 - **`vm`** — `'bch-2026'` (default) or `'bch-spec'` for entries targeting the
   proposed 100 kB-script VM; spec entries rank in their own category.
 - **`tokenSafetyEnforced`** — for covenant entries, only set true if the
   covenant genuinely pins category/capability continuity (and you provide the
-  rejection vectors to prove it).
+  supporting rejection vectors and owner argument).
 
 The score is total on-chain bytes (locking + unlocking + serialized-tx
 overhead); all-zero padding pushes count toward it and are reported as dead
@@ -114,13 +132,21 @@ reviewable artifact.
 ## Review
 
 What the maintainer checks on a PR, roughly in order: the harness passes for
-your id (correctness gates), the metadata claims match what the vectors
-demonstrate, the header comment's soundness argument holds up, and the entry
-doesn't require harness changes (if it does — a genuinely new structure or
-grading dimension — expect that part to get real review, like any code change).
+your id (fixture and deployment evidence), the metadata claims match what the
+vectors demonstrate, and the claims sheet's equation and composition argument
+holds up. A reviewed disposition requires a written argument plus independent
+constructive review: rebuild the exact bytes, pin their hashes, and check the
+owner of every acceptance-dependent value, including multi-input bindings.
+The same pipeline or agent's agreement is not independent assurance; ordinary
+field and hash assumptions may still be shared. Any verifier-program byte,
+VK, domain, or deployment-premise change requires a new review. Update pins
+when the bytes change.
+The entry should not require harness changes (if it does — a genuinely new
+structure or grading dimension — expect that part to get real review, like any
+code change).
 
-The maintainers may also add red-team attacks against your exact bytes
-(`src/bch/redteam/<id>.json`); every attack run must be rejected. A verifier must
+The maintainers may also add red-team checks against your exact bytes
+(`src/bch/redteam/<id>.json`); every supplied run must be rejected. A verifier must
 bind `vk_x` to the public inputs it claims: a real proof with forged public inputs
 has to fail. See [docs/public-input-binding.md](docs/public-input-binding.md).
 

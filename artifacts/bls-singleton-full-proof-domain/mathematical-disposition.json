@@ -1,0 +1,600 @@
+{
+  "schema": "bls-full-subgroup-proof-domain-mathematical-disposition/v1",
+  "status": "CONDITIONALLY_CONFIRMED_FIXED_VK_FULL_SUBGROUP_POINT_DOMAIN_INCLUDING_INFINITY",
+  "sourceRevision": "c0b0a824fc9018b4ef344d2b68538f7159ffffdd",
+  "sourceFile": "singleton/bls12-381/groth16_strict.cash",
+  "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
+  "artifact": "compiled-locking.hex",
+  "lockingSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+  "lockingBytes": 17465,
+  "equation": "e(-A,B) * e(alpha,beta) * e(IC0+s0*IC1+s1*IC2,gamma) * e(C,delta) = 1",
+  "domain": {
+    "publicInputs": "All two-tuples of canonical Fr integers, including neutral computed vk_x.",
+    "AandC": "Canonical points in the order-r G1 subgroup, finite or infinity. Finite coordinates satisfy [r]P=O; no cofactor-quotient interpretation is needed.",
+    "B": "Canonical points in the order-r G2 subgroup, finite or infinity. Finite B retains the nonzero endpoint/psi check even when A is infinity.",
+    "infinityEncoding": {
+      "G1": [
+        "0",
+        "0"
+      ],
+      "G2": [
+        "0",
+        "0",
+        "0",
+        "0"
+      ]
+    },
+    "verificationKey": "The exact baked-in public synthetic key; arbitrary keys, circuits and setup transcripts are outside this statement."
+  },
+  "composition": [
+    "Fresh raw namespace, push-only unlocking and clean final stack bind 42 definitions, 360 static invocations and the exact ten-integer ABI.",
+    "All canonical Fr/Fp guards, finite-versus-infinity predicates, strict G1 callees, finite B curve equations and finite B endpoint/psi operands are bound to actual input words.",
+    "The full 255-bit [r]P G1 loop has exact canonical/curve guards, four symbolic accumulator paths, true callee operands, backedge and final Z=0 check.",
+    "The current MSM block is exactly the old proved 256-instruction block after static callee-ID substitution; actual entry words, normalization, key table and all canonical Fr tuples transfer.",
+    "All 16 finite/infinity combinations for A,B,C and computed vk_x preserve exact coefficient-indexed pairing tuples and exact Fp12 unit literals. Finite B remains subgroup-checked on the fixed alpha fallback when A=O.",
+    "All three actual pairing products and the outer conjugation consume the exact preceding twelve-word tuples; the 55-slot handoff preserves 43 lower carriers and the actual top twelve-word result.",
+    "The current 65-call FinalExp expression DAG, all operands/outputs, twelve terminal predicates and final stack exactly match the prior proved artifact under helper renaming. Retained carriers cannot reach arithmetic.",
+    "The old field/tower/Jacobian/Miller/strict-G2/nonzero/easy/cyclotomic/hard-exponent theorems transfer through 41 exact helper fingerprints; the changed G1 body has a new independent proof. Omitted neutral factors are the field unit.",
+    "The resulting unit predicate has the standard final-exponent kernel because its exponent is three times the standard exponent and gcd(3,r)=1."
+  ],
+  "modelPremises": [
+    "Pinned VM integer, byte, function-table and final-stack semantics.",
+    "Standard BLS12-381 prime/curve/group-order/optimal-Ate and finite-field facts.",
+    "The exact fixed key and compiled artifact, and admissible arithmetic execution."
+  ],
+  "calleeBodies": [
+    {
+      "id": 0,
+      "bodySha256": "f527eecd02a97c259f3f3a3e23b47e8e38141a95d5ff24c0d32efda18d27ae63",
+      "arity": {
+        "in": 2,
+        "out": 0,
+        "alt": 0
+      },
+      "currentCertificateSha256": "46ffdf700cdec231912901e5e930127065ff12b98140ef00b4483e40efda7de8",
+      "currentCompiledCertificateSha256": "4a7c8c326361f22500d91a2414a1065b2f72d2b9b6c1be3059253e9513548934"
+    },
+    {
+      "id": 1,
+      "bodySha256": "bbf7ab9196f45d282113df4455e0602b016c18aa2ad7fb8eb1c2fb7f29579bac",
+      "arity": {
+        "in": 1,
+        "out": 1,
+        "alt": 0
+      },
+      "transferredFromOldId": 1,
+      "recursiveSemanticFingerprint": "fc764460a0ddd406daa4bbf73a31bc2f0b8891ced7685e9528e3ddfeacfda36f",
+      "priorCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a"
+    },
+    {
+      "id": 2,
+      "bodySha256": "43f7ec965c22dcdcb8bd06239876ff5a4a1f3eb22bbd5e8306fd8e5d6f9b87e1",
+      "arity": {
+        "in": 2,
+        "out": 1,
+        "alt": 0
+      },
+      "transferredFromOldId": 2,
+      "recursiveSemanticFingerprint": "ab7cc05301ae3b81a94b21d6ef06dba9519b6ac1dd88a72de07c09050241def3",
+      "priorCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a"
+    },
+    {
+      "id": 3,
+      "bodySha256": "1bbf6d103ddeb1cef605e69eafd20231d1c1b9cbc0c208b4a66a3308352244cf",
+      "arity": {
+        "in": 2,
+        "out": 1,
+        "alt": 0
+      },
+      "transferredFromOldId": 3,
+      "recursiveSemanticFingerprint": "c226576499577c90a536c3bbd30c4ef952da91e0f73d4d31496908aa17a9911e",
+      "priorCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a"
+    },
+    {
+      "id": 5,
+      "bodySha256": "e0d6a9835f02d17e533e643afd9c995ff62c53287af1719ee13b257fa45727e7",
+      "arity": {
+        "in": 3,
+        "out": 3,
+        "alt": 0
+      },
+      "transferredFromOldId": 8,
+      "recursiveSemanticFingerprint": "ca90b1b14645f0b807d35b61ea2d8bbf85fd46a571d2ad0e6363661e9309bd3d",
+      "priorCertificateSha256": "4634a0b6da2ef86f906aa466e88346f30bd1add5f0b79c039e980d308740da06"
+    },
+    {
+      "id": 6,
+      "bodySha256": "c83029276fb4adb317126b0bf4b287a8342de83127d08175d77a6389e5631ea4",
+      "arity": {
+        "in": 2,
+        "out": 1,
+        "alt": 0
+      },
+      "transferredFromOldId": 5,
+      "recursiveSemanticFingerprint": "67ff880347b420cb4287436334361904106449a5d7852db1a9930c1b2d50cccd",
+      "priorCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a"
+    },
+    {
+      "id": 7,
+      "bodySha256": "e1d71c1ba0144fdc7da103f9c50194e9bd5c861b63e7d3bccfb8906167ddb4ee",
+      "arity": {
+        "in": 5,
+        "out": 3,
+        "alt": 0
+      },
+      "transferredFromOldId": 10,
+      "recursiveSemanticFingerprint": "53de0ad6997b5bafdbceff0bab6b727ea233092248ac75af13b685a132acd92b",
+      "priorCertificateSha256": "4634a0b6da2ef86f906aa466e88346f30bd1add5f0b79c039e980d308740da06"
+    },
+    {
+      "id": 8,
+      "bodySha256": "ee4806abc7028236d239a0bacf5f831444c3eaa3211073ba778d14ac0c22fdc9",
+      "arity": {
+        "in": 2,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 4,
+      "recursiveSemanticFingerprint": "f70be79a3b8fcdacd21b52a5ec1bb865e55ddeff2f5e5daf3d40c9c15ba40484",
+      "priorCertificateSha256": "b3bbdb0dc1f7c0462df5ceaded2be969984cda195eac6e0ce579362962410590"
+    },
+    {
+      "id": 9,
+      "bodySha256": "a3c67143859b1b9e85bd90475148bed9bb4f98e7dbda835a9a288ea9d63a2060",
+      "arity": {
+        "in": 4,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 6,
+      "recursiveSemanticFingerprint": "c157f635db19a1a6c0f62757d474770adb11dce9d744c34e02a073ed9af8350c",
+      "priorCertificateSha256": "b3bbdb0dc1f7c0462df5ceaded2be969984cda195eac6e0ce579362962410590"
+    },
+    {
+      "id": 11,
+      "bodySha256": "8ae66a95b84c4fbe4ff34571a44d606ea2e4ee220d1116b9d79e77e3aa86ffb1",
+      "arity": {
+        "in": 2,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 9,
+      "recursiveSemanticFingerprint": "3cff364cc5272d15708cb49af2aa611cb03e4715b08dd894e10d9b439ee4de5a",
+      "priorCertificateSha256": "7a6312601106e62cbf0a45020a1f7eb038f5a4092d8aa6dc807db67a11305953"
+    },
+    {
+      "id": 12,
+      "bodySha256": "ab872e9175ba74fb88f772fb5ae0b523ab71ac512aafec4e527037eb730e98cb",
+      "arity": {
+        "in": 1,
+        "out": 1,
+        "alt": 0
+      },
+      "transferredFromOldId": 11,
+      "recursiveSemanticFingerprint": "e37772a411eb16f1bac91c3462b48017a6a0cd42b3a83cebd304664dbbc0c1d5",
+      "priorCertificateSha256": "7a6312601106e62cbf0a45020a1f7eb038f5a4092d8aa6dc807db67a11305953"
+    },
+    {
+      "id": 13,
+      "bodySha256": "324d2e0f14913eed9a9e15b474e9545ad096add868426f60e003ffff75fb1042",
+      "arity": {
+        "in": 1,
+        "out": 1,
+        "alt": 0
+      },
+      "transferredFromOldId": 12,
+      "recursiveSemanticFingerprint": "d57ec225dda0cb2c3ffd63326a080f7e6afc3d284d27fd863ec38c9696df112a",
+      "priorCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a"
+    },
+    {
+      "id": 14,
+      "bodySha256": "c286afe30fbdc5cb2a053503850a2726e89f5ddb297c8e27b4b7b670f81edf19",
+      "arity": {
+        "in": 6,
+        "out": 18,
+        "alt": 0
+      },
+      "transferredFromOldId": 13,
+      "recursiveSemanticFingerprint": "5877e77ab35133a4a226cd48609a02b635ab006ac4c187b83a6b453ce93f0b75",
+      "priorCertificateSha256": "f165aa09c0d293e9a79e5c73bea623013b73883b551a99553a01de84a718cc86"
+    },
+    {
+      "id": 15,
+      "bodySha256": "15fc670a67dab1ee88d1fc999ac1be0d48cb1c32ede94a4c0094b725d19e615c",
+      "arity": {
+        "in": 12,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 14,
+      "recursiveSemanticFingerprint": "67ffb6659a1b1ec32685e20846460c9c3d01dede41a8fc213d483dda83525fa1",
+      "priorCertificateSha256": "212164762e577ce4ac9e4426c0b17e0156dedf40dcdb4e7d5d3085ac665e4073"
+    },
+    {
+      "id": 16,
+      "bodySha256": "648b3eba05159da9920f8023d36e4f6948d44d8cbb3a7eb50a93ec3871b59fab",
+      "arity": {
+        "in": 24,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 15,
+      "recursiveSemanticFingerprint": "31155f3e63180ae8bc20d858e5bb5d50c5dd80d47728e6f0d4810b32def304ad",
+      "priorCertificateSha256": "212164762e577ce4ac9e4426c0b17e0156dedf40dcdb4e7d5d3085ac665e4073"
+    },
+    {
+      "id": 17,
+      "bodySha256": "df417f4bf6e146cf41d6d259f7f22b532511d2c4c44ae244d8109b755a95b241",
+      "arity": {
+        "in": 12,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 16,
+      "recursiveSemanticFingerprint": "3e265b5258dee9462b9983952800c18e3c1aa483f649a6ec3a901b89c456d484",
+      "priorCertificateSha256": "212164762e577ce4ac9e4426c0b17e0156dedf40dcdb4e7d5d3085ac665e4073"
+    },
+    {
+      "id": 18,
+      "bodySha256": "0974f4f573ae5dae75a581024b4a160e1436606c928ec00172638ec37c715306",
+      "arity": {
+        "in": 4,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 17,
+      "recursiveSemanticFingerprint": "39fa3ab5a9b07f61ad8ac4cc3726dcfbbab8bc83a69e799c1d19080ca6103acf",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 19,
+      "bodySha256": "34141b4431e881653047aac44d62f527077acb3363982d2f8502a314bc10c9d1",
+      "arity": {
+        "in": 4,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 18,
+      "recursiveSemanticFingerprint": "928abffe56d74b0cb6a0ed1bca7f93e608cdbb186a2efbc1710dc8bc86c2058c",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 20,
+      "bodySha256": "861c8d8ba31c589f967660545adf38508593e8c95ac06951b8cb613e3198fed1",
+      "arity": {
+        "in": 2,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 19,
+      "recursiveSemanticFingerprint": "d39a614126f0805999a7c5418d5355544ae6323bfa361bbfc55e140d5acd8868",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 21,
+      "bodySha256": "a0dff79b4be3942657d10befd294fac97e59e47924a454088e94c50687b2a255",
+      "arity": {
+        "in": 6,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 20,
+      "recursiveSemanticFingerprint": "397f8e8badcebe476b3124fa7381b65f8746e6e581dccc2e2d17626ce107d174",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 22,
+      "bodySha256": "8f2088041ad71796d7b5a787c84d28c7f02232fb0458f7e4072ffbfb8636a5b7",
+      "arity": {
+        "in": 12,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 21,
+      "recursiveSemanticFingerprint": "1fb397c95a9f2e82e86e4e929dd18bb3d571d4255c30f4f076c580bedd2502d0",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 23,
+      "bodySha256": "c00ad0f6fb4bbcb5d48dfb917c49cdc2789b10a1dc43295f780975a19740d991",
+      "arity": {
+        "in": 12,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 22,
+      "recursiveSemanticFingerprint": "4f75e1810d33a7b6a8d6b0939133022643bb615cd454042247fc9ccdb8ec9c8a",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 24,
+      "bodySha256": "911212d561911911d35bead6be05532539dad5877c90f10a9ca48c546269f812",
+      "arity": {
+        "in": 6,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 23,
+      "recursiveSemanticFingerprint": "7acba988f7a0f74740afa2a5b554db1fbd06b929a31ee1bd5026079d71cb4fcd",
+      "priorCertificateSha256": "ae70b11fa55eb1fefb06f0aae44f0f0f5dfb5ef6cb07db64bc879baf83324395"
+    },
+    {
+      "id": 25,
+      "bodySha256": "0e3b8b42d66a163d7ffaec8aa8f1f99afa4e80afaeaf78c2bb57d8f2325b82d7",
+      "arity": {
+        "in": 3,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 24,
+      "recursiveSemanticFingerprint": "892cb9cda004111983d9fcc826cd3b77939da80096920afa64fc0f3765faac98",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 26,
+      "bodySha256": "5e05c98d5203cb3bb8bca3883e0170150dd309376860e35488dc62038fce6b50",
+      "arity": {
+        "in": 2,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 25,
+      "recursiveSemanticFingerprint": "9cf2f89efbb182c02951e9e973e896f2f58fa06bafc8407a8d4b82447cd916b5",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 27,
+      "bodySha256": "dd7b1bb7f99241ba6a461a3a915e95b7f9b6d84f80b6d6cc32fd38176be88d73",
+      "arity": {
+        "in": 2,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 26,
+      "recursiveSemanticFingerprint": "1a24eeaefcafc5d4c2719ead3309f543deca32bc89ae31fdf94b10ac6802e184",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 28,
+      "bodySha256": "9ea503fe73122001d70e72f8dfd3742ff3231d513b35cc6f81f7f595aa859c21",
+      "arity": {
+        "in": 2,
+        "out": 2,
+        "alt": 0
+      },
+      "transferredFromOldId": 27,
+      "recursiveSemanticFingerprint": "2d2b82cda260258cd7a0f3ab3ebd3902a86ce75483151217a8a4a099c891ada3",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 29,
+      "bodySha256": "a69c5e14cb8f0b9f1a6d1804818aa5b3eac02612473a6599f6b2b74552f469a0",
+      "arity": {
+        "in": 20,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 28,
+      "recursiveSemanticFingerprint": "7e558ee5f43292fe5d08266b901448437df9428ce08f4c008d89ba65b69ca8ae",
+      "priorCertificateSha256": "de5bde521c322716f57a42c8801039e8ba833a2c988e024966ea8803e236697b"
+    },
+    {
+      "id": 30,
+      "bodySha256": "beeb1f23cf8b39391dcb5a5b4b917c4cdd78a8cd016a95c1eb663d1ccd77b572",
+      "arity": {
+        "in": 18,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 29,
+      "recursiveSemanticFingerprint": "d4a5ba4be1374b4cc03e0664273567a55d90672a78212640e3a25b51ea672e2b",
+      "priorCertificateSha256": "de5bde521c322716f57a42c8801039e8ba833a2c988e024966ea8803e236697b"
+    },
+    {
+      "id": 31,
+      "bodySha256": "57fe62df0d40862744d92bf8e0866d9697305bf701b78c151cbe2fb9befba891",
+      "arity": {
+        "in": 10,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 30,
+      "recursiveSemanticFingerprint": "43193057a1149e89817ee374e61d3aa091e8b7165c591a73ded96871b0307397",
+      "priorCertificateSha256": "de5bde521c322716f57a42c8801039e8ba833a2c988e024966ea8803e236697b"
+    },
+    {
+      "id": 32,
+      "bodySha256": "dbc50f21957deee6756aa5afab68a83f532ea176ab1899809ec7d9dcca84277b",
+      "arity": {
+        "in": 8,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 31,
+      "recursiveSemanticFingerprint": "fccb09f7a166dfca884947dccf40f8c094cbec7a7ccc52e82ccda82b2fc9e2de",
+      "priorCertificateSha256": "de5bde521c322716f57a42c8801039e8ba833a2c988e024966ea8803e236697b"
+    },
+    {
+      "id": 33,
+      "bodySha256": "fc5e74ec1448be97828eb5459be33043ca2d719635f4223f33c91b8971a05ce1",
+      "arity": {
+        "in": 10,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 32,
+      "recursiveSemanticFingerprint": "df0f0e53be83b4692f692a451ab0bdf1a312246c1c285252559e3878e5e24774",
+      "priorCertificateSha256": "ae70b11fa55eb1fefb06f0aae44f0f0f5dfb5ef6cb07db64bc879baf83324395"
+    },
+    {
+      "id": 36,
+      "bodySha256": "3a8478f713234dff0f3524bcb187321b053e92c1400441e251df25a039163a1c",
+      "arity": {
+        "in": 12,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 35,
+      "recursiveSemanticFingerprint": "0954d6dd15409574b771cadc944a9dcd84a95b5ebbc9db6ca8492d24f4d8ac6b",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 37,
+      "bodySha256": "846a0c6c51a6450efd8f486a2909f4636b0e7915dedee7b42a9c5daa93f4063f",
+      "arity": {
+        "in": 6,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 36,
+      "recursiveSemanticFingerprint": "f3300882c440b4fac0fcaaa2b6ef9ce0bf2a4da20c7ac275e1bc04b4c9620234",
+      "priorCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d"
+    },
+    {
+      "id": 40,
+      "bodySha256": "c9600074b02488275536c28f73caff23892e0553cf0e8201634d08f9393bab17",
+      "arity": {
+        "in": 6,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 39,
+      "recursiveSemanticFingerprint": "8faf02b493c3077a7510f677f4214e8baa625361c93cb364732b880eab30b9d7",
+      "priorCertificateSha256": "212164762e577ce4ac9e4426c0b17e0156dedf40dcdb4e7d5d3085ac665e4073"
+    },
+    {
+      "id": 43,
+      "bodySha256": "24de01240827fa17a9e6008e5173a681314eab87f546719db3025c3dec86ea3b",
+      "arity": {
+        "in": 12,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 42,
+      "recursiveSemanticFingerprint": "e503e29cea948e969422de84d6565801306801e1e63267bba9774bce6e686357",
+      "priorCertificateSha256": "6a6d224d6abc7720dcd3e99db9cc266119a1fa7130e692433a16529196e4e2be"
+    },
+    {
+      "id": 44,
+      "bodySha256": "440f3b8ff9cafe1b8e49caab9b33b831ca79eaebeb5592f1a4ee09c88c9140d9",
+      "arity": {
+        "in": 10,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 43,
+      "recursiveSemanticFingerprint": "248f37e779e640b97e0299e77bd3073e1b946f819fbea7ac7c52cc0bd4218ad0",
+      "priorCertificateSha256": "6a6d224d6abc7720dcd3e99db9cc266119a1fa7130e692433a16529196e4e2be"
+    },
+    {
+      "id": 45,
+      "bodySha256": "240369309d53cfac7bd097e533c536f6c7af95f66e5c9e6e682bcfcab26ffd22",
+      "arity": {
+        "in": 8,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 44,
+      "recursiveSemanticFingerprint": "65d11baabcb7744020f458d2709f66e00bf6af5ecdeb953872fc9894a2af2c0f",
+      "priorCertificateSha256": "6a6d224d6abc7720dcd3e99db9cc266119a1fa7130e692433a16529196e4e2be"
+    },
+    {
+      "id": 46,
+      "bodySha256": "624a5d9e3d79851520dc934f9cceccebbd7b91571af8773181cb35ec26e5a2fa",
+      "arity": {
+        "in": 12,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 45,
+      "recursiveSemanticFingerprint": "4bd28f43d38ba715d1795fe35a7dae9d80575562a14c759d4a135ec7c70f1f1d",
+      "priorCertificateSha256": "6531355e72ab7202008743b8842abce3547217f773a085fc86a8c9cc3003b134"
+    },
+    {
+      "id": 48,
+      "bodySha256": "2ee7e080e8c22ab81ef743543d65bfc359a2cf52fd2232c87e0dfa58c920b4b0",
+      "arity": {
+        "in": 12,
+        "out": 12,
+        "alt": 0
+      },
+      "transferredFromOldId": 47,
+      "recursiveSemanticFingerprint": "a7f4e38b908b8a4942563f23fdb136cfaa08086e174ac7d583c7405d90e3f711",
+      "priorCertificateSha256": "1263b6c09429f2ebfd867b5c39bdc35b5ee1f409eeef1b0c8a2db46f7aa56f2e"
+    },
+    {
+      "id": 49,
+      "bodySha256": "47f90f021a31846b1847f9d84a5497ca5aaf3b76222c078fb6a04b3f1b2d8200",
+      "arity": {
+        "in": 4,
+        "out": 4,
+        "alt": 0
+      },
+      "transferredFromOldId": 48,
+      "recursiveSemanticFingerprint": "c59a7a71c73adb9b5d3708cbca18f3be3ca58b2ae235d69b80a40f35cb1c6751",
+      "priorCertificateSha256": "bdedabcc1a24074c4ec1134b7bb7aadc6b2fb3421f4c85492fadb0708ff821d8"
+    },
+    {
+      "id": 51,
+      "bodySha256": "9d11b7916cbb613addae0fb13fb4a91031130c66d3a16e9ee1ef6aa0e11cb5c3",
+      "arity": {
+        "in": 10,
+        "out": 6,
+        "alt": 0
+      },
+      "transferredFromOldId": 50,
+      "recursiveSemanticFingerprint": "bc0818d746a6faa0ce74130bb43d2b5a7efa962a5ad76fb5bf73d3bdef5e255a",
+      "priorCertificateSha256": "6a6d224d6abc7720dcd3e99db9cc266119a1fa7130e692433a16529196e4e2be"
+    }
+  ],
+  "reviewEvidenceSha256": {
+    "namespace": "7bf5685827f6ccbbf4dab13ac3e3ebebf1dcfb0228b58df2b27b1d7a3fe95558",
+    "arity": "09c4060e5163e751378de5c6c8c92ff6e858dbd277b24da484d7ee707f59cfc0",
+    "calleeTransfer": "98d1fb69c5f24c218a937cc1a89b0e0c3947a133724c1f428ac4d8ed636c721f",
+    "strictG1": "46ffdf700cdec231912901e5e930127065ff12b98140ef00b4483e40efda7de8",
+    "strictG1Compiled": "4a7c8c326361f22500d91a2414a1065b2f72d2b9b6c1be3059253e9513548934",
+    "msmTransfer": "bf29e679113eb17591b84a4b4ffc01b0f32e2d58b85b071639aaf2f27d330d0c",
+    "pairingTuplesAndHandoff": "d9b49847ebf11920e17c22d25a392c0e860a670bd7c7be25fe18d7bc1e655ff0",
+    "entryAndEndpoint": "ba4d31ae4de34a48d863e7cd12ca5012b39ddd0414618e02339c4dbdaf7be942",
+    "finalExpDag": "7e3d4fc2bf8578ba106164d0212ec7d099788d9eb24f2929bc123acd659968cb",
+    "finalExpPeer": "05f0e813c3301a5b237c2ce88a413451b03ad611c8066474b4bd28254b4156d2",
+    "wholeCompositionPeer": "f66c75ac4c5234ea3056cf29b05ea20e2cd2dd7e3b295c15c62bfa4c15041a46",
+    "priorFiniteArithmeticTheorem": "9f1b9f35fa2c0fd0abf78638f094c74e8a084c93497c0b011cddf2d0180571a9"
+  },
+  "wholeTheoremSha256": "2b8cfcec8780457daae66a0bb758fecedc877bd4e09ffe38167aade31c6f1da5",
+  "implementedBindingObligationsRemaining": [],
+  "validation": {
+    "existingPositiveProofs": 5,
+    "arithmeticAccepted": 5,
+    "consensusAccepted": 0,
+    "standardAccepted": 0,
+    "externalInfinityCoverage": "Symbolic universal branch and group-identity proof; no newly generated external-infinity fixtures.",
+    "newProofOrPublicInputCases": 0
+  },
+  "remainingHolds": [
+    "Native admission remains held: raw direct locking is 17465 bytes, above the 10000-byte maximum; standard output admission also fails.",
+    "No arbitrary-key/circuit, trusted-setup, knowledge, zero-knowledge, whole-transaction, relay or mainnet theorem is asserted.",
+    "The newly added infinity branches are proved symbolically; the five existing proof fixtures have finite external points. No external-infinity proof fixture was generated."
+  ],
+  "portableChecks": {
+    "calleeTransfer": {
+      "checker": "check-callee-transfer.mjs",
+      "checkerSha256": "7e2f62d267007ed38ac2743c4fc6ef098ccd425858c6f4ff857aa8a03d2aba64",
+      "receipt": "callee-transfer.json",
+      "receiptSha256": "134b81a74c0d159c8f462b367f1c425849af33cdf457f671b515c9b9dd96f8a6"
+    },
+    "strictG1": {
+      "checker": "check-g1-subgroup.mjs",
+      "checkerSha256": "49367d6d3431c4c433c452db85bef6cd4c8c7dfadeed6710f3e259186cacbda7",
+      "receipt": "g1-loop-operands.json",
+      "receiptSha256": "0e7cd8a05c220533f1f9e2a217658eae34b44b42dfba60061d92c518f38ee7df"
+    }
+  },
+  "compiledArtifactOrigin": {
+    "sourceRevision": "b4a14a8fb91e3bc25995f26334f04eb0cbd19072",
+    "sourceFile": "singleton/bls12-381/groth16.cash",
+    "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
+    "lockingSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+    "boundary": "Same strict source bytes, imports, compiler policy and raw locking artifact; source moved verbatim, no recompilation."
+  }
+}

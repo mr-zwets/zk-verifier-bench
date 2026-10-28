@@ -1,10 +1,13 @@
 # zk-verifier-bench
 
 A benchmark harness for **Groth16 proof verifiers on the Bitcoin Cash VM**.
-Every entry is executed on the BCH 2026 virtual machine (libauth); the harness
+Executable entries run on their applicable BCH virtual machines (libauth);
+profile-only entries receive size measurements without execution. For
+executable entries, the harness
 
-1. **proves correctness** — the valid proof run is ACCEPTED, and tampered,
-   worst-case, and adversarial-input runs are REJECTED;
+1. **checks fixtures** — the valid and supplied worst-case proof runs
+   are ACCEPTED, while supplied tampered and adversarial-input runs are
+   REJECTED;
 2. **measures cost** — total on-chain bytes (the score), op-cost, serialized-tx
    overhead, and dead-weight padding; and
 3. **checks deployability** — consensus limits, mempool standardness, and
@@ -25,8 +28,11 @@ Miller loop, the final exponentiation — does not fit in one input, so a
 deployable verifier must be split across many inputs and/or transactions.
 There are several ways to do that split, and several ways to shrink each piece.
 This harness grades all of them on a level field: one primary score (total
-on-chain bytes — bytes are fees), hard correctness gates, and secondary columns
-for op-cost and deployability.
+on-chain bytes — bytes are fees), evidence gates, and secondary columns for
+op-cost and deployability. A mathematical soundness disposition for the exact
+artifact requires the written claim and independent constructive review in
+[`docs/submission-claims.md`](docs/submission-claims.md); fixtures support that
+disposition but do not establish it alone.
 
 Groth16 itself is not the end goal — it requires a circuit-specific trusted
 setup and, being pairing-based, is not post-quantum safe. But it is the
@@ -274,7 +280,7 @@ for the full contract.
 
 Five VMs (`src/harness/vm.ts`):
 
-- **loosened** BCH 2026 VM — every resource ceiling lifted; proves correctness
+- **loosened** BCH 2026 VM — every resource ceiling lifted; executes fixtures
   and measures op-cost even for oversized entries;
 - **real** BCH 2026 VM — consensus limits; decides `BCH compatible`;
 - **standard** BCH 2026 VM — mempool-relay policy; decides standardness;
@@ -295,14 +301,16 @@ Beyond accept/reject on the committed proof, entries are graded on:
 
 - **proof-generality** — for `proofBinding: 'runtime'` entries the harness runs
   several distinct valid proofs minted under the same verifying key against the
-  one fixed locking (N/N must verify); a baked entry would accept only its own.
+  intended ordered program set (N/N must verify). The harness executes the
+  supplied runs; program identity and proof distinctness require review.
   See `docs/proof-generality.md`.
 - **worst-case proof** — a dense, near-r-input proof run through the same
-  locking, so op-cost claims hold at the worst case, not just the committed
-  proof.
-- **input validation** — adversarial witnesses carrying off-curve or
-  out-of-subgroup points must be rejected (EIP-197-style on-curve + subgroup
-  checks).
+  locking. It must be a valid proof and be accepted; it is a measured dense
+  case, not a universal worst-case bound.
+- **input validation** — supplied off-curve or out-of-subgroup witnesses test
+  claimed EIP-197-style validation. The harness counts whole-run rejection;
+  the existence and ownership of a domain check require separate review. A
+  cofactor-equivalent domain does not imply strict subgroup rejection.
 - **standardness** — does every step also relay (`fitsBchStandardness`), or is
   the entry consensus-valid but non-standard (e.g. bare intra-tx bundles)?
 - **secure packaging** — P2SH20-packaged entries are flagged (collision-attack
@@ -318,16 +326,18 @@ quality:
 
 - **Curve.** BLS12-381 field elements are 1.5× BN254's; bigger curve, bigger
   scripts. Compare within a curve line first.
-- **Statement.** Each verifies a different circuit with a different verifying
-  key and public-input count (which sets the vk_x MSM size).
-- **Deployment model — proof at runtime vs baked per-proof.** The references
-  and the singletons are *runtime-general*: the proof arrives push-only in the
-  unlocking at spend time, so one deployed program verifies any proof for its
-  circuit. The chunked / intra-tx / grouped entries are *instance-specific*:
-  proof material is baked into the chunk scripts, so a different proof requires
-  regenerating the chunks. Both genuinely verify on-chain, but they are
-  different artifacts; the harness reports `proofBinding` per entry and proves
-  the distinction empirically via the multi-proof sweep.
+- **Statement.** Native Groth16 entries use the published benchmark VK and two
+  public inputs for their curve. Reference baselines may use other keys and
+  input counts. These synthetic equation fixtures do not establish circuit
+  knowledge; compare the exact statement and domain before comparing totals.
+- **Deployment model — proof at runtime vs baked per-proof.** A
+  *runtime-general* entry receives its proof at spend time and is intended to
+  verify any proof in its declared VK/input domain. An *instance-specific*
+  entry specializes its scripts to a proof, so a different proof requires
+  regenerating them. This distinction depends on the entry's `proofBinding`,
+  not whether it is singleton, chunked, intra-tx or grouped. Both can verify
+  on-chain under their declared equations and assumptions; the harness reports
+  their supplied multi-proof coverage separately.
 
 So a cross-entry "N× larger" on totals is indicative, not a clean benchmark;
 per-milestone comparisons are normalized instead (same scalar, fixed-iteration
@@ -361,18 +371,28 @@ src/nchain/           nChain reference extract/run/verify
 src/scrypt-bn256/     sCrypt reference extract/run/verify
 data/<impl>/          SOURCE.md provenance (raw hex is gitignored, re-fetchable)
 docs/                 benchmark.md, checkpoints.md, proof-generality.md,
+                      public-input-binding.md, submission-claims.md,
                       pairing-checker.md, scrypt.md
 results.json          committed leaderboard export (consumed by the website)
 score-history.json    committed per-run score history
 ```
+
+The current challenge covers the declared fixed-VK pairing equation, using the
+published benchmark setup for each native curve. It
+does not certify circuit knowledge soundness, application-level zero knowledge
+or state binding, arbitrary verifying keys, independent setup, or live relay
+guarantees. Application ZK and VM-cost/TXv5 work are welcome as companion
+research tracks; `bch-spec`'s larger limits and its separate TXv5-as-written
+grade are distinct models.
 
 ## Contributing
 
 External verifier submissions are welcome — several leaderboard entries
 arrived as PRs. A submission is vectors JSON + an implementation module + a
 one-line registry edit; your contract source and build tooling can stay
-private, because the harness grades behavior (correctness gates, multiproof
-generality, worst-case runs) rather than source. See
+private, provided the exact bytecode is pinned and a byte-identical rebuild
+method is reviewed. The harness grades declared behavior and deployment
+evidence; see the claim sheet and
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Related repos

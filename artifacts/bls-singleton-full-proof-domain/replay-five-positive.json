@@ -1,0 +1,156 @@
+{
+  "schema": "bls-full-proof-domain-existing-positive-replay/v1",
+  "status": "PASS_EXISTING_POSITIVES_ARITHMETIC_NATIVE_ADMISSION_HOLD",
+  "node": "v24.19.0",
+  "sourceFile": "singleton/bls12-381/groth16_strict.cash",
+  "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
+  "lockingSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+  "fixtureSha256": "05468d396ddd410a08878cecfd482c33635e7d89e48e4661c462772f108ed2ea",
+  "positivePacketSha256": "5c07dbe90d46a088141b7c2a3d4437e26a954925666cd140417203a47db523b6",
+  "neutralCaseSha256": "55e262ca14852e5653e10b1b240cbed0b543adfe372e742a5388bb60c676374a",
+  "neutralComputedVkx": true,
+  "replayToolSha256": "e546aabdd1368a6cd5b9e1690100f9ebca3e989ee74f831a581c6117700048d7",
+  "results": [
+    {
+      "index": 0,
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "costKind": "completed",
+          "operationCost": 1186203941
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify transaction: error in evaluating input index 0: The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify standard transaction: standard transactions may only spend standard output types. Source output 0 is non-standard: locking bytecode length of 17465 exceeds the maximum standard locking bytecode length of 201.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "costKind": "completed",
+          "operationCost": 1187069366
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify transaction: error in evaluating input index 0: The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify standard transaction: standard transactions may only spend standard output types. Source output 0 is non-standard: locking bytecode length of 17465 exceeds the maximum standard locking bytecode length of 201.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "costKind": "completed",
+          "operationCost": 1188918619
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify transaction: error in evaluating input index 0: The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify standard transaction: standard transactions may only spend standard output types. Source output 0 is non-standard: locking bytecode length of 17465 exceeds the maximum standard locking bytecode length of 201.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "costKind": "completed",
+          "operationCost": 1188162401
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify transaction: error in evaluating input index 0: The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify standard transaction: standard transactions may only spend standard output types. Source output 0 is non-standard: locking bytecode length of 17465 exceeds the maximum standard locking bytecode length of 201.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        }
+      ]
+    },
+    {
+      "index": "archived-neutral-vkx",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "costKind": "completed",
+          "operationCost": 1021968607
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify transaction: error in evaluating input index 0: The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 17465 bytes.",
+          "verifyResult": "Unable to verify standard transaction: standard transactions may only spend standard output types. Source output 0 is non-standard: locking bytecode length of 17465 exceeds the maximum standard locking bytecode length of 201.",
+          "costKind": "admission-halt",
+          "operationCost": 0
+        }
+      ]
+    }
+  ],
+  "scope": "Four unchanged existing singleton positives and one reversibly reencoded archived positive with neutral computed vk_x. The unchanged positive payloads use finite external points; separate compiled symbolic certificates own infinity and strict-G1 coverage. No new proof, negative case, compiler, optimization, whole-transaction or mainnet conclusion."
+}

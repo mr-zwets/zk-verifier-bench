@@ -1,0 +1,471 @@
+{
+  "schema": "historical-rooted-graph-positive-replay/v1",
+  "status": "PASS_WITH_DECLARED_RESOURCE_HOLDS",
+  "positiveOnly": true,
+  "smoke": true,
+  "node": "v26.12.0",
+  "replayToolSha256": "258778d8477e95a10320cd4027102e42aa1636363c58c4e942a603cb0885fdc0",
+  "rootedPacketSha256": "75c3bb008b672b066abae1df206450ad29815ca5bfd1176a66a63ac533e5e89e",
+  "manifestSha256": "a8748bb4201360e9fcf7cfde8524c2cf599a698afeaf58ee34b67bd52d4cda83",
+  "correctedPacketSha256": "f88d2274794b0e38c5254187c04d97033080b7fa84fafbccd982f99e5b4f19b1",
+  "staticChecks": "PASS",
+  "sourceHelperSha256": "f9ef0d0e38f67369826bc3592a4438b70f80da96acd059b7670f3b73a51e095d",
+  "sourceFrameManifestSha256": "5193b245337b0758120164142f956327ff25a4673e2147899dbdbf12ac9fbdb2",
+  "profiles": [
+    {
+      "id": "bch-groth16-historical-bn27-intratx-frame-corrected-rooted",
+      "declaredVm": "bch-2026",
+      "runs": [
+        {
+          "case": "primary",
+          "mode": "oracle",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 7829916
+            },
+            {
+              "index": 26,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 7652617
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "consensus",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": false,
+              "error": "Program attempted to push a stack item that exceeded the maximum stack item length. Maximum stack item length: 10000; item length: 10040 bytes.",
+              "resourceHold": true,
+              "costKind": "halt",
+              "operationCost": 7799095
+            },
+            {
+              "index": 26,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 7652617
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "standard",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": false,
+              "error": "Program attempted to push a stack item that exceeded the maximum stack item length. Maximum stack item length: 10000; item length: 10040 bytes.",
+              "resourceHold": true,
+              "costKind": "halt",
+              "operationCost": 7802551
+            },
+            {
+              "index": 26,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 7667593
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bch-groth16-historical-bls26-frame-corrected-rooted",
+      "declaredVm": "bch-2026",
+      "runs": [
+        {
+          "case": "primary",
+          "mode": "oracle",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 587521
+            },
+            {
+              "index": 25,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 6048750
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "consensus",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 587521
+            },
+            {
+              "index": 25,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 6048750
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "standard",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 590337
+            },
+            {
+              "index": 25,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 6060270
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bch-groth16-historical-bls24-frame-corrected-rooted",
+      "declaredVm": "bch-2026",
+      "runs": [
+        {
+          "case": "primary",
+          "mode": "oracle",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 545073
+            },
+            {
+              "index": 23,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 7669748
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "consensus",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 545073
+            },
+            {
+              "index": 23,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 7669748
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "standard",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 547889
+            },
+            {
+              "index": 23,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 7682164
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bch-groth16-historical-bn13-frame-corrected-rooted",
+      "declaredVm": "bch-2026",
+      "runs": [
+        {
+          "case": "primary",
+          "mode": "oracle",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 952527
+            },
+            {
+              "index": 12,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 2569532
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "consensus",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 952527
+            },
+            {
+              "index": 12,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 2569532
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "standard",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 955855
+            },
+            {
+              "index": 12,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 2578108
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bch-groth16-historical-bls34-frame-corrected-rooted",
+      "declaredVm": "bch-2026",
+      "runs": [
+        {
+          "case": "primary",
+          "mode": "oracle",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 588487
+            },
+            {
+              "index": 33,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 5142197
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "consensus",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 588487
+            },
+            {
+              "index": 33,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 5142197
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "standard",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 591303
+            },
+            {
+              "index": 33,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 5152437
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bch-groth16-historical-bn-large4-frame-corrected-rooted",
+      "declaredVm": "bch-spec",
+      "runs": [
+        {
+          "case": "primary",
+          "mode": "oracle",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 21761589
+            },
+            {
+              "index": 3,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 64202890
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "consensus",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 21761589
+            },
+            {
+              "index": 3,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 64202890
+            }
+          ]
+        },
+        {
+          "case": "primary",
+          "mode": "standard",
+          "outcomes": [
+            {
+              "index": 0,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 21767221
+            },
+            {
+              "index": 3,
+              "accepted": true,
+              "error": null,
+              "resourceHold": false,
+              "costKind": "completed",
+              "operationCost": 64256266
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "accepted": 34,
+  "holds": 2,
+  "resourceHolds": 2,
+  "holdDetails": [
+    {
+      "index": 0,
+      "accepted": false,
+      "error": "Program attempted to push a stack item that exceeded the maximum stack item length. Maximum stack item length: 10000; item length: 10040 bytes.",
+      "resourceHold": true,
+      "costKind": "halt",
+      "operationCost": 7799095
+    },
+    {
+      "index": 0,
+      "accepted": false,
+      "error": "Program attempted to push a stack item that exceeded the maximum stack item length. Maximum stack item length: 10000; item length: 10040 bytes.",
+      "resourceHold": true,
+      "costKind": "halt",
+      "operationCost": 7802551
+    }
+  ],
+  "evaluations": 36,
+  "scope": "Existing corrected positive cases only. Proof/public/state/table/padding prefixes are byte-identical. No proof generation, negative cases, compiler/producer/planner invocation, grouped graph, whole-transaction, relay, neutral-domain, or mainnet conclusion."
+}

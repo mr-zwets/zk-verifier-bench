@@ -1,0 +1,62 @@
+{
+  "schema": "bls-plain-singleton-neutral-vkx-qualification/v1",
+  "sourceRevision": "ab5c0a9ba5e755d190ff2ad43a8b659f92407ebe",
+  "sourceFile": "singleton/bls12-381/groth16.cash",
+  "sourceSha256": "7162dffe5226bfe93ca82d9b98ecd86efcd555495fd08ebb96dc49d6c0a93197",
+  "sourceImports": {
+    "singleton/bls12-381/lib/FinalExp.cash": "d97f9d54b0818cc850fcca0a1abbf16ec556eb8ebb3c4598c54cd7ac49d0a9ef",
+    "singleton/bls12-381/lib/Fp.cash": "ba116b1921da9f14a665765483e62c5fb8c964364d7507f0341d8a16612e110f",
+    "singleton/bls12-381/lib/Fp12.cash": "27ddeea29485d6460b7431a7b056e94f20b91e693313dd7ddc81cd7432aba9ed",
+    "singleton/bls12-381/lib/Fp2.cash": "f882e69e6543110055a70dc24eccebc3e84560bc6cea1e792f5f6e49452301c8",
+    "singleton/bls12-381/lib/Fp6.cash": "4ce5e6274d6dafa1623204c6605f0c71bfad0465c43ee91b1fe580901dcb5323",
+    "singleton/bls12-381/lib/G2Check.cash": "6bd09601fa6112708009f82ea10e4ecfb917df3a73db91aa501598ab24dd2b08",
+    "singleton/bls12-381/lib/Miller.cash": "317f768d5125c2ceb6f0ab633cd68b0aeaa4bd88aa3d4457dbb1183414da5766"
+  },
+  "lockingSha256": "bec94008264eefa667247df1cbb3376299a5061cdcb5a1e4cda8b92c9a91abbb",
+  "lockingBytes": 14246,
+  "positivePacketSha256": "5c07dbe90d46a088141b7c2a3d4437e26a954925666cd140417203a47db523b6",
+  "originalMultiproofFile": "src/bch/groth16-bls12381-singleton-multiproof-vectors.json",
+  "originalMultiproofSha256": "05468d396ddd410a08878cecfd482c33635e7d89e48e4661c462772f108ed2ea",
+  "compiler": {
+    "entry": "cashc/packages/cashc/dist/compiler.js",
+    "entrySha256": "5e92acd05a37bea1d71e0a5ae35fe0d79d437229e1ef6e354d94147e7375bd70",
+    "node": "v24.19.0",
+    "options": {
+      "optimizeFor": "opcost",
+      "rescheduleStacks": false,
+      "disableDefSinking": true,
+      "disableOptimisationCrossCheck": true
+    },
+    "selection": "One fixed policy; no byte-size objective, variant selection, padding change, or resource tuning."
+  },
+  "mathematicalChange": "The projective neutral public MSM returns a reserved off-curve (0,0) sentinel; that gamma pairing factor is the Fp12 unit. Finite normalization and gamma Miller operand order are preserved.",
+  "domain": "Two canonical Fr public inputs, finite canonical external A/C points in the G1 pairing quotient, finite strict-r B. Neutral computed vk_x is supported; external infinity encodings are not added.",
+  "proofBoundary": "Complete conditional arithmetic composition for the exact raw artifact and the declared finite external-point/cofactor-quotient ABI, with every canonical Fr public tuple including neutral vk_x. Standard field/curve/pairing and pinned VM premises remain. No external infinity, arbitrary-key/circuit, setup/knowledge or native-admission theorem.",
+  "nativeAdmission": "HOLD: this raw fixed-policy 14246-byte direct locking exceeds BCH2026 10000-byte locking admission, and is not a standard output. No relay/mainnet claim.",
+  "constraints": {
+    "existingPositiveProofsOnly": true,
+    "newProofGeneration": false,
+    "negativeCaseExecution": false,
+    "cybersecurityTesting": false,
+    "byteOptimization": false,
+    "registryAndScoresChanged": false
+  },
+  "neutralCaseFile": "neutral-case.json",
+  "neutralCaseSha256": "55e262ca14852e5653e10b1b240cbed0b543adfe372e742a5388bb60c676374a",
+  "existingPositiveProofs": 5,
+  "neutralCase": "One unchanged mathematical positive from benchmark PR14 extraValidProofs[13] under source PR7, decoded and canonically reencoded for the existing 10-int singleton ABI. Its public inputs are [1,r-1], and actual fixed-key aggregation is neutral. Four other positive unlockings are byte-identical to the original plain multiproof artifact.",
+  "replayToolSha256": "4fb233ace4b1422ea91807519af83a368a07b00b98523144976bd9fde5099d7a",
+  "validation": {
+    "existingPositiveProofs": 5,
+    "arithmeticOracleAccepted": 5,
+    "consensusAccepted": 0,
+    "standardAccepted": 0,
+    "nativeFailure": "Actual evaluate error:14246-byte direct locking exceeds10000-byte maximum. Standard verify also reports nonstandard source output >201 bytes.",
+    "neutralCaseObserved": "The archived neutral-vkx case accepts in the same full arithmetic verifier as all four original singleton proofs.",
+    "fullNewWholeBytecodeTheorem": "CONDITIONAL_FINITE_DOMAIN_ARITHMETIC_EQUATION_COMPOSITION",
+    "newProofOrPublicInputCases": 0,
+    "auxiliaryReencoding": "One archived positive case, same mathematical proof and public inputs; official canonical VM-number pushes."
+  },
+  "mathematicalDisposition": "mathematical-disposition.json",
+  "mathematicalDispositionSha256": "2cf6eb40d9002ed8019be69d01c5e99f8feecb88da9f40c6744e63a75e149daf"
+}

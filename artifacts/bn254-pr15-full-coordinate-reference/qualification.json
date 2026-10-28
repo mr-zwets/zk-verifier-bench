@@ -1,0 +1,41 @@
+{
+  "schema": "bn254-pr15-full-coordinate-reference/v1",
+  "status": "CONDITIONALLY_QUALIFIED_FULL_COORDINATE_REFERENCE_NATIVE_HOLD",
+  "sourceDirectory": "singleton/bn254/pr15-full-coordinate-reference",
+  "sourceQualificationSha256": "f4869ddac3b9a201798342876e08eaaf1b8925ccf4af117a59aa779d0c09daed",
+  "sourceFiles": {
+    "local-build.mjs": "3206c562b1259032907e8762182b30217d800aecc7aeb783f58408c618374b44",
+    "verifier.asm": "32e947c07ce5566e5fe56f10ab70d43824b4a1af3dd21fb19b5073690569fd82",
+    "minimal-correction.patch": "80733a86baddb8142cab90ca7e035a2eccf99c4d454b441d61e6192b01bc4f04"
+  },
+  "compiledFile": "verifier-4681.hex",
+  "compiledBytes": 4681,
+  "compiledSha256": "dc2b929c5645d3baaac4fb544ba7565bf54c34156532a715053432d4f9913782",
+  "files": {
+    "portable-replay-report.json": "159c4086456db5e1e5ceea33ccdc69fa0aa630855df32abfba7cf41a59359baa",
+    "verifier-4681.hex": "ae6feefd9c976882c0dd54d59039de3a45c4c1c6a5086d0fc8d4e71c7e4c201b",
+    "four-positive-unlockings.json": "30040c925bc1a9e7164734966ed1027174079a44f9cca17f678a1e295d4d4c77",
+    "replay.mjs": "3bf747919ce629f22eb306282e8c8af68c98d7632ab0ba707deeae0f64dd3b9c",
+    "mathematical-disposition.json": "c13d227400507b5e3a4faeb25572769cfa5dc27a4f06ed6930c55a35386ed06c",
+    "rebuild-qualification.json": "2b9ba5955584c6a4265cf9e6ba66249541dcf0d3edb62cdfef29cd5718798d3b"
+  },
+  "existingPositiveProofs": 4,
+  "oracleAccepted": 4,
+  "consensusAccepted": 0,
+  "standardAccepted": 0,
+  "domain": "Canonical full-coordinate EIP197 point-value domain, finite or neutral A/B/C and reconstructed vk_x; two canonical Fr public scalars. This is the historical4681-byte codec, distinct from the merged4320-byte parity codec.",
+  "nativeAdmission": "HOLD: operation-cost density on the existing per-input native contexts.",
+  "qualifications": [
+    "Exact fixed synthetic verification key; source DSL,62functions and main literal/call fingerprints are frozen.",
+    "Pinned integer/byte/function BCH2026 semantics and standard BN254 field/curve/subgroup/pairing facts.",
+    "No circuit/trusted-setup knowledge soundness, universal producer, whole-transaction, relay or mainnet claim."
+  ],
+  "constraints": {
+    "existingProofFixturesOnly": true,
+    "newProofs": 0,
+    "negativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false,
+    "registryOrScoreChange": false
+  }
+}

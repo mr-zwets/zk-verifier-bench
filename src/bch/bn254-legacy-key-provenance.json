@@ -1,0 +1,432 @@
+{
+  "status": "PASS_CURRENT_CHECKER_20_COORDINATES_AND_ORIGINAL_PF7_FIXED_MILLER_COEFFICIENTS",
+  "node": "v24.19.0",
+  "readbackToolSha256": "22953f6c37952cee6047ebf47654622921a1daf51eaa140172ec8985464575f2",
+  "keyArtifactSha256": "e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e",
+  "equationLoaderSha256": "0c295f59ae5440c097821589fd2068c1d1a42f8cda010a76b18d90036a258650",
+  "equationLoaderBytes": 5901,
+  "coordinates": [
+    {
+      "name": "vk.alpha.x",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 547
+        }
+      ]
+    },
+    {
+      "name": "vk.alpha.y",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 546
+        }
+      ]
+    },
+    {
+      "name": "vk.beta.x.c0",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 551
+        }
+      ]
+    },
+    {
+      "name": "vk.beta.x.c1",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 550
+        }
+      ]
+    },
+    {
+      "name": "vk.beta.y.c0",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 549
+        }
+      ]
+    },
+    {
+      "name": "vk.beta.y.c1",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 548
+        }
+      ]
+    },
+    {
+      "name": "vk.gamma.x.c0",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 653
+        }
+      ]
+    },
+    {
+      "name": "vk.gamma.x.c1",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 652
+        }
+      ]
+    },
+    {
+      "name": "vk.gamma.y.c0",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 651
+        }
+      ]
+    },
+    {
+      "name": "vk.gamma.y.c1",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 650
+        }
+      ]
+    },
+    {
+      "name": "vk.delta.x.c0",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 663
+        }
+      ]
+    },
+    {
+      "name": "vk.delta.x.c1",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 662
+        }
+      ]
+    },
+    {
+      "name": "vk.delta.y.c0",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 661
+        }
+      ]
+    },
+    {
+      "name": "vk.delta.y.c1",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 660
+        }
+      ]
+    },
+    {
+      "name": "vk.ic.0.x",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 564
+        }
+      ]
+    },
+    {
+      "name": "vk.ic.0.y",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 563
+        }
+      ]
+    },
+    {
+      "name": "vk.ic.1.x",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 555
+        }
+      ]
+    },
+    {
+      "name": "vk.ic.1.y",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 554
+        }
+      ]
+    },
+    {
+      "name": "vk.ic.2.x",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 568
+        }
+      ]
+    },
+    {
+      "name": "vk.ic.2.y",
+      "matches": [
+        {
+          "function": "checker_main",
+          "id": 65792,
+          "instruction": 567
+        }
+      ]
+    }
+  ],
+  "pairfold7": {
+    "originalSha256": "4cb3ca8745a404d50ca7543858f6d01e6fbf68a7a8240ac96f7c8597b57233ac",
+    "terminalSha256": "6bd2a76ca98ba62c6bbd368bbccf4be86ca80a18ca9415c6db62a9edc56faf9b",
+    "factors": [
+      {
+        "limb": 0,
+        "instruction": 301,
+        "opcodeOffset": 2206,
+        "dataOffset": 2207,
+        "hex": "b4c0fdc0db5b6b4c836800a0af4e7ee2ab11cf13ed0f5e6ed5b9c95c9024142f"
+      },
+      {
+        "limb": 1,
+        "instruction": 302,
+        "opcodeOffset": 2239,
+        "dataOffset": 2240,
+        "hex": "554dc5a4cb68f17ca994a130c6db4650c801d22867d7eb55eec51921b940e307"
+      },
+      {
+        "limb": 2,
+        "instruction": 307,
+        "opcodeOffset": 2276,
+        "dataOffset": 2277,
+        "hex": "d1aea8594d232f0ff5273772339bc37aba474b49101dbb349a51826c1ecf3f25"
+      },
+      {
+        "limb": 3,
+        "instruction": 312,
+        "opcodeOffset": 2313,
+        "dataOffset": 2314,
+        "hex": "f6b09b9ec78c52a9c0d66853dba589d341af21b1ced8e2f9e027d59843e2092b"
+      },
+      {
+        "limb": 4,
+        "instruction": 317,
+        "opcodeOffset": 2350,
+        "dataOffset": 2351,
+        "hex": "74130b86ff4eb811743ad9243677a6ea991214b1aad492db486c388c07aed82a"
+      },
+      {
+        "limb": 5,
+        "instruction": 322,
+        "opcodeOffset": 2387,
+        "dataOffset": 2388,
+        "hex": "ed69e9839933e68532fe18971e4b82d2a5df89c71bb21b743b990c490629d01a"
+      },
+      {
+        "limb": 6,
+        "instruction": 327,
+        "opcodeOffset": 2424,
+        "dataOffset": 2425,
+        "hex": "b13f57ba3ce08fcfe3ca6cfd54cf1ff2e2a30c3d1cf0c4e4857f78a169c98804"
+      },
+      {
+        "limb": 7,
+        "instruction": 332,
+        "opcodeOffset": 2461,
+        "dataOffset": 2462,
+        "hex": "aeab8e40c709860a66d48d6b491b5f331da9641154e857e0930b68ba53700002"
+      },
+      {
+        "limb": 8,
+        "instruction": 337,
+        "opcodeOffset": 2498,
+        "dataOffset": 2499,
+        "hex": "b1000a4bd2afc2f791eac08b3e78be43fdb8a33f742c005b4a2de183240c4a0f"
+      },
+      {
+        "limb": 9,
+        "instruction": 342,
+        "opcodeOffset": 2535,
+        "dataOffset": 2536,
+        "hex": "5d3076e7ee643bb926c003a74bec9ff3d1435ae3d72d34807c33954876034217"
+      },
+      {
+        "limb": 10,
+        "instruction": 347,
+        "opcodeOffset": 2572,
+        "dataOffset": 2573,
+        "hex": "1d1a9d66ddcc01b228af02621d7fd1445d2302b7dd5472bf0bd5a06f79051f07"
+      },
+      {
+        "limb": 11,
+        "instruction": 352,
+        "opcodeOffset": 2609,
+        "dataOffset": 2610,
+        "hex": "ce3387617e18527818e5bb3746d5a4c32f9a630d9c964dbd0810ba3af5f51d0e"
+      }
+    ],
+    "coefficientSha256": "8ec88f41e55c2367c56c732f5c26ae676585b40da4ba7659e0e850257a792be6",
+    "pointConstantOccurrences": [
+      {
+        "name": "vk.gamma.x.c0",
+        "carriers": [
+          {
+            "input": 1,
+            "unlockingByteOffset": 1027
+          }
+        ]
+      },
+      {
+        "name": "vk.gamma.x.c1",
+        "carriers": [
+          {
+            "input": 1,
+            "unlockingByteOffset": 994
+          }
+        ]
+      },
+      {
+        "name": "vk.gamma.y.c0",
+        "carriers": [
+          {
+            "input": 0,
+            "unlockingByteOffset": 533
+          }
+        ]
+      },
+      {
+        "name": "vk.gamma.y.c1",
+        "carriers": [
+          {
+            "input": 0,
+            "unlockingByteOffset": 632
+          }
+        ]
+      },
+      {
+        "name": "vk.delta.x.c0",
+        "carriers": [
+          {
+            "input": 1,
+            "unlockingByteOffset": 1120
+          }
+        ]
+      },
+      {
+        "name": "vk.delta.x.c1",
+        "carriers": [
+          {
+            "input": 1,
+            "unlockingByteOffset": 1087
+          }
+        ]
+      },
+      {
+        "name": "vk.delta.y.c0",
+        "carriers": [
+          {
+            "input": 0,
+            "unlockingByteOffset": 566
+          }
+        ]
+      },
+      {
+        "name": "vk.delta.y.c1",
+        "carriers": [
+          {
+            "input": 0,
+            "unlockingByteOffset": 599
+          }
+        ]
+      },
+      {
+        "name": "vk.ic.0.x",
+        "carriers": [
+          {
+            "input": 5,
+            "unlockingByteOffset": 4171
+          }
+        ]
+      },
+      {
+        "name": "vk.ic.0.y",
+        "carriers": [
+          {
+            "input": 5,
+            "unlockingByteOffset": 4203
+          }
+        ]
+      },
+      {
+        "name": "vk.ic.1.x",
+        "carriers": [
+          {
+            "input": 5,
+            "unlockingByteOffset": 4235
+          }
+        ]
+      },
+      {
+        "name": "vk.ic.1.y",
+        "carriers": [
+          {
+            "input": 5,
+            "unlockingByteOffset": 4267
+          }
+        ]
+      },
+      {
+        "name": "vk.ic.2.x",
+        "carriers": [
+          {
+            "input": 5,
+            "unlockingByteOffset": 4299
+          }
+        ]
+      },
+      {
+        "name": "vk.ic.2.y",
+        "carriers": [
+          {
+            "input": 5,
+            "unlockingByteOffset": 4331
+          }
+        ]
+      }
+    ],
+    "encoding": "12 separate PUSH32 instruction data values, with polynomial-evaluation arithmetic between them",
+    "polynomialOwner": "Exact coefficient push and PICK/MUL/ADD block; coefficients evaluate c0+sum(ci*basis_i). The prior challenge-power basis and rest of the legacy verifier are separate unclaimed obligations."
+  },
+  "scope": "Public-key arithmetic and exact instruction-boundary readback only. No proof producer, fixture generation, negative suite or VM execution. The current checker bank transfers its established caller/role proof by exact byte identity; literal readback alone is not a new binding theorem. Original PairFold-7 individual alpha/beta declaration, point-role proof and full legacy verifier soundness are not established by this readback."
+}

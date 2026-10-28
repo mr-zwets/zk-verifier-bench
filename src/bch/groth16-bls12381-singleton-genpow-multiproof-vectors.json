@@ -43,7 +43,7 @@
   ],
   "provenance": {
     "source": "singleton/bls12-381/leader-recovered/cofactor-points.mjs",
-    "sourceRevision": "b7338eab2899f9b7b6be381b029691fc903abebf",
+    "sourceRevision": "8eb2c5dd6b1fd88dce3cdf90acc2bb19bfa78db7",
     "sourceFiles": {
       "program.mjs": "160e5d0bbb337eae61395596f73e15a749a4868c57ea344db918db293486b2de",
       "field.mjs": "1f045d29f75d18e499b107658e7f7316f7e11c87c3757386c99dc008615129b1",

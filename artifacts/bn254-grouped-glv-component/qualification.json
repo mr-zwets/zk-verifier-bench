@@ -1,0 +1,26 @@
+{
+  "schema": "bn254-grouped-glv-positive-component/v1",
+  "scope": "Public-input aggregation component only. Proof A/B/C are not consumed by this component. The supplied two-step graph is an external premise; no whole Groth16 or rooted covenant claim.",
+  "sourceRevision": "f8b16b221fb039f0ed04636b195a5deb8379f13c",
+  "artifactSha256": "e6c9b4b1168dbe8ed9a4bc723bb33ad7a0873b5ad5579f600232898613fcbdda",
+  "checkpointFile": "src/checkpoints/pairing-vectors.json",
+  "checkpointSha256": "e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e",
+  "existingProofFixture": "src/bch/groth16-singleton-multiproof-vectors.json",
+  "existingProofFixtureSha256": "10ccd795c69ad04d13ac7353c893fcf920e3a662b9a7f9639590f4a21b67f789",
+  "verification": "All three archived public-input pairs, one shared pair of programs; six per-input evaluations in each of oracle, BCH2026 consensus and standard modes. Expected final affine vk_x computed independently with noble G1 arithmetic and the public VK.",
+  "reproduce": "node artifacts/bn254-grouped-glv-component/replay.mjs new-report.json",
+  "newProofOrInputCases": false,
+  "byteOptimization": false,
+  "retiredEvidence": "raw-v1 reversed the second logical public-input pair; only corrected raw-v2 is supplied. Proofs and shared executable programs are unchanged.",
+  "emitters": {
+    "module": "chunked/pairing/gen_vkx_glv.mjs",
+    "first": "genCash(0,32,true,false,true,null,false,true,false)",
+    "final": "genCash(32,64,false,true,true,null,false,true,false)",
+    "compilePolicy": "One fixed compileString default raw policy; saved programs unchanged during reencoding."
+  },
+  "sourcePins": {
+    "chunked/pairing/gen_vkx_glv.mjs": "2f600f06f3e80d59648b068676893b8f272bb67fbcc3bd7b802982a6049affc2",
+    "chunked/pairing/_millermath.mjs": "1a6dc161cacbcdd70782ac97456ffb57e7617ecf756ea02d53727c2ec06d49e3"
+  },
+  "compilerEntrySha256": "5e92acd05a37bea1d71e0a5ae35fe0d79d437229e1ef6e354d94147e7375bd70"
+}

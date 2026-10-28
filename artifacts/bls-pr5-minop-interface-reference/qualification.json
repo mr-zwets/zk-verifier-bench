@@ -1,0 +1,64 @@
+{
+  "schema": "bls-pr5-minop-interface-artifact/v1",
+  "status": "CONDITIONALLY_QUALIFIED_FIXED_KEY_FINITE_DOMAIN_REFERENCE_NATIVE_HOLD",
+  "sourceDirectory": "singleton/bls12-381/pr5-minop-interface-reference",
+  "sourceQualificationSha256": "7266a33870a3d17e7e12de7a742a7573d62067fef4a0f14cc5865a519c5a9e45",
+  "sourceFiles": {
+    "rebuild.mjs": "8fc26031375ad2c45788d8e4ba56efcd66c28fabd0026bf6a1d23e905ade7c21",
+    "groth16_minop.cash": "00641ad5178d450277a0738b999e43cc6fc87598e27cf547ed25a35871c883ae",
+    "transport-51-to-45.mjs": "40fcca5654dd2f678d5370adc99d1e3f9923dd52e7d68bc39b668629386041ba",
+    "lib/lazy/Bls12381LazyG.cash": "6c9527d3083940041931ca4cd1e682609089adbc30ae0b56a18a181d41b03bf6",
+    "lib/lazy/Bls12381Lazy.cash": "c6aa944554eb8bdea3295ca1e9c209edfacec62e264c8085d50c060acb04f462"
+  },
+  "compiledFile": "program.hex",
+  "compiledBytes": 64396,
+  "compiledSha256": "42ca73a63775c062898e97ecde2b9a3d57b5f292d11677341a9fe5d6063ae0d3",
+  "files": {
+    "positive-replay.json": "030ae8774f9a7d8775d573c4a33c4532dfb1423e2bb38600fd55a3cfa0fcdbf6",
+    "program.json": "6db50f7f41aa855884a207a7f32f48531d2323b31c872f95e9c802968f9c8e26",
+    "mathematical-abi.json": "a99f5d9ec4d4f37004a547d18f9fed9c90082967ad9f520dd1bfb80a988bd4fb",
+    "fixed-policy-rebuild.json": "bf2f4f9bf978f1bc189b778d1421f22652b3e43747414e3a99f82e87c96d504c",
+    "positive-reencoded.json": "4578baa78f231a475a3747e6a89694d0cc67600067814cc6649bafe4b53cdb9f",
+    "program.hex": "1e0448a455ddf916e1ab22a7afaf69c74ee6780a7e1fe0c3d288eed5249c8419",
+    "replay.mjs": "9e9ff28a5c732fe80b5d9396e1685d13f59f9004677362ba2ce2f06e16cef66f",
+    "theorem-summary.json": "8224b40ed729a5087150bb55b7b26a7ebf52344cde397a86100509b5de215205",
+    "transport-51-to-45-review.json": "8a0bc76b4aaf00b20bba0b3d7b461775311c76009d403d0307a4ee7a4fc97c48",
+    "domain-range-summary.json": "56a1bcbfe2ea963a1ffec4aab0e626903da6e2db38f0aa0efa5ec84cee5a2916",
+    "rebuild-receipt.json": "5b95ebcaf426c175a591e5b4797d4e7b0092026b534c58e5d20bb8d1a3ab178e"
+  },
+  "existingOriginalFixtureSha256": "6b10adf46643bde31c691c8b38d25120b622f6df8c1dd342dfb7107eaaff6b40",
+  "existingPositiveProofs": 5,
+  "oracleAccepted": 5,
+  "nativeConsensusAccepted": 0,
+  "nativeStandardAccepted": 0,
+  "nativeAdmission": "HOLD:64396-byte locking exceeds10000-byte per-script maximum before execution.",
+  "guardedMathematicalScope": "Proof coordinates and GLV components are explicitly bounded; public scalar range follows the bounded-decomposition congruence. Modular inverse representatives for vkxZinv reduce to the same field point. Finite external point and finite reconstructed-vk_x qualifications remain.",
+  "closedEquationOwners": [
+    "scalar",
+    "seed",
+    "GLV",
+    "field",
+    "group",
+    "Miller",
+    "residue",
+    "terminal"
+  ],
+  "theoremSha256": "2869d18a091354bd2d5163c5c71bca490efe34b15902e6e73153d40d9f198c54",
+  "qualifications": [
+    "Exact fixed synthetic key and the stated finite-domain/auxiliary contracts.",
+    "Pinned CashScript compiled-operand and BCH2026 integer/byte/function semantics.",
+    "Standard BLS field, curve, subgroup and pairing facts.",
+    "No arbitrary circuit/setup knowledge-soundness, universal producer, neutral-point completeness, native, whole-transaction, relay or mainnet claim.",
+    "The statement does not transfer to the archived51-argument or current21-argument locking ABI."
+  ],
+  "constraints": {
+    "existingProofsOnly": true,
+    "auxiliaryTransportOnly": true,
+    "newProofs": 0,
+    "negativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false,
+    "resourceOrRelayClaim": false
+  },
+  "fixedPolicyRebuildVerified": true
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "bls-pr5-minop-frozen45-artifact/v1",
+  "status": "FROZEN_COMPILED_REFERENCE",
+  "programHexPath": "program.hex",
+  "programBytes": 64396,
+  "programSha256": "42ca73a63775c062898e97ecde2b9a3d57b5f292d11677341a9fe5d6063ae0d3",
+  "programHexFileSha256": "1e0448a455ddf916e1ab22a7afaf69c74ee6780a7e1fe0c3d288eed5249c8419",
+  "sourcePath": "../../public-source/singleton/bls12-381/pr5-minop-interface-reference/groth16_minop.cash",
+  "sourceSha256": "00641ad5178d450277a0738b999e43cc6fc87598e27cf547ed25a35871c883ae",
+  "compilerHead": "1c707c1dbf87396b30ba5e0704b1db44475ce893",
+  "sourceHead": "2831928fe224d252fc90dfc26ecfdf52f29e9399",
+  "abiArgumentCount": 45,
+  "abiNames": ["Ax", "Ay", "Bxa", "Bxb", "Bya", "Byb", "Cx", "Cy", "in0", "in1", "c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "ci0", "ci1", "ci2", "ci3", "ci4", "ci5", "ci6", "ci7", "ci8", "ci9", "ci10", "ci11", "w0", "w1", "w2", "w3", "w4", "w5", "k10", "k20", "k11", "k21", "vkxZinv"],
+  "archived51ArgumentLockingUsable": false,
+  "compilerVariants": 0,
+  "byteOptimization": false
+}

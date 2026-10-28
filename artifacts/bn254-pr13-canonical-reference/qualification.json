@@ -1,0 +1,56 @@
+{
+  "schema": "bn254-pr13-canonical-reference-artifact/v1",
+  "status": "CONDITIONALLY_QUALIFIED_FULL_FIXED_KEY_EQUATION_CANONICAL_FINITE_EXTERNAL_DOMAIN_NATIVE_HOLD",
+  "sourceDirectory": "singleton/bn254/pr13-canonical-reference",
+  "sourceQualificationSha256": "03bf63742964d2e36b03bb75584f8e58745dfe10665abbcfe4c1e59531f70102",
+  "sourceAssemblySha256": "5e6e08c934202bbdb22ca54b033486df4f514d701379f4407978ad31877bafd3",
+  "sourceBuilderSha256": "47e0f8d6fde95e6d912d8641bc8813f208646557d5aeafe96d24267469e3aa64",
+  "lockingFile": "compiled-locking.hex",
+  "lockingBytes": 8922,
+  "lockingSha256": "cbd27cf7a971d0fa1ad86dcf3bc8db9a21b717905b3440ba9ec598195e5f59b0",
+  "guardTransferFile": "guard-transfer.json",
+  "guardTransferSha256": "7906a0b200c7152aa9ca33b26bb8f91ec2259a839feecec431f12689be42015a",
+  "positivePacket": "positive-cases.json",
+  "positivePacketSha256": "16f0916bb77289459956cdcc7e1c706016d1cfce04af2970d0ffb8bfdd671470",
+  "replayTool": "replay.mjs",
+  "replayToolSha256": "055ff2f8e2505b1305b9b1820bab3b24ce6e4185fa08e66c294734d072ba42d4",
+  "positiveReplay": "positive-replay.json",
+  "positiveReplaySha256": "2e46d62b3ad77a82971185939d9bc9e6b09ddeae650df9ca4e80a7f6cf1111b6",
+  "existingPositiveProofs": 5,
+  "oracleAccepted": 5,
+  "consensusAccepted": 0,
+  "standardAccepted": 0,
+  "bodyTheorem": {
+    "canonicalEquationCompositionSha256": "56b3a609b99e0ed70534b10730de299507743310a0cb8c7495481feed2dd992b",
+    "finalAssessmentSha256": "26f8bc8482c9148c179bd19680ff10a836bc9651af700eed5cfb56e6b1e7752b",
+    "requiredG1PredicateSupplementSha256": "e419248d08924db89c98e5892ebda9f8f9f4f3ba715c4500f87fed9a4c969ada",
+    "coverage": {
+      "actualHelpers": 44,
+      "mainHelperCalls": 296,
+      "g2SubgroupIterations": 128,
+      "millerEventsPerCall": 241,
+      "finalCoordinatePredicates": 12
+    },
+    "transfer": "The earlier complete canonical-domain equation theorem applies to the unchanged body; the new prefix establishes its previously external integer-range and ten-slot ABI premises."
+  },
+  "domain": "Eight canonical Fp coordinates, two canonical Fr scalars; finite affine A/C on G1 and finite order-r B on the twist. Computed vk_x may be neutral. Exact fixed synthetic VK. External infinity encodings are not added.",
+  "premises": [
+    "Pinned integer/byte/function/control semantics of the BCH2026 VM.",
+    "Standard BN254 field, curve, subgroup and pairing facts, and the recorded exact-body conditional theorem.",
+    "The exact fixed public key and original proof/public tuple; secure setup, circuit knowledge soundness and deployment are outside this statement."
+  ],
+  "excludedClaims": [
+    "External-infinity completeness",
+    "Arbitrary verification keys or circuit/setup knowledge soundness",
+    "Native whole-transaction, relay or mainnet admission",
+    "Universal producer/resource completeness"
+  ],
+  "constraints": {
+    "newProofs": 0,
+    "negativeCases": 0,
+    "producerOrCompilerInvocation": false,
+    "byteOptimization": false,
+    "cybersecurityTesting": false,
+    "registryOrScoreChange": false
+  }
+}

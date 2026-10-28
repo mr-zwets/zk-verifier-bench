@@ -1,0 +1,524 @@
+{
+  "schema": "bls-plain-singleton-mathematical-disposition/v1",
+  "status": "CONDITIONALLY_CONFIRMED_FIXED_VK_FINITE_PROOF_DOMAIN_EQUATION",
+  "sourceRevision": "ab5c0a9ba5e755d190ff2ad43a8b659f92407ebe",
+  "sourceFile": "singleton/bls12-381/groth16.cash",
+  "sourceSha256": "7162dffe5226bfe93ca82d9b98ecd86efcd555495fd08ebb96dc49d6c0a93197",
+  "artifact": "compiled-locking.hex",
+  "lockingSha256": "bec94008264eefa667247df1cbb3376299a5061cdcb5a1e4cda8b92c9a91abbb",
+  "lockingBytes": 14246,
+  "equation": "e(-A,B) * e(alpha,beta) * e(IC0+s0*IC1+s1*IC2,gamma) * e(C,delta) = 1",
+  "domain": {
+    "publicInputs": "All two-tuples of canonical Fr integers. Neutral computed vk_x is supported.",
+    "AandC": "Finite canonical points on E(Fp), interpreted in the G1 pairing quotient; strict unique G1 subgroup encodings are not claimed.",
+    "B": "Finite canonical point on the M-twist; the actual accepted endpoint and psi comparisons enforce strict order-r G2.",
+    "externalInfinityEncoding": false,
+    "verificationKey": "The exact public synthetic BLS key baked into the paired source, not an arbitrary or independently generated circuit key."
+  },
+  "composition": [
+    "The inherited pinned VM requires push-only unlocking, a fresh function namespace and clean final stack. All42 DEFINE bodies and358 raw static INVOKE identifiers are bound; the full stack contract is10 arguments to1 result.",
+    "Actual entry guards bind both canonical Fr inputs, both finite G1 checks and all canonical B coordinates/twist equations.",
+    "The full255-step shared-doubling MSM consumes those same public integers and the exact IC table. Current Jacobian outputs, final IC0 addition and finite/neutral normalization are bytecode-bound.",
+    "The actual Miller walk has64 iterations and the checked signed NAF masks. Group and sparse-line helper outputs are bound at their true slots. Endpoint nonzero excludes absorbing exceptional walks; the exact psi relation and pinned domain/order theorem force strict-r B.",
+    "The four actual Miller operands are(-A,B),(alpha,beta),(vk_x,gamma),(C,delta), with a literal Fp12 unit for neutral vk_x. Three actual products and the negative-seed conjugation are bound.",
+    "Finite G1 y-coordinates are nonzero under the odd full G1 order. Regular G2 line coefficients have nonzero c2, so the independent014 basis gives nonzero line values and a nonzero complete pairing product.",
+    "Independent tower character calculations establish the standard Fp2/Fp6/Fp12 irreducibility, conditional on the standard prime p. The actual inlined quadratic/cubic norm and adjugate operations therefore give a valid inverse of the nonzero pairing product.",
+    "Actual easy-part operands produce W=f^((p^6-1)(p^2+1)). Since p^12-1=easy*Phi12, W and every downstream hard-chain operand lie in the required cyclotomic subgroup.",
+    "The compiled cyclotomic square is independently certified by exact linear combinations of18 norm/Frobenius polynomial constraints. The signed-x power loop and all actual hard-chain tuples, including inline Frobenius1/3 constants, are bound.",
+    "The exact resulting exponent is3*(p^12-1)/r. The actual12 terminal comparisons require the unit. Since gcd(3,r)=1, this has exactly the standard final-exponent unit kernel."
+  ],
+  "premises": [
+    "Pinned VM integer/byte/function semantics and the exact compiled artifact.",
+    "Standard BLS prime, curve/group order, elliptic-curve law, optimal-Ate correspondence and finite-field facts.",
+    "The finite/cofactor-quotient proof-point ABI stated above. Arithmetic execution must be admissible; no universal native resource bound is asserted."
+  ],
+  "validation": {
+    "existingPositiveProofs": 5,
+    "arithmeticVmAccepted": 5,
+    "neutralComputedVkxCases": 1,
+    "newProofOrPublicInputCases": 0,
+    "auxiliaryReencoding": "One positive from original source PR7/benchmark PR14; its mathematical proof/public tuple is unchanged.",
+    "nativeAdmission": "HOLD:14246-byte raw direct locking exceeds10000-byte admission; standard verify also rejects the output type."
+  },
+  "calleeBodies": [
+    {
+      "id": 0,
+      "bodySha256": "15892c5fabc31ae79211399564470b33cead1e882f08b089e940a43344cdf12a",
+      "arity": {
+        "inputs": 2,
+        "outputs": 0,
+        "alt": 0
+      },
+      "localCertificateSha256": "79412ee19a47f557ce9ededbf5bf6ad921e3d0b1af797190946f68bb4c715a2f",
+      "checkerSha256": "7489fa99ee42b9513e4482823bab1aa4033f90ec49b8aa5b9ec27dfaf66667d4"
+    },
+    {
+      "id": 1,
+      "bodySha256": "bbf7ab9196f45d282113df4455e0602b016c18aa2ad7fb8eb1c2fb7f29579bac",
+      "arity": {
+        "inputs": 1,
+        "outputs": 1,
+        "alt": 0
+      },
+      "localCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a",
+      "checkerSha256": "09fa19312032d4da905c28fbabfaa14b583047977a6886fe42450ef47e15d260"
+    },
+    {
+      "id": 2,
+      "bodySha256": "43f7ec965c22dcdcb8bd06239876ff5a4a1f3eb22bbd5e8306fd8e5d6f9b87e1",
+      "arity": {
+        "inputs": 2,
+        "outputs": 1,
+        "alt": 0
+      },
+      "localCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a",
+      "checkerSha256": "09fa19312032d4da905c28fbabfaa14b583047977a6886fe42450ef47e15d260"
+    },
+    {
+      "id": 3,
+      "bodySha256": "1bbf6d103ddeb1cef605e69eafd20231d1c1b9cbc0c208b4a66a3308352244cf",
+      "arity": {
+        "inputs": 2,
+        "outputs": 1,
+        "alt": 0
+      },
+      "localCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a",
+      "checkerSha256": "09fa19312032d4da905c28fbabfaa14b583047977a6886fe42450ef47e15d260"
+    },
+    {
+      "id": 4,
+      "bodySha256": "e17433ce4b976c05385ab5e5f8ca6bc44c0fe90545e30d8d96f2aff77766a055",
+      "arity": {
+        "inputs": 2,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "b3bbdb0dc1f7c0462df5ceaded2be969984cda195eac6e0ce579362962410590",
+      "checkerSha256": "5e8b745359e914726f4431c4b53aa19d522bc7076f39c09c45204b8fab60188c"
+    },
+    {
+      "id": 5,
+      "bodySha256": "c83029276fb4adb317126b0bf4b287a8342de83127d08175d77a6389e5631ea4",
+      "arity": {
+        "inputs": 2,
+        "outputs": 1,
+        "alt": 0
+      },
+      "localCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a",
+      "checkerSha256": "09fa19312032d4da905c28fbabfaa14b583047977a6886fe42450ef47e15d260"
+    },
+    {
+      "id": 6,
+      "bodySha256": "0f3b5aa70ff21d9ddbce246144c7716899a353d33a0ede4db2539aeb28d415d8",
+      "arity": {
+        "inputs": 4,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "b3bbdb0dc1f7c0462df5ceaded2be969984cda195eac6e0ce579362962410590",
+      "checkerSha256": "5e8b745359e914726f4431c4b53aa19d522bc7076f39c09c45204b8fab60188c"
+    },
+    {
+      "id": 8,
+      "bodySha256": "9a2120d9b0a76c41b1a7f803f01f5887176db3622b3fe3e14df266d89c4069a9",
+      "arity": {
+        "inputs": 3,
+        "outputs": 3,
+        "alt": 0
+      },
+      "localCertificateSha256": "4634a0b6da2ef86f906aa466e88346f30bd1add5f0b79c039e980d308740da06",
+      "checkerSha256": "2991a6666c135a453b9010c09af26dd7ee40a0e7147edb115f3d714c717c107e"
+    },
+    {
+      "id": 9,
+      "bodySha256": "8ae66a95b84c4fbe4ff34571a44d606ea2e4ee220d1116b9d79e77e3aa86ffb1",
+      "arity": {
+        "inputs": 2,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "7a6312601106e62cbf0a45020a1f7eb038f5a4092d8aa6dc807db67a11305953",
+      "checkerSha256": "ebeb55d88220e793da38920928dc16825ca3e3123ca694655ed9359144425ec1"
+    },
+    {
+      "id": 10,
+      "bodySha256": "b8690cba8079f8d953084615a5c0cf96687f554c84230098e2002bb458f80e58",
+      "arity": {
+        "inputs": 5,
+        "outputs": 3,
+        "alt": 0
+      },
+      "localCertificateSha256": "4634a0b6da2ef86f906aa466e88346f30bd1add5f0b79c039e980d308740da06",
+      "checkerSha256": "2991a6666c135a453b9010c09af26dd7ee40a0e7147edb115f3d714c717c107e"
+    },
+    {
+      "id": 11,
+      "bodySha256": "ab872e9175ba74fb88f772fb5ae0b523ab71ac512aafec4e527037eb730e98cb",
+      "arity": {
+        "inputs": 1,
+        "outputs": 1,
+        "alt": 0
+      },
+      "localCertificateSha256": "7a6312601106e62cbf0a45020a1f7eb038f5a4092d8aa6dc807db67a11305953",
+      "checkerSha256": "ebeb55d88220e793da38920928dc16825ca3e3123ca694655ed9359144425ec1"
+    },
+    {
+      "id": 12,
+      "bodySha256": "324d2e0f14913eed9a9e15b474e9545ad096add868426f60e003ffff75fb1042",
+      "arity": {
+        "inputs": 1,
+        "outputs": 1,
+        "alt": 0
+      },
+      "localCertificateSha256": "79a4eec848a2bb06b3c3401c75f625ad6dc258383f71bef09323e07bb5025c2a",
+      "checkerSha256": "09fa19312032d4da905c28fbabfaa14b583047977a6886fe42450ef47e15d260"
+    },
+    {
+      "id": 13,
+      "bodySha256": "d80f73fd3a3f0cfdbbedeb5810fe41037f2936f5175af8ed45faaf07077b13d8",
+      "arity": {
+        "inputs": 6,
+        "outputs": 18,
+        "alt": 0
+      },
+      "localCertificateSha256": "f165aa09c0d293e9a79e5c73bea623013b73883b551a99553a01de84a718cc86",
+      "checkerSha256": "565791930423772258f5ea37884fe77e46e8646069dc37a4f6058fdbf6043b85"
+    },
+    {
+      "id": 14,
+      "bodySha256": "539203ee3ec681bb3d38f8b6d30ffecce6ebebb261b5b078c9693decd14f87af",
+      "arity": {
+        "inputs": 12,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "212164762e577ce4ac9e4426c0b17e0156dedf40dcdb4e7d5d3085ac665e4073",
+      "checkerSha256": "48efab75d9aa19a9663b881695e28f866296ee55adf54be27b40771460e740e2"
+    },
+    {
+      "id": 15,
+      "bodySha256": "5f586d5bccb09b35eb1cdf0581569848bf988c794cfe2fbd7af43c7b8e264118",
+      "arity": {
+        "inputs": 24,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "212164762e577ce4ac9e4426c0b17e0156dedf40dcdb4e7d5d3085ac665e4073",
+      "checkerSha256": "48efab75d9aa19a9663b881695e28f866296ee55adf54be27b40771460e740e2"
+    },
+    {
+      "id": 16,
+      "bodySha256": "7ee03010757c4993b373359eb2fd7c3861ee9849cc7531c8205dff48548fcd1e",
+      "arity": {
+        "inputs": 12,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "212164762e577ce4ac9e4426c0b17e0156dedf40dcdb4e7d5d3085ac665e4073",
+      "checkerSha256": "48efab75d9aa19a9663b881695e28f866296ee55adf54be27b40771460e740e2"
+    },
+    {
+      "id": 17,
+      "bodySha256": "0974f4f573ae5dae75a581024b4a160e1436606c928ec00172638ec37c715306",
+      "arity": {
+        "inputs": 4,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 18,
+      "bodySha256": "d855206973bd307d2634f804f4bda831cd9f10d706907b2404fe8faebb6223bb",
+      "arity": {
+        "inputs": 4,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 19,
+      "bodySha256": "1198eb1839575070a443e6866eebca3f6bdc3bdac6fa243b92aafffd02d92627",
+      "arity": {
+        "inputs": 2,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 20,
+      "bodySha256": "eaa6ba4de669f8c52030aa76824638009615f45f79c6885a3d433dfe3f06cb33",
+      "arity": {
+        "inputs": 6,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 21,
+      "bodySha256": "57a32d111e8be3c5b373ffb36fd71ffa6771c8999e21b7709404889d9538f773",
+      "arity": {
+        "inputs": 12,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 22,
+      "bodySha256": "8f2088041ad71796d7b5a787c84d28c7f02232fb0458f7e4072ffbfb8636a5b7",
+      "arity": {
+        "inputs": 12,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 23,
+      "bodySha256": "636715b90bb7172795dbf91af3c0128bc595fd77025f67553357f960c7552ded",
+      "arity": {
+        "inputs": 6,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "ae70b11fa55eb1fefb06f0aae44f0f0f5dfb5ef6cb07db64bc879baf83324395",
+      "checkerSha256": "e55d2366d27e987b0057fc892fdf0f3937e50d12d66d32f29e18b96470b4a882"
+    },
+    {
+      "id": 24,
+      "bodySha256": "0e3b8b42d66a163d7ffaec8aa8f1f99afa4e80afaeaf78c2bb57d8f2325b82d7",
+      "arity": {
+        "inputs": 3,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 25,
+      "bodySha256": "5740c234572f7c9f993a47ff22466649b110364ac7897326f082d3526a33a9c4",
+      "arity": {
+        "inputs": 2,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 26,
+      "bodySha256": "88f3aa27d46fc128d5548fef8963051df317f6d58155bb313666764a201a7210",
+      "arity": {
+        "inputs": 2,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 27,
+      "bodySha256": "9ea503fe73122001d70e72f8dfd3742ff3231d513b35cc6f81f7f595aa859c21",
+      "arity": {
+        "inputs": 2,
+        "outputs": 2,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 28,
+      "bodySha256": "9f420f8a0a02dedb1b8956d3f2f75483aef66a28d6a0ceacbf30e1ffee1f7e6e",
+      "arity": {
+        "inputs": 20,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "de5bde521c322716f57a42c8801039e8ba833a2c988e024966ea8803e236697b",
+      "checkerSha256": "e00801b86ac2a4b3a4ccf24ef0e99bfdd53bb030e655e7df983ac51cf829d5c1"
+    },
+    {
+      "id": 29,
+      "bodySha256": "3a6545d8f2dcc57a50aa2d1ae401b8de3a863fce3c9610fcd5a3193423488594",
+      "arity": {
+        "inputs": 18,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "de5bde521c322716f57a42c8801039e8ba833a2c988e024966ea8803e236697b",
+      "checkerSha256": "e00801b86ac2a4b3a4ccf24ef0e99bfdd53bb030e655e7df983ac51cf829d5c1"
+    },
+    {
+      "id": 30,
+      "bodySha256": "f7c62323e6081bc9e553ad0a8f63b053ece77612b299a52cabc8bd97e8ce002e",
+      "arity": {
+        "inputs": 10,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "de5bde521c322716f57a42c8801039e8ba833a2c988e024966ea8803e236697b",
+      "checkerSha256": "e00801b86ac2a4b3a4ccf24ef0e99bfdd53bb030e655e7df983ac51cf829d5c1"
+    },
+    {
+      "id": 31,
+      "bodySha256": "c10f2fd09a8c542dfadd6ef857f1029a0ca89415f67a31a1722a9ba8ea1701e6",
+      "arity": {
+        "inputs": 8,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "de5bde521c322716f57a42c8801039e8ba833a2c988e024966ea8803e236697b",
+      "checkerSha256": "e00801b86ac2a4b3a4ccf24ef0e99bfdd53bb030e655e7df983ac51cf829d5c1"
+    },
+    {
+      "id": 32,
+      "bodySha256": "55aa09c3e281f11cfb007e48ea913fca5c78ea4537fa88bb0b3bf01a431aca51",
+      "arity": {
+        "inputs": 10,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "ae70b11fa55eb1fefb06f0aae44f0f0f5dfb5ef6cb07db64bc879baf83324395",
+      "checkerSha256": "e55d2366d27e987b0057fc892fdf0f3937e50d12d66d32f29e18b96470b4a882"
+    },
+    {
+      "id": 35,
+      "bodySha256": "4d48375c40877af707bf3281f9f4ddda44f3ac4f62294fbbf6e3094df3aeb6ab",
+      "arity": {
+        "inputs": 12,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 36,
+      "bodySha256": "2cc736bb8c160205c9ed37c04aa6331e089222d21f71dd1f6d5e298d7a610bf3",
+      "arity": {
+        "inputs": 6,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "fd7992a904be988dcd591f96b2dff7e68d825894794e7c9b2836d0e727b6d97d",
+      "checkerSha256": "72476238d16394c66dfe204c0919d108696e750b37c0c27b3e36b5ff7692d883"
+    },
+    {
+      "id": 39,
+      "bodySha256": "505cde5f8ff34c5ab6ed1475b04b6a909ff8792d7441cbddbd2f07495226a391",
+      "arity": {
+        "inputs": 6,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "212164762e577ce4ac9e4426c0b17e0156dedf40dcdb4e7d5d3085ac665e4073",
+      "checkerSha256": "48efab75d9aa19a9663b881695e28f866296ee55adf54be27b40771460e740e2"
+    },
+    {
+      "id": 42,
+      "bodySha256": "e38dd090942c47c182dd405e3a09f415f4b1da02e4647c185690f1b3c72e9bd8",
+      "arity": {
+        "inputs": 12,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "6a6d224d6abc7720dcd3e99db9cc266119a1fa7130e692433a16529196e4e2be",
+      "checkerSha256": "e2f6d2d5307bc8bb89abb65200df8fdc8146dc503a487c4372398d9eeb9b20ec"
+    },
+    {
+      "id": 43,
+      "bodySha256": "e93765844a40d0edbf05cc2c51041de0296eb63b91d0bcd9a2223a2edb909ea6",
+      "arity": {
+        "inputs": 10,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "6a6d224d6abc7720dcd3e99db9cc266119a1fa7130e692433a16529196e4e2be",
+      "checkerSha256": "e2f6d2d5307bc8bb89abb65200df8fdc8146dc503a487c4372398d9eeb9b20ec"
+    },
+    {
+      "id": 44,
+      "bodySha256": "abc410579e58fb6ae8f54cd830c9664df77b9d7b7369230b20dab5d6840d0626",
+      "arity": {
+        "inputs": 8,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "6a6d224d6abc7720dcd3e99db9cc266119a1fa7130e692433a16529196e4e2be",
+      "checkerSha256": "e2f6d2d5307bc8bb89abb65200df8fdc8146dc503a487c4372398d9eeb9b20ec"
+    },
+    {
+      "id": 45,
+      "bodySha256": "229f76a8d79a3f1a0088b0ca676e632e901d3aa49fd637761deeb0a43c5a0f14",
+      "arity": {
+        "inputs": 12,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "6531355e72ab7202008743b8842abce3547217f773a085fc86a8c9cc3003b134",
+      "checkerSha256": "473105594a3954b24929174a61c0d12036cbf8a00b2b95ad7b6360d121ca5642"
+    },
+    {
+      "id": 47,
+      "bodySha256": "27021150621cf86bff979184d6b6a01addd7c875453593346b9cd91fc8c11042",
+      "arity": {
+        "inputs": 12,
+        "outputs": 12,
+        "alt": 0
+      },
+      "localCertificateSha256": "1263b6c09429f2ebfd867b5c39bdc35b5ee1f409eeef1b0c8a2db46f7aa56f2e",
+      "checkerSha256": "4f495ef2d1b5bae10cd1d8d3257bf91549dd2e8f94367c753bba077fd386a818"
+    },
+    {
+      "id": 48,
+      "bodySha256": "4b1a22c1790b69c50554aee6a188bc761bc03979c1bb9ac04572f8637b7c7659",
+      "arity": {
+        "inputs": 4,
+        "outputs": 4,
+        "alt": 0
+      },
+      "localCertificateSha256": "bdedabcc1a24074c4ec1134b7bb7aadc6b2fb3421f4c85492fadb0708ff821d8",
+      "checkerSha256": "a2d35fb4b34ae5b12233b7489690bb376fdb30037966cb36294d9c6556fab034"
+    },
+    {
+      "id": 50,
+      "bodySha256": "bee731ca62e93a0d825aa8cf4b32e35223057004e4e9d5db5a4a5e12f54e7d73",
+      "arity": {
+        "inputs": 10,
+        "outputs": 6,
+        "alt": 0
+      },
+      "localCertificateSha256": "6a6d224d6abc7720dcd3e99db9cc266119a1fa7130e692433a16529196e4e2be",
+      "checkerSha256": "e2f6d2d5307bc8bb89abb65200df8fdc8146dc503a487c4372398d9eeb9b20ec"
+    }
+  ],
+  "reviewEvidenceSha256": {
+    "parent/whole-bls-composition-peer-v2.json": "b457588f2a3cb84360638814684fd5faecc177bec0d7b29662327f4801570337",
+    "parent/bls-final-composition-v1.json": "015de926bfce98394c974e52ee9953ffa3b664ccc43343018a18b2fae33a4195",
+    "parent/bls-hard-chain-v1.json": "dcf28dc29d11c90d088c49bd94c2e41a57dc4d4463cbf4da9b4f7455037147b0",
+    "parent/bls-entry-domain-v1.json": "8dcb6f2d6def6a138c672f6468e7227fc89d05b6b337bde76c974718dffbc7d5",
+    "parent/bls-namespace-v1.json": "c72397884d1f309df4e26624841bcc694b9459c69f9915d6797f73c72c2cb583",
+    "parent/bls-tower-field-v1.json": "76828f454a7dd3938f558d78229c1ab8ba778566d1c2d51113885f83db08cf3a",
+    "parent/g2-affine-geometry-v1.json": "7f97198bcb7163a7616244e6fa3186c05115588f98642d96750f9144c9f1e6e4",
+    "bls-domain/finalexp-main-stack-proof-v3.json": "88393a4f42e21c2ec12a4e24fb0b24a5d88cdd1e3f37635e3449ba3434e571cf",
+    "bls-domain/pairing-finite-domain-bridge-v1/pairing-finite-domain-bridge-v1.json": "9be2e553767c859cc82d7ec0df67ac9f5bd6d42fc2ef939b1e613d96fd583687"
+  },
+  "remainingHolds": [
+    "Current BCH/native/standard admission and whole-transaction/relay validity.",
+    "External infinity encodings, arbitrary-key/circuit support and trusted setup/knowledge soundness.",
+    "Original historical withdrawals and scores remain unchanged."
+  ],
+  "scope": "Mathematical arithmetic review only. Static symbolic certificates and existing positive fixtures; no new proofs, negative cases, cybersecurity testing, byte optimization, merge or deployment."
+}

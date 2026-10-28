@@ -1,0 +1,16 @@
+{
+  "schema": "bls-pr5-minop-domain-range-summary/v1",
+  "status": "RANGES_ENFORCED_ZINV_CANONICALITY_NOT_REQUIRED_FOR_EQUATION",
+  "sourceSha256": "00641ad5178d450277a0738b999e43cc6fc87598e27cf547ed25a35871c883ae",
+  "guards": {
+    "proofCoordinates": "groth16_minop.cash:16-23 within(...,0,fieldP)",
+    "glvComponents": "groth16_minop.cash:32 within(...,0,2^128)",
+    "publicInputs": "groth16_minop.cash:33-34 exact bounded decomposition congruence",
+    "residueCAndW": "Bls12381LazyG.cash:168-170 within(...,0,P)"
+  },
+  "zInv": {
+    "guard": "No separate canonical range guard",
+    "disposition": "Not a confirmed equation-soundness gap; modular inverse representatives reduce to the same affine point. No extra ABI guard is included."
+  },
+  "qualification": "The range guards support the conditional finite-domain theorem only; they do not overcome the native bytecode/resource hold or prove unrestricted producer completeness."
+}

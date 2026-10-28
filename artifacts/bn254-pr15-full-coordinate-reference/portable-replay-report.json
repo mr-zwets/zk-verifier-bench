@@ -1,0 +1,178 @@
+{
+  "schema": "source15-benchmark32-full-coordinate-positive-replay/v1",
+  "status": "PASS_FOUR_UNCHANGED_POSITIVES_ARITHMETIC_ORACLE_NATIVE_HOLD",
+  "historicalAttribution": {
+    "sourcePr": "15",
+    "benchmarkPr": "32",
+    "sourceHead": "1e7c52ab3b6af132c3f3f87effd38821828c874d",
+    "benchmarkHead": "aede1967237b3d7e28f9ca74ab52232e7e6d5421",
+    "fixtureSelection": "primary plus the three uncommitted multiproof positives from the archived PR32 fixture set"
+  },
+  "artifact": {
+    "path": "verifier-4681.hex",
+    "bytes": 4681,
+    "sha256": "dc2b929c5645d3baaac4fb544ba7565bf54c34156532a715053432d4f9913782"
+  },
+  "vm": {
+    "implementation": "@bitauth/libauth direct BCH2026 VM constructors resolved through benchmark-repo/package.json",
+    "packageVersion": "3.1.0-next.8",
+    "packageSha256": "6b4e3b7f062b80782c62cb7732ed01571c5f163fd786af877c0ae5fdc33ec65e",
+    "entrySha256": "c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d"
+  },
+  "results": [
+    {
+      "fixture": "primary",
+      "mode": "officialArithmeticOracle",
+      "witnessSha256": "3b7f238bff6e58a0c3d579e43c0412eb44217a80339ee94f936fcd77bbc1eeaf",
+      "witnessBytes": 272,
+      "contextSha256": "0a6fb53ddb038b5c01d0f1344f7bf417ea4793582eb6ac906ec828af40df9e61",
+      "accepted": true,
+      "error": null,
+      "operationCost": 5505621356,
+      "instructionCount": 21767279
+    },
+    {
+      "fixture": "primary",
+      "mode": "declaredBch2026Consensus",
+      "witnessSha256": "3b7f238bff6e58a0c3d579e43c0412eb44217a80339ee94f936fcd77bbc1eeaf",
+      "witnessBytes": 272,
+      "contextSha256": "0a6fb53ddb038b5c01d0f1344f7bf417ea4793582eb6ac906ec828af40df9e61",
+      "accepted": false,
+      "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250482.",
+      "operationCost": 250482,
+      "instructionCount": 1527
+    },
+    {
+      "fixture": "primary",
+      "mode": "declaredBch2026Standard",
+      "witnessSha256": "3b7f238bff6e58a0c3d579e43c0412eb44217a80339ee94f936fcd77bbc1eeaf",
+      "witnessBytes": 272,
+      "contextSha256": "0a6fb53ddb038b5c01d0f1344f7bf417ea4793582eb6ac906ec828af40df9e61",
+      "accepted": false,
+      "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250482.",
+      "operationCost": 250482,
+      "instructionCount": 1527
+    },
+    {
+      "fixture": "extra-0",
+      "mode": "officialArithmeticOracle",
+      "witnessSha256": "608c4ee04433f08f83a6506eafee5bb6db3f82a9383409ab91534eab5d74bc14",
+      "witnessBytes": 272,
+      "contextSha256": "562d362908c3ec1a392245fa1d815c6fc3450af02ad02882d2b7c6eadd85690e",
+      "accepted": true,
+      "error": null,
+      "operationCost": 5505443619,
+      "instructionCount": 21766283
+    },
+    {
+      "fixture": "extra-0",
+      "mode": "declaredBch2026Consensus",
+      "witnessSha256": "608c4ee04433f08f83a6506eafee5bb6db3f82a9383409ab91534eab5d74bc14",
+      "witnessBytes": 272,
+      "contextSha256": "562d362908c3ec1a392245fa1d815c6fc3450af02ad02882d2b7c6eadd85690e",
+      "accepted": false,
+      "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250415.",
+      "operationCost": 250415,
+      "instructionCount": 1525
+    },
+    {
+      "fixture": "extra-0",
+      "mode": "declaredBch2026Standard",
+      "witnessSha256": "608c4ee04433f08f83a6506eafee5bb6db3f82a9383409ab91534eab5d74bc14",
+      "witnessBytes": 272,
+      "contextSha256": "562d362908c3ec1a392245fa1d815c6fc3450af02ad02882d2b7c6eadd85690e",
+      "accepted": false,
+      "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250415.",
+      "operationCost": 250415,
+      "instructionCount": 1525
+    },
+    {
+      "fixture": "extra-1",
+      "mode": "officialArithmeticOracle",
+      "witnessSha256": "057618507600224ab6a682902ee98f22e921dfb3a3ee029b6605ef665fdaecb2",
+      "witnessBytes": 272,
+      "contextSha256": "f415e0b95eefb05f629977c374089000c956a6d67bf44640c99c06404728ffee",
+      "accepted": true,
+      "error": null,
+      "operationCost": 5506001655,
+      "instructionCount": 21769271
+    },
+    {
+      "fixture": "extra-1",
+      "mode": "declaredBch2026Consensus",
+      "witnessSha256": "057618507600224ab6a682902ee98f22e921dfb3a3ee029b6605ef665fdaecb2",
+      "witnessBytes": 272,
+      "contextSha256": "f415e0b95eefb05f629977c374089000c956a6d67bf44640c99c06404728ffee",
+      "accepted": false,
+      "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250412.",
+      "operationCost": 250412,
+      "instructionCount": 1528
+    },
+    {
+      "fixture": "extra-1",
+      "mode": "declaredBch2026Standard",
+      "witnessSha256": "057618507600224ab6a682902ee98f22e921dfb3a3ee029b6605ef665fdaecb2",
+      "witnessBytes": 272,
+      "contextSha256": "f415e0b95eefb05f629977c374089000c956a6d67bf44640c99c06404728ffee",
+      "accepted": false,
+      "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250412.",
+      "operationCost": 250412,
+      "instructionCount": 1528
+    },
+    {
+      "fixture": "extra-2",
+      "mode": "officialArithmeticOracle",
+      "witnessSha256": "9ccbf6bbb3ed145ba9efd0fb98c5a48067d451b260da91c52ac06fd4737003c0",
+      "witnessBytes": 272,
+      "contextSha256": "f67894eae99a5069730c8c2ead9fdf20609f785a2c8ca758498fd664adf7891d",
+      "accepted": true,
+      "error": null,
+      "operationCost": 5505776730,
+      "instructionCount": 21767777
+    },
+    {
+      "fixture": "extra-2",
+      "mode": "declaredBch2026Consensus",
+      "witnessSha256": "9ccbf6bbb3ed145ba9efd0fb98c5a48067d451b260da91c52ac06fd4737003c0",
+      "witnessBytes": 272,
+      "contextSha256": "f67894eae99a5069730c8c2ead9fdf20609f785a2c8ca758498fd664adf7891d",
+      "accepted": false,
+      "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250419.",
+      "operationCost": 250419,
+      "instructionCount": 1524
+    },
+    {
+      "fixture": "extra-2",
+      "mode": "declaredBch2026Standard",
+      "witnessSha256": "9ccbf6bbb3ed145ba9efd0fb98c5a48067d451b260da91c52ac06fd4737003c0",
+      "witnessBytes": 272,
+      "contextSha256": "f67894eae99a5069730c8c2ead9fdf20609f785a2c8ca758498fd664adf7891d",
+      "accepted": false,
+      "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250419.",
+      "operationCost": 250419,
+      "instructionCount": 1524
+    }
+  ],
+  "summary": {
+    "fixtureCount": 4,
+    "arithmeticOracle": {
+      "accepted": 4,
+      "total": 4
+    },
+    "declaredBch2026Consensus": {
+      "accepted": 0,
+      "total": 4
+    },
+    "declaredBch2026Standard": {
+      "accepted": 0,
+      "total": 4
+    }
+  },
+  "restrictions": [
+    "existing positive unlockings only",
+    "no invalid or negative cases",
+    "no proof generation, mutation, auxiliary reencoding, or optimization",
+    "arithmetic oracle acceptance is mathematical execution evidence only",
+    "native BCH2026 resource admission remains HOLD"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "historical-frame-reference-qualification/v1",
+  "sourceRepository": "mr-zwets/groth16_cashscript",
+  "sourceRevision": "0645a3726eabc2ab85bb35ae0a944d3fd32b54e5",
+  "sourceHelper": "chunked/intratx/repair_historical_frames.mjs",
+  "sourceHelperSha256": "443c06d70c9c7d9677a81368bdd632eb3fb53a1fa9c094dc37a9dbd261883a3c",
+  "sourceManifest": "chunked/intratx/historical-frame-repairs.json",
+  "sourceManifestSha256": "5193b245337b0758120164142f956327ff25a4673e2147899dbdbf12ac9fbdb2",
+  "originalPositivePacketSha256": "45cdf5dd47d7b07aea07a635eb606ebc58f1d301007bedac568d37e2bbd8e066",
+  "correctedPositivePacketSha256": "f88d2274794b0e38c5254187c04d97033080b7fa84fafbccd982f99e5b4f19b1",
+  "profiles": 7,
+  "existingGraphs": 21,
+  "mathematicalProofAndPublicWitnessPrefixes": "Byte-identical to the original archived positive scripts; no auxiliary reencoding or padding changes.",
+  "codeDelta": "Only the recorded mandatory frame guards and derived P2SH transport change. BNlarge4 includes the input2 length<65536 header predicate and exact terminal3 length; BN13 needs one exact carrier predicate. All selected programs match the existing compiled finite-equation theorem identities.",
+  "qualification": "The source manifest owns exact profile/program identities, accepted finite domains and full ordered-graph/ancestry/VM/field/hash premises. Positive execution alone is not a universal proof or a whole-transaction admission certificate.",
+  "nativeAdmission": "Per-input results recorded by replay.mjs. Whole-transaction size, fee, relay and mainnet admission are not established.",
+  "scope": "Mathematical correctness only; existing positive cases. No proof generation, negative-case execution, cybersecurity testing, compiler/prover/planner invocation, or byte/resource optimization.",
+  "reproduce": "node artifacts/historical-frame-repairs/replay.mjs source-checkout new-report.json",
+  "validation": {
+    "existingGraphs": 21,
+    "perInputEvaluations": 1395,
+    "arithmeticOracle": {
+      "accepted": 465,
+      "total": 465
+    },
+    "bch2026Consensus": {
+      "accepted": 453,
+      "total": 453
+    },
+    "bch2026Standard": {
+      "accepted": 451,
+      "total": 453
+    },
+    "proposedSpecConsensus": {
+      "accepted": 12,
+      "total": 12
+    },
+    "proposedSpecStandard": {
+      "accepted": 12,
+      "total": 12
+    },
+    "resourceHolds": "BN13 input1 reaches the standard-mode operation-cost density limit in extra-0 and worst-case; all arithmetic-oracle and declared-consensus inputs accept. Halt costs do not measure complete execution costs."
+  }
+}

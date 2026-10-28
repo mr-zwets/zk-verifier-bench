@@ -1,0 +1,12 @@
+{
+  "schema": "bls-pr5-minop45-fixed-rebuild/v1",
+  "bytes": 64396,
+  "sha256": "42ca73a63775c062898e97ecde2b9a3d57b5f292d11677341a9fe5d6063ae0d3",
+  "sourceSha256": "00641ad5178d450277a0738b999e43cc6fc87598e27cf547ed25a35871c883ae",
+  "options": {
+    "rescheduleStacks": true
+  },
+  "compilerVariants": 0,
+  "newProofs": 0,
+  "byteOptimization": false
+}

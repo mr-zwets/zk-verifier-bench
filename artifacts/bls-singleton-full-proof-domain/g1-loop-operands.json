@@ -1,0 +1,305 @@
+{
+  "schema": "bls-strict-g1-symbolic-loop-operands/v1",
+  "status": "PASS_ACTUAL_GUARDS_CALL_OPERANDS_ACCUMULATOR_BACKEDGE_AND_EXIT",
+  "artifactSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+  "checkerSha256": "49367d6d3431c4c433c452db85bef6cd4c8c7dfadeed6710f3e259186cacbda7",
+  "prefix": {
+    "stack": [
+      "caller",
+      "y",
+      "x",
+      "0",
+      "1",
+      "0",
+      "52435875175126190479447740508185965837690552500527637822603658699938581184513",
+      "0"
+    ],
+    "calls": [
+      {
+        "instruction": 12,
+        "id": 1,
+        "args": [
+          "y"
+        ],
+        "outputs": [
+          "sqr(y)"
+        ]
+      },
+      {
+        "instruction": 19,
+        "id": 1,
+        "args": [
+          "x"
+        ],
+        "outputs": [
+          "sqr(x)"
+        ]
+      },
+      {
+        "instruction": 21,
+        "id": 2,
+        "args": [
+          "sqr(x)",
+          "x"
+        ],
+        "outputs": [
+          "mul(sqr(x),x)"
+        ]
+      },
+      {
+        "instruction": 23,
+        "id": 3,
+        "args": [
+          "mul(sqr(x),x)",
+          "4"
+        ],
+        "outputs": [
+          "add(mul(sqr(x),x),4)"
+        ]
+      }
+    ],
+    "guards": [
+      "within(x,0,4002409555221667393417789825735904156556882819939007885332058136124031650490837864442687629129015664037894272559787)",
+      "within(y,0,4002409555221667393417789825735904156556882819939007885332058136124031650490837864442687629129015664037894272559787)",
+      "eq(sqr(y),add(mul(sqr(x),x),4))"
+    ],
+    "branches": [],
+    "until": []
+  },
+  "paths": [
+    {
+      "finite": false,
+      "bit": false,
+      "stack": [
+        "caller",
+        "y",
+        "x",
+        "Rx",
+        "Ry",
+        "0",
+        "52435875175126190479447740508185965837690552500527637822603658699938581184513",
+        "add(k,1)"
+      ],
+      "calls": [],
+      "guards": [],
+      "branches": [
+        {
+          "instruction": 36,
+          "predicate": "lt(k,255)",
+          "take": true
+        },
+        {
+          "instruction": 44,
+          "predicate": "neq(0,0)",
+          "take": false
+        },
+        {
+          "instruction": 110,
+          "predicate": "eq(mod(shr(52435875175126190479447740508185965837690552500527637822603658699938581184513,sub(254,k)),2),1)",
+          "take": false
+        }
+      ],
+      "until": [
+        "not(lt(k,255))"
+      ]
+    },
+    {
+      "finite": false,
+      "bit": true,
+      "stack": [
+        "caller",
+        "y",
+        "x",
+        "add.x(Rx,Ry,0,x,y)",
+        "add.y(Rx,Ry,0,x,y)",
+        "add.z(Rx,Ry,0,x,y)",
+        "52435875175126190479447740508185965837690552500527637822603658699938581184513",
+        "add(k,1)"
+      ],
+      "calls": [
+        {
+          "instruction": 122,
+          "id": 7,
+          "args": [
+            "Rx",
+            "Ry",
+            "0",
+            "x",
+            "y"
+          ],
+          "outputs": [
+            "add.x(Rx,Ry,0,x,y)",
+            "add.y(Rx,Ry,0,x,y)",
+            "add.z(Rx,Ry,0,x,y)"
+          ]
+        }
+      ],
+      "guards": [],
+      "branches": [
+        {
+          "instruction": 36,
+          "predicate": "lt(k,255)",
+          "take": true
+        },
+        {
+          "instruction": 44,
+          "predicate": "neq(0,0)",
+          "take": false
+        },
+        {
+          "instruction": 110,
+          "predicate": "eq(mod(shr(52435875175126190479447740508185965837690552500527637822603658699938581184513,sub(254,k)),2),1)",
+          "take": true
+        }
+      ],
+      "until": [
+        "not(lt(k,255))"
+      ]
+    },
+    {
+      "finite": true,
+      "bit": false,
+      "stack": [
+        "caller",
+        "y",
+        "x",
+        "double.x(Rx,Ry,Rz)",
+        "double.y(Rx,Ry,Rz)",
+        "double.z(Rx,Ry,Rz)",
+        "52435875175126190479447740508185965837690552500527637822603658699938581184513",
+        "add(k,1)"
+      ],
+      "calls": [
+        {
+          "instruction": 52,
+          "id": 5,
+          "args": [
+            "Rx",
+            "Ry",
+            "Rz"
+          ],
+          "outputs": [
+            "double.x(Rx,Ry,Rz)",
+            "double.y(Rx,Ry,Rz)",
+            "double.z(Rx,Ry,Rz)"
+          ]
+        }
+      ],
+      "guards": [],
+      "branches": [
+        {
+          "instruction": 36,
+          "predicate": "lt(k,255)",
+          "take": true
+        },
+        {
+          "instruction": 44,
+          "predicate": "neq(Rz,0)",
+          "take": true
+        },
+        {
+          "instruction": 110,
+          "predicate": "eq(mod(shr(52435875175126190479447740508185965837690552500527637822603658699938581184513,sub(254,k)),2),1)",
+          "take": false
+        }
+      ],
+      "until": [
+        "not(lt(k,255))"
+      ]
+    },
+    {
+      "finite": true,
+      "bit": true,
+      "stack": [
+        "caller",
+        "y",
+        "x",
+        "add.x(double.x(Rx,Ry,Rz),double.y(Rx,Ry,Rz),double.z(Rx,Ry,Rz),x,y)",
+        "add.y(double.x(Rx,Ry,Rz),double.y(Rx,Ry,Rz),double.z(Rx,Ry,Rz),x,y)",
+        "add.z(double.x(Rx,Ry,Rz),double.y(Rx,Ry,Rz),double.z(Rx,Ry,Rz),x,y)",
+        "52435875175126190479447740508185965837690552500527637822603658699938581184513",
+        "add(k,1)"
+      ],
+      "calls": [
+        {
+          "instruction": 52,
+          "id": 5,
+          "args": [
+            "Rx",
+            "Ry",
+            "Rz"
+          ],
+          "outputs": [
+            "double.x(Rx,Ry,Rz)",
+            "double.y(Rx,Ry,Rz)",
+            "double.z(Rx,Ry,Rz)"
+          ]
+        },
+        {
+          "instruction": 122,
+          "id": 7,
+          "args": [
+            "double.x(Rx,Ry,Rz)",
+            "double.y(Rx,Ry,Rz)",
+            "double.z(Rx,Ry,Rz)",
+            "x",
+            "y"
+          ],
+          "outputs": [
+            "add.x(double.x(Rx,Ry,Rz),double.y(Rx,Ry,Rz),double.z(Rx,Ry,Rz),x,y)",
+            "add.y(double.x(Rx,Ry,Rz),double.y(Rx,Ry,Rz),double.z(Rx,Ry,Rz),x,y)",
+            "add.z(double.x(Rx,Ry,Rz),double.y(Rx,Ry,Rz),double.z(Rx,Ry,Rz),x,y)"
+          ]
+        }
+      ],
+      "guards": [],
+      "branches": [
+        {
+          "instruction": 36,
+          "predicate": "lt(k,255)",
+          "take": true
+        },
+        {
+          "instruction": 44,
+          "predicate": "neq(Rz,0)",
+          "take": true
+        },
+        {
+          "instruction": 110,
+          "predicate": "eq(mod(shr(52435875175126190479447740508185965837690552500527637822603658699938581184513,sub(254,k)),2),1)",
+          "take": true
+        }
+      ],
+      "until": [
+        "not(lt(k,255))"
+      ]
+    }
+  ],
+  "exit": {
+    "stack": [
+      "caller"
+    ],
+    "calls": [],
+    "guards": [
+      "eq(Rz,0)"
+    ],
+    "branches": [
+      {
+        "instruction": 36,
+        "predicate": "lt(255,255)",
+        "take": false
+      }
+    ],
+    "until": [
+      "not(lt(255,255))"
+    ]
+  },
+  "scalar": "52435875175126190479447740508185965837690552500527637822603658699938581184513",
+  "conclusion": "The actual canonical/curve guards and all four loop paths preserve the original finite x,y and caller prefix; callee operands/returns implement R -> 2R+bit*P, k -> k+1, for exactly255bits of r. The actual final check is Z([r]P)=0. Transferred complete Jacobian formulas give strict order-r membership for finite points.",
+  "activity": {
+    "vmRuns": 0,
+    "newProofCases": 0,
+    "negativeCases": 0,
+    "byteOptimization": false
+  }
+}

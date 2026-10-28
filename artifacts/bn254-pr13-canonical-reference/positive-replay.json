@@ -1,0 +1,152 @@
+{
+  "schema": "bn254-archived-singleton-guarded-positive-replay/v1",
+  "status": "PASS_EXISTING_POSITIVES_ARITHMETIC",
+  "node": "v24.22.1",
+  "vmPackageEntrySha256": "c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d",
+  "guardedSha256": "cbd27cf7a971d0fa1ad86dcf3bc8db9a21b717905b3440ba9ec598195e5f59b0",
+  "guardTransferSha256": "7906a0b200c7152aa9ca33b26bb8f91ec2259a839feecec431f12689be42015a",
+  "positivePacketSha256": "16f0916bb77289459956cdcc7e1c706016d1cfce04af2970d0ffb8bfdd671470",
+  "replayToolSha256": "055ff2f8e2505b1305b9b1820bab3b24ce6e4185fa08e66c294734d072ba42d4",
+  "results": [
+    {
+      "name": "primary",
+      "unlockingSha256": "3b7f238bff6e58a0c3d579e43c0412eb44217a80339ee94f936fcd77bbc1eeaf",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 746958741,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250455.",
+          "operationCost": 250455,
+          "finalStackItems": 31
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250455.",
+          "operationCost": 250455,
+          "finalStackItems": 31
+        }
+      ]
+    },
+    {
+      "name": "extra-0",
+      "unlockingSha256": "608c4ee04433f08f83a6506eafee5bb6db3f82a9383409ab91534eab5d74bc14",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 746741195,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250422.",
+          "operationCost": 250422,
+          "finalStackItems": 30
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250422.",
+          "operationCost": 250422,
+          "finalStackItems": 30
+        }
+      ]
+    },
+    {
+      "name": "extra-1",
+      "unlockingSha256": "057618507600224ab6a682902ee98f22e921dfb3a3ee029b6605ef665fdaecb2",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 747425145,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250421.",
+          "operationCost": 250421,
+          "finalStackItems": 31
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250421.",
+          "operationCost": 250421,
+          "finalStackItems": 31
+        }
+      ]
+    },
+    {
+      "name": "extra-2",
+      "unlockingSha256": "9ccbf6bbb3ed145ba9efd0fb98c5a48067d451b260da91c52ac06fd4737003c0",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 747080897,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250490.",
+          "operationCost": 250490,
+          "finalStackItems": 30
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 250400 (density control length: 313); operation cost following operation: 250490.",
+          "operationCost": 250490,
+          "finalStackItems": 30
+        }
+      ]
+    },
+    {
+      "name": "worst-case",
+      "unlockingSha256": "6bce9eb3f8615c60c02c4085013fe5aa180fb5614e8ed86afde5ef2f7fd0dcf8",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 804924446,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 296800 (density control length: 371); operation cost following operation: 296885.",
+          "operationCost": 296885,
+          "finalStackItems": 21
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 296800 (density control length: 371); operation cost following operation: 296885.",
+          "operationCost": 296885,
+          "finalStackItems": 21
+        }
+      ]
+    }
+  ],
+  "existingPositiveProofs": 5,
+  "oracleAccepted": 5,
+  "consensusAccepted": 0,
+  "standardAccepted": 0,
+  "scope": "Saved compiled right-neutral repair plus canonical-input guard. Five unchanged historical proof/public-input unlockings only. Resource-loosened oracle evidence and per-input native admission observations; no negative/new proof cases, whole-transaction/relay, producer, setup, or optimization claim."
+}

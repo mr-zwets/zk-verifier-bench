@@ -1,0 +1,452 @@
+{
+  "schema": "remaining-verifier-corrections-qualification/v5",
+  "sourceRevision": "c0b0a824fc9018b4ef344d2b68538f7159ffffdd",
+  "benchmarkBase": "b140f64ca073c6d0466083fe14b5d9c83776d844",
+  "status": "STANDALONE_CORRECTED_REFERENCES_DEFAULT_REGISTRY_AND_FEED_UNCHANGED",
+  "frameProfiles": {
+    "profiles": 5,
+    "existingPositiveRunsAcrossTwoModes": 52,
+    "inputEvaluations": 908,
+    "allAccepted": true,
+    "modes": [
+      "BCH2026 consensus",
+      "BCH2026 standard per-input"
+    ],
+    "groupLockingAndTokenSeams": 15,
+    "limits": "The pairing profile is a component. Full-equation claims retain their mathematical, exact-program-graph and ledger-ancestry premises. Per-input observations are not whole-transaction or relay admission."
+  },
+  "bnLegacyEquationReferences": {
+    "profiles": 7,
+    "existingProofGraphs": 35,
+    "arithmeticOracleInputEvaluations": 185,
+    "allArithmeticInputsAccepted": true,
+    "completeDeclaredConsensusGraphsAccepted": 0,
+    "completeDeclaredStandardGraphsAccepted": 0,
+    "nativeResourceAdmission": "HOLD",
+    "catalogSha256": "51ef1509eca342bc931b1f92ef57fc1af719948654399faeef5e4a9986d337c0",
+    "catalogSourceSha256": "51ef1509eca342bc931b1f92ef57fc1af719948654399faeef5e4a9986d337c0",
+    "slimTerminalRepair": {
+      "profileId": "bch-groth16-intratx-pairfold5-densless-msm-slim-equation-checked",
+      "sourceRepairHelperSha256": "cb676275cc4a8775151d9c4e12f9961f987c48afe5c633fa9a7faf6c567c9a77",
+      "adapterSha256": "a840a7cf1575b4163b8f33b704fa3a845b0f0e0a24e81324888bda512ea2eadc",
+      "terminalRedeemBytes": 4831,
+      "terminalRedeemSha256": "df390dd4cc36f80242c6126c211b87d42b0e61b242ca1869b87eb9f081357aae",
+      "terminalRedeemHash256": "9fbcbf907fed26e32014dff541f9dbc68213d587e44867901f9c3dfdc5f24ef6",
+      "positiveReplay": "artifacts/maintainer-review-followup/replay-slim.json",
+      "positiveReplaySha256": "cad2d72d68841779b7b08d52cfff16aee3b651e5bbef91cc700e7164efd38238",
+      "nativeAdmission": "HOLD: current BCH rejects the 10,990-byte terminal locking before execution",
+      "scope": "Only the slim terminal locking changed: HASH256 <hash256(redeem)> EQUALVERIFY is followed by the existing guard and unchanged redeem program; all other six catalog profiles and all archived proof/public/state bytes remain unchanged.",
+      "replayTool": "artifacts/maintainer-review-followup/replay-slim.mjs",
+      "replayToolSha256": "4b70111b8dbeb5292fbbe126334e9b6f8ac0e088d47bfc740d4964eef7cad051"
+    },
+    "keyScope": "The public checker VK has a pinned owner. All 20 coordinate-role assignments in the pre-existing PairFold-7 declaration and all 12 terminal raw Miller coefficients match. Original exporter/setup linkage and historical algorithm soundness remain unestablished; withdrawals stand.",
+    "soundnessOwner": "Mandatory full fixed-key equation checker; legacy PIT/slope/table predicates receive no independent soundness credit.",
+    "keyProvenance": "src/bch/bn254-legacy-key-provenance.json"
+  },
+  "blsLarge": {
+    "existingProofGraphs": 3,
+    "inputEvaluations": 27,
+    "checkedVectorSha256": "9b0ca5517eacf50d52a7991b90a89ded64e10c907fce9f2273c735a5a18af5d1",
+    "repairManifestSha256": "48f4b0efa19935e1b09df630036e470e007fad79dd6f493e96ef746ead8fcffb",
+    "repairHelperSha256": "db44031eef5c85985dbf38f524f8774525ea8d4e1107a152083df676a011f071",
+    "positiveReplay": "artifacts/maintainer-review-followup/replay-large.json",
+    "positiveReplaySha256": "8bafb9bfdc3aeff30049d120a5d3ac1e53bc516565e1339eb1d91f23f49face1",
+    "modes": [
+      "resource-loosened arithmetic oracle",
+      "proposed-spec consensus",
+      "proposed-spec standard per-input"
+    ],
+    "allAccepted": true,
+    "entryGuards": [
+      {
+        "input": 0,
+        "bytes": 288,
+        "depth": 1,
+        "hex": "7c7682770220019d7c"
+      },
+      {
+        "input": 1,
+        "bytes": 768,
+        "depth": 0,
+        "hex": "7682770200039d"
+      },
+      {
+        "input": 2,
+        "bytes": 1632,
+        "depth": 0,
+        "hex": "7682770260069d"
+      }
+    ],
+    "limits": "Proposed-spec profile only; the 288-byte GLV, 768-byte input-validation, and 1632-byte terminal frames require the proposed per-script limits. Current BCH, whole-transaction and relay admission remain HOLD.",
+    "graphPremises": "The three-input intra-transaction graph preserves the archived input order, exact OP_INPUTBYTECODE successor links, state-carrier ownership, and P2SH32 locking transport. The positive replay is an existing-fixture artifact check, not a live ancestry or deployment claim.",
+    "replayTool": "artifacts/maintainer-review-followup/replay-large.mjs",
+    "replayToolSha256": "a16d4cfb4aa64568f888bb4f44399270a6ddb7647dc28c2c344f390bfffe1fc0"
+  },
+  "blsVkx": {
+    "scope": "public-input aggregation component only",
+    "existingGraphs": 2,
+    "inputEvaluations": 66,
+    "allAccepted": true,
+    "modes": [
+      "resource-loosened arithmetic oracle",
+      "BCH2026 consensus",
+      "BCH2026 standard per-input"
+    ],
+    "successorPinsPerGraph": 10,
+    "terminalSuccessorPredicate": false,
+    "limits": "Connected designated NFT lineage and valid ancestry remain premises; no complete pairing or token lifecycle claim."
+  },
+  "mergedSourceProvenance": {
+    "sourceRevision": "8eb2c5dd6b1fd88dce3cdf90acc2bb19bfa78db7",
+    "files": [
+      "groth16-bls12381-singleton-genpow-vectors.json",
+      "groth16-bls12381-singleton-genpow-multiproof-vectors.json"
+    ],
+    "allNonProvenanceFieldsUnchanged": true
+  },
+  "constraints": {
+    "existingPositiveFixturesOnly": true,
+    "newProofGeneration": false,
+    "negativeFixtureExecution": false,
+    "cybersecurityTesting": false,
+    "byteOptimization": false,
+    "upstreamMergeOrDeployment": false,
+    "newProofOrPublicInputCases": false,
+    "auxiliaryStateReencoding": true,
+    "auxiliaryReencodingAuthorization": "Allow auxiliary reencoding",
+    "paddingTargetOrCutChanges": false,
+    "originalArchivedProofPayloadsModified": false
+  },
+  "additionalPositiveReferences": [
+    {
+      "profile": "default BLS one-chunk Fp6 full ordered graph",
+      "artifact": "artifacts/bls-default-fp6-reencoded-v2/encoded-vectors-v1.json",
+      "qualification": "artifacts/bls-default-fp6-reencoded-v2/qualification.json",
+      "existingProofs": 3,
+      "inputsPerProof": 35,
+      "arithmeticOracleAccepted": 105,
+      "consensusAccepted": 101,
+      "standardAccepted": 101,
+      "nativeResourceHold": "Case 2 GLV inputs 1-4 exceed operation-cost density; no layout or padding adjustment attempted.",
+      "boundary": "The original unrooted packet requires the full ordered graph as a deployment premise. A separate rooted derivative and whole-transaction observations are qualified in graphAncestryCorrections.",
+      "graphBoundSuccessor": "artifacts/graph-ancestry-corrections"
+    },
+    {
+      "profile": "BN grouped nonprojective final GLV component",
+      "artifact": "artifacts/bn254-grouped-glv-component/encoded-vectors.json",
+      "qualification": "artifacts/bn254-grouped-glv-component/qualification.json",
+      "existingPublicInputPairs": 3,
+      "inputsPerPair": 2,
+      "consensusAccepted": 6,
+      "standardAccepted": 6,
+      "independentExpectedValue": "noble G1 aggregation using the existing public VK; second logical pair [439832,401604].",
+      "boundary": "Two-step aggregation component; no Groth16 or rooted covenant claim."
+    },
+    {
+      "profile": "current BN covenant producer fixed-cut reference",
+      "artifact": "artifacts/bn254-covenant-reencoded/encoded-vectors.json",
+      "qualification": "artifacts/bn254-covenant-reencoded/qualification.json",
+      "existingProofs": 3,
+      "inputsPerProof": 27,
+      "arithmeticOracleAccepted": 81,
+      "consensusAccepted": 75,
+      "standardAccepted": 75,
+      "nativeResourceHold": "Two Miller stages per case exceed the 10000-byte unlocking limit.",
+      "boundary": "Actual fullSpecs/bindContract path, one fixed default compiler policy and shared graph. Linked whole-transaction observations are now qualified in graphAncestryCorrections; relay admission remains unestablished.",
+      "wholeTransactionLinkedEvidence": "artifacts/graph-ancestry-corrections/validation-report.json"
+    },
+    {
+      "profile": "current BLS covenant producer fixed-cut reference",
+      "artifact": "artifacts/bls-covenant-reencoded/encoded-vectors.json",
+      "qualification": "artifacts/bls-covenant-reencoded/qualification.json",
+      "existingProofs": 3,
+      "inputsPerProof": 35,
+      "arithmeticOracleAccepted": 105,
+      "consensusAccepted": 101,
+      "standardAccepted": 101,
+      "nativeResourceHold": "Case 2 GLV inputs 1-4 exceed the density limit at fixed 10000-byte frames.",
+      "boundary": "Actual fullSpecs/bindContract path with one fixed raw compiler policy; witness checks repeating the encoder are not counted as independent evidence.",
+      "wholeTransactionLinkedEvidence": "artifacts/graph-ancestry-corrections/validation-report.json"
+    }
+  ],
+  "archivedCompatibility": {
+    "originalBytes": "Archived BN48/BLS86 whole graphs remain codec-incompatible with the corrected current producers. The original artifacts are unchanged.",
+    "correctedReferences": "Separate reencoded graphs preserve existing mathematical proofs and logical public inputs; program, auxiliary and state-transport encodings are explicitly qualified.",
+    "genericGlv": "Aggregation component only; proof points are not inputs to this component."
+  },
+  "retiredEvidence": [
+    "An earlier current-BLS evidence wrapper selected raw/rescheduled variants and tuned padding. It is excluded and replaced by the supplied fixed-policy artifact.",
+    "An earlier grouped-GLV evidence snapshot reversed the second logical input pair. It is excluded; supplied raw-v2 uses the unchanged archived [439832,401604] statement."
+  ],
+  "historicalFrameReferences": {
+    "artifactDirectory": "artifacts/historical-frame-repairs",
+    "qualification": "artifacts/historical-frame-repairs/qualification.json",
+    "sourceHelper": "chunked/intratx/repair_historical_frames.mjs",
+    "profiles": 7,
+    "existingGraphs": 21,
+    "proofPublicStateTablePaddingInstructionsPreserved": true,
+    "arithmeticOracleAccepted": 465,
+    "declaredConsensusAccepted": 465,
+    "declaredStandardAccepted": 463,
+    "totalPerMode": 465,
+    "nativeVersusProposed": "Six historical profiles use BCH2026. BNlarge4 uses proposed bch-spec only; its 12 inputs per mode are reported separately.",
+    "scope": "Conditional finite-equation frame repairs at exact archived program identities; complete ordered graphs and appropriate token ancestry remain explicit premises. Whole-transaction size/fees, relay, neutral completeness and mainnet admission are unclaimed.",
+    "standardResourceHolds": 2,
+    "registryAndHistoricalScoresChanged": false
+  },
+  "historicalRootedReferences": {
+    "artifactDirectory": "artifacts/historical-rooted-graphs",
+    "qualification": "artifacts/historical-rooted-graphs/qualification.json",
+    "profiles": 6,
+    "existingGraphs": 18,
+    "perMode": 384,
+    "oracleAccepted": 384,
+    "declaredConsensusAccepted": 372,
+    "declaredStandardAccepted": 370,
+    "bch2026": {
+      "perMode": 372,
+      "consensusAccepted": 360,
+      "standardAccepted": 358
+    },
+    "proposedBchSpec": {
+      "perMode": 12,
+      "consensusAccepted": 12,
+      "standardAccepted": 12
+    },
+    "graphBinding": "Root input index and exact count; five reverse successor-lock chains; BN13 root absolute pins preserve its input3-lock dependencies. Applies when spending the pinned root under ordinary ledger input validation and P2SH32 binding.",
+    "nativeHolds": "BN27:24 evaluations at unchanged10000-byte limits, including next-input-bytecode pushes; BN13:2 existing standard density holds. No tuning.",
+    "mathematicalScope": "Transfers the prior necessary finite-domain equation theorem by exact body and argument-stack preservation. Grouped ancestry and neutral-proof domains remain outside these derivatives."
+  },
+  "blsPlainSingletonNeutralVkx": {
+    "artifactDirectory": "artifacts/bls-singleton-neutral-vkx",
+    "qualification": "artifacts/bls-singleton-neutral-vkx/qualification.json",
+    "sourceFile": "singleton/bls12-381/groth16.cash",
+    "sourceSha256": "7162dffe5226bfe93ca82d9b98ecd86efcd555495fd08ebb96dc49d6c0a93197",
+    "existingPositiveProofs": 5,
+    "oracleAccepted": 5,
+    "nativeAdmission": "HOLD",
+    "scope": "Two canonical Fr public inputs, finite canonical external A/C points in the G1 pairing quotient, finite strict-r B. Neutral computed vk_x is supported; external infinity encodings are not added.",
+    "proofBoundary": "Complete conditional arithmetic composition for the exact raw artifact and the declared finite external-point/cofactor-quotient ABI, with every canonical Fr public tuple including neutral vk_x. Standard field/curve/pairing and pinned VM premises remain. No external infinity, arbitrary-key/circuit, setup/knowledge or native-admission theorem.",
+    "neutralExistingCase": "benchmark PR14 extraValidProofs[13], public inputs [1,r-1]; reversible auxiliary encoding only",
+    "mathematicalDisposition": "artifacts/bls-singleton-neutral-vkx/mathematical-disposition.json",
+    "mathematicalDispositionSha256": "2cf6eb40d9002ed8019be69d01c5e99f8feecb88da9f40c6744e63a75e149daf",
+    "sourceRevision": "ab5c0a9ba5e755d190ff2ad43a8b659f92407ebe",
+    "supersededBy": "artifacts/bls-singleton-full-proof-domain"
+  },
+  "blsPlainSingletonFullProofDomain": {
+    "artifactDirectory": "artifacts/bls-singleton-full-proof-domain",
+    "qualification": "artifacts/bls-singleton-full-proof-domain/qualification.json",
+    "qualificationSha256": "90c01832de620b2fd68dde9a02c863f0c2df0718401ae276ad21774cbf3f7c2a",
+    "sourceRevision": "c0b0a824fc9018b4ef344d2b68538f7159ffffdd",
+    "sourceFile": "singleton/bls12-381/groth16_strict.cash",
+    "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
+    "lockingSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+    "lockingBytes": 17465,
+    "existingPositiveProofs": 5,
+    "oracleAccepted": 5,
+    "nativeAdmission": "HOLD",
+    "scope": "All canonical points of G1 and G2 including infinity, under the documented uncompressed integer-coordinate sentinels; two canonical Fr public inputs, including neutral computed vk_x. Exact fixed synthetic VK only.",
+    "mathematicalDisposition": "artifacts/bls-singleton-full-proof-domain/mathematical-disposition.json",
+    "mathematicalDispositionSha256": "1d073609c51bb6600a48270cbbcfe2c2d663b46aa9dde1e4135c565b22d98642",
+    "compiledArtifactOrigin": {
+      "sourceRevision": "b4a14a8fb91e3bc25995f26334f04eb0cbd19072",
+      "sourceFile": "singleton/bls12-381/groth16.cash",
+      "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
+      "lockingSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
+      "boundary": "Same strict source bytes, imports, compiler policy and raw locking artifact; source moved verbatim, no recompilation."
+    }
+  },
+  "pairfold7KeyProvenance": {
+    "artifactDirectory": "artifacts/pairfold7-key-provenance",
+    "qualification": "artifacts/pairfold7-key-provenance/qualification.json",
+    "qualificationSha256": "f95c86de4aee034bd784b0d1b9ab135e4e43b5349949b5d3dbfb7126b4bb4488",
+    "coordinateRolesChecked": 20,
+    "terminalFactorLimbsMatched": 12,
+    "historicalExporterLink": "UNESTABLISHED",
+    "historicalWithdrawalsUnchanged": true
+  },
+  "graphAncestryCorrections": {
+    "artifactDirectory": "artifacts/graph-ancestry-corrections",
+    "qualification": "artifacts/graph-ancestry-corrections/qualification.json",
+    "qualificationSha256": "b893fa6529e7f470ffe418d0e0fc7345710dc160b784500a4f811faf70ffa404",
+    "mathematicalDisposition": "artifacts/graph-ancestry-corrections/mathematical-disposition.json",
+    "mathematicalDispositionSha256": "a5968e524982b71337e98ce24974cbdbd0b6a06f43ff5a5edcbee415258e00c3",
+    "replay": "artifacts/graph-ancestry-corrections/replay.mjs",
+    "replaySha256": "1353f5149c0f7d7707571941b4ab649bda649a321b013b119d9c691c051a4eaa",
+    "validationReport": "artifacts/graph-ancestry-corrections/validation-report.json",
+    "validationReportSha256": "a8dae67dfc7afb6f319b13c95a9412a8b41da48fa5a9f42acb1976a5966ad55d",
+    "sourceHelper": "chunked/intratx/bind_reference_graphs.mjs",
+    "sourceHelperSha256": "21da67414e46c66fcefd9935ccc423483283873e012be881705f91eb27b65d75",
+    "existingCaseScenarios": 12,
+    "wholeTransactions": 198,
+    "modeChecks": 594,
+    "arithmeticOracleAccepted": 198,
+    "consensusAccepted": 176,
+    "standardAccepted": 176,
+    "resourceHoldsPerNativeMode": 22,
+    "familyModeCounts": {
+      "bls-default-fp6": {
+        "oracle": {
+          "accepted": 3,
+          "total": 3,
+          "failures": 0
+        },
+        "consensus": {
+          "accepted": 0,
+          "total": 3,
+          "failures": 3
+        },
+        "standard": {
+          "accepted": 0,
+          "total": 3,
+          "failures": 3
+        }
+      },
+      "bn254-grouped": {
+        "oracle": {
+          "accepted": 9,
+          "total": 9,
+          "failures": 0
+        },
+        "consensus": {
+          "accepted": 0,
+          "total": 9,
+          "failures": 9
+        },
+        "standard": {
+          "accepted": 0,
+          "total": 9,
+          "failures": 9
+        }
+      },
+      "bn254-covenant": {
+        "oracle": {
+          "accepted": 81,
+          "total": 81,
+          "failures": 0
+        },
+        "consensus": {
+          "accepted": 75,
+          "total": 81,
+          "failures": 6
+        },
+        "standard": {
+          "accepted": 75,
+          "total": 81,
+          "failures": 6
+        }
+      },
+      "bls-covenant": {
+        "oracle": {
+          "accepted": 105,
+          "total": 105,
+          "failures": 0
+        },
+        "consensus": {
+          "accepted": 101,
+          "total": 105,
+          "failures": 4
+        },
+        "standard": {
+          "accepted": 101,
+          "total": 105,
+          "failures": 4
+        }
+      }
+    },
+    "linkedParentOutputs": 186,
+    "syntheticInitialFundingAnchors": 186,
+    "graphBinding": "Default BLS uses one 35-input transaction whose root pins 34 sibling programs. Grouped BN27 uses three 9-input transactions; each root pins 8 siblings, with mutable NFT continuity to the next exact root and a terminal burn. All old arithmetic bodies and payloads are preserved.",
+    "sequentialCovenants": "Existing BN/BLS programs use 27/35 successive single-input transactions. Source is unchanged; the new whole-transaction replay validates their linked topology and saved BLS token categories.",
+    "limits": "Conditional transfer of prior finite-domain arithmetic only. Initial funding anchors are synthetic; designated instance/genesis/funding, fixed-VK/setup, native resource, relay and mainnet premises remain. Native holds are not tuned away. Historical original withdrawals remain."
+  },
+  "maintainerReviewFollowup": {
+    "sourceRevision": "c0b0a824fc9018b4ef344d2b68538f7159ffffdd",
+    "scope": "Existing positive fixtures and mathematical/static source review only. No new proof/public-input or negative cases, cybersecurity tests, byte/padding/cut optimization, upstream PR merge or deployment.",
+    "normalBlsSource": "singleton/bls12-381/groth16.cash equals upstream17b05a7 exactly; stronger domain exists only in separate strict file/reference.",
+    "slimRuntimeOwner": "The bare terminal HASH256/EQUALVERIFY authenticates its retained redeem before the unchanged equation guard. Under push-only/minimal-push VM rules this binds the canonical wire suffix. Five existing arithmetic graphs / 25 inputs accept; the 10990-byte native locking HOLD remains.",
+    "exactFrameCatalog": "Current source-helper/compiler metadata was regenerated; all 454 positive locking/unlocking records are unchanged. The module seal matches the actual catalog. Earlier 52 runs / 908 VM observations apply to these exact same programs.",
+    "bnLarge4Input2Owner": "After P2SH consumes the redeem and OP_DROP removes the 64548-byte table, the surviving state is checked at offset 1949. The 33 fixed 32-byte splits imply length >= 1056; the <65536 gate fixes its PUSHDATA2 header class under minimal-push rules. This is not exact-1088 length or content authentication; finite-domain/frame premises remain.",
+    "fsPitReview": "All13intratx root binders and program sets across130existingpositive scenarios were statically decoded. Independent field/kernel and support calculations reproduce degree137 and132quotient coefficients. The revised source section5 supplies the full adaptive random-oracle game, COLL/LATE opening argument and (23*q_beta+160*q_alpha)/2^256 +3*N*(N-1)/2^257 bound, including verifier/setup queries and disjoint challenge counts. Two binders precede imports;11use the stated genuine-PIC shared-stack/call-frame argument. No new FS fixture execution, rebuild or universal compiled arithmetic theorem is claimed.",
+    "frozenResults": "results.json is unchanged upstream measurement/review snapshot; live source review explanations carry clarified query counters."
+  },
+  "archivedFullVerifierReferences": {
+    "references": [
+      {
+        "id": "bn254-pr13-canonical-reference",
+        "affectedHistoricalPrs": {
+          "source": [
+            6
+          ],
+          "benchmark": [
+            13
+          ]
+        },
+        "qualification": "artifacts/bn254-pr13-canonical-reference/qualification.json",
+        "qualificationSha256": "e96934ebfb442ae77db737db718f87bbd25c28c7d043e035cf94aabb910c17d9",
+        "sourceRevision": "c21f750a7c448cd8b1fab5f5156c5a9a598f3167",
+        "sourceDirectory": "singleton/bn254/pr13-canonical-reference",
+        "sourceQualificationSha256": "03bf63742964d2e36b03bb75584f8e58745dfe10665abbcfe4c1e59531f70102",
+        "programSha256": "cbd27cf7a971d0fa1ad86dcf3bc8db9a21b717905b3440ba9ec598195e5f59b0",
+        "programBytes": 8922,
+        "existingPositiveArtifactCases": 5,
+        "arithmeticOracleAccepted": 5,
+        "nativeAdmission": "HOLD",
+        "scope": "Eight canonical Fp coordinates, two canonical Fr scalars; finite affine A/C on G1 and finite order-r B on the twist. Computed vk_x may be neutral. Exact fixed synthetic VK. External infinity encodings are not added.",
+        "profileCoverage": "Inherited BN254 singleton only. Source6 raw14 covenant and generic grouped-affine graph qualifications remain separate."
+      },
+      {
+        "id": "bn254-pr15-full-coordinate-reference",
+        "affectedHistoricalPrs": {
+          "source": [
+            15
+          ],
+          "benchmark": [
+            32
+          ]
+        },
+        "qualification": "artifacts/bn254-pr15-full-coordinate-reference/qualification.json",
+        "qualificationSha256": "dca9f2d0059548eb553b3c9f6df85b0a1abed10ff784a8e1c22e12dd5334b3a6",
+        "sourceRevision": "c21f750a7c448cd8b1fab5f5156c5a9a598f3167",
+        "sourceDirectory": "singleton/bn254/pr15-full-coordinate-reference",
+        "sourceQualificationSha256": "f4869ddac3b9a201798342876e08eaaf1b8925ccf4af117a59aa779d0c09daed",
+        "programSha256": "dc2b929c5645d3baaac4fb544ba7565bf54c34156532a715053432d4f9913782",
+        "programBytes": 4681,
+        "existingPositiveArtifactCases": 4,
+        "arithmeticOracleAccepted": 4,
+        "nativeAdmission": "HOLD",
+        "scope": "Canonical full-coordinate EIP197 point-value domain, finite or neutral A/B/C and reconstructed vk_x; two canonical Fr public scalars. This is the historical4681-byte codec, distinct from the merged4320-byte parity codec."
+      },
+      {
+        "id": "bls-pr5-minop-interface-reference",
+        "affectedHistoricalPrs": {
+          "source": [
+            5
+          ],
+          "benchmark": [
+            11
+          ]
+        },
+        "qualification": "artifacts/bls-pr5-minop-interface-reference/qualification.json",
+        "qualificationSha256": "5b8adfa756a2eecdb9400d88f3b015b5f3185211214f9cede9a7195e2934ed71",
+        "sourceRevision": "c21f750a7c448cd8b1fab5f5156c5a9a598f3167",
+        "sourceDirectory": "singleton/bls12-381/pr5-minop-interface-reference",
+        "sourceQualificationSha256": "7266a33870a3d17e7e12de7a742a7573d62067fef4a0f14cc5865a519c5a9e45",
+        "programSha256": "42ca73a63775c062898e97ecde2b9a3d57b5f292d11677341a9fe5d6063ae0d3",
+        "programBytes": 64396,
+        "existingPositiveArtifactCases": 5,
+        "arithmeticOracleAccepted": 5,
+        "nativeAdmission": "HOLD",
+        "scope": "Proof coordinates and GLV components are explicitly bounded; public scalar range follows the bounded-decomposition congruence. Modular inverse representatives for vkxZinv reduce to the same field point. Finite external point and finite reconstructed-vk_x qualifications remain."
+      }
+    ],
+    "existingPositiveArtifactCases": 14,
+    "arithmeticOracleAccepted": 14,
+    "nativeAdmission": "All three remain resource-held; these are scoped mathematical references outside the registry.",
+    "historicalWithdrawalsUnchanged": true,
+    "newProofCases": 0,
+    "negativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false
+  }
+}

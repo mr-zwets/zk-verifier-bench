@@ -1,0 +1,125 @@
+{
+  "status": "PASS_DIRECT_PACKET_KEY_TERMINAL_FACTOR_BINDING",
+  "packetSchema": "pairfold7-portable-provenance-packet/v2",
+  "sourceRevision": "037f0361c2ad1a18cacb5b01266ffc8ad147448b",
+  "sourceBlobSha1": "b9d8d45853e5aba080046906a7dab25f1f0e149b",
+  "benchmarkRevision": "83d8a1aeb6bc6209823608a280a909741f4109ed",
+  "vectorSha256": "4cb3ca8745a404d50ca7543858f6d01e6fbf68a7a8240ac96f7c8597b57233ac",
+  "implementationBlobSha1": "dff089025d66406cd7254729965c8cdde08e18bb",
+  "roleBindings": [
+    "alpha/beta",
+    "gamma",
+    "delta",
+    "IC0",
+    "IC1",
+    "IC2"
+  ],
+  "roleCoordinateCount": 20,
+  "directPairing": {
+    "library": "@noble/curves/bn254.js",
+    "moduleResolution": "benchmark checkout dependency via createRequire(package.json)",
+    "finalExponentiation": false,
+    "flattenOrder": [
+      "c0.c0.c0",
+      "c0.c0.c1",
+      "c0.c1.c0",
+      "c0.c1.c1",
+      "c0.c2.c0",
+      "c0.c2.c1",
+      "c1.c0.c0",
+      "c1.c0.c1",
+      "c1.c1.c0",
+      "c1.c1.c1",
+      "c1.c2.c0",
+      "c1.c2.c1"
+    ],
+    "terminalLimbCount": 12,
+    "terminalLimbSha256LittleEndian": "8ec88f41e55c2367c56c732f5c26ae676585b40da4ba7659e0e850257a792be6",
+    "terminalRedeemSha256": "6bd2a76ca98ba62c6bbd368bbccf4be86ca80a18ca9415c6db62a9edc56faf9b",
+    "terminalPush": {
+      "opcodeOffset": 3396,
+      "dataOffset": 3399,
+      "length": 5809
+    },
+    "limbs": [
+      {
+        "index": 0,
+        "opcodeOffset": 2206,
+        "dataOffset": 2207,
+        "littleEndian": "b4c0fdc0db5b6b4c836800a0af4e7ee2ab11cf13ed0f5e6ed5b9c95c9024142f"
+      },
+      {
+        "index": 1,
+        "opcodeOffset": 2239,
+        "dataOffset": 2240,
+        "littleEndian": "554dc5a4cb68f17ca994a130c6db4650c801d22867d7eb55eec51921b940e307"
+      },
+      {
+        "index": 2,
+        "opcodeOffset": 2276,
+        "dataOffset": 2277,
+        "littleEndian": "d1aea8594d232f0ff5273772339bc37aba474b49101dbb349a51826c1ecf3f25"
+      },
+      {
+        "index": 3,
+        "opcodeOffset": 2313,
+        "dataOffset": 2314,
+        "littleEndian": "f6b09b9ec78c52a9c0d66853dba589d341af21b1ced8e2f9e027d59843e2092b"
+      },
+      {
+        "index": 4,
+        "opcodeOffset": 2350,
+        "dataOffset": 2351,
+        "littleEndian": "74130b86ff4eb811743ad9243677a6ea991214b1aad492db486c388c07aed82a"
+      },
+      {
+        "index": 5,
+        "opcodeOffset": 2387,
+        "dataOffset": 2388,
+        "littleEndian": "ed69e9839933e68532fe18971e4b82d2a5df89c71bb21b743b990c490629d01a"
+      },
+      {
+        "index": 6,
+        "opcodeOffset": 2424,
+        "dataOffset": 2425,
+        "littleEndian": "b13f57ba3ce08fcfe3ca6cfd54cf1ff2e2a30c3d1cf0c4e4857f78a169c98804"
+      },
+      {
+        "index": 7,
+        "opcodeOffset": 2461,
+        "dataOffset": 2462,
+        "littleEndian": "aeab8e40c709860a66d48d6b491b5f331da9641154e857e0930b68ba53700002"
+      },
+      {
+        "index": 8,
+        "opcodeOffset": 2498,
+        "dataOffset": 2499,
+        "littleEndian": "b1000a4bd2afc2f791eac08b3e78be43fdb8a33f742c005b4a2de183240c4a0f"
+      },
+      {
+        "index": 9,
+        "opcodeOffset": 2535,
+        "dataOffset": 2536,
+        "littleEndian": "5d3076e7ee643bb926c003a74bec9ff3d1435ae3d72d34807c33954876034217"
+      },
+      {
+        "index": 10,
+        "opcodeOffset": 2572,
+        "dataOffset": 2573,
+        "littleEndian": "1d1a9d66ddcc01b228af02621d7fd1445d2302b7dd5472bf0bd5a06f79051f07"
+      },
+      {
+        "index": 11,
+        "opcodeOffset": 2609,
+        "dataOffset": 2610,
+        "littleEndian": "ce3387617e18527818e5bb3746d5a4c32f9a630d9c964dbd0810ba3af5f51d0e"
+      }
+    ]
+  },
+  "historicalFactorCertificate": {
+    "sha256": "48c33fb5318a2894f1847be11e6e46c8a2ee10377cf3b4d78e426e73d9bc5130",
+    "matchesDirectPacketPairing": true,
+    "usedAs": "additional historical corroboration, not the source of the direct binding"
+  },
+  "scope": "Exact packet key-coordinate/source-role and pinned-vector terminal-factor readback only. No proof producer, fixture generation, negative suite, or VM execution. This does not establish the historical exporter link or full verifier soundness."
+}

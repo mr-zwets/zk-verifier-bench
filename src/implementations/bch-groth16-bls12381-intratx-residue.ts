@@ -11,7 +11,7 @@
 // 191432, 192522 and 228434 bytes, exceeding the pinned 100000-byte standard tx cap.
 // Whole-transaction/ledger/network admission remains HOLD; excluded from REGISTRY.
 // Archived negative suites are historical and are not included or validated here.
-// Source predicates are quotient-only; legacy/default mode is preserved.
+// This frozen artifact is quotient mode; default Fp6 source has separate qualification.
 //
 // Reproduce the positive-only artifact with the public source tool:
 // node groth16_cashscript/chunked/intratx/repair_registered_bls24.mjs \

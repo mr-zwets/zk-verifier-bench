@@ -1,0 +1,88 @@
+{
+  "schema": "bn254-archived-singleton-canonical-guard-transfer/v1",
+  "bodyBytes": 8539,
+  "bodySha256": "5276a859c7c087b7cba6b2e9d17944bae14157d30c74fabb74c3958b4d7f7296",
+  "assemblySha256": "5e6e08c934202bbdb22ca54b033486df4f514d701379f4407978ad31877bafd3",
+  "prefixBytes": 383,
+  "prefixSha256": "ff04fce79a43f3253acbfe9387324b3ede8bffb4641362b223e6a21ebe991561",
+  "guardedBytes": 8922,
+  "guardedSha256": "cbd27cf7a971d0fa1ad86dcf3bc8db9a21b717905b3440ba9ec598195e5f59b0",
+  "arity": 10,
+  "owners": [
+    {
+      "depth": 0,
+      "argument": "Ax",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+      "gateHex": "0079002047fd7cd8168c203c8dca7168916a81975d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 1,
+      "argument": "Ay",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+      "gateHex": "5179002047fd7cd8168c203c8dca7168916a81975d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 2,
+      "argument": "Bxa",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+      "gateHex": "5279002047fd7cd8168c203c8dca7168916a81975d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 3,
+      "argument": "Bxb",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+      "gateHex": "5379002047fd7cd8168c203c8dca7168916a81975d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 4,
+      "argument": "Bya",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+      "gateHex": "5479002047fd7cd8168c203c8dca7168916a81975d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 5,
+      "argument": "Byb",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+      "gateHex": "5579002047fd7cd8168c203c8dca7168916a81975d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 6,
+      "argument": "Cx",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+      "gateHex": "5679002047fd7cd8168c203c8dca7168916a81975d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 7,
+      "argument": "Cy",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+      "gateHex": "5779002047fd7cd8168c203c8dca7168916a81975d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 8,
+      "argument": "in0",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088548364400416034343698204186575808495617",
+      "gateHex": "58790020010000f093f5e1439170b97948e833285d588181b64550b829a031e1724e6430a569"
+    },
+    {
+      "depth": 9,
+      "argument": "in1",
+      "lower": "0",
+      "upper": "21888242871839275222246405745257275088548364400416034343698204186575808495617",
+      "gateHex": "59790020010000f093f5e1439170b97948e833285d588181b64550b829a031e1724e6430a569"
+    }
+  ],
+  "lemma": "DEPTH requires exactly ten words. Each gate copies depth d, enforces 0 <= word < its field/scalar modulus using WITHIN and VERIFY, and restores the entire original ten-word stack. No function/altstack/control state is installed. The unchanged 8539-byte compiled body therefore receives exactly its proved canonical ten-argument ABI.",
+  "pointDomain": "Finite canonical external A/C on G1 and finite strict-G2 B; reconstructed vk_x may be neutral. Existing body owns curve/subgroup/equation checks.",
+  "scriptSource": "Existing compiled body only, followed unchanged after a new canonical-input predicate prefix; no compiler invocation or optimization.",
+  "vmPackage": "@bitauth/libauth@3.1.0-next.8",
+  "vmPackageEntrySha256": "c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d"
+}

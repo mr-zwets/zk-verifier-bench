@@ -1,0 +1,141 @@
+{
+  "schema": "graph-ancestry-conditional-mathematical-disposition/v1",
+  "status": "CONDITIONAL_GRAPH_BINDING_AND_FINITE_ARITHMETIC_TRANSFER",
+  "claim": "Spending a designated root under the stated VM, P2SH32/hash and valid-ledger premises enforces the exact reviewed program graph. Preserved arithmetic bodies and their original finite-domain state-seam theorem then imply the same fixed-key necessary pairing equation. This is an implication under explicit premises, not a new completeness, setup, or proof-of-knowledge theorem.",
+  "identities": {
+    "sourceHelper": {
+      "path": "chunked/intratx/bind_reference_graphs.mjs",
+      "sha256": "21da67414e46c66fcefd9935ccc423483283873e012be881705f91eb27b65d75"
+    },
+    "defaultSourcePacketSha256": "672f206dac00d9626275b17dc63eaf75df252c37b9ec6978558a98ec1c277e17",
+    "groupedSourcePacketSha256": "f88d2274794b0e38c5254187c04d97033080b7fa84fafbccd982f99e5b4f19b1",
+    "groupedFrameManifestSha256": "5193b245337b0758120164142f956327ff25a4673e2147899dbdbf12ac9fbdb2",
+    "defaultBoundPacketSha256": "35180eb97123b35c392df0d119e8acf860eb173517526367df19fe997e8f4b3b",
+    "groupedBoundPacketSha256": "98d41614aaadc92dd9ee4b1b784b8cc9cf891e74ad4e67532f8c4b72cedcfe60",
+    "replaySha256": "1353f5149c0f7d7707571941b4ab649bda649a321b013b119d9c691c051a4eaa",
+    "validationReportSha256": "a8dae67dfc7afb6f319b13c95a9412a8b41da48fa5a9f42acb1976a5966ad55d"
+  },
+  "rootPrograms": {
+    "defaultBls35": [
+      {
+        "start": 0,
+        "count": 35,
+        "next": null,
+        "prefixBytes": 1351,
+        "sourceCodeSha256": "0e00087104fdb2cc4f9b200c88d802b088487c840a5cf98057257db88edf1983",
+        "rootedCodeSha256": "b63f4f73c3f98dd917abc6263ee5d5572edb6342674c1d932be5988b4e9fbb29",
+        "rootedLocking": "aa20cdeac19c6eba0563eb556c43a7b37f58665b7d7b17c222430c5b7b9dcfbb2ccb87",
+        "rootedUnlockingBytes": [
+          11351,
+          11351,
+          11351
+        ]
+      }
+    ],
+    "groupedBn27": [
+      {
+        "start": 0,
+        "count": 9,
+        "next": 9,
+        "prefixBytes": 549,
+        "sourceCodeSha256": "8264da0e5bb0500d47d7e205f78840d273cf67992aea6e25e9ad5d98f59e3c41",
+        "rootedCodeSha256": "d576ae1d5dee8d05b29dae8edb682906347a7920780ee73608f6664d1b9609a5",
+        "rootedLocking": "aa2004787f1d563785f6ebeb51675147efcdce0150bc10fe5355de3e496180a27d6b87",
+        "rootedUnlockingBytes": [
+          10390,
+          10390,
+          10390
+        ]
+      },
+      {
+        "start": 9,
+        "count": 9,
+        "next": 18,
+        "prefixBytes": 549,
+        "sourceCodeSha256": "36050492ce7407168f15b257f1084d3eaad9110cddb5bdd35629be22066d2480",
+        "rootedCodeSha256": "5771f6dde07c458a57e765792638738ac4bf0b0c192f1c87283df5e2f0fd327e",
+        "rootedLocking": "aa208de27081c386d55c0472267680ee4ad7daf57b175708723ee95ff40a450e19c487",
+        "rootedUnlockingBytes": [
+          10549,
+          10549,
+          10549
+        ]
+      },
+      {
+        "start": 18,
+        "count": 9,
+        "next": null,
+        "prefixBytes": 509,
+        "sourceCodeSha256": "782d995f0906b4c6461e11ce5cce2e45cde90b032a4b6f151a5b04cf42f47d9b",
+        "rootedCodeSha256": "d8770f770eba70d0dd84f9525901dbc0912237ae6c002ca940564ad954beae85",
+        "rootedLocking": "aa2084ce443feea034c1a941be7c9aeb971855daf36f401728800bd438c33a2d5aa887",
+        "rootedUnlockingBytes": [
+          10296,
+          10297,
+          10298
+        ]
+      }
+    ]
+  },
+  "preservationProof": [
+    "The fixed input packet SHA256 and corrected grouped frame manifest identify all prior arithmetic owners. decodeStep verifies each original P2SH32 owner and canonical final redeem push. All cases use the same original code set.",
+    "Only default root 0 and grouped roots 0,9,18 receive prefixes. Every old arithmetic body is an exact suffix. All other program and unlocking bytes remain exact. Each case retains its own original proof/public/state/table/padding argument prefix; different cases need not share those argument bytes.",
+    "Every new predicate consumes its own temporaries and preserves the original caller stack. The roots retain local INPUTINDEX 0 and the transaction topology used by the old arithmetic bodies.",
+    "Default: all 38 old INPUTBYTECODE reads across stages 0\u201333 target fixed input 4 or INPUTINDEX+1. None target the changed input 0; stage 34 has no such read. All 27 grouped old INPUTBYTECODE reads resolve to unchanged local inputs 1\u20138, never local root 0. There is no old ACTIVEBYTECODE or CODESEPARATOR. Thus neither changed redeem length nor content changes a legacy code-read result.",
+    "The grouped packet starts from all 27 corrected frame owners, including the existing stage6 and stage26 repairs. Exact identity preserves those repairs."
+  ],
+  "defaultRootProof": [
+    "INPUTINDEX == 0 and TXINPUTCOUNT == 35 fix the local topology.",
+    "For each i in 1..34, UTXOBYTECODE(i) must equal the literal 35-byte P2SH32 owner of reviewed program i. Under ordinary ledger validation every actual input must also validate that locking program; under P2SH32 binding its redeem program is the reviewed owner.",
+    "The spending input itself is the designated rooted program. Thus all 35 reviewed arithmetic stages are present in order. Positive replay evidence does not supply the external designated-root/funding premise."
+  ],
+  "groupedRootProof": [
+    "Each root requires local INPUTINDEX == 0 and TXINPUTCOUNT == 9, and pins the eight local sibling locking owners absolutely. Group roots are assembled in reverse order 18,9,0 so each successor literal owns the completed next root.",
+    "UTXOTOKENCATEGORY(0) is split at 32 and its suffix must equal byte 01, exactly the mutable NFT capability under the VM token-category encoding. Each sibling either has empty category, consumed on the empty branch, or has a nonempty category whose first 32 bytes must differ bytewise from the root category.",
+    "OP_SIZE leaves the category item and adds its size. NUMNOTEQUAL and IF consume only the size comparison. The nonempty branch consumes both category prefixes via EQUAL, NOT, VERIFY; the empty branch consumes its category via DROP. Both paths restore the caller stack.",
+    "Exactly one output is allowed. Groups 0 and 1 require its locking bytes to equal the next rooted owner and its complete category/capability bytes to equal the input-root bytes. Ordinary token validation plus exclusion of same-category siblings preserves the unique designated mutable thread. Original group-first/tail commitment predicates own the arithmetic state seams.",
+    "Group 2 requires empty output token category. With one output this enforces the terminal token burn; it does not constrain the unrelated output destination or invent a proof/public-input value.",
+    "Induction from a designated initial root, with valid parent-output ancestry and the original state-seam theorem, binds all three ordered groups and the fixed-key finite arithmetic conclusion. A matching program funded elsewhere is not automatically the designated instance."
+  ],
+  "originalArithmeticPremises": [
+    "The prior profile-specific fixed-VK finite-domain arithmetic and state-seam proofs apply to the exact original code hashes; their domain is not enlarged.",
+    "The documented field/curve/subgroup/pairing and VM instruction semantics hold, and P2SH32/hash binding identifies exact reviewed owners.",
+    "The application supplies a designated initial root and valid ledger inputs. Offline synthetic anchors do not establish real funding, genesis authority, or circuit/setup provenance."
+  ],
+  "sequentialCovenants": {
+    "sourceChanges": false,
+    "bnTopology": "27 successive one-input transactions per existing case",
+    "blsTopology": "35 successive one-input transactions per existing case",
+    "graphBoundary": "Existing source owns successor locking, commitment and NFT capability transitions. The new replay checks complete linked contexts, not a mistaken one-transaction count27/count35 wrapper.",
+    "genesisBoundary": "Genesis produces a mutable continuation and a separately retained minting NFT. No claim of unique authorized instance across every possible genesis is introduced."
+  },
+  "evidence": {
+    "positiveCases": 12,
+    "wholeTransactions": 198,
+    "modeChecks": 594,
+    "oracleAccepted": 198,
+    "consensusAccepted": 176,
+    "standardAccepted": 176,
+    "resourceHoldsPerNativeMode": 22,
+    "linkedParentOutputs": 186,
+    "syntheticFundingAnchors": 186,
+    "generatedOutputs": 204,
+    "spentGeneratedOutputs": 186,
+    "unconsumedGeneratedOutputs": 18,
+    "unconsumedOutputBoundary": "Includes terminal unspendable outputs and retained minting outputs; not a count of live spendable UTXOs.",
+    "independence": "Each case is a separate scenario. Repeated synthetic anchor identifiers are never merged across cases.",
+    "wholeVm": "vm.verify({sourceOutputs,transaction}) checks each complete transaction using the fixed policy for its mode.",
+    "lineage": "Official hash256 is independently cross-checked against double-SHA256. Every child wire outpoint digest and exact parent-output/source-output match is checked; generated outputs and supplied anchors are consumed at most once per scenario."
+  },
+  "staticReviewReceiptSha256": {
+    "groupedFullComposition": "8a7120159cab93aa158021e5000ad5ca2ad01925b823db1fd18b3624f0f762d9",
+    "defaultAndFinalRunner": "38803c0a2e6beaf32d335f0421376efc35cf01f15dd8201d62e624280d609f04",
+    "groupedDecodedSymbolicStack": "46706c9d549e3fc63295d830376151463f4eda264cdd8caabdf0ce8cbbed1a99"
+  },
+  "exclusions": [
+    "Original withdrawn constructions and performance claims remain withdrawn.",
+    "No new or changed mathematical proof/public-input cases; auxiliary redeem/P2SH/output-link transport only.",
+    "No compiler, producer, prover, planner, negative suite, cybersecurity testing, byte/padding/cut/resource optimization, upstream merge or deployment.",
+    "All original finite-domain, native resource, external key/setup, designated-root and actual ledger/funding limitations remain. No general native/relay/mainnet admission is inferred."
+  ]
+}

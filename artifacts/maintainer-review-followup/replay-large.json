@@ -1,0 +1,120 @@
+{
+  "schema": "bls12381-residue-large-corrected-positive-replay/v1",
+  "status": "PASS_EXISTING_POSITIVES_ORACLE_AND_BCH_SPEC",
+  "positiveOnly": true,
+  "implementation": "bch-groth16-bls12381-intratx-residue-large-corrected",
+  "vectorSha256": "9b0ca5517eacf50d52a7991b90a89ded64e10c907fce9f2273c735a5a18af5d1",
+  "runs": [
+    {
+      "name": "valid",
+      "mode": "oracle",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        4038232,
+        79786952,
+        62785254
+      ]
+    },
+    {
+      "name": "valid",
+      "mode": "bch-spec-consensus",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        4038232,
+        79786952,
+        62785254
+      ]
+    },
+    {
+      "name": "valid",
+      "mode": "bch-spec-standard",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        4043864,
+        79852616,
+        62837862
+      ]
+    },
+    {
+      "name": "extra-0",
+      "mode": "oracle",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        4890764,
+        79789414,
+        62787590
+      ]
+    },
+    {
+      "name": "extra-0",
+      "mode": "bch-spec-consensus",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        4890764,
+        79789414,
+        62787590
+      ]
+    },
+    {
+      "name": "extra-0",
+      "mode": "bch-spec-standard",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        4896396,
+        79855078,
+        62840198
+      ]
+    },
+    {
+      "name": "worst-case",
+      "mode": "oracle",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        34730789,
+        79793374,
+        62788858
+      ]
+    },
+    {
+      "name": "worst-case",
+      "mode": "bch-spec-consensus",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        34730789,
+        79793374,
+        62788858
+      ]
+    },
+    {
+      "name": "worst-case",
+      "mode": "bch-spec-standard",
+      "inputs": 3,
+      "accepted": true,
+      "failures": [],
+      "operationCosts": [
+        34736421,
+        79859038,
+        62841466
+      ]
+    }
+  ],
+  "fixtureRuns": 9,
+  "evaluatedInputs": 27,
+  "scope": "Existing steps, extraValidProofs, and worstCaseProof only. No invalid fixtures, proof generation, builder, compiler variant, optimization, or cybersecurity execution."
+}

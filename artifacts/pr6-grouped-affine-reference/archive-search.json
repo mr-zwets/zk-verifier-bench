@@ -1,0 +1,67 @@
+{
+  "schema": "pr6-grouped-affine-archive-search/v1",
+  "scope": "Positive fixture-byte scan of the listed existing local archive sets; bounded coverage, not a claim about unscanned repositories.",
+  "method": "Hash decoded locking scripts and final P2SH unlocking pushes; deduplicate complete raw JSON by SHA256. Classify targets from original compile receipts by entry, input and projective flag.",
+  "coverage": {
+    "vectorFilesDiscovered": 1436,
+    "uniqueRawFilesParsed": 261,
+    "duplicateCopiesSuppressedByRawFileSha256": 1175,
+    "skipped": 0,
+    "maxJsonBytes": 16000000
+  },
+  "archiveSets": [
+    "historical-fixtures-v1",
+    "current-harness-benchmark",
+    "maintainer-followup-benchmark",
+    "source6-bundle",
+    "old-source-repo"
+  ],
+  "selectedProfile": {
+    "windows": [
+      [
+        0,
+        21
+      ],
+      [
+        21,
+        43
+      ]
+    ],
+    "curve": "BN254",
+    "sharedTable": {
+      "inputIndex": 1,
+      "dataOffset": 233
+    },
+    "successor": {
+      "payloadBytes": 704,
+      "coordinateOffset": 384,
+      "coordinateBytes": 64
+    }
+  },
+  "programMatches": {
+    "projective-reference-first": 12,
+    "projective-reference-final": 12,
+    "pre-fallback-affine-first": 12,
+    "pre-fallback-affine-final": 0,
+    "complete-affine-final": 0
+  },
+  "genericAffinePositivePairMatches": 0,
+  "preFallbackAffinePositivePairMatches": 0,
+  "projectiveReferencePositivePairMatches": 12,
+  "matchingProjectiveArchive": {
+    "repository": "mr-zwets/zk-verifier-bench",
+    "pullRequests": [
+      13,
+      14
+    ],
+    "file": "src/bch/groth16-intratx-residue-vectors.json",
+    "rawSha256": "be5f48aa8923c7d7a976436d31e41efa8e06f07a9505e719eb830c4a6ac35434",
+    "positiveCases": 12,
+    "successor": "projective608-byte layout; no affine zInv parameter",
+    "affineSuccessor704BytePushes": 0
+  },
+  "conclusion": "No existing positive fixture in this scanned set matches the pre-fallback or complete affine final program/704-byte successor ABI. The related projective archive cannot validate an affine replacement.",
+  "newProofWitnessOrFixtureBytes": 0,
+  "negativeVmTests": 0,
+  "byteOptimizations": false
+}

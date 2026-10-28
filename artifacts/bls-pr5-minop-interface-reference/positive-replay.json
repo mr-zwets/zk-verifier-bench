@@ -1,0 +1,151 @@
+{
+  "schema": "bls-source5-minop45-positive-replay/v1",
+  "status": "PASS_EXISTING_POSITIVES_ARITHMETIC",
+  "node": "v24.22.1",
+  "vmPackageEntrySha256": "c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d",
+  "guardedSha256": "42ca73a63775c062898e97ecde2b9a3d57b5f292d11677341a9fe5d6063ae0d3",
+  "positivePacketSha256": "4578baa78f231a475a3747e6a89694d0cc67600067814cc6649bafe4b53cdb9f",
+  "replayToolSha256": "9e9ff28a5c732fe80b5d9396e1685d13f59f9004677362ba2ce2f06e16cef66f",
+  "results": [
+    {
+      "name": "proofs[0]",
+      "unlockingSha256": "f5e8af7ae1f8ecd1171aab2a62d37d85993390362b19ae73a99c65d441fd6047",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 152662799,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        }
+      ]
+    },
+    {
+      "name": "proofs[1]",
+      "unlockingSha256": "cd9a6c45f6c93d4cb98c3e48d7928c628bcb4f5d317b52c04fb10c2f2bf33f0c",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 155072291,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        }
+      ]
+    },
+    {
+      "name": "proofs[2]",
+      "unlockingSha256": "5d50331c5a9e719aa08f67186ab715f4f0722ada33c4b814dfe1938c6eb636a6",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 154410798,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        }
+      ]
+    },
+    {
+      "name": "proofs[3]",
+      "unlockingSha256": "ae5eb50d5863dfeca50367b99cf0005e7683eba54324fc0cd63f9bc9e2da759c",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 155252654,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        }
+      ]
+    },
+    {
+      "name": "worstCaseProof",
+      "unlockingSha256": "c5a1fb46d10f929cf37449895cf208c5b72b56e9bd3477ebb08f9c0c1ceb83ec",
+      "outcomes": [
+        {
+          "mode": "oracle",
+          "accepted": true,
+          "error": null,
+          "operationCost": 179195533,
+          "finalStackItems": 1
+        },
+        {
+          "mode": "consensus",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        },
+        {
+          "mode": "standard",
+          "accepted": false,
+          "error": "The provided locking bytecode exceeds the maximum bytecode length. Maximum bytecode length: 10000 bytes. Locking bytecode length: 64396 bytes.",
+          "operationCost": 0,
+          "finalStackItems": 0
+        }
+      ]
+    }
+  ],
+  "existingPositiveProofs": 5,
+  "oracleAccepted": 5,
+  "consensusAccepted": 0,
+  "standardAccepted": 0,
+  "scope": "Saved exact 45-argument BLS minop artifact. Five existing proof/public-input payloads, with only six proven-zero auxiliary limbs removed from the 51-argument transport. Resource-loosened oracle evidence and per-input native admission observations; no negative/new proof cases, whole-transaction/relay, producer, setup, or optimization claim."
+}

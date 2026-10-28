@@ -1,0 +1,25 @@
+{
+  "schema": "bls-minop-51-to-45-transport-review/v1",
+  "status": "STATIC_REVIEWED_NOT_PRODUCER_EXECUTED",
+  "helperPath": "../../public-source/singleton/bls12-381/pr5-minop-interface-reference/transport-51-to-45.mjs",
+  "projection": {
+    "originalDeclarationSlots": 51,
+    "retainedDeclarationSlots": 45,
+    "removedSlots": [40, 41, 42, 43, 44, 45],
+    "removedNames": ["w6", "w7", "w8", "w9", "w10", "w11"],
+    "retainedNames": ["Ax", "Ay", "Bxa", "Bxb", "Bya", "Byb", "Cx", "Cy", "in0", "in1", "c0", "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "ci0", "ci1", "ci2", "ci3", "ci4", "ci5", "ci6", "ci7", "ci8", "ci9", "ci10", "ci11", "w0", "w1", "w2", "w3", "w4", "w5", "k10", "k20", "k11", "k21", "vkxZinv"]
+  },
+  "mathematicalBasis": {
+    "checkerSourceSha256": "00641ad5178d450277a0738b999e43cc6fc87598e27cf547ed25a35871c883ae",
+    "residueCheckerSourceSha256": "6c9527d3083940041931ca4cd1e682609089adbc30ae0b56a18a181d41b03bf6",
+    "constructorInvariant": "The residue constructor asserts the upper six Fp12 limbs are zero; the checker multiplies the retained six-limb Fp6 value against an implicit six-zero upper half.",
+    "existingFixtureEvidence": "All five existing reencoded records decode removed w6..w11 as numeric zero and preserve every retained raw push."
+  },
+  "guardrails": [
+    "No producer or prover execution",
+    "No new or negative fixtures",
+    "No VM execution by this helper",
+    "No byte optimization",
+    "No cybersecurity testing"
+  ]
+}

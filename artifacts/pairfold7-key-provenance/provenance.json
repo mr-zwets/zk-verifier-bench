@@ -1,0 +1,56 @@
+{
+  "schema": "pairfold7-portable-provenance-packet/v2",
+  "status": "DIRECT_PACKET_KEY_TERMINAL_FACTOR_BINDING",
+  "basePacketPath": "key.json",
+  "basePacketSha256": "8bc6417c6c1724ab439f9679532273485c73ef82242416b822e06c07fef99db1",
+  "checkerPath": "check.mjs",
+  "directBindings": {
+    "keyCoordinates": "The v2 checker reads the exact packet VK coordinates inherited from v1, validates all 20 coordinate occurrences against the pinned source Git blob's role calls, and uses the same exact alpha/beta coordinates for the independent pairing calculation.",
+    "terminalProgram": "The v2 checker reads the pinned vector Git blob, selects steps[-1] labelled terminal, parses its final PUSHDATA2 as the redeem program, and checks its length and SHA before reading offsets.",
+    "terminalOpcodeOffsets": [
+      2206,
+      2239,
+      2276,
+      2313,
+      2350,
+      2387,
+      2424,
+      2461,
+      2498,
+      2535,
+      2572,
+      2609
+    ],
+    "terminalDataOffsets": [
+      2207,
+      2240,
+      2277,
+      2314,
+      2351,
+      2388,
+      2425,
+      2462,
+      2499,
+      2536,
+      2573,
+      2610
+    ],
+    "terminalLength": 5809,
+    "flattenOrder": [
+      "c0.c0.c0",
+      "c0.c0.c1",
+      "c0.c1.c0",
+      "c0.c1.c1",
+      "c0.c2.c0",
+      "c0.c2.c1",
+      "c1.c0.c0",
+      "c1.c0.c1",
+      "c1.c1.c0",
+      "c1.c1.c1",
+      "c1.c2.c0",
+      "c1.c2.c1"
+    ],
+    "factorCertificateRole": "Additional historical corroboration only; v2 does not rely on its serialized limb or manifest claims for the direct binding."
+  },
+  "qualification": "This packet closes exact declared-key to pinned-terminal-coefficient compatibility. It does not establish the historical exporter/setup link, full verifier soundness, or neutral-domain completeness."
+}

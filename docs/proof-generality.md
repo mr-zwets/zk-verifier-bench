@@ -5,15 +5,22 @@ and the difference matters more than raw byte counts:
 
 - **runtime-general** — the proof `(A, B, C)` and public inputs arrive *push-only*
   in the unlocking (witness) script at spend time. One deployed locking script
-  verifies **any** valid proof for its verifying key (VK). This is how the
+  is intended to verify any valid proof in its declared verifying-key (VK) and
+  input domain. This is how the
   references (`nchain`, `scrypt-bn256`) and our **singleton** verifiers work.
-- **instance-specific** — the proof is **baked into the locking program**. Our
-  **chunked** verifiers commit each step's carried state (`hash256` of the
+- **instance-specific** — the proof is **baked into the locking program**. Some
+  chunked constructions commit each step's carried state (`hash256` of the
   intermediate Miller / final-exp values) into the chunk scripts, so the program is
   specialized to one proof; a different proof needs the chunks regenerated.
 
-Both genuinely verify on-chain (an invalid proof cannot satisfy either). But the
-deployment models differ, so their byte totals are not directly comparable — see
+Deployment structure alone does not determine this property: chunked,
+intra-transaction and grouped constructions may also be runtime-general.
+Read the entry's `proofBinding` and its exact construction argument.
+
+Both can verify on-chain under their declared equations and assumptions. A
+soundness argument, rather than the fixture sweep alone, establishes what an
+invalid proof cannot satisfy. The deployment models differ, so their byte
+totals are not directly comparable — see
 "Not every Groth16 is alike" in the [README](../README.md).
 
 Fixture acceptance supports a finite claim; it does not prove correctness for every
@@ -107,7 +114,9 @@ exactly the runtime-general property under test.
 
 We do not need a real circuit or prover, because we know the trusted-setup scalars
 (the same ones `src/checkpoints/gen-pairing-vectors.ts` / the BLS `bls_instance.mjs`
-used to construct the committed instance). The Groth16 pre-final-exp product is
+used to construct the committed instance). These are synthetic equation-valid
+fixtures, not application-circuit proofs. They establish no circuit knowledge,
+setup integrity, or application-level zero-knowledge claim. The Groth16 pre-final-exp product is
 
 ```
 e(-A,B)·e(alpha,beta)·e(vk_x,gamma)·e(C,delta)

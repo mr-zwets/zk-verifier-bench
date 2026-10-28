@@ -1,0 +1,55 @@
+{
+  "schema": "graph-ancestry-corrections-qualification/v1",
+  "scope": "Positive existing proof/public/state/token/value/output contexts only.",
+  "sourceHelper": {
+    "path": "bind_reference_graphs.mjs",
+    "sha256": "21da67414e46c66fcefd9935ccc423483283873e012be881705f91eb27b65d75",
+    "groupedRootBoundPacketSha256": "98d41614aaadc92dd9ee4b1b784b8cc9cf891e74ad4e67532f8c4b72cedcfe60"
+  },
+  "finiteTheoremTransfer": {
+    "premise": "The binder adds only stack-neutral root/continuation predicates around the previously validated arithmetic bodies; saved proof, public-input, state, table, and padding bytes remain unchanged.",
+    "boundary": "This transfers the prior finite-domain arithmetic theorem under its original premises; positive fixture acceptance is not a universal-domain proof."
+  },
+  "symbolicRootStackProof": {
+    "checkerSha256": "cafde147f9895e0f830259a7d86d6377cfa76d95b7f8d57628c295178fe6163a",
+    "receiptSha256": "46706c9d549e3fc63295d830376151463f4eda264cdd8caabdf0ce8cbbed1a99",
+    "result": "Each grouped prefix consumes its own predicate temporaries and restores the legacy caller stack. OP_SIZE preserves its operand; both nonempty-category and empty-category branches consume that operand exactly once. The public mathematical-disposition.json gives the root and composition arguments; the hashes identify the separate decoded symbolic review."
+  },
+  "ancestry": {
+    "parentIds": "official double-SHA256 raw digest with UI-order reversal for transaction outpoint fields",
+    "checks": [
+      "serialized child outpoint digest",
+      "parent output 0 equals child source output 0",
+      "duplicate generated outpoints",
+      "per-chain double spends",
+      "synthetic anchor uniqueness"
+    ],
+    "syntheticFunding": "Zero-hash anchors and grouped non-baton global stage indices are explicit auxiliary context; they are not live UTXO, relay, confirmation, or mainnet claims."
+  },
+  "nativeBoundary": {
+    "oracle": "198/198 accepted",
+    "consensus": "176/198 accepted; 22 exact fixed-policy resource holds retained in validation-report.json",
+    "standard": "176/198 accepted; 22 exact fixed-policy resource holds retained in validation-report.json",
+    "noMasking": true
+  },
+  "prohibitedScope": [
+    "new proofs",
+    "negative cases",
+    "cybersecurity testing",
+    "producer/compiler/planner/prover execution",
+    "byte or padding optimization",
+    "live UTXO or mainnet claims"
+  ],
+  "validationReport": {
+    "path": "validation-report.json",
+    "sha256": "a8dae67dfc7afb6f319b13c95a9412a8b41da48fa5a9f42acb1976a5966ad55d",
+    "replaySha256": "1353f5149c0f7d7707571941b4ab649bda649a321b013b119d9c691c051a4eaa"
+  },
+  "mathematicalDisposition": "mathematical-disposition.json",
+  "mathematicalDispositionSha256": "a5968e524982b71337e98ce24974cbdbd0b6a06f43ff5a5edcbee415258e00c3",
+  "staticReviewReceiptSha256": {
+    "groupedFullComposition": "8a7120159cab93aa158021e5000ad5ca2ad01925b823db1fd18b3624f0f762d9",
+    "defaultAndFinalRunner": "38803c0a2e6beaf32d335f0421376efc35cf01f15dd8201d62e624280d609f04",
+    "groupedDecodedSymbolicStack": "46706c9d549e3fc63295d830376151463f4eda264cdd8caabdf0ce8cbbed1a99"
+  }
+}

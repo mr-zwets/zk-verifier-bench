@@ -1,0 +1,62 @@
+{
+  "schema": "historical-rooted-graph-qualification/v1",
+  "sourceHelper": "chunked/intratx/bind_historical_graphs.mjs",
+  "sourceHelperSha256": "f9ef0d0e38f67369826bc3592a4438b70f80da96acd059b7670f3b73a51e095d",
+  "sourceManifest": "chunked/intratx/historical-rooted-graphs.json",
+  "sourceManifestSha256": "a8748bb4201360e9fcf7cfde8524c2cf599a698afe58ee34b67bd52d4cda83",
+  "correctedPositivePacketSha256": "f88d2274794b0e38c5254187c04d97033080b7fa84fafbccd982f99e5b4f19b1",
+  "rootedPositivePacketSha256": "75c3bb008b672b066abae1df206450ad29815ca5bfd1176a66a63ac533e5e89e",
+  "replayToolSha256": "258778d8477e95a10320cd4027102e42aa1636363c58c4e942a603cb0885fdc0",
+  "profiles": [
+    {
+      "id": "bch-groth16-historical-bn27-intratx-frame-corrected-rooted",
+      "mode": "successor-chain",
+      "inputCount": 27
+    },
+    {
+      "id": "bch-groth16-historical-bls26-frame-corrected-rooted",
+      "mode": "successor-chain",
+      "inputCount": 26
+    },
+    {
+      "id": "bch-groth16-historical-bls24-frame-corrected-rooted",
+      "mode": "successor-chain",
+      "inputCount": 24
+    },
+    {
+      "id": "bch-groth16-historical-bn13-frame-corrected-rooted",
+      "mode": "root-absolute-pins",
+      "inputCount": 13
+    },
+    {
+      "id": "bch-groth16-historical-bls34-frame-corrected-rooted",
+      "mode": "successor-chain",
+      "inputCount": 34
+    },
+    {
+      "id": "bch-groth16-historical-bn-large4-frame-corrected-rooted",
+      "mode": "successor-chain",
+      "inputCount": 4
+    }
+  ],
+  "graphPremise": "For a transaction spending a UTXO protected by the pinned root program, root position and exact input count are enforced. The successor-lock comparisons, together with ordinary ledger validation of every input and P2SH32 hash binding, force the complete ordered program graph. BN13 uses absolute root pins and preserves inputs 1..12. A particular historical outpoint identity is not asserted.",
+  "theoremTransfer": "Each inserted root/successor gate is stack-neutral at the original redeem-body boundary; every original arithmetic instruction and every proof/public/state/table/padding unlocking prefix is preserved. The previously qualified finite-domain equation therefore transfers under the original VM/hash/curve premises and the enforced conditional ordered graph. Exact historical outpoint identity remains external.",
+  "validation": {
+    "staticChecks": "PASS",
+    "smoke": {
+      "report": "replay-smoke.json",
+      "evaluations": 36,
+      "accepted": 34,
+      "resourceHolds": 2
+    },
+    "full": {
+      "report": "replay-full.json",
+      "evaluations": 1152,
+      "accepted": 1126,
+      "resourceHolds": 26
+    },
+    "resourceHolds": "BN27 inputs 0 and 8 reach the BCH2026 10000-byte stack-item limit, while inputs 1 and 9 reach the 10000-byte unlocking limit, in consensus and standard modes across three cases (24 evaluations). BN13 has only the two standard-mode operation-cost-density holds at input 1 in extra-0 and worst-case. Oracle and proposed-spec evaluations accept every case.",
+    "positiveOnly": true
+  },
+  "scope": "Existing corrected positive cases only. No proof generation, negative cases, compiler/producer/planner invocation, grouped graph, cybersecurity testing, byte optimization, whole-transaction admission, relay/mainnet conclusion, or neutral-domain completeness claim."
+}

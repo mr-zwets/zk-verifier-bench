@@ -1,0 +1,56 @@
+{
+  "schema": "bn254-current-covenant-positive-reference/v1",
+  "status": "PASS_ARITHMETIC_FIXTURES_NATIVE_RESOURCE_HOLD",
+  "sourceRevision": "f8b16b221fb039f0ed04636b195a5deb8379f13c",
+  "sourcePins": {
+    "chunked/pairing/build_vectors_covenant_residue.mjs": "6bf6a37f4dcd285a04c6e0437bf088f93e4ed1547669399e46a7cf8e5560c7f9",
+    "chunked/pairing/gen_g2check.mjs": "5f95be5cab8e81eaf0f73525ae2b498e28f788254ed35caed228fa5741384e46",
+    "chunked/pairing/gen_vkx_glv.mjs": "2f600f06f3e80d59648b068676893b8f272bb67fbcc3bd7b802982a6049affc2",
+    "chunked/pairing/gen_miller_residue.mjs": "7a75011f7b0bfcb70d988edcb7be8fc3a10d789f279a15667642bca5242f04e4",
+    "chunked/pairing/_millermath.mjs": "1a6dc161cacbcdd70782ac97456ffb57e7617ecf756ea02d53727c2ec06d49e3",
+    "chunked/pairing/_residuemath.mjs": "0190c97341ac840608de9f46c55ddd9013191d359793ff564a41600138fd52d8",
+    "singleton/bn254/lib/Fp12.cash": "e5e4c2ddde4109ac2d34226826c4d30e30e2ae96969a268a82bdec78902f8d93",
+    "singleton/bn254/lib/Fp2.cash": "7b0085efccaa127e8cfb822f6d4c0c6d384996eea8a7ad6f3e7cd920bc895807",
+    "singleton/bn254/lib/G1.cash": "7ca01ba129be1e14433f478ef9ca1031702bad6d6ddce186e6c421b702a737b4",
+    "singleton/bn254/lib/FinalExp.cash": "e72d70967842416a762676a3fe543cb25752929eec3f006b7fe245dc7122b603",
+    "singleton/bn254/lib/Fp.cash": "a628abaff5b9d82840526afa9fd5948f8409a3dbaa85df421ce64254845723fe",
+    "singleton/bn254/lib/Fp6.cash": "370ae001bf5ad43a34fbc015381f5be50a4dbdce53a9dbcb67f3f71524ad8136",
+    "singleton/bn254/lib/Miller.cash": "2756c4bcd803a3a46c9a7136afc9cc99e529c8e2398570affd168e3d59027e28",
+    "singleton/bn254/lib/lazy/Bn254Lazy.cash": "4193185b04bf334905f00cd2ae58e444d22095c0eaaee853a53f46beaa5d26b4",
+    "singleton/bn254/lib/lazy/Bn254LazyG.cash": "ba5b7a852cd6c90a86c5d4cab47712a8588498818de9a3de61bcb39270717d4c"
+  },
+  "compilePolicy": "One fixed compileFileBytecode default rescheduleStacks:true policy. No compiler variant or size selection. Fixed existing cuts and target 10000-byte frames.",
+  "artifactSha256": "49f80dfd42790caf26ff56020b0bcd5ec916f9801d972475f147571863c51ed2",
+  "checkpointSha256": "e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e",
+  "multiproofSha256": "10ccd795c69ad04d13ac7353c893fcf920e3a662b9a7f9639590f4a21b67f789",
+  "existingProofs": 3,
+  "logicalPublicInputs": [
+    [
+      "42540",
+      "732739"
+    ],
+    [
+      "439832",
+      "401604"
+    ],
+    [
+      "14474011154664524427946373126085988481658748083205070504932198000989141204991",
+      "14474011154664524427946373126085988481658748083205070504932198000989141204991"
+    ]
+  ],
+  "originalBn48Fixture": {
+    "repository": "mr-zwets/zk-verifier-bench",
+    "revision": "39df0459b8b231f4fc0097c78c5a879842b5dc38",
+    "file": "src/bch/groth16-chunked-vectors.json",
+    "sha256": "ddef81a2fb0956e0dc4f19e40441a1f8e3e6b150e97726e282665592782dfcf4",
+    "binding": "Parent compared all three proof tuples and public scalars against this archived fixture and the current public checkpoint/multiproof. Replay uses the existing public checkpoint/multiproof; it fetches no files."
+  },
+  "nativeAcceptedPerMode": 75,
+  "arithmeticOracleAccepted": 81,
+  "inputsPerProof": 27,
+  "nativeHolds": "Each case has unlocking lengths 10015 and 10415-10479 at Miller [305,323) and [340,348), exceeding the native 10000-byte limit.",
+  "scope": "Existing finite positive cases only. The exact connected graph, commitment seams and per-input VM results are verified. Oracle resource bounds are relaxed only to execute arithmetic. No neutral-domain completeness, whole-transaction, relay, mainnet, production setup, or arbitrary-key claim.",
+  "commitmentScope": "Replay checks recorded incoming/outgoing commitment equality at each seam; compiled contracts execute the witness-to-commitment checks. No separate decoded-state commitment theorem is claimed.",
+  "reproduce": "node artifacts/bn254-covenant-reencoded/replay.mjs source-checkout new-report.json",
+  "compilerEntrySha256": "5e92acd05a37bea1d71e0a5ae35fe0d79d437229e1ef6e354d94147e7375bd70"
+}

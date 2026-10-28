@@ -7,11 +7,11 @@ verifier is one Step; every other structure is an ordered list of Steps whose
 cross-step continuity the harness reproduces faithfully (see *Structures*
 below).
 
-For each implementation the harness:
+For each executable implementation the harness:
 
-1. **proves correctness** — the valid run is fully ACCEPTED and every invalid
-   run REJECTED, on the BCH 2026 VM with limits loosened (so even oversized
-   verifiers run to completion);
+1. **checks fixtures** — the valid run is fully ACCEPTED and every
+   supplied invalid run REJECTED, on the BCH 2026 VM with limits loosened (so
+   even oversized verifiers run to completion);
    maintainer red-team attacks from `src/bch/redteam/<id>.json` (when present)
    must be rejected too, see [public-input-binding.md](public-input-binding.md);
    an entry that declares where its public inputs live (`publicInputs`) must
@@ -26,9 +26,18 @@ For each implementation the harness:
 3. **checks deployability** — replays the valid run on the real consensus VM
    (`bchCompatible`) and the standard/relay VM (`fitsBchStandardness`).
 
-Correctness gates the cost numbers. Results are grouped into separate
+Evidence gates the cost numbers. A reviewed mathematical claim is separate:
+acceptance of the exact byte-pinned artifact must imply the stated fixed-VK
+equation under named assumptions and domain restrictions. Fixtures are
+supporting evidence, not the admission basis. See the authoritative
+[submission claim sheet](submission-claims.md). Results are grouped into separate
 leaderboards by category (`full` / `partial` / `spec` / `demo`) and curve; the
 score is total on-chain bytes.
+
+`profileOnly` entries receive byte/packaging and script-cap accounting without
+VM execution. Their `bchCompatible` flag is size-based, `validPassed` is false,
+and standardness is not demonstrated; they provide no fixture-acceptance or
+executed-deployability evidence.
 
 Run it: `pnpm benchmark`. Positional args are substring filters on the entry id
 (`pnpm benchmark genpow`, `pnpm benchmark singleton chunked`); `--demos`
@@ -42,7 +51,7 @@ The VM constructors in `src/harness/vm.ts`:
 
 | VM | used for |
 |----|----------|
-| `createLoosenedVm` | correctness + op-cost measurement (every ceiling lifted, so oversized entries run to completion) |
+| `createLoosenedVm` | fixture execution + op-cost measurement (every ceiling lifted, so oversized entries run to completion) |
 | `createRealVm` | consensus limits → the `BCH compatible` verdict |
 | `createStandardVm` | mempool-relay policy → the `fitsBchStandardness` verdict |
 | `createRealVmSpec` / `createStandardVmSpec` | the proposed **bch-spec** VM (100,000-byte scripts, op-cost budget `(10,000 + len) × 800`); grades `vm: 'bch-spec'` entries |
@@ -81,7 +90,7 @@ export const myImpl: Implementation = {
 
 Register it in `REGISTRY` in `src/harness/benchmark.ts`.
 
-- **Correctness.** The valid run must have every step accept. Invalid runs are
+- **Fixture checks.** The valid run must have every step accept. Invalid runs are
   given explicitly and/or, if `tamperable`, derived by flipping a bit in each
   step's witness (works when witnesses are push-only data). A run is "rejected"
   if any of its steps fails.
@@ -97,7 +106,9 @@ Register it in `REGISTRY` in `src/harness/benchmark.ts`.
 - **Input validation.** `invalidInputs` outcomes record whole-run rejection only.
   The harness cannot attribute rejection to an isolated domain predicate and
   therefore does not award the legacy `inputValidation.enforced` badge. This is
-  missing evidence, not proof that domain checks are absent.
+  missing evidence, not proof that domain checks are absent. A
+  cofactor-equivalent equation domain is a separate policy, not a claim of
+  strict subgroup rejection.
 
 ## Structures
 

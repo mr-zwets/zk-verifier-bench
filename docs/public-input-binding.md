@@ -34,34 +34,43 @@ As a control, the same claimed inputs with `vk_x` honestly recomputed for them
 (which no longer matches the proof) are rejected. So the hole is specifically that
 the claimed inputs are not bound to `vk_x`.
 
-These entries now fail the correctness verdict. They stay listed but are
-excluded from the frontier and the score history until a fixed revision rejects
-the attacks.
+The affected original claims remain withdrawn or held. Rejecting these runs
+is necessary evidence for the public-input/MSM subclaim, but does not restore
+full-verifier qualification. A corrected successor needs a new equation review
+and an exact-artifact disposition; historical measurements remain history.
 
-## A repaired entry
+See the upstream maintainer discussions in [issue #28](https://github.com/mr-zwets/groth16_cashscript/issues/28)
+and [issue #32](https://github.com/mr-zwets/groth16_cashscript/issues/32).
 
-`bch-groth16-intratx-pairfold5-densless-msm` keeps the reconstructed densless verifier, slices
-the dead predicate out of its genesis, and adds two inputs that recompute
+<a id="a-repaired-entry"></a>
+
+## Historical MSM repair and later full-verifier withdrawal
+
+`bch-groth16-intratx-pairfold5-densless-msm` kept the reconstructed densless
+verifier, sliced the dead predicate out of its genesis, and added two inputs that recompute
 `vk_x = IC0 + n0*IC1 + n1*IC2` from the claimed public inputs (GLV Straus); the terminal requires
 the genesis `vk_x` to equal their result. Its red-team file (written by the source's
 `redteam.mjs`, since the PairFold generator here no longer matches its layout) rejects forged
 public inputs, adaptive forgeries with a valid MSM witness for the forged inputs, a pad-shift
-forgery found in review, and invalid proof points. Source: `chunked/bn254/densless-msm` in
-groth16_cashscript.
+forgery found in review, and invalid proof points. This demonstrates a public-input/MSM repair
+only; it does not establish the soundness of the complete pairing verifier. The later F6 review
+withdrew the full-verifier claim, so this entry must not be cited as a confirmed sound
+submission. Source:
+`chunked/bn254/densless-msm` in groth16_cashscript.
 
 ## The red-team gate
 
 Submitters write their own `invalid` vectors. That leaves the negative set under
 the submitter's control, and weak negatives (such as tampering only the P2SH
 redeem push) can make a broken verifier look sound. The red-team gate adds
-attacks written by the maintainers:
+attacks written by the maintainers against the exact reviewed bytes:
 
 - `src/bch/redteam/<id>.json` holds concrete attack runs against an entry's exact
   bytes. Each run is the entry's valid run with some unlockings replaced. Every
   run must be **rejected**.
 - `src/harness/redteam.ts` evaluates them inside `benchmark()`. Any accepted run
-  sets the verdict to `FAIL (maintainer red-team attack accepted)`; in
-  `results.json` this shows up as `correctness.verdict: "fail"`, with
+  sets the verdict to the existing `FAIL (maintainer red-team attack accepted)`;
+  in `results.json` this shows up as `correctness.verdict: "fail"`, with
   `correctness.redTeam` and a `failures` entry.
 - The file pins the `sha256` of every locking it targets. If the entry is
   resubmitted with new lockings, the file is reported **stale** and not counted.
@@ -82,7 +91,10 @@ multiplicities are pinned to the claimed inputs. Before opening the PR:
 
 1. regenerate the red-team file for your id with the command above;
 2. confirm `pnpm benchmark <id>` reports `red-team: all N maintainer attack
-   run(s) rejected`.
+   run(s) rejected`;
+3. document the full equation argument and independent review in the claim
+   [sheet](submission-claims.md). Passing these checks alone is necessary evidence, not a universal
+   theorem.
 
 If your construction changes the genesis layout so the tool no longer finds the
 auxiliary blob, say so in the PR. The maintainers will then write an attack for

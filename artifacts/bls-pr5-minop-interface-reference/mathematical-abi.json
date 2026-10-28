@@ -1,0 +1,25 @@
+{
+  "schema": "bls-pr5-minop-mathematical-abi/v1",
+  "finiteDomain": {
+    "proofCoordinates": "0 <= Ax,Ay,Bxa,Bxb,Bya,Byb,Cx,Cy < fieldP",
+    "publicInputs": "Bounded GLV decomposition k10,k20,k11,k21 with exact congruence to in0,in1 modulo r",
+    "residue": "c and cInv are canonical Fp12 limbs; w0..w5 are canonical embedded-Fp6 limbs",
+    "glv": "0 <= k10,k20,k11,k21 < 2^128",
+    "inverse": "vkxZinv is consumed through modular inverse and affine conversion; canonical representative is not required for the field equation"
+  },
+  "composition": {
+    "helpers": 30,
+    "glvUniversalKernelCases": 4096,
+    "millerEvents": 277,
+    "preparedLines": 138,
+    "terminalPredicates": 47,
+    "scalarSeedMillerResidueBindingsClosed": true,
+    "conditionalSingletonEquationSoundnessEstablished": true,
+    "fullNumericDomainAcceptanceOrBudgetEstablished": false,
+    "externalStatementIdentityEstablished": false,
+    "archivedArtifactTheoremTransferred": false,
+    "multiproofCallerDefectRepaired": false
+  },
+  "equation": "e(-A,B)*e(alpha,beta)*e(vk_x,gamma)*e(C,delta)=1",
+  "qualification": "This is a conditional finite-domain mathematical composition. It does not establish unrestricted VM acceptance, native resource admission, producer totality, exceptional-point completeness, or circuit/trusted-setup knowledge soundness."
+}

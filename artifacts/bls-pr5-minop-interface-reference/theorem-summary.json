@@ -1,0 +1,17 @@
+{
+  "schema": "bls-pr5-minop-theorem-summary/v1",
+  "status": "PASS_COMPILED_FINITE_DOMAIN_EQUATION_COMPOSITION",
+  "originalResultSha256": "2869d18a091354bd2d5163c5c71bca490efe34b15902e6e73153d40d9f198c54",
+  "programSha256": "42ca73a63775c062898e97ecde2b9a3d57b5f292d11677341a9fe5d6063ae0d3",
+  "sourceSha256": "00641ad5178d450277a0738b999e43cc6fc87598e27cf547ed25a35871c883ae",
+  "compilerHead": "1c707c1dbf87396b30ba5e0704b1db44475ce893",
+  "closedBindings": ["scalar", "seed", "GLV", "field", "group", "Miller", "residue", "terminal"],
+  "unclosedPremises": [
+    "finite-domain theorem must be joined to the stated CashScript within semantics and pinned BCH2026 VM arithmetic",
+    "native resource admission is not established: the 64,396-byte locking exceeds the 10,000-byte per-script limit before execution",
+    "the five positive fixture replay does not establish full numeric-domain acceptance or producer/witness totality",
+    "the theorem does not transfer to the archived 51-argument locking or generic current minop ABI",
+    "SNARK circuit, trusted-setup, and external statement identity are outside this theorem"
+  ],
+  "notClaimed": ["unrestricted full soundness", "native or standard admission", "byte optimization", "cybersecurity assurance"]
+}
