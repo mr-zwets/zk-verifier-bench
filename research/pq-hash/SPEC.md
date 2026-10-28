@@ -3,7 +3,7 @@
 Track: pq-hash (post-quantum, hash-based proof verification on BCH). Phase: Design. Date: 2026-10-28.
 Branch: `wip/pq-hash-design` (zk-verifier-bench), worktree `work/pq-hash/design`. **Research only: not a leaderboard entry.** Nothing here touches REGISTRY, results.json or score-history.json.
 
-Calculator: [research/pq-hash/params.py](research/pq-hash/params.py). It is the single source for every number below. Its outputs are [params-output.txt](research/pq-hash/params-output.txt) and [params-output.json](research/pq-hash/params-output.json).
+Calculator: [params.py](params.py). It is the single source for every number below. Its outputs are [params-output.txt](params-output.txt) and [params-output.json](params-output.json).
 - Bytes are exact for the proof format in section 3. Multiproof sizes are expectations over uniform query indices.
 - Op-cost figures are a rough kernel model, used only for feasibility. The Kernels phase replaces them with measurements (section 8).
 
@@ -15,14 +15,14 @@ Calculator: [research/pq-hash/params.py](research/pq-hash/params.py). It is the 
 | field | Goldilocks p = 2^64 − 2^32 + 1; challenges and FRI layers ≥ 1 in F_{p^3} = F_p[u]/(u^3 − 7) |
 | hash | SHA-256 (native OP_SHA256) for Merkle trees, Fiat-Shamir and grinding; Merkle nodes truncated to h bytes (h = 25 at 100 bits, 32 at 128) |
 | statement | MiMC-7 chain over F_p with an 8-constant periodic schedule; trace 2 columns × n = 2^16 rows; y = F^(n−1)(x); 4 constraints, degree 3 |
-| soundness | provable, Johnson regime: BCIKS20 Thm 8.3 batched FRI with list-size DEEP-ALI; round-by-round Fiat-Shamir with grinding; ZK out of scope |
+| soundness | provable, Johnson regime: BCIKS20 Thm 8.3 batched FRI with list-size DEEP-ALI; round-by-round Fiat-Shamir with grinding; ZK out of scope. **All λ figures are classical bit-security** (quantum: §4.5) |
 | P100 | ρ = 2^−7, folds [4, 8, 8], final degree < 2^8, m = 3, **s = 22 queries**, g = 28, h = 25: λ = 100; **≈ 50.0 KB proof** |
 | P128 | ρ = 2^−5, folds [4, 8, 8], final degree < 2^8, m = 4, **s = 43 queries**, g = 28, h = 32: λ = 128; **≈ 91.5 KB proof** |
 | layout (a), today's standard rules | P100: **1 transaction, 6 inputs, ≈ 57 KB**. P128: **2 transactions, 14 inputs, ≈ 120 KB**, with an NFT thread between them |
 | layout (b), one input (TXv5 / bch-spec) | P100: ≈ 54 KB unlocking. P128: ≈ 95.6 KB unlocking, which fits the 100,000 B standard transaction with ≈ 4 KB to spare |
 
 Headline expectation, to be confirmed by Build:
-- A **128-bit provably sound** post-quantum STARK verifier fits **one TXv5 input**.
+- A **128-bit (classical) provably sound** STARK verifier, built only from hashing (the post-quantum family), fits **one TXv5 input**. "Provably" is conditional on one open check (§4.1): the per-round Fiat-Shamir split of the commit error. The P128 commit round has only 0.3 bits of margin.
 - A **100-bit** one fits **one standard BCH transaction today** (6 inputs).
 - Op-cost is not the binding limit overall: the model puts the verifier at about 40–60% of the byte-tied budget. Bytes bind, as `beyond-groth16.tsx` predicts. Per input the picture is more nuanced (§6.4).
 
@@ -209,9 +209,13 @@ Notation: q = p^3 ≈ 2^191.999, N = |L_0|, ρ = n/N, m ≥ 3 the Johnson parame
 Fiat-Shamir:
 - STARK-with-FRI is round-by-round sound with per-round errors bounded by the table (Block, Garreta, Katz, Thaler, Tiwari, Zajac, ePrint 2023/1071; ethSTARK v1.2 §6).
 - The SHA-256 random-oracle compilation then gives an attacker with Q hash queries a success probability ≤ Q·2^−λ_IOP + O(Q^2/2^{8h}), where λ_IOP = min over rounds of (−log2 ε_round + grinding_round).
-- We report **λ = min(λ_IOP, 4h)**: the work, in SHA-256 calls, needed for constant success probability.
+- We report **λ = min(λ_IOP, 4h)**: the work, in SHA-256 calls, needed for constant success probability. **λ is a classical security level**; for a quantum adversary see §4.5.
 - Grinding enters only the query round (g = 28). The commit rounds need none at q ≈ 2^192.
-- The Analysis phase must check one inequality against ePrint 2023/1071's list-decoding RBR theorem: that every per-round commit error is ≤ ε_C. If their constant is larger, s grows by 1–2 queries (about 2 KB at P128).
+- **Open item (stated as a condition, not yet closed).** One inequality is unchecked against ePrint 2023/1071's list-decoding RBR theorem: that every per-round commit error is ≤ the combined BCIKS20 Thm 8.3 ε_C. Until it is checked, "128-bit provable" for P128 (and "100-bit provable" for P100) holds **on the condition that the per-round errors are bounded by ε_C**.
+- **Margins the claim depends on.**
+  - P128: the commit rounds give 128.31 bits, a margin of only 0.31 bits; the query round gives 128.19 bits (with g = 28), a margin of 0.19 bits.
+  - P100: λ_IOP = 100.11 and the commit rounds give 123.9 bits, so P100 has about 24 bits of commit margin; its claim is not sensitive to the open item unless the RBR constant costs more than that.
+  - If the RBR constant turns out larger, P128 needs either 1–2 more queries (about 2 KB; the layout (b) P128-3 transaction then no longer fits 100,000 B, since it has 19 B spare after the review fixes) or a few grinding bits on the commit rounds (one PoW nonce per commit challenge, as U128g does).
 
 ### 4.2 Results (calculator, `soundness`)
 
@@ -249,6 +253,13 @@ P128's commit-phase margin is thin (128.3 bits). m = 4 is chosen for it; m = 3 w
   - P128 fits one TXv5 input up to n = 2^16.
 - **Grinding** (P128 shape): 98.6 / 95.0 / 91.5 / 89.7 KB at g = 20 / 24 / 28 / 32. About 0.9 KB per bit near g = 28. Prover cost doubles per bit.
 - **Final degree** trades bytes for op-cost. At P128, 2^5 instead of 2^8 costs +8.1 KB (99.6 KB, no longer fits one TXv5 input) and saves about 0.3M op per query. P100: +2.6 KB.
+
+### 4.5 Quantum adversary (indicative)
+All λ above are classical. Against a quantum adversary the levels are lower:
+- **Collisions on h-byte digests.** BHT collision search takes about 2^(8h/3) queries: about **67 bits at h = 25 (P100)** and about **85 bits at h = 32 (P128)**.
+- **Grinding and per-round Fiat-Shamir errors.** Grover search roughly halves their bit counts. For example, the 28 grinding bits are worth about 14 against a quantum adversary. Quantum random-oracle analyses of BCS-compiled IOPs (Chiesa–Manohar–Spooner, TCC 2019) give roughly λ_IOP/2.
+- **Indicative quantum levels.** P100 is about 50 bits and P128 about 64 bits, limited by the halved IOP term, with collisions at 67 and 85 bits. These figures are indicative only; this track neither proves nor measures them.
+- **What "post-quantum" means here.** The construction relies only on hash functions, with no discrete log or pairings. That is what makes it post-quantum. Its λ figures are still classical: a quantum-128 target would need about double the query and grinding work, plus h = 32 digests or longer.
 
 ## 5. Parameter sets (for the Build phase)
 

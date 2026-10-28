@@ -19,3 +19,18 @@ This worktree: research/pq-hash/verifier/ = crosscheck.ts (this harness's own VM
 (copies of the source repo's results), REPORT.md. Nothing registered; no REGISTRY/results.json/score-history changes.
 - REPORT.md: the Write tool refused the report file; its full text is in the Verifier phase's final output (orchestrator
   places it at research/pq-hash/verifier/REPORT.md).
+- 2026-10-28 Design phase:
+  - SPEC.md written;
+  - calculator at research/pq-hash/params.py (outputs params-output.txt/json).
+- Sources fetched for the bounds:
+  - BCIKS20: ECCC TR20-083 rev 2 (Thm 8.3 formula checked verbatim);
+  - BCHKS25: ECCC TR25-169 (Thm 1.5, sensitivity only).
+  - Could not fetch: ePrint PDFs (403) for ethSTARK, Block et al. and Haboeck. The ALI/DEEP list-size terms and the RBR per-round claim are flagged for the Analysis phase (SPEC 4.1).
+- Open for later phases:
+  - Kernels: K1-K19 (SPEC 8).
+  - Build: wip/pq-hash-build in groth16_cashscript.
+  - Model risks: op-cost model only rough (OPC constants); code size 4 KB estimated; P128 single-input margin 4.3 KB.
+- Review fixes: SPEC.md moved to research/pq-hash/SPEC.md; committed .pyc dropped (__pycache__ ignored); λ labelled
+  classical, new §4.5 with indicative quantum levels (BHT collisions ~67 bits at h=25, ~85 at h=32; Grover halves
+  grinding/RBR terms); §4.1 states the open RBR check as an explicit condition with margins (P128 commit 0.31 bits,
+  query 0.19 bits; P100 ~24 bits commit margin).
