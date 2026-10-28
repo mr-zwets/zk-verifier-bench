@@ -1,0 +1,1962 @@
+[
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "Goldilocks (64-bit): mulmod a*b mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 554,
+   "max": 575,
+   "mean": 569.1875
+  },
+  "opCons": {
+   "min": 554,
+   "max": 575,
+   "mean": 569.1875
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 222,
+   "max": 241,
+   "mean": 235.8125
+  },
+  "pushed": {
+   "min": 32,
+   "max": 34,
+   "mean": 33.375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 12,
+   "max": 12,
+   "mean": 12
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "Goldilocks (64-bit): addmod (a+b) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 413,
+   "max": 426,
+   "mean": 424.5625
+  },
+  "opCons": {
+   "min": 413,
+   "max": 426,
+   "mean": 424.5625
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 88,
+   "max": 99,
+   "mean": 98
+  },
+  "pushed": {
+   "min": 25,
+   "max": 27,
+   "mean": 26.5625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 12,
+   "max": 12,
+   "mean": 12
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "Goldilocks (64-bit): submod (a-b+p) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 640,
+   "max": 653,
+   "mean": 648.8125
+  },
+  "opCons": {
+   "min": 640,
+   "max": 653,
+   "mean": 648.8125
+  },
+  "instr": {
+   "min": 5,
+   "max": 5,
+   "mean": 5
+  },
+  "arith": {
+   "min": 97,
+   "max": 108,
+   "mean": 105.0625
+  },
+  "pushed": {
+   "min": 43,
+   "max": 45,
+   "mean": 43.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 23,
+   "max": 23,
+   "mean": 23
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "BabyBear (31-bit): mulmod a*b mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 376,
+   "max": 376,
+   "mean": 376
+  },
+  "opCons": {
+   "min": 376,
+   "max": 376,
+   "mean": 376
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 60,
+   "max": 60,
+   "mean": 60
+  },
+  "pushed": {
+   "min": 16,
+   "max": 16,
+   "mean": 16
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 7,
+   "max": 7,
+   "mean": 7
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "BabyBear (31-bit): addmod (a+b) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 336,
+   "max": 342,
+   "mean": 338.625
+  },
+  "opCons": {
+   "min": 336,
+   "max": 342,
+   "mean": 338.625
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 24,
+   "max": 29,
+   "mean": 26.1875
+  },
+  "pushed": {
+   "min": 12,
+   "max": 13,
+   "mean": 12.4375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 7,
+   "max": 7,
+   "mean": 7
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "BabyBear (31-bit): submod (a-b+p) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 548,
+   "max": 554,
+   "mean": 551
+  },
+  "opCons": {
+   "min": 548,
+   "max": 554,
+   "mean": 551
+  },
+  "instr": {
+   "min": 5,
+   "max": 5,
+   "mean": 5
+  },
+  "arith": {
+   "min": 28,
+   "max": 33,
+   "mean": 30.5
+  },
+  "pushed": {
+   "min": 20,
+   "max": 21,
+   "mean": 20.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 13,
+   "max": 13,
+   "mean": 13
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "M31 (31-bit): mulmod a*b mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 370,
+   "max": 376,
+   "mean": 375.25
+  },
+  "opCons": {
+   "min": 370,
+   "max": 376,
+   "mean": 375.25
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 55,
+   "max": 60,
+   "mean": 59.375
+  },
+  "pushed": {
+   "min": 15,
+   "max": 16,
+   "mean": 15.875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 7,
+   "max": 7,
+   "mean": 7
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "M31 (31-bit): addmod (a+b) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 336,
+   "max": 342,
+   "mean": 339.75
+  },
+  "opCons": {
+   "min": 336,
+   "max": 342,
+   "mean": 339.75
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 24,
+   "max": 29,
+   "mean": 27.125
+  },
+  "pushed": {
+   "min": 12,
+   "max": 13,
+   "mean": 12.625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 7,
+   "max": 7,
+   "mean": 7
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "M31 (31-bit): submod (a-b+p) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 548,
+   "max": 554,
+   "mean": 551.375
+  },
+  "opCons": {
+   "min": 548,
+   "max": 554,
+   "mean": 551.375
+  },
+  "instr": {
+   "min": 5,
+   "max": 5,
+   "mean": 5
+  },
+  "arith": {
+   "min": 28,
+   "max": 33,
+   "mean": 30.8125
+  },
+  "pushed": {
+   "min": 20,
+   "max": 21,
+   "mean": 20.5625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 13,
+   "max": 13,
+   "mean": 13
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "128-bit prime 2^128-159: mulmod a*b mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 1213,
+   "max": 1265,
+   "mean": 1234.125
+  },
+  "opCons": {
+   "min": 1213,
+   "max": 1265,
+   "mean": 1234.125
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 848,
+   "max": 899,
+   "mean": 868.375
+  },
+  "pushed": {
+   "min": 65,
+   "max": 66,
+   "mean": 65.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 20,
+   "max": 20,
+   "mean": 20
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "128-bit prime 2^128-159: addmod (a+b) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 653,
+   "max": 674,
+   "mean": 669.3125
+  },
+  "opCons": {
+   "min": 653,
+   "max": 674,
+   "mean": 669.3125
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 304,
+   "max": 323,
+   "mean": 319.0625
+  },
+  "pushed": {
+   "min": 49,
+   "max": 51,
+   "mean": 50.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 20,
+   "max": 20,
+   "mean": 20
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "128-bit prime 2^128-159: submod (a-b+p) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 904,
+   "max": 925,
+   "mean": 920.25
+  },
+  "opCons": {
+   "min": 904,
+   "max": 925,
+   "mean": 920.25
+  },
+  "instr": {
+   "min": 5,
+   "max": 5,
+   "mean": 5
+  },
+  "arith": {
+   "min": 321,
+   "max": 340,
+   "mean": 336.5625
+  },
+  "pushed": {
+   "min": 83,
+   "max": 85,
+   "mean": 83.6875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 39,
+   "max": 39,
+   "mean": 39
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K19",
+  "group": "field",
+  "notes": "",
+  "name": "192-bit prime (P-192): mulmod a*b mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 2245,
+   "max": 2323,
+   "mean": 2278.125
+  },
+  "opCons": {
+   "min": 2245,
+   "max": 2323,
+   "mean": 2278.125
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 1848,
+   "max": 1924,
+   "mean": 1880.5625
+  },
+  "pushed": {
+   "min": 97,
+   "max": 99,
+   "mean": 97.5625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 28,
+   "max": 28,
+   "mean": 28
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K19",
+  "group": "field",
+  "notes": "",
+  "name": "192-bit prime (P-192): addmod (a+b) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 1021,
+   "max": 1050,
+   "mean": 1040.4375
+  },
+  "opCons": {
+   "min": 1021,
+   "max": 1050,
+   "mean": 1040.4375
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 648,
+   "max": 675,
+   "mean": 666.3125
+  },
+  "pushed": {
+   "min": 73,
+   "max": 75,
+   "mean": 74.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 28,
+   "max": 28,
+   "mean": 28
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K19",
+  "group": "field",
+  "notes": "",
+  "name": "192-bit prime (P-192): submod (a-b+p) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 1296,
+   "max": 1325,
+   "mean": 1317.4375
+  },
+  "opCons": {
+   "min": 1296,
+   "max": 1325,
+   "mean": 1317.4375
+  },
+  "instr": {
+   "min": 5,
+   "max": 5,
+   "mean": 5
+  },
+  "arith": {
+   "min": 673,
+   "max": 700,
+   "mean": 693.875
+  },
+  "pushed": {
+   "min": 123,
+   "max": 125,
+   "mean": 123.5625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 55,
+   "max": 55,
+   "mean": 55
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "BN254 Fr (254-bit), context: mulmod a*b mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 3562,
+   "max": 3596,
+   "mean": 3587.5
+  },
+  "opCons": {
+   "min": 3562,
+   "max": 3596,
+   "mean": 3587.5
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 3135,
+   "max": 3168,
+   "mean": 3159.75
+  },
+  "pushed": {
+   "min": 127,
+   "max": 128,
+   "mean": 127.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 35,
+   "max": 35,
+   "mean": 35
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "BN254 Fr (254-bit), context: addmod (a+b) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 1484,
+   "max": 1484,
+   "mean": 1484
+  },
+  "opCons": {
+   "min": 1484,
+   "max": 1484,
+   "mean": 1484
+  },
+  "instr": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "arith": {
+   "min": 1088,
+   "max": 1088,
+   "mean": 1088
+  },
+  "pushed": {
+   "min": 96,
+   "max": 96,
+   "mean": 96
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 35,
+   "max": 35,
+   "mean": 35
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "BN254 Fr (254-bit), context: submod (a-b+p) mod p",
+  "trials": 16,
+  "opStd": {
+   "min": 1780,
+   "max": 1780,
+   "mean": 1780
+  },
+  "opCons": {
+   "min": 1780,
+   "max": 1780,
+   "mean": 1780
+  },
+  "instr": {
+   "min": 5,
+   "max": 5,
+   "mean": 5
+  },
+  "arith": {
+   "min": 1120,
+   "max": 1120,
+   "mean": 1120
+  },
+  "pushed": {
+   "min": 160,
+   "max": 160,
+   "mean": 160
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 69,
+   "max": 69,
+   "mean": 69
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "",
+  "name": "Goldilocks: lazy add a+b (no reduction)",
+  "trials": 16,
+  "opStd": {
+   "min": 116,
+   "max": 118,
+   "mean": 117.875
+  },
+  "opCons": {
+   "min": 116,
+   "max": 118,
+   "mean": 117.875
+  },
+  "instr": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "arith": {
+   "min": 8,
+   "max": 9,
+   "mean": 8.9375
+  },
+  "pushed": {
+   "min": 8,
+   "max": 9,
+   "mean": 8.9375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "per product: divide by 2",
+  "name": "Goldilocks: lazy dot product of 2 (sum a_i*b_i, one OP_MOD)",
+  "trials": 16,
+  "opStd": {
+   "min": 1525,
+   "max": 1557,
+   "mean": 1544.625
+  },
+  "opCons": {
+   "min": 1525,
+   "max": 1557,
+   "mean": 1544.625
+  },
+  "instr": {
+   "min": 11,
+   "max": 11,
+   "mean": 11
+  },
+  "arith": {
+   "min": 336,
+   "max": 364,
+   "mean": 353.3125
+  },
+  "pushed": {
+   "min": 89,
+   "max": 93,
+   "mean": 91.3125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 20,
+   "max": 20,
+   "mean": 20
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "per product: divide by 3",
+  "name": "Goldilocks: lazy dot product of 3 (sum a_i*b_i, one OP_MOD)",
+  "trials": 16,
+  "opStd": {
+   "min": 2283,
+   "max": 2345,
+   "mean": 2312.3125
+  },
+  "opCons": {
+   "min": 2283,
+   "max": 2345,
+   "mean": 2312.3125
+  },
+  "instr": {
+   "min": 17,
+   "max": 17,
+   "mean": 17
+  },
+  "arith": {
+   "min": 431,
+   "max": 487,
+   "mean": 457.1875
+  },
+  "pushed": {
+   "min": 151,
+   "max": 158,
+   "mean": 155.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 26,
+   "max": 26,
+   "mean": 26
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "per product: divide by 4",
+  "name": "Goldilocks: lazy dot product of 4 (sum a_i*b_i, one OP_MOD)",
+  "trials": 16,
+  "opStd": {
+   "min": 3069,
+   "max": 3113,
+   "mean": 3087.5
+  },
+  "opCons": {
+   "min": 3069,
+   "max": 3113,
+   "mean": 3087.5
+  },
+  "instr": {
+   "min": 23,
+   "max": 23,
+   "mean": 23
+  },
+  "arith": {
+   "min": 549,
+   "max": 585,
+   "mean": 564.4375
+  },
+  "pushed": {
+   "min": 220,
+   "max": 228,
+   "mean": 223.0625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 32,
+   "max": 32,
+   "mean": 32
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K1",
+  "group": "field",
+  "notes": "r = xl + h0*(2^32-1) - h1 + p, then OP_MOD on a 9-byte operand",
+  "name": "Goldilocks: mulmod with special-form reduction (shifts) + final OP_MOD",
+  "trials": 16,
+  "opStd": {
+   "min": 3298,
+   "max": 3331,
+   "mean": 3312.5625
+  },
+  "opCons": {
+   "min": 3298,
+   "max": 3331,
+   "mean": 3312.5625
+  },
+  "instr": {
+   "min": 29,
+   "max": 29,
+   "mean": 29
+  },
+  "arith": {
+   "min": 218,
+   "max": 238,
+   "mean": 229.0625
+  },
+  "pushed": {
+   "min": 176,
+   "max": 193,
+   "mean": 183.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 52,
+   "max": 52,
+   "mean": 52
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2c",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^2 (u^2 = 7): mul",
+  "trials": 16,
+  "opStd": {
+   "min": 3603,
+   "max": 3716,
+   "mean": 3657
+  },
+  "opCons": {
+   "min": 3603,
+   "max": 3716,
+   "mean": 3657
+  },
+  "instr": {
+   "min": 27,
+   "max": 27,
+   "mean": 27
+  },
+  "arith": {
+   "min": 685,
+   "max": 782,
+   "mean": 730.625
+  },
+  "pushed": {
+   "min": 218,
+   "max": 234,
+   "mean": 226.375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 45,
+   "max": 45,
+   "mean": 45
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2c",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^2 (u^2 = 7): add (reduced)",
+  "trials": 16,
+  "opStd": {
+   "min": 1361,
+   "max": 1365,
+   "mean": 1363.5625
+  },
+  "opCons": {
+   "min": 1361,
+   "max": 1365,
+   "mean": 1363.5625
+  },
+  "instr": {
+   "min": 11,
+   "max": 11,
+   "mean": 11
+  },
+  "arith": {
+   "min": 196,
+   "max": 198,
+   "mean": 197.4375
+  },
+  "pushed": {
+   "min": 65,
+   "max": 67,
+   "mean": 66.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 29,
+   "max": 29,
+   "mean": 29
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^3 (u^3 = 7), schoolbook lazy: mul",
+  "trials": 16,
+  "opStd": {
+   "min": 7959,
+   "max": 8150,
+   "mean": 8063.625
+  },
+  "opCons": {
+   "min": 7959,
+   "max": 8150,
+   "mean": 8063.625
+  },
+  "instr": {
+   "min": 61,
+   "max": 61,
+   "mean": 61
+  },
+  "arith": {
+   "min": 1344,
+   "max": 1505,
+   "mean": 1432.8125
+  },
+  "pushed": {
+   "min": 515,
+   "max": 545,
+   "mean": 530.8125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 88,
+   "max": 88,
+   "mean": 88
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^3 (u^3 = 7): add (reduced)",
+  "trials": 16,
+  "opStd": {
+   "min": 2538,
+   "max": 2556,
+   "mean": 2548.75
+  },
+  "opCons": {
+   "min": 2538,
+   "max": 2556,
+   "mean": 2548.75
+  },
+  "instr": {
+   "min": 21,
+   "max": 21,
+   "mean": 21
+  },
+  "arith": {
+   "min": 284,
+   "max": 297,
+   "mean": 291.9375
+  },
+  "pushed": {
+   "min": 154,
+   "max": 160,
+   "mean": 156.8125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 48,
+   "max": 48,
+   "mean": 48
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2c",
+  "group": "ext",
+  "notes": "",
+  "name": "BabyBear^4 (x^4 = 11), schoolbook lazy: mul",
+  "trials": 16,
+  "opStd": {
+   "min": 11765,
+   "max": 11789,
+   "mean": 11782.5625
+  },
+  "opCons": {
+   "min": 11765,
+   "max": 11789,
+   "mean": 11782.5625
+  },
+  "instr": {
+   "min": 106,
+   "max": 106,
+   "mean": 106
+  },
+  "arith": {
+   "min": 674,
+   "max": 690,
+   "mean": 685.625
+  },
+  "pushed": {
+   "min": 491,
+   "max": 499,
+   "mean": 496.9375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 122,
+   "max": 122,
+   "mean": 122
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2c",
+  "group": "ext",
+  "notes": "",
+  "name": "BabyBear^4 (x^4 = 11): add (reduced)",
+  "trials": 16,
+  "opStd": {
+   "min": 3022,
+   "max": 3040,
+   "mean": 3030.9375
+  },
+  "opCons": {
+   "min": 3022,
+   "max": 3040,
+   "mean": 3030.9375
+  },
+  "instr": {
+   "min": 28,
+   "max": 28,
+   "mean": 28
+  },
+  "arith": {
+   "min": 96,
+   "max": 111,
+   "mean": 103.5
+  },
+  "pushed": {
+   "min": 126,
+   "max": 129,
+   "mean": 127.4375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 44,
+   "max": 44,
+   "mean": 44
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2c",
+  "group": "ext",
+  "notes": "",
+  "name": "M31^4 = QM31 (Stwo tower), schoolbook lazy: mul",
+  "trials": 16,
+  "opStd": {
+   "min": 15027,
+   "max": 15092,
+   "mean": 15076
+  },
+  "opCons": {
+   "min": 15027,
+   "max": 15092,
+   "mean": 15076
+  },
+  "instr": {
+   "min": 136,
+   "max": 136,
+   "mean": 136
+  },
+  "arith": {
+   "min": 797,
+   "max": 841,
+   "mean": 830.3125
+  },
+  "pushed": {
+   "min": 630,
+   "max": 651,
+   "mean": 645.6875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 177,
+   "max": 177,
+   "mean": 177
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2c",
+  "group": "ext",
+  "notes": "",
+  "name": "M31^4 = QM31 (Stwo tower): add (reduced)",
+  "trials": 16,
+  "opStd": {
+   "min": 3022,
+   "max": 3040,
+   "mean": 3033
+  },
+  "opCons": {
+   "min": 3022,
+   "max": 3040,
+   "mean": 3033
+  },
+  "instr": {
+   "min": 28,
+   "max": 28,
+   "mean": 28
+  },
+  "arith": {
+   "min": 96,
+   "max": 111,
+   "mean": 105.3125
+  },
+  "pushed": {
+   "min": 126,
+   "max": 129,
+   "mean": 127.6875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 44,
+   "max": 44,
+   "mean": 44
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2c",
+  "group": "ext",
+  "notes": "",
+  "name": "BabyBear^5 (x^5 = 2), schoolbook lazy (Plonky3 deg-5 option): mul",
+  "trials": 16,
+  "opStd": {
+   "min": 18058,
+   "max": 18100,
+   "mean": 18071.875
+  },
+  "opCons": {
+   "min": 18058,
+   "max": 18100,
+   "mean": 18071.875
+  },
+  "instr": {
+   "min": 163,
+   "max": 163,
+   "mean": 163
+  },
+  "arith": {
+   "min": 999,
+   "max": 1030,
+   "mean": 1007.8125
+  },
+  "pushed": {
+   "min": 759,
+   "max": 770,
+   "mean": 764.0625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 183,
+   "max": 183,
+   "mean": 183
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2c",
+  "group": "ext",
+  "notes": "",
+  "name": "BabyBear^5 (x^5 = 2): add (reduced)",
+  "trials": 16,
+  "opStd": {
+   "min": 3790,
+   "max": 3814,
+   "mean": 3803.375
+  },
+  "opCons": {
+   "min": 3790,
+   "max": 3814,
+   "mean": 3803.375
+  },
+  "instr": {
+   "min": 35,
+   "max": 35,
+   "mean": 35
+  },
+  "arith": {
+   "min": 120,
+   "max": 140,
+   "mean": 131.25
+  },
+  "pushed": {
+   "min": 170,
+   "max": 174,
+   "mean": 172.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 55,
+   "max": 55,
+   "mean": 55
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^3: mul, Karatsuba (6 MUL)",
+  "trials": 16,
+  "opStd": {
+   "min": 10886,
+   "max": 11044,
+   "mean": 10998
+  },
+  "opCons": {
+   "min": 10886,
+   "max": 11044,
+   "mean": 10998
+  },
+  "instr": {
+   "min": 89,
+   "max": 89,
+   "mean": 89
+  },
+  "arith": {
+   "min": 1218,
+   "max": 1337,
+   "mean": 1304.25
+  },
+  "pushed": {
+   "min": 768,
+   "max": 807,
+   "mean": 793.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 116,
+   "max": 116,
+   "mean": 116
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^3: square, schoolbook lazy",
+  "trials": 16,
+  "opStd": {
+   "min": 6191,
+   "max": 6356,
+   "mean": 6272.5
+  },
+  "opCons": {
+   "min": 6191,
+   "max": 6356,
+   "mean": 6272.5
+  },
+  "instr": {
+   "min": 47,
+   "max": 47,
+   "mean": 47
+  },
+  "arith": {
+   "min": 1110,
+   "max": 1252,
+   "mean": 1179.4375
+  },
+  "pushed": {
+   "min": 381,
+   "max": 404,
+   "mean": 393.0625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 74,
+   "max": 74,
+   "mean": 74
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^3: x F_p (scalar times extension element)",
+  "trials": 16,
+  "opStd": {
+   "min": 2862,
+   "max": 2956,
+   "mean": 2895.6875
+  },
+  "opCons": {
+   "min": 2862,
+   "max": 2956,
+   "mean": 2895.6875
+  },
+  "instr": {
+   "min": 20,
+   "max": 20,
+   "mean": 20
+  },
+  "arith": {
+   "min": 696,
+   "max": 780,
+   "mean": 726.6875
+  },
+  "pushed": {
+   "min": 166,
+   "max": 176,
+   "mean": 169
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 47,
+   "max": 47,
+   "mean": 47
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^3: add, lazy (no reduction)",
+  "trials": 16,
+  "opStd": {
+   "min": 1628,
+   "max": 1634,
+   "mean": 1631.625
+  },
+  "opCons": {
+   "min": 1628,
+   "max": 1634,
+   "mean": 1631.625
+  },
+  "instr": {
+   "min": 15,
+   "max": 15,
+   "mean": 15
+  },
+  "arith": {
+   "min": 26,
+   "max": 27,
+   "mean": 26.625
+  },
+  "pushed": {
+   "min": 102,
+   "max": 107,
+   "mean": 105
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 15,
+   "max": 15,
+   "mean": 15
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "slot 17 B",
+  "name": "Goldilocks^3: mul, Kronecker-packed (pack both, 1 OP_MUL, unpack, 3 OP_MOD)",
+  "trials": 16,
+  "opStd": {
+   "min": 8997,
+   "max": 9118,
+   "mean": 9066.625
+  },
+  "opCons": {
+   "min": 8997,
+   "max": 9118,
+   "mean": 9066.625
+  },
+  "instr": {
+   "min": 55,
+   "max": 55,
+   "mean": 55
+  },
+  "arith": {
+   "min": 2430,
+   "max": 2539,
+   "mean": 2493.6875
+  },
+  "pushed": {
+   "min": 1067,
+   "max": 1079,
+   "mean": 1072.9375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 93,
+   "max": 93,
+   "mean": 93
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^3: mul, Kronecker packed in / packed out (1 OP_MUL, unpack, 3 OP_MOD, repack)",
+  "trials": 16,
+  "opStd": {
+   "min": 7382,
+   "max": 7493,
+   "mean": 7448.5
+  },
+  "opCons": {
+   "min": 7382,
+   "max": 7493,
+   "mean": 7448.5
+  },
+  "instr": {
+   "min": 41,
+   "max": 41,
+   "mean": 41
+  },
+  "arith": {
+   "min": 2438,
+   "max": 2539,
+   "mean": 2499.75
+  },
+  "pushed": {
+   "min": 844,
+   "max": 854,
+   "mean": 848.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 76,
+   "max": 76,
+   "mean": 76
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K2",
+  "group": "ext",
+  "notes": "",
+  "name": "Goldilocks^3: add, Kronecker packed (1 OP_ADD, lazy)",
+  "trials": 16,
+  "opStd": {
+   "min": 184,
+   "max": 186,
+   "mean": 185.75
+  },
+  "opCons": {
+   "min": 184,
+   "max": 186,
+   "mean": 185.75
+  },
+  "instr": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "arith": {
+   "min": 42,
+   "max": 43,
+   "mean": 42.875
+  },
+  "pushed": {
+   "min": 42,
+   "max": 43,
+   "mean": 42.875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 1,
+   "max": 1,
+   "mean": 1
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ }
+]
