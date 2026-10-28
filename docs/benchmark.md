@@ -94,26 +94,20 @@ Register it in `REGISTRY` in `src/harness/benchmark.ts`.
   given explicitly and/or, if `tamperable`, derived by flipping a bit in each
   step's witness (works when witnesses are push-only data). A run is "rejected"
   if any of its steps fails.
-- **Proof-generality.** `proofBinding: 'runtime'` claims one deployed program
-  verifies any proof in its declared VK/input domain; where `extraValidProofs`
-  are supplied the harness counts their acceptance. It does not compare their
-  lockings, step counts or proof distinctness against the primary run. Those
-  are scenario-contract requirements for the submitter and constructive
-  reviewer, not facts established by the count. See `proof-generality.md`.
-- **Worst case.** Op-cost is proof-dependent for the chunked verifiers, so the
-  committed proof alone understates it; a valid `worstCaseProof` runs dense
-  inputs through the same locking and the result is reported as `worstCase`.
-  This is a measured supplied case, not a universal bound; it must be accepted.
-  The harness does not check locking/step-count identity here either; review
-  must establish that it measures the same construction.
-- **Input validation.** `invalidInputs` carry well-formed witnesses with
-  structurally invalid curve points (off-curve, or on-curve but outside the
-  order-r subgroup); a claim of EIP-197-style validation must reject them all.
-  `inputValidation.enforced` currently means that all supplied runs rejected;
-  the harness does not identify the rejecting predicate or verify unchanged
-  lockings. Review must establish the intended isolated validation check.
-  Rejection by the final pairing equation alone does not demonstrate it.
-  A cofactor-equivalent equation domain is a separate policy, not a claim of
+- **Proof-generality.** `proofBinding` is a declaration. The harness checks the
+  same program/context across honest runs and requires reviewed `proofInputs`
+  locators before crediting distinct-proof fixture evidence. All supplied honest
+  runs must accept; missing proof identity is unconfirmed. Finite samples do not
+  establish universal correctness. See [proof generality](proof-generality.md).
+- **Worst case.** `worstCaseProof` must be nonempty and match the primary run's
+  step count, programs and transaction topology before its resource use is
+  measured. Acceptance is part of the correctness verdict. Its name/density does
+  not prove a universal resource maximum.
+- **Input validation.** `invalidInputs` outcomes record whole-run rejection only.
+  The harness cannot attribute rejection to an isolated domain predicate and
+  therefore does not award the legacy `inputValidation.enforced` badge. This is
+  missing evidence, not proof that domain checks are absent. A
+  cofactor-equivalent equation domain is a separate policy, not a claim of
   strict subgroup rejection.
 
 ## Structures

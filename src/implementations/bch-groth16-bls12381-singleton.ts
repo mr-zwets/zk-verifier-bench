@@ -1,3 +1,4 @@
+import { affineSingletonProofInputs } from './groth16-proof-inputs.js';
 // BCH-native COMPLETE BLS12-381 Groth16 verifier as a single-tx contract -- the
 // full verification on the SAME curve as the nChain reference, so a true
 // apples-to-apples head-to-head: vk_x computed on-chain, then the pairing check.
@@ -60,6 +61,7 @@ export const bchGroth16Bls12381Singleton: Implementation = {
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: affineSingletonProofInputs,
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract on ' +
     'BLS12-381 -- the SAME curve as nchain (Groth16Verify, ' +

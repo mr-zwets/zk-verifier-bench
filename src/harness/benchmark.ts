@@ -4,6 +4,7 @@
 //   3. budget fit     - does each step fit one standard BCH input's op-cost budget?
 // Results are grouped into separate leaderboards by (proofSystem, structure).
 // Correctness gates the cost numbers.
+import { assertHonestRuns } from './scenario-contract.js';
 import { bchGroth16Bls12381Chunked } from '../implementations/bch-groth16-bls12381-chunked.js';
 import { bchGroth16Bls12381ChunkedCovenant } from '../implementations/bch-groth16-bls12381-chunked-covenant.js';
 import { bchGroth16Bls12381ChunkedCovenantResidue } from '../implementations/bch-groth16-bls12381-chunked-covenant-residue.js';
@@ -292,21 +293,17 @@ const runRejects = (vm: Bch2026Vm, run: Step[], bsv: boolean): boolean =>
  * short-circuits at its boundary input; only a genuinely unbound seam evaluates the whole
  * prefix.
  */
-interface CrossStageBinding {
-  applicable: boolean;
-  seamsTested: number;
-  unboundSeams: number;
-  firstUnboundSeam?: string;
-}
-const crossStageStaple = (vm: Bch2026Vm, scenario: Scenario, bsv: boolean): CrossStageBinding => {
+type CrossStageBinding = BenchmarkResult['crossStageBinding'];
+const crossStageStaple = (vm: Bch2026Vm, scenario: Scenario, other: Step[] | undefined, bsv: boolean): CrossStageBinding => {
   const base = scenario.valid;
-  const other = scenario.extraValidProofs?.[0];
-  const distinctStages = new Set(base.map((s) => s.checkpoint).filter((c) => c !== undefined)).size;
   const isIntraTx = base.length > 1 && base.every((s) => s.intraTx !== undefined);
-  // Need a shared-tx bundle, a second distinct proof under the same lockings, and >= 2 named
-  // stages for "cross-stage" to mean anything.
-  if (!isIntraTx || other === undefined || other.length !== base.length || distinctStages < 2) {
-    return { applicable: false, seamsTested: 0, unboundSeams: 0 };
+  if (!isIntraTx) return { applicable: false, seamsTested: 0, unboundSeams: 0 };
+  const distinctStages = new Set(base.map((s) => s.checkpoint).filter((c) => c !== undefined)).size;
+  if (distinctStages < 2) {
+    return { applicable: true, seamsTested: 0, unboundSeams: 0, reason: 'no declared cross-stage checkpoint boundaries' };
+  }
+  if (other === undefined) {
+    return { applicable: true, seamsTested: 0, unboundSeams: 0, reason: 'no accepted, qualified distinct extra proof' };
   }
   let unboundSeams = 0;
   let firstUnboundSeam: string | undefined;
@@ -402,6 +399,7 @@ const tokenSafetyOf = (
 };
 
 export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Implementation['load']>>): BenchmarkResult => {
+  const honestRuns = assertHonestRuns(impl, scenario);
   // Envelope-security gate (applies to executed AND profile-only entries): disallow P2SH20.
   const env = packagingSecurity(scenario.valid);
   // Profile-only: size-decidable, not executed (e.g. tx-introspection covenants
@@ -423,9 +421,10 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     return {
       impl, profileOnly: true, checked: false, validPassed: false,
       invalidRejected: 0, invalidTotal: 0, pass: false, bsvOpReturn: false, steps,
-      proofBinding: impl.proofBinding ?? 'runtime', proofsTested: 1, proofsPassed: 0, runtimeGeneral: false,
+      proofBinding: impl.proofBinding ?? 'runtime', proofsTested: 0, proofsPassed: 0, runtimeGeneral: false,
+      proofIdentity: { ...honestRuns.proofIdentity, reason: 'profile-only: honest runs not executed' },
       ...tokenSafetyOf(scenario, impl),
-      inputValidation: { tested: 0, rejected: 0, enforced: false },
+      inputValidation: { tested: 0, rejected: 0, enforced: false, evidence: 'not-executed', reason: 'profile-only: not executed' },
       crossStageBinding: { applicable: false, seamsTested: 0, unboundSeams: 0 },
       redTeam: { present: false, stale: false, tested: 0, accepted: 0, kinds: [] },
       publicInputs: { declared: false, tested: 0, accepted: 0 },
@@ -454,16 +453,18 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
   const steps = scenario.valid.map((s) => runStep(vm, s, bsv));
   const validPassed = steps.every((s) => s.accepted);
 
-  // Proof-generality: run each EXTRA distinct proof against the same locking and
-  // count how many fully accept. A runtime-general verifier accepts them all; a
-  // verifier with the proof baked into its program accepts only the one it was
-  // built for. (The main valid run above is proof #0.)
+  // Shape and declared proof identity were checked before execution. Run counts remain
+  // observable even when no proof locator is declared; those counts alone earn no claim.
   const extraRuns = scenario.extraValidProofs ?? [];
-  const extraPassed = extraRuns.filter((run) => !runRejects(vm, run, bsv)).length;
+  const acceptedExtras = extraRuns.filter((run) => !runRejects(vm, run, bsv));
   const proofBinding = impl.proofBinding ?? 'runtime';
   const proofsTested = 1 + extraRuns.length;
-  const proofsPassed = (validPassed ? 1 : 0) + extraPassed;
-  const runtimeGeneral = proofsPassed >= 2;
+  const proofsPassed = (validPassed ? 1 : 0) + acceptedExtras.length;
+  const runtimeGeneral = proofBinding === 'runtime' && honestRuns.proofIdentity.distinct
+    && validPassed && acceptedExtras.length === extraRuns.length;
+  const distinctAcceptedExtra = validPassed
+    ? honestRuns.distinctExtraProofs.find((run) => acceptedExtras.includes(run))
+    : undefined;
 
   // cumulative op-cost + bytes to reach each named checkpoint (in-between metrics)
   const checkpointStats: BenchmarkResult['checkpointStats'] = [];
@@ -499,21 +500,19 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
       : []);
   const invalidRejected = invalidRuns.filter((run) => runRejects(vm, run, bsv)).length;
 
-  // EIP-197 input validation: adversarial-point runs (off-curve / off-subgroup) must reject.
-  // ONLY counts as a demonstration when the bad point is rejected at an ISOLATED validation
-  // step (a chunked g2check stage), BEFORE it can reach the pairing — that is what
-  // Scenario.invalidInputs supplies. A naive point-swap in a FULL (single-tx) verifier is
-  // rejected by the verification equation itself (a wrong B makes e(-A,B)·… ≠ 1) regardless
-  // of whether on-curve/subgroup checks exist, so it does NOT discriminate and is NOT used
-  // here (see harness/adversarial.ts). A full verifier with no isolated adversarial run is
-  // reported as NOT DEMONSTRATED.
+  // Whole-run rejection does not identify an on-curve/subgroup check: the equation
+  // or an unrelated stage may reject. Preserve observations without awarding enforcement.
   const inputRuns = scenario.invalidInputs ?? [];
   const inputRejected = inputRuns.filter((run) => runRejects(vm, run, bsv)).length;
-  const inputValidation = { tested: inputRuns.length, rejected: inputRejected, enforced: inputRuns.length > 0 && inputRejected === inputRuns.length };
+  const inputValidation: BenchmarkResult['inputValidation'] = {
+    tested: inputRuns.length, rejected: inputRejected, enforced: false,
+    evidence: 'run-rejection-only',
+    reason: 'domain enforcement is not demonstrated by whole-run rejection; requires independent review',
+  };
 
-  // Cross-stage stapling: every stage must be bound to ONE proof (see crossStageStaple). An
-  // unbound seam is a soundness hole and fails the entry; N/A entries don't count against it.
-  const crossStageBinding = crossStageStaple(vm, scenario, bsv);
+  // Preserve the existing seam sampler, requiring accepted, distinct-proof evidence first.
+  // Untested applicable bundles remain valid-only; finite outcomes do not prove soundness.
+  const crossStageBinding = crossStageStaple(vm, scenario, distinctAcceptedExtra, bsv);
 
   // Maintainer red-team runs (see harness/redteam.ts): concrete attacks on this entry's exact
   // bytes, written by the maintainers rather than the submitter. Any accepted run fails the entry.
@@ -564,7 +563,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     validPassed,
     invalidRejected,
     invalidTotal: invalidRuns.length,
-    pass: validPassed && worstCaseAccepted && invalidRuns.length > 0 && invalidRejected === invalidRuns.length && env.secure && crossStageBinding.unboundSeams === 0 && redTeamResult.accepted === 0 && publicInputResult.accepted === 0,
+    pass: validPassed && acceptedExtras.length === extraRuns.length && worstCaseAccepted && crossStageBinding.reason === undefined && invalidRuns.length > 0 && invalidRejected === invalidRuns.length && env.secure && crossStageBinding.unboundSeams === 0 && redTeamResult.accepted === 0 && publicInputResult.accepted === 0,
     crossStageBinding,
     redTeam: redTeamResult,
     publicInputs: publicInputResult,
@@ -573,6 +572,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     proofsTested,
     proofsPassed,
     runtimeGeneral,
+    proofIdentity: honestRuns.proofIdentity,
     ...tokenSafetyOf(scenario, impl),
     inputValidation,
     bsvOpReturn: bsv,
@@ -624,12 +624,14 @@ export const computeResults = async (includeDemos = false): Promise<BenchmarkRes
   if (skipped.length > 0) console.error(`skipping (SKIP_IMPLS): ${skipped.map((i) => i.id).join(', ')}`);
   const results: BenchmarkResult[] = [];
   for (const impl of registry) {
+    let scenario: Scenario;
     try {
-      const scenario = await impl.load();
-      results.push(benchmark(impl, scenario));
-    } catch {
-      // an implementation that fails to load is simply omitted from the results
+      scenario = await impl.load();
+    } catch (error) {
+      console.error(`${impl.id}: failed to load: ${String(error)}`);
+      continue;
     }
+    results.push(benchmark(impl, scenario));
   }
   return results;
 };
@@ -648,11 +650,12 @@ const padL = (s: string, w: number) => s.padStart(w);
  * wins). Both the live progress line and the results table derive their label from this, so
  * the ranking — and where a new gate like the cross-stage staple slots in — lives in ONE place.
  */
-type Verdict = 'profile' | 'insecure-packaging' | 'pass' | 'worst-case-fail' | 'cross-stage-fail' | 'redteam-fail' | 'public-input-fail' | 'valid-only' | 'fail';
+type Verdict = 'profile' | 'insecure-packaging' | 'pass' | 'extra-proof-fail' | 'worst-case-fail' | 'cross-stage-fail' | 'redteam-fail' | 'public-input-fail' | 'valid-only' | 'fail';
 const verdictOf = (r: BenchmarkResult): Verdict => {
   if (r.profileOnly) return 'profile';
   if (!r.securePackaging) return 'insecure-packaging';
   if (r.pass) return 'pass';
+  if (r.proofsPassed < r.proofsTested) return 'extra-proof-fail';
   if (r.worstCase?.accepted === false) return 'worst-case-fail';
   if (r.crossStageBinding.unboundSeams > 0) return 'cross-stage-fail';
   if (r.redTeam.accepted > 0) return 'redteam-fail';
@@ -666,11 +669,12 @@ const progressLabel = (r: BenchmarkResult): string => ({
   profile: 'profile-only (size)',
   'insecure-packaging': 'DISALLOWED (insecure P2SH20 envelope)',
   pass: 'PASS',
+  'extra-proof-fail': 'FAIL (honest proof run rejected)',
   'worst-case-fail': 'FAIL (worst-case proof rejected)',
   'cross-stage-fail': 'FAIL (cross-stage staple accepted)',
   'redteam-fail': 'FAIL (maintainer red-team attack accepted)',
   'public-input-fail': 'FAIL (mutated public inputs accepted)',
-  'valid-only': 'valid-only (no reject test)',
+  'valid-only': 'valid-only (required fixture evidence missing)',
   fail: 'FAIL',
 }[verdictOf(r)]);
 
@@ -680,6 +684,7 @@ const correctnessCell = (r: BenchmarkResult): string => {
     case 'profile': return 'profile (size)';
     case 'insecure-packaging': return 'DISALLOWED (P2SH20)';
     case 'pass': return `PASS (${r.invalidRejected}/${r.invalidTotal}✗${r.bsvOpReturn ? ', BSV OP_RETURN' : ''})`;
+    case 'extra-proof-fail': return `FAIL (honest runs ${r.proofsPassed}/${r.proofsTested})`;
     case 'worst-case-fail': return 'FAIL (worst-case✗)';
     case 'cross-stage-fail': return 'FAIL (cross-stage staple)';
     case 'redteam-fail': return `FAIL (red-team ${r.redTeam.accepted}/${r.redTeam.tested})`;
@@ -725,6 +730,7 @@ const main = async () => {
       console.log(progressLabel(r));
     } catch (e) {
       console.log(`ERROR: ${(e as Error).message}`);
+      process.exitCode = 1;
     }
   }
 
@@ -784,30 +790,23 @@ const main = async () => {
       }
       if (!r.profileOnly) {
         if (r.proofBinding === 'baked') {
-          console.log(`    > proof generality: instance-specific — the proof is baked into the program; a different proof needs it regenerated (the tamper test confirms only the baked witness is accepted)`);
-        } else if (r.proofsTested >= 2) {
-          const tag = r.proofsPassed === r.proofsTested ? 'runtime-general' : `ONLY ${r.proofsPassed}/${r.proofsTested} — NOT general`;
-          console.log(`    > proof generality: ${tag} — one fixed locking verifies ${r.proofsPassed}/${r.proofsTested} distinct proofs (proof in the unlocking witness)`);
+          console.log(`    > proof generality: instance-specific — proof binding declared baked`);
         } else {
-          console.log(`    > proof generality: runtime-general by construction — proof supplied in the unlocking witness (1 reference proof available)`);
+          console.log(`    > proof generality: ${r.runtimeGeneral ? 'distinct-proof fixtures accepted' : 'NOT DEMONSTRATED'} — ${r.proofsPassed}/${r.proofsTested} supplied runs accepted; ${r.proofIdentity.reason ?? 'declared proof components differ (finite fixture evidence only)'}`);
         }
         if (r.tokenThreaded) {
           console.log(`    > token safety: ${r.tokenSafetyEnforced ? 'ENFORCED' : 'NOT enforced'} — state is threaded through the NFT commitment` +
             (r.tokenSafetyEnforced ? '' : ', but category continuity / capability are not pinned (a real deployment must enforce them)'));
         }
-        const isFullGroth16 = r.impl.proofSystem === 'Groth16' && r.impl.milestone === undefined && r.impl.demo !== true;
-        if (r.inputValidation.tested > 0) {
-          console.log(`    > input validation: ${r.inputValidation.enforced ? 'ENFORCED' : 'NOT enforced'} — ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected at an isolated check (EIP-197 on-curve + G2-subgroup)`);
-        } else if (isFullGroth16) {
-          const why = r.impl.structure === 'single-tx'
-            ? 'single-tx: a swapped point is caught by the pairing equation, not a validation check, so rejection here would not prove on-curve/subgroup validation'
-            : 'no isolated adversarial-point run (off-curve / off-subgroup) supplied';
-          console.log(`    > input validation: NOT DEMONSTRATED — ${why}`);
+        if (r.impl.proofSystem === 'Groth16' || r.inputValidation.tested > 0) {
+          console.log(`    > input validation: NOT DEMONSTRATED — ${r.inputValidation.rejected}/${r.inputValidation.tested} supplied runs rejected; ${r.inputValidation.reason}`);
         }
         const csb = r.crossStageBinding;
-        if (csb.applicable) {
+        if (csb.reason) {
+          console.log(`    > cross-stage binding: NOT TESTED — ${csb.reason}`);
+        } else if (csb.applicable) {
           console.log(csb.unboundSeams === 0
-            ? `    > cross-stage binding: BOUND — every stage is pinned to one proof (${csb.seamsTested} seams staple-tested with a 2nd distinct proof, all rejected)`
+            ? `    > cross-stage binding: ${csb.seamsTested} sampled seams rejected with a qualified second proof (finite fixture evidence only)`
             : `    > cross-stage binding: UNBOUND — ${csb.unboundSeams}/${csb.seamsTested} seam(s) accept a spliced 2-proof hybrid (first at "${csb.firstUnboundSeam}"): one proof's stage can be stapled onto another proof's remaining stages`);
         }
         const pi = r.publicInputs;

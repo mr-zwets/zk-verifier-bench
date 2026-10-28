@@ -30,7 +30,8 @@
     "scrypt-bn256:verify": "tsx --max-old-space-size=8192 src/scrypt-bn256/verify-proofs.ts",
     "scrypt-bn256:find-vkx": "tsx --max-old-space-size=8192 src/scrypt-bn256/find-vkx.ts",
     "txv5": "tsx --max-old-space-size=8192 src/harness/txv5-report.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:scenario-contract": "tsx --test src/harness/scenario-contract.test.ts src/harness/entry.test.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,3 +1,4 @@
+import { affineSingletonProofInputs } from './groth16-proof-inputs.js';
 // BCH-native COMPLETE Groth16 verifier on BLS12-381, single-tx -- the SAME verifier as
 // bch-groth16-bls12381-singleton (vk_x computed in one shared-doubling
 // Shamir/Straus pass, then the full pairing check),
@@ -45,6 +46,7 @@ export const bchGroth16Bls12381SingletonOpcodeOptimized: Implementation = {
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: affineSingletonProofInputs,
   source:
     'Same complete BLS12-381 Groth16 verifier as bch-groth16-bls12381-singleton ' +
     '(Groth16Verify, singleton/bls12-381/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 ' +

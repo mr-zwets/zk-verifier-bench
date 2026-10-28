@@ -128,12 +128,9 @@ export interface Scenario {
   /** explicit invalid runs; each is a full step list that must fail at some step */
   invalid?: Step[][];
   /**
-   * Adversarial INPUT runs: well-formed witnesses that supply a structurally-invalid
-   * curve point — a G1/G2 point off the curve, or a G2 point on-curve but OUTSIDE the
-   * order-r subgroup. A verifier with EIP-197-style input validation (on-curve +
-   * subgroup checks, like ecPairing) REJECTS all of these; one that feeds raw points
-   * into the pairing may accept them. The harness runs them to empirically grade
-   * input validation (BenchmarkResult.inputValidation). Each must be REJECTED.
+   * Supplied invalid-input runs. Their whole-run rejection is recorded only as an
+   * observation; it does not identify a rejecting predicate, isolate a domain check,
+   * or demonstrate on-curve/subgroup enforcement. Domain claims require independent review.
    */
   invalidInputs?: Step[][];
   /** if true, the harness derives invalid runs by bit-flipping each step's witness */
@@ -172,6 +169,16 @@ export interface Scenario {
   };
 }
 
+/** A reviewed location of proof data, excluding public inputs, padding and auxiliary witnesses.
+ * Numeric pushes compare their VM-number values; packed fields require fixed byte slices. */
+export interface ProofInput {
+  input: number;
+  push: number;
+  encoding?: 'vm-number' | 'bytes';
+  offset?: number;
+  length?: number;
+}
+
 export interface Implementation {
   id: string;
   name: string;
@@ -191,9 +198,13 @@ export interface Implementation {
    *               chunked verifier bakes each step's state-commitments); a different
    *               proof needs the program regenerated. Instance-specific.
    * The harness reports this and, where `extraValidProofs` are provided, confirms it
-   * empirically. Defaults to 'runtime' when omitted.
+   * with declared proofInputs. Finite fixtures do not prove universal correctness.
+   * Defaults to 'runtime' when omitted.
    */
   proofBinding?: 'runtime' | 'baked';
+  /** Proof components used to establish distinctness of extraValidProofs. Field ownership
+   * and canonical packed encodings require review; missing locators mean unknown identity. */
+  proofInputs?: ProofInput[];
   /**
    * Which BCH VM the entry targets, deciding the consensus limits it is graded against:
    *   'bch-2026' (default) - the current-BCH VM: per-script cap 10,000 B, op-cost budget
@@ -313,35 +324,39 @@ export interface BenchmarkResult {
   pass: boolean;
   /** how the proof is bound to the program (see Implementation.proofBinding) */
   proofBinding: 'runtime' | 'baked';
-  /** distinct proofs run against the SAME locking (1 = the main valid run, + extras) */
+  /** Supplied honest runs executed (primary + extras), not a count of proven distinct proofs. */
   proofsTested: number;
-  /** how many of those distinct proofs the program fully accepted */
+  /** How many supplied primary/extra runs fully accepted. */
   proofsPassed: number;
-  /** verifies >= 2 distinct proofs under one locking (empirically runtime-general) */
+  /** At least two declared-distinct proofs accepted under the same program; finite evidence only. */
   runtimeGeneral: boolean;
+  proofIdentity: { declared: boolean; distinct: boolean; reason?: string };
   /** any step threads state through an NFT-commitment covenant (Step.covenant set) */
   tokenThreaded: boolean;
   /** token-threading entries only: does the covenant enforce token safety (category
    * continuity + capability constraint)? null when not token-threaded. */
   tokenSafetyEnforced: boolean | null;
-  /** EIP-197 input validation: how many ISOLATED adversarial-point runs (off-curve /
-   * off-subgroup, from Scenario.invalidInputs — a chunked g2check stage that rejects the bad
-   * point at the check, before the pairing) were run, and how many the verifier rejected.
-   * `enforced` = at least one tested and ALL rejected. `tested === 0` on a full Groth16
-   * verifier means input validation is NOT DEMONSTRATED — note a naive point-swap in a
-   * single-tx verifier is caught by the verification equation, so it can't demonstrate
-   * validation (see harness/adversarial.ts). */
-  inputValidation: { tested: number; rejected: number; enforced: boolean };
+  /** Raw rejection observations cannot attribute rejection to a domain predicate.
+   * `enforced` is retained for compatibility and remains false until such evidence exists. */
+  inputValidation: {
+    tested: number;
+    rejected: number;
+    enforced: boolean;
+    evidence: 'run-rejection-only' | 'not-executed';
+    reason: string;
+  };
   /**
    * Cross-stage stapling gate (multi-stage soundness). A chunked verifier must bind every
    * stage to ONE proof: splicing one proof's stage onto another proof's remaining stages in a
    * single transaction must be REJECTED. Tested by building hybrid runs from two distinct
-   * valid proofs (`valid` + `extraValidProofs[0]`) at each seam. `unboundSeams > 0` means a
+   * valid proofs (`valid` + a qualified accepted extra) at each seam. `unboundSeams > 0` means a
    * stage output is a free island (not bound to the proof the rest of the run consumes) — a
    * soundness hole that folds into `pass`. `applicable` is false for single-tx verifiers and
    * for covenant/grouped entries whose token hand-off the harness cannot staple-test (N/A does
-   * not penalize). See harness/benchmark.ts crossStageStaple. */
-  crossStageBinding: { applicable: boolean; seamsTested: number; unboundSeams: number; firstUnboundSeam?: string };
+   * not penalize). Missing eligible proof/stage evidence on an intra-tx bundle is untested
+   * with a reason and cannot earn `pass`. Finite seam samples are not a soundness proof.
+   * See harness/benchmark.ts crossStageStaple. */
+  crossStageBinding: { applicable: boolean; seamsTested: number; unboundSeams: number; firstUnboundSeam?: string; reason?: string };
   /** Maintainer red-team gate: concrete attacks on the entry's exact bytes from
    * src/bch/redteam/<id>.json (not submitter-controlled). `accepted > 0` is a soundness hole
    * that folds into `pass`; a stale file (lockings changed) is reported but not counted.

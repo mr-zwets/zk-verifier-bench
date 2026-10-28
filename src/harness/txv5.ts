@@ -50,6 +50,7 @@ import {
   encodeDataPush,
 } from '@bitauth/libauth';
 
+import { assertRunShape, assertSameProgramRun } from './scenario-contract.js';
 import { withUnlockings } from './gates.js';
 import type { Scenario, Step } from './types.js';
 import {
@@ -382,12 +383,20 @@ const figureOf = (run: string, g: ReturnType<typeof gradeRun>, shipped: { score:
  * worst-case witness (picked for the bch-spec budget; not necessarily the TXv5 worst case); `honest`
  * gives the figure of every honest run (fixture 0, each extraValidProof, the worst-case proof). */
 export const txv5Grade = (scenario: Scenario, bsv: boolean, scoreOf: ScoreOf): Txv5Grade => {
+  // Validate shipped and variant programs independently before any VM execution.
+  // A pad-slot variant deliberately changes programs and may shift proof push indices.
+  const v = scenario.txv5Variant;
+  [scenario, ...(v ? [v] : [])].forEach((source, sourceIndex) => {
+    const label = sourceIndex === 0 ? 'TXv5 shipped' : 'TXv5 variant';
+    assertRunShape(source.valid, `${label} valid`);
+    (source.extraValidProofs ?? []).forEach((run, index) =>
+      assertSameProgramRun(source.valid, run, `${label} extra proof #${index + 1}`));
+    if (source.worstCaseProof !== undefined) assertSameProgramRun(source.valid, source.worstCaseProof, `${label} worst-case proof`);
+  });
   const ctx: ModeContext[] = [
     { standard: false, real: createRealVmTxv5(), unbudgeted: createUnbudgetedVmTxv5(false) },
     { standard: true, real: createStandardVmTxv5(), unbudgeted: createUnbudgetedVmTxv5(true) },
   ];
-  // an entry with a TXv5-grading variant is graded on that variant's runs (Scenario.txv5Variant)
-  const v = scenario.txv5Variant;
   const src = v ?? scenario;
   const runs: [string, Step[]][] = [
     ['fixture 0', src.valid],

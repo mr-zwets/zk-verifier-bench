@@ -61,17 +61,14 @@ export const isBsvSeed = (impl: Implementation): boolean =>
 export const isBsvSingleton = (impl: Implementation, validPassed: boolean, bchCompatible: boolean): boolean =>
   isBsvSeed(impl) && impl.structure === 'single-tx' && validPassed && !bchCompatible;
 
-// Rolled-up soundness for the entry — the single "is this a valid verifier" signal the
-// per-dimension cells (bch / generality / inputValidation / packaging) never summarized. Also the
-// home of the cross-stage stapling result (folded in here rather than a separate top-level cell,
-// since it is purely a correctness concern). Mirrors the harness `pass` gate, reasons kept legible:
+// Fixture outcomes for the entry; mathematical soundness is a separate review.
+// Mirrors the harness `pass` gate and preserves the reasons for failed or missing evidence:
 //   'fail'       - a hard defect: the valid run is not fully accepted, an invalid run is wrongly
 //                  accepted, the worst-case proof is rejected, packaging is insecure, or a
 //                  cross-stage staple or a maintainer red-team attack is accepted. `failures` names
 //                  each. DISQUALIFIED — excluded from the frontier leaders and score-history.
-//   'valid-only' - the valid run passes but the entry shipped no invalid fixtures, so rejection
-//                  was never exercised (correct as far as tested, not the same as proven sound).
-//   'pass'       - valid run accepted AND every negative fixture rejected.
+//   'valid-only' - the valid run passes but required fixture evidence is missing.
+//   'pass'       - all supplied honest runs accepted and required fixture gates completed.
 export const correctnessOf = (r: BenchmarkResult) => {
   const csb = r.crossStageBinding;
   const failures = [
@@ -79,6 +76,7 @@ export const correctnessOf = (r: BenchmarkResult) => {
     r.invalidTotal > 0 && r.invalidRejected < r.invalidTotal
       ? `${r.invalidTotal - r.invalidRejected}/${r.invalidTotal} invalid run(s) wrongly accepted`
       : null,
+    r.proofsPassed < r.proofsTested ? `${r.proofsTested - r.proofsPassed}/${r.proofsTested} honest run(s) rejected (completeness)` : null,
     r.worstCase?.accepted === false ? 'worst-case proof rejected (completeness)' : null,
     csb.unboundSeams > 0
       ? `cross-stage staple accepted (${csb.unboundSeams}/${csb.seamsTested} seam(s))`
@@ -92,7 +90,7 @@ export const correctnessOf = (r: BenchmarkResult) => {
       : null,
   ].filter((x): x is string => x !== null);
   const verdict: 'pass' | 'fail' | 'valid-only' =
-    failures.length > 0 ? 'fail' : r.invalidTotal > 0 ? 'pass' : 'valid-only';
+    failures.length > 0 ? 'fail' : r.pass ? 'pass' : 'valid-only';
   return {
     verdict,
     validAccepted: r.validPassed,
@@ -103,19 +101,19 @@ export const correctnessOf = (r: BenchmarkResult) => {
     // proof rejects every such hybrid; an accepted hybrid is a soundness hole (a stage output that
     // nothing later ties to the proof the rest of the run consumes). Tested by building hybrid runs
     // from two distinct valid proofs at each seam (benchmark.ts crossStageStaple). bound=false is a
-    // `fail`; bound=null = N/A (single-tx, or a covenant/grouped token hand-off the harness cannot
-    // staple-test yet — neither credited nor penalized).
+    // `fail`; bound=null means N/A or untested (reason retained), never positive evidence.
     crossStageBinding: {
       applicable: csb.applicable,
-      bound: csb.applicable ? csb.unboundSeams === 0 : null,
+      bound: csb.applicable && csb.seamsTested > 0 ? csb.unboundSeams === 0 : null,
+      ...(csb.reason ? { reason: csb.reason } : {}),
       seamsTested: csb.seamsTested,
       unboundSeams: csb.unboundSeams,
       ...(csb.firstUnboundSeam ? { firstUnboundSeam: csb.firstUnboundSeam } : {}),
-      detail: !csb.applicable
+      detail: csb.reason ?? (!csb.applicable
         ? 'not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet'
         : csb.unboundSeams === 0
-          ? `every stage bound to one proof: ${csb.seamsTested} seams staple-tested with a 2nd distinct proof, all rejected`
-          : `UNBOUND: ${csb.unboundSeams}/${csb.seamsTested} seam(s) accept a spliced 2-proof hybrid (first at "${csb.firstUnboundSeam}") — one proof's stage can be stapled onto another proof's remaining stages`,
+          ? `${csb.seamsTested} sampled seams rejected with a qualified second proof (finite fixture evidence only)`
+          : `UNBOUND: ${csb.unboundSeams}/${csb.seamsTested} seam(s) accept a spliced 2-proof hybrid (first at "${csb.firstUnboundSeam}") — one proof's stage can be stapled onto another proof's remaining stages`),
     },
     // Maintainer red-team gate (harness/redteam.ts): attacks on the entry's exact bytes that a
     // sound verifier must reject, e.g. a real proof with FORGED public inputs. null = no file.
@@ -142,9 +140,9 @@ export const entryOf = (r: BenchmarkResult) => ({
   // Which BCH VM the entry targets: 'bch-2026' (current chain) or 'bch-spec' (proposed 100 kB-
   // script upgrade). Lets the site badge/segregate spec entries (also carried by `category: spec`).
   vmTarget: r.impl.vm ?? 'bch-2026',
-  // Rolled-up soundness: verdict (pass | fail | valid-only), the underlying valid/invalid-run and
+  // Rolled-up fixture outcomes: verdict (pass | fail | valid-only), the underlying valid/invalid-run and
   // worst-case data, the folded-in cross-stage stapling result, and a `failures` summary. The
-  // single headline "is this a valid verifier" signal the per-dimension cells never summarized;
+  // finite-run headline; it does not establish universal verifier correctness;
   // `verdict: 'fail'` disqualifies the entry from the frontier leaders / score-history (see main()).
   correctness: correctnessOf(r),
   // Evidence-based soundness review status: 'reviewed' (independent review of this exact
@@ -219,20 +217,16 @@ export const entryOf = (r: BenchmarkResult) => ({
   // BCH treats as failure (so the success case is scored differently per chain)
   bsvOpReturn: r.bsvOpReturn,
   bch: bchCell(r),
-  // proof-generality: does ONE deployed program verify many proofs (runtime-general)
-  // or just the one it was built for (instance-specific)? Empirically confirmed where
-  // extra proofs were run (proofsTested > 1).
+  // Binding is declared; same-program shape and declared proof components are checked.
   generality: {
-    binding: r.proofBinding, // 'runtime' | 'baked'
+    binding: r.proofBinding,
     runtimeGeneral: r.runtimeGeneral,
     proofsTested: r.proofsTested,
     proofsPassed: r.proofsPassed,
-    detail:
-      r.proofBinding === 'baked'
-        ? 'instance-specific: the proof is baked into the program; a different proof needs it regenerated'
-        : r.proofsTested >= 2
-          ? `runtime-general: one fixed locking verifies ${r.proofsPassed}/${r.proofsTested} distinct proofs (proof in the unlocking witness)`
-          : 'runtime-general by construction: proof supplied in the unlocking witness (1 reference proof available)',
+    proofIdentity: r.proofIdentity,
+    detail: r.proofBinding === 'baked'
+      ? 'instance-specific: proof binding declared baked'
+      : `${r.runtimeGeneral ? 'distinct-proof fixtures accepted' : 'NOT DEMONSTRATED'}: ${r.proofsPassed}/${r.proofsTested} supplied runs accepted; ${r.proofIdentity.reason ?? 'declared proof components differ (finite fixture evidence only)'}`,
   },
   // token-threading covenant safety (only meaningful for covenant entries): does the
   // covenant pin the carried token (category continuity + capability) so the threaded
@@ -247,19 +241,10 @@ export const entryOf = (r: BenchmarkResult) => ({
             : 'state threaded through the NFT commitment, but category continuity / capability are NOT enforced — a real deployment must pin a fixed category with a perpetuated mutable commitment (or mint a fresh immutable token each step)',
       }
     : null,
-  // EIP-197 input validation: does the verifier reject structurally-invalid points
-  // (off-curve, or G2 off the order-r subgroup) before pairing them? Empirically
-  // confirmed by running adversarial-point inputs (Scenario.invalidInputs).
+  // Whole-run rejection is an observation, not attribution to a domain predicate.
   inputValidation: {
-    enforced: r.inputValidation.enforced,
-    tested: r.inputValidation.tested,
-    rejected: r.inputValidation.rejected,
-    detail:
-      r.inputValidation.tested === 0
-        ? 'NOT demonstrated — no isolated adversarial-point run that rejects a bad point at a validation check (a naive point-swap in a single-tx verifier is caught by the pairing equation, not by validation)'
-        : r.inputValidation.enforced
-          ? `on-curve + G2-subgroup checks enforced: ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points (off-curve / off-subgroup) rejected at an isolated check`
-          : `NOT enforced: only ${r.inputValidation.rejected}/${r.inputValidation.tested} adversarial points rejected — raw points reach the pairing`,
+    ...r.inputValidation,
+    detail: `NOT DEMONSTRATED: ${r.inputValidation.rejected}/${r.inputValidation.tested} supplied runs rejected; ${r.inputValidation.reason}`,
   },
   // envelope security: `type` is what the steps' lockings actually are (p2sh32 | p2s |
   // p2sh20 | mixed). A contract hidden behind an insecure P2SH20 hash (OP_HASH160,

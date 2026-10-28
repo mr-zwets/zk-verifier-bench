@@ -23,44 +23,82 @@ invalid proof cannot satisfy. The deployment models differ, so their byte
 totals are not directly comparable — see
 "Not every Groth16 is alike" in the [README](../README.md).
 
-The benchmark **reports this distinction empirically** instead of treating the
-fixture sweep as a universal theorem. Multiproof coverage demonstrates the
-declared runtime behavior for the supplied proofs; it does not replace the
-written equation argument and independent review for the exact artifact. A
-dense `worstCaseProof` is likewise a measured valid case, not a universal
-resource bound. See the [submission claim sheet](submission-claims.md).
+Fixture acceptance supports a finite claim; it does not prove correctness for every
+proof or establish that proof data is actually consumed by the verifier. Those are
+separate mathematical review obligations.
 
 ## How the harness checks it
 
-Each `Implementation` declares a `proofBinding: 'runtime' | 'baked'`
-(`src/harness/types.ts`). For verifiers whose trusted setup we control, the
-scenario also carries `extraValidProofs: Step[][]` — additional *distinct* valid
-proofs intended to run against the **same** ordered programs. The harness
-(`src/harness/benchmark.ts`):
+`Implementation.proofBinding` declares runtime or baked binding. Before executing
+or measuring a scenario, the harness requires:
 
-1. runs the main valid proof (proof #0),
-2. executes each supplied `extraValidProofs` run using that run's own steps,
-3. reports `proofsTested` / `proofsPassed` and a one-line verdict:
-   - `runtime` + N/N pass → **"runtime-general — one fixed locking verifies N/N
-     distinct proofs"** (a coverage label for those supplied proofs),
-   - `runtime` + only 1 proof available → **"runtime-general by construction"**
-     (the references; we cannot mint proofs for a VK whose setup we do not hold;
-     this label is a declared construction property, not a review status or a
-     universal conclusion from one run),
-   - `baked` → **"instance-specific — the proof is baked into the program"** (the
-     supplied per-step tamper test checks the committed witness path).
+- a nonempty primary run;
+- every extra and supplied worst-case run to have the same step count, ordered
+  locking bytecode, context kind, transaction topology, and successor programs;
+- intra-transaction/grouped sibling scripts to match the actual run being evaluated.
 
-A program that *claimed* runtime-generality but had the proof baked in would be
-exposed by this supplied sweep if it accepted only 1 of N. That result is
-coverage, not a universal theorem. The `generality` block is also emitted into
-`results.json` (`src/harness/export-json.ts`) for the website.
+Proof-dependent token commitments and unlocking witnesses may change. These checks
+establish program/context consistency, not enforcement of cross-transaction state
+continuity by the scripts themselves. A malformed honest-run contract throws before
+VM execution; the exporter cannot silently treat it as a successful measurement.
+The CLI reports the error and exits with a nonzero status.
 
-**Current implementation limit:** the harness does not compare extra runs'
-locking bytecode, step counts or proof distinctness with the primary run. The
-same-program/distinct-proof conditions are requirements of the scenario
-contract, which submitters and reviewers must check separately. The displayed
-counts alone do not establish even that finite fixed-program coverage. The
-same identity check is needed for a supplied `worstCaseProof`.
+Distinctness additionally requires reviewed `Implementation.proofInputs` locators:
+
+```ts
+proofInputs: [
+  { input: 0, push: 2 }, // VM-number value, normalized across push encodings
+  { input: 0, push: 3, encoding: 'bytes', offset: 0, length: 48 },
+]
+```
+
+Indices are zero-based unlocking instruction positions (as with `publicInputs`).
+Declare genuine proof components only: exclude public scalars, pads, auxiliary
+roots, carried state and redeem scripts. A differing component establishes distinct
+encoded proofs only when its field ownership and encoding are reviewed. Numeric
+pushes compare decoded VM-number values. Packed byte fields require explicit,
+bounded, canonical slices. These locators do not validate curve points, subgroups,
+canonical field encodings, or consumption by the verifier.
+
+Missing locators mean identity is unknown: accepted extra runs still contribute to
+`proofsTested`/`proofsPassed`, but cannot earn `runtimeGeneral`. Duplicate declared
+fingerprints and malformed locators are explicit contract errors. The worst-case
+run may reuse an honest proof, but must match the same program and locator layout.
+
+`runtimeGeneral` requires runtime binding, declared-distinct extra proofs, and
+acceptance of every supplied primary/extra run. It is finite fixture evidence,
+never a universal theorem. A rejected extra is a completeness failure in both the
+CLI and JSON correctness verdict. Profile-only entries execute zero runs.
+
+The four affine BN254/BLS12-381 baseline and opcode singleton descriptors declare
+proof-coordinate pushes 2–9. Other layouts remain identity-unconfirmed until their
+owners supply reviewed locators; a different full witness alone is insufficient.
+
+Multi-input intra-transaction seam checks require an accepted, qualified distinct
+extra. Missing evidence is reported as untested (`bound: null`, correctness
+`valid-only`), rather than credited as a passing seam check. Missing named checkpoint boundaries also leave this sampler untested. A finite set of rejected seams does not prove universal
+stage binding. Covenant/grouped state continuity remains outside this seam check.
+
+The independently callable TXv5 grader also enforces honest-run program/context
+consistency, separately within shipped and pad-slot variant programs. It does not
+infer proof distinctness or mathematical soundness from those resource measurements.
+
+## Input-domain observations
+
+`inputValidation.tested`/`rejected` report only whole-run outcomes of supplied
+`invalidInputs`. They do not identify an isolated rejecting predicate: an equation,
+resource limit, or unrelated stage may reject. The legacy `enforced` field remains
+false, with `evidence: 'run-rejection-only'` (or `not-executed` for profile-only).
+This means **not demonstrated by this metric**, not that domain checks are absent.
+The actual accepted domain and its enforcement require independent review of the
+exact verifier bytes and argument.
+
+## Checking the contracts
+
+Run `pnpm test:scenario-contract` and `pnpm typecheck`. The focused tests reuse
+archived fixture byte arrays and alter only run/locator/context metadata. They do
+not generate proofs, run negative VM cases, or invoke benchmark gates. The full
+benchmark retains its existing VM/gate behavior; these tests are a separate check.
 
 ## How the extra proofs are minted
 
@@ -129,4 +167,4 @@ pnpm benchmark:json     # refresh results.json (adds the generality block)
 
 Set `EXTRA_PROOFS=N` to mint more/fewer (each extra proof is a full singleton VM
 evaluation, ~3.5–4 s, so the default of 3 keeps the benchmark snappy while still
-demonstrating N≥2 coverage).
+sampling at least two proofs).

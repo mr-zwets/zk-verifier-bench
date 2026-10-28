@@ -1,3 +1,4 @@
+import { affineSingletonProofInputs } from './groth16-proof-inputs.js';
 // BCH-native COMPLETE Groth16 verifier as a single-tx contract -- the full
 // verification, not just a piece: vk_x computed on-chain from the public inputs,
 // then the pairing check.
@@ -70,6 +71,7 @@ export const bchGroth16Singleton: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: affineSingletonProofInputs,
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract ' +
     '(Groth16Verify, singleton/bn254/groth16.cash). Computes vk_x = IC0 + in0*IC1 ' +

@@ -1,3 +1,4 @@
+import { affineSingletonProofInputs } from './groth16-proof-inputs.js';
 // BCH-native COMPLETE Groth16 verifier, single-tx -- the SAME verifier as
 // bch-groth16-singleton (vk_x computed on-chain, then the full BN254 pairing check),
 // but with the locking bytecode opcode-optimized: a custom decompile -> reschedule ->
@@ -57,6 +58,7 @@ export const bchGroth16SingletonOpcodeOptimized: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: affineSingletonProofInputs,
   source:
     'Same complete Groth16 verifier as bch-groth16-singleton (Groth16Verify, ' +
     'singleton/bn254/groth16.cash: vk_x = IC0 + in0*IC1 + in1*IC2 on-chain, then ' +
