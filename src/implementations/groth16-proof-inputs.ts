@@ -96,6 +96,7 @@ export const bn254CovenantResidueProofInputs: ProofInput[] = numericPushes(0, 7,
 
 // BLS12-381 covenant residue: the final GLV step (step 4) takes the proof tuple as witnesses:
 // allArgs = [...commitLimbs, zInv, -A.x, -A.y, Bxa, Bxb, Bya, Byb, Cx, Cy], pushed in reverse after a
-// leading pad (chunked/bls12-381/build_vectors_covenant_residue.mjs:383-395, 418-426): pushes 1..8 =
+// leading pad push (chunked/bls12-381/build_vectors_covenant_residue.mjs:170-177, 383-395, 418-426):
+// pushes 1..8 =
 // Cy, Cx, Byb, Bya, Bxb, Bxa, -A.y, -A.x. The genesis carries only public inputs.
 export const bls12381CovenantResidueProofInputs: ProofInput[] = numericPushes(4, 1, 8);
