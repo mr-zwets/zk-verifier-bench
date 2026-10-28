@@ -10,8 +10,11 @@
 //              per two squarings); (b) witnessed: the prover supplies y = x^(1/7) and the verifier checks y^7 == x
 //              (unique since x -> x^7 is a permutation of F_p); 84 hints = 672 bytes per permutation.
 import {asm, Stk, numBytes} from './lib/asm.mjs';
-import {p, MDS_ROW, ARK1, ARK2, INV_ALPHA, W, ROUNDS, mds, permute} from './lib/ref-rpo.mjs';
+import {p, MDS_ROW, ARK1, ARK2, INV_ALPHA, W, ROUNDS, mds, permute, selfTest} from './lib/ref-rpo.mjs';
 import {powmod} from './lib/ref-field.mjs';
+
+// enforce the reference's provenance on every run (as k-tip5.mjs does): Miden's 19 published RPO256 hash vectors
+selfTest();
 
 const nb = (v) => numBytes(v);
 const SL = 80, SLB = 10; // slot bits / bytes
