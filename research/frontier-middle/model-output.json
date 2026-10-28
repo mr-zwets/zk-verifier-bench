@@ -1,0 +1,3289 @@
+{
+ "validation": {
+  "BN254:singleton (plain)": {
+   "curve": "BN254",
+   "family": "F12",
+   "choice": {
+    "tower": "red",
+    "acc": "sep4",
+    "term": "fe",
+    "subgroup": "walk",
+    "vkx": "jac",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": false,
+    "p2sh": false
+   },
+   "inputs": 1,
+   "bytes": 8206,
+   "bytes_lo": 8206,
+   "bytes_hi": 8206,
+   "bytes_worst": 8206,
+   "op": 771.107,
+   "op_lo": 771.107,
+   "op_hi": 771.107,
+   "op_worst": 829.574,
+   "rows": [
+    [
+     "input checks",
+     0.118,
+     213,
+     0
+    ],
+    [
+     "G2 subgroup walk",
+     49.078,
+     925,
+     0
+    ],
+    [
+     "vk_x jac",
+     35.533,
+     897,
+     0
+    ],
+    [
+     "Fp12 squarings x260",
+     223.6,
+     0,
+     0
+    ],
+    [
+     "pair B: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "pair gamma: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "pair delta: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "pair beta: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "reduced tower code (helpers, miller, line, add)",
+     0,
+     2184,
+     0
+    ],
+    [
+     "product of 4 Miller values",
+     2.604,
+     204,
+     0
+    ],
+    [
+     "VK G2 constants (beta, gamma, delta)",
+     0,
+     330,
+     0
+    ],
+    [
+     "final exp easy",
+     5.339,
+     558,
+     0
+    ],
+    [
+     "final exp hard",
+     146.299,
+     2536,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 963.84275,
+    "2": 481.900875,
+    "5": 192.73575,
+    "10": 96.347375,
+    "25": 38.51435,
+    "50": 19.236674999999998,
+    "100": 9.597837499999999
+   },
+   "eff_hi": {
+    "1": 963.84275,
+    "2": 481.900875,
+    "5": 192.73575,
+    "10": 96.347375,
+    "25": 38.51435,
+    "50": 19.236674999999998,
+    "100": 9.597837499999999
+   },
+   "eff_lo": {
+    "1": 963.84275,
+    "2": 481.900875,
+    "5": 192.73575,
+    "10": 96.347375,
+    "25": 38.51435,
+    "50": 19.236674999999998,
+    "100": 9.597837499999999
+   },
+   "per_input_script": 8206,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 118.28,
+   "k_min_bchspec": 53.23
+  },
+  "BN254:singleton-opcode-optimized": {
+   "curve": "BN254",
+   "family": "F12",
+   "choice": {
+    "tower": "red",
+    "acc": "sep4",
+    "term": "fe",
+    "subgroup": "walk",
+    "vkx": "jac",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": true,
+    "p2sh": false
+   },
+   "inputs": 1,
+   "bytes": 6236,
+   "bytes_lo": 5844,
+   "bytes_hi": 6786,
+   "bytes_worst": 6236,
+   "op": 799.638,
+   "op_lo": 780.617,
+   "op_hi": 813.903,
+   "op_worst": 858.105,
+   "rows": [
+    [
+     "input checks",
+     0.118,
+     213,
+     0
+    ],
+    [
+     "G2 subgroup walk",
+     49.078,
+     925,
+     0
+    ],
+    [
+     "vk_x jac",
+     35.533,
+     897,
+     0
+    ],
+    [
+     "Fp12 squarings x260",
+     223.6,
+     0,
+     0
+    ],
+    [
+     "pair B: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "pair gamma: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "pair delta: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "pair beta: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "reduced tower code (helpers, miller, line, add)",
+     0,
+     2184,
+     0
+    ],
+    [
+     "product of 4 Miller values",
+     2.604,
+     204,
+     0
+    ],
+    [
+     "VK G2 constants (beta, gamma, delta)",
+     0,
+     330,
+     0
+    ],
+    [
+     "final exp easy",
+     5.339,
+     558,
+     0
+    ],
+    [
+     "final exp hard",
+     146.299,
+     2536,
+     0
+    ],
+    [
+     "outlining (recompiler)",
+     "x1.037",
+     -1970,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 999.5065,
+    "2": 499.73275,
+    "5": 199.8685,
+    "10": 99.91375,
+    "25": 39.9409,
+    "50": 19.94995,
+    "100": 9.954475
+   },
+   "eff_hi": {
+    "1": 1017.33775,
+    "2": 508.648375,
+    "5": 203.43475,
+    "10": 101.696875,
+    "25": 40.65415,
+    "50": 20.306575000000002,
+    "100": 10.132787500000001
+   },
+   "eff_lo": {
+    "1": 975.73025,
+    "2": 487.844625,
+    "5": 195.11325,
+    "10": 97.536125,
+    "25": 38.98985,
+    "50": 19.474425,
+    "100": 9.7167125
+   },
+   "per_input_script": 6236,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 161.77,
+   "k_min_bchspec": 61.94
+  },
+  "BN254:singleton-minop": {
+   "curve": "BN254",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_aff",
+    "B": "wit",
+    "gamma": "baked",
+    "delta": "baked",
+    "layout": "unrolled",
+    "outline": false,
+    "p2sh": false
+   },
+   "inputs": 1,
+   "bytes": 58285,
+   "bytes_lo": 58285,
+   "bytes_hi": 58285,
+   "bytes_worst": 64001,
+   "op": 64.794,
+   "op_lo": 64.794,
+   "op_hi": 64.794,
+   "op_worst": 72.794,
+   "rows": [
+    [
+     "input checks",
+     0.082,
+     230,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.254,
+     220,
+     0
+    ],
+    [
+     "vk_x glv_aff",
+     1.16,
+     1756,
+     1071
+    ],
+    [
+     "Fp12 squarings x65",
+     11.466,
+     0,
+     0
+    ],
+    [
+     "pair B: 88 lines",
+     12.206,
+     0,
+     0
+    ],
+    [
+     "pair B: witnessed affine walk",
+     8.246,
+     0,
+     5808
+    ],
+    [
+     "pair gamma: 88 lines",
+     12.206,
+     0,
+     0
+    ],
+    [
+     "pair gamma: baked lines",
+     0,
+     11704,
+     0
+    ],
+    [
+     "pair delta: 88 lines",
+     12.206,
+     0,
+     0
+    ],
+    [
+     "pair delta: baked lines",
+     0,
+     11704,
+     0
+    ],
+    [
+     "unit line kernel + unit coords",
+     0.059,
+     1272,
+     99
+    ],
+    [
+     "affine witnessed G2 kernels",
+     0,
+     398,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     1849,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     256,
+     0
+    ],
+    [
+     "residue c-folds",
+     3.793,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.777,
+     1000,
+     198
+    ],
+    [
+     "unrolled glue",
+     1.978,
+     16770,
+     0
+    ],
+    [
+     "unrolled cleanup",
+     0.363,
+     3591,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 80.9515,
+    "2": 58.285,
+    "5": 58.285,
+    "10": 58.285,
+    "25": 58.285,
+    "50": 58.285,
+    "100": 58.285
+   },
+   "eff_hi": {
+    "1": 80.9515,
+    "2": 58.285,
+    "5": 58.285,
+    "10": 58.285,
+    "25": 58.285,
+    "50": 58.285,
+    "100": 58.285
+   },
+   "eff_lo": {
+    "1": 80.9515,
+    "2": 58.285,
+    "5": 58.285,
+    "10": 58.285,
+    "25": 58.285,
+    "50": 58.285,
+    "100": 58.285
+   },
+   "per_input_script": 58285,
+   "fits_bch2026_size": false,
+   "k_min_bch2026": 1.39,
+   "k_min_bchspec": 1.19
+  },
+  "BLS12-381:singleton (plain)": {
+   "curve": "BLS12-381",
+   "family": "F12",
+   "choice": {
+    "tower": "red",
+    "acc": "sep4",
+    "term": "fe",
+    "subgroup": "endpoint",
+    "vkx": "straus",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": false,
+    "p2sh": false
+   },
+   "inputs": 1,
+   "bytes": 7510,
+   "bytes_lo": 7510,
+   "bytes_hi": 7510,
+   "bytes_worst": 7510,
+   "op": 994.597,
+   "op_lo": 994.597,
+   "op_hi": 994.597,
+   "op_worst": 1057.643,
+   "rows": [
+    [
+     "input checks",
+     0.372,
+     352,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.0,
+     0,
+     0
+    ],
+    [
+     "vk_x straus",
+     10.884,
+     981,
+     0
+    ],
+    [
+     "Fp12 squarings x256",
+     351.027,
+     0,
+     0
+    ],
+    [
+     "pair B: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "pair gamma: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "pair delta: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "pair beta: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "reduced tower code (helpers, miller, line, add)",
+     0,
+     2130,
+     0
+    ],
+    [
+     "product of 4 Miller values",
+     4.191,
+     227,
+     0
+    ],
+    [
+     "VK G2 constants (beta, gamma, delta)",
+     0,
+     441,
+     0
+    ],
+    [
+     "final exp easy",
+     11.466,
+     568,
+     0
+    ],
+    [
+     "final exp hard",
+     223.745,
+     2327,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 1243.20525,
+    "2": 621.582125,
+    "5": 248.60825,
+    "10": 124.283625,
+    "25": 49.688849999999995,
+    "50": 24.823925,
+    "100": 12.3914625
+   },
+   "eff_hi": {
+    "1": 1243.20525,
+    "2": 621.582125,
+    "5": 248.60825,
+    "10": 124.283625,
+    "25": 49.688849999999995,
+    "50": 24.823925,
+    "100": 12.3914625
+   },
+   "eff_lo": {
+    "1": 1243.20525,
+    "2": 621.582125,
+    "5": 248.60825,
+    "10": 124.283625,
+    "25": 49.688849999999995,
+    "50": 24.823925,
+    "100": 12.3914625
+   },
+   "per_input_script": 7510,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 166.81,
+   "k_min_bchspec": 71.4
+  },
+  "BLS12-381:singleton-opcode-optimized": {
+   "curve": "BLS12-381",
+   "family": "F12",
+   "choice": {
+    "tower": "red",
+    "acc": "sep4",
+    "term": "fe",
+    "subgroup": "endpoint",
+    "vkx": "straus",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": true,
+    "p2sh": false
+   },
+   "inputs": 1,
+   "bytes": 5999,
+   "bytes_lo": 5648,
+   "bytes_hi": 6491,
+   "bytes_worst": 5999,
+   "op": 1003.549,
+   "op_lo": 997.581,
+   "op_hi": 1008.024,
+   "op_worst": 1066.595,
+   "rows": [
+    [
+     "input checks",
+     0.372,
+     352,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.0,
+     0,
+     0
+    ],
+    [
+     "vk_x straus",
+     10.884,
+     981,
+     0
+    ],
+    [
+     "Fp12 squarings x256",
+     351.027,
+     0,
+     0
+    ],
+    [
+     "pair B: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "pair gamma: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "pair delta: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "pair beta: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "reduced tower code (helpers, miller, line, add)",
+     0,
+     2130,
+     0
+    ],
+    [
+     "product of 4 Miller values",
+     4.191,
+     227,
+     0
+    ],
+    [
+     "VK G2 constants (beta, gamma, delta)",
+     0,
+     441,
+     0
+    ],
+    [
+     "final exp easy",
+     11.466,
+     568,
+     0
+    ],
+    [
+     "final exp hard",
+     223.745,
+     2327,
+     0
+    ],
+    [
+     "outlining (recompiler)",
+     "x1.009",
+     -1511,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 1254.39525,
+    "2": 627.177125,
+    "5": 250.84625,
+    "10": 125.402625,
+    "25": 50.136449999999996,
+    "50": 25.047725,
+    "100": 12.5033625
+   },
+   "eff_hi": {
+    "1": 1259.989,
+    "2": 629.974,
+    "5": 251.965,
+    "10": 125.962,
+    "25": 50.3602,
+    "50": 25.159599999999998,
+    "100": 12.559299999999999
+   },
+   "eff_lo": {
+    "1": 1246.93525,
+    "2": 623.447125,
+    "5": 249.35425,
+    "10": 124.656625,
+    "25": 49.83805,
+    "50": 24.898525000000003,
+    "100": 12.428762500000001
+   },
+   "per_input_script": 5999,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 211.11,
+   "k_min_bchspec": 78.89
+  },
+  "BLS12-381:singleton-minop": {
+   "curve": "BLS12-381",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_jac",
+    "B": "proj",
+    "gamma": "baked",
+    "delta": "baked",
+    "layout": "unrolled",
+    "outline": false,
+    "p2sh": false
+   },
+   "inputs": 1,
+   "bytes": 59241,
+   "bytes_lo": 59241,
+   "bytes_hi": 59241,
+   "bytes_worst": 59302,
+   "op": 145.727,
+   "op_lo": 145.727,
+   "op_hi": 145.727,
+   "op_worst": 171.25,
+   "rows": [
+    [
+     "input checks",
+     0.207,
+     304,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.147,
+     239,
+     0
+    ],
+    [
+     "vk_x glv_jac",
+     3.607,
+     1961,
+     56
+    ],
+    [
+     "Fp12 squarings x64",
+     27.085,
+     0,
+     0
+    ],
+    [
+     "pair B: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair B: projective walk",
+     19.5,
+     0,
+     0
+    ],
+    [
+     "pair gamma: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair gamma: baked lines",
+     0,
+     20286,
+     0
+    ],
+    [
+     "pair delta: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair delta: baked lines",
+     0,
+     20286,
+     0
+    ],
+    [
+     "projective G2 kernels",
+     0,
+     0,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     2583,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     384,
+     0
+    ],
+    [
+     "residue c-folds",
+     2.494,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.366,
+     654,
+     294
+    ],
+    [
+     "unrolled site glue",
+     0,
+     11710,
+     0
+    ],
+    [
+     "unrolled cleanup",
+     0.0,
+     0,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 182.11775,
+    "2": 91.038375,
+    "5": 59.241,
+    "10": 59.241,
+    "25": 59.241,
+    "50": 59.241,
+    "100": 59.241
+   },
+   "eff_hi": {
+    "1": 182.11775,
+    "2": 91.038375,
+    "5": 59.241,
+    "10": 59.241,
+    "25": 59.241,
+    "50": 59.241,
+    "100": 59.241
+   },
+   "eff_lo": {
+    "1": 182.11775,
+    "2": 91.038375,
+    "5": 59.241,
+    "10": 59.241,
+    "25": 59.241,
+    "50": 59.241,
+    "100": 59.241
+   },
+   "per_input_script": 59241,
+   "fits_bch2026_size": false,
+   "k_min_bch2026": 3.08,
+   "k_min_bchspec": 2.63
+  }
+ },
+ "frontier": {
+  "BN254": [
+   {
+    "label": "F12/red shared res vkx=jac B=proj g=proj d=proj rolled +outline",
+    "bytes": 4536,
+    "op": 358.075,
+    "inputs": 1,
+    "bytes_lo": 4285,
+    "bytes_hi": 4889,
+    "op_lo": 343.06,
+    "op_hi": 375.93,
+    "op_worst": 416.542
+   },
+   {
+    "label": "F12/red shared res vkx=glv_jac B=proj g=proj d=proj rolled +outline",
+    "bytes": 5033,
+    "op": 323.198,
+    "inputs": 1,
+    "bytes_lo": 4751,
+    "bytes_hi": 5428,
+    "op_lo": 308.435,
+    "op_hi": 341.433,
+    "op_worst": 336.598
+   },
+   {
+    "label": "F12/red shared res vkx=glv_aff B=proj g=proj d=proj rolled +outline",
+    "bytes": 6251,
+    "op": 322.43,
+    "inputs": 1,
+    "bytes_lo": 5956,
+    "bytes_hi": 6664,
+    "op_lo": 308.263,
+    "op_hi": 339.649,
+    "op_worst": 330.43
+   },
+   {
+    "label": "F12/red shared res vkx=glv_jac B=proj g=proj d=proj rolled",
+    "bytes": 6449,
+    "op": 311.666,
+    "inputs": 1,
+    "bytes_lo": 6449,
+    "bytes_hi": 6449,
+    "op_lo": 304.678,
+    "op_hi": 323.48,
+    "op_worst": 325.066
+   },
+   {
+    "label": "F12/lazy shared res vkx=jac B=proj g=proj d=proj rolled +outline",
+    "bytes": 6536,
+    "op": 155.638,
+    "inputs": 1,
+    "bytes_lo": 5717,
+    "bytes_hi": 7845,
+    "op_lo": 133.784,
+    "op_hi": 186.793,
+    "op_worst": 214.105
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=proj rolled +outline",
+    "bytes": 7093,
+    "op": 120.996,
+    "inputs": 1,
+    "bytes_lo": 6244,
+    "bytes_hi": 8445,
+    "op_lo": 99.239,
+    "op_hi": 152.64,
+    "op_worst": 134.396
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=proj rolled",
+    "bytes": 8235,
+    "op": 117.472,
+    "inputs": 1,
+    "bytes_lo": 7650,
+    "bytes_hi": 9125,
+    "op_lo": 98.257,
+    "op_hi": 146.067,
+    "op_worst": 130.872
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_aff B=proj g=proj d=proj rolled",
+    "bytes": 9517,
+    "op": 116.732,
+    "inputs": 1,
+    "bytes_lo": 8932,
+    "bytes_hi": 10407,
+    "op_lo": 98.087,
+    "op_hi": 144.377,
+    "op_worst": 124.732
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=pile rolled +outline",
+    "bytes": 13188,
+    "op": 104.15,
+    "inputs": 1,
+    "bytes_lo": 11987,
+    "bytes_hi": 15033,
+    "op_lo": 87.102,
+    "op_hi": 129.198,
+    "op_worst": 117.55
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_aff B=proj g=proj d=pile rolled +outline",
+    "bytes": 14432,
+    "op": 103.387,
+    "inputs": 1,
+    "bytes_lo": 13217,
+    "bytes_hi": 16295,
+    "op_lo": 86.93,
+    "op_hi": 127.432,
+    "op_worst": 111.387
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=pile rolled",
+    "bytes": 15388,
+    "op": 101.116,
+    "inputs": 1,
+    "bytes_lo": 14803,
+    "bytes_hi": 16278,
+    "op_lo": 86.239,
+    "op_hi": 123.634,
+    "op_worst": 114.516
+   },
+   {
+    "label": "ZEV/single delta=proj B=keep m=2",
+    "bytes": 16453,
+    "op": 31.894,
+    "inputs": 1,
+    "bytes_lo": 16333,
+    "bytes_hi": 16633,
+    "op_lo": 29.974,
+    "op_hi": 34.454,
+    "op_worst": 31.894
+   },
+   {
+    "label": "ZEV/single delta=pile B=keep m=2",
+    "bytes": 21915,
+    "op": 23.337,
+    "inputs": 1,
+    "bytes_lo": 21915,
+    "bytes_hi": 21915,
+    "op_lo": 23.337,
+    "op_hi": 23.337,
+    "op_worst": 23.337
+   },
+   {
+    "label": "ZEV/native delta=pile B=keep m=2",
+    "bytes": 27624,
+    "op": 20.573,
+    "inputs": 3,
+    "bytes_lo": 27624,
+    "bytes_hi": 27624,
+    "op_lo": 20.573,
+    "op_hi": 20.573,
+    "op_worst": 20.573
+   }
+  ],
+  "BLS12-381": [
+   {
+    "label": "F12/red shared res vkx=straus B=proj g=proj d=proj rolled +outline",
+    "bytes": 5282,
+    "op": 412.152,
+    "inputs": 1,
+    "bytes_lo": 5014,
+    "bytes_hi": 5657,
+    "op_lo": 405.675,
+    "op_hi": 420.772,
+    "op_worst": 475.198
+   },
+   {
+    "label": "F12/red shared res vkx=glv_jac B=proj g=proj d=proj rolled +outline",
+    "bytes": 6107,
+    "op": 404.81,
+    "inputs": 1,
+    "bytes_lo": 5791,
+    "bytes_hi": 6551,
+    "op_lo": 398.376,
+    "op_hi": 413.396,
+    "op_worst": 430.333
+   },
+   {
+    "label": "F12/lazy shared res vkx=straus B=proj g=proj d=proj rolled +outline",
+    "bytes": 6200,
+    "op": 202.512,
+    "inputs": 1,
+    "bytes_lo": 5666,
+    "bytes_hi": 7059,
+    "op_lo": 196.489,
+    "op_hi": 209.788,
+    "op_worst": 265.558
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=proj rolled +outline",
+    "bytes": 7089,
+    "op": 195.017,
+    "inputs": 1,
+    "bytes_lo": 6506,
+    "bytes_hi": 8016,
+    "op_lo": 189.139,
+    "op_hi": 202.183,
+    "op_worst": 220.54
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=proj rolled",
+    "bytes": 8189,
+    "op": 189.337,
+    "inputs": 1,
+    "bytes_lo": 7919,
+    "bytes_hi": 8639,
+    "op_lo": 187.267,
+    "op_hi": 193.477,
+    "op_worst": 214.86
+   },
+   {
+    "label": "F12/lazy shared res vkx=straus B=proj g=proj d=pile rolled +outline",
+    "bytes": 11958,
+    "op": 187.402,
+    "inputs": 1,
+    "bytes_lo": 11085,
+    "bytes_hi": 13291,
+    "op_lo": 179.721,
+    "op_hi": 197.486,
+    "op_worst": 250.448
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=pile rolled +outline",
+    "bytes": 12847,
+    "op": 179.907,
+    "inputs": 1,
+    "bytes_lo": 11925,
+    "bytes_hi": 14248,
+    "op_lo": 172.372,
+    "op_hi": 189.882,
+    "op_worst": 205.43
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=pile rolled",
+    "bytes": 14963,
+    "op": 174.667,
+    "inputs": 1,
+    "bytes_lo": 14693,
+    "bytes_hi": 15413,
+    "op_lo": 170.665,
+    "op_hi": 181.705,
+    "op_worst": 200.19
+   },
+   {
+    "label": "F12/lazy shared res vkx=straus B=proj g=pile d=pile rolled +outline",
+    "bytes": 17588,
+    "op": 172.293,
+    "inputs": 1,
+    "bytes_lo": 16384,
+    "bytes_hi": 19385,
+    "op_lo": 162.954,
+    "op_hi": 185.185,
+    "op_worst": 235.339
+   },
+   {
+    "label": "F12/lazy shared res vkx=glv_jac B=proj g=pile d=pile rolled +outline",
+    "bytes": 18477,
+    "op": 164.797,
+    "inputs": 1,
+    "bytes_lo": 17224,
+    "bytes_hi": 20342,
+    "op_lo": 155.604,
+    "op_hi": 177.58,
+    "op_worst": 190.32
+   },
+   {
+    "label": "ZEV/single delta=proj B=proj m=2",
+    "bytes": 18661,
+    "op": 37.256,
+    "inputs": 1,
+    "bytes_lo": 18541,
+    "bytes_hi": 18841,
+    "op_lo": 34.673,
+    "op_hi": 40.61,
+    "op_worst": 37.256
+   },
+   {
+    "label": "ZEV/single delta=proj B=keep m=2",
+    "bytes": 20159,
+    "op": 35.908,
+    "inputs": 1,
+    "bytes_lo": 20039,
+    "bytes_hi": 20339,
+    "op_lo": 33.595,
+    "op_hi": 38.993,
+    "op_worst": 35.908
+   },
+   {
+    "label": "ZEV/single delta=pile B=proj m=2",
+    "bytes": 24986,
+    "op": 27.418,
+    "inputs": 1,
+    "bytes_lo": 24986,
+    "bytes_hi": 24986,
+    "op_lo": 27.149,
+    "op_hi": 27.688,
+    "op_worst": 27.418
+   },
+   {
+    "label": "ZEV/single delta=pile B=keep m=2",
+    "bytes": 26484,
+    "op": 26.071,
+    "inputs": 1,
+    "bytes_lo": 26484,
+    "bytes_hi": 26484,
+    "op_lo": 26.071,
+    "op_hi": 26.071,
+    "op_worst": 26.071
+   },
+   {
+    "label": "ZEV/native delta=pile B=keep m=2",
+    "bytes": 34229,
+    "op": 24.04,
+    "inputs": 4,
+    "bytes_lo": 34229,
+    "bytes_hi": 34229,
+    "op_lo": 24.04,
+    "op_hi": 24.04,
+    "op_worst": 24.04
+   }
+  ]
+ },
+ "best": {
+  "BN254": {
+   "1": {
+    "design": "ZEV/native delta=pile B=keep m=2",
+    "eff": 27.624,
+    "eff_hi": 27.624,
+    "today": 27.6
+   },
+   "2": {
+    "design": "ZEV/single delta=proj B=keep m=2",
+    "eff": 19.89275,
+    "eff_hi": 21.49275,
+    "today": 21.9
+   },
+   "5": {
+    "design": "ZEV/single delta=proj B=keep m=2",
+    "eff": 16.453,
+    "eff_hi": 16.633,
+    "today": 21.9
+   },
+   "10": {
+    "design": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=pile rolled +outline",
+    "eff": 13.188,
+    "eff_hi": 16.10875,
+    "today": 21.9
+   },
+   "25": {
+    "design": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=proj rolled +outline",
+    "eff": 7.093,
+    "eff_hi": 8.445,
+    "today": 21.9
+   },
+   "50": {
+    "design": "F12/lazy shared res vkx=jac B=proj g=proj d=proj rolled +outline",
+    "eff": 6.536,
+    "eff_hi": 7.845,
+    "today": 19.2
+   },
+   "100": {
+    "design": "F12/red shared res vkx=jac B=proj g=proj d=proj rolled +outline",
+    "eff": 4.536,
+    "eff_hi": 4.889,
+    "today": 9.6
+   }
+  },
+  "BLS12-381": {
+   "1": {
+    "design": "ZEV/single delta=pile B=keep m=2",
+    "eff": 32.54775,
+    "eff_hi": 32.54775,
+    "today": 32.5
+   },
+   "2": {
+    "design": "ZEV/single delta=proj B=keep m=2",
+    "eff": 22.4015,
+    "eff_hi": 24.329625,
+    "today": 26.5
+   },
+   "5": {
+    "design": "ZEV/single delta=proj B=proj m=2",
+    "eff": 18.661,
+    "eff_hi": 18.841,
+    "today": 26.5
+   },
+   "10": {
+    "design": "ZEV/single delta=proj B=proj m=2",
+    "eff": 18.661,
+    "eff_hi": 18.841,
+    "today": 26.5
+   },
+   "25": {
+    "design": "F12/lazy shared res vkx=glv_jac B=proj g=proj d=proj rolled",
+    "eff": 9.42585,
+    "eff_hi": 9.632850000000001,
+    "today": 26.5
+   },
+   "50": {
+    "design": "F12/lazy shared res vkx=straus B=proj g=proj d=proj rolled +outline",
+    "eff": 6.2,
+    "eff_hi": 7.059,
+    "today": 24.8
+   },
+   "100": {
+    "design": "F12/red shared res vkx=straus B=proj g=proj d=proj rolled +outline",
+    "eff": 5.282,
+    "eff_hi": 5.657,
+    "today": 12.4
+   }
+  }
+ },
+ "named": {
+  "BN254:T1 SI-GLS + on-chain projective delta walk": {
+   "curve": "BN254",
+   "family": "ZEV",
+   "choice": {
+    "host": "single",
+    "delta": "proj",
+    "Baff": "keep",
+    "m": 2
+   },
+   "inputs": 1,
+   "bytes": 16453,
+   "bytes_lo": 16333,
+   "bytes_hi": 16633,
+   "bytes_worst": 16453,
+   "op": 31.894,
+   "op_lo": 29.974,
+   "op_hi": 34.454,
+   "op_worst": 31.894,
+   "rows": [
+    [
+     "measured base (BN254 single)",
+     23.337,
+     21915,
+     0
+    ],
+    [
+     "delta: drop baked slope pile",
+     -4.263,
+     -5858,
+     0
+    ],
+    [
+     "delta: projective walk on-chain (B kernel reused)",
+     12.8,
+     300,
+     0
+    ],
+    [
+     "delta: projective delta lines raise max chunk degree (+~3 quotient words)",
+     0.02,
+     96,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 39.8265,
+    "2": 19.89275,
+    "5": 16.453,
+    "10": 16.453,
+    "25": 16.453,
+    "50": 16.453,
+    "100": 16.453
+   },
+   "eff_hi": {
+    "1": 43.0265,
+    "2": 21.49275,
+    "5": 16.633,
+    "10": 16.633,
+    "25": 16.633,
+    "50": 16.633,
+    "100": 16.633
+   },
+   "eff_lo": {
+    "1": 37.4265,
+    "2": 18.69275,
+    "5": 16.333,
+    "10": 16.333,
+    "25": 16.333,
+    "50": 16.333,
+    "100": 16.333
+   },
+   "per_input_script": 16453,
+   "fits_bch2026_size": false,
+   "k_min_bch2026": 2.43,
+   "k_min_bchspec": 1.51,
+   "label": "T1 SI-GLS + on-chain projective delta walk"
+  },
+  "BN254:T2 rolled lazy-tower residue singleton (all walks projective, GLV-Jacobian vk_x)": {
+   "curve": "BN254",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_jac",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": false,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 8235,
+   "bytes_lo": 7650,
+   "bytes_hi": 9125,
+   "bytes_worst": 8260,
+   "op": 117.472,
+   "op_lo": 98.257,
+   "op_hi": 146.067,
+   "op_worst": 130.872,
+   "rows": [
+    [
+     "input checks",
+     0.082,
+     230,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.254,
+     220,
+     0
+    ],
+    [
+     "vk_x glv_jac",
+     1.9,
+     1500,
+     45
+    ],
+    [
+     "Fp12 squarings x65",
+     11.466,
+     0,
+     0
+    ],
+    [
+     "pair B: 88 lines",
+     15.4,
+     0,
+     0
+    ],
+    [
+     "pair B: projective walk",
+     16.3,
+     0,
+     0
+    ],
+    [
+     "pair gamma: 88 lines",
+     15.4,
+     0,
+     0
+    ],
+    [
+     "pair gamma: projective walk",
+     16.3,
+     0,
+     0
+    ],
+    [
+     "pair delta: 88 lines",
+     15.4,
+     0,
+     0
+    ],
+    [
+     "pair delta: projective walk",
+     16.3,
+     0,
+     0
+    ],
+    [
+     "general 034 line kernel",
+     0,
+     1200,
+     0
+    ],
+    [
+     "projective G2 kernels",
+     0,
+     450,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     1849,
+     0
+    ],
+    [
+     "baked e(alpha,beta) constant",
+     0.18,
+     198,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     256,
+     0
+    ],
+    [
+     "residue c-folds",
+     3.793,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.777,
+     1000,
+     198
+    ],
+    [
+     "rolled loop",
+     3.87,
+     700,
+     0
+    ],
+    [
+     "cleanup",
+     0.05,
+     10,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 146.799,
+    "2": 73.379,
+    "5": 29.327,
+    "10": 14.643,
+    "25": 8.235,
+    "50": 8.235,
+    "100": 8.235
+   },
+   "eff_hi": {
+    "1": 182.54275,
+    "2": 91.250875,
+    "5": 36.47575,
+    "10": 18.217375,
+    "25": 9.125,
+    "50": 9.125,
+    "100": 9.125
+   },
+   "eff_lo": {
+    "1": 122.78025,
+    "2": 61.369625,
+    "5": 24.52325,
+    "10": 12.241125,
+    "25": 7.65,
+    "50": 7.65,
+    "100": 7.65
+   },
+   "per_input_script": 8235,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 17.96,
+   "k_min_bchspec": 8.1,
+   "label": "T2 rolled lazy-tower residue singleton (all walks projective, GLV-Jacobian vk_x)"
+  },
+  "BN254:T2+outline (recompiler pass)": {
+   "curve": "BN254",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_jac",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": true,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 7093,
+   "bytes_lo": 6244,
+   "bytes_hi": 8445,
+   "bytes_worst": 7118,
+   "op": 120.996,
+   "op_lo": 99.239,
+   "op_hi": 152.64,
+   "op_worst": 134.396,
+   "rows": [
+    [
+     "input checks",
+     0.082,
+     230,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.254,
+     220,
+     0
+    ],
+    [
+     "vk_x glv_jac",
+     1.9,
+     1500,
+     45
+    ],
+    [
+     "Fp12 squarings x65",
+     11.466,
+     0,
+     0
+    ],
+    [
+     "pair B: 88 lines",
+     15.4,
+     0,
+     0
+    ],
+    [
+     "pair B: projective walk",
+     16.3,
+     0,
+     0
+    ],
+    [
+     "pair gamma: 88 lines",
+     15.4,
+     0,
+     0
+    ],
+    [
+     "pair gamma: projective walk",
+     16.3,
+     0,
+     0
+    ],
+    [
+     "pair delta: 88 lines",
+     15.4,
+     0,
+     0
+    ],
+    [
+     "pair delta: projective walk",
+     16.3,
+     0,
+     0
+    ],
+    [
+     "general 034 line kernel",
+     0,
+     1200,
+     0
+    ],
+    [
+     "projective G2 kernels",
+     0,
+     450,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     1849,
+     0
+    ],
+    [
+     "baked e(alpha,beta) constant",
+     0.18,
+     198,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     256,
+     0
+    ],
+    [
+     "residue c-folds",
+     3.793,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.777,
+     1000,
+     198
+    ],
+    [
+     "rolled loop",
+     3.87,
+     700,
+     0
+    ],
+    [
+     "cleanup",
+     0.05,
+     10,
+     0
+    ],
+    [
+     "outlining (recompiler)",
+     "x1.030",
+     -1142,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 151.204,
+    "2": 75.5815,
+    "5": 30.208,
+    "10": 15.0835,
+    "25": 7.093,
+    "50": 7.093,
+    "100": 7.093
+   },
+   "eff_hi": {
+    "1": 190.759,
+    "2": 95.359,
+    "5": 38.119,
+    "10": 19.039,
+    "25": 8.445,
+    "50": 8.445,
+    "100": 8.445
+   },
+   "eff_lo": {
+    "1": 124.00775,
+    "2": 61.983375,
+    "5": 24.76875,
+    "10": 12.363875,
+    "25": 6.244,
+    "50": 6.244,
+    "100": 6.244
+   },
+   "per_input_script": 7093,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 21.5,
+   "k_min_bchspec": 8.9,
+   "label": "T2+outline (recompiler pass)"
+  },
+  "BN254:T2 with delta slope pile (build flag)": {
+   "curve": "BN254",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_jac",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "pile",
+    "layout": "rolled",
+    "outline": false,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 15388,
+   "bytes_lo": 14803,
+   "bytes_hi": 16278,
+   "bytes_worst": 15413,
+   "op": 101.116,
+   "op_lo": 86.239,
+   "op_hi": 123.634,
+   "op_worst": 114.516,
+   "rows": [
+    [
+     "input checks",
+     0.082,
+     230,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.254,
+     220,
+     0
+    ],
+    [
+     "vk_x glv_jac",
+     1.9,
+     1500,
+     45
+    ],
+    [
+     "Fp12 squarings x65",
+     11.466,
+     0,
+     0
+    ],
+    [
+     "pair B: 88 lines",
+     15.4,
+     0,
+     0
+    ],
+    [
+     "pair B: projective walk",
+     16.3,
+     0,
+     0
+    ],
+    [
+     "pair gamma: 88 lines",
+     15.4,
+     0,
+     0
+    ],
+    [
+     "pair gamma: projective walk",
+     16.3,
+     0,
+     0
+    ],
+    [
+     "pair delta: 88 lines",
+     12.206,
+     0,
+     0
+    ],
+    [
+     "pair delta: slope pile + x/c recursion",
+     3.08,
+     5632,
+     0
+    ],
+    [
+     "unit line kernel + unit coords",
+     0.059,
+     1272,
+     99
+    ],
+    [
+     "general 034 line kernel",
+     0,
+     1200,
+     0
+    ],
+    [
+     "projective G2 kernels",
+     0,
+     450,
+     0
+    ],
+    [
+     "pile recursion code",
+     0,
+     150,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     1849,
+     0
+    ],
+    [
+     "baked e(alpha,beta) constant",
+     0.18,
+     198,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     256,
+     0
+    ],
+    [
+     "residue c-folds",
+     3.793,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.777,
+     1000,
+     198
+    ],
+    [
+     "rolled loop",
+     3.87,
+     700,
+     0
+    ],
+    [
+     "cleanup",
+     0.05,
+     10,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 126.354,
+    "2": 63.1565,
+    "5": 25.238,
+    "10": 15.388,
+    "25": 15.388,
+    "50": 15.388,
+    "100": 15.388
+   },
+   "eff_hi": {
+    "1": 154.5015,
+    "2": 77.23025,
+    "5": 30.8675,
+    "10": 16.278,
+    "25": 16.278,
+    "50": 16.278,
+    "100": 16.278
+   },
+   "eff_lo": {
+    "1": 107.75775,
+    "2": 53.858375,
+    "5": 21.51875,
+    "10": 14.803,
+    "25": 14.803,
+    "50": 14.803,
+    "100": 14.803
+   },
+   "per_input_script": 15388,
+   "fits_bch2026_size": false,
+   "k_min_bch2026": 8.24,
+   "k_min_bchspec": 5.0,
+   "label": "T2 with delta slope pile (build flag)"
+  },
+  "BN254:R reduced-tower residue singleton (plain singleton minus FE/subgroup walk/4 loops)": {
+   "curve": "BN254",
+   "family": "F12",
+   "choice": {
+    "tower": "red",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_jac",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": true,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 5033,
+   "bytes_lo": 4751,
+   "bytes_hi": 5428,
+   "bytes_worst": 5058,
+   "op": 323.198,
+   "op_lo": 308.435,
+   "op_hi": 341.433,
+   "op_worst": 336.598,
+   "rows": [
+    [
+     "input checks",
+     0.118,
+     213,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.25,
+     220,
+     0
+    ],
+    [
+     "vk_x glv_jac",
+     1.9,
+     1500,
+     45
+    ],
+    [
+     "Fp12 squarings x65",
+     55.9,
+     0,
+     0
+    ],
+    [
+     "pair B: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "pair gamma: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "pair delta: proj walk + lines",
+     77.134,
+     0,
+     0
+    ],
+    [
+     "reduced tower code (helpers, miller, line, add)",
+     0,
+     2184,
+     0
+    ],
+    [
+     "baked e(alpha,beta) constant",
+     0.868,
+     404,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     220,
+     0
+    ],
+    [
+     "residue c-folds",
+     18.228,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     3.0,
+     900,
+     384
+    ],
+    [
+     "outlining (recompiler)",
+     "x1.037",
+     -1416,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 403.9565,
+    "2": 201.95775,
+    "5": 80.7585,
+    "10": 40.35875,
+    "25": 16.1189,
+    "50": 8.03895,
+    "100": 5.033
+   },
+   "eff_hi": {
+    "1": 426.75025,
+    "2": 213.354625,
+    "5": 85.31725,
+    "10": 42.638125,
+    "25": 17.03065,
+    "50": 8.494825,
+    "100": 5.428
+   },
+   "eff_lo": {
+    "1": 385.50275,
+    "2": 192.730875,
+    "5": 77.06775,
+    "10": 38.513375,
+    "25": 15.38075,
+    "50": 7.669875,
+    "100": 4.751
+   },
+   "per_input_script": 5033,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 81.19,
+   "k_min_bchspec": 27.05,
+   "label": "R reduced-tower residue singleton (plain singleton minus FE/subgroup walk/4 loops)"
+  },
+  "BN254:native + on-chain projective delta (multi-input, bch-2026 sizes)": {
+   "curve": "BN254",
+   "family": "ZEV",
+   "choice": {
+    "host": "native",
+    "delta": "proj",
+    "Baff": "keep",
+    "m": 2
+   },
+   "inputs": 3,
+   "bytes": 22193,
+   "bytes_lo": 22073,
+   "bytes_hi": 22373,
+   "bytes_worst": 22193,
+   "op": 29.174,
+   "op_lo": 27.254,
+   "op_hi": 31.734,
+   "op_worst": 29.174,
+   "rows": [
+    [
+     "measured base (BN254 native)",
+     20.573,
+     27624,
+     0
+    ],
+    [
+     "delta: drop baked slope pile",
+     -4.219,
+     -5827,
+     0
+    ],
+    [
+     "delta: projective walk on-chain (B kernel reused)",
+     12.8,
+     300,
+     0
+    ],
+    [
+     "delta: projective delta lines raise max chunk degree (+~3 quotient words)",
+     0.02,
+     96,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 36.3445,
+    "2": 22.193,
+    "5": 22.193,
+    "10": 22.193,
+    "25": 22.193,
+    "50": 22.193,
+    "100": 22.193
+   },
+   "eff_hi": {
+    "1": 39.5445,
+    "2": 22.373,
+    "5": 22.373,
+    "10": 22.373,
+    "25": 22.373,
+    "50": 22.373,
+    "100": 22.373
+   },
+   "eff_lo": {
+    "1": 33.9445,
+    "2": 22.073,
+    "5": 22.073,
+    "10": 22.073,
+    "25": 22.073,
+    "50": 22.073,
+    "100": 22.073
+   },
+   "per_input_script": 7398,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 1.66,
+   "k_min_bchspec": 0.7,
+   "label": "native + on-chain projective delta (multi-input, bch-2026 sizes)"
+  },
+  "BN254:native + on-chain projective delta + projective B (multi-input, bch-2026 sizes)": {
+   "curve": "BN254",
+   "family": "ZEV",
+   "choice": {
+    "host": "native",
+    "delta": "proj",
+    "Baff": "proj",
+    "m": 2
+   },
+   "inputs": 3,
+   "bytes": 19871,
+   "bytes_lo": 19751,
+   "bytes_hi": 20051,
+   "bytes_worst": 19871,
+   "op": 33.39,
+   "op_lo": 30.627,
+   "op_hi": 36.793,
+   "op_worst": 33.39,
+   "rows": [
+    [
+     "measured base (BN254 native)",
+     20.573,
+     27624,
+     0
+    ],
+    [
+     "delta: drop baked slope pile",
+     -4.219,
+     -5827,
+     0
+    ],
+    [
+     "delta: projective walk on-chain (B kernel reused)",
+     12.8,
+     300,
+     0
+    ],
+    [
+     "delta: projective delta lines raise max chunk degree (+~3 quotient words)",
+     0.02,
+     96,
+     0
+    ],
+    [
+     "B walk: all projective (drop witnessed affine slopes)",
+     4.216,
+     430,
+     -2752
+    ]
+   ],
+   "eff": {
+    "1": 41.6145,
+    "2": 20.74575,
+    "5": 19.871,
+    "10": 19.871,
+    "25": 19.871,
+    "50": 19.871,
+    "100": 19.871
+   },
+   "eff_hi": {
+    "1": 45.86825,
+    "2": 22.872625,
+    "5": 20.051,
+    "10": 20.051,
+    "25": 20.051,
+    "50": 20.051,
+    "100": 20.051
+   },
+   "eff_lo": {
+    "1": 38.16075,
+    "2": 19.751,
+    "5": 19.751,
+    "10": 19.751,
+    "25": 19.751,
+    "50": 19.751,
+    "100": 19.751
+   },
+   "per_input_script": 6624,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 2.12,
+   "k_min_bchspec": 0.84,
+   "label": "native + on-chain projective delta + projective B (multi-input, bch-2026 sizes)"
+  },
+  "BN254:rolled minop with slope piles (hint-heavy F12)": {
+   "curve": "BN254",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_aff",
+    "B": "wit",
+    "gamma": "pile",
+    "delta": "pile",
+    "layout": "rolled",
+    "outline": false,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 26858,
+   "bytes_lo": 26648,
+   "bytes_hi": 27208,
+   "bytes_worst": 32574,
+   "op": 72.713,
+   "op_lo": 68.314,
+   "op_hi": 80.279,
+   "op_worst": 80.713,
+   "rows": [
+    [
+     "input checks",
+     0.082,
+     230,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.254,
+     220,
+     0
+    ],
+    [
+     "vk_x glv_aff",
+     1.16,
+     1756,
+     1071
+    ],
+    [
+     "Fp12 squarings x65",
+     11.466,
+     0,
+     0
+    ],
+    [
+     "pair B: 88 lines",
+     12.206,
+     0,
+     0
+    ],
+    [
+     "pair B: witnessed affine walk",
+     8.246,
+     0,
+     5808
+    ],
+    [
+     "pair gamma: 88 lines",
+     12.206,
+     0,
+     0
+    ],
+    [
+     "pair gamma: slope pile + x/c recursion",
+     3.08,
+     5632,
+     0
+    ],
+    [
+     "pair delta: 88 lines",
+     12.206,
+     0,
+     0
+    ],
+    [
+     "pair delta: slope pile + x/c recursion",
+     3.08,
+     5632,
+     0
+    ],
+    [
+     "unit line kernel + unit coords",
+     0.059,
+     1272,
+     99
+    ],
+    [
+     "affine witnessed G2 kernels",
+     0,
+     398,
+     0
+    ],
+    [
+     "pile recursion code",
+     0,
+     150,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     1849,
+     0
+    ],
+    [
+     "baked e(alpha,beta) constant",
+     0.18,
+     198,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     256,
+     0
+    ],
+    [
+     "residue c-folds",
+     3.793,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.777,
+     1000,
+     198
+    ],
+    [
+     "rolled loop",
+     3.87,
+     700,
+     0
+    ],
+    [
+     "cleanup",
+     0.05,
+     10,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 90.85025,
+    "2": 45.404625,
+    "5": 26.858,
+    "10": 26.858,
+    "25": 26.858,
+    "50": 26.858,
+    "100": 26.858
+   },
+   "eff_hi": {
+    "1": 100.30775,
+    "2": 50.133375,
+    "5": 27.208,
+    "10": 27.208,
+    "25": 27.208,
+    "50": 27.208,
+    "100": 27.208
+   },
+   "eff_lo": {
+    "1": 85.3515,
+    "2": 42.65525,
+    "5": 26.648,
+    "10": 26.648,
+    "25": 26.648,
+    "50": 26.648,
+    "100": 26.648
+   },
+   "per_input_script": 26858,
+   "fits_bch2026_size": false,
+   "k_min_bch2026": 3.39,
+   "k_min_bchspec": 2.47,
+   "label": "rolled minop with slope piles (hint-heavy F12)"
+  },
+  "BLS12-381:T1 SI-GLS + on-chain projective delta walk + all-projective B": {
+   "curve": "BLS12-381",
+   "family": "ZEV",
+   "choice": {
+    "host": "single",
+    "delta": "proj",
+    "Baff": "proj",
+    "m": 2
+   },
+   "inputs": 1,
+   "bytes": 18661,
+   "bytes_lo": 18541,
+   "bytes_hi": 18841,
+   "bytes_worst": 18661,
+   "op": 37.256,
+   "op_lo": 34.673,
+   "op_hi": 40.61,
+   "op_worst": 37.256,
+   "rows": [
+    [
+     "measured base (BLS12-381 single)",
+     26.071,
+     26484,
+     0
+    ],
+    [
+     "delta: drop baked slope pile",
+     -5.611,
+     -6769,
+     0
+    ],
+    [
+     "delta: projective walk on-chain (B kernel reused)",
+     15.422,
+     300,
+     0
+    ],
+    [
+     "delta: projective delta lines raise max chunk degree (+~3 quotient words)",
+     0.027,
+     144,
+     0
+    ],
+    [
+     "B walk: all projective (drop witnessed affine slopes)",
+     1.347,
+     -250,
+     -1248
+    ]
+   ],
+   "eff": {
+    "1": 46.529,
+    "2": 23.244,
+    "5": 18.661,
+    "10": 18.661,
+    "25": 18.661,
+    "50": 18.661,
+    "100": 18.661
+   },
+   "eff_hi": {
+    "1": 50.7215,
+    "2": 25.34025,
+    "5": 18.841,
+    "10": 18.841,
+    "25": 18.841,
+    "50": 18.841,
+    "100": 18.841
+   },
+   "eff_lo": {
+    "1": 43.30025,
+    "2": 21.629625,
+    "5": 18.541,
+    "10": 18.541,
+    "25": 18.541,
+    "50": 18.541,
+    "100": 18.541
+   },
+   "per_input_script": 18661,
+   "fits_bch2026_size": false,
+   "k_min_bch2026": 2.5,
+   "k_min_bchspec": 1.63,
+   "label": "T1 SI-GLS + on-chain projective delta walk + all-projective B"
+  },
+  "BLS12-381:T1a SI-GLS + on-chain projective delta walk (keep affine B segment)": {
+   "curve": "BLS12-381",
+   "family": "ZEV",
+   "choice": {
+    "host": "single",
+    "delta": "proj",
+    "Baff": "keep",
+    "m": 2
+   },
+   "inputs": 1,
+   "bytes": 20159,
+   "bytes_lo": 20039,
+   "bytes_hi": 20339,
+   "bytes_worst": 20159,
+   "op": 35.908,
+   "op_lo": 33.595,
+   "op_hi": 38.993,
+   "op_worst": 35.908,
+   "rows": [
+    [
+     "measured base (BLS12-381 single)",
+     26.071,
+     26484,
+     0
+    ],
+    [
+     "delta: drop baked slope pile",
+     -5.611,
+     -6769,
+     0
+    ],
+    [
+     "delta: projective walk on-chain (B kernel reused)",
+     15.422,
+     300,
+     0
+    ],
+    [
+     "delta: projective delta lines raise max chunk degree (+~3 quotient words)",
+     0.027,
+     144,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 44.844,
+    "2": 22.4015,
+    "5": 20.159,
+    "10": 20.159,
+    "25": 20.159,
+    "50": 20.159,
+    "100": 20.159
+   },
+   "eff_hi": {
+    "1": 48.70025,
+    "2": 24.329625,
+    "5": 20.339,
+    "10": 20.339,
+    "25": 20.339,
+    "50": 20.339,
+    "100": 20.339
+   },
+   "eff_lo": {
+    "1": 41.95275,
+    "2": 20.955875,
+    "5": 20.039,
+    "10": 20.039,
+    "25": 20.039,
+    "50": 20.039,
+    "100": 20.039
+   },
+   "per_input_script": 20159,
+   "fits_bch2026_size": false,
+   "k_min_bch2026": 2.23,
+   "k_min_bchspec": 1.49,
+   "label": "T1a SI-GLS + on-chain projective delta walk (keep affine B segment)"
+  },
+  "BLS12-381:T2 rolled minop: gamma/delta lines computed on-chain (projective)": {
+   "curve": "BLS12-381",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_jac",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": false,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 8189,
+   "bytes_lo": 7919,
+   "bytes_hi": 8639,
+   "bytes_worst": 8250,
+   "op": 189.337,
+   "op_lo": 187.267,
+   "op_hi": 193.477,
+   "op_worst": 214.86,
+   "rows": [
+    [
+     "input checks",
+     0.207,
+     304,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.147,
+     239,
+     0
+    ],
+    [
+     "vk_x glv_jac",
+     3.607,
+     1961,
+     56
+    ],
+    [
+     "Fp12 squarings x64",
+     27.085,
+     0,
+     0
+    ],
+    [
+     "pair B: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair B: projective walk",
+     19.5,
+     0,
+     0
+    ],
+    [
+     "pair gamma: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair gamma: projective walk",
+     19.5,
+     0,
+     0
+    ],
+    [
+     "pair delta: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair delta: projective walk",
+     19.5,
+     0,
+     0
+    ],
+    [
+     "projective G2 kernels",
+     0,
+     0,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     2583,
+     0
+    ],
+    [
+     "baked e(alpha,beta) constant",
+     0.42,
+     300,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     384,
+     0
+    ],
+    [
+     "residue c-folds",
+     2.494,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.366,
+     654,
+     294
+    ],
+    [
+     "rolled loop",
+     4.14,
+     900,
+     0
+    ],
+    [
+     "cleanup",
+     0.05,
+     10,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 236.63025,
+    "2": 118.294625,
+    "5": 47.29325,
+    "10": 23.626125,
+    "25": 9.42585,
+    "50": 8.189,
+    "100": 8.189
+   },
+   "eff_hi": {
+    "1": 241.80525,
+    "2": 120.882125,
+    "5": 48.32825,
+    "10": 24.143625,
+    "25": 9.632850000000001,
+    "50": 8.639,
+    "100": 8.639
+   },
+   "eff_lo": {
+    "1": 234.04275,
+    "2": 117.000875,
+    "5": 46.77575,
+    "10": 23.367375,
+    "25": 9.32235,
+    "50": 7.919,
+    "100": 7.919
+   },
+   "per_input_script": 8189,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 29.1,
+   "k_min_bchspec": 13.08,
+   "label": "T2 rolled minop: gamma/delta lines computed on-chain (projective)"
+  },
+  "BLS12-381:T2+outline (recompiler pass)": {
+   "curve": "BLS12-381",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_jac",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": true,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 7089,
+   "bytes_lo": 6506,
+   "bytes_hi": 8016,
+   "bytes_worst": 7150,
+   "op": 195.017,
+   "op_lo": 189.139,
+   "op_hi": 202.183,
+   "op_worst": 220.54,
+   "rows": [
+    [
+     "input checks",
+     0.207,
+     304,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.147,
+     239,
+     0
+    ],
+    [
+     "vk_x glv_jac",
+     3.607,
+     1961,
+     56
+    ],
+    [
+     "Fp12 squarings x64",
+     27.085,
+     0,
+     0
+    ],
+    [
+     "pair B: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair B: projective walk",
+     19.5,
+     0,
+     0
+    ],
+    [
+     "pair gamma: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair gamma: projective walk",
+     19.5,
+     0,
+     0
+    ],
+    [
+     "pair delta: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair delta: projective walk",
+     19.5,
+     0,
+     0
+    ],
+    [
+     "projective G2 kernels",
+     0,
+     0,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     2583,
+     0
+    ],
+    [
+     "baked e(alpha,beta) constant",
+     0.42,
+     300,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     384,
+     0
+    ],
+    [
+     "residue c-folds",
+     2.494,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.366,
+     654,
+     294
+    ],
+    [
+     "rolled loop",
+     4.14,
+     900,
+     0
+    ],
+    [
+     "cleanup",
+     0.05,
+     10,
+     0
+    ],
+    [
+     "outlining (recompiler)",
+     "x1.030",
+     -1100,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 243.73025,
+    "2": 121.844625,
+    "5": 48.71325,
+    "10": 24.336125,
+    "25": 9.709850000000001,
+    "50": 7.089,
+    "100": 7.089
+   },
+   "eff_hi": {
+    "1": 252.68775,
+    "2": 126.323375,
+    "5": 50.50475,
+    "10": 25.231875,
+    "25": 10.06815,
+    "50": 8.016,
+    "100": 8.016
+   },
+   "eff_lo": {
+    "1": 236.38275,
+    "2": 118.170875,
+    "5": 47.24375,
+    "10": 23.601375,
+    "25": 9.41595,
+    "50": 6.506,
+    "100": 6.506
+   },
+   "per_input_script": 7089,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 34.67,
+   "k_min_bchspec": 14.35,
+   "label": "T2+outline (recompiler pass)"
+  },
+  "BLS12-381:R reduced-tower residue singleton": {
+   "curve": "BLS12-381",
+   "family": "F12",
+   "choice": {
+    "tower": "red",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "straus",
+    "B": "proj",
+    "gamma": "proj",
+    "delta": "proj",
+    "layout": "rolled",
+    "outline": true,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 5282,
+   "bytes_lo": 5014,
+   "bytes_hi": 5657,
+   "bytes_worst": 5282,
+   "op": 412.152,
+   "op_lo": 405.675,
+   "op_hi": 420.772,
+   "op_worst": 475.198,
+   "rows": [
+    [
+     "input checks",
+     0.372,
+     352,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.0,
+     0,
+     0
+    ],
+    [
+     "vk_x straus",
+     10.884,
+     981,
+     0
+    ],
+    [
+     "Fp12 squarings x64",
+     87.757,
+     0,
+     0
+    ],
+    [
+     "pair B: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "pair gamma: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "pair delta: proj walk + lines",
+     98.228,
+     0,
+     0
+    ],
+    [
+     "reduced tower code (helpers, miller, line, add)",
+     0,
+     2130,
+     0
+    ],
+    [
+     "baked e(alpha,beta) constant",
+     1.397,
+     596,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     294,
+     0
+    ],
+    [
+     "residue c-folds",
+     8.382,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     5.0,
+     1000,
+     576
+    ],
+    [
+     "outlining (recompiler)",
+     "x1.009",
+     -1151,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 515.149,
+    "2": 257.554,
+    "5": 102.997,
+    "10": 51.478,
+    "25": 20.566599999999998,
+    "50": 10.262799999999999,
+    "100": 5.282
+   },
+   "eff_hi": {
+    "1": 525.924,
+    "2": 262.9415,
+    "5": 105.152,
+    "10": 52.5555,
+    "25": 20.9976,
+    "50": 10.478299999999999,
+    "100": 5.657
+   },
+   "eff_lo": {
+    "1": 507.05275,
+    "2": 253.505875,
+    "5": 101.37775,
+    "10": 50.668375,
+    "25": 20.24275,
+    "50": 10.100875,
+    "100": 5.0299375
+   },
+   "per_input_script": 5282,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 98.6,
+   "k_min_bchspec": 33.93,
+   "label": "R reduced-tower residue singleton"
+  },
+  "BLS12-381:native + on-chain projective delta + projective B (multi-input, bch-2026 sizes)": {
+   "curve": "BLS12-381",
+   "family": "ZEV",
+   "choice": {
+    "host": "native",
+    "delta": "proj",
+    "Baff": "proj",
+    "m": 2
+   },
+   "inputs": 4,
+   "bytes": 21155,
+   "bytes_lo": 21035,
+   "bytes_hi": 21335,
+   "bytes_worst": 21155,
+   "op": 40.219,
+   "op_lo": 36.639,
+   "op_hi": 44.57,
+   "op_worst": 40.219,
+   "rows": [
+    [
+     "measured base (BLS12-381 native)",
+     24.04,
+     34229,
+     0
+    ],
+    [
+     "delta: drop baked slope pile",
+     -5.604,
+     -7290,
+     0
+    ],
+    [
+     "delta: projective walk on-chain (B kernel reused)",
+     15.422,
+     300,
+     0
+    ],
+    [
+     "delta: projective delta lines raise max chunk degree (+~3 quotient words)",
+     0.028,
+     144,
+     0
+    ],
+    [
+     "B walk: all projective (drop witnessed affine slopes)",
+     6.333,
+     300,
+     -6528
+    ]
+   ],
+   "eff": {
+    "1": 50.10975,
+    "2": 24.972875,
+    "5": 21.155,
+    "10": 21.155,
+    "25": 21.155,
+    "50": 21.155,
+    "100": 21.155
+   },
+   "eff_hi": {
+    "1": 55.5485,
+    "2": 27.69225,
+    "5": 21.335,
+    "10": 21.335,
+    "25": 21.335,
+    "50": 21.335,
+    "100": 21.335
+   },
+   "eff_lo": {
+    "1": 45.63475,
+    "2": 22.735375,
+    "5": 21.035,
+    "10": 21.035,
+    "25": 21.035,
+    "50": 21.035,
+    "100": 21.035
+   },
+   "per_input_script": 5289,
+   "fits_bch2026_size": true,
+   "k_min_bch2026": 2.4,
+   "k_min_bchspec": 0.83,
+   "label": "native + on-chain projective delta + projective B (multi-input, bch-2026 sizes)"
+  },
+  "BLS12-381:rolled minop with baked lines as data (hint-heavy F12)": {
+   "curve": "BLS12-381",
+   "family": "F12",
+   "choice": {
+    "tower": "lazy",
+    "acc": "shared",
+    "term": "res",
+    "subgroup": "endpoint",
+    "vkx": "glv_jac",
+    "B": "proj",
+    "gamma": "baked",
+    "delta": "baked",
+    "layout": "rolled",
+    "outline": false,
+    "p2sh": true
+   },
+   "inputs": 1,
+   "bytes": 48461,
+   "bytes_lo": 48191,
+   "bytes_hi": 48911,
+   "bytes_worst": 48522,
+   "op": 149.917,
+   "op_lo": 147.847,
+   "op_hi": 154.057,
+   "op_worst": 175.44,
+   "rows": [
+    [
+     "input checks",
+     0.207,
+     304,
+     0
+    ],
+    [
+     "fused endpoint G2 check",
+     0.147,
+     239,
+     0
+    ],
+    [
+     "vk_x glv_jac",
+     3.607,
+     1961,
+     56
+    ],
+    [
+     "Fp12 squarings x64",
+     27.085,
+     0,
+     0
+    ],
+    [
+     "pair B: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair B: projective walk",
+     19.5,
+     0,
+     0
+    ],
+    [
+     "pair gamma: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair gamma: baked lines",
+     0,
+     20286,
+     0
+    ],
+    [
+     "pair delta: 69 lines",
+     30.774,
+     0,
+     0
+    ],
+    [
+     "pair delta: baked lines",
+     0,
+     20286,
+     0
+    ],
+    [
+     "projective G2 kernels",
+     0,
+     0,
+     0
+    ],
+    [
+     "tower kernels (sqr, helpers, torus mul)",
+     0,
+     2583,
+     0
+    ],
+    [
+     "VK G2 constants (gamma, delta walk starts)",
+     0,
+     384,
+     0
+    ],
+    [
+     "residue c-folds",
+     2.494,
+     0,
+     0
+    ],
+    [
+     "residue terminal",
+     0.366,
+     654,
+     294
+    ],
+    [
+     "rolled loop",
+     4.14,
+     900,
+     0
+    ],
+    [
+     "cleanup",
+     0.05,
+     10,
+     0
+    ]
+   ],
+   "eff": {
+    "1": 187.35525,
+    "2": 93.657125,
+    "5": 48.461,
+    "10": 48.461,
+    "25": 48.461,
+    "50": 48.461,
+    "100": 48.461
+   },
+   "eff_hi": {
+    "1": 192.53025,
+    "2": 96.244625,
+    "5": 48.911,
+    "10": 48.911,
+    "25": 48.911,
+    "50": 48.911,
+    "100": 48.911
+   },
+   "eff_lo": {
+    "1": 184.76775,
+    "2": 92.363375,
+    "5": 48.191,
+    "10": 48.191,
+    "25": 48.191,
+    "50": 48.191,
+    "100": 48.191
+   },
+   "per_input_script": 48461,
+   "fits_bch2026_size": false,
+   "k_min_bch2026": 3.87,
+   "k_min_bchspec": 3.21,
+   "label": "rolled minop with baked lines as data (hint-heavy F12)"
+  }
+ }
+}

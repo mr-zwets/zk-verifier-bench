@@ -1,0 +1,538 @@
+{
+ "bls12381-t1-sigls-dproj": {
+  "id": "research-bls12381-t1-sigls-dproj",
+  "harness": {
+   "pass": true,
+   "validPassed": true,
+   "invalid": "15/15",
+   "proofs": "6/6",
+   "runtimeGeneral": true,
+   "worstCase": {
+    "accepted": true,
+    "stepCount": 1,
+    "totalOperationCost": 37863895,
+    "maxStepOperationCost": 37863895,
+    "inputsForHeaviestStep": 1
+   },
+   "publicInputs": {
+    "declared": true,
+    "tested": 9,
+    "accepted": 0
+   },
+   "layout": {
+    "applicable": false,
+    "padsTested": 0,
+    "malleable": 0,
+    "dependencies": []
+   },
+   "redTeam": {
+    "present": false,
+    "stale": false,
+    "tested": 0,
+    "accepted": 0,
+    "kinds": []
+   },
+   "inputValidation": {
+    "tested": 0,
+    "rejected": 0,
+    "enforced": false
+   },
+   "score": 18892,
+   "totalBytes": 18829,
+   "txOverhead": 63,
+   "lockingBytes": 35,
+   "unlockingBytes": 18794,
+   "opCost": 36894701,
+   "fitsStandardBudget": true,
+   "bchCompatible": false,
+   "bchIncompatibleReason": "op-cost",
+   "securePackaging": true,
+   "packagingType": "p2sh32"
+  },
+  "opDefineBodyBytes": 2446,
+  "runs": [
+   {
+    "label": "valid",
+    "unlockingBytes": 18794,
+    "opCost": 36894701,
+    "bchnAdjusted": 36897147,
+    "kMinBchnAdjusted": 1.61,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#1",
+    "unlockingBytes": 19226,
+    "opCost": 36981085,
+    "bchnAdjusted": 36983531,
+    "kMinBchnAdjusted": 1.59,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#2",
+    "unlockingBytes": 20810,
+    "opCost": 38701245,
+    "bchnAdjusted": 38703691,
+    "kMinBchnAdjusted": 1.58,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#3",
+    "unlockingBytes": 18794,
+    "opCost": 36789927,
+    "bchnAdjusted": 36792373,
+    "kMinBchnAdjusted": 1.6,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#4",
+    "unlockingBytes": 20090,
+    "opCost": 37593163,
+    "bchnAdjusted": 37595609,
+    "kMinBchnAdjusted": 1.57,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#5",
+    "unlockingBytes": 20378,
+    "opCost": 37385553,
+    "bchnAdjusted": 37387999,
+    "kMinBchnAdjusted": 1.54,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": false
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "worstCase",
+    "unlockingBytes": 18938,
+    "opCost": 37863895,
+    "bchnAdjusted": 37866341,
+    "kMinBchnAdjusted": 1.64,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   }
+  ],
+  "Ek": {
+   "1": {
+    "committed": 46.08,
+    "worst": 47.29,
+    "today": 32.5,
+    "change": "42%",
+    "changeWorst": "46%"
+   },
+   "2": {
+    "committed": 23.02,
+    "worst": 23.63,
+    "today": 26.5,
+    "change": "-13%",
+    "changeWorst": "-11%"
+   },
+   "5": {
+    "committed": 18.89,
+    "worst": 18.89,
+    "today": 26.5,
+    "change": "-29%",
+    "changeWorst": "-29%"
+   },
+   "10": {
+    "committed": 18.89,
+    "worst": 18.89,
+    "today": 26.5,
+    "change": "-29%",
+    "changeWorst": "-29%"
+   },
+   "25": {
+    "committed": 18.89,
+    "worst": 18.89,
+    "today": 26.5,
+    "change": "-29%",
+    "changeWorst": "-29%"
+   },
+   "50": {
+    "committed": 18.89,
+    "worst": 18.89,
+    "today": 24.8,
+    "change": "-24%",
+    "changeWorst": "-24%"
+   },
+   "100": {
+    "committed": 18.89,
+    "worst": 18.89,
+    "today": 12.4,
+    "change": "52%",
+    "changeWorst": "52%"
+   }
+  }
+ },
+ "bls12381-t2-minop-rolled": {
+  "id": "research-bls12381-t2-minop-rolled-p2sh32",
+  "harness": {
+   "pass": true,
+   "validPassed": true,
+   "invalid": "5/5",
+   "proofs": "4/4",
+   "runtimeGeneral": true,
+   "worstCase": {
+    "accepted": true,
+    "stepCount": 1,
+    "totalOperationCost": 218289447,
+    "maxStepOperationCost": 218289447,
+    "inputsForHeaviestStep": 28
+   },
+   "publicInputs": {
+    "declared": true,
+    "tested": 9,
+    "accepted": 0
+   },
+   "layout": {
+    "applicable": false,
+    "padsTested": 0,
+    "malleable": 0,
+    "dependencies": []
+   },
+   "redTeam": {
+    "present": false,
+    "stale": false,
+    "tested": 0,
+    "accepted": 0,
+    "kinds": []
+   },
+   "inputValidation": {
+    "tested": 0,
+    "rejected": 0,
+    "enforced": false
+   },
+   "score": 8712,
+   "totalBytes": 8625,
+   "txOverhead": 87,
+   "lockingBytes": 35,
+   "unlockingBytes": 8590,
+   "opCost": 192759049,
+   "fitsStandardBudget": false,
+   "bchCompatible": false,
+   "bchIncompatibleReason": "op-cost",
+   "securePackaging": true,
+   "packagingType": "p2sh32"
+  },
+  "opDefineBodyBytes": 2267,
+  "runs": [
+   {
+    "label": "valid",
+    "unlockingBytes": 8590,
+    "opCost": 192759049,
+    "bchnAdjusted": 192761316,
+    "kMinBchnAdjusted": 27.92,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#1",
+    "unlockingBytes": 8596,
+    "opCost": 195078734,
+    "bchnAdjusted": 195081001,
+    "kMinBchnAdjusted": 28.24,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#2",
+    "unlockingBytes": 8596,
+    "opCost": 194449403,
+    "bchnAdjusted": 194451670,
+    "kMinBchnAdjusted": 28.15,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#3",
+    "unlockingBytes": 8595,
+    "opCost": 195233638,
+    "bchnAdjusted": 195235905,
+    "kMinBchnAdjusted": 28.26,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": false
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "worstCase",
+    "unlockingBytes": 8712,
+    "opCost": 218289447,
+    "bchnAdjusted": 218291714,
+    "kMinBchnAdjusted": 31.18,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   }
+  ],
+  "Ek": {
+   "1": {
+    "committed": 240.91,
+    "worst": 272.82,
+    "today": 32.5,
+    "change": "641%",
+    "changeWorst": "739%"
+   },
+   "2": {
+    "committed": 120.43,
+    "worst": 136.39,
+    "today": 26.5,
+    "change": "354%",
+    "changeWorst": "415%"
+   },
+   "5": {
+    "committed": 48.15,
+    "worst": 54.53,
+    "today": 26.5,
+    "change": "82%",
+    "changeWorst": "106%"
+   },
+   "10": {
+    "committed": 24.05,
+    "worst": 27.25,
+    "today": 26.5,
+    "change": "-9%",
+    "changeWorst": "3%"
+   },
+   "25": {
+    "committed": 9.6,
+    "worst": 10.87,
+    "today": 26.5,
+    "change": "-64%",
+    "changeWorst": "-59%"
+   },
+   "50": {
+    "committed": 8.71,
+    "worst": 8.71,
+    "today": 24.8,
+    "change": "-65%",
+    "changeWorst": "-65%"
+   },
+   "100": {
+    "committed": 8.71,
+    "worst": 8.71,
+    "today": 12.4,
+    "change": "-30%",
+    "changeWorst": "-30%"
+   }
+  }
+ },
+ "bls12381-t2-minop-rolled (bare locking, as the reviewed minop)": {
+  "id": "research-bls12381-t2-minop-rolled-bare",
+  "harness": {
+   "pass": true,
+   "validPassed": true,
+   "invalid": "5/5",
+   "proofs": "4/4",
+   "runtimeGeneral": true,
+   "worstCase": {
+    "accepted": true,
+    "stepCount": 1,
+    "totalOperationCost": 218273206,
+    "maxStepOperationCost": 218273206,
+    "inputsForHeaviestStep": 28
+   },
+   "publicInputs": {
+    "declared": true,
+    "tested": 9,
+    "accepted": 0
+   },
+   "layout": {
+    "applicable": false,
+    "padsTested": 0,
+    "malleable": 0,
+    "dependencies": []
+   },
+   "redTeam": {
+    "present": false,
+    "stale": false,
+    "tested": 0,
+    "accepted": 0,
+    "kinds": []
+   },
+   "inputValidation": {
+    "tested": 0,
+    "rejected": 0,
+    "enforced": false
+   },
+   "score": 8674,
+   "totalBytes": 8587,
+   "txOverhead": 87,
+   "lockingBytes": 7840,
+   "unlockingBytes": 747,
+   "opCost": 192742808,
+   "fitsStandardBudget": false,
+   "bchCompatible": false,
+   "bchIncompatibleReason": "op-cost",
+   "securePackaging": true,
+   "packagingType": "p2s"
+  },
+  "opDefineBodyBytes": 2267,
+  "runs": [
+   {
+    "label": "valid",
+    "unlockingBytes": 747,
+    "opCost": 192742808,
+    "bchnAdjusted": 192745075,
+    "kMinBchnAdjusted": 305.76,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#1",
+    "unlockingBytes": 753,
+    "opCost": 195062493,
+    "bchnAdjusted": 195064760,
+    "kMinBchnAdjusted": 307.1,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#2",
+    "unlockingBytes": 753,
+    "opCost": 194433162,
+    "bchnAdjusted": 194435429,
+    "kMinBchnAdjusted": 306.11,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "extra#3",
+    "unlockingBytes": 752,
+    "opCost": 195217397,
+    "bchnAdjusted": 195219664,
+    "kMinBchnAdjusted": 307.73,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   },
+   {
+    "label": "worstCase",
+    "unlockingBytes": 869,
+    "opCost": 218273206,
+    "bchnAdjusted": 218275473,
+    "kMinBchnAdjusted": 299.83,
+    "acceptedAtKmin": {
+     "consensus": true,
+     "standard": true
+    },
+    "rejectedAtKmin_0_99": true,
+    "stockVm": false
+   }
+  ],
+  "Ek": {
+   "1": {
+    "committed": 240.89,
+    "worst": 272.8,
+    "today": 32.5,
+    "change": "641%",
+    "changeWorst": "739%"
+   },
+   "2": {
+    "committed": 120.42,
+    "worst": 136.38,
+    "today": 26.5,
+    "change": "354%",
+    "changeWorst": "415%"
+   },
+   "5": {
+    "committed": 48.15,
+    "worst": 54.53,
+    "today": 26.5,
+    "change": "82%",
+    "changeWorst": "106%"
+   },
+   "10": {
+    "committed": 24.05,
+    "worst": 27.24,
+    "today": 26.5,
+    "change": "-9%",
+    "changeWorst": "3%"
+   },
+   "25": {
+    "committed": 9.6,
+    "worst": 10.87,
+    "today": 26.5,
+    "change": "-64%",
+    "changeWorst": "-59%"
+   },
+   "50": {
+    "committed": 8.67,
+    "worst": 8.67,
+    "today": 24.8,
+    "change": "-65%",
+    "changeWorst": "-65%"
+   },
+   "100": {
+    "committed": 8.67,
+    "worst": 8.67,
+    "today": 12.4,
+    "change": "-30%",
+    "changeWorst": "-30%"
+   }
+  }
+ }
+}
