@@ -44,7 +44,10 @@ export const bls12381MinopProofInputs: ProofInput[] = numericPushes(0, 13, 8);
 //   [257,545) residue root, [545,641) unit(-A) = (p0u, p0v), [641,737) unit(C) = (p3u, p3v).
 // unitG1 (chunked/bls12-381/_pairingmath.mjs:70-75) maps (x, y) to (-x/(2y), -1/(2y)) and the identity
 // to (0, 0); it is a bijection, so these are A and C in a normalized chart. The B-identity flag is
-// part of B's encoding (an identity B ships the fixed substitute coordinates).
+// part of B's encoding (an identity B ships the fixed substitute coordinates). These are the effective
+// proof's coordinates: when B is the identity the generator also zeroes A (measure_fs_singleton.mjs:
+// 206-210) and the contract ignores p0, so distinctness is judged on what the contract consumes, which
+// is conservative.
 export const bls12381FsSingletonProofInputs: ProofInput[] = [
   { input: 0, push: 22, encoding: 'bytes', offset: 0, length: 1 },
   ...packedFields(0, 22, 1, 48, 4),
@@ -90,8 +93,10 @@ export const bn254IntratxResidueLargeProofInputs: ProofInput[] = intratxResidueG
 
 // BN254 covenant residue: the GLV minting-baton genesis (step 0) takes the raw proof tuple
 // PROOF_LIMBS = (-A.x, -A.y, Bxa, Bxb, Bya, Byb, Cx, Cy) as its first args, pushed in reverse before the
-// redeem (chunked/pairing/gen_vkx_glv.mjs:176-180, 462-466): pushes 7..14 = Cy, Cx, Byb, Bya, Bxb,
-// Bxa, -A.y, -A.x. Later steps only re-bind committed copies.
+// redeem (chunked/pairing/gen_vkx_glv.mjs:176-180, 462-466) after exactly one leading pad push
+// (chunked/pairing/build_vectors_covenant_residue.mjs:50-58, 189-199; padBytes emits one push even for a
+// zero target): push 0 = pad, pushes 1..6 = the scalars k21, k11, k20, k10, in1, in0 (reversed), pushes
+// 7..14 = Cy, Cx, Byb, Bya, Bxb, Bxa, -A.y, -A.x. Later steps only re-bind committed copies.
 export const bn254CovenantResidueProofInputs: ProofInput[] = numericPushes(0, 7, 8);
 
 // BLS12-381 covenant residue: the final GLV step (step 4) takes the proof tuple as witnesses:
