@@ -175,7 +175,8 @@ const codeFilesUnder = (dir: string): string[] =>
 
 const isExcludedHarnessFile = (abs: string): boolean => {
   const r = rel(abs);
-  return r.startsWith(`${HARNESS_DIR}/`) && HARNESS_EXCLUDED.has(r.slice(HARNESS_DIR.length + 1));
+  // tests (*.test.ts) never run during a benchmark, so they cannot change a row
+  return r.startsWith(`${HARNESS_DIR}/`) && (HARNESS_EXCLUDED.has(r.slice(HARNESS_DIR.length + 1)) || /\.test\.m?ts$/.test(r));
 };
 
 /** The modules and files hashed into the harness fingerprint: every code file under src/harness
