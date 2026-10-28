@@ -101,8 +101,10 @@ Changed cryptographic premises, domains, or deployment assumptions require a
 new review, but do not change byte hashes unless the bytes change.
 
 For `proofBinding: 'runtime'`, distinguish supplied multiproof coverage from a
-universal claim. Check equal ordered programs and step counts plus actual proof
-distinctness; current harness acceptance counts do not enforce these facts.
+universal claim. The harness enforces equal ordered programs, step counts and
+context, and credits distinctness only through reviewed `proofInputs` locators;
+review must still confirm those locators name genuine proof components and that
+the verifier consumes them. Finite fixture coverage is not a universal claim.
 The dense `worstCaseProof` is a measured case and must be a
 valid proof that the verifier accepts; it is not a universal worst-case bound.
 State a universal bound only when the mathematics and resource analysis prove
