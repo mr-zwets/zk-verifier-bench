@@ -11,3 +11,7 @@
   - Kernels: K1-K19 (SPEC 8).
   - Build: wip/pq-hash-build in groth16_cashscript.
   - Model risks: op-cost model only rough (OPC constants); code size 4 KB estimated; P128 single-input margin 4.3 KB.
+- Review fixes: SPEC.md moved to research/pq-hash/SPEC.md; committed .pyc dropped (__pycache__ ignored); λ labelled
+  classical, new §4.5 with indicative quantum levels (BHT collisions ~67 bits at h=25, ~85 at h=32; Grover halves
+  grinding/RBR terms); §4.1 states the open RBR check as an explicit condition with margins (P128 commit 0.31 bits,
+  query 0.19 bits; P100 ~24 bits commit margin).

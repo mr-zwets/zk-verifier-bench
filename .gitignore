@@ -5,4 +5,4 @@
 # Kept in git: each folder's SOURCE.md (provenance).
 data/**/*.hex
 data/**/*.asm
-data/**/*.meta.json
+data/**/*.meta.json__pycache__/
