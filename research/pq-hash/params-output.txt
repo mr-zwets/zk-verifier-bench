@@ -1,0 +1,90 @@
+== P100: JB e=3 n=2^16 rho=2^-7 k0=4 k=8 df=2^8 s=22 g=28 g_c=0 m=3 h=25
+   soundness {'rounds': {'ali': 184.69, 'deep': 157.37, 'batch+folds': 123.85, 'query': 100.11}, 'lam_iop': 100.11, 'lam': 100, 'limited_by': 'digest'}
+   proof bytes: dedup 50022 (PT 6388 {'statement': 16, 'roots': 100, 'ood': 120, 'final': 6144, 'nonces': 8}, leaves 14080, siblings 29554); plain paths 61718; with O1 omit 48966
+   arities [4, 8, 8] N=2^23 trees [('trace', 21, 64), ('comp', 21, 192), ('fri1', 18, 192), ('fri2', 15, 192)]
+   (a) standard: 1 tx, 6 inputs, 57450 B
+        {'queries': 22, 'inputs': 6, 'tx_bytes': 57450, 'b': 10, 'query_bytes': 1643, 'tops': [('trace', 11, 3682), ('comp', 11, 3682), ('fri1', 8, 2070), ('fri2', 5, 693)], 'data_bytes': 20536, 'op_per_query': 1005328, 'fill': 0, 'op_total': 24463820, 'budget_total': 45907200, 'ok': True}
+   (b) single input: {'unlocking': 54115, 'tx_bytes': 54214, 'op_est': 23759816, 'budget_txv5': 43324800, 'budget_bchspec': 51292000, 'op_frac_txv5': 0.548, 'fits': True}
+== P128: JB e=3 n=2^16 rho=2^-5 k0=4 k=8 df=2^8 s=43 g=28 g_c=0 m=4 h=32
+   soundness {'rounds': {'ali': 185.33, 'deep': 160.59, 'batch+folds': 128.31, 'query': 128.19}, 'lam_iop': 128.19, 'lam': 128, 'limited_by': 'digest'}
+   proof bytes: dedup 91468 (PT 6416 {'statement': 16, 'roots': 128, 'ood': 120, 'final': 6144, 'nonces': 8}, leaves 27520, siblings 57532); plain paths 126128; with O1 omit 89404
+   arities [4, 8, 8] N=2^21 trees [('trace', 19, 64), ('comp', 19, 192), ('fri1', 16, 192), ('fri2', 13, 192)]
+   (a) standard: 2 tx, 14 inputs, 120052 B
+        {'queries': 22, 'inputs': 7, 'tx_bytes': 61071, 'b': 8, 'query_bytes': 1667, 'tops': [('trace', 11, 4712), ('comp', 11, 4712), ('fri1', 8, 2650), ('fri2', 5, 886)], 'data_bytes': 23397, 'op_per_query': 994928, 'fill': 0, 'op_total': 24504916, 'budget_total': 48712000, 'ok': True}
+        {'queries': 21, 'inputs': 7, 'tx_bytes': 58981, 'b': 8, 'query_bytes': 1667, 'tops': [('trace', 11, 4544), ('comp', 11, 4544), ('fri1', 8, 2573), ('fri2', 5, 876)], 'data_bytes': 22974, 'op_per_query': 994928, 'fill': 0, 'op_total': 23492804, 'budget_total': 47040000, 'ok': True}
+   (b) single input: {'unlocking': 95624, 'tx_bytes': 95723, 'op_est': 44984804, 'budget_txv5': 76532000, 'budget_bchspec': 84499200, 'op_frac_txv5': 0.588, 'fits': True}
+== U100: UDR e=2 n=2^16 rho=2^-4 k0=4 k=8 df=2^8 s=79 g=28 g_c=0 m=3 h=25
+   soundness {'rounds': {'ali': 126.42, 'deep': 106.87, 'batch': 108.0, 'fold1': 108.42, 'fold2': 110.19, 'fold3': 113.19, 'query': 100.09}, 'lam_iop': 100.09, 'lam': 100, 'limited_by': 'digest'}
+   proof bytes: dedup 107423 (PT 4300 {'statement': 16, 'roots': 100, 'ood': 80, 'final': 4096, 'nonces': 8}, leaves 35392, siblings 67731); plain paths 164117; with O1 omit 104895
+   arities [4, 8, 8] N=2^20 trees [('trace', 18, 64), ('comp', 18, 128), ('fri1', 15, 128), ('fri2', 12, 128)]
+   (a) standard: 2 tx, 16 inputs, 140291 B
+        {'queries': 40, 'inputs': 8, 'tx_bytes': 70853, 'b': 7, 'query_bytes': 1151, 'tops': [('trace', 11, 5825), ('comp', 11, 5825), ('fri1', 8, 2954), ('fri2', 5, 769)], 'data_bytes': 23694, 'op_per_query': 637360, 'fill': 0, 'op_total': 28653796, 'budget_total': 56536000, 'ok': True}
+        {'queries': 39, 'inputs': 8, 'tx_bytes': 69438, 'b': 7, 'query_bytes': 1151, 'tops': [('trace', 11, 5715), ('comp', 11, 5715), ('fri1', 8, 2912), ('fri2', 5, 767)], 'data_bytes': 23430, 'op_per_query': 637360, 'fill': 0, 'op_total': 28002708, 'budget_total': 55404000, 'ok': True}
+   (b) single input: {'unlocking': 111687, 'tx_bytes': 111786, 'op_est': 53183540, 'budget_txv5': 89382400, 'budget_bchspec': 97349600, 'op_frac_txv5': 0.595, 'fits': False}
+== U128g: UDR e=2 n=2^16 rho=2^-3 k0=4 k=8 df=2^8 s=121 g=28 g_c=24 m=3 h=32
+   soundness {'rounds': {'ali': 150.42, 'deep': 131.75, 'batch': 133.0, 'fold1': 133.42, 'fold2': 135.19, 'fold3': 138.19, 'query': 128.44}, 'lam_iop': 128.44, 'lam': 128, 'limited_by': 'digest'}
+   proof bytes: dedup 166568 (PT 4376 {'statement': 16, 'roots': 128, 'ood': 80, 'final': 4096, 'nonces': 56}, leaves 54208, siblings 107984); plain paths 287032; with O1 omit 162696
+   arities [4, 8, 8] N=2^19 trees [('trace', 17, 64), ('comp', 17, 128), ('fri1', 14, 128), ('fri2', 11, 128)]
+   (a) standard: 3 tx, 24 inputs, 233400 B
+        {'queries': 41, 'inputs': 8, 'tx_bytes': 78816, 'b': 5, 'query_bytes': 1091, 'tops': [('trace', 12, 8895), ('comp', 12, 8895), ('fri1', 9, 5047), ('fri2', 6, 1732)], 'data_bytes': 32966, 'op_per_query': 626960, 'fill': 0, 'op_total': 29063476, 'budget_total': 62906400, 'ok': True}
+        {'queries': 40, 'inputs': 8, 'tx_bytes': 77292, 'b': 5, 'query_bytes': 1091, 'tops': [('trace', 12, 8724), ('comp', 12, 8724), ('fri1', 9, 4968), ('fri2', 6, 1720)], 'data_bytes': 32533, 'op_per_query': 626960, 'fill': 0, 'op_total': 28418925, 'budget_total': 61687200, 'ok': True}
+        {'queries': 40, 'inputs': 8, 'tx_bytes': 77292, 'b': 5, 'query_bytes': 1091, 'tops': [('trace', 12, 8724), ('comp', 12, 8724), ('fri1', 9, 4968), ('fri2', 6, 1720)], 'data_bytes': 32533, 'op_per_query': 626960, 'fill': 0, 'op_total': 28418925, 'budget_total': 61687200, 'ok': True}
+   (b) single input: {'unlocking': 170958, 'tx_bytes': 171057, 'op_est': 79792760, 'budget_txv5': 136799200, 'budget_bchspec': 144766400, 'op_frac_txv5': 0.583, 'fits': False}
+== B128: JB25 e=3 n=2^16 rho=2^-7 k0=4 k=8 df=2^8 s=30 g=28 g_c=0 m=5 h=32
+   soundness {'rounds': {'ali': 184.04, 'deep': 156.06, 'batch': 144.79, 'fold1': 145.2, 'fold2': 145.98, 'fold3': 148.98, 'query': 128.87}, 'lam_iop': 128.87, 'lam': 128, 'limited_by': 'digest'}
+   proof bytes: dedup 75450 (PT 6416 {'statement': 16, 'roots': 128, 'ood': 120, 'final': 6144, 'nonces': 8}, leaves 19200, siblings 49834); plain paths 97616; with O1 omit 74010
+   arities [4, 8, 8] N=2^23 trees [('trace', 21, 64), ('comp', 21, 192), ('fri1', 18, 192), ('fri2', 15, 192)]
+   (a) standard: 1 tx, 10 inputs, 84886 B
+        {'queries': 30, 'inputs': 10, 'tx_bytes': 84886, 'b': 8, 'query_bytes': 1667, 'tops': [('trace', 13, 7902), ('comp', 13, 7902), ('fri1', 10, 5045), ('fri2', 7, 2346)], 'data_bytes': 33632, 'op_per_query': 994928, 'fill': 0, 'op_total': 33690137, 'budget_total': 67849600, 'ok': True}
+   (b) single input: {'unlocking': 79567, 'tx_bytes': 79666, 'op_est': 32111840, 'budget_txv5': 63686400, 'budget_bchspec': 71653600, 'op_frac_txv5': 0.504, 'fits': True}
+== C100: CONJ e=2 n=2^16 rho=2^-7 k0=8 k=16 df=2^6 s=11 g=28 g_c=0 m=3 h=25
+   soundness {'rounds': {'ali': 126.0, 'deep': 103.98, 'batch+folds': 100.0, 'query': 105}, 'lam_iop': 100.0, 'lam': 100.0, 'limited_by': 'batch+folds'}
+   proof bytes: dedup 23940 (PT 1228 {'statement': 16, 'roots': 100, 'ood': 80, 'final': 1024, 'nonces': 8}, leaves 8448, siblings 14264); plain paths 28651; with O1 omit 23588
+   arities [8, 16, 8] N=2^23 trees [('trace', 20, 128), ('comp', 20, 256), ('fri1', 16, 256), ('fri2', 13, 128)]
+   (a) standard: 1 tx, 3 inputs, 29505 B
+        {'queries': 11, 'inputs': 3, 'tx_bytes': 29505, 'b': 0, 'query_bytes': 771, 'tops': [('trace', 20, 4597), ('comp', 20, 4597), ('fri1', 16, 3497), ('fri2', 13, 2673)], 'data_bytes': 20613, 'op_per_query': 588640, 'fill': 0, 'op_total': 8283968, 'budget_total': 23556000, 'ok': True}
+   (b) single input: {'unlocking': 28000, 'tx_bytes': 28099, 'op_est': 8060440, 'budget_txv5': 22432800, 'budget_bchspec': 30400000, 'op_frac_txv5': 0.359, 'fits': True}
+== C128: CONJ e=3 n=2^16 rho=2^-7 k0=4 k=16 df=2^7 s=15 g=28 g_c=0 m=3 h=32
+   soundness {'rounds': {'ali': 190.0, 'deep': 167.98, 'batch+folds': 164.19, 'query': 133}, 'lam_iop': 133, 'lam': 128, 'limited_by': 'digest'}
+   proof bytes: dedup 41748 (PT 3344 {'statement': 16, 'roots': 128, 'ood': 120, 'final': 3072, 'nonces': 8}, leaves 12480, siblings 25924); plain paths 50864; with O1 omit 41028
+   arities [4, 16, 8] N=2^23 trees [('trace', 21, 64), ('comp', 21, 192), ('fri1', 17, 384), ('fri2', 14, 192)]
+   (a) standard: 1 tx, 5 inputs, 48412 B
+        {'queries': 15, 'inputs': 5, 'tx_bytes': 48412, 'b': 6, 'query_bytes': 1603, 'tops': [('trace', 15, 5401), ('comp', 15, 5401), ('fri1', 11, 3484), ('fri2', 8, 2067)], 'data_bytes': 23718, 'op_per_query': 872496, 'fill': 0, 'op_total': 15301781, 'budget_total': 38678400, 'ok': True}
+   (b) single input: {'unlocking': 45820, 'tx_bytes': 45919, 'op_est': 14668940, 'budget_txv5': 36688800, 'budget_bchspec': 44656000, 'op_frac_txv5': 0.4, 'fits': True}
+
+== sensitivity: optimum proof bytes (dedup) vs trace length, provable JB e=3, g=28
+  100-bit:
+     2^10: 22623 B s=22 rho=2^-7 m=3; (a) 1 tx/16 in/38783 B; (b) 26710 B fits
+     2^12: 30776 B s=22 rho=2^-7 m=3; (a) 1 tx/4 in/37444 B; (b) 34866 B fits
+     2^14: 40821 B s=22 rho=2^-7 m=3; (a) 1 tx/5 in/48916 B; (b) 44911 B fits
+     2^15: 44751 B s=22 rho=2^-7 m=3; (a) 1 tx/6 in/51905 B; (b) 48844 B fits
+     2^16: 50022 B s=22 rho=2^-7 m=3; (a) 1 tx/6 in/57450 B; (b) 54115 B fits
+     2^18: 60376 B s=22 rho=2^-7 m=3; (a) 1 tx/7 in/68153 B; (b) 64472 B fits
+     2^20: 71574 B s=22 rho=2^-7 m=3; (a) 1 tx/8 in/79469 B; (b) 75670 B fits
+  128-bit:
+     2^10: 31751 B s=30 rho=2^-7 m=5; (a) 1 tx/24 in/50617 B; (b) 35862 B fits
+     2^12: 47497 B s=31 rho=2^-7 m=3; (a) 1 tx/6 in/55628 B; (b) 51614 B fits
+     2^14: 66154 B s=36 rho=2^-6 m=4; (a) 1 tx/8 in/76752 B; (b) 70286 B fits
+     2^15: 77145 B s=37 rho=2^-6 m=3; (a) 1 tx/11 in/91146 B; (b) 81280 B fits
+     2^16: 91468 B s=43 rho=2^-5 m=4; (a) 2 tx/14 in/120052 B; (b) 95624 B fits
+     2^18: 138077 B s=57 rho=2^-4 m=3; (a) 2 tx/20 in/172770 B; (b) 142275 B over
+     2^20: 209045 B s=79 rho=2^-3 m=3; (a) 3 tx/31 in/273173 B; (b) 213312 B over
+
+== sensitivity: grinding bits (P128 shape, n=2^16)
+  g=20: 98600 B s=47 rho=2^-5 m=4 k0=4 k=8 df=2^8
+  g=24: 95042 B s=45 rho=2^-5 m=4 k0=4 k=8 df=2^8
+  g=28: 91468 B s=43 rho=2^-5 m=4 k0=4 k=8 df=2^8
+  g=32: 89674 B s=42 rho=2^-5 m=4 k0=4 k=8 df=2^8
+
+== search optimum per regime (n=2^16, g=28)
+  JB    e=3 100-bit g_c=0:   50022 B  s=22 rho=2^-7 k0=4 k=8 df=2^8 m=3 h=25  lam=100 (digest)
+  JB    e=3 128-bit g_c=0:   91468 B  s=43 rho=2^-5 k0=4 k=8 df=2^8 m=4 h=32  lam=128 (digest)
+  UDR   e=2 100-bit g_c=0:  107423 B  s=79 rho=2^-4 k0=4 k=8 df=2^8 m=3 h=25  lam=100 (digest)
+  UDR   e=3 100-bit g_c=0:  124679 B  s=79 rho=2^-4 k0=4 k=8 df=2^8 m=3 h=25  lam=100 (digest)
+  UDR   e=3 128-bit g_c=0:  190817 B  s=110 rho=2^-4 k0=4 k=8 df=2^8 m=3 h=32  lam=128 (digest)
+  UDR   e=2 128-bit g_c=24:  166568 B  s=121 rho=2^-3 k0=4 k=8 df=2^8 m=3 h=32  lam=128 (digest)
+  JB25  e=2 100-bit g_c=0: infeasible
+  JB25  e=2 128-bit g_c=0: infeasible
+  JB25  e=3 128-bit g_c=0:   75450 B  s=30 rho=2^-7 k0=4 k=8 df=2^8 m=5 h=32  lam=128 (digest)
+  CONJ  e=2 100-bit g_c=0:   23940 B  s=11 rho=2^-7 k0=8 k=16 df=2^6 m=3 h=25  lam=100.0 (batch+folds)
+  CONJ  e=3 128-bit g_c=0:   41748 B  s=15 rho=2^-7 k0=4 k=16 df=2^7 m=3 h=32  lam=128 (digest)

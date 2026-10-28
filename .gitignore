@@ -6,3 +6,4 @@
 data/**/*.hex
 data/**/*.asm
 data/**/*.meta.json
+__pycache__/

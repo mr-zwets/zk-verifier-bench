@@ -1,0 +1,100 @@
+[
+ {
+  "id": "K16",
+  "group": "blake2s",
+  "notes": "straight-line code, fits one P2SH redeem",
+  "name": "Blake2s-256 of 64 bytes (one compression, 2-to-1 node), fully unrolled",
+  "trials": 6,
+  "opStd": {
+   "min": 837774,
+   "max": 837811,
+   "mean": 837797.1666666666
+  },
+  "opCons": {
+   "min": 837774,
+   "max": 837811,
+   "mean": 837797.1666666666
+  },
+  "instr": {
+   "min": 8026,
+   "max": 8026,
+   "mean": 8026
+  },
+  "arith": {
+   "min": 2397,
+   "max": 2399,
+   "mean": 2398.3333333333335
+  },
+  "pushed": {
+   "min": 32775,
+   "max": 32812,
+   "mean": 32798.833333333336
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 8787,
+   "max": 8787,
+   "mean": 8787
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K16",
+  "group": "blake2s",
+  "notes": "",
+  "name": "Blake2s-256 of 64 bytes, G as an OP_DEFINE function (80 calls)",
+  "trials": 6,
+  "opStd": {
+   "min": 961205,
+   "max": 961309,
+   "mean": 961244.5
+  },
+  "opCons": {
+   "min": 961205,
+   "max": 961309,
+   "mean": 961244.5
+  },
+  "instr": {
+   "min": 9235,
+   "max": 9235,
+   "mean": 9235
+  },
+  "arith": {
+   "min": 2398,
+   "max": 2399,
+   "mean": 2398.8333333333335
+  },
+  "pushed": {
+   "min": 35306,
+   "max": 35410,
+   "mean": 35345.666666666664
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 1681,
+   "max": 1681,
+   "mean": 1681
+  },
+  "defBytes": 104,
+  "prologueBytes": 108,
+  "defineLibauth": 405,
+  "defineBchn": 509,
+  "real": [
+   "ok"
+  ]
+ }
+]

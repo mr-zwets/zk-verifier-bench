@@ -1,0 +1,198 @@
+[
+ {
+  "id": "K15",
+  "group": "gf128",
+  "notes": "loop runs until the remaining Y is 0 (about 128 iterations for random Y)",
+  "name": "GF(2^128) mul, bit-serial (LSB-first loop over Y, LSHIFTBIN + conditional XOR)",
+  "trials": 8,
+  "opStd": {
+   "min": 448117,
+   "max": 466840,
+   "mean": 460667.625
+  },
+  "opCons": {
+   "min": 448117,
+   "max": 466840,
+   "mean": 460667.625
+  },
+  "instr": {
+   "min": 4319,
+   "max": 4494,
+   "mean": 4437.125
+  },
+  "arith": {
+   "min": 1087,
+   "max": 1170,
+   "mean": 1141.375
+  },
+  "pushed": {
+   "min": 15130,
+   "max": 16632,
+   "mean": 15813.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 84,
+   "max": 84,
+   "mean": 84
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K15",
+  "group": "gf128",
+  "notes": "16 byte-iterations x 2 nibbles; includes table build and cleanup",
+  "name": "GF(2^128) mul, 4-bit windowed (table of 16 multiples built in-script, PICK lookups)",
+  "trials": 8,
+  "opStd": {
+   "min": 116951,
+   "max": 117052,
+   "mean": 117009.125
+  },
+  "opCons": {
+   "min": 116951,
+   "max": 117052,
+   "mean": 117009.125
+  },
+  "instr": {
+   "min": 1108,
+   "max": 1108,
+   "mean": 1108
+  },
+  "arith": {
+   "min": 139,
+   "max": 145,
+   "mean": 143
+  },
+  "pushed": {
+   "min": 6012,
+   "max": 6112,
+   "mean": 6066.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 576,
+   "max": 576,
+   "mean": 576
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K15",
+  "group": "gf128",
+  "notes": "",
+  "name": "GF(2^128) 4-bit table build + cleanup only (subtract for the per-mul cost with a reused table)",
+  "trials": 8,
+  "opStd": {
+   "min": 16934,
+   "max": 17030,
+   "mean": 16978
+  },
+  "opCons": {
+   "min": 16934,
+   "max": 17030,
+   "mean": 16978
+  },
+  "instr": {
+   "min": 155,
+   "max": 155,
+   "mean": 155
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 1434,
+   "max": 1530,
+   "mean": 1478
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 486,
+   "max": 486,
+   "mean": 486
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K15",
+  "group": "gf128",
+  "notes": "straight-line, data-independent",
+  "name": "GF(2^128) mul, integer multiplier with holes (5x5 OP_MUL of 26-bit-sparse parts, XOR per class, shift reduction)",
+  "trials": 8,
+  "opStd": {
+   "min": 44068,
+   "max": 44646,
+   "mean": 44361.5
+  },
+  "opCons": {
+   "min": 44068,
+   "max": 44646,
+   "mean": 44361.5
+  },
+  "instr": {
+   "min": 325,
+   "max": 325,
+   "mean": 325
+  },
+  "arith": {
+   "min": 6680,
+   "max": 7185,
+   "mean": 6933.625
+  },
+  "pushed": {
+   "min": 4888,
+   "max": 4961,
+   "mean": 4927.875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 692,
+   "max": 692,
+   "mean": 692
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ }
+]
