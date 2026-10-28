@@ -10,7 +10,7 @@
 //       red-team, adversarial, tamper, entry, types), and the toolchain.
 // (a)-(c) are hashed by content. (d) is the HARNESS FINGERPRINT, computed automatically: the
 // normalized (comment/format-free) code of every code file under src/harness (recursively) except
-// the files that cannot change a row (HARNESS_EXCLUDED below), plus every local module those files
+// the files that cannot change a row (HARNESS_EXCLUDED below, and *.test.ts tests), plus every local module those files
 // import, transitively (wherever it lives; the implementation imports of benchmark.ts are the
 // per-entry part (a) and are skipped), plus every repo file they name by literal path. The
 // toolchain part is the resolved version of every direct dependency, sha256(pnpm-lock.yaml)
@@ -180,7 +180,7 @@ const isExcludedHarnessFile = (abs: string): boolean => {
 };
 
 /** The modules and files hashed into the harness fingerprint: every code file under src/harness
- * (recursively, minus HARNESS_EXCLUDED), closed under relative imports (the implementation imports
+ * (recursively, minus HARNESS_EXCLUDED and *.test.ts tests), closed under relative imports (the implementation imports
  * of benchmark.ts excepted: those are per-entry), plus the repo files they name by literal path. */
 export const harnessClosure = (): { modules: string[]; files: string[] } => {
   const queue = codeFilesUnder(join(ROOT, HARNESS_DIR)).filter((f) => !isExcludedHarnessFile(f));

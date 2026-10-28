@@ -25,7 +25,7 @@ totals are not directly comparable — see
 
 Fixture acceptance supports a finite claim; it does not prove correctness for every
 proof or establish that proof data is actually consumed by the verifier. Those are
-separate mathematical review obligations.
+separate mathematical review obligations. See the [submission claim sheet](submission-claims.md).
 
 ## How the harness checks it
 

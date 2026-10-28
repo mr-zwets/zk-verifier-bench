@@ -110,7 +110,7 @@ export const correctnessOf = (r: BenchmarkResult) => {
       unboundSeams: csb.unboundSeams,
       ...(csb.firstUnboundSeam ? { firstUnboundSeam: csb.firstUnboundSeam } : {}),
       detail: csb.reason ?? (!csb.applicable
-        ? 'not staple-tested — single-tx, or a covenant/grouped token hand-off the harness does not model yet'
+        ? 'not staple-tested — single-tx, an intra-tx bundle with fewer than two named checkpoints (no seam to sample), or a covenant/grouped token hand-off the harness does not model yet'
         : csb.unboundSeams === 0
           ? `${csb.seamsTested} sampled seams rejected with a qualified second proof (finite fixture evidence only)`
           : `UNBOUND: ${csb.unboundSeams}/${csb.seamsTested} seam(s) accept a spliced 2-proof hybrid (first at "${csb.firstUnboundSeam}") — one proof's stage can be stapled onto another proof's remaining stages`),
