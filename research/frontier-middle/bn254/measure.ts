@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { decodeAuthenticationInstructions, hexToBin } from '@bitauth/libauth';
 import { benchmark } from '../../../src/harness/benchmark.js';
 import type { Implementation, Step } from '../../../src/harness/types.js';
-import { createLoosenedVm, createRealVmSpec, createStandardVmSpec, evaluatePair } from '../../../src/harness/vm.js';
+import { createLoosenedVm, createRealVm, createRealVmSpec, createStandardVm, createStandardVmSpec, evaluatePair } from '../../../src/harness/vm.js';
 
 const DIR = 'research/frontier-middle/bn254';
 interface RawStep { label: string; locking: string; unlocking: string; checkpoint?: string }
@@ -27,6 +27,11 @@ const DESIGNS: Record<string, { file: string; vm: 'bch-spec' | 'bch-2026'; name:
     file: 't1-sigls-dproj-inline-vectors.json', vm: 'bch-spec', name: 'RESEARCH T1 variant: inline delta doubling + bound BADD/DADD',
     source: 'same, DPROJ_SHARED=0',
     publicInputs: [{ input: 0, push: 1, name: 'n0', offset: 256, encoding: 'le32' }, { input: 0, push: 1, name: 'n1', offset: 288, encoding: 'le32' }],
+  },
+  'research-bn254-t2-rolled-residue': {
+    file: 't2-rolled-residue-vectors.json', vm: 'bch-2026', name: 'RESEARCH T2 rolled residue singleton (BN254, one input, exact class identity)',
+    source: 'groth16_cashscript wip/frontier-middle-build-bn254 research/frontier-middle/bn254/rolled-residue (research artifact, not ranked)',
+    publicInputs: [{ input: 0, push: 0, name: 'n0', offset: 256, encoding: 'le32' }, { input: 0, push: 0, name: 'n1', offset: 288, encoding: 'le32' }],
   },
 };
 // executed OP_DEFINE body bytes of one unlocking (P2SH32: the last push is the redeem; every OP_DEFINE runs once)
@@ -48,14 +53,14 @@ for (const id of ids) {
   const scen = await impl.load();
   const r = benchmark(impl, scen);
   // per proof: op-cost (loosened BCH 2026 VM = the harness's op-cost VM), bch-spec strict verdicts, k_min
-  const loose = createLoosenedVm(), spec = createRealVmSpec(), specStd = createStandardVmSpec();
+  const loose = createLoosenedVm(), spec = d.vm === 'bch-spec' ? createRealVmSpec() : createRealVm(), specStd = d.vm === 'bch-spec' ? createStandardVmSpec() : createStandardVm();
   const proofs = [['fixture0', scen.valid], ...(scen.extraValidProofs ?? []).map((x, i) => [`extra${i + 1}`, x]), ...(scen.worstCaseProof ? [['worstCase', scen.worstCaseProof]] : [])] as [string, Step[]][];
   const perProof = proofs.map(([label, run]) => {
     const s = run[0]!; const L = evaluatePair(loose, s.lockingBytecode, s.unlockingBytecode, undefined, s.intraTx);
     const S = evaluatePair(spec, s.lockingBytecode, s.unlockingBytecode, undefined, s.intraTx), SS = evaluatePair(specStd, s.lockingBytecode, s.unlockingBytecode, undefined, s.intraTx);
     const len = s.unlockingBytecode.length, defs = defineBodyBytes(s.unlockingBytecode);
     return { label, accepted: L.accepted, opCost: L.operationCost, opCostBchn: L.operationCost + defs, defineBodyBytes: defs, unlockingBytes: len,
-      bchSpecStrict: { consensus: S.accepted, standard: SS.accepted, error: S.error },
+      strictVm: { vm: d.vm, consensus: S.accepted, standard: SS.accepted, error: S.error },
       kMinBch2026: (L.operationCost + defs) / ((41 + len) * 800), kMinBchSpec: (L.operationCost + defs) / ((10000 + len) * 800) };
   });
   const invalidRejected = (scen.invalid ?? []).filter((run) => !evaluatePair(loose, run[0]!.lockingBytecode, run[0]!.unlockingBytecode, undefined, run[0]!.intraTx).accepted).length;
