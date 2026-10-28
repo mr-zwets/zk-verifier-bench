@@ -13,6 +13,7 @@
 import { readFileSync } from 'node:fs';
 import { encodeDataPush, encodeLockingBytecodeP2sh32, hash256, hexToBin } from '@bitauth/libauth';
 import type { Implementation, Step } from '../harness/types.js';
+import { bls12381FsSingletonProofInputs } from './groth16-proof-inputs.js';
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-fs-spec-shared-vectors.json', 'utf8')) as {
   lockingOK: string;
@@ -48,6 +49,7 @@ export const bchGroth16Bls12381SingletonFsSpecShared: Implementation = {
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bls12381FsSingletonProofInputs,
   vm: 'bch-spec',
   source: 'Complete qsplit tail-22 FS-PIT verifier for the proposed bch-spec VM. ' +
     'Public VK slopes reconstruct the exact original line table before transcript hashing. ' +

@@ -84,6 +84,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bn254CovenantResidueProofInputs } from './groth16-proof-inputs.js';
 
 interface RawStep {
   label: string; locking: string; unlocking: string; invalidUnlocking?: string; checkpoint?: string;
@@ -137,6 +138,7 @@ export const bchGroth16ChunkedCovenantResidue: Implementation = {
   field: 'BN254',
   structure: 'multi-tx',
   proofBinding: 'runtime',
+  proofInputs: bn254CovenantResidueProofInputs,
   tokenSafetyEnforced: true,
   source:
     'BCH-native CashScript: the complete runtime-proof Groth16 verifier in 12 covenant-threaded ' +

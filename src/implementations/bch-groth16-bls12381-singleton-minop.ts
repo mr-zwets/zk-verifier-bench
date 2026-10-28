@@ -26,6 +26,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bls12381MinopProofInputs } from './groth16-proof-inputs.js';
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-minop-vectors.json', 'utf8')) as {
   lockingOK: string;
@@ -49,6 +50,7 @@ export const bchGroth16Bls12381SingletonMinOp: Implementation = {
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bls12381MinopProofInputs,
   source:
     'BCH-native CashScript: the COMPLETE BLS12-381 Groth16 verifier in ONE contract, ' +
     'op-optimized — same curve as nchain. Lazy field tower for the Miller loop; QUOTIENT-' +

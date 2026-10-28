@@ -41,6 +41,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bls12381FsSingletonProofInputs } from './groth16-proof-inputs.js';
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-fs-vectors.json', 'utf8')) as {
   lockingOK: string;
@@ -67,6 +68,7 @@ export const bchGroth16Bls12381SingletonFs: Implementation = {
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bls12381FsSingletonProofInputs,
   source:
     'BCH-native CashScript: the complete qsplit tail-22 BLS12-381 Groth16 verification in ' +
     'ONE contract. The script rebuilds the Fiat-Shamir commitment and quotient Merkle roots ' +

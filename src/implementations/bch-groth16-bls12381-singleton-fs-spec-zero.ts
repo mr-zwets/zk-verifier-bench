@@ -14,6 +14,7 @@
 import { readFileSync } from 'node:fs';
 import { encodeDataPush, encodeLockingBytecodeP2sh32, hash256, hexToBin } from '@bitauth/libauth';
 import type { Implementation, Step } from '../harness/types.js';
+import { bls12381FsSingletonProofInputs } from './groth16-proof-inputs.js';
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-fs-spec-zero-vectors.json', 'utf8')) as {
   lockingOK: string;
@@ -49,6 +50,7 @@ export const bchGroth16Bls12381SingletonFsSpecZero: Implementation = {
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bls12381FsSingletonProofInputs,
   vm: 'bch-spec',
   source: 'Same fixed BLS12-381 FS-PIT statement and VK as the shared-code singleton. ' +
     'FS_ZERO_PIC_FACTORS=1 omits the six all-zero Fp6 limbs for zero public-digit pairs. ' +

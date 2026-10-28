@@ -13,6 +13,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { genpowSingletonProofInputs } from './groth16-proof-inputs.js';
 
 const v = JSON.parse(readFileSync('src/bch/groth16-bls12381-singleton-genpow-vectors.json', 'utf8')) as {
   lockingOK: string;
@@ -36,6 +37,7 @@ export const bchGroth16Bls12381SingletonGenpow: Implementation = {
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: genpowSingletonProofInputs,
   source:
     'cofactorPoints() in singleton/bls12-381/leader-recovered/cofactor-points.mjs: ' +
     'canonical finite compressed-point and curve checks, complete G2 root chart, ' +
