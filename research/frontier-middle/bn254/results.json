@@ -1,0 +1,248 @@
+{
+ "research-bn254-t1-sigls-dproj": {
+  "id": "research-bn254-t1-sigls-dproj",
+  "bytes": 16571,
+  "scriptBytes": 16508,
+  "txOverhead": 63,
+  "inputs": 1,
+  "opCost": 33317244,
+  "opCostBchnAdjusted": 33318543,
+  "worstProofOpCostBchn": 33334850,
+  "harness": {
+   "validPassed": true,
+   "proofsPassed": "4/4",
+   "invalidRejected": "15/15",
+   "invalidRejectedLoose": "15/15",
+   "publicInputs": {
+    "declared": true,
+    "tested": 9,
+    "accepted": 0
+   },
+   "pass": true,
+   "fitsStandardBudget": true,
+   "inputsForHeaviestStep": 1
+  },
+  "perProof": [
+   {
+    "label": "fixture0",
+    "accepted": true,
+    "opCost": 33317244,
+    "opCostBchn": 33318543,
+    "defineBodyBytes": 1299,
+    "unlockingBytes": 16473,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 21178400 (density control length: 26473); operation cost following operation: 21178585."
+    },
+    "kMinBch2026": 2.521992173307497,
+    "kMinBchSpec": 1.5732323027235295
+   },
+   {
+    "label": "extra1",
+    "accepted": true,
+    "opCost": 32606899,
+    "opCostBchn": 32608198,
+    "defineBodyBytes": 1299,
+    "unlockingBytes": 15897,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 20717600 (density control length: 25897); operation cost following operation: 20717683."
+    },
+    "kMinBch2026": 2.5574254925335675,
+    "kMinBchSpec": 1.573937039039271
+   },
+   {
+    "label": "extra2",
+    "accepted": true,
+    "opCost": 32598117,
+    "opCostBchn": 32599416,
+    "defineBodyBytes": 1299,
+    "unlockingBytes": 15897,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 20717600 (density control length: 25897); operation cost following operation: 20717611."
+    },
+    "kMinBch2026": 2.5567367298280836,
+    "kMinBchSpec": 1.573513148241109
+   },
+   {
+    "label": "extra3",
+    "accepted": true,
+    "opCost": 32625087,
+    "opCostBchn": 32626386,
+    "defineBodyBytes": 1299,
+    "unlockingBytes": 15897,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 20717600 (density control length: 25897); operation cost following operation: 20717644."
+    },
+    "kMinBch2026": 2.5588519575856443,
+    "kMinBchSpec": 1.574814939954435
+   },
+   {
+    "label": "worstCase",
+    "accepted": true,
+    "opCost": 33333551,
+    "opCostBchn": 33334850,
+    "defineBodyBytes": 1299,
+    "unlockingBytes": 16473,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 21178400 (density control length: 26473); operation cost following operation: 21178471."
+    },
+    "kMinBch2026": 2.52322650478382,
+    "kMinBchSpec": 1.574002285347335
+   }
+  ],
+  "Ek_fixture0": {
+   "1": 41608,
+   "2": 20784,
+   "5": 16571,
+   "10": 16571,
+   "25": 16571,
+   "50": 16571,
+   "100": 16571
+  },
+  "Ek_worstProof": {
+   "1": 41628,
+   "2": 20794,
+   "5": 16571,
+   "10": 16571,
+   "25": 16571,
+   "50": 16571,
+   "100": 16571
+  },
+  "kMin": {
+   "bch2026": 2.5588519575856443,
+   "bchSpec": 1.574814939954435
+  }
+ },
+ "research-bn254-t1-sigls-dproj-inline": {
+  "id": "research-bn254-t1-sigls-dproj-inline",
+  "bytes": 17203,
+  "scriptBytes": 17140,
+  "txOverhead": 63,
+  "inputs": 1,
+  "opCost": 32021353,
+  "opCostBchnAdjusted": 32022832,
+  "worstProofOpCostBchn": 32039485,
+  "harness": {
+   "validPassed": true,
+   "proofsPassed": "4/4",
+   "invalidRejected": "15/15",
+   "invalidRejectedLoose": "15/15",
+   "publicInputs": {
+    "declared": true,
+    "tested": 9,
+    "accepted": 0
+   },
+   "pass": true,
+   "fitsStandardBudget": true,
+   "inputsForHeaviestStep": 1
+  },
+  "perProof": [
+   {
+    "label": "fixture0",
+    "accepted": true,
+    "opCost": 32021353,
+    "opCostBchn": 32022832,
+    "defineBodyBytes": 1479,
+    "unlockingBytes": 17105,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 21684000 (density control length: 27105); operation cost following operation: 21685134."
+    },
+    "kMinBch2026": 2.3345701621369415,
+    "kMinBchSpec": 1.4767954251983029
+   },
+   {
+    "label": "extra1",
+    "accepted": true,
+    "opCost": 31311340,
+    "opCostBchn": 31312819,
+    "defineBodyBytes": 1479,
+    "unlockingBytes": 16529,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 21223200 (density control length: 26529); operation cost following operation: 21223269."
+    },
+    "kMinBch2026": 2.3621619643934824,
+    "kMinBchSpec": 1.4754051698141657
+   },
+   {
+    "label": "extra2",
+    "accepted": true,
+    "opCost": 31301710,
+    "opCostBchn": 31303189,
+    "defineBodyBytes": 1479,
+    "unlockingBytes": 16529,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 21223200 (density control length: 26529); operation cost following operation: 21223208."
+    },
+    "kMinBch2026": 2.3614355009052503,
+    "kMinBchSpec": 1.4749514210863583
+   },
+   {
+    "label": "extra3",
+    "accepted": true,
+    "opCost": 31329166,
+    "opCostBchn": 31330645,
+    "defineBodyBytes": 1479,
+    "unlockingBytes": 16529,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 21223200 (density control length: 26529); operation cost following operation: 21224444."
+    },
+    "kMinBch2026": 2.3635067139408568,
+    "kMinBchSpec": 1.4762450997022127
+   },
+   {
+    "label": "worstCase",
+    "accepted": true,
+    "opCost": 32038006,
+    "opCostBchn": 32039485,
+    "defineBodyBytes": 1479,
+    "unlockingBytes": 17105,
+    "bchSpecStrict": {
+     "consensus": false,
+     "standard": false,
+     "error": "Program attempted an operation that would exceed the operation cost density limit. Maximum operation cost: 21684000 (density control length: 27105); operation cost following operation: 21684064."
+    },
+    "kMinBch2026": 2.335784220809518,
+    "kMinBchSpec": 1.4775634108098137
+   }
+  ],
+  "Ek_fixture0": {
+   "1": 39988,
+   "2": 19974,
+   "5": 17203,
+   "10": 17203,
+   "25": 17203,
+   "50": 17203,
+   "100": 17203
+  },
+  "Ek_worstProof": {
+   "1": 40009,
+   "2": 19984,
+   "5": 17203,
+   "10": 17203,
+   "25": 17203,
+   "50": 17203,
+   "100": 17203
+  },
+  "kMin": {
+   "bch2026": 2.3635067139408568,
+   "bchSpec": 1.4775634108098137
+  }
+ }
+}
