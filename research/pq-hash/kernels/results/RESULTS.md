@@ -96,7 +96,7 @@ libauth 3.1.0-next.8, BCH_2026 instruction set. Op-cost per call: mean over rand
 
 | id | kernel | op-cost std | op-cost cons | hash iter | code B | BCHN-adjusted | real VM | notes |
 |---|---|--:|--:|--:|--:|---|---|---|
-| K16 | Blake2s-256 of 64 bytes (one compression, 2-to-1 node), fully unrolled | 837,797 (837,774–837,811) | 837,797 (837,774–837,811) | 0 | 8,787 | = libauth | ok | unrolled code exceeds the 10,000-byte script limit if over |
+| K16 | Blake2s-256 of 64 bytes (one compression, 2-to-1 node), fully unrolled | 837,797 (837,774–837,811) | 837,797 (837,774–837,811) | 0 | 8,787 | = libauth | ok | straight-line code, fits one P2SH redeem |
 | K16 | Blake2s-256 of 64 bytes, G as an OP_DEFINE function (80 calls) | 961,245 (961,205–961,309) | 961,245 (961,205–961,309) | 0 | 1,681 + 104 | define once: libauth 405, BCHN 509 | ok |  |
 
 ## RPO permutation (K16) and K4 chain

@@ -2,7 +2,13 @@
 
 Kernels phase (SPEC.md section 8). Files: research/pq-hash/kernels/.
 - lib/asm.mjs (assembler + symbolic stack), lib/slp.mjs (straight-line program compiler), lib/measure.mjs (marker-based
-  op-cost measurement on libauth BCH_2026, loosened + real P2SH32 check), lib/ref-field.mjs.
-- run.mjs runs k-*.mjs; results/*.json.
-- Done: k-field (K1, K2, K19, comparison fields), k-hash (K5, K6, K7, K17), k-gf128 (K15), k-rpo (K16 RPO, K4 chain).
-- Note: asm() treats a Uint8Array as a DATA push; splice code with {raw: bytes} (bit me twice).
+  op-cost measurement on libauth BCH_2026, loosened + real P2SH32 check), lib/fp3.mjs, lib/ref-field.mjs, lib/ref-rpo.mjs.
+- run.mjs -> results/*.json; table.mjs -> results/RESULTS.md; ratios.mjs -> results/RATIOS.md.
+- Done: K1, K2, K3, K4, K5, K6, K7, K8 (blob + item-based), K9, K10, K11 (IDFT + binary folds, O1), K12, K13, K14,
+  K15 (bit-serial, 4-bit windowed, holes), K16 (Blake2s, RPO computed/witnessed, Tip5 full permutation), K17, K19.
+- Not done: K18 (lattice, optional); BCHN timing (optional).
+- REPORT.md: the subagent Write tool refused .md report files; the full report text was returned in the phase's final
+  output (orchestrator should place it at research/pq-hash/kernels/REPORT.md).
+- Note: asm() treats a Uint8Array as a DATA push; splice code with {raw: bytes}.
+- Key findings for Build: final polynomial (256 coeffs) ~0.71M/query; P128 per-query kernel sum 1.47M (model 0.99M);
+  layout (b) P128 projection 71.9M = 94% of TXv5-as-written budget; layout (a) op-bound at 4 queries/input.

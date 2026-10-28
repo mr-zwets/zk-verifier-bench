@@ -98,7 +98,7 @@ const withFn = compressionBody({asFunction: true});
 const gBody = gFunctionBody();
 def('K16', 'blake2s', 'Blake2s-256 of 64 bytes (one compression, 2-to-1 node), fully unrolled', (rng) => {
   const m = rng.bytes(64); return {inputs: [m], body: unrolled, outputs: [{bin: blake(m)}]};
-}, 'unrolled code exceeds the 10,000-byte script limit if over');
+}, 'straight-line code, fits one P2SH redeem');
 def('K16', 'blake2s', 'Blake2s-256 of 64 bytes, G as an OP_DEFINE function (80 calls)', (rng) => {
   const m = rng.bytes(64); return {inputs: [m], defs: [{id: 1, body: gBody}], body: withFn, outputs: [{bin: blake(m)}]};
 });
