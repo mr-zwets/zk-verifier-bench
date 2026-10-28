@@ -1,0 +1,44 @@
+blob 6465 R 81 roles [ 1521, 195, 183, 789 ] funcs {"WORK":279,"READ0":33,"RD2":27,"P":49,"RD6":75,"RD":14,"SETUP":1606,"EV":46,"TBL":175,"TM":111,"WSTART":31,"LOOP":103,"AFFDBL":288,"DSTEP":186,"AFFADD":333,"BND":92,"FINW":118,"C48":11,"G1C":18,"TA":78}
+sections {"1:pin+K":137,"1:params":53,"1:work":2,"1:fin":3,"2:pin+K":124,"2:params":54,"2:work":2,"2:fin":3,"3:pin+K":131,"3:params":49,"3:work":2,"3:fin":607,"0:pin+K":192,"0:transcript":177,"0:statement":231,"0:binding":98,"0:quotient+final":186,"0:setup":835,"0:start":489,"0:loop":2,"0:fin":3}
+R in vector unlocking: true
+== input 0: accepted true  opCost 4,646,429 unlocking 6397 pushes [96,3264,240,513,27,2160,81] budget 5,150,400
+   unlocking/p2sh                 7,638 {}
+   R+blob                        86,408 {"(self)":"72,521"}
+   start                         32,901 {"(self)":"32,901"}
+   after-pin+K                  136,938 {"(self)":"136,938"}
+   after-transcript             136,388 {"(self)":"72,008","G1C":"38,438","RD6":"20,812"}
+   after-statement              268,112 {"(self)":"259,185"}
+   after-binding                424,398 {"(self)":"348,381","RD2":"70,032"}
+   after-quotient+final         807,946 {"SETUP>TBL":"633,466","SETUP":"130,287","SETUP>EV":"27,697"}
+   after-setup                   66,263 {"(self)":"38,618","EV":"27,349"}
+   after-start                2,660,933 {"LOOP>AFFDBL":"1,025,972","LOOP>AFFADD":"696,817","LOOP>DSTEP":"571,306","LOOP>BND":"265,988","LOOP":"100,649"}
+   after-loop                    18,504 {}
+   incl {"#phase2":"4,638,791 /","BLOB":"4,566,270 /1","ROLE0":"4,552,383 /1","LOOP":"2,660,732 /1","AFFDBL":"1,025,972 /7","DSTEP":"816,229 /10","SETUP":"791,598 /1","AFFADD":"696,817 /3","TBL":"633,466 /2","TM":"374,120 /4","EV":"279,926 /10","BND":"265,988 /5","RD2":"107,388 /35","RD6":"65,238 /7","G1C":"38,734 /2"}
+   defines 25 body bytes 12826
+== input 1: accepted true  opCost 6,827,540 unlocking 9755 pushes [4896,240,171,124,4229,81] budget 7,836,800
+   unlocking/p2sh                10,898 {}
+   R+blob                        86,413 {"(self)":"72,525"}
+   start                         47,767 {"(self)":"47,767"}
+   after-pin+K                    7,643 {}
+   after-params               6,656,315 {"WORK>LOOP":"5,681,838","WORK>SETUP":"791,598","WORK":"75,904","WORK>READ0":"53,446","WORK>WSTART":"45,427"}
+   after-work                    18,504 {}
+   incl {"#phase2":"6,816,642 /","BLOB":"6,744,117 /1","ROLE1":"6,730,229 /1","WORK":"6,656,114 /1","LOOP":"5,681,838 /1","AFFDBL":"2,955,073 /20","DSTEP":"1,736,192 /21","SETUP":"791,598 /1","TBL":"633,466 /2","BND":"549,652 /10","TM":"374,120 /4","EV":"279,974 /10","AFFADD":"235,780 /1","RD6":"118,190 /13","RD2":"77,634 /25","READ0":"53,446 /1","WSTART":"45,427 /1"}
+   defines 25 body bytes 12826
+== input 2: accepted true  opCost 6,819,259 unlocking 9720 pushes [4896,240,2208,45,2236,81] budget 7,808,800
+   unlocking/p2sh                10,863 {}
+   R+blob                        86,413 {"(self)":"72,525"}
+   start                         24,522 {"(self)":"24,522"}
+   after-pin+K                    7,645 {}
+   after-params               6,671,066 {"WORK>LOOP":"5,682,376","WORK>SETUP":"791,598","WORK":"90,165","WORK>READ0":"53,446","WORK>WSTART":"45,379"}
+   after-work                    18,750 {}
+   incl {"#phase2":"6,808,396 /","BLOB":"6,735,871 /1","ROLE2":"6,721,983 /1","WORK":"6,670,865 /1","LOOP":"5,682,376 /1","AFFDBL":"2,958,684 /20","DSTEP":"1,736,327 /21","SETUP":"791,598 /1","TBL":"633,466 /2","BND":"549,824 /10","TM":"374,120 /4","EV":"279,926 /10","AFFADD":"229,830 /1","RD6":"118,194 /13","RD2":"77,636 /25","READ0":"53,446 /1","WSTART":"45,379 /1"}
+   defines 25 body bytes 12826
+== input 3: accepted true  opCost 5,747,058 unlocking 8025 pushes [3552,48,447,2037,1728,115,81] budget 6,452,800
+   unlocking/p2sh                 9,265 {}
+   R+blob                        86,413 {"(self)":"72,525"}
+   start                         22,100 {"(self)":"22,100"}
+   after-pin+K                    6,293 {}
+   after-params               5,366,189 {"WORK>LOOP":"4,385,806","WORK>SETUP":"791,598","WORK":"83,590","WORK>READ0":"53,446","WORK>WSTART":"43,647"}
+   after-work                   256,798 {"(self)":"255,701"}
+   incl {"#phase2":"5,737,793 /","BLOB":"5,665,268 /1","ROLE3":"5,651,380 /1","WORK":"5,365,988 /1","LOOP":"4,385,806 /1","AFFDBL":"2,355,695 /16","DSTEP":"1,315,524 /16","SETUP":"791,598 /1","TBL":"633,466 /2","BND":"378,847 /7","TM":"374,120 /4","EV":"279,922 /10","RD6":"91,714 /10","RD2":"62,704 /20","READ0":"53,446 /1","WSTART":"43,647 /1"}
+   defines 25 body bytes 12826

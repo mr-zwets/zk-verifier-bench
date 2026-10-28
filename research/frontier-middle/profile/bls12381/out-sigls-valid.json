@@ -1,0 +1,2027 @@
+{
+ "accepted": true,
+ "operationCost": 26070993,
+ "attributed": 26070993,
+ "instructions": 58285,
+ "excl": {
+  "PROJDBL": 12381919,
+  "DSTEP": 5566892,
+  "#phase2": 2638291,
+  "AFFDBL": 1483768,
+  "EV": 1147319,
+  "PROJADD": 665133,
+  "BND": 640537,
+  "RD": 585550,
+  "AFFADD": 446565,
+  "TM": 367256,
+  "P": 60828,
+  "G1C": 38038,
+  "#phase0": 26677,
+  "#phase1": 13293,
+  "TA": 8927
+ },
+ "incl": {
+  "#phase2": 26031023,
+  "PROJDBL": 12381919,
+  "DSTEP": 5566892,
+  "BND": 1841668,
+  "AFFDBL": 1525706,
+  "EV": 1159751,
+  "PROJADD": 665133,
+  "RD": 626990,
+  "AFFADD": 460395,
+  "TM": 373768,
+  "P": 60828,
+  "G1C": 38334,
+  "#phase0": 26677,
+  "#phase1": 13293,
+  "TA": 8927
+ },
+ "calls": {
+  "P": 411,
+  "RD": 280,
+  "G1C": 2,
+  "EV": 42,
+  "TA": 1,
+  "TM": 4,
+  "AFFDBL": 10,
+  "DSTEP": 68,
+  "AFFADD": 3,
+  "BND": 32,
+  "PROJDBL": 53,
+  "PROJADD": 2
+ },
+ "edges": {
+  "#phase2 -> P": 1,
+  "#phase2 -> RD": 62,
+  "RD -> P": 280,
+  "#phase2 -> G1C": 2,
+  "G1C -> P": 2,
+  "#phase2 -> EV": 10,
+  "EV -> P": 84,
+  "#phase2 -> TA": 1,
+  "#phase2 -> TM": 4,
+  "TM -> P": 44,
+  "#phase2 -> AFFDBL": 10,
+  "AFFDBL -> RD": 20,
+  "#phase2 -> DSTEP": 68,
+  "#phase2 -> AFFADD": 3,
+  "AFFADD -> RD": 6,
+  "#phase2 -> BND": 32,
+  "BND -> RD": 192,
+  "BND -> EV": 32,
+  "#phase2 -> PROJDBL": 53,
+  "#phase2 -> PROJADD": 2
+ },
+ "opTot": {
+  "0": [
+   900,
+   9
+  ],
+  "1": [
+   567807,
+   5623
+  ],
+  "2": [
+   40902,
+   402
+  ],
+  "3": [
+   103,
+   1
+  ],
+  "9": [
+   109,
+   1
+  ],
+  "10": [
+   116,
+   1
+  ],
+  "20": [
+   264,
+   2
+  ],
+  "28": [
+   140,
+   1
+  ],
+  "30": [
+   66156,
+   447
+  ],
+  "31": [
+   149,
+   1
+  ],
+  "51": [
+   61812,
+   612
+  ],
+  "52": [
+   104838,
+   1038
+  ],
+  "53": [
+   148571,
+   1471
+  ],
+  "54": [
+   141746,
+   1404
+  ],
+  "55": [
+   79083,
+   783
+  ],
+  "56": [
+   65347,
+   647
+  ],
+  "57": [
+   71657,
+   710
+  ],
+  "58": [
+   102000,
+   1010
+  ],
+  "59": [
+   46099,
+   457
+  ],
+  "60": [
+   27169,
+   269
+  ],
+  "63": [
+   35200,
+   352
+  ],
+  "65": [
+   300,
+   3
+  ],
+  "66": [
+   20500,
+   205
+  ],
+  "67": [
+   12600,
+   126
+  ],
+  "68": [
+   35200,
+   352
+  ],
+  "69": [
+   32600,
+   326
+  ],
+  "74": [
+   13232,
+   131
+  ],
+  "75": [
+   41300,
+   413
+  ],
+  "76": [
+   200998,
+   1328
+  ],
+  "77": [
+   7800,
+   78
+  ],
+  "78": [
+   280006,
+   1624
+  ],
+  "79": [
+   1267813,
+   8706
+  ],
+  "80": [
+   244,
+   1
+  ],
+  "81": [
+   81276,
+   612
+  ],
+  "82": [
+   18223,
+   180
+  ],
+  "84": [
+   228,
+   1
+  ],
+  "87": [
+   101,
+   1
+  ],
+  "88": [
+   101,
+   1
+  ],
+  "89": [
+   1200,
+   12
+  ],
+  "91": [
+   34366,
+   343
+  ],
+  "92": [
+   202,
+   2
+  ],
+  "93": [
+   740452,
+   3453
+  ],
+  "94": [
+   664282,
+   2574
+  ],
+  "95": [
+   8944270,
+   3907
+  ],
+  "96": [
+   6408,
+   63
+  ],
+  "97": [
+   9606588,
+   2101
+  ],
+  "4d": [
+   36944,
+   24
+  ],
+  "aa": [
+   13060,
+   1
+  ],
+  "e": [
+   114,
+   1
+  ],
+  "2d": [
+   145,
+   1
+  ],
+  "4c": [
+   858,
+   4
+  ],
+  "5a": [
+   47006,
+   466
+  ],
+  "5b": [
+   59327,
+   588
+  ],
+  "5c": [
+   42187,
+   418
+  ],
+  "9d": [
+   404,
+   4
+  ],
+  "7c": [
+   230100,
+   2301
+  ],
+  "6b": [
+   64900,
+   649
+  ],
+  "7a": [
+   820958,
+   5068
+  ],
+  "2b": [
+   143,
+   1
+  ],
+  "7e": [
+   59847,
+   296
+  ],
+  "a8": [
+   14220,
+   3
+  ],
+  "a5": [
+   101,
+   1
+  ],
+  "7f": [
+   427524,
+   665
+  ],
+  "7b": [
+   266400,
+   2664
+  ],
+  "8a": [
+   118100,
+   1181
+  ],
+  "9f": [
+   28482,
+   282
+  ],
+  "8f": [
+   69868,
+   224
+  ],
+  "5e": [
+   25755,
+   255
+  ],
+  "5f": [
+   25250,
+   250
+  ],
+  "5d": [
+   35350,
+   350
+  ],
+  "3f": [
+   163,
+   1
+  ],
+  "6c": [
+   100312,
+   673
+  ],
+  "a2": [
+   12613,
+   126
+  ],
+  "9b": [
+   404,
+   4
+  ]
+ },
+ "top": [
+  {
+   "name": "P",
+   "cost": 148,
+   "at": 8970,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12825,
+   "at": 8974,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12777,
+   "at": 8976,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12729,
+   "at": 8978,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12681,
+   "at": 8980,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12633,
+   "at": 8982,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12585,
+   "at": 8984,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12537,
+   "at": 8986,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12489,
+   "at": 8988,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12249,
+   "at": 9083,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12201,
+   "at": 9085,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12153,
+   "at": 9087,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12105,
+   "at": 9089,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12057,
+   "at": 9091,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 12009,
+   "at": 9093,
+   "phase": 2
+  },
+  {
+   "name": "G1C",
+   "cost": 19167,
+   "at": 9146,
+   "phase": 2
+  },
+  {
+   "name": "G1C",
+   "cost": 19167,
+   "at": 9152,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 27591,
+   "at": 9744,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 27487,
+   "at": 10058,
+   "phase": 2
+  },
+  {
+   "name": "TA",
+   "cost": 8927,
+   "at": 10078,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 27543,
+   "at": 10698,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 27543,
+   "at": 10730,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 28210,
+   "at": 10762,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 28262,
+   "at": 10794,
+   "phase": 2
+  },
+  {
+   "name": "TM",
+   "cost": 93478,
+   "at": 10804,
+   "phase": 2
+  },
+  {
+   "name": "TM",
+   "cost": 93430,
+   "at": 10818,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 27595,
+   "at": 11438,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 27539,
+   "at": 11470,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 28318,
+   "at": 11502,
+   "phase": 2
+  },
+  {
+   "name": "EV",
+   "cost": 28206,
+   "at": 11534,
+   "phase": 2
+  },
+  {
+   "name": "TM",
+   "cost": 93530,
+   "at": 11544,
+   "phase": 2
+  },
+  {
+   "name": "TM",
+   "cost": 93330,
+   "at": 11558,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 154593,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82229,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "AFFADD",
+   "cost": 154407,
+   "at": 12166,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81938,
+   "at": 12178,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56699,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 153820,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81794,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 153125,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81599,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "AFFADD",
+   "cost": 153515,
+   "at": 12166,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82210,
+   "at": 12178,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57916,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 153141,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81866,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57388,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 152781,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81642,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 152417,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81589,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "AFFADD",
+   "cost": 152473,
+   "at": 12166,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82264,
+   "at": 12178,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56756,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 152089,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81935,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 58483,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 151700,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81727,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 150903,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81379,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57914,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "AFFDBL",
+   "cost": 151137,
+   "at": 12142,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82164,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 210442,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81883,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57287,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234286,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81739,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233825,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81544,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56762,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233452,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82377,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234294,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81931,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJADD",
+   "cost": 332613,
+   "at": 12169,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81744,
+   "at": 12178,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 58487,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234041,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81603,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234345,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82157,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57908,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233875,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81923,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234035,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81621,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57285,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233626,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81538,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234194,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82262,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56708,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234101,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81933,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233916,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81627,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 58484,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234092,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81535,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234297,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82315,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57908,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234140,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81923,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234142,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81846,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57330,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233727,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81488,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233929,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82378,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56758,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234249,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81882,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234207,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81786,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 58431,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234198,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81434,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233835,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82326,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57804,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234352,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82038,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234189,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81796,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57281,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233852,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81600,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234088,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82274,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56705,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234057,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81938,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234151,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81692,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 58485,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233499,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81401,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234047,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82159,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57918,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234458,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81988,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234097,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81741,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57334,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234301,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81539,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233343,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82366,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56764,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234352,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81984,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234047,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81681,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJADD",
+   "cost": 332520,
+   "at": 12169,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81387,
+   "at": 12178,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 58481,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234236,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82262,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233488,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81934,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57906,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234210,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81793,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233909,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81600,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57338,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234260,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82214,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233834,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81924,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56756,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234193,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81795,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234025,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81600,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 58384,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234192,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82262,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234417,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81928,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57908,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234146,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81735,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234291,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81597,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 57340,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234093,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 82112,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 233939,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81986,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "BND",
+   "cost": 56760,
+   "at": 12281,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234245,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81846,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "PROJDBL",
+   "cost": 234360,
+   "at": 12145,
+   "phase": 2
+  },
+  {
+   "name": "DSTEP",
+   "cost": 81589,
+   "at": 12152,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1591,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1689,
+   "at": 12694,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1641,
+   "at": 12696,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1593,
+   "at": 12698,
+   "phase": 2
+  },
+  {
+   "name": "RD",
+   "cost": 1545,
+   "at": 12700,
+   "phase": 2
+  }
+ ],
+ "defines": [
+  {
+   "key": "01",
+   "name": "P",
+   "bodyLen": 49
+  },
+  {
+   "key": "02",
+   "name": "RD",
+   "bodyLen": 14
+  },
+  {
+   "key": "03",
+   "name": "G1C",
+   "bodyLen": 16
+  },
+  {
+   "key": "04",
+   "name": "EV",
+   "bodyLen": 45
+  },
+  {
+   "key": "05",
+   "name": "TA",
+   "bodyLen": 78
+  },
+  {
+   "key": "06",
+   "name": "TM",
+   "bodyLen": 111
+  },
+  {
+   "key": "07",
+   "name": "AFFDBL",
+   "bodyLen": 284
+  },
+  {
+   "key": "08",
+   "name": "PROJDBL",
+   "bodyLen": 445
+  },
+  {
+   "key": "09",
+   "name": "DSTEP",
+   "bodyLen": 190
+  },
+  {
+   "key": "0a",
+   "name": "AFFADD",
+   "bodyLen": 296
+  },
+  {
+   "key": "0b",
+   "name": "PROJADD",
+   "bodyLen": 614
+  },
+  {
+   "key": "0c",
+   "name": "BND",
+   "bodyLen": 79
+  }
+ ],
+ "edgeIncl": {
+  "#phase2 > PROJDBL": 12381919,
+  "PROJDBL > (self)": 12381919,
+  "#phase2 > DSTEP": 5566892,
+  "DSTEP > (self)": 5566892,
+  "#phase2 > (self)": 2638291,
+  "#phase2 > BND": 1841668,
+  "#phase2 > AFFDBL": 1525706,
+  "AFFDBL > (self)": 1483768,
+  "EV > (self)": 1147319,
+  "BND > EV": 881457,
+  "#phase2 > PROJADD": 665133,
+  "PROJADD > (self)": 665133,
+  "BND > (self)": 640537,
+  "RD > (self)": 585550,
+  "#phase2 > AFFADD": 460395,
+  "AFFADD > (self)": 446565,
+  "#phase2 > TM": 373768,
+  "TM > (self)": 367256,
+  "BND > RD": 319674,
+  "#phase2 > EV": 278294,
+  "#phase2 > RD": 251548,
+  "P > (self)": 60828,
+  "AFFDBL > RD": 41938,
+  "RD > P": 41440,
+  "#phase2 > G1C": 38334,
+  "G1C > (self)": 38038,
+  "#phase0 > (self)": 26677,
+  "AFFADD > RD": 13830,
+  "#phase1 > (self)": 13293,
+  "EV > P": 12432,
+  "#phase2 > TA": 8927,
+  "TA > (self)": 8927,
+  "TM > P": 6512,
+  "G1C > P": 296,
+  "#phase2 > P": 148
+ },
+ "custom": {
+  "unlocking+p2sh|(self)": 39970,
+  "prologue(OP_DEFINE)|(self)": 5833,
+  "transcript|(self)": 88242,
+  "transcript|P": 148,
+  "parse+checks|(self)": 158312,
+  "parse+checks|RD": 174030,
+  "parse+checks|G1C": 38334,
+  "powers|(self)": 192467,
+  "powers|EV": 55078,
+  "gls-tables|(self)": 35766,
+  "gls-tables|TA": 8927,
+  "gls-tables|EV": 223216,
+  "gls-tables|TM": 373768,
+  "loop-setup|(self)": 96693,
+  "loop:entry|(self)": 100,
+  "loop:bdbl|(self)": 75808,
+  "loop:bdbl|AFFDBL": 1525706,
+  "loop:dstep|(self)": 44032,
+  "loop:dstep|DSTEP": 5157349,
+  "loop:add|(self)": 158199,
+  "loop:add|AFFADD": 460395,
+  "loop:add|DSTEP": 409543,
+  "loop:digit|(self)": 116061,
+  "loop:gls|(self)": 905788,
+  "loop:bnd|(self)": 38431,
+  "loop:bnd|BND": 1841668,
+  "loop:loopend|(self)": 161396,
+  "loop:bdbl|PROJDBL": 12381919,
+  "loop:add|PROJADD": 665133,
+  "terminal|(self)": 165348,
+  "quotient|(self)": 343382,
+  "quotient|RD": 77518,
+  "cleanup|(self)": 52433
+ },
+ "info": {
+  "sections": {
+   "init": 0,
+   "transcript": 6702,
+   "parse+checks": 277,
+   "powers": 811,
+   "gls-tables": 1500,
+   "loop-setup": 575,
+   "loop": 173,
+   "terminal": 334,
+   "final": 145,
+   "cleanup": 7
+  },
+  "funcs": {
+   "P": 49,
+   "RD": 14,
+   "EV": 45,
+   "TM": 111,
+   "TA": 78,
+   "G1C": 16,
+   "DSTEP": 190,
+   "AFFDBL": 284,
+   "PROJDBL": 445,
+   "AFFADD": 296,
+   "PROJADD": 614,
+   "BND": 79
+  },
+  "prologue": 2269
+ }
+}

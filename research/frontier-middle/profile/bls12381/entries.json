@@ -1,0 +1,590 @@
+[
+ {
+  "id": "bch-groth16-bls12381-singleton-opcode-optimized",
+  "totalBytes": 5999,
+  "totalOpCost": 1003512299,
+  "components": [
+   {
+    "name": "unlocking: push proof A,B,C + n0,n1",
+    "opCost": 1387,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "397 B unlocking = 8 x 49 B coordinates + 2 public inputs; no prover hints"
+   },
+   {
+    "name": "OP_DEFINE prelude (define headers)",
+    "opCost": 36240,
+    "codeBytes": 465,
+    "hintBytes": 0,
+    "notes": "105 OP_DEFINEs; libauth charges 100 each; BCHN-adjusted +2,814 (body bytes) => 39,054. Body bytes are counted in the components that own them"
+   },
+   {
+    "name": "input checks: coordinate range, A/C on curve, B on twist",
+    "opCost": 178946,
+    "codeBytes": 90,
+    "hintBytes": 0,
+    "notes": "no G1 subgroup check (cofactor malleability only)"
+   },
+   {
+    "name": "G2 subgroup check: psi(B) == [x]B endpoint of the (-A,B) walk",
+    "opCost": 178777,
+    "codeBytes": 394,
+    "hintBytes": 0,
+    "notes": "the [|x|]B walk itself is inside Miller(-A,B); main bytes here include inline VK G2/psi constants first pushed in this span"
+   },
+   {
+    "name": "vk_x MSM: 2-scalar Straus/Shamir 255-bit loop + Fermat inverse + affine",
+    "opCost": 10874554,
+    "codeBytes": 959,
+    "hintBytes": 0,
+    "notes": "bench vector n=(123,456): 8 dbl + 9 add; dense 254-bit inputs measured 73,697,901 (253 dbl x ~99k + 255 add x ~156k + inverse 6.07M + loop ~2.7M); 588 B of IC-table constants"
+   },
+   {
+    "name": "Miller x4 pairs: Fp12 squaring of f (generic fp12Mul, 64 per pair)",
+    "opCost": 355805349,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "1,389,865 per squaring; 4 independent loops, so f is squared 256 times (a shared multi-Miller loop would square 64 times); fp12Mul body counted under field tower"
+   },
+   {
+    "name": "Miller x4 pairs: line evaluation (sparse mul014, 69 per pair)",
+    "opCost": 261476110,
+    "codeBytes": 279,
+    "hintBytes": 0,
+    "notes": "276 lines x 947,377"
+   },
+   {
+    "name": "Miller x4 pairs: G2 doubling (projective, inlined pointDouble, 64 per pair)",
+    "opCost": 114089171,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "445,661 per doubling; also done for the 3 constant Q (beta, gamma, delta)"
+   },
+   {
+    "name": "Miller x4 pairs: G2 addition (5 per pair)",
+    "opCost": 12542641,
+    "codeBytes": 157,
+    "hintBytes": 0,
+    "notes": "627,132 per addition"
+   },
+   {
+    "name": "Miller x4 pairs: loop control/stack glue + call sites",
+    "opCost": 7919694,
+    "codeBytes": 487,
+    "hintBytes": 0,
+    "notes": "per pair 187,956,380: doubling iteration 2,813,810, addition step 1,574,509; millerSingleR body (inlines pointDouble/fp12Sqr/mul014) in codeBytes"
+   },
+   {
+    "name": "Fp12 product of the 4 Miller values + conjugate",
+    "opCost": 4237217,
+    "codeBytes": 207,
+    "hintBytes": 0,
+    "notes": "3 fp12Mul (~1.37M each)"
+   },
+   {
+    "name": "final exp easy part: conj * inverse (fp12Inv, Fermat inverseFp) * frob2",
+    "opCost": 11567861,
+    "codeBytes": 216,
+    "hintBytes": 0,
+    "notes": "includes one 381-bit Fermat inverse (6.07M)"
+   },
+   {
+    "name": "final exp hard part (Hayashida-Scott): 5 x powMinusX + frobenius + ~10 fp12Mul",
+    "opCost": 224604352,
+    "codeBytes": 1080,
+    "hintBytes": 0,
+    "notes": "powMinusX 41,692,356 each = 64 cyclotomic squarings (521,149) + 6 fp12Mul; finalExp is inlined into main"
+   },
+   {
+    "name": "field tower helper bodies (Fp/Fp2/Fp6/Fp12, P constant)",
+    "opCost": 0,
+    "codeBytes": 481,
+    "hintBytes": 0,
+    "notes": "op-cost counted inside the phase components (see cross-cut rows)"
+   },
+   {
+    "name": "outlined fragments (68 OP_DEFINE bodies from the outliner)",
+    "opCost": 0,
+    "codeBytes": 700,
+    "hintBytes": 0,
+    "notes": "op-cost counted inside callers; outlining adds ~0.9% op-cost (OP_INVOKE + id push per use)"
+   },
+   {
+    "name": "[cross-cut, not additive] leaf Fp arithmetic: mulFp/addFp/subFp/sqrFp/negFp/inverseFp/P-const bodies",
+    "opCost": 831601925,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "82.9% of op-cost; mulFp 339,381,058 (52,368 x 6.5k), addFp 235,096,350 (82,409 x 2.9k), subFp 204,322,122 (60,302 x 3.4k), P 37,999,592 (256,754 x 148), inverseFp 12.1M"
+   },
+   {
+    "name": "[cross-cut, not additive] dispatch: OP_INVOKE + stack shuffles + loop control (everything outside leaf Fp bodies)",
+    "opCost": 171910374,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "by opcode class: OP_INVOKE/DEFINE ~5.2-5.7%, stack ops ~8.7%, pushes ~12% (incl. 48-B P constant), MUL/MOD ~69.5%"
+   }
+  ]
+ },
+ {
+  "id": "bch-groth16-bls12381-singleton",
+  "totalBytes": 7510,
+  "totalOpCost": 994589979,
+  "components": [
+   {
+    "name": "unlocking: push proof A,B,C + n0,n1",
+    "opCost": 1387,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "397 B unlocking = 8 x 49 B coordinates + 2 public inputs; no prover hints"
+   },
+   {
+    "name": "OP_DEFINE prelude (define headers)",
+    "opCost": 16050,
+    "codeBytes": 194,
+    "hintBytes": 0,
+    "notes": "37 OP_DEFINEs; libauth charges 100 each; BCHN-adjusted +2,993 (body bytes) => 19,043. Body bytes are counted in the components that own them"
+   },
+   {
+    "name": "input checks: coordinate range, A/C on curve, B on twist",
+    "opCost": 176636,
+    "codeBytes": 108,
+    "hintBytes": 0,
+    "notes": "no G1 subgroup check (cofactor malleability only)"
+   },
+   {
+    "name": "G2 subgroup check: psi(B) == [x]B endpoint of the (-A,B) walk",
+    "opCost": 178968,
+    "codeBytes": 491,
+    "hintBytes": 0,
+    "notes": "the [|x|]B walk itself is inside Miller(-A,B); main bytes here include inline VK G2/psi constants first pushed in this span"
+   },
+   {
+    "name": "vk_x MSM: 2-scalar Straus/Shamir 255-bit loop + Fermat inverse + affine",
+    "opCost": 10884338,
+    "codeBytes": 981,
+    "hintBytes": 0,
+    "notes": "bench vector n=(123,456): 8 dbl + 9 add; dense 254-bit inputs measured 73,928,839 (253 dbl x ~99k + 255 add x ~156k + inverse 6.07M + loop ~2.7M); 588 B of IC-table constants"
+   },
+   {
+    "name": "Miller x4 pairs: Fp12 squaring of f (generic fp12Mul, 64 per pair)",
+    "opCost": 351019941,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "1,371,172 per squaring; 4 independent loops, so f is squared 256 times (a shared multi-Miller loop would square 64 times); fp12Mul body counted under field tower"
+   },
+   {
+    "name": "Miller x4 pairs: line evaluation (sparse mul014, 69 per pair)",
+    "opCost": 258480406,
+    "codeBytes": 388,
+    "hintBytes": 0,
+    "notes": "276 lines x 936,523"
+   },
+   {
+    "name": "Miller x4 pairs: G2 doubling (projective, inlined pointDouble, 64 per pair)",
+    "opCost": 109944247,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "429,470 per doubling; also done for the 3 constant Q (beta, gamma, delta)"
+   },
+   {
+    "name": "Miller x4 pairs: G2 addition (5 per pair)",
+    "opCost": 12502441,
+    "codeBytes": 189,
+    "hintBytes": 0,
+    "notes": "625,122 per addition"
+   },
+   {
+    "name": "Miller x4 pairs: loop control/stack glue + call sites",
+    "opCost": 11984210,
+    "codeBytes": 839,
+    "hintBytes": 0,
+    "notes": "per pair 185,977,888: doubling iteration 2,783,901, addition step 1,561,645; millerSingleR body (inlines pointDouble/fp12Sqr/mul014) in codeBytes"
+   },
+   {
+    "name": "Fp12 product of the 4 Miller values + conjugate",
+    "opCost": 4190902,
+    "codeBytes": 227,
+    "hintBytes": 0,
+    "notes": "3 fp12Mul (~1.37M each)"
+   },
+   {
+    "name": "final exp easy part: conj * inverse (fp12Inv, Fermat inverseFp) * frob2",
+    "opCost": 11465569,
+    "codeBytes": 568,
+    "hintBytes": 0,
+    "notes": "includes one 381-bit Fermat inverse (6.07M)"
+   },
+   {
+    "name": "final exp hard part (Hayashida-Scott): 5 x powMinusX + frobenius + ~10 fp12Mul",
+    "opCost": 223744884,
+    "codeBytes": 2327,
+    "hintBytes": 0,
+    "notes": "powMinusX 41,565,627 each = 64 cyclotomic squarings (517,531) + 6 fp12Mul; finalExp is inlined into main"
+   },
+   {
+    "name": "field tower helper bodies (Fp/Fp2/Fp6/Fp12, P constant)",
+    "opCost": 0,
+    "codeBytes": 714,
+    "hintBytes": 0,
+    "notes": "op-cost counted inside the phase components (see cross-cut rows)"
+   },
+   {
+    "name": "[cross-cut, not additive] leaf Fp arithmetic: mulFp/addFp/subFp/sqrFp/negFp/inverseFp/P-const bodies",
+    "opCost": 831601925,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "83.6% of op-cost; mulFp 339,381,058 (52,368 x 6.5k), addFp 235,096,350 (82,409 x 2.9k), subFp 204,322,122 (60,302 x 3.4k), P 37,999,592 (256,754 x 148), inverseFp 12.1M"
+   },
+   {
+    "name": "[cross-cut, not additive] dispatch: OP_INVOKE + stack shuffles + loop control (everything outside leaf Fp bodies)",
+    "opCost": 162988054,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "by opcode class: OP_INVOKE/DEFINE ~5.2-5.7%, stack ops ~8.7%, pushes ~12% (incl. 48-B P constant), MUL/MOD ~69.5%"
+   }
+  ]
+ },
+ {
+  "id": "bch-groth16-bls12381-singleton-minop",
+  "totalBytes": 58841,
+  "totalOpCost": 145596803,
+  "components": [
+   {
+    "name": "unlocking: proof + inputs (twice) + hints",
+    "opCost": 2826,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "747 B: coordinates 392, inputs ~10, hints 343-411 (rows below)"
+   },
+   {
+    "name": "OP_DEFINE prelude: 27 lazy-tower / Miller kernel bodies",
+    "opCost": 10606,
+    "codeBytes": 2583,
+    "hintBytes": 0,
+    "notes": "bodies 2,480 B (fp12Sqr 247, line 270, fp6Mul01 138, pointDouble 183, pointAdd 213, fp12MulTorus 188, fp2Mul 223, fp6Mul 193, jac* 229, ...); BCHN-adjusted +2,480"
+   },
+   {
+    "name": "input checks: range of 8 coords + 6 root limbs, A/C on curve, B on twist",
+    "opCost": 152252,
+    "codeBytes": 221,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "vk_x MSM: GLV 4-scalar 128-bit Straus over a baked 15-entry subset-sum table, mixed Jacobian-affine adds, witnessed zInv",
+    "opCost": 3606820,
+    "codeBytes": 1961,
+    "hintBytes": 56,
+    "notes": "bench vector (n=123,456) 3,606,820; dense 254-bit inputs 29,127,793; 1,440 B baked table; hint = zInv 49 B + k-decomposition (7 B at the bench vector, 68 B dense)"
+   },
+   {
+    "name": "Miller (batched, unrolled): shared f squaring (lazy fp12Sqr x64)",
+    "opCost": 27084383,
+    "codeBytes": 1279,
+    "hintBytes": 0,
+    "notes": "423,193 each (vs 1.37M reduced-tower squaring in the plain singleton)"
+   },
+   {
+    "name": "Miller: G2 doubling of B (lazy, x64)",
+    "opCost": 17852032,
+    "codeBytes": 1025,
+    "hintBytes": 0,
+    "notes": "278,938 each"
+   },
+   {
+    "name": "Miller: G2 addition of B (x5)",
+    "opCost": 1650012,
+    "codeBytes": 160,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "Miller: (-A,B) line evaluation (sparse Fp12 mul, x69)",
+    "opCost": 30775862,
+    "codeBytes": 3726,
+    "hintBytes": 0,
+    "notes": "446,027 each"
+   },
+   {
+    "name": "Miller: baked (vk_x,gamma)/(C,delta) line evaluation (x138, coefficients inline)",
+    "opCost": 61413192,
+    "codeBytes": 45524,
+    "hintBytes": 0,
+    "notes": "445,023 each, same cost as a runtime line (baking removes only the G2 arithmetic); 40,556 of the 45,524 code bytes are 828 inline 48-B line coefficients"
+   },
+   {
+    "name": "residue: c^-|x| folds into the Miller loop (fp12MulTorus x6)",
+    "opCost": 2494357,
+    "codeBytes": 552,
+    "hintBytes": 294,
+    "notes": "hint = 6-limb torus root u (294 B)"
+   },
+   {
+    "name": "Miller setup/glue",
+    "opCost": 41644,
+    "codeBytes": 83,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "G2 subgroup check psi(B) == [x]B on the walk endpoint",
+    "opCost": 146956,
+    "codeBytes": 239,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "residue terminal check [fF] = [frob(c)] (replaces final exponentiation)",
+    "opCost": 365861,
+    "codeBytes": 654,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "[cross-cut, not additive] lazy field arithmetic leaves (fp2Mul unreduced, mulFp, subFp, mSqr, mSub, fp6Add, redFp)",
+    "opCost": 113199106,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "fp2Mul 82,548,917 (3,794 x 21.8k); opcode classes: MUL/MOD 60%, stack 17%, push 12%, add/sub 9%, OP_INVOKE 1.8%"
+   }
+  ]
+ },
+ {
+  "id": "bch-groth16-bls12381-sound-si-gls-single",
+  "totalBytes": 26484,
+  "totalOpCost": 26070993,
+  "components": [
+   {
+    "name": "unlocking pushes + P2SH32 redeem hash check (locking 35 B)",
+    "opCost": 39970,
+    "codeBytes": 35,
+    "hintBytes": 0,
+    "notes": "HASH256 over the 12,793 B redeem"
+   },
+   {
+    "name": "OP_DEFINE prologue (12 functions)",
+    "opCost": 5833,
+    "codeBytes": 97,
+    "hintBytes": 0,
+    "notes": "BCHN-adjusted +2,221; function bodies are counted in their components"
+   },
+   {
+    "name": "transcript: SHA256(TAG||WS), rho, z (Fiat-Shamir)",
+    "opCost": 88390,
+    "codeBytes": 123,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "input checks: word range (RD), n<r, nibble mask, A/C on curve, B on twist",
+    "opCost": 370676,
+    "codeBytes": 307,
+    "hintBytes": 0,
+    "notes": "statement words in WS (A,B,C 384 + n0,n1 64 = 448 B) are proof/public inputs, not hints"
+   },
+   {
+    "name": "powers of z, Frobenius/line coefficient prep, S_c(+-z), Rconst(+-z)",
+    "opCost": 247545,
+    "codeBytes": 856,
+    "hintBytes": 0,
+    "notes": "e(alpha,beta)*e(IC0,gamma) baked as one class Rconst"
+   },
+   {
+    "name": "vk_x replacement: GT-GLS folding of e(vk_x,gamma) (TP/TM tables at +-z, per-event nibble lookups, exact integer binding acc_k == n_k)",
+    "opCost": 1663526,
+    "codeBytes": 1689,
+    "hintBytes": 128,
+    "notes": "tables 641,677 + lookups 905,788 (worst-case witness 2,212,093) + digit 116,061; 128 B base-|x| nibble strings in WS; gls-tables code includes baked GLS factor constants"
+   },
+   {
+    "name": "loop setup (initial F+-)",
+    "opCost": 96693,
+    "codeBytes": 575,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "Miller (-A,B): B doublings incl. F+-^2 and line evaluation at +-z",
+    "opCost": 13983433,
+    "codeBytes": 729,
+    "hintBytes": 1248,
+    "notes": "10 affine with witnessed slope (152,571 each) + 53 homogeneous projective (233,621 each); hint = 13 affine B slopes (10 dbl + 3 add) x 96 B"
+   },
+   {
+    "name": "Miller (C,delta): fixed-pair steps (baked slopes, on-chain x/c recursion, line at +-z)",
+    "opCost": 5610924,
+    "codeBytes": 6769,
+    "hintBytes": 0,
+    "notes": "68 steps x 82,514; codeBytes include the 6,579 B delta-slope pile baked in the redeem"
+   },
+   {
+    "name": "Miller (-A,B): B additions (2 projective + 3 affine) incl. S_c(-+z) c^-1 factor",
+    "opCost": 1283727,
+    "codeBytes": 910,
+    "hintBytes": 0,
+    "notes": "PROJADD 332,566 each, AFFADD 153,465 each"
+   },
+   {
+    "name": "SI-GLS checkpoint boundaries: 32 committed monic states, R <- R*rho + F+ S'(-z) - F- S'(z)",
+    "opCost": 1880099,
+    "codeBytes": 79,
+    "hintBytes": 9216,
+    "notes": "58,753 per boundary (incl. RD range checks of 6 state words); hint = 32 states x 288 B"
+   },
+   {
+    "name": "loop control (event loop, schedule)",
+    "opCost": 161496,
+    "codeBytes": 173,
+    "hintBytes": 0,
+    "notes": "63 events"
+   },
+   {
+    "name": "terminal: slope/size consumption, psi endpoint G2 check [|x|]B = -psi(B), W = Frob(S_c)(+-z) residue term",
+    "opCost": 165348,
+    "codeBytes": 334,
+    "hintBytes": 288,
+    "notes": "hint = residue root s^c (6 words); replaces the whole final exponentiation"
+   },
+   {
+    "name": "quotient Horner over WQ + final Schwartz-Zippel identity (R == z q(z^2) M(z))",
+    "opCost": 420900,
+    "codeBytes": 145,
+    "hintBytes": 2256,
+    "notes": "47 quotient words (n_q depends on statement; worst witness 485,109 op)"
+   },
+   {
+    "name": "cleanup",
+    "opCost": 52433,
+    "codeBytes": 7,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "push headers + tx overhead",
+    "opCost": 0,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "9 B push headers + 63 B tx overhead (not code/hint)"
+   }
+  ]
+ },
+ {
+  "id": "bch-groth16-bls12381-sound-native",
+  "totalBytes": 34229,
+  "totalOpCost": 24040286,
+  "components": [
+   {
+    "name": "per-input covenant R (input count, identical lockings, load 6,465 B program from 2 carriers, SHA256 check, define+invoke) x4",
+    "opCost": 384311,
+    "codeBytes": 464,
+    "hintBytes": 0,
+    "notes": "R+blob 345,647 + unlocking/P2SH 38,664; each input re-defines all 25 functions: BCHN-adjusted +12,826 per input (+51,304 total) => 24,091,590"
+   },
+   {
+    "name": "role entry: pin layout + K-block (delta constants) SHA256 checks + role params",
+    "opCost": 148871,
+    "codeBytes": 2688,
+    "hintBytes": 0,
+    "notes": "codeBytes = all 4 role bodies (1,521/195/183/789), which also hold the head and terminal sections inline"
+   },
+   {
+    "name": "head transcript (input 0): hash of all 4 regions, rho, z",
+    "opCost": 136938,
+    "codeBytes": 0,
+    "hintBytes": 96,
+    "notes": "hint = ZR claim 96 B"
+   },
+   {
+    "name": "statement checks (input 0): range, n<r, nibbles, A/C curve, B twist",
+    "opCost": 136388,
+    "codeBytes": 134,
+    "hintBytes": 416,
+    "notes": "statement region 864 B = proof/inputs 448 (not hint) + hints: nibbles 128 + residue root 288"
+   },
+   {
+    "name": "vk_x replacement: GT-GLS exact integer binding (input 0)",
+    "opCost": 268112,
+    "codeBytes": 78,
+    "hintBytes": 0,
+    "notes": "worst witness 291,237; table lookups during the loop are in loop control"
+   },
+   {
+    "name": "quotient Horner + final identity (input 0)",
+    "opCost": 424398,
+    "codeBytes": 0,
+    "hintBytes": 2160,
+    "notes": "WQ 45 words at the fixture; worst n_q=116: 1,063,340"
+   },
+   {
+    "name": "SETUP per input x4: powers of z, GT-GLS tables (TBL), TM, EV",
+    "opCost": 3182740,
+    "codeBytes": 1938,
+    "hintBytes": 0,
+    "notes": "791,598 per input, of which GLS tables 633,466; replicated in every input (multi-input overhead ~2.4M); SETUP body includes 1,152 B GLS factor constants"
+   },
+   {
+    "name": "state/witness reads + walk start",
+    "opCost": 361054,
+    "codeBytes": 64,
+    "hintBytes": 0,
+    "notes": ""
+   },
+   {
+    "name": "Miller (-A,B): 63 affine B doublings with witnessed slopes (incl. F+-^2, line at +-z)",
+    "opCost": 9295424,
+    "codeBytes": 288,
+    "hintBytes": 6048,
+    "notes": "147,546 each; hint = 63 doubling slopes x 96 B"
+   },
+   {
+    "name": "Miller (C,delta): 68 fixed-pair steps (baked slopes, x/c recursion)",
+    "opCost": 5604272,
+    "codeBytes": 7290,
+    "hintBytes": 0,
+    "notes": "82,416 each; codeBytes include 7,104 B of K blocks (delta walk point + 68 baked slopes) hosted in unlockings, SHA256-pinned"
+   },
+   {
+    "name": "Miller (-A,B): 5 affine B additions incl. c^-1 factor",
+    "opCost": 753908,
+    "codeBytes": 333,
+    "hintBytes": 480,
+    "notes": "150,782 each (excl. the delta add step inside AFFADD, counted in the delta row); hint = 5 addition slopes"
+   },
+   {
+    "name": "SI-GLS checkpoint boundaries (32 committed states)",
+    "opCost": 1744311,
+    "codeBytes": 92,
+    "hintBytes": 9216,
+    "notes": "54,510 each; hint = 32 states x 288 B"
+   },
+   {
+    "name": "loop control incl. per-event GLS nibble lookups",
+    "opCost": 1012837,
+    "codeBytes": 382,
+    "hintBytes": 0,
+    "notes": "worst witness 2,236,848"
+   },
+   {
+    "name": "terminal (input 3): psi endpoint G2 check, W = Frob(S_c)(+-z) residue term, claim",
+    "opCost": 256798,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "residue root hint counted in statement row"
+   },
+   {
+    "name": "hand-over claims, FINW, other glue",
+    "opCost": 329924,
+    "codeBytes": 282,
+    "hintBytes": 768,
+    "notes": "hint = claims CL (3 x 240 + 48); codeBytes include blob define headers"
+   },
+   {
+    "name": "zero filler + push headers + tx overhead",
+    "opCost": 0,
+    "codeBytes": 0,
+    "hintBytes": 0,
+    "notes": "filler 311 B (budget only), push headers, 192 B tx overhead"
+   }
+  ]
+ }
+]
