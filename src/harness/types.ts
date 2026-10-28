@@ -353,7 +353,8 @@ export interface BenchmarkResult {
    * stage output is a free island (not bound to the proof the rest of the run consumes) — a
    * soundness hole that folds into `pass`. `applicable` is false for single-tx verifiers and
    * for covenant/grouped entries whose token hand-off the harness cannot staple-test (N/A does
-   * not penalize). Missing eligible proof/stage evidence on an intra-tx bundle is untested
+   * not penalize), and for intra-tx bundles with fewer than two named checkpoints (no seam to
+   * sample). Missing eligible proof evidence on a checkpointed intra-tx bundle is untested
    * with a reason and cannot earn `pass`. Finite seam samples are not a soundness proof.
    * See harness/benchmark.ts crossStageStaple. */
   crossStageBinding: { applicable: boolean; seamsTested: number; unboundSeams: number; firstUnboundSeam?: string; reason?: string };
