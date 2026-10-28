@@ -1,0 +1,198 @@
+[
+ {
+  "id": "K16",
+  "group": "tip5",
+  "notes": "includes pushing and dropping the 256-entry table; 1 permutation = one 2-to-1 Tip5 hash (5-element = 40-byte digest)",
+  "name": "Tip5 permutation (Triton VM), emulated: 4 lookup S-boxes + 12 x^7 + packed MDS per round, 5 rounds",
+  "trials": 4,
+  "opStd": {
+   "min": 756504,
+   "max": 757659,
+   "mean": 756986
+  },
+  "opCons": {
+   "min": 756504,
+   "max": 757659,
+   "mean": 756986
+  },
+  "instr": {
+   "min": 4713,
+   "max": 4713,
+   "mean": 4713
+  },
+  "arith": {
+   "min": 230943,
+   "max": 231966,
+   "mean": 231379.25
+  },
+  "pushed": {
+   "min": 54260,
+   "max": 54393,
+   "mean": 54306.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 1584,
+   "max": 1584,
+   "mean": 1584
+  },
+  "defBytes": 1801,
+  "prologueBytes": 1811,
+  "defineLibauth": 2403,
+  "defineBchn": 4204,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K16",
+  "group": "tip5",
+  "notes": "includes the table push/drop (about 40k); subtract the table kernel below",
+  "name": "Tip5 building block: one split-and-lookup S-box (table on the stack)",
+  "trials": 4,
+  "opStd": {
+   "min": 50865,
+   "max": 50894,
+   "mean": 50879
+  },
+  "opCons": {
+   "min": 50865,
+   "max": 50894,
+   "mean": 50879
+  },
+  "instr": {
+   "min": 499,
+   "max": 499,
+   "mean": 499
+  },
+  "arith": {
+   "min": 438,
+   "max": 457,
+   "mean": 447.5
+  },
+  "pushed": {
+   "min": 527,
+   "max": 537,
+   "mean": 531.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 779,
+   "max": 779,
+   "mean": 779
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K16",
+  "group": "tip5",
+  "notes": "",
+  "name": "Tip5 building block: push + drop the 256-entry table",
+  "trials": 1,
+  "opStd": {
+   "min": 38656,
+   "max": 38656,
+   "mean": 38656
+  },
+  "opCons": {
+   "min": 38656,
+   "max": 38656,
+   "mean": 38656
+  },
+  "instr": {
+   "min": 384,
+   "max": 384,
+   "mean": 384
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 256,
+   "max": 256,
+   "mean": 256
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 623,
+   "max": 623,
+   "mean": 623
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "K16",
+  "group": "tip5",
+  "notes": "",
+  "name": "Tip5 building block: MDS 16x16 + round constants (Kronecker-packed, 11-byte slots)",
+  "trials": 4,
+  "opStd": {
+   "min": 56649,
+   "max": 56869,
+   "mean": 56758.5
+  },
+  "opCons": {
+   "min": 56649,
+   "max": 56869,
+   "mean": 56758.5
+  },
+  "instr": {
+   "min": 168,
+   "max": 168,
+   "mean": 168
+  },
+  "arith": {
+   "min": 32741,
+   "max": 32927,
+   "mean": 32833.75
+  },
+  "pushed": {
+   "min": 7108,
+   "max": 7142,
+   "mean": 7124.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 501,
+   "max": 501,
+   "mean": 501
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ]
+ }
+]

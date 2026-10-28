@@ -35,6 +35,7 @@ const loose = {
   maximumStandardLockingBytecodeLength: -1, maximumStandardUnlockingBytecodeLength: HUGE, maximumTokenCommitmentLength: 128,
   operationCostBudgetPerByte: HUGE, maximumStackItemLength: HUGE, maximumVmNumberByteLength: HUGE, maximumStackDepth: HUGE,
   maximumControlStackDepth: HUGE, maximumBytecodeLength: HUGE, maximumOperationCount: HUGE,
+  hashDigestIterationsPerByteStandard: HUGE, hashDigestIterationsPerByteNonstandard: HUGE,
 };
 const crypto = {ripemd160, secp256k1, sha1, sha256};
 
@@ -101,6 +102,7 @@ export function runCase(c) {
     bodyBytes: c.body.length, defBytes, prologueBytes: prologue.length,
     defineLibauth: cost(pr, 192), defineBchn: cost(pr, 192) + defBytes,
   };
+  if (c.meta?.nodes) { out.nodes = c.meta.nodes; out.perNodeStd = out.opStd / c.meta.nodes; out.perNodeCons = out.opCons / c.meta.nodes; }
   // real BCH 2026 VM, P2SH32 with zero pad (pad pushed last, dropped first by the redeem)
   const redeem = asm('DROP', {raw: script});
   // the real spend also pays for pushing the inputs, the pad and the redeem, OP_DROP, the P2SH32 hash of the redeem
@@ -133,6 +135,7 @@ export function measure(name, build, {trials = 16, seed = 1} = {}) {
     name, trials, opStd: agg((r) => r.opStd), opCons: agg((r) => r.opCons), instr: agg((r) => r.instr), arith: agg((r) => r.arith),
     pushed: agg((r) => r.pushed), iters: agg((r) => r.iters), bodyBytes: agg((r) => r.bodyBytes), defBytes: rows[0].defBytes,
     prologueBytes: rows[0].prologueBytes, defineLibauth: rows[0].defineLibauth, defineBchn: rows[0].defineBchn, real,
+    ...(rows[0].nodes ? {nodes: agg((r) => r.nodes), perNodeStd: agg((r) => r.perNodeStd), perNodeCons: agg((r) => r.perNodeCons)} : {}),
   };
 }
 

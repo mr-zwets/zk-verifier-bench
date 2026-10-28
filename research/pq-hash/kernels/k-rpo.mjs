@@ -15,14 +15,14 @@ import {powmod} from './lib/ref-field.mjs';
 
 const nb = (v) => numBytes(v);
 const SL = 80, SLB = 10; // slot bits / bytes
-const pack = (v) => v.reduce((a, x, i) => a + (x << BigInt(SL * i)), 0n);
+const pack = (v, slb = SLB) => v.reduce((a, x, i) => a + (x << BigInt(8 * slb * i)), 0n);
 // Q(X) = sum_k M[(-k) mod 12] X^k, so that coefficient n of S*Q is sum_j s_j M[(j - n) mod 12]
-export const packedRow = (row) => pack(row.map((_, k) => row[(row.length - k) % row.length]));
+export const packedRow = (row, slb = SLB) => pack(row.map((_, k) => row[(row.length - k) % row.length]), slb);
 
 // [s0 .. s_{w-1} ARK] -> [s0' .. s_{w-1}'] ; s' = (circulant(row) s + ARK) mod p
 export function mdsArkCode(w, row, slb = SLB) {
   const sl = slb * 8;
-  const Q = packedRow(row);
+  const Q = packedRow(row, slb);
   return asm('TOALTSTACK',
     Array.from({length: w - 1}, () => [sl, 'LSHIFTNUM', 'ADD']), // Horner from the top: s_{w-2} + s_{w-1} X, ...
     Q, 'MUL',

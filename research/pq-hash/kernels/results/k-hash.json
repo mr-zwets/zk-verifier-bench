@@ -753,6 +753,198 @@
   ]
  },
  {
+  "id": "K8",
+  "group": "merkle",
+  "notes": "per node: divide by the nodes processed (reported in meta)",
+  "name": "multiproof merge, 22 sorted positions (with duplicates removed) over 10 levels, h=32; returns the root",
+  "trials": 6,
+  "opStd": {
+   "min": 1527287,
+   "max": 1715739,
+   "mean": 1602084.1666666667
+  },
+  "opCons": {
+   "min": 1496055,
+   "max": 1681691,
+   "mean": 1569700.1666666667
+  },
+  "instr": {
+   "min": 9078,
+   "max": 9892,
+   "mean": 9411
+  },
+  "arith": {
+   "min": 539,
+   "max": 616,
+   "mean": 577.5
+  },
+  "pushed": {
+   "min": 572096,
+   "max": 674851,
+   "mean": 611830.6666666666
+  },
+  "iters": {
+   "min": 244,
+   "max": 266,
+   "mean": 253
+  },
+  "bodyBytes": {
+   "min": 820,
+   "max": 820,
+   "mean": 820
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ],
+  "nodes": {
+   "min": 122,
+   "max": 133,
+   "mean": 126.5
+  },
+  "perNodeStd": {
+   "min": 12518.745901639344,
+   "max": 12900.293233082706,
+   "mean": 12661.527908280446
+  },
+  "perNodeCons": {
+   "min": 12262.745901639344,
+   "max": 12644.293233082706,
+   "mean": 12405.527908280446
+  }
+ },
+ {
+  "id": "K8",
+  "group": "merkle",
+  "notes": "per node: divide by the nodes processed (reported in meta)",
+  "name": "multiproof merge, 22 sorted positions (with duplicates removed) over 10 levels, h=25; returns the root",
+  "trials": 6,
+  "opStd": {
+   "min": 1422446,
+   "max": 1603724,
+   "mean": 1498451
+  },
+  "opCons": {
+   "min": 1407086,
+   "max": 1586956,
+   "mean": 1482515
+  },
+  "instr": {
+   "min": 9650,
+   "max": 10530,
+   "mean": 10010
+  },
+  "arith": {
+   "min": 540,
+   "max": 606,
+   "mean": 570.1666666666666
+  },
+  "pushed": {
+   "min": 433866,
+   "max": 524978,
+   "mean": 472976.8333333333
+  },
+  "iters": {
+   "min": 120,
+   "max": 131,
+   "mean": 124.5
+  },
+  "bodyBytes": {
+   "min": 900,
+   "max": 900,
+   "mean": 900
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ],
+  "nodes": {
+   "min": 120,
+   "max": 131,
+   "mean": 124.5
+  },
+  "perNodeStd": {
+   "min": 11853.716666666667,
+   "max": 12242.167938931298,
+   "mean": 12032.461931159158
+  },
+  "perNodeCons": {
+   "min": 11725.716666666667,
+   "max": 12114.167938931298,
+   "mean": 11904.461931159158
+  }
+ },
+ {
+  "id": "K8",
+  "group": "merkle",
+  "notes": "per node: divide by the nodes processed (reported in meta)",
+  "name": "multiproof merge, 43 sorted positions (with duplicates removed) over 10 levels, h=32; returns the root",
+  "trials": 6,
+  "opStd": {
+   "min": 3011745,
+   "max": 3474496,
+   "mean": 3213721.5
+  },
+  "opCons": {
+   "min": 2961313,
+   "max": 3418944,
+   "mean": 3160985.5
+  },
+  "instr": {
+   "min": 14628,
+   "max": 16108,
+   "mean": 15294
+  },
+  "arith": {
+   "min": 934,
+   "max": 1045,
+   "mean": 983.5
+  },
+  "pushed": {
+   "min": 1472328,
+   "max": 1779380,
+   "mean": 1604234
+  },
+  "iters": {
+   "min": 394,
+   "max": 434,
+   "mean": 412
+  },
+  "bodyBytes": {
+   "min": 820,
+   "max": 820,
+   "mean": 820
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ],
+  "nodes": {
+   "min": 197,
+   "max": 217,
+   "mean": 206
+  },
+  "perNodeStd": {
+   "min": 15288.045685279189,
+   "max": 16011.502304147465,
+   "mean": 15591.67585491857
+  },
+  "perNodeCons": {
+   "min": 15032.045685279189,
+   "max": 15755.502304147465,
+   "mean": 15335.67585491857
+  }
+ },
+ {
   "id": "K7",
   "group": "merkle",
   "notes": "8 values; per value: divide the parse part",

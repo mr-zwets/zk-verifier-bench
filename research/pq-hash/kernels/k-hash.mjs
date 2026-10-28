@@ -81,6 +81,52 @@ for (const h of [32, 25]) {
   }
 }
 
+// ---- K8: multiproof merge (sorted distinct positions at the cap level -> root), canonical order ----
+// Level by level: an entry (pos, node) merges with the next entry if pos is even and the next pos is pos + 1,
+// otherwise it consumes the next proof sibling. Entries are 4-byte LE positions || h-byte nodes in one blob;
+// the sibling stream stays on the altstack. Levels are unrolled; the inner loop runs once per produced node.
+function multiproofRef(leaves, positions, h, D) {
+  // full tree
+  const lv = [leaves]; for (let d = 0; d < D; d++) { const prev = lv[d]; lv.push(Array.from({length: prev.length / 2}, (_, i) => parent(prev[2 * i], prev[2 * i + 1], 0, h))); }
+  let L = positions.map((q) => [q, leaves[q]]); const proof = []; let nodes = 0;
+  for (let d = 0; d < D; d++) {
+    const next = [];
+    for (let i = 0; i < L.length; i++) {
+      const [q, nd] = L[i]; nodes++;
+      if (q % 2 === 0 && i + 1 < L.length && L[i + 1][0] === q + 1) { next.push([q >> 1, parent(nd, L[i + 1][1], 0, h)]); i++; }
+      else { const sib = lv[d][q ^ 1]; proof.push(sib); next.push([q >> 1, parent(nd, sib, q & 1, h)]); }
+    }
+    L = next;
+  }
+  if (L.length !== 1 || L[0][0] !== 0) throw new Error('multiproof ref');
+  return {root: L[0][1], proof, nodes, treeRoot: lv[D][0]};
+}
+function multiproofBody(h, D) {
+  const E = 4 + h, tr = h === 32 ? [] : [h, 'SPLIT', 'DROP'];
+  const inner = ['BEGIN',
+    E, 'SPLIT', 'SWAP', 4, 'SPLIT', 'SWAP', 'BIN2NUM',                       // next L' node pos
+    2, 'PICK', 'SIZE', 'NIP', 'IF', 2, 'PICK', 4, 'SPLIT', 'DROP', 'BIN2NUM', 'OVER', '1ADD', 'NUMEQUAL', 'OVER', 2, 'MOD', 'NOT', 'BOOLAND', 'ELSE', 0, 'ENDIF',
+    'IF', 'ROT', E, 'SPLIT', 'SWAP', 4, 'SPLIT', 'NIP', 3, 'ROLL', 'SWAP', 'CAT', 'SHA256', ...tr, 'ROT', 'SWAP',   // merge
+    'ELSE', 'FROMALTSTACK', h, 'SPLIT', 'TOALTSTACK', 'OVER', 2, 'MOD', 'ROT', 'TOALTSTACK', 'ROLL', 'CAT', 'SHA256', ...tr, 'FROMALTSTACK', 'SWAP', // sibling
+    'ENDIF',
+    'SWAP', 1, 'RSHIFTNUM', 4, 'NUM2BIN', 'SWAP', 'CAT', 'ROT', 'SWAP', 'CAT', 'SWAP', // next' L
+    'SIZE', 'NOT', 'UNTIL', 'DROP'];
+  return asm('SWAP', 'TOALTSTACK', Array.from({length: D}, () => [0, 'SWAP', inner]), // each level: [next=empty, L] -> next
+    4, 'SPLIT', 'NIP', 'FROMALTSTACK', 'SIZE', 'NIP', 'NOT', 'VERIFY');
+}
+for (const [h, D, k] of [[32, 10, 22], [25, 10, 22], [32, 10, 43]]) {
+  const body = multiproofBody(h, D);
+  def('K8', 'merkle', `multiproof merge, ${k} sorted positions (with duplicates removed) over ${D} levels, h=${h}; returns the root`, (rng) => {
+    const leaves = Array.from({length: 1 << D}, () => rng.bytes(h));
+    const pos = [...new Set(Array.from({length: k}, () => rng.int(1 << D)))].sort((a, b) => a - b);
+    const ref = multiproofRef(leaves, pos, h, D);
+    if (Buffer.compare(Buffer.from(ref.root), Buffer.from(ref.treeRoot)) !== 0) throw new Error('multiproof root');
+    const L = Uint8Array.from(pos.flatMap((q) => [q & 255, (q >> 8) & 255, (q >> 16) & 255, 0, ...leaves[q]]));
+    const proof = Uint8Array.from(ref.proof.flatMap((x) => [...x]));
+    return {inputs: [proof, L], body, outputs: [{bin: ref.root}], meta: {nodes: ref.nodes, siblings: ref.proof.length}};
+  }, 'per node: divide by the nodes processed (reported in meta)', 6);
+}
+
 // ---- K7: leaf hash + parse (tag byte, k values of 8 bytes LE, unsigned) ----
 const le8 = (v) => { const b = new Uint8Array(8); for (let i = 0; i < 8; i++) b[i] = Number((v >> BigInt(8 * i)) & 255n); return b; };
 for (const [nv, label] of [[8, '64 B (trace leaf: 4 points x 2 values)'], [24, '192 B (composition / FRI leaf: 24 values)']]) {

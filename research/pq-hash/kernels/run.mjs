@@ -3,7 +3,7 @@
 import {writeFileSync, mkdirSync} from 'node:fs';
 import {measure, runCase} from './lib/measure.mjs';
 
-const files = process.argv.slice(2).length ? process.argv.slice(2) : ['k-hash', 'k-field', 'k-fieldops', 'k-gf128', 'k-blake2s', 'k-rpo', 'k-tip5', 'k-stark'];
+const files = process.argv.slice(2).length ? process.argv.slice(2) : ['k-hash', 'k-field', 'k-gf128', 'k-blake2s', 'k-rpo', 'k-tip5', 'k-stark'];
 // calibration: an empty kernel measures 0
 const cal = runCase({inputs: [Uint8Array.of(5)], body: new Uint8Array(0), outputs: [{num: 5n}]});
 if (cal.opStd !== 0 || cal.instr !== 0) throw new Error('calibration failed ' + JSON.stringify(cal));
