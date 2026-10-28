@@ -1,0 +1,198 @@
+../prover/vectors/P100-0.json: plan [[[0,3],[3,6],[6,9],[9,12],[12,15],[15,18],[18,20],[20,22]]]
+  valid                          ACCEPT  
+  sibling_trace_first            REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+6 inputs)
+  sibling_fri2_last              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+6 inputs)
+  opened_trace_value             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+6 inputs)
+  opened_comp_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+6 inputs)
+  opened_fri1_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+6 inputs)
+  final_coeff_flip               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  final_coeff_last_flip          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  final_coeff_reground           REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+6 inputs)
+  public_input_x_in              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  public_input_y_out             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  public_input_noncanonical      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  statement_mismatch             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  root_trace_flip                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  root_fri1_flip                 REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  ood_flip                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  ood_H1_flip                    REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  nonce_flip                     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  truncated                      REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+6 inputs)
+  trailing_byte                  REJECT  tx0/in9: Program failed an OP_VERIFY operation.
+  leaves_only_truncated          REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+6 inputs)
+  qry_leaf_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_path_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_T_hint                     REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_inputs_swapped             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry_queries_swapped            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_missing_input              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+7 inputs)
+  qry_extra_input                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+9 inputs)
+  qry_nonzero_pad                REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_extra_push                 REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head_fin_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  head_ood_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  head_nonce_byte                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  head_nonzero_pad               REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code_byte                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+8 inputs)
+  foreign_locking_input          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+8 inputs)
+all as expected
+../prover/vectors/C100-0.json: plan [[[0,3],[3,6],[6,9],[9,11]]]
+  valid                          ACCEPT  
+  sibling_trace_first            REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+2 inputs)
+  sibling_fri2_last              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+2 inputs)
+  opened_trace_value             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+2 inputs)
+  opened_comp_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+2 inputs)
+  opened_fri1_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+2 inputs)
+  final_coeff_flip               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  final_coeff_last_flip          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  final_coeff_reground           REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+2 inputs)
+  public_input_x_in              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  public_input_y_out             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  public_input_noncanonical      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  statement_mismatch             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  root_trace_flip                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  root_fri1_flip                 REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  ood_flip                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  ood_H1_flip                    REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  nonce_flip                     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  truncated                      REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+2 inputs)
+  trailing_byte                  REJECT  tx0/in5: Program failed an OP_VERIFY operation.
+  leaves_only_truncated          REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+2 inputs)
+  qry_leaf_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_path_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_T_hint                     REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_inputs_swapped             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry_queries_swapped            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_missing_input              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+3 inputs)
+  qry_extra_input                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+5 inputs)
+  qry_nonzero_pad                REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_extra_push                 REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head_fin_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  head_ood_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  head_nonce_byte                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+3 inputs)
+  head_nonzero_pad               REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code_byte                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+4 inputs)
+  foreign_locking_input          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+4 inputs)
+all as expected
+../prover/vectors/C128-0.json: plan [[[0,3],[3,6],[6,9],[9,12],[12,15]]]
+  valid                          ACCEPT  
+  sibling_trace_first            REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+3 inputs)
+  sibling_fri2_last              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+3 inputs)
+  opened_trace_value             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+3 inputs)
+  opened_comp_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+3 inputs)
+  opened_fri1_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+3 inputs)
+  final_coeff_flip               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  final_coeff_last_flip          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  final_coeff_reground           REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+3 inputs)
+  public_input_x_in              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  public_input_y_out             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  public_input_noncanonical      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  statement_mismatch             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  root_trace_flip                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  root_fri1_flip                 REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  ood_flip                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  ood_H1_flip                    REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  nonce_flip                     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  truncated                      REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+3 inputs)
+  trailing_byte                  REJECT  tx0/in6: Program failed an OP_VERIFY operation.
+  leaves_only_truncated          REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+3 inputs)
+  qry_leaf_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_path_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_T_hint                     REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_inputs_swapped             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry_queries_swapped            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_missing_input              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+4 inputs)
+  qry_extra_input                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+6 inputs)
+  qry_nonzero_pad                REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_extra_push                 REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head_fin_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  head_ood_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  head_nonce_byte                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+4 inputs)
+  head_nonzero_pad               REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code_byte                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+5 inputs)
+  foreign_locking_input          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+5 inputs)
+all as expected
+../prover/vectors/P128-0.json: plan [[[0,3],[3,6],[6,9],[9,12],[12,15],[15,18],[18,20],[20,22]],[[22,25],[25,28],[28,31],[31,34],[34,37],[37,40],[40,43]]]
+  valid                          ACCEPT  
+  sibling_trace_first            REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+13 inputs)
+  sibling_fri2_last              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+13 inputs)
+  opened_trace_value             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+13 inputs)
+  opened_comp_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+13 inputs)
+  opened_fri1_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+13 inputs)
+  final_coeff_flip               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  final_coeff_last_flip          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  final_coeff_reground           REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+13 inputs)
+  public_input_x_in              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  public_input_y_out             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  public_input_noncanonical      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  statement_mismatch             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  root_trace_flip                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  root_fri1_flip                 REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  ood_flip                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  ood_H1_flip                    REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  nonce_flip                     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+15 inputs)
+  truncated                      REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+13 inputs)
+  trailing_byte                  REJECT  tx1/in8: Program failed an OP_VERIFY operation.
+  leaves_only_truncated          REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+13 inputs)
+  qry_leaf_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_path_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_T_hint                     REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_inputs_swapped             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry_queries_swapped            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_missing_input              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+7 inputs)
+  qry_extra_input                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+9 inputs)
+  qry_nonzero_pad                REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_extra_push                 REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head_fin_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  head_ood_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  head_nonce_byte                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+7 inputs)
+  head_nonzero_pad               REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code_byte                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+8 inputs)
+  foreign_locking_input          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+8 inputs)
+  thread_wrong_commitment        REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  thread_tx0_missing_nft         REJECT  tx0/in0: Program attempted to read from an invalid transact
+  thread_tx1_keeps_token         REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  thread_splice_tx1_of_B         REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+all as expected
+../prover/vectors/U100-0.json: plan [[[0,3],[3,6],[6,9],[9,12],[12,15],[15,18],[18,21],[21,24],[24,27],[27,30],[30,33],[33,36],[36,38],[38,40]],[[40,43],[43,46],[46,49],[49,52],[52,55],[55,58],[58,61],[61,64],[64,67],[67,70],[70,73],[73,76],[76,79]]]
+  valid                          ACCEPT  
+  sibling_trace_first            REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+25 inputs)
+  sibling_fri2_last              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+25 inputs)
+  opened_trace_value             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+25 inputs)
+  opened_comp_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+25 inputs)
+  opened_fri1_value              REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+25 inputs)
+  final_coeff_flip               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  final_coeff_last_flip          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  final_coeff_reground           REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+25 inputs)
+  public_input_x_in              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  public_input_y_out             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  public_input_noncanonical      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  statement_mismatch             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  root_trace_flip                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  root_fri1_flip                 REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  ood_flip                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  ood_H1_flip                    REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  nonce_flip                     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+27 inputs)
+  truncated                      REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+25 inputs)
+  trailing_byte                  REJECT  tx1/in14: Program failed an OP_VERIFY operation.
+  leaves_only_truncated          REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+25 inputs)
+  qry_leaf_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_path_byte                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_T_hint                     REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_inputs_swapped             REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry_queries_swapped            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_missing_input              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+13 inputs)
+  qry_extra_input                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+15 inputs)
+  qry_nonzero_pad                REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry_extra_push                 REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head_fin_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  head_ood_byte                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  head_nonce_byte                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  head_nonzero_pad               REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code_byte                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+14 inputs)
+  foreign_locking_input          REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+14 inputs)
+  thread_wrong_commitment        REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  thread_tx0_missing_nft         REJECT  tx0/in0: Program attempted to read from an invalid transact
+  thread_tx1_keeps_token         REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  thread_splice_tx1_of_B         REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+all as expected

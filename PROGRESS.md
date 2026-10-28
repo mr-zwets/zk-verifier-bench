@@ -12,3 +12,8 @@ Kernels phase (SPEC.md section 8). Files: research/pq-hash/kernels/.
 - Note: asm() treats a Uint8Array as a DATA push; splice code with {raw: bytes}.
 - Key findings for Build: final polynomial (256 coeffs) ~0.71M/query; P128 per-query kernel sum 1.47M (model 0.99M);
   layout (b) P128 projection 71.9M = 94% of TXv5-as-written budget; layout (a) op-bound at 4 queries/input.
+
+# PROGRESS (wip/pq-hash-verifier) -- Verifier phase, must never land on main
+Sources: groth16_cashscript wip/pq-hash-verifier, research/pq-hash/verifier (worktree work/pq-hash/verifier).
+This worktree: research/pq-hash/verifier/ = crosscheck.ts (this harness's own VM wrappers), crosscheck.json, results/
+(copies of the source repo's results), REPORT.md. Nothing registered; no REGISTRY/results.json/score-history changes.

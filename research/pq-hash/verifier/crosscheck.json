@@ -1,0 +1,436 @@
+[
+ {
+  "vector": "P100-0.json",
+  "proofBytes": 49718,
+  "b": {
+   "unlocking": 56555,
+   "txBytes": 56642,
+   "opStd": 38727198,
+   "opTxv5Std": 38727198,
+   "iters": 1801,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 72.7,
+   "txv5BudgetPct": 85.5,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 1,
+   "inputs": 10,
+   "totalBytes": 77623,
+   "allAccepted": true,
+   "maxInputPct": "93.8",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "P100-1.json",
+  "proofBytes": 49618,
+  "b": {
+   "unlocking": 56449,
+   "txBytes": 56536,
+   "opStd": 38655691,
+   "opTxv5Std": 38655691,
+   "iters": 1796,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 72.7,
+   "txv5BudgetPct": 85.5,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 1,
+   "inputs": 10,
+   "totalBytes": 77613,
+   "allAccepted": true,
+   "maxInputPct": "93.8",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "P100-2.json",
+  "proofBytes": 49093,
+  "b": {
+   "unlocking": 55911,
+   "txBytes": 55998,
+   "opStd": 38540262,
+   "opTxv5Std": 38540262,
+   "iters": 1776,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 73.1,
+   "txv5BudgetPct": 86.1,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 1,
+   "inputs": 10,
+   "totalBytes": 77608,
+   "allAccepted": true,
+   "maxInputPct": "93.8",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "P100-3.json",
+  "proofBytes": 50618,
+  "b": {
+   "unlocking": 57420,
+   "txBytes": 57507,
+   "opStd": 38816827,
+   "opTxv5Std": 38816827,
+   "iters": 1837,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 72,
+   "txv5BudgetPct": 84.4,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 1,
+   "inputs": 10,
+   "totalBytes": 77626,
+   "allAccepted": true,
+   "maxInputPct": "93.8",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "P128-0.json",
+  "proofBytes": 88752,
+  "b": {
+   "unlocking": 96363,
+   "txBytes": 96452,
+   "opStd": 71539685,
+   "opTxv5Std": 71539685,
+   "iters": 4623,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 84.1,
+   "txv5BudgetPct": 92.8,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 2,
+   "inputs": 19,
+   "totalBytes": 154833,
+   "allAccepted": true,
+   "maxInputPct": "93.6",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "P128-1.json",
+  "proofBytes": 90736,
+  "b": {
+   "unlocking": 98365,
+   "txBytes": 98454,
+   "opStd": 71817039,
+   "opTxv5Std": 71817039,
+   "iters": 4747,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 82.8,
+   "txv5BudgetPct": 91.2,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 2,
+   "inputs": 19,
+   "totalBytes": 154831,
+   "allAccepted": true,
+   "maxInputPct": "93.6",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "P128-2.json",
+  "proofBytes": 91952,
+  "b": {
+   "unlocking": 99560,
+   "txBytes": 99649,
+   "opStd": 71952039,
+   "opTxv5Std": 71952039,
+   "iters": 4823,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 82.1,
+   "txv5BudgetPct": 90.3,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 2,
+   "inputs": 19,
+   "totalBytes": 154835,
+   "allAccepted": true,
+   "maxInputPct": "93.6",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "P128-3.json",
+  "proofBytes": 92240,
+  "b": {
+   "unlocking": 99872,
+   "txBytes": 99961,
+   "opStd": 72001166,
+   "opTxv5Std": 72001166,
+   "iters": 4841,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 81.9,
+   "txv5BudgetPct": 90.1,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 2,
+   "inputs": 19,
+   "totalBytes": 154831,
+   "allAccepted": true,
+   "maxInputPct": "93.6",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "U100-0.json",
+  "proofBytes": 106967,
+  "b": {
+   "unlocking": 114561,
+   "txBytes": 114650,
+   "opStd": 0,
+   "opTxv5Std": 0,
+   "iters": 0,
+   "spec": [
+    false,
+    false
+   ],
+   "txv5": [
+    false,
+    false
+   ],
+   "specBudgetPct": 0,
+   "txv5BudgetPct": 0,
+   "standardTx": false
+  },
+  "a": {
+   "transactions": 2,
+   "inputs": 31,
+   "totalBytes": 188562,
+   "allAccepted": true,
+   "maxInputPct": "93.5",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "U100-1.json",
+  "proofBytes": 105892,
+  "b": {
+   "unlocking": 113452,
+   "txBytes": 113541,
+   "opStd": 0,
+   "opTxv5Std": 0,
+   "iters": 0,
+   "spec": [
+    false,
+    false
+   ],
+   "txv5": [
+    false,
+    false
+   ],
+   "specBudgetPct": 0,
+   "txv5BudgetPct": 0,
+   "standardTx": false
+  },
+  "a": {
+   "transactions": 2,
+   "inputs": 31,
+   "totalBytes": 188553,
+   "allAccepted": true,
+   "maxInputPct": "93.5",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "C100-0.json",
+  "proofBytes": 24326,
+  "b": {
+   "unlocking": 30337,
+   "txBytes": 30424,
+   "opStd": 16005078,
+   "opTxv5Std": 16005078,
+   "iters": 943,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 49.6,
+   "txv5BudgetPct": 65.9,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 1,
+   "inputs": 6,
+   "totalBytes": 36787,
+   "allAccepted": true,
+   "maxInputPct": "75.5",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "C100-1.json",
+  "proofBytes": 23851,
+  "b": {
+   "unlocking": 29888,
+   "txBytes": 29975,
+   "opStd": 15969895,
+   "opTxv5Std": 15969895,
+   "iters": 924,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 50,
+   "txv5BudgetPct": 66.7,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 1,
+   "inputs": 6,
+   "totalBytes": 36787,
+   "allAccepted": true,
+   "maxInputPct": "75.5",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "C128-0.json",
+  "proofBytes": 41936,
+  "b": {
+   "unlocking": 48962,
+   "txBytes": 49049,
+   "opStd": 26663208,
+   "opTxv5Std": 26663208,
+   "iters": 2190,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 56.5,
+   "txv5BudgetPct": 68,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 1,
+   "inputs": 7,
+   "totalBytes": 60435,
+   "allAccepted": true,
+   "maxInputPct": "77.0",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ },
+ {
+  "vector": "C128-1.json",
+  "proofBytes": 42032,
+  "b": {
+   "unlocking": 49046,
+   "txBytes": 49133,
+   "opStd": 26641681,
+   "opTxv5Std": 26641681,
+   "iters": 2196,
+   "spec": [
+    true,
+    true
+   ],
+   "txv5": [
+    true,
+    true
+   ],
+   "specBudgetPct": 56.4,
+   "txv5BudgetPct": 67.8,
+   "standardTx": true
+  },
+  "a": {
+   "transactions": 1,
+   "inputs": 7,
+   "totalBytes": 60435,
+   "allAccepted": true,
+   "maxInputPct": "77.0",
+   "inputsWithinCap": true,
+   "txsWithinCap": true
+  }
+ }
+]

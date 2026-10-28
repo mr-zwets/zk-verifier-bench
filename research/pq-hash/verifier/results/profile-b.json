@@ -1,0 +1,80 @@
+[
+ {
+  "set": "P128",
+  "vector": "P128-0.json",
+  "opStdWithMarkers": 71562205,
+  "markers": 225,
+  "phases": {
+   "witness pushes, redeem hash, OP_DEFINEs": 143196,
+   "transcript": 198337,
+   "air-0": 395498,
+   "air-1": 58570,
+   "air-2": 27096,
+   "air-3": 38261,
+   "air+consts": 22790,
+   "merkle": 9399276,
+   "unpack": 762640
+  },
+  "perQuery": {
+   "q-entry": 55523,
+   "q-parse": 68791,
+   "q-deep": 453988,
+   "q-layers": 347390,
+   "q-final": 478019
+  },
+  "queriesTotal": 60359601,
+  "cleanup": 100
+ },
+ {
+  "set": "P100",
+  "vector": "P100-0.json",
+  "opStdWithMarkers": 38739218,
+  "markers": 120,
+  "phases": {
+   "witness pushes, redeem hash, OP_DEFINEs": 97308,
+   "transcript": 148811,
+   "air-0": 396438,
+   "air-1": 58758,
+   "air-2": 27033,
+   "air-3": 37865,
+   "air+consts": 22477,
+   "merkle": 6013051,
+   "unpack": 762625
+  },
+  "perQuery": {
+   "q-entry": 61929,
+   "q-parse": 68790,
+   "q-deep": 453895,
+   "q-layers": 347446,
+   "q-final": 478322
+  },
+  "queriesTotal": 31028412,
+  "cleanup": 100
+ },
+ {
+  "set": "C128",
+  "vector": "C128-0.json",
+  "opStdWithMarkers": 26671728,
+  "markers": 85,
+  "phases": {
+   "witness pushes, redeem hash, OP_DEFINEs": 90307,
+   "transcript": 117004,
+   "air-0": 395711,
+   "air-1": 58804,
+   "air-2": 27018,
+   "air-3": 44872,
+   "air+consts": 60253,
+   "merkle": 4290759,
+   "unpack": 368364
+  },
+  "perQuery": {
+   "q-entry": 62922,
+   "q-parse": 90672,
+   "q-deep": 455003,
+   "q-layers": 530619,
+   "q-final": 268323
+  },
+  "queriesTotal": 21113082,
+  "cleanup": 100
+ }
+]
