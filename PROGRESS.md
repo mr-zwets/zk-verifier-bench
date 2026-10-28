@@ -34,3 +34,6 @@ This worktree: research/pq-hash/verifier/ = crosscheck.ts (this harness's own VM
   classical, new §4.5 with indicative quantum levels (BHT collisions ~67 bits at h=25, ~85 at h=32; Grover halves
   grinding/RBR terms); §4.1 states the open RBR check as an explicit condition with margins (P128 commit 0.31 bits,
   query 0.19 bits; P100 ~24 bits commit margin).
+- Review fixes (groth16_cashscript wip/pq-hash-verifier e8845b6): layout (b) witness shape pinned per tree (blocker),
+  TXv5 pad checked zero, layout (a) encoded tx sizes + full-tx verify. results/ copies refreshed; crosscheck.ts re-run
+  and agrees (P128-3 b: tx 99,981 B, op 72,002,598, 90.1% TXv5; P128 a: 154,829 B).

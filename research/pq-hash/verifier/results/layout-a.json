@@ -16,6 +16,13 @@
   ],
   "padBytes": 0,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 16741798,
   "opBchnTotal": 16828306,
@@ -139,6 +146,13 @@
   ],
   "padBytes": 0,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 16745064,
   "opBchnTotal": 16831572,
@@ -262,6 +276,13 @@
   ],
   "padBytes": 0,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 30393614,
   "opBchnTotal": 30512313,
@@ -401,6 +422,13 @@
   ],
   "padBytes": 0,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 30399204,
   "opBchnTotal": 30517903,
@@ -540,6 +568,13 @@
   ],
   "padBytes": 6337,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 47806665,
   "opBchnTotal": 47967615,
@@ -727,6 +762,13 @@
   ],
   "padBytes": 6327,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 47798263,
   "opBchnTotal": 47959213,
@@ -914,6 +956,13 @@
   ],
   "padBytes": 6322,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 47793688,
   "opBchnTotal": 47954638,
@@ -1101,6 +1150,13 @@
   ],
   "padBytes": 6340,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 47808060,
   "opBchnTotal": 47969010,
@@ -1282,13 +1338,24 @@
   "defineBytes": 18326,
   "transactions": 2,
   "inputs": 19,
-  "totalBytes": 154833,
+  "totalBytes": 154831,
   "txBytes": [
-   79374,
+   79372,
    75459
   ],
   "padBytes": 852,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   },
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 91691326,
   "opBchnTotal": 92039520,
@@ -1616,13 +1683,24 @@
   "defineBytes": 18326,
   "transactions": 2,
   "inputs": 19,
-  "totalBytes": 154831,
+  "totalBytes": 154829,
   "txBytes": [
-   79372,
+   79370,
    75459
   ],
   "padBytes": 850,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   },
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 91671660,
   "opBchnTotal": 92019854,
@@ -1950,13 +2028,24 @@
   "defineBytes": 18326,
   "transactions": 2,
   "inputs": 19,
-  "totalBytes": 154835,
+  "totalBytes": 154833,
   "txBytes": [
-   79376,
+   79374,
    75459
   ],
   "padBytes": 854,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   },
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 91712541,
   "opBchnTotal": 92060735,
@@ -2284,13 +2373,24 @@
   "defineBytes": 18326,
   "transactions": 2,
   "inputs": 19,
-  "totalBytes": 154831,
+  "totalBytes": 154829,
   "txBytes": [
-   79372,
+   79370,
    75459
   ],
   "padBytes": 850,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   },
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 91687949,
   "opBchnTotal": 92036143,
@@ -2618,13 +2718,24 @@
   "defineBytes": 14916,
   "transactions": 2,
   "inputs": 31,
-  "totalBytes": 188562,
+  "totalBytes": 188560,
   "txBytes": [
-   95588,
+   95586,
    92974
   ],
   "padBytes": 314,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   },
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 117443690,
   "opBchnTotal": 117906086,
@@ -3144,13 +3255,24 @@
   "defineBytes": 14916,
   "transactions": 2,
   "inputs": 31,
-  "totalBytes": 188553,
+  "totalBytes": 188551,
   "txBytes": [
-   95579,
+   95577,
    92974
   ],
   "padBytes": 305,
   "accepted": true,
+  "txVerify": [
+   {
+    "std": true,
+    "cons": true
+   },
+   {
+    "std": true,
+    "cons": true
+   }
+  ],
+  "opBchnBasis": "standard libauth op-cost + all OP_DEFINE body bytes per input (upper bound)",
   "fitsStandard": true,
   "opStdTotal": 117404524,
   "opBchnTotal": 117866920,
