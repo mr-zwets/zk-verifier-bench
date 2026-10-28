@@ -127,6 +127,51 @@ for (const [h, D, k] of [[32, 10, 22], [25, 10, 22], [32, 10, 43]]) {
   }, 'per node: divide by the nodes processed (reported in meta)', 6);
 }
 
+// K8 variant: entries as stack items. Levels alternate direction: level A reads the main stack (ascending, smallest
+// on top) and writes (pos, node) pairs to the altstack; level B reads the altstack (descending) and writes to the main
+// stack. A sentinel pair (-1, -1) ends each list. Proof siblings are separate pushes in consumption order, the first one
+// deepest, and each is fetched with OP_DEPTH OP_1SUB OP_ROLL (the merge runs on a stack whose bottom is the proof).
+function multiproofRefItems(leaves, positions, h, D) {
+  const lv = [leaves]; for (let d = 0; d < D; d++) { const prev = lv[d]; lv.push(Array.from({length: prev.length / 2}, (_, i) => parent(prev[2 * i], prev[2 * i + 1], 0, h))); }
+  let L = positions.map((q) => [q, leaves[q]]); const proof = []; let nodes = 0;
+  for (let d = 0; d < D; d++) {
+    const asc = d % 2 === 0; const src = asc ? L : [...L].reverse(); const next = [];
+    for (let i = 0; i < src.length; i++) {
+      const [q, nd] = src[i]; nodes++;
+      const partner = asc ? (q % 2 === 0 && i + 1 < src.length && src[i + 1][0] === q + 1) : (q % 2 === 1 && i + 1 < src.length && src[i + 1][0] === q - 1);
+      if (partner) { const other = src[i + 1][1]; next.push([q >> 1, asc ? parent(nd, other, 0, h) : parent(other, nd, 0, h)]); i++; }
+      else { const sib = lv[d][q ^ 1]; proof.push(sib); next.push([q >> 1, parent(nd, sib, q & 1, h)]); }
+    }
+    L = asc ? next : next.reverse();
+  }
+  return {root: L[0][1], proof, nodes, treeRoot: lv[D][0]};
+}
+function multiproofItemsBody(h, D) {
+  const tr = h === 32 ? [] : [h, 'SPLIT', 'DROP'];
+  const sib = ['DEPTH', '1SUB', 'ROLL', 'OVER', 2, 'MOD', 'ROT', 'TOALTSTACK', 'ROLL', 'CAT', 'SHA256', ...tr, 'FROMALTSTACK']; // [n p] -> [parent p]
+  const levelA = [-1, -1, 'TOALTSTACK', 'TOALTSTACK', 'BEGIN',
+    'DUP', 2, 'MOD', 'NOT', 3, 'PICK', 2, 'PICK', '1ADD', 'NUMEQUAL', 'BOOLAND',
+    'IF', 2, 'ROLL', 'DROP', 'ROT', 'ROT', 'SWAP', 'CAT', 'SHA256', ...tr, 'SWAP', 'ELSE', ...sib, 'ENDIF',
+    1, 'RSHIFTNUM', 'TOALTSTACK', 'TOALTSTACK', 'DUP', 0, 'LESSTHAN', 'UNTIL', '2DROP'];
+  const levelB = [-1, -1, 'FROMALTSTACK', 'FROMALTSTACK', 'BEGIN', 'FROMALTSTACK', 'FROMALTSTACK',
+    'DUP', 3, 'PICK', '1SUB', 'NUMEQUAL', 3, 'PICK', 2, 'MOD', 'BOOLAND',
+    'IF', 'DROP', 'ROT', 'CAT', 'SHA256', ...tr, 'SWAP', 'ELSE', 'TOALTSTACK', 'TOALTSTACK', ...sib, 'ENDIF',
+    1, 'RSHIFTNUM', 'FROMALTSTACK', 'FROMALTSTACK', 'DUP', 0, 'LESSTHAN', 'UNTIL', '2DROP'];
+  if (D % 2) throw new Error('even D only in this kernel');
+  return asm(Array.from({length: D / 2}, () => [levelA, levelB]), 0, 'NUMEQUALVERIFY', 'NIP', 'NIP', 'DEPTH', 1, 'NUMEQUALVERIFY');
+}
+for (const [h, D, k] of [[32, 10, 22], [25, 10, 22], [32, 10, 43], [32, 16, 43]]) {
+  const body = multiproofItemsBody(h, D);
+  def('K8', 'merkle', `multiproof merge, items on the stack (alternating direction), ${k} positions, ${D} levels, h=${h}`, (rng) => {
+    const leaves = Array.from({length: 1 << D}, () => rng.bytes(h));
+    const pos = [...new Set(Array.from({length: k}, () => rng.int(1 << D)))].sort((a, b) => a - b);
+    const ref = multiproofRefItems(leaves, pos, h, D);
+    if (Buffer.compare(Buffer.from(ref.root), Buffer.from(ref.treeRoot)) !== 0) throw new Error('multiproof root');
+    const entries = [...pos].reverse().flatMap((q) => [leaves[q], nb(BigInt(q))]); // smallest on top
+    return {inputs: [...ref.proof, nb(-1n), nb(-1n), ...entries], body, outputs: [{bin: ref.root}], meta: {nodes: ref.nodes, siblings: ref.proof.length}};
+  }, 'per node: see [per node]', 6);
+}
+
 // ---- K7: leaf hash + parse (tag byte, k values of 8 bytes LE, unsigned) ----
 const le8 = (v) => { const b = new Uint8Array(8); for (let i = 0; i < 8; i++) b[i] = Number((v >> BigInt(8 * i)) & 255n); return b; };
 for (const [nv, label] of [[8, '64 B (trace leaf: 4 points x 2 values)'], [24, '192 B (composition / FRI leaf: 24 values)']]) {

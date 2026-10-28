@@ -945,6 +945,262 @@
   }
  },
  {
+  "id": "K8",
+  "group": "merkle",
+  "notes": "per node: see [per node]",
+  "name": "multiproof merge, items on the stack (alternating direction), 22 positions, 10 levels, h=32",
+  "trials": 6,
+  "opStd": {
+   "min": 559956,
+   "max": 639752,
+   "mean": 599077
+  },
+  "opCons": {
+   "min": 531028,
+   "max": 606728,
+   "mean": 568143.6666666666
+  },
+  "instr": {
+   "min": 4875,
+   "max": 5555,
+   "mean": 5207.833333333333
+  },
+  "arith": {
+   "min": 654,
+   "max": 734,
+   "mean": 691.3333333333334
+  },
+  "pushed": {
+   "min": 28410,
+   "max": 33997,
+   "mean": 31202.333333333332
+  },
+  "iters": {
+   "min": 226,
+   "max": 258,
+   "mean": 241.66666666666666
+  },
+  "bodyBytes": {
+   "min": 492,
+   "max": 492,
+   "mean": 492
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ],
+  "nodes": {
+   "min": 113,
+   "max": 129,
+   "mean": 120.83333333333333
+  },
+  "perNodeStd": {
+   "min": 4955.362831858407,
+   "max": 4959.3178294573645,
+   "mean": 4957.836376404346
+  },
+  "perNodeCons": {
+   "min": 4699.362831858407,
+   "max": 4703.3178294573645,
+   "mean": 4701.836376404346
+  }
+ },
+ {
+  "id": "K8",
+  "group": "merkle",
+  "notes": "per node: see [per node]",
+  "name": "multiproof merge, items on the stack (alternating direction), 22 positions, 10 levels, h=25",
+  "trials": 6,
+  "opStd": {
+   "min": 649157,
+   "max": 730158,
+   "mean": 693305
+  },
+  "opCons": {
+   "min": 633669,
+   "max": 712750,
+   "mean": 676771.6666666666
+  },
+  "instr": {
+   "min": 5941,
+   "max": 6668,
+   "mean": 6337.166666666667
+  },
+  "arith": {
+   "min": 686,
+   "max": 760,
+   "mean": 723.8333333333334
+  },
+  "pushed": {
+   "min": 31139,
+   "max": 36486,
+   "mean": 34064.5
+  },
+  "iters": {
+   "min": 121,
+   "max": 136,
+   "mean": 129.16666666666666
+  },
+  "bodyBytes": {
+   "min": 572,
+   "max": 572,
+   "mean": 572
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ],
+  "nodes": {
+   "min": 121,
+   "max": 136,
+   "mean": 129.16666666666666
+  },
+  "perNodeStd": {
+   "min": 5364.93388429752,
+   "max": 5368.808823529412,
+   "mean": 5367.485122627045
+  },
+  "perNodeCons": {
+   "min": 5236.93388429752,
+   "max": 5240.808823529412,
+   "mean": 5239.485122627045
+  }
+ },
+ {
+  "id": "K8",
+  "group": "merkle",
+  "notes": "per node: see [per node]",
+  "name": "multiproof merge, items on the stack (alternating direction), 43 positions, 10 levels, h=32",
+  "trials": 6,
+  "opStd": {
+   "min": 963741,
+   "max": 1024168,
+   "mean": 999069.3333333334
+  },
+  "opCons": {
+   "min": 914077,
+   "max": 971432,
+   "mean": 947613.3333333334
+  },
+  "instr": {
+   "min": 8323,
+   "max": 8831,
+   "mean": 8619.333333333334
+  },
+  "arith": {
+   "min": 1203,
+   "max": 1270,
+   "mean": 1234.1666666666667
+  },
+  "pushed": {
+   "min": 55742,
+   "max": 60694,
+   "mean": 58717.833333333336
+  },
+  "iters": {
+   "min": 388,
+   "max": 412,
+   "mean": 402
+  },
+  "bodyBytes": {
+   "min": 492,
+   "max": 492,
+   "mean": 492
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "ok"
+  ],
+  "nodes": {
+   "min": 194,
+   "max": 206,
+   "mean": 201
+  },
+  "perNodeStd": {
+   "min": 4967.737113402062,
+   "max": 4971.689320388349,
+   "mean": 4970.471647316789
+  },
+  "perNodeCons": {
+   "min": 4711.737113402062,
+   "max": 4715.689320388349,
+   "mean": 4714.471647316789
+  }
+ },
+ {
+  "id": "K8",
+  "group": "merkle",
+  "notes": "per node: see [per node]",
+  "name": "multiproof merge, items on the stack (alternating direction), 43 positions, 16 levels, h=32",
+  "trials": 6,
+  "opStd": {
+   "min": 2252411,
+   "max": 2397064,
+   "mean": 2322076.5
+  },
+  "opCons": {
+   "min": 2139259,
+   "max": 2277000,
+   "mean": 2205596.5
+  },
+  "instr": {
+   "min": 18900,
+   "max": 20046,
+   "mean": 19450.666666666668
+  },
+  "arith": {
+   "min": 3434,
+   "max": 3674,
+   "mean": 3563.6666666666665
+  },
+  "pushed": {
+   "min": 189249,
+   "max": 208694,
+   "mean": 198726.16666666666
+  },
+  "iters": {
+   "min": 884,
+   "max": 938,
+   "mean": 910
+  },
+  "bodyBytes": {
+   "min": 783,
+   "max": 783,
+   "mean": 783
+  },
+  "defBytes": 0,
+  "prologueBytes": 0,
+  "defineLibauth": 0,
+  "defineBchn": 0,
+  "real": [
+   "over one standard input"
+  ],
+  "nodes": {
+   "min": 442,
+   "max": 469,
+   "mean": 455
+  },
+  "perNodeStd": {
+   "min": 5095.9524886877825,
+   "max": 5111.01066098081,
+   "mean": 5103.358413809549
+  },
+  "perNodeCons": {
+   "min": 4839.9524886877825,
+   "max": 4855.01066098081,
+   "mean": 4847.358413809549
+  }
+ },
+ {
   "id": "K7",
   "group": "merkle",
   "notes": "8 values; per value: divide the parse part",
