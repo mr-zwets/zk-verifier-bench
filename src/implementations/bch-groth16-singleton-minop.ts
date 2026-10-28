@@ -21,6 +21,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bn254MinopProofInputs } from './groth16-proof-inputs.js';
 
 const v = JSON.parse(readFileSync('src/bch/groth16-singleton-minop-vectors.json', 'utf8')) as {
   lockingOK: string;
@@ -42,6 +43,7 @@ export const bchGroth16SingletonMinOp: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bn254MinopProofInputs,
   source:
     'BCH-native CashScript: the COMPLETE Groth16 verifier in ONE contract, op-optimized. ' +
     'Lazy field tower; quotient-torus residue check in Fp12*/Fp6* (six-limb canonical root, ' +

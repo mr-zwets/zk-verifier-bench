@@ -44,6 +44,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bn254IntratxResidueLargeProofInputs } from './groth16-proof-inputs.js';
 
 interface RawStep { label: string; locking: string; unlocking: string; checkpoint?: string }
 interface Vectors { steps: RawStep[]; extraValidProofs?: RawStep[][]; worstCaseProof?: RawStep[]; invalid?: RawStep[][]; invalidInputs?: RawStep[][] }
@@ -79,6 +80,7 @@ export const bchGroth16IntratxResidueLarge: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bn254IntratxResidueLargeProofInputs,
   vm: 'bch-spec',
   source:
     'BCH-native CashScript: one runtime-proof BN254 verifier in four linked inputs of one ' +

@@ -12,6 +12,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { genpowSingletonProofInputs } from './groth16-proof-inputs.js';
 
 const v = JSON.parse(readFileSync('src/bch/groth16-singleton-genpow-vectors.json', 'utf8')) as {
   lockingOK: string;
@@ -36,6 +37,7 @@ export const bchGroth16SingletonGenpow: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: genpowSingletonProofInputs,
   source:
     'Explicit symbolic assembly in singleton/bn254/genpow-reconstructed/verifier.asm. ' +
     'Original finite A/C parity witnesses and all proof/public bytes remain unchanged. ' +

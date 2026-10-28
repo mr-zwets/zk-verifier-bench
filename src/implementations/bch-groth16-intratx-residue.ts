@@ -78,6 +78,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bn254IntratxResidueProofInputs } from './groth16-proof-inputs.js';
 
 interface RawStep { label: string; locking: string; unlocking: string; checkpoint?: string }
 interface Vectors {
@@ -124,6 +125,7 @@ export const bchGroth16IntratxResidue: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bn254IntratxResidueProofInputs,
   source:
     'BCH-native CashScript: one runtime-proof BN254 verifier linked across 11 inputs of one ' +
     'transaction. Two grouped GLV vk_x inputs feed nine affine, unit-line Miller inputs. The GLV ' +

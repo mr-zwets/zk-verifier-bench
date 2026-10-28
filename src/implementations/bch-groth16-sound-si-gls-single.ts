@@ -10,6 +10,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bn254SiGlsProofInputs } from './groth16-proof-inputs.js';
 
 interface RawStep {
   label: string;
@@ -71,6 +72,7 @@ export const bchGroth16SoundSiGlsSingle: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bn254SiGlsProofInputs,
   source:
     'Single-identity BN254 Groth16 verifier: one batched odd torus identity at +-z over 33 committed monic ' +
     'states, GT-GLS folding of e(vk_x, gamma), projective B with exact G2 endpoint check, every accept-relevant ' +

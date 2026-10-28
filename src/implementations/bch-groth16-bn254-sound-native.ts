@@ -13,6 +13,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bn254SoundNativeProofInputs } from './groth16-proof-inputs.js';
 
 interface RawStep {
   label: string;
@@ -63,6 +64,7 @@ export const bchGroth16Bn254SoundNative: Implementation = {
   field: 'BN254',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bn254SoundNativeProofInputs,
   source:
     'SI-GLS mathematics split over 3 P2SH32 inputs of one bch-2026 transaction (shared redeem loads hash-authenticated ' +
     'code; graph pinned by input count and identical lockings; affine B walk with exact inverse-norm witnesses; ' +
