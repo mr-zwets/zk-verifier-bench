@@ -92,6 +92,29 @@ export const REVIEW_STATUS: Record<string, ReviewStatus> = {
     ],
   },
 
+  // Track 2 "frontier middle" designs (bench research/frontier-middle/REPORT.md): each curve had two Track 2 reviews
+  // 2026-10-28, soundness and measurement reproduction, all pass with minor findings only (REPORT.md section 5); the
+  // minor items were fixed or documented in one fix round on groth16_cashscript wip/frontier-entries (2026-10-28):
+  // per-kernel random-point differential tests (BN T2), FE(MAB) = e(alpha, beta) asserted, the delta-kernel value trace
+  // test against DPROJ (BLS T1), the order-13 projective-degeneracy vector kept, the E_A = 0 exactness lemma, the lazy-tower
+  // envelope stated as liveness-only (BLS T2), worst-case k_min notes and README wording. No guard-coverage attack vectors
+  // were added: rejection is shown with the existing invalid classes only.
+  ...Object.fromEntries(
+    (
+      [
+        ['bch-groth16-sound-si-gls-dproj', 'bn254/README.md', 'BN254 T1: the reviewed SI-GLS with the baked delta slope pile replaced by an on-chain projective delta walk through the shared B kernels; the projective lines are Fp2* multiples of the affine ones (classes unchanged, WS byte-identical, WQ re-bound before z under the unchanged NQ_MAX = 132); all 88 delta steps asserted against noble at build time.'],
+        ['bch-groth16-bls12381-sound-si-gls-dproj', 'bls12381/sigls-dproj/README.md', 'BLS12-381 T1: the reviewed SI-GLS with an on-chain projective delta walk (value trace of the on-chain delta kernels equals DPROJ at all 68 steps) and E_A = 0 (all-projective B; Z = 0 absorbing and Z_T != 0 make every step exact, replacing the slope equations and the x != x_B guard); A and C cofactor-equivalent (malleability only).'],
+        ['bch-groth16-singleton-rolled-residue', 'bn254/README.md', 'BN254 T2: rolled exact-identity singleton (no hints, no Fiat-Shamir, no Schwartz-Zippel): exact class identity over Fp12, SI-GLS B endpoint, Jacobian vk_x with Z * zInv == 1, every word range-checked; kernels pass per-kernel random-point differential tests against noble (Schwartz-Zippel, error <= deg/p each).'],
+        ['bch-groth16-singleton-rolled-residue-mulc', 'bn254/README.md', 'BN254 T2, byte-lean build (T2_SQR=mulc) of the rolled exact-identity singleton: the squaring goes through the shared MULC + GLUE kernels (differential-tested like the others); otherwise the same program and argument as bch-groth16-singleton-rolled-residue.'],
+        ['bch-groth16-bls12381-singleton-minop-rolled', 'bls12381/minop-rolled/README.md', 'BLS12-381 T2: the reviewed min-op singleton with only the Miller emitter changed (one rolled NAF loop, on-chain gamma/delta walks through the same library bodies, asserted against the baked coefficients and noble); the accumulator matches the unrolled program on every vector; the lazy-tower envelope is a liveness-only matter (exact integer arithmetic). A/C cofactor malleability as in the reviewed minop.'],
+      ] as [string, string, string][]
+    ).map(([id, readme, what]): [string, ReviewStatus] => [id, {
+      status: 'reviewed',
+      reason: `Two Track 2 reviews 2026-10-28 (soundness; measurement reproduction), both pass with minor findings only, all fixed or documented in the 2026-10-28 fix round. ${what}`,
+      refs: [`${SRC}/blob/main/research/frontier-middle/${readme}`, `${BENCH}/blob/main/research/frontier-middle/REPORT.md#5-review-outcomes`],
+    }]),
+  ),
+
   // BN254 singletons: independent review 2026-10-26 (notes: verifier.cash work/bn-singleton-review/REVIEW.md)
   // after the jacAddG1 right-identity fix (bench 15bf0fe). Its one LOW finding, missing
   // 0 <= v < p checks on the proof coordinates (encoding malleability only), is fixed in

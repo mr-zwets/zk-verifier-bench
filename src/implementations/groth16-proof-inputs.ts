@@ -37,6 +37,10 @@ export const bn254MinopProofInputs: ProofInput[] = numericPushes(0, 193, 8);
 // 21 args pushed in reverse (singleton/bls12-381/build_vectors_groth16_minop.mjs:44, 55-68;
 // gen_multiproof_minop.mjs:59-69). Arg i sits at push 20 - i, so Cy..Ax = pushes 13..20.
 export const bls12381MinopProofInputs: ProofInput[] = numericPushes(0, 13, 8);
+// BLS12-381 rolled min-op: the same spend() interface (research/frontier-middle/bls12381/minop-rolled/README.md,
+// gen_minop_rolled.mjs keeps the reviewed generator's ABI); the P2SH32 redeem push is appended last (push 21), so
+// Cy..Ax stay at pushes 13..20.
+export const bls12381MinopRolledProofInputs: ProofInput[] = numericPushes(0, 13, 8);
 
 // BLS12-381 Fiat-Shamir singletons (fs, fs-spec, fs-spec-shared, fs-spec-zero): the 737-byte statement
 // push 22 (chunked/bls12-381/measure_fs_singleton.mjs:848-874, SKIP_GAMMA layout, 48-byte LE limbs):
@@ -63,6 +67,19 @@ export const bn254SiGlsProofInputs: ProofInput[] = packedFields(0, 1, 0, 32, 8);
 // 48-byte LE words, then n0/n1 at 384/416 (chunked/bls12-381/sound-si-gls/transaction.mjs:7,
 // protocol.mjs:32, 159-161).
 export const bls12381SiGlsProofInputs: ProofInput[] = packedFields(0, 1, 0, 48, 8);
+
+// Track 2 designs (paths under research/frontier-middle/ are on groth16_cashscript wip/frontier-entries until merged).
+// SI-GLS with an on-chain projective delta walk keeps the reviewed SI-GLS witness layout, so the locators are
+// the same: BN254 [WQ, WS, redeem] with WS opening on the 8 proof coordinates as 32-byte LE words
+// (research/frontier-middle/bn254/sigls-dproj/transaction.mjs:7, protocol.mjs:16, 121-123); BLS12-381 the same with
+// 48-byte LE words (research/frontier-middle/bls12381/sigls-dproj/transaction.mjs:7, protocol.mjs:32).
+export const bn254SiGlsDprojProofInputs: ProofInput[] = packedFields(0, 1, 0, 32, 8);
+export const bls12381SiGlsDprojProofInputs: ProofInput[] = packedFields(0, 1, 0, 48, 8);
+
+// BN254 rolled residue singleton (both builds): unlocking [W, redeem]; W = xA yA xB0 xB1 yB0 yB1 xC yC n0 n1 sc0..sc5 zInv
+// as 32-byte LE words (research/frontier-middle/bn254/rolled-residue/protocol.mjs:1, 53; script.mjs section 1).
+// Words 0..7 are A, B, C; n0/n1 (256/288), the residue root and zInv are excluded.
+export const bn254RolledResidueProofInputs: ProofInput[] = packedFields(0, 0, 0, 32, 8);
 
 // BN254 sound native (3 inputs): input 2 pushes [D, STMT, S2, H2, DS2, F2, WQ, R]; STMT opens with
 // the 8 proof coordinates as 32-byte LE words (chunked/bn254/bn-native-sound/transaction.mjs:26,
