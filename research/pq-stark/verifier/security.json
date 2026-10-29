@@ -42,7 +42,7 @@
    "simple_lb_q_plus_pow": 102
   },
   "target": 100,
-  "label": "conjectured 100 only (proven JB 59.77)"
+  "label": "conjectured 100 only (JB 59.77, powers-batching adaptation)"
  },
  "fib-C100-zk-0.json": {
   "JB": {
@@ -87,7 +87,7 @@
    "simple_lb_q_plus_pow": 102
   },
   "target": 100,
-  "label": "conjectured 100 only (proven JB 58.81)"
+  "label": "conjectured 100 only (JB 58.81, powers-batching adaptation)"
  },
  "fib-C100-zkmin-0.json": {
   "JB": {
@@ -132,7 +132,7 @@
    "simple_lb_q_plus_pow": 102
   },
   "target": 100,
-  "label": "conjectured 100 only (proven JB 58.81)"
+  "label": "conjectured 100 only (JB 58.81, powers-batching adaptation)"
  },
  "fib-C100h-0.json": {
   "JB": {
@@ -177,7 +177,7 @@
    "simple_lb_q_plus_pow": 102
   },
   "target": 100,
-  "label": "conjectured 100 only (proven JB 59.77)"
+  "label": "conjectured 100 only (JB 59.77, powers-batching adaptation)"
  },
  "fib-C128-0.json": {
   "JB": {
@@ -222,7 +222,7 @@
    "simple_lb_q_plus_pow": 130
   },
   "target": 128,
-  "label": "conjectured 128 only (proven JB 74.93)"
+  "label": "conjectured 128 only (JB 74.93, powers-batching adaptation)"
  },
  "fib-C128-zk-0.json": {
   "JB": {
@@ -267,7 +267,7 @@
    "simple_lb_q_plus_pow": 130
   },
   "target": 128,
-  "label": "conjectured 128 only (proven JB 74.93)"
+  "label": "conjectured 128 only (JB 74.93, powers-batching adaptation)"
  },
  "fib-C128-zkmin-0.json": {
   "JB": {
@@ -312,7 +312,7 @@
    "simple_lb_q_plus_pow": 130
   },
   "target": 128,
-  "label": "conjectured 128 only (proven JB 74.93)"
+  "label": "conjectured 128 only (JB 74.93, powers-batching adaptation)"
  },
  "fib-P100-0.json": {
   "JB": {
@@ -357,7 +357,7 @@
    "simple_lb_q_plus_pow": 182
   },
   "target": 100,
-  "label": "100 JB (proven, Soundness bound)"
+  "label": "100 (JB, powers-batching adaptation, unpublished)"
  },
  "fib-P100-zk-0.json": {
   "JB": {
@@ -402,7 +402,7 @@
    "simple_lb_q_plus_pow": 182
   },
   "target": 100,
-  "label": "103.7 JB (proven, Soundness bound)"
+  "label": "103.7 (JB, powers-batching adaptation, unpublished)"
  },
  "fib-P100-zkmin-0.json": {
   "JB": {
@@ -447,7 +447,7 @@
    "simple_lb_q_plus_pow": 182
   },
   "target": 100,
-  "label": "103.7 JB (proven, Soundness bound)"
+  "label": "103.7 (JB, powers-batching adaptation, unpublished)"
  },
  "fib-P128-0.json": {
   "JB": {
@@ -492,7 +492,7 @@
    "simple_lb_q_plus_pow": 243
   },
   "target": 128,
-  "label": "126.31 JB (below 128; Plonky3 LDR estimator 128)"
+  "label": "126.31 (JB, powers-batching adaptation; below 128; Plonky3 LDR estimator 128)"
  },
  "fib-P128-zk-0.json": {
   "JB": {
@@ -537,7 +537,7 @@
    "simple_lb_q_plus_pow": 243
   },
   "target": 128,
-  "label": "123.91 JB (below 128; Plonky3 LDR estimator 128)"
+  "label": "123.91 (JB, powers-batching adaptation; below 128; Plonky3 LDR estimator 128)"
  },
  "fib-P128-zkmin-0.json": {
   "JB": {
@@ -582,7 +582,7 @@
    "simple_lb_q_plus_pow": 243
   },
   "target": 128,
-  "label": "124.15 JB (below 128; Plonky3 LDR estimator 128)"
+  "label": "124.15 (JB, powers-batching adaptation; below 128; Plonky3 LDR estimator 128)"
  },
  "fib-S100-0.json": {
   "JB": {
@@ -625,7 +625,7 @@
    "simple_lb_q_plus_pow": 177
   },
   "target": 100,
-  "label": "101.11 JB (proven, Soundness bound)"
+  "label": "101.11 (JB, powers-batching adaptation, unpublished)"
  },
  "fib-S100b-0.json": {
   "JB": {
@@ -666,7 +666,7 @@
    "simple_lb_q_plus_pow": 177
   },
   "target": 100,
-  "label": "100.32 JB (proven, Soundness bound)"
+  "label": "100.32 (JB, powers-batching adaptation, unpublished)"
  },
  "fib-S100z-zkmin-0.json": {
   "JB": {
@@ -709,7 +709,7 @@
    "simple_lb_q_plus_pow": 177
   },
   "target": 100,
-  "label": "100.21 JB (proven, Soundness bound)"
+  "label": "100.21 (JB, powers-batching adaptation, unpublished)"
  },
  "fib-S128-0.json": {
   "JB": {
@@ -750,7 +750,7 @@
    "simple_lb_q_plus_pow": 234
   },
   "target": 128,
-  "label": "128 JB (proven, Soundness bound)"
+  "label": "128 (JB, powers-batching adaptation, unpublished)"
  },
  "fib-S128b-0.json": {
   "JB": {
@@ -793,7 +793,7 @@
    "simple_lb_q_plus_pow": 233
   },
   "target": 128,
-  "label": "128 JB (proven, Soundness bound)"
+  "label": "128 (JB, powers-batching adaptation, unpublished)"
  },
  "fib-S128z-zkmin-0.json": {
   "JB": {
@@ -836,7 +836,7 @@
    "simple_lb_q_plus_pow": 235
   },
   "target": 128,
-  "label": "128.0 JB (proven, Soundness bound)"
+  "label": "128.0 (JB, powers-batching adaptation, unpublished)"
  },
  "mimc-C100-0.json": {
   "JB": {
@@ -881,7 +881,7 @@
    "simple_lb_q_plus_pow": 102
   },
   "target": 100,
-  "label": "conjectured 100 only (proven JB 59.6)"
+  "label": "conjectured 100 only (JB 59.6, powers-batching adaptation)"
  },
  "mimc-C100-zk-0.json": {
   "JB": {
@@ -926,7 +926,7 @@
    "simple_lb_q_plus_pow": 102
   },
   "target": 100,
-  "label": "conjectured 100 only (proven JB 58.67)"
+  "label": "conjectured 100 only (JB 58.67, powers-batching adaptation)"
  },
  "mimc-C100-zkmin-0.json": {
   "JB": {
@@ -971,7 +971,7 @@
    "simple_lb_q_plus_pow": 102
   },
   "target": 100,
-  "label": "conjectured 100 only (proven JB 58.81)"
+  "label": "conjectured 100 only (JB 58.81, powers-batching adaptation)"
  },
  "mimc-C100h-0.json": {
   "JB": {
@@ -1016,7 +1016,7 @@
    "simple_lb_q_plus_pow": 102
   },
   "target": 100,
-  "label": "conjectured 100 only (proven JB 59.6)"
+  "label": "conjectured 100 only (JB 59.6, powers-batching adaptation)"
  },
  "mimc-C128-0.json": {
   "JB": {
@@ -1061,7 +1061,7 @@
    "simple_lb_q_plus_pow": 130
   },
   "target": 128,
-  "label": "conjectured 128 only (proven JB 74.93)"
+  "label": "conjectured 128 only (JB 74.93, powers-batching adaptation)"
  },
  "mimc-C128-zk-0.json": {
   "JB": {
@@ -1106,7 +1106,7 @@
    "simple_lb_q_plus_pow": 130
   },
   "target": 128,
-  "label": "conjectured 128 only (proven JB 74.93)"
+  "label": "conjectured 128 only (JB 74.93, powers-batching adaptation)"
  },
  "mimc-C128-zkmin-0.json": {
   "JB": {
@@ -1151,7 +1151,7 @@
    "simple_lb_q_plus_pow": 130
   },
   "target": 128,
-  "label": "conjectured 128 only (proven JB 74.93)"
+  "label": "conjectured 128 only (JB 74.93, powers-batching adaptation)"
  },
  "mimc-P100-0.json": {
   "JB": {
@@ -1196,7 +1196,7 @@
    "simple_lb_q_plus_pow": 182
   },
   "target": 100,
-  "label": "100 JB (proven, Soundness bound)"
+  "label": "100 (JB, powers-batching adaptation, unpublished)"
  },
  "mimc-P100-zk-0.json": {
   "JB": {
@@ -1241,7 +1241,7 @@
    "simple_lb_q_plus_pow": 182
   },
   "target": 100,
-  "label": "103.59 JB (proven, Soundness bound)"
+  "label": "103.59 (JB, powers-batching adaptation, unpublished)"
  },
  "mimc-P100-zkmin-0.json": {
   "JB": {
@@ -1286,7 +1286,7 @@
    "simple_lb_q_plus_pow": 182
   },
   "target": 100,
-  "label": "103.59 JB (proven, Soundness bound)"
+  "label": "103.59 (JB, powers-batching adaptation, unpublished)"
  },
  "mimc-P128-0.json": {
   "JB": {
@@ -1331,7 +1331,7 @@
    "simple_lb_q_plus_pow": 243
   },
   "target": 128,
-  "label": "125.94 JB (below 128; Plonky3 LDR estimator 128)"
+  "label": "125.94 (JB, powers-batching adaptation; below 128; Plonky3 LDR estimator 128)"
  },
  "mimc-P128-zk-0.json": {
   "JB": {
@@ -1376,7 +1376,7 @@
    "simple_lb_q_plus_pow": 243
   },
   "target": 128,
-  "label": "123.19 JB (below 128; Plonky3 LDR estimator 128)"
+  "label": "123.19 (JB, powers-batching adaptation; below 128; Plonky3 LDR estimator 128)"
  },
  "mimc-P128-zkmin-0.json": {
   "JB": {
@@ -1421,7 +1421,7 @@
    "simple_lb_q_plus_pow": 243
   },
   "target": 128,
-  "label": "123.41 JB (below 128; Plonky3 LDR estimator 128)"
+  "label": "123.41 (JB, powers-batching adaptation; below 128; Plonky3 LDR estimator 128)"
  },
  "mimc-S100-0.json": {
   "JB": {
@@ -1464,7 +1464,7 @@
    "simple_lb_q_plus_pow": 177
   },
   "target": 100,
-  "label": "101.11 JB (proven, Soundness bound)"
+  "label": "101.11 (JB, powers-batching adaptation, unpublished)"
  },
  "mimc-S100b-0.json": {
   "JB": {
@@ -1505,7 +1505,7 @@
    "simple_lb_q_plus_pow": 177
   },
   "target": 100,
-  "label": "100.25 JB (proven, Soundness bound)"
+  "label": "100.25 (JB, powers-batching adaptation, unpublished)"
  },
  "mimc-S128-0.json": {
   "JB": {
@@ -1546,7 +1546,7 @@
    "simple_lb_q_plus_pow": 234
   },
   "target": 128,
-  "label": "128 JB (proven, Soundness bound)"
+  "label": "128 (JB, powers-batching adaptation, unpublished)"
  },
  "mimc-S128b-0.json": {
   "JB": {
@@ -1589,6 +1589,6 @@
    "simple_lb_q_plus_pow": 233
   },
   "target": 128,
-  "label": "128 JB (proven, Soundness bound)"
+  "label": "128 (JB, powers-batching adaptation, unpublished)"
  }
 }

@@ -4,6 +4,8 @@ ADK/BCIKS per-round errors, BCIKS Thm 7.2 batching with powers (our adaptation, 
 via Block et al. Cor. 5), for the exact FriParameters of each vector and each AIR's shape (width, constraint count,
 constraint degree). JB = Johnson-bound list decoding (best m in 3..24), UD = unique decoding. lambda = min(lambda_IOP,
 digest bits 4h, the usual birthday convention); lambda_strict_digest uses the strict Cor. 5 reading (4h - 0.79).
+Every vector here is a Plonky3 proof (powers batching), so no figure is labelled 'proven': the labels say
+'powers-batching adaptation, unpublished' (proof sketch in ../soundness/SOUNDNESS.md section 2.1).
 usage: python3 security.py <prover vectors dir> > security.json"""
 import glob, json, os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'soundness'))
@@ -28,10 +30,10 @@ for f in sorted(glob.glob(os.path.join(sys.argv[1], '*-0.json'))):
     jb = res['JB']['lambda']
     target = 128 if est['conjectured_bits'] >= 128 and not s['name'].startswith(('P100', 'S100')) else 100
     if s['name'].startswith('C'):
-        label = f"conjectured {est['conjectured_bits']} only (proven JB {jb})"
+        label = f"conjectured {est['conjectured_bits']} only (JB {jb}, powers-batching adaptation)"
     elif jb >= target - 0.005:
-        label = f"{jb} JB (proven, Soundness bound)"
+        label = f"{jb} (JB, powers-batching adaptation, unpublished)"
     else:
-        label = f"{jb} JB (below {target}; Plonky3 LDR estimator {est['proven_ldr_bits']})"
+        label = f"{jb} (JB, powers-batching adaptation; below {target}; Plonky3 LDR estimator {est['proven_ldr_bits']})"
     out[os.path.basename(f)] = {**res, 'plonky3': est, 'target': target, 'label': label}
 print(json.dumps(out, indent=1))

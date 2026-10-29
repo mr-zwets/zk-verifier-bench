@@ -19,9 +19,10 @@ and the zero-knowledge (HidingFriPcs) variants.
     verdicts were as expected. Most manipulations keep the item count and size.
   - Layout (a): `test-a` ran 417 cases on 8 representative vectors (see `results/test-a.log`), 0 unexpected. One honest caveat is below.
 - **The best 128-bit set is S128** (mimc, 78,393 B proof):
-  - Security: 128.17 bits λ_IOP under the Soundness phase's per-round bound (Johnson regime, m = 10). That is
+  - Security: 128.17 bits λ_IOP under the Soundness phase's per-round bound (Johnson regime, m = 10), **with the
+    powers-batching adaptation, which is not a published statement** (see the security section). That is
     λ = 128 under the usual digest convention, and 127.21 under the strict reading.
-  - Layout (b): 33.87M op-cost, **47.9% of the base-41 budget** of one 88.3 KB input. Track 5 field P128
+  - Layout (b): 33.87M op-cost (BCHN-adjusted 33.87M), **47.9% of the base-41 budget** of one 88.3 KB input. Track 5 field P128
     (Track 4 format, 92 KB) was 50.05M, 64.9%.
   - Layout (a), today's standard rules: **2 transactions, 17 inputs, 123,452 B.** Track 5 field P128 needed 19
     inputs and 150,891 B.
@@ -37,7 +38,7 @@ and the zero-knowledge (HidingFriPcs) variants.
     round binds. Plonky3's own estimator says 128.
   - The proof is 110 KB, so it does not fit one 100 KB input.
   - ZK proofs (86-189 KB) mostly do not fit one input, and need 2-5 transactions under today's rules.
-  - The C sets (degree 2, and the conjectured C128) are not provably secure: 60 and 75 bits proven.
+  - The C sets (degree 2, and the conjectured C128) are far below target under the same bound: 60 and 75 bits.
 
 The full tables (every AIR × set × ZK variant, both regimes) are in [results/tables.md](results/tables.md). They are
 also summarised below.
@@ -98,22 +99,32 @@ phase's calculator (`params5.py`, P3 model) run on each vector's exact FriParame
 regime is per-round Johnson-bound list decoding, with Fiat-Shamir per Block et al. Cor. 5. λ is capped at 4h (the
 usual birthday convention).
 
+**None of these figures is a proven bound as published.** Every vector here is a Plonky3 proof, and Plonky3 batches
+the DEEP quotients (and the constraints) with powers of one challenge. The batching term for that, (t−1)(A0 + B1), is
+the Soundness phase's adaptation of [ADK] Thm 2 (BCIKS Thm 7.2 in place of Thm 7.4). A proof sketch is in
+zk-verifier-bench `wip/pq-stark-soundness` `research/pq-stark/soundness/SOUNDNESS.md` §2.1; it is not published and
+not peer reviewed. Only Track 4-format proofs (independent γ_j, the Track 5 field phase's P100/P128) rest on [ADK]
+Thm 2 as published. The S sets depend on this term: their batching round is within 0.2-1.2 bits of the binding query
+round (S100b 100.66 vs 100.25, S100z 100.39 vs 100.21, S128 129.38 vs 128.17).
+
 | set | D | λ (JB) | binding round | regime / note |
 |---|---|---|---|---|
-| S128 | 3 | 128 (λ_IOP 128.17) | query | proven (JB, m = 10); 127.21 under the strict digest reading |
-| S128b | 3 | 128 (λ_IOP 128.09) | query | proven (JB) |
-| S128z (ZK) | 3 | 128.00 | query | proven (JB) |
-| S100 | 3 | 101.11 | query | proven (JB) |
-| S100b | 3 | 100.25 (mimc), 100.32 (fib) | query | proven (JB) |
-| S100z (ZK) | 3 | 100.21 | query | proven (JB) |
-| P100 | 3 | 100 (λ_IOP 100.11) | query / digest | proven; h = 25: 99.21 under the strict digest reading. The ZK variants (h = 32): 103.6 |
-| P128 | 3 | **125.94 (mimc), 126.31 (fib)** | query / batch | **below 128.** Plonky3's own LDR estimator says 128. ZK variants: 123.2-124.2 |
+| S128 | 3 | 128 (λ_IOP 128.17) | query | JB, powers-batching adaptation, unpublished; m = 10; 127.21 under the strict digest reading |
+| S128b | 3 | 128 (λ_IOP 128.09) | query | JB, powers-batching adaptation, unpublished |
+| S128z (ZK) | 3 | 128.00 | query | JB, powers-batching adaptation, unpublished |
+| S100 | 3 | 101.11 | query | JB, powers-batching adaptation, unpublished |
+| S100b | 3 | 100.25 (mimc), 100.32 (fib) | query | JB, powers-batching adaptation, unpublished |
+| S100z (ZK) | 3 | 100.21 | query | JB, powers-batching adaptation, unpublished |
+| P100 | 3 | 100 (λ_IOP 100.11) | query / digest | JB, powers-batching adaptation, unpublished; h = 25: 99.21 under the strict digest reading. The ZK variants (h = 32): 103.6 |
+| P128 | 3 | **125.94 (mimc), 126.31 (fib)** | query / batch | **below 128** (JB, powers-batching adaptation). Plonky3's own LDR estimator says 128. ZK variants: 123.2-124.2 |
 | C128 | 3 | 74.93 | query | conjectured 128 only |
 | C100, C100h | 2 | 59.6-59.8 | query | conjectured 100 only (degree 2) |
 
 Every unique-decoding figure is far lower (43-69 bits). Caveats carried over from the Soundness phase:
 - Plonky3 batches with powers of one challenge. Using BCIKS Thm 7.2 inside the ADK proof for that is the Soundness
-  phase's adaptation, not a published statement.
+  phase's adaptation, not a published statement (see above).
+- Zero knowledge of the ZK variants is by Plonky3's construction (HidingFriPcs, ePrint 2024/1037 §4.2), not proven
+  here; the conditions are in the prover README. This verifier only checks the proofs; it does not affect hiding.
 - The AIR shape passed to the calculator (width, 5 constraints, degree 3 for mimc and 2 for fib) is this phase's
   mapping of the two AIRs.
 
@@ -122,17 +133,21 @@ Every unique-decoding figure is far lower (43-69 bits). Caveats carried over fro
 The full tables are in [results/tables.md](results/tables.md), generated by `node tables.mjs`. They cover every
 AIR × set × ZK variant, both regimes, and the per-phase profile. Selected rows (mimc unless noted):
 
+Security is λ under the per-round bound with the powers-batching adaptation (not published; see above). BCHN-adjusted
+op-cost is on the standard basis (libauth standard op-cost + OP_DEFINE body bytes); the consensus-basis figure is in
+the JSON as `opBchnAdjustedCons` / `opBchnConsTotal`.
+
 | set | proof B | security | (b) one 100 KB input: op-cost std / BCHN-adj., % of budget | (a) today: txs / inputs / total B |
 |---|--:|---|---|---|
-| S128 | 78,393 | 128 | 33.87M / 33.35M, 47.9% | 2 / 17 / 123,452 |
+| S128 | 78,393 | 128 | 33.87M / 33.87M, 47.9% | 2 / 17 / 123,452 |
 | S128b | 99,795 | 128 | does not fit (110,710 B unlocking) | 2 / 25 / 166,343 |
-| S100 | 76,019 | 101.1 | 30.58M / 30.02M, 44.3% | 2 / 19 / 127,870 |
-| S100b | 60,793 | 100.3 | 25.64M / 25.24M, 45.5% | 1 / 12 / 83,515 |
-| P100 (h = 25) | 58,183 | 100 | 23.83M / 23.53M, 43.5% | 1 / 13 / 85,649 |
+| S100 | 76,019 | 101.1 | 30.58M / 30.58M, 44.3% | 2 / 19 / 127,870 |
+| S100b | 60,793 | 100.3 | 25.64M / 25.65M, 45.5% | 1 / 12 / 83,515 |
+| P100 (h = 25) | 58,183 | 100 | 23.83M / 23.83M, 43.5% | 1 / 13 / 85,649 |
 | P128 | 110,765 | 125.9 | does not fit (122,057 B) | 2 / 26 / 185,338 |
-| C100 (D = 2) | 56,893 | conj. 100 | 19.96M / 19.51M, 38.6% | 1 / 11 / 93,794 |
+| C100 (D = 2) | 56,893 | conj. 100 | 19.96M / 19.97M, 38.6% | 1 / 11 / 93,794 |
 | fib S128z (ZK) | 112,501 | 128 | does not fit (126,183 B) | 3 / 35 / 234,553 |
-| fib S100z (ZK) | 85,853 | 100.2 | 29.42M / 28.83M, 37.0% | 2 / 25 / 136,556 |
+| fib S100z (ZK) | 85,853 | 100.2 | 29.42M / 29.42M, 37.0% | 2 / 25 / 136,556 |
 
 Comparison with the Track 4 format (Track 5 field phase, same CashVM techniques, P128 at 91.5 KB, 128.19 bits):
 
@@ -173,11 +188,17 @@ That is 0.2-1.1% of the op-cost and 3-8% of the redeem bytes.
 
 - **Rejection sampling:** a challenge sample ≥ p is rejected on chain, where Plonky3 would draw again. This is
   safe for soundness. The completeness loss is about 2^-32 per sample, roughly 12 samples per proof.
-- **Range checks:**
+- **Range checks (accepted deviation):**
   - Field values in leaves, OOD and the final polynomial are not range-checked. The residues are used, and the
     bytes are bound by the Merkle roots and the transcript.
-  - A non-canonical twin v + p is a different transcript. No value in the 45 proofs has such a twin; `test-b` reports
-  these cases as n/a.
+  - So the script accepts a slightly larger byte language than Plonky3's verifier (and `../prover/verify.mjs`),
+    which reject a u64 ≥ p. This is accepted as **language-level malleability with no soundness impact**: a
+    non-canonical twin v + p hashes to different transcript bytes and a different Merkle leaf, so it is a different
+    oracle query, not a second answer to the same one. It does not let anyone change what the proof proves.
+  - No value in the 45 proofs has such a twin (v + p must still fit 8 bytes, so v < 2^32 − 1), so `test-b`
+    reports these cases as n/a.
+  - Adding the check would cost one `DUP <p> LESSTHAN VERIFY` per 8-byte value in PKL and parseOOD (as POPB
+    already does); it was not built or measured.
   - The hint T is checked to be < p.
 - **Layout (a) and malformed p3s-v1:** layout (a) carries full paths instead of the pruned multiproof. So two
   format-level tamper cases, "one trailing byte" and "extra sibling digest (count + 1)", are refused by the layout (a)
@@ -191,7 +212,10 @@ That is 0.2-1.1% of the op-cost and 3-8% of the redeem bytes.
     and periodic columns as in Plonky3. ZK salts and random codewords are generic.
   - The statement (public values) is baked into the code.
 - **Cost accounting:**
-  - BCHN-adjusted op-cost = libauth op-cost (consensus basis) + the body bytes of every OP_DEFINE the input executes.
+  - BCHN-adjusted op-cost = libauth op-cost (standard basis) + the body bytes of every OP_DEFINE the input executes.
+    This matches the Track 5 field phase and the layout (a) padding gate. The consensus-basis figure is kept in the
+    JSON (`opBchnAdjustedCons`, `opBchnConsTotal`, per input `opBchnCons`). Before this fix the figures used the
+    consensus basis, so they were not comparable with the field phase.
   - In layout (a) every input pays for all code. That is an upper bound for CODE inputs.
 - **Not done:**
   - No further op-cost work beyond the Track 5 field techniques. Folds (57% of a query) and Merkle (25-40%) are the
