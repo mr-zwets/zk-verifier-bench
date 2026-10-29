@@ -1,0 +1,2501 @@
+[
+ {
+  "id": "A1",
+  "group": "ext-mul",
+  "notes": "",
+  "name": "F_p^3 mul, schoolbook lazy (Track 4 MULE, one OP_MOD per coefficient), as a function",
+  "trials": 8,
+  "opStd": {
+   "min": 8209,
+   "max": 8345,
+   "mean": 8266.25
+  },
+  "opCons": {
+   "min": 8209,
+   "max": 8345,
+   "mean": 8266.25
+  },
+  "instr": {
+   "min": 63,
+   "max": 63,
+   "mean": 63
+  },
+  "arith": {
+   "min": 1384,
+   "max": 1502,
+   "mean": 1434.25
+  },
+  "pushed": {
+   "min": 524,
+   "max": 543,
+   "mean": 532
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1952,
+  "prologueBytes": 2069,
+  "defineLibauth": 10681,
+  "defineBchn": 12633,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "A1",
+  "group": "ext-mul",
+  "notes": "",
+  "name": "F_p^2 mul, schoolbook lazy (Track 4 MULE, one OP_MOD per coefficient), as a function",
+  "trials": 8,
+  "opStd": {
+   "min": 3827,
+   "max": 3897,
+   "mean": 3876.75
+  },
+  "opCons": {
+   "min": 3827,
+   "max": 3897,
+   "mean": 3876.75
+  },
+  "instr": {
+   "min": 29,
+   "max": 29,
+   "mean": 29
+  },
+  "arith": {
+   "min": 704,
+   "max": 764,
+   "mean": 747.375
+  },
+  "pushed": {
+   "min": 223,
+   "max": 233,
+   "mean": 229.375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1322,
+  "prologueBytes": 1433,
+  "defineLibauth": 10051,
+  "defineBchn": 11373,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "A2",
+  "group": "ext-mul",
+  "notes": "",
+  "name": "F_p^3 times a per-proof constant beta: Track 4 MULE with beta as arguments",
+  "trials": 8,
+  "opStd": {
+   "min": 8251,
+   "max": 8338,
+   "mean": 8300.875
+  },
+  "opCons": {
+   "min": 8251,
+   "max": 8338,
+   "mean": 8300.875
+  },
+  "instr": {
+   "min": 63,
+   "max": 63,
+   "mean": 63
+  },
+  "arith": {
+   "min": 1421,
+   "max": 1498,
+   "mean": 1463.875
+  },
+  "pushed": {
+   "min": 530,
+   "max": 542,
+   "mean": 537
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1952,
+  "prologueBytes": 2069,
+  "defineLibauth": 10681,
+  "defineBchn": 12633,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "A2",
+  "group": "ext-mul",
+  "notes": "per-proof cost: the 3 columns (COLS, measured below)",
+  "name": "F_p^3 times a per-proof constant beta: packed rotation columns (3 OP_MUL + unpack + 3 OP_MOD), inline",
+  "trials": 8,
+  "opStd": {
+   "min": 5780,
+   "max": 5900,
+   "mean": 5853
+  },
+  "opCons": {
+   "min": 5780,
+   "max": 5900,
+   "mean": 5853
+  },
+  "instr": {
+   "min": 34,
+   "max": 34,
+   "mean": 34
+  },
+  "arith": {
+   "min": 1733,
+   "max": 1848,
+   "mean": 1803.125
+  },
+  "pushed": {
+   "min": 647,
+   "max": 652,
+   "mean": 649.875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 64,
+   "max": 64,
+   "mean": 64
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "A2",
+  "group": "ext-mul",
+  "notes": "",
+  "name": "rotation columns of a per-proof constant (COLS, 17-byte slots), once per constant",
+  "trials": 8,
+  "opStd": {
+   "min": 4981,
+   "max": 5015,
+   "mean": 4998.5
+  },
+  "opCons": {
+   "min": 4981,
+   "max": 5015,
+   "mean": 4998.5
+  },
+  "instr": {
+   "min": 42,
+   "max": 42,
+   "mean": 42
+  },
+  "arith": {
+   "min": 250,
+   "max": 261,
+   "mean": 255.625
+  },
+  "pushed": {
+   "min": 531,
+   "max": 554,
+   "mean": 542.875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "A3",
+  "group": "lazy",
+  "notes": "",
+  "name": "a*b + c*d in F_p^3: two MULE + ADDE (each reduced, Track 4 style)",
+  "trials": 8,
+  "opStd": {
+   "min": 21828,
+   "max": 22067,
+   "mean": 21943.25
+  },
+  "opCons": {
+   "min": 21828,
+   "max": 22067,
+   "mean": 21943.25
+  },
+  "instr": {
+   "min": 173,
+   "max": 173,
+   "mean": 173
+  },
+  "arith": {
+   "min": 3090,
+   "max": 3292,
+   "mean": 3187.5
+  },
+  "pushed": {
+   "min": 1438,
+   "max": 1475,
+   "mean": 1455.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 33,
+   "max": 33,
+   "mean": 33
+  },
+  "defBytes": 1952,
+  "prologueBytes": 2069,
+  "defineLibauth": 10681,
+  "defineBchn": 12633,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "A3",
+  "group": "lazy",
+  "notes": "",
+  "name": "a*b + c*d in F_p^3: lazy, 18 products, one OP_MOD per coefficient, inline",
+  "trials": 8,
+  "opStd": {
+   "min": 15397,
+   "max": 15525,
+   "mean": 15460.5
+  },
+  "opCons": {
+   "min": 15397,
+   "max": 15525,
+   "mean": 15460.5
+  },
+  "instr": {
+   "min": 119,
+   "max": 119,
+   "mean": 119
+  },
+  "arith": {
+   "min": 2403,
+   "max": 2512,
+   "mean": 2456.75
+  },
+  "pushed": {
+   "min": 1094,
+   "max": 1113,
+   "mean": 1103.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 146,
+   "max": 146,
+   "mean": 146
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B1",
+  "group": "fold",
+  "notes": "",
+  "name": "fold pair u + v + beta x^-1 (u - v): Track 4 MULF (g = beta x^-1) + PAIR (MULE inside)",
+  "trials": 8,
+  "opStd": {
+   "min": 20920,
+   "max": 21008,
+   "mean": 20953.625
+  },
+  "opCons": {
+   "min": 20920,
+   "max": 21008,
+   "mean": 20953.625
+  },
+  "instr": {
+   "min": 170,
+   "max": 170,
+   "mean": 170
+  },
+  "arith": {
+   "min": 2554,
+   "max": 2631,
+   "mean": 2584.5
+  },
+  "pushed": {
+   "min": 1362,
+   "max": 1377,
+   "mean": 1369.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 26,
+   "max": 26,
+   "mean": 26
+  },
+  "defBytes": 1952,
+  "prologueBytes": 2069,
+  "defineLibauth": 10681,
+  "defineBchn": 12633,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B1",
+  "group": "fold",
+  "notes": "",
+  "name": "fold pair: PAIRP (rotation columns of beta, 17-byte slots; unpacked values)",
+  "trials": 8,
+  "opStd": {
+   "min": 13291,
+   "max": 13368,
+   "mean": 13327
+  },
+  "opCons": {
+   "min": 13291,
+   "max": 13368,
+   "mean": 13327
+  },
+  "instr": {
+   "min": 94,
+   "max": 94,
+   "mean": 94
+  },
+  "arith": {
+   "min": 2714,
+   "max": 2781,
+   "mean": 2747.75
+  },
+  "pushed": {
+   "min": 1173,
+   "max": 1187,
+   "mean": 1179.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1769,
+  "prologueBytes": 1877,
+  "defineLibauth": 9896,
+  "defineBchn": 11665,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B1",
+  "group": "fold",
+  "notes": "the UR is paid once per fold, not per pair",
+  "name": "fold pair: PAIRK (packed values, 26-byte slots) + UR (unpack, reduce)",
+  "trials": 8,
+  "opStd": {
+   "min": 12934,
+   "max": 13161,
+   "mean": 13092.5
+  },
+  "opCons": {
+   "min": 12934,
+   "max": 13161,
+   "mean": 13092.5
+  },
+  "instr": {
+   "min": 69,
+   "max": 69,
+   "mean": 69
+  },
+  "arith": {
+   "min": 4092,
+   "max": 4313,
+   "mean": 4245.25
+  },
+  "pushed": {
+   "min": 1942,
+   "max": 1953,
+   "mean": 1947.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 6,
+   "max": 6,
+   "mean": 6
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B2",
+  "group": "fold",
+  "notes": "",
+  "name": "FRI fold, arity 2: Track 4 FOLD2 (binary folds, MULF + PAIR)",
+  "trials": 8,
+  "opStd": {
+   "min": 20218,
+   "max": 20369,
+   "mean": 20286.25
+  },
+  "opCons": {
+   "min": 20218,
+   "max": 20369,
+   "mean": 20286.25
+  },
+  "instr": {
+   "min": 164,
+   "max": 164,
+   "mean": 164
+  },
+  "arith": {
+   "min": 2530,
+   "max": 2652,
+   "mean": 2587.5
+  },
+  "pushed": {
+   "min": 1287,
+   "max": 1317,
+   "mean": 1298.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 2353,
+  "prologueBytes": 2476,
+  "defineLibauth": 11383,
+  "defineBchn": 13736,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B2",
+  "group": "fold",
+  "notes": "columns of beta^(2^l) are per-proof constants (COLSK)",
+  "name": "FRI fold, arity 2: Track 5 FOLD2 (packed values, PAIRK) + UR",
+  "trials": 8,
+  "opStd": {
+   "min": 13665,
+   "max": 13906,
+   "mean": 13788.125
+  },
+  "opCons": {
+   "min": 13665,
+   "max": 13906,
+   "mean": 13788.125
+  },
+  "instr": {
+   "min": 75,
+   "max": 75,
+   "mean": 75
+  },
+  "arith": {
+   "min": 4090,
+   "max": 4321,
+   "mean": 4209.375
+  },
+  "pushed": {
+   "min": 2075,
+   "max": 2085,
+   "mean": 2078.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 6,
+   "max": 6,
+   "mean": 6
+  },
+  "defBytes": 2101,
+  "prologueBytes": 2226,
+  "defineLibauth": 11432,
+  "defineBchn": 13533,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B2",
+  "group": "fold",
+  "notes": "",
+  "name": "FRI fold, arity 4: Track 4 FOLD4 (binary folds, MULF + PAIR)",
+  "trials": 8,
+  "opStd": {
+   "min": 65575,
+   "max": 65882,
+   "mean": 65690.5
+  },
+  "opCons": {
+   "min": 65575,
+   "max": 65882,
+   "mean": 65690.5
+  },
+  "instr": {
+   "min": 531,
+   "max": 531,
+   "mean": 531
+  },
+  "arith": {
+   "min": 8195,
+   "max": 8454,
+   "mean": 8289.75
+  },
+  "pushed": {
+   "min": 4276,
+   "max": 4328,
+   "mean": 4300.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 2353,
+  "prologueBytes": 2476,
+  "defineLibauth": 11383,
+  "defineBchn": 13736,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B2",
+  "group": "fold",
+  "notes": "columns of beta^(2^l) are per-proof constants (COLSK)",
+  "name": "FRI fold, arity 4: Track 5 FOLD4 (packed values, PAIRK) + UR",
+  "trials": 8,
+  "opStd": {
+   "min": 39474,
+   "max": 39895,
+   "mean": 39695.625
+  },
+  "opCons": {
+   "min": 39474,
+   "max": 39895,
+   "mean": 39695.625
+  },
+  "instr": {
+   "min": 217,
+   "max": 217,
+   "mean": 217
+  },
+  "arith": {
+   "min": 11546,
+   "max": 11946,
+   "mean": 11752.25
+  },
+  "pushed": {
+   "min": 6228,
+   "max": 6259,
+   "mean": 6243.375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 6,
+   "max": 6,
+   "mean": 6
+  },
+  "defBytes": 2101,
+  "prologueBytes": 2226,
+  "defineLibauth": 11432,
+  "defineBchn": 13533,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B2",
+  "group": "fold",
+  "notes": "",
+  "name": "FRI fold, arity 8: Track 4 FOLD8 (binary folds, MULF + PAIR)",
+  "trials": 8,
+  "opStd": {
+   "min": 155944,
+   "max": 156141,
+   "mean": 156033.875
+  },
+  "opCons": {
+   "min": 155944,
+   "max": 156141,
+   "mean": 156033.875
+  },
+  "instr": {
+   "min": 1260,
+   "max": 1260,
+   "mean": 1260
+  },
+  "arith": {
+   "min": 19374,
+   "max": 19542,
+   "mean": 19455.375
+  },
+  "pushed": {
+   "min": 10565,
+   "max": 10599,
+   "mean": 10578.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 2353,
+  "prologueBytes": 2476,
+  "defineLibauth": 11383,
+  "defineBchn": 13736,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B2",
+  "group": "fold",
+  "notes": "columns of beta^(2^l) are per-proof constants (COLSK)",
+  "name": "FRI fold, arity 8: Track 5 FOLD8 (packed values, PAIRK) + UR",
+  "trials": 8,
+  "opStd": {
+   "min": 90885,
+   "max": 91717,
+   "mean": 91285.75
+  },
+  "opCons": {
+   "min": 90885,
+   "max": 91717,
+   "mean": 91285.75
+  },
+  "instr": {
+   "min": 497,
+   "max": 497,
+   "mean": 497
+  },
+  "arith": {
+   "min": 26580,
+   "max": 27365,
+   "mean": 26963.125
+  },
+  "pushed": {
+   "min": 14605,
+   "max": 14652,
+   "mean": 14622.625
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 6,
+   "max": 6,
+   "mean": 6
+  },
+  "defBytes": 2101,
+  "prologueBytes": 2226,
+  "defineLibauth": 11432,
+  "defineBchn": 13533,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B2",
+  "group": "fold",
+  "notes": "",
+  "name": "FRI fold, arity 16: Track 4 FOLD16 (binary folds, MULF + PAIR)",
+  "trials": 8,
+  "opStd": {
+   "min": 336589,
+   "max": 337040,
+   "mean": 336860.625
+  },
+  "opCons": {
+   "min": 336589,
+   "max": 337040,
+   "mean": 336860.625
+  },
+  "instr": {
+   "min": 2707,
+   "max": 2707,
+   "mean": 2707
+  },
+  "arith": {
+   "min": 41842,
+   "max": 42240,
+   "mean": 42069.375
+  },
+  "pushed": {
+   "min": 24047,
+   "max": 24120,
+   "mean": 24091.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 2353,
+  "prologueBytes": 2476,
+  "defineLibauth": 11383,
+  "defineBchn": 13736,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B2",
+  "group": "fold",
+  "notes": "columns of beta^(2^l) are per-proof constants (COLSK)",
+  "name": "FRI fold, arity 16: Track 5 FOLD16 (packed values, PAIRK) + UR",
+  "trials": 8,
+  "opStd": {
+   "min": 192736,
+   "max": 193626,
+   "mean": 193275.375
+  },
+  "opCons": {
+   "min": 192736,
+   "max": 193626,
+   "mean": 193275.375
+  },
+  "instr": {
+   "min": 1047,
+   "max": 1047,
+   "mean": 1047
+  },
+  "arith": {
+   "min": 56715,
+   "max": 57574,
+   "mean": 57208.5
+  },
+  "pushed": {
+   "min": 31321,
+   "max": 31416,
+   "mean": 31366.875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 6,
+   "max": 6,
+   "mean": 6
+  },
+  "defBytes": 2101,
+  "prologueBytes": 2226,
+  "defineLibauth": 11432,
+  "defineBchn": 13533,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B3",
+  "group": "deep",
+  "notes": "",
+  "name": "DEEP at one point: Track 4 DEEPPT (MULF, MULE calls; 25 per-proof constants as arguments)",
+  "trials": 8,
+  "opStd": {
+   "min": 63332,
+   "max": 63804,
+   "mean": 63535.75
+  },
+  "opCons": {
+   "min": 63332,
+   "max": 63804,
+   "mean": 63535.75
+  },
+  "instr": {
+   "min": 493,
+   "max": 493,
+   "mean": 493
+  },
+  "arith": {
+   "min": 9348,
+   "max": 9744,
+   "mean": 9517.625
+  },
+  "pushed": {
+   "min": 4684,
+   "max": 4760,
+   "mean": 4718.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1952,
+  "prologueBytes": 2069,
+  "defineLibauth": 10681,
+  "defineBchn": 12633,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B3",
+  "group": "deep",
+  "notes": "",
+  "name": "DEEP at one point: Track 5 DPK (packed numerators, 11 packed constants, lazy f0, packed output)",
+  "trials": 8,
+  "opStd": {
+   "min": 37831,
+   "max": 38085,
+   "mean": 37970.625
+  },
+  "opCons": {
+   "min": 37831,
+   "max": 38085,
+   "mean": 37970.625
+  },
+  "instr": {
+   "min": 235,
+   "max": 235,
+   "mean": 235
+  },
+  "arith": {
+   "min": 10110,
+   "max": 10346,
+   "mean": 10236.5
+  },
+  "pushed": {
+   "min": 4221,
+   "max": 4248,
+   "mean": 4234.125
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the coefficients left on the stack (checked unchanged)",
+  "name": "final polynomial per query, D = 32: Track 4 (packed coefficients, GRP groups of 32 + HORN)",
+  "trials": 4,
+  "opStd": {
+   "min": 107430,
+   "max": 108035,
+   "mean": 107709.5
+  },
+  "opCons": {
+   "min": 107430,
+   "max": 108035,
+   "mean": 107709.5
+  },
+  "instr": {
+   "min": 764,
+   "max": 764,
+   "mean": 764
+  },
+  "arith": {
+   "min": 23884,
+   "max": 24433,
+   "mean": 24142.25
+  },
+  "pushed": {
+   "min": 7141,
+   "max": 7202,
+   "mean": 7167.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 89,
+   "max": 89,
+   "mean": 89
+  },
+  "defBytes": 1935,
+  "prologueBytes": 2044,
+  "defineLibauth": 10062,
+  "defineBchn": 11997,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 32: Track 5 group-packed dot product, H = 4 (G = 8)",
+  "trials": 4,
+  "opStd": {
+   "min": 54674,
+   "max": 55434,
+   "mean": 55186
+  },
+  "opCons": {
+   "min": 54674,
+   "max": 55434,
+   "mean": 55186
+  },
+  "instr": {
+   "min": 277,
+   "max": 277,
+   "mean": 277
+  },
+  "arith": {
+   "min": 19099,
+   "max": 19806,
+   "mean": 19570.75
+  },
+  "pushed": {
+   "min": 7875,
+   "max": 7933,
+   "mean": 7915.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 170,
+   "max": 170,
+   "mean": 170
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 32: Track 5 group-packed dot product, H = 8 (G = 4)",
+  "trials": 4,
+  "opStd": {
+   "min": 74408,
+   "max": 75766,
+   "mean": 75186.5
+  },
+  "opCons": {
+   "min": 74408,
+   "max": 75766,
+   "mean": 75186.5
+  },
+  "instr": {
+   "min": 425,
+   "max": 425,
+   "mean": 425
+  },
+  "arith": {
+   "min": 18947,
+   "max": 20268,
+   "mean": 19698
+  },
+  "pushed": {
+   "min": 12961,
+   "max": 13002,
+   "mean": 12988.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 185,
+   "max": 185,
+   "mean": 185
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 32: Track 5 group-packed dot product, H = 16 (G = 2)",
+  "trials": 4,
+  "opStd": {
+   "min": 130325,
+   "max": 131501,
+   "mean": 131119.75
+  },
+  "opCons": {
+   "min": 130325,
+   "max": 131501,
+   "mean": 131119.75
+  },
+  "instr": {
+   "min": 793,
+   "max": 793,
+   "mean": 793
+  },
+  "arith": {
+   "min": 20408,
+   "max": 21507,
+   "mean": 21135.75
+  },
+  "pushed": {
+   "min": 30617,
+   "max": 30753,
+   "mean": 30684
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 265,
+   "max": 265,
+   "mean": 265
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "",
+  "name": "final polynomial per proof (unpack FIN), D = 32: Track 4 (16-coefficient chunks -> packed coefficients)",
+  "trials": 2,
+  "opStd": {
+   "min": 87903,
+   "max": 87908,
+   "mean": 87905.5
+  },
+  "opCons": {
+   "min": 87903,
+   "max": 87908,
+   "mean": 87905.5
+  },
+  "instr": {
+   "min": 733,
+   "max": 733,
+   "mean": 733
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 14603,
+   "max": 14608,
+   "mean": 14605.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 13,
+   "max": 13,
+   "mean": 13
+  },
+  "defBytes": 2057,
+  "prologueBytes": 2175,
+  "defineLibauth": 10786,
+  "defineBchn": 12843,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "",
+  "name": "final polynomial per proof (regroup FIN), D = 32: Track 5 group-packed, H = 8",
+  "trials": 2,
+  "opStd": {
+   "min": 130056,
+   "max": 130057,
+   "mean": 130056.5
+  },
+  "opCons": {
+   "min": 130056,
+   "max": 130057,
+   "mean": 130056.5
+  },
+  "instr": {
+   "min": 984,
+   "max": 984,
+   "mean": 984
+  },
+  "arith": {
+   "min": 6,
+   "max": 6,
+   "mean": 6
+  },
+  "pushed": {
+   "min": 31650,
+   "max": 31651,
+   "mean": 31650.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 93,
+   "max": 93,
+   "mean": 93
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the coefficients left on the stack (checked unchanged)",
+  "name": "final polynomial per query, D = 64: Track 4 (packed coefficients, GRP groups of 32 + HORN)",
+  "trials": 4,
+  "opStd": {
+   "min": 160019,
+   "max": 160510,
+   "mean": 160321.25
+  },
+  "opCons": {
+   "min": 160019,
+   "max": 160510,
+   "mean": 160321.25
+  },
+  "instr": {
+   "min": 1067,
+   "max": 1067,
+   "mean": 1067
+  },
+  "arith": {
+   "min": 40742,
+   "max": 41207,
+   "mean": 41040
+  },
+  "pushed": {
+   "min": 12572,
+   "max": 12603,
+   "mean": 12581.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 99,
+   "max": 99,
+   "mean": 99
+  },
+  "defBytes": 1935,
+  "prologueBytes": 2044,
+  "defineLibauth": 10062,
+  "defineBchn": 11997,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 64: Track 5 group-packed dot product, H = 4 (G = 16)",
+  "trials": 4,
+  "opStd": {
+   "min": 87593,
+   "max": 89255,
+   "mean": 88556
+  },
+  "opCons": {
+   "min": 87593,
+   "max": 89255,
+   "mean": 88556
+  },
+  "instr": {
+   "min": 373,
+   "max": 373,
+   "mean": 373
+  },
+  "arith": {
+   "min": 37168,
+   "max": 38800,
+   "mean": 38108.5
+  },
+  "pushed": {
+   "min": 13125,
+   "max": 13164,
+   "mean": 13147.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 249,
+   "max": 249,
+   "mean": 249
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 64: Track 5 group-packed dot product, H = 8 (G = 8)",
+  "trials": 4,
+  "opStd": {
+   "min": 102023,
+   "max": 103765,
+   "mean": 102909.5
+  },
+  "opCons": {
+   "min": 102023,
+   "max": 103765,
+   "mean": 102909.5
+  },
+  "instr": {
+   "min": 473,
+   "max": 473,
+   "mean": 473
+  },
+  "arith": {
+   "min": 36638,
+   "max": 38360,
+   "mean": 37524.5
+  },
+  "pushed": {
+   "min": 18067,
+   "max": 18105,
+   "mean": 18085
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 218,
+   "max": 218,
+   "mean": 218
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 64: Track 5 group-packed dot product, H = 16 (G = 4)",
+  "trials": 4,
+  "opStd": {
+   "min": 154430,
+   "max": 157515,
+   "mean": 156671.75
+  },
+  "opCons": {
+   "min": 154430,
+   "max": 157515,
+   "mean": 156671.75
+  },
+  "instr": {
+   "min": 817,
+   "max": 817,
+   "mean": 817
+  },
+  "arith": {
+   "min": 37118,
+   "max": 40050,
+   "mean": 39226.5
+  },
+  "pushed": {
+   "min": 35612,
+   "max": 35844,
+   "mean": 35745.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 281,
+   "max": 281,
+   "mean": 281
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "",
+  "name": "final polynomial per proof (unpack FIN), D = 64: Track 4 (16-coefficient chunks -> packed coefficients)",
+  "trials": 2,
+  "opStd": {
+   "min": 178978,
+   "max": 178981,
+   "mean": 178979.5
+  },
+  "opCons": {
+   "min": 178978,
+   "max": 178981,
+   "mean": 178979.5
+  },
+  "instr": {
+   "min": 1470,
+   "max": 1470,
+   "mean": 1470
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 31978,
+   "max": 31981,
+   "mean": 31979.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 35,
+   "max": 35,
+   "mean": 35
+  },
+  "defBytes": 2057,
+  "prologueBytes": 2175,
+  "defineLibauth": 10786,
+  "defineBchn": 12843,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "",
+  "name": "final polynomial per proof (regroup FIN), D = 64: Track 5 group-packed, H = 8",
+  "trials": 2,
+  "opStd": {
+   "min": 260738,
+   "max": 260738,
+   "mean": 260738
+  },
+  "opCons": {
+   "min": 260738,
+   "max": 260738,
+   "mean": 260738
+  },
+  "instr": {
+   "min": 1956,
+   "max": 1956,
+   "mean": 1956
+  },
+  "arith": {
+   "min": 14,
+   "max": 14,
+   "mean": 14
+  },
+  "pushed": {
+   "min": 65124,
+   "max": 65124,
+   "mean": 65124
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 93,
+   "max": 93,
+   "mean": 93
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the coefficients left on the stack (checked unchanged)",
+  "name": "final polynomial per query, D = 128: Track 4 (packed coefficients, GRP groups of 32 + HORN)",
+  "trials": 4,
+  "opStd": {
+   "min": 265100,
+   "max": 266602,
+   "mean": 265685.75
+  },
+  "opCons": {
+   "min": 265100,
+   "max": 266602,
+   "mean": 265685.75
+  },
+  "instr": {
+   "min": 1673,
+   "max": 1673,
+   "mean": 1673
+  },
+  "arith": {
+   "min": 74358,
+   "max": 75762,
+   "mean": 74900.5
+  },
+  "pushed": {
+   "min": 23442,
+   "max": 23540,
+   "mean": 23485.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 121,
+   "max": 121,
+   "mean": 121
+  },
+  "defBytes": 1935,
+  "prologueBytes": 2044,
+  "defineLibauth": 10062,
+  "defineBchn": 11997,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 128: Track 5 group-packed dot product, H = 4 (G = 32)",
+  "trials": 4,
+  "opStd": {
+   "min": 154347,
+   "max": 155435,
+   "mean": 154874
+  },
+  "opCons": {
+   "min": 154347,
+   "max": 155435,
+   "mean": 154874
+  },
+  "instr": {
+   "min": 565,
+   "max": 565,
+   "mean": 565
+  },
+  "arith": {
+   "min": 74229,
+   "max": 75327,
+   "mean": 74761.75
+  },
+  "pushed": {
+   "min": 23600,
+   "max": 23623,
+   "mean": 23612.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 393,
+   "max": 393,
+   "mean": 393
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 128: Track 5 group-packed dot product, H = 8 (G = 16)",
+  "trials": 4,
+  "opStd": {
+   "min": 157306,
+   "max": 159052,
+   "mean": 157899.5
+  },
+  "opCons": {
+   "min": 157306,
+   "max": 159052,
+   "mean": 157899.5
+  },
+  "instr": {
+   "min": 569,
+   "max": 569,
+   "mean": 569
+  },
+  "arith": {
+   "min": 72188,
+   "max": 73921,
+   "mean": 72787.5
+  },
+  "pushed": {
+   "min": 28172,
+   "max": 28231,
+   "mean": 28212
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 297,
+   "max": 297,
+   "mean": 297
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 128: Track 5 group-packed dot product, H = 16 (G = 8)",
+  "trials": 4,
+  "opStd": {
+   "min": 204592,
+   "max": 207131,
+   "mean": 205857
+  },
+  "opCons": {
+   "min": 204592,
+   "max": 207131,
+   "mean": 205857
+  },
+  "instr": {
+   "min": 865,
+   "max": 865,
+   "mean": 865
+  },
+  "arith": {
+   "min": 72396,
+   "max": 74910,
+   "mean": 73618
+  },
+  "pushed": {
+   "min": 45696,
+   "max": 45806,
+   "mean": 45739
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 314,
+   "max": 314,
+   "mean": 314
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "",
+  "name": "final polynomial per proof (unpack FIN), D = 128: Track 4 (16-coefficient chunks -> packed coefficients)",
+  "trials": 2,
+  "opStd": {
+   "min": 364956,
+   "max": 364957,
+   "mean": 364956.5
+  },
+  "opCons": {
+   "min": 364956,
+   "max": 364957,
+   "mean": 364956.5
+  },
+  "instr": {
+   "min": 2942,
+   "max": 2942,
+   "mean": 2942
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 70756,
+   "max": 70757,
+   "mean": 70756.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 75,
+   "max": 75,
+   "mean": 75
+  },
+  "defBytes": 2057,
+  "prologueBytes": 2175,
+  "defineLibauth": 10786,
+  "defineBchn": 12843,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "",
+  "name": "final polynomial per proof (regroup FIN), D = 128: Track 5 group-packed, H = 8",
+  "trials": 2,
+  "opStd": {
+   "min": 527572,
+   "max": 527574,
+   "mean": 527573
+  },
+  "opCons": {
+   "min": 527572,
+   "max": 527574,
+   "mean": 527573
+  },
+  "instr": {
+   "min": 3900,
+   "max": 3900,
+   "mean": 3900
+  },
+  "arith": {
+   "min": 30,
+   "max": 30,
+   "mean": 30
+  },
+  "pushed": {
+   "min": 137542,
+   "max": 137544,
+   "mean": 137543
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 94,
+   "max": 94,
+   "mean": 94
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the coefficients left on the stack (checked unchanged)",
+  "name": "final polynomial per query, D = 256: Track 4 (packed coefficients, GRP groups of 32 + HORN)",
+  "trials": 4,
+  "opStd": {
+   "min": 473712,
+   "max": 477285,
+   "mean": 475360.75
+  },
+  "opCons": {
+   "min": 473712,
+   "max": 477285,
+   "mean": 475360.75
+  },
+  "instr": {
+   "min": 2885,
+   "max": 2885,
+   "mean": 2885
+  },
+  "arith": {
+   "min": 139974,
+   "max": 143435,
+   "mean": 141554.25
+  },
+  "pushed": {
+   "min": 45238,
+   "max": 45350,
+   "mean": 45306.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 165,
+   "max": 165,
+   "mean": 165
+  },
+  "defBytes": 1935,
+  "prologueBytes": 2044,
+  "defineLibauth": 10062,
+  "defineBchn": 11997,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 256: Track 5 group-packed dot product, H = 4 (G = 64)",
+  "trials": 4,
+  "opStd": {
+   "min": 287667,
+   "max": 289118,
+   "mean": 288128.25
+  },
+  "opCons": {
+   "min": 287667,
+   "max": 289118,
+   "mean": 288128.25
+  },
+  "instr": {
+   "min": 949,
+   "max": 949,
+   "mean": 949
+  },
+  "arith": {
+   "min": 148126,
+   "max": 149567,
+   "mean": 148608.25
+  },
+  "pushed": {
+   "min": 44551,
+   "max": 44651,
+   "mean": 44620
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 682,
+   "max": 682,
+   "mean": 682
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 256: Track 5 group-packed dot product, H = 8 (G = 32)",
+  "trials": 4,
+  "opStd": {
+   "min": 267097,
+   "max": 269567,
+   "mean": 268132
+  },
+  "opCons": {
+   "min": 267097,
+   "max": 269567,
+   "mean": 268132
+  },
+  "instr": {
+   "min": 761,
+   "max": 761,
+   "mean": 761
+  },
+  "arith": {
+   "min": 142523,
+   "max": 144976,
+   "mean": 143551.75
+  },
+  "pushed": {
+   "min": 48440,
+   "max": 48516,
+   "mean": 48480.25
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 441,
+   "max": 441,
+   "mean": 441
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "outputs: the packed groups left on the stack",
+  "name": "final polynomial per query, D = 256: Track 5 group-packed dot product, H = 16 (G = 16)",
+  "trials": 4,
+  "opStd": {
+   "min": 300938,
+   "max": 307255,
+   "mean": 303778.5
+  },
+  "opCons": {
+   "min": 300938,
+   "max": 307255,
+   "mean": 303778.5
+  },
+  "instr": {
+   "min": 961,
+   "max": 961,
+   "mean": 961
+  },
+  "arith": {
+   "min": 139187,
+   "max": 145407,
+   "mean": 141994.5
+  },
+  "pushed": {
+   "min": 65645,
+   "max": 65748,
+   "mean": 65684
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 393,
+   "max": 393,
+   "mean": 393
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "",
+  "name": "final polynomial per proof (unpack FIN), D = 256: Track 4 (16-coefficient chunks -> packed coefficients)",
+  "trials": 2,
+  "opStd": {
+   "min": 756182,
+   "max": 756191,
+   "mean": 756186.5
+  },
+  "opCons": {
+   "min": 756182,
+   "max": 756191,
+   "mean": 756186.5
+  },
+  "instr": {
+   "min": 5886,
+   "max": 5886,
+   "mean": 5886
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 167582,
+   "max": 167591,
+   "mean": 167586.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 163,
+   "max": 163,
+   "mean": 163
+  },
+  "defBytes": 2057,
+  "prologueBytes": 2175,
+  "defineLibauth": 10786,
+  "defineBchn": 12843,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "B4",
+  "group": "final",
+  "notes": "",
+  "name": "final polynomial per proof (regroup FIN), D = 256: Track 5 group-packed, H = 8",
+  "trials": 2,
+  "opStd": {
+   "min": 1083133,
+   "max": 1083136,
+   "mean": 1083134.5
+  },
+  "opCons": {
+   "min": 1083133,
+   "max": 1083136,
+   "mean": 1083134.5
+  },
+  "instr": {
+   "min": 7788,
+   "max": 7788,
+   "mean": 7788
+  },
+  "arith": {
+   "min": 62,
+   "max": 62,
+   "mean": 62
+  },
+  "pushed": {
+   "min": 304271,
+   "max": 304274,
+   "mean": 304272.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 98,
+   "max": 98,
+   "mean": 98
+  },
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
+  "real": [
+   "over one standard input"
+  ]
+ },
+ {
+  "id": "C1",
+  "group": "inverse",
+  "notes": "",
+  "name": "invert 9 F_p values (8 DEEP norms and x0): Montgomery batch, one witnessed inverse (+8 proof bytes)",
+  "trials": 8,
+  "opStd": {
+   "min": 29032,
+   "max": 29233,
+   "mean": 29135.125
+  },
+  "opCons": {
+   "min": 29032,
+   "max": 29233,
+   "mean": 29135.125
+  },
+  "instr": {
+   "min": 217,
+   "max": 217,
+   "mean": 217
+  },
+  "arith": {
+   "min": 5907,
+   "max": 6088,
+   "mean": 6000.625
+  },
+  "pushed": {
+   "min": 1425,
+   "max": 1445,
+   "mean": 1434.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 142,
+   "max": 142,
+   "mean": 142
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "C1",
+  "group": "inverse",
+  "notes": "",
+  "name": "invert 9 F_p values: every inverse witnessed and checked x * x^-1 == 1 (+72 proof bytes)",
+  "trials": 8,
+  "opStd": {
+   "min": 10631,
+   "max": 10677,
+   "mean": 10658.125
+  },
+  "opCons": {
+   "min": 10631,
+   "max": 10677,
+   "mean": 10658.125
+  },
+  "instr": {
+   "min": 80,
+   "max": 80,
+   "mean": 80
+  },
+  "arith": {
+   "min": 2093,
+   "max": 2134,
+   "mean": 2117.25
+  },
+  "pushed": {
+   "min": 538,
+   "max": 543,
+   "mean": 540.875
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 162,
+   "max": 162,
+   "mean": 162
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "D1",
+  "group": "x0",
+  "notes": "",
+  "name": "x0 = 7 w^idx (idx < 2^19): Track 4 XPOW, square and multiply",
+  "trials": 8,
+  "opStd": {
+   "min": 47336,
+   "max": 55135,
+   "mean": 52126.25
+  },
+  "opCons": {
+   "min": 47336,
+   "max": 55135,
+   "mean": 52126.25
+  },
+  "instr": {
+   "min": 391,
+   "max": 463,
+   "mean": 442
+  },
+  "arith": {
+   "min": 5584,
+   "max": 7371,
+   "mean": 6605.25
+  },
+  "pushed": {
+   "min": 1131,
+   "max": 1464,
+   "mean": 1321
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1952,
+  "prologueBytes": 2069,
+  "defineLibauth": 10681,
+  "defineBchn": 12633,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "D1",
+  "group": "x0",
+  "notes": "",
+  "name": "x0: Track 4 fast XPOW, 4-bit windows from tables in the code (+768 B code)",
+  "trials": 8,
+  "opStd": {
+   "min": 13269,
+   "max": 13585,
+   "mean": 13426
+  },
+  "opCons": {
+   "min": 13269,
+   "max": 13585,
+   "mean": 13426
+  },
+  "instr": {
+   "min": 106,
+   "max": 106,
+   "mean": 106
+  },
+  "arith": {
+   "min": 700,
+   "max": 1024,
+   "mean": 940.625
+  },
+  "pushed": {
+   "min": 1778,
+   "max": 1974,
+   "mean": 1885.375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 3005,
+  "prologueBytes": 3124,
+  "defineLibauth": 11734,
+  "defineBchn": 14739,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "D1",
+  "group": "x0",
+  "notes": "per query; outputs include the tables (left unchanged)",
+  "name": "x0: Track 5 runtime 4-bit window tables on the stack (5 x 16 values, built once per proof)",
+  "trials": 8,
+  "opStd": {
+   "min": 7222,
+   "max": 7419,
+   "mean": 7321.75
+  },
+  "opCons": {
+   "min": 7222,
+   "max": 7419,
+   "mean": 7321.75
+  },
+  "instr": {
+   "min": 62,
+   "max": 62,
+   "mean": 62
+  },
+  "arith": {
+   "min": 825,
+   "max": 1001,
+   "mean": 914.25
+  },
+  "pushed": {
+   "min": 197,
+   "max": 218,
+   "mean": 207.5
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 103,
+   "max": 103,
+   "mean": 103
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "E1",
+  "group": "parse",
+  "notes": "",
+  "name": "parse 64 leaf bytes into 8 F_p values (Track 4 PARSE8)",
+  "trials": 8,
+  "opStd": {
+   "min": 5834,
+   "max": 5838,
+   "mean": 5835.75
+  },
+  "opCons": {
+   "min": 5834,
+   "max": 5838,
+   "mean": 5835.75
+  },
+  "instr": {
+   "min": 54,
+   "max": 54,
+   "mean": 54
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 434,
+   "max": 438,
+   "mean": 435.75
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1952,
+  "prologueBytes": 2069,
+  "defineLibauth": 10681,
+  "defineBchn": 12633,
+  "real": [
+   "ok"
+  ]
+ },
+ {
+  "id": "E1",
+  "group": "parse",
+  "notes": "",
+  "name": "parse a 192-byte FRI leaf into 8 packed F_p^3 values (Track 5 PKL, 26-byte slots)",
+  "trials": 8,
+  "opStd": {
+   "min": 21988,
+   "max": 21992,
+   "mean": 21990.375
+  },
+  "opCons": {
+   "min": 21988,
+   "max": 21992,
+   "mean": 21990.375
+  },
+  "instr": {
+   "min": 180,
+   "max": 180,
+   "mean": 180
+  },
+  "arith": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "pushed": {
+   "min": 3988,
+   "max": 3992,
+   "mean": 3990.375
+  },
+  "iters": {
+   "min": 0,
+   "max": 0,
+   "mean": 0
+  },
+  "bodyBytes": {
+   "min": 3,
+   "max": 3,
+   "mean": 3
+  },
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
+  "real": [
+   "ok"
+  ]
+ }
+]

@@ -1,0 +1,433 @@
+../prover/vectors/mimc-S128-0.json: plan [[[0,2],[2,4],[4,6],[6,8],[8,10],[10,12],[12,14]],[[14,16],[16,18],[18,20],[20,22],[22,24],[24,26]]], code blobs 1
+  valid                                        ACCEPT  
+  trace root                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  quotient root                                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  first FRI commit-phase root                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  last FRI commit-phase root                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  OOD trace_local[0]                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  OOD trace_next[0]                            REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  OOD quotient chunk 0                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  OOD last quotient chunk                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  final polynomial coeff 0 (PoW breaks)        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  query PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  batch PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  commit PoW witness (round 0) + 1             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  input leaf trace q0[0]                       REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input leaf trace q25[last]                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input leaf quotient q0[0]                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input leaf quotient q25[last]                REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input sibling (first)                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input sibling (last)                         REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  FRI sibling value (first)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  FRI sibling value (last)                     REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  FRI Merkle sibling (first)                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  FRI Merkle sibling (last)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  non-canonical field element (0xff..ff in final polynomial) REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  degree_bits + 1                              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  truncated by one byte                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  one trailing byte                            REJECT (encoder only: 1 trailing byte(s); the script accepts the re-encoded witness)  
+  extra sibling digest in first multiproof (count + 1) REJECT (encoder only: 1 unused sibling digest(s) for the transcript's indices; the script accepts the re-encoded witness)  
+  public output + 1 (different statement)      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  public input + 1 (different statement)       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  qry: L byte (row)                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L byte (FRI sibling value)              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (input tree)                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (last FRI tree)               REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: hint T                                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: two QRY inputs swapped                  REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry: queries swapped inside an input         REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L and path swapped                      REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: input missing                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+6 inputs)
+  qry: extra input                             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+8 inputs)
+  qry: non-zero pad                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: extra push                              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head: FIN byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+6 inputs)
+  head: OOD byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+6 inputs)
+  head: degree_bits byte                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+6 inputs)
+  head: query PoW byte                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+6 inputs)
+  head: non-zero pad                           REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code: byte                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+7 inputs)
+  graph: one input under a foreign locking     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+7 inputs)
+  thread: tx1 NFT committed to another G       REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx0 without the thread NFT           REJECT  tx0/in0: Program attempted to read from an invalid transact
+  thread: tx1 keeps the token                  REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx1 holds the NFT of another k       REJECT  tx1/in0: Program failed an OP_VERIFY operation. | tx1/in1: Program failed an OP_VERIFY operation. (+6 inputs)
+  thread: tx1 of proof B with the NFT of proof A REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+test-a mimc-S128-0.json: 54 cases, 0 unexpected, 2 rejected by the encoder only
+../prover/vectors/fib-S128-0.json: plan [[[0,2],[2,4],[4,6],[6,8],[8,10],[10,12],[12,14]],[[14,16],[16,18],[18,20],[20,22],[22,24],[24,26]]], code blobs 1
+  valid                                        ACCEPT  
+  trace root                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  quotient root                                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  first FRI commit-phase root                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  last FRI commit-phase root                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  OOD trace_local[0]                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  OOD trace_next[0]                            REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  OOD quotient chunk 0                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  final polynomial coeff 0 (PoW breaks)        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  query PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  batch PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  commit PoW witness (round 0) + 1             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  input leaf trace q0[0]                       REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input leaf trace q25[last]                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input leaf quotient q0[0]                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input leaf quotient q25[last]                REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input sibling (first)                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  input sibling (last)                         REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  FRI sibling value (first)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  FRI sibling value (last)                     REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  FRI Merkle sibling (first)                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  FRI Merkle sibling (last)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  non-canonical field element (0xff..ff in final polynomial) REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  degree_bits + 1                              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  truncated by one byte                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+11 inputs)
+  one trailing byte                            REJECT (encoder only: 1 trailing byte(s); the script accepts the re-encoded witness)  
+  extra sibling digest in first multiproof (count + 1) REJECT (encoder only: 1 unused sibling digest(s) for the transcript's indices; the script accepts the re-encoded witness)  
+  public output + 1 (different statement)      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  public input + 1 (different statement)       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+13 inputs)
+  qry: L byte (row)                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L byte (FRI sibling value)              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (input tree)                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (last FRI tree)               REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: hint T                                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: two QRY inputs swapped                  REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry: queries swapped inside an input         REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L and path swapped                      REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: input missing                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+6 inputs)
+  qry: extra input                             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+8 inputs)
+  qry: non-zero pad                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: extra push                              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head: FIN byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+6 inputs)
+  head: OOD byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+6 inputs)
+  head: degree_bits byte                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+6 inputs)
+  head: query PoW byte                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+6 inputs)
+  head: non-zero pad                           REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code: byte                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+7 inputs)
+  graph: one input under a foreign locking     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+7 inputs)
+  thread: tx1 NFT committed to another G       REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx0 without the thread NFT           REJECT  tx0/in0: Program attempted to read from an invalid transact
+  thread: tx1 keeps the token                  REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx1 holds the NFT of another k       REJECT  tx1/in0: Program failed an OP_VERIFY operation. | tx1/in1: Program failed an OP_VERIFY operation. (+6 inputs)
+test-a fib-S128-0.json: 52 cases, 0 unexpected, 2 rejected by the encoder only
+../prover/vectors/mimc-P128-0.json: plan [[[0,2],[2,4],[4,6],[6,8],[8,10],[10,12],[12,14],[14,16],[16,18],[18,20],[20,22]],[[22,24],[24,26],[26,28],[28,30],[30,32],[32,34],[34,36],[36,38],[38,40],[40,42],[42,43]]], code blobs 1
+  valid                                        ACCEPT  
+  trace root                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  quotient root                                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  first FRI commit-phase root                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  last FRI commit-phase root                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  OOD trace_local[0]                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  OOD trace_next[0]                            REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  OOD quotient chunk 0                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  OOD last quotient chunk                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  final polynomial coeff 0 (PoW breaks)        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  query PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  input leaf trace q0[0]                       REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  input leaf trace q42[last]                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  input leaf quotient q0[0]                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  input leaf quotient q42[last]                REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  input sibling (first)                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  input sibling (last)                         REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  FRI sibling value (first)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  FRI sibling value (last)                     REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  FRI Merkle sibling (first)                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  FRI Merkle sibling (last)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  non-canonical field element (0xff..ff in final polynomial) REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  degree_bits + 1                              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  truncated by one byte                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+20 inputs)
+  one trailing byte                            REJECT (encoder only: 1 trailing byte(s); the script accepts the re-encoded witness)  
+  extra sibling digest in first multiproof (count + 1) REJECT (encoder only: 1 unused sibling digest(s) for the transcript's indices; the script accepts the re-encoded witness)  
+  public output + 1 (different statement)      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  public input + 1 (different statement)       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+22 inputs)
+  qry: L byte (row)                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L byte (FRI sibling value)              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (input tree)                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (last FRI tree)               REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: hint T                                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: two QRY inputs swapped                  REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry: queries swapped inside an input         REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L and path swapped                      REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: input missing                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+  qry: extra input                             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+12 inputs)
+  qry: non-zero pad                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: extra push                              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head: FIN byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  head: OOD byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  head: degree_bits byte                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  head: query PoW byte                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  head: non-zero pad                           REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code: byte                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+  graph: one input under a foreign locking     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+  thread: tx1 NFT committed to another G       REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx0 without the thread NFT           REJECT  tx0/in0: Program attempted to read from an invalid transact
+  thread: tx1 keeps the token                  REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx1 holds the NFT of another k       REJECT  tx1/in0: Program failed an OP_VERIFY operation. | tx1/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+  thread: tx1 of proof B with the NFT of proof A REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+test-a mimc-P128-0.json: 52 cases, 0 unexpected, 2 rejected by the encoder only
+../prover/vectors/mimc-P100-0.json: plan [[[0,2],[2,4],[4,6],[6,8],[8,10],[10,12],[12,14],[14,16],[16,18],[18,20],[20,22]]], code blobs 1
+  valid                                        ACCEPT  
+  trace root                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  quotient root                                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  first FRI commit-phase root                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  last FRI commit-phase root                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  OOD trace_local[0]                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  OOD trace_next[0]                            REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  OOD quotient chunk 0                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  OOD last quotient chunk                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  final polynomial coeff 0 (PoW breaks)        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  query PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  input leaf trace q0[0]                       REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  input leaf trace q21[last]                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  input leaf quotient q0[0]                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  input leaf quotient q21[last]                REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  input sibling (first)                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  input sibling (last)                         REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  FRI sibling value (first)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  FRI sibling value (last)                     REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  FRI Merkle sibling (first)                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  FRI Merkle sibling (last)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  non-canonical field element (0xff..ff in final polynomial) REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  degree_bits + 1                              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  truncated by one byte                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  one trailing byte                            REJECT (encoder only: 1 trailing byte(s); the script accepts the re-encoded witness)  
+  extra sibling digest in first multiproof (count + 1) REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  public output + 1 (different statement)      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  public input + 1 (different statement)       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  qry: L byte (row)                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L byte (FRI sibling value)              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (input tree)                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (last FRI tree)               REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: hint T                                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: two QRY inputs swapped                  REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry: queries swapped inside an input         REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L and path swapped                      REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: input missing                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+  qry: extra input                             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+12 inputs)
+  qry: non-zero pad                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: extra push                              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head: FIN byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  head: OOD byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  head: degree_bits byte                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  head: query PoW byte                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+10 inputs)
+  head: non-zero pad                           REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code: byte                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+  graph: one input under a foreign locking     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+test-a mimc-P100-0.json: 47 cases, 0 unexpected, 1 rejected by the encoder only
+../prover/vectors/mimc-C100-0.json: plan [[[0,3],[3,6],[6,9],[9,12],[12,15],[15,18],[18,21],[21,24],[24,27]]], code blobs 1
+  valid                                        ACCEPT  
+  trace root                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  quotient root                                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  first FRI commit-phase root                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  last FRI commit-phase root                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  OOD trace_local[0]                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  OOD trace_next[0]                            REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  OOD quotient chunk 0                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  OOD last quotient chunk                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  final polynomial coeff 0 (PoW breaks)        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  query PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  final polynomial coeff 0 + 1, query PoW re-ground REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  input leaf trace q0[0]                       REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  input leaf trace q26[last]                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  input leaf quotient q0[0]                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  input leaf quotient q26[last]                REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  input sibling (first)                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  input sibling (last)                         REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  FRI sibling value (first)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  FRI sibling value (last)                     REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  FRI Merkle sibling (first)                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  FRI Merkle sibling (last)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  non-canonical field element (0xff..ff in final polynomial) REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  degree_bits + 1                              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  truncated by one byte                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+7 inputs)
+  one trailing byte                            REJECT (encoder only: 1 trailing byte(s); the script accepts the re-encoded witness)  
+  extra sibling digest in first multiproof (count + 1) REJECT (encoder only: 1 unused sibling digest(s) for the transcript's indices; the script accepts the re-encoded witness)  
+  public output + 1 (different statement)      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  public input + 1 (different statement)       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  qry: L byte (row)                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L byte (FRI sibling value)              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (input tree)                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (last FRI tree)               REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: hint T                                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: two QRY inputs swapped                  REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry: queries swapped inside an input         REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L and path swapped                      REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: input missing                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+8 inputs)
+  qry: extra input                             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+  qry: non-zero pad                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: extra push                              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head: FIN byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  head: OOD byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  head: degree_bits byte                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  head: query PoW byte                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+8 inputs)
+  head: non-zero pad                           REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code: byte                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+9 inputs)
+  graph: one input under a foreign locking     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+9 inputs)
+test-a mimc-C100-0.json: 48 cases, 0 unexpected, 2 rejected by the encoder only
+../prover/vectors/mimc-S100b-0.json: plan [[[0,2],[2,4],[4,6],[6,8],[8,10],[10,12],[12,14],[14,16],[16,18],[18,19]]], code blobs 1
+  valid                                        ACCEPT  
+  trace root                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  quotient root                                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  first FRI commit-phase root                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  last FRI commit-phase root                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  OOD trace_local[0]                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  OOD trace_next[0]                            REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  OOD quotient chunk 0                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  OOD last quotient chunk                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  final polynomial coeff 0 (PoW breaks)        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  query PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  input leaf trace q0[0]                       REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  input leaf trace q18[last]                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  input leaf quotient q0[0]                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  input leaf quotient q18[last]                REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  input sibling (first)                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  input sibling (last)                         REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  FRI sibling value (first)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  FRI sibling value (last)                     REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  FRI Merkle sibling (first)                   REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  FRI Merkle sibling (last)                    REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  non-canonical field element (0xff..ff in final polynomial) REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  degree_bits + 1                              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  truncated by one byte                        REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  one trailing byte                            REJECT (encoder only: 1 trailing byte(s); the script accepts the re-encoded witness)  
+  extra sibling digest in first multiproof (count + 1) REJECT (encoder only: 1 unused sibling digest(s) for the transcript's indices; the script accepts the re-encoded witness)  
+  public output + 1 (different statement)      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  public input + 1 (different statement)       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  qry: L byte (row)                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L byte (FRI sibling value)              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (input tree)                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: path byte (last FRI tree)               REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: hint T                                  REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: two QRY inputs swapped                  REJECT  tx0/in2: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation.
+  qry: queries swapped inside an input         REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: L and path swapped                      REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: input missing                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+9 inputs)
+  qry: extra input                             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+  qry: non-zero pad                            REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  qry: extra push                              REJECT  tx0/in2: Program failed an OP_VERIFY operation.
+  head: FIN byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  head: OOD byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  head: degree_bits byte                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  head: query PoW byte                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in2: Program failed an OP_VERIFY operation. (+9 inputs)
+  head: non-zero pad                           REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code: byte                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+  graph: one input under a foreign locking     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+test-a mimc-S100b-0.json: 47 cases, 0 unexpected, 2 rejected by the encoder only
+../prover/vectors/fib-S100z-zkmin-0.json: plan [[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10]],[[10,11],[11,12],[12,13],[13,14],[14,15],[15,16],[16,17],[17,18],[18,19]]], code blobs 2
+  valid                                        ACCEPT  
+  trace root                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  quotient root                                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  random-polynomial root                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  first FRI commit-phase root                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  last FRI commit-phase root                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  OOD trace_local[0]                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  OOD trace_next[0]                            REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  OOD quotient chunk 0                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  OOD last quotient chunk                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  OOD random polynomial                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  OOD random-codeword opening (last)           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  final polynomial coeff 0 (PoW breaks)        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  query PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  batch PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  input leaf random q0[0]                      REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  input leaf random q18[last]                  REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  input leaf trace q0[0]                       REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  input leaf trace q18[last]                   REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  input leaf quotient q0[0]                    REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  input leaf quotient q18[last]                REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  input sibling (first)                        REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  input sibling (last)                         REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  FRI sibling value (first)                    REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  FRI sibling value (last)                     REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  FRI Merkle sibling (first)                   REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  FRI Merkle sibling (last)                    REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  leaf salt (first)                            REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  leaf salt (last)                             REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  non-canonical field element (0xff..ff in final polynomial) REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  degree_bits + 1                              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  truncated by one byte                        REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+17 inputs)
+  one trailing byte                            REJECT (encoder only: 1 trailing byte(s); the script accepts the re-encoded witness)  
+  extra sibling digest in first multiproof (count + 1) REJECT (encoder only: 1 unused sibling digest(s) for the transcript's indices; the script accepts the re-encoded witness)  
+  public output + 1 (different statement)      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  public input + 1 (different statement)       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+19 inputs)
+  qry: L byte (row)                            REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: L byte (FRI sibling value)              REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: path byte (input tree)                  REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: path byte (last FRI tree)               REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: hint T                                  REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: two QRY inputs swapped                  REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation.
+  qry: L and path swapped                      REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: input missing                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+  qry: extra input                             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+12 inputs)
+  qry: non-zero pad                            REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: extra push                              REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  head: FIN byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  head: OOD byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  head: degree_bits byte                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  head: query PoW byte                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+9 inputs)
+  head: non-zero pad                           REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code: byte                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+  graph: one input under a foreign locking     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+  thread: tx1 NFT committed to another G       REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx0 without the thread NFT           REJECT  tx0/in0: Program attempted to read from an invalid transact
+  thread: tx1 keeps the token                  REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx1 holds the NFT of another k       REJECT  tx1/in0: Program failed an OP_VERIFY operation. | tx1/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+test-a fib-S100z-zkmin-0.json: 58 cases, 0 unexpected, 2 rejected by the encoder only
+../prover/vectors/fib-S128z-zkmin-0.json: plan [[[0,1],[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9]],[[9,10],[10,11],[11,12],[12,13],[13,14],[14,15],[15,16],[16,17],[17,18]],[[18,19],[19,20],[20,21],[21,22],[22,23],[23,24],[24,25],[25,26]]], code blobs 2
+  valid                                        ACCEPT  
+  trace root                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  quotient root                                REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  random-polynomial root                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  first FRI commit-phase root                  REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  last FRI commit-phase root                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  OOD trace_local[0]                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  OOD trace_next[0]                            REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  OOD quotient chunk 0                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  OOD last quotient chunk                      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  OOD random polynomial                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  OOD random-codeword opening (last)           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  final polynomial coeff 0 (PoW breaks)        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  query PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  batch PoW witness + 1                        REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  commit PoW witness (round 0) + 1             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  input leaf random q0[0]                      REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  input leaf random q25[last]                  REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  input leaf trace q0[0]                       REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  input leaf trace q25[last]                   REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  input leaf quotient q0[0]                    REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  input leaf quotient q25[last]                REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  input sibling (first)                        REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  input sibling (last)                         REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  FRI sibling value (first)                    REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  FRI sibling value (last)                     REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  FRI Merkle sibling (first)                   REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  FRI Merkle sibling (last)                    REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  leaf salt (first)                            REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  leaf salt (last)                             REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  non-canonical field element (0xff..ff in final polynomial) REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  degree_bits + 1                              REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  truncated by one byte                        REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation. (+24 inputs)
+  one trailing byte                            REJECT (encoder only: 1 trailing byte(s); the script accepts the re-encoded witness)  
+  extra sibling digest in first multiproof (count + 1) REJECT (encoder only: 1 unused sibling digest(s) for the transcript's indices; the script accepts the re-encoded witness)  
+  public output + 1 (different statement)      REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  public input + 1 (different statement)       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+27 inputs)
+  qry: L byte (row)                            REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: L byte (FRI sibling value)              REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: path byte (input tree)                  REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: path byte (last FRI tree)               REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: hint T                                  REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: two QRY inputs swapped                  REJECT  tx0/in3: Program failed an OP_VERIFY operation. | tx0/in4: Program failed an OP_VERIFY operation.
+  qry: L and path swapped                      REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: input missing                           REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+9 inputs)
+  qry: extra input                             REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+11 inputs)
+  qry: non-zero pad                            REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  qry: extra push                              REJECT  tx0/in3: Program failed an OP_VERIFY operation.
+  head: FIN byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  head: OOD byte                               REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  head: degree_bits byte                       REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  head: query PoW byte                         REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in3: Program failed an OP_VERIFY operation. (+8 inputs)
+  head: non-zero pad                           REJECT  tx0/in0: Program failed an OP_VERIFY operation.
+  code: byte                                   REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+  graph: one input under a foreign locking     REJECT  tx0/in0: Program failed an OP_VERIFY operation. | tx0/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+  thread: tx1 NFT committed to another G       REJECT  tx1/in0: Program failed an OP_VERIFY operation. | tx2/in0: Program failed an OP_VERIFY operation.
+  thread: tx0 without the thread NFT           REJECT  tx0/in0: Program attempted to read from an invalid transact
+  thread: tx1 keeps the token                  REJECT  tx1/in0: Program failed an OP_VERIFY operation.
+  thread: tx1 holds the NFT of another k       REJECT  tx1/in0: Program failed an OP_VERIFY operation. | tx1/in1: Program failed an OP_VERIFY operation. (+10 inputs)
+test-a fib-S128z-zkmin-0.json: 59 cases, 0 unexpected, 2 rejected by the encoder only
