@@ -1,0 +1,1594 @@
+{
+ "fib-C100-0.json": {
+  "JB": {
+   "lambda": 59.77,
+   "lambda_iop": 59.77,
+   "lambda_strict_digest": 59.77,
+   "binding": "query",
+   "m": 11,
+   "rounds": {
+    "ali": 119.22,
+    "deep": 97.5,
+    "batch": 60.1,
+    "fold1": 65.61,
+    "fold2": 71.61,
+    "fold3": 77.61,
+    "fold4": 82.84,
+    "query": 59.77
+   }
+  },
+  "UD": {
+   "lambda": 43.41,
+   "lambda_iop": 43.41,
+   "lambda_strict_digest": 43.41,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 125.68,
+    "deep": 110.42,
+    "batch": 106.68,
+    "fold1": 106.19,
+    "fold2": 106.19,
+    "fold3": 106.19,
+    "fold4": 107.42,
+    "query": 43.41
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 102,
+   "proven_ldr_bits": 61,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 102
+  },
+  "target": 100,
+  "label": "conjectured 100 only (proven JB 59.77)"
+ },
+ "fib-C100-zk-0.json": {
+  "JB": {
+   "lambda": 58.81,
+   "lambda_iop": 58.81,
+   "lambda_strict_digest": 58.81,
+   "binding": "query",
+   "m": 7,
+   "rounds": {
+    "ali": 119.87,
+    "deep": 97.06,
+    "batch": 59.38,
+    "fold1": 67.93,
+    "fold2": 73.93,
+    "fold3": 79.93,
+    "fold4": 85.93,
+    "query": 58.81
+   }
+  },
+  "UD": {
+   "lambda": 43.41,
+   "lambda_iop": 43.41,
+   "lambda_strict_digest": 43.41,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 125.68,
+    "deep": 108.68,
+    "batch": 102.64,
+    "fold1": 105.19,
+    "fold2": 105.19,
+    "fold3": 105.19,
+    "fold4": 105.19,
+    "query": 43.41
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 101,
+   "proven_ldr_bits": 61,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 102
+  },
+  "target": 100,
+  "label": "conjectured 100 only (proven JB 58.81)"
+ },
+ "fib-C100-zkmin-0.json": {
+  "JB": {
+   "lambda": 58.81,
+   "lambda_iop": 58.81,
+   "lambda_strict_digest": 58.81,
+   "binding": "query",
+   "m": 7,
+   "rounds": {
+    "ali": 119.87,
+    "deep": 97.06,
+    "batch": 59.98,
+    "fold1": 67.93,
+    "fold2": 73.93,
+    "fold3": 79.93,
+    "fold4": 85.93,
+    "query": 58.81
+   }
+  },
+  "UD": {
+   "lambda": 43.41,
+   "lambda_iop": 43.41,
+   "lambda_strict_digest": 43.41,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 125.68,
+    "deep": 108.68,
+    "batch": 103.25,
+    "fold1": 105.19,
+    "fold2": 105.19,
+    "fold3": 105.19,
+    "fold4": 105.19,
+    "query": 43.41
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 102,
+   "proven_ldr_bits": 61,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 102
+  },
+  "target": 100,
+  "label": "conjectured 100 only (proven JB 58.81)"
+ },
+ "fib-C100h-0.json": {
+  "JB": {
+   "lambda": 59.77,
+   "lambda_iop": 59.77,
+   "lambda_strict_digest": 59.77,
+   "binding": "query",
+   "m": 11,
+   "rounds": {
+    "ali": 119.22,
+    "deep": 97.5,
+    "batch": 60.1,
+    "fold1": 65.61,
+    "fold2": 71.61,
+    "fold3": 77.61,
+    "fold4": 82.84,
+    "query": 59.77
+   }
+  },
+  "UD": {
+   "lambda": 43.41,
+   "lambda_iop": 43.41,
+   "lambda_strict_digest": 43.41,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 125.68,
+    "deep": 110.42,
+    "batch": 106.68,
+    "fold1": 106.19,
+    "fold2": 106.19,
+    "fold3": 106.19,
+    "fold4": 107.42,
+    "query": 43.41
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 100,
+   "proven_ldr_bits": 61,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 102
+  },
+  "target": 100,
+  "label": "conjectured 100 only (proven JB 59.77)"
+ },
+ "fib-C128-0.json": {
+  "JB": {
+   "lambda": 74.93,
+   "lambda_iop": 74.93,
+   "lambda_strict_digest": 74.93,
+   "binding": "query",
+   "m": 24,
+   "rounds": {
+    "ali": 182.09,
+    "deep": 159.24,
+    "batch": 116.2,
+    "fold1": 121.97,
+    "fold2": 127.97,
+    "fold3": 133.97,
+    "fold4": 139.2,
+    "query": 74.93
+   }
+  },
+  "UD": {
+   "lambda": 51.88,
+   "lambda_iop": 51.88,
+   "lambda_strict_digest": 51.88,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.42,
+    "batch": 170.42,
+    "fold1": 170.19,
+    "fold2": 170.19,
+    "fold3": 170.19,
+    "fold4": 171.42,
+    "query": 51.88
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 75,
+   "proven_udr_bits": 51,
+   "simple_lb_q_plus_pow": 130
+  },
+  "target": 128,
+  "label": "conjectured 128 only (proven JB 74.93)"
+ },
+ "fib-C128-zk-0.json": {
+  "JB": {
+   "lambda": 74.93,
+   "lambda_iop": 74.93,
+   "lambda_strict_digest": 74.93,
+   "binding": "query",
+   "m": 24,
+   "rounds": {
+    "ali": 182.09,
+    "deep": 157.51,
+    "batch": 111.26,
+    "fold1": 119.97,
+    "fold2": 125.97,
+    "fold3": 131.97,
+    "fold4": 137.97,
+    "query": 74.93
+   }
+  },
+  "UD": {
+   "lambda": 51.88,
+   "lambda_iop": 51.88,
+   "lambda_strict_digest": 51.88,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 172.68,
+    "batch": 166.48,
+    "fold1": 169.19,
+    "fold2": 169.19,
+    "fold3": 169.19,
+    "fold4": 169.19,
+    "query": 51.88
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 75,
+   "proven_udr_bits": 51,
+   "simple_lb_q_plus_pow": 130
+  },
+  "target": 128,
+  "label": "conjectured 128 only (proven JB 74.93)"
+ },
+ "fib-C128-zkmin-0.json": {
+  "JB": {
+   "lambda": 74.93,
+   "lambda_iop": 74.93,
+   "lambda_strict_digest": 74.93,
+   "binding": "query",
+   "m": 24,
+   "rounds": {
+    "ali": 182.09,
+    "deep": 157.51,
+    "batch": 111.5,
+    "fold1": 119.97,
+    "fold2": 125.97,
+    "fold3": 131.97,
+    "fold4": 137.97,
+    "query": 74.93
+   }
+  },
+  "UD": {
+   "lambda": 51.88,
+   "lambda_iop": 51.88,
+   "lambda_strict_digest": 51.88,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 172.68,
+    "batch": 166.71,
+    "fold1": 169.19,
+    "fold2": 169.19,
+    "fold3": 169.19,
+    "fold4": 169.19,
+    "query": 51.88
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 75,
+   "proven_udr_bits": 51,
+   "simple_lb_q_plus_pow": 130
+  },
+  "target": 128,
+  "label": "conjectured 128 only (proven JB 74.93)"
+ },
+ "fib-P100-0.json": {
+  "JB": {
+   "lambda": 100,
+   "lambda_iop": 100.11,
+   "lambda_strict_digest": 99.21,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 181.09,
+    "deep": 157.24,
+    "batch": 121.85,
+    "fold1": 127.63,
+    "fold2": 133.63,
+    "fold3": 139.63,
+    "fold4": 144.85,
+    "query": 100.11
+   }
+  },
+  "UD": {
+   "lambda": 49.75,
+   "lambda_iop": 49.75,
+   "lambda_strict_digest": 49.75,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.42,
+    "batch": 166.42,
+    "fold1": 166.19,
+    "fold2": 166.19,
+    "fold3": 166.19,
+    "fold4": 167.42,
+    "query": 49.75
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 100,
+   "proven_ldr_bits": 100,
+   "proven_udr_bits": 49,
+   "simple_lb_q_plus_pow": 182
+  },
+  "target": 100,
+  "label": "100 JB (proven, Soundness bound)"
+ },
+ "fib-P100-zk-0.json": {
+  "JB": {
+   "lambda": 103.7,
+   "lambda_iop": 103.7,
+   "lambda_strict_digest": 103.7,
+   "binding": "query",
+   "m": 12,
+   "rounds": {
+    "ali": 179.09,
+    "deep": 151.51,
+    "batch": 104.05,
+    "fold1": 112.77,
+    "fold2": 118.77,
+    "fold3": 124.77,
+    "fold4": 130.77,
+    "query": 103.7
+   }
+  },
+  "UD": {
+   "lambda": 49.75,
+   "lambda_iop": 49.75,
+   "lambda_strict_digest": 49.75,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 172.68,
+    "batch": 162.48,
+    "fold1": 165.19,
+    "fold2": 165.19,
+    "fold3": 165.19,
+    "fold4": 165.19,
+    "query": 49.75
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 104,
+   "proven_udr_bits": 49,
+   "simple_lb_q_plus_pow": 182
+  },
+  "target": 100,
+  "label": "103.7 JB (proven, Soundness bound)"
+ },
+ "fib-P100-zkmin-0.json": {
+  "JB": {
+   "lambda": 103.7,
+   "lambda_iop": 103.7,
+   "lambda_strict_digest": 103.7,
+   "binding": "query",
+   "m": 12,
+   "rounds": {
+    "ali": 179.09,
+    "deep": 151.51,
+    "batch": 104.29,
+    "fold1": 112.77,
+    "fold2": 118.77,
+    "fold3": 124.77,
+    "fold4": 130.77,
+    "query": 103.7
+   }
+  },
+  "UD": {
+   "lambda": 49.75,
+   "lambda_iop": 49.75,
+   "lambda_strict_digest": 49.75,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 172.68,
+    "batch": 162.71,
+    "fold1": 165.19,
+    "fold2": 165.19,
+    "fold3": 165.19,
+    "fold4": 165.19,
+    "query": 49.75
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 104,
+   "proven_udr_bits": 49,
+   "simple_lb_q_plus_pow": 182
+  },
+  "target": 100,
+  "label": "103.7 JB (proven, Soundness bound)"
+ },
+ "fib-P128-0.json": {
+  "JB": {
+   "lambda": 126.31,
+   "lambda_iop": 126.31,
+   "lambda_strict_digest": 126.31,
+   "binding": "batch",
+   "m": 4,
+   "rounds": {
+    "ali": 182.68,
+    "deep": 160.41,
+    "batch": 126.31,
+    "fold1": 132.09,
+    "fold2": 138.09,
+    "fold3": 144.09,
+    "fold4": 149.31,
+    "query": 128.19
+   }
+  },
+  "UD": {
+   "lambda": 69.09,
+   "lambda_iop": 69.09,
+   "lambda_strict_digest": 69.09,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.42,
+    "batch": 168.42,
+    "fold1": 168.19,
+    "fold2": 168.19,
+    "fold3": 168.19,
+    "fold4": 169.42,
+    "query": 69.09
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 69,
+   "simple_lb_q_plus_pow": 243
+  },
+  "target": 128,
+  "label": "126.31 JB (below 128; Plonky3 LDR estimator 128)"
+ },
+ "fib-P128-zk-0.json": {
+  "JB": {
+   "lambda": 123.91,
+   "lambda_iop": 123.91,
+   "lambda_strict_digest": 123.91,
+   "binding": "batch",
+   "m": 3,
+   "rounds": {
+    "ali": 183.09,
+    "deep": 159.51,
+    "batch": 123.91,
+    "fold1": 132.63,
+    "fold2": 138.63,
+    "fold3": 144.63,
+    "fold4": 150.63,
+    "query": 125.94
+   }
+  },
+  "UD": {
+   "lambda": 69.09,
+   "lambda_iop": 69.09,
+   "lambda_strict_digest": 69.09,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 172.68,
+    "batch": 164.48,
+    "fold1": 167.19,
+    "fold2": 167.19,
+    "fold3": 167.19,
+    "fold4": 167.19,
+    "query": 69.09
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 69,
+   "simple_lb_q_plus_pow": 243
+  },
+  "target": 128,
+  "label": "123.91 JB (below 128; Plonky3 LDR estimator 128)"
+ },
+ "fib-P128-zkmin-0.json": {
+  "JB": {
+   "lambda": 124.15,
+   "lambda_iop": 124.15,
+   "lambda_strict_digest": 124.15,
+   "binding": "batch",
+   "m": 3,
+   "rounds": {
+    "ali": 183.09,
+    "deep": 159.51,
+    "batch": 124.15,
+    "fold1": 132.63,
+    "fold2": 138.63,
+    "fold3": 144.63,
+    "fold4": 150.63,
+    "query": 125.94
+   }
+  },
+  "UD": {
+   "lambda": 69.09,
+   "lambda_iop": 69.09,
+   "lambda_strict_digest": 69.09,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 172.68,
+    "batch": 164.71,
+    "fold1": 167.19,
+    "fold2": 167.19,
+    "fold3": 167.19,
+    "fold4": 167.19,
+    "query": 69.09
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 69,
+   "simple_lb_q_plus_pow": 243
+  },
+  "target": 128,
+  "label": "124.15 JB (below 128; Plonky3 LDR estimator 128)"
+ },
+ "fib-S100-0.json": {
+  "JB": {
+   "lambda": 101.11,
+   "lambda_iop": 101.11,
+   "lambda_strict_digest": 101.11,
+   "binding": "query",
+   "m": 24,
+   "rounds": {
+    "ali": 180.09,
+    "deep": 155.24,
+    "batch": 109.2,
+    "fold1": 114.97,
+    "fold2": 120.97,
+    "fold3": 126.97,
+    "query": 101.11
+   }
+  },
+  "UD": {
+   "lambda": 55.67,
+   "lambda_iop": 55.67,
+   "lambda_strict_digest": 55.67,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.42,
+    "batch": 168.42,
+    "fold1": 168.19,
+    "fold2": 168.19,
+    "fold3": 168.19,
+    "query": 55.67
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 101,
+   "proven_udr_bits": 55,
+   "simple_lb_q_plus_pow": 177
+  },
+  "target": 100,
+  "label": "101.11 JB (proven, Soundness bound)"
+ },
+ "fib-S100b-0.json": {
+  "JB": {
+   "lambda": 100.32,
+   "lambda_iop": 100.32,
+   "lambda_strict_digest": 100.32,
+   "binding": "query",
+   "m": 20,
+   "rounds": {
+    "ali": 177.36,
+    "deep": 149.77,
+    "batch": 100.5,
+    "fold1": 107.18,
+    "fold2": 115.18,
+    "query": 100.32
+   }
+  },
+  "UD": {
+   "lambda": 43.89,
+   "lambda_iop": 43.89,
+   "lambda_strict_digest": 43.89,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.42,
+    "batch": 165.42,
+    "fold1": 164.09,
+    "fold2": 164.09,
+    "query": 43.89
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 100,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 177
+  },
+  "target": 100,
+  "label": "100.32 JB (proven, Soundness bound)"
+ },
+ "fib-S100z-zkmin-0.json": {
+  "JB": {
+   "lambda": 100.21,
+   "lambda_iop": 100.21,
+   "lambda_strict_digest": 100.21,
+   "binding": "query",
+   "m": 17,
+   "rounds": {
+    "ali": 177.59,
+    "deep": 148.5,
+    "batch": 100.39,
+    "fold1": 106.77,
+    "fold2": 114.77,
+    "fold3": 121.87,
+    "query": 100.21
+   }
+  },
+  "UD": {
+   "lambda": 43.89,
+   "lambda_iop": 43.89,
+   "lambda_strict_digest": 43.89,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 172.68,
+    "batch": 164.71,
+    "fold1": 163.09,
+    "fold2": 163.09,
+    "fold3": 164.19,
+    "query": 43.89
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 100,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 177
+  },
+  "target": 100,
+  "label": "100.21 JB (proven, Soundness bound)"
+ },
+ "fib-S128-0.json": {
+  "JB": {
+   "lambda": 128,
+   "lambda_iop": 128.17,
+   "lambda_strict_digest": 127.21,
+   "binding": "query",
+   "m": 10,
+   "rounds": {
+    "ali": 178.36,
+    "deep": 151.77,
+    "batch": 130.25,
+    "fold1": 128.93,
+    "fold2": 136.93,
+    "query": 128.17
+   }
+  },
+  "UD": {
+   "lambda": 51.85,
+   "lambda_iop": 51.85,
+   "lambda_strict_digest": 51.85,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.42,
+    "batch": 188.42,
+    "fold1": 179.09,
+    "fold2": 179.09,
+    "query": 51.85
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 51,
+   "simple_lb_q_plus_pow": 234
+  },
+  "target": 128,
+  "label": "128 JB (proven, Soundness bound)"
+ },
+ "fib-S128b-0.json": {
+  "JB": {
+   "lambda": 128,
+   "lambda_iop": 128.09,
+   "lambda_strict_digest": 127.21,
+   "binding": "query",
+   "m": 12,
+   "rounds": {
+    "ali": 181.09,
+    "deep": 157.24,
+    "batch": 129.99,
+    "fold1": 128.77,
+    "fold2": 134.77,
+    "fold3": 140.77,
+    "query": 128.09
+   }
+  },
+  "UD": {
+   "lambda": 67.18,
+   "lambda_iop": 67.18,
+   "lambda_strict_digest": 67.18,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.42,
+    "batch": 182.42,
+    "fold1": 175.19,
+    "fold2": 175.19,
+    "fold3": 175.19,
+    "query": 67.18
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 67,
+   "simple_lb_q_plus_pow": 233
+  },
+  "target": 128,
+  "label": "128 JB (proven, Soundness bound)"
+ },
+ "fib-S128z-zkmin-0.json": {
+  "JB": {
+   "lambda": 128.0,
+   "lambda_iop": 128.0,
+   "lambda_strict_digest": 127.21,
+   "binding": "query",
+   "m": 6,
+   "rounds": {
+    "ali": 179.09,
+    "deep": 151.51,
+    "batch": 129.4,
+    "fold1": 128.87,
+    "fold2": 134.87,
+    "fold3": 140.87,
+    "query": 128.0
+   }
+  },
+  "UD": {
+   "lambda": 52.85,
+   "lambda_iop": 52.85,
+   "lambda_strict_digest": 52.85,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 172.68,
+    "batch": 183.71,
+    "fold1": 177.19,
+    "fold2": 177.19,
+    "fold3": 177.19,
+    "query": 52.85
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 52,
+   "simple_lb_q_plus_pow": 235
+  },
+  "target": 128,
+  "label": "128.0 JB (proven, Soundness bound)"
+ },
+ "mimc-C100-0.json": {
+  "JB": {
+   "lambda": 59.6,
+   "lambda_iop": 59.6,
+   "lambda_strict_digest": 59.6,
+   "binding": "query",
+   "m": 10,
+   "rounds": {
+    "ali": 119.36,
+    "deep": 97.36,
+    "batch": 60.17,
+    "fold1": 66.53,
+    "fold2": 72.53,
+    "fold3": 78.53,
+    "fold4": 83.75,
+    "query": 59.6
+   }
+  },
+  "UD": {
+   "lambda": 43.41,
+   "lambda_iop": 43.41,
+   "lambda_strict_digest": 43.41,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 125.68,
+    "deep": 110.0,
+    "batch": 105.83,
+    "fold1": 106.19,
+    "fold2": 106.19,
+    "fold3": 106.19,
+    "fold4": 107.42,
+    "query": 43.41
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 102,
+   "proven_ldr_bits": 61,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 102
+  },
+  "target": 100,
+  "label": "conjectured 100 only (proven JB 59.6)"
+ },
+ "mimc-C100-zk-0.json": {
+  "JB": {
+   "lambda": 58.67,
+   "lambda_iop": 58.67,
+   "lambda_strict_digest": 58.67,
+   "binding": "batch",
+   "m": 7,
+   "rounds": {
+    "ali": 119.87,
+    "deep": 96.22,
+    "batch": 58.67,
+    "fold1": 67.93,
+    "fold2": 73.93,
+    "fold3": 79.93,
+    "fold4": 85.93,
+    "query": 58.81
+   }
+  },
+  "UD": {
+   "lambda": 43.41,
+   "lambda_iop": 43.41,
+   "lambda_strict_digest": 43.41,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 125.68,
+    "deep": 107.83,
+    "batch": 101.93,
+    "fold1": 105.19,
+    "fold2": 105.19,
+    "fold3": 105.19,
+    "fold4": 105.19,
+    "query": 43.41
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 100,
+   "proven_ldr_bits": 61,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 102
+  },
+  "target": 100,
+  "label": "conjectured 100 only (proven JB 58.67)"
+ },
+ "mimc-C100-zkmin-0.json": {
+  "JB": {
+   "lambda": 58.81,
+   "lambda_iop": 58.81,
+   "lambda_strict_digest": 58.81,
+   "binding": "query",
+   "m": 7,
+   "rounds": {
+    "ali": 119.87,
+    "deep": 96.22,
+    "batch": 59.24,
+    "fold1": 67.93,
+    "fold2": 73.93,
+    "fold3": 79.93,
+    "fold4": 85.93,
+    "query": 58.81
+   }
+  },
+  "UD": {
+   "lambda": 43.41,
+   "lambda_iop": 43.41,
+   "lambda_strict_digest": 43.41,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 125.68,
+    "deep": 107.83,
+    "batch": 102.51,
+    "fold1": 105.19,
+    "fold2": 105.19,
+    "fold3": 105.19,
+    "fold4": 105.19,
+    "query": 43.41
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 101,
+   "proven_ldr_bits": 61,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 102
+  },
+  "target": 100,
+  "label": "conjectured 100 only (proven JB 58.81)"
+ },
+ "mimc-C100h-0.json": {
+  "JB": {
+   "lambda": 59.6,
+   "lambda_iop": 59.6,
+   "lambda_strict_digest": 59.6,
+   "binding": "query",
+   "m": 10,
+   "rounds": {
+    "ali": 119.36,
+    "deep": 97.36,
+    "batch": 60.17,
+    "fold1": 66.53,
+    "fold2": 72.53,
+    "fold3": 78.53,
+    "fold4": 83.75,
+    "query": 59.6
+   }
+  },
+  "UD": {
+   "lambda": 43.41,
+   "lambda_iop": 43.41,
+   "lambda_strict_digest": 43.41,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 125.68,
+    "deep": 110.0,
+    "batch": 105.83,
+    "fold1": 106.19,
+    "fold2": 106.19,
+    "fold3": 106.19,
+    "fold4": 107.42,
+    "query": 43.41
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 100,
+   "proven_ldr_bits": 61,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 102
+  },
+  "target": 100,
+  "label": "conjectured 100 only (proven JB 59.6)"
+ },
+ "mimc-C128-0.json": {
+  "JB": {
+   "lambda": 74.93,
+   "lambda_iop": 74.93,
+   "lambda_strict_digest": 74.93,
+   "binding": "query",
+   "m": 24,
+   "rounds": {
+    "ali": 182.09,
+    "deep": 158.83,
+    "batch": 115.32,
+    "fold1": 121.97,
+    "fold2": 127.97,
+    "fold3": 133.97,
+    "fold4": 139.2,
+    "query": 74.93
+   }
+  },
+  "UD": {
+   "lambda": 51.88,
+   "lambda_iop": 51.88,
+   "lambda_strict_digest": 51.88,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.0,
+    "batch": 169.54,
+    "fold1": 170.19,
+    "fold2": 170.19,
+    "fold3": 170.19,
+    "fold4": 171.42,
+    "query": 51.88
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 75,
+   "proven_udr_bits": 51,
+   "simple_lb_q_plus_pow": 130
+  },
+  "target": 128,
+  "label": "conjectured 128 only (proven JB 74.93)"
+ },
+ "mimc-C128-zk-0.json": {
+  "JB": {
+   "lambda": 74.93,
+   "lambda_iop": 74.93,
+   "lambda_strict_digest": 74.93,
+   "binding": "query",
+   "m": 24,
+   "rounds": {
+    "ali": 182.09,
+    "deep": 156.66,
+    "batch": 110.53,
+    "fold1": 119.97,
+    "fold2": 125.97,
+    "fold3": 131.97,
+    "fold4": 137.97,
+    "query": 74.93
+   }
+  },
+  "UD": {
+   "lambda": 51.88,
+   "lambda_iop": 51.88,
+   "lambda_strict_digest": 51.88,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 171.83,
+    "batch": 165.75,
+    "fold1": 169.19,
+    "fold2": 169.19,
+    "fold3": 169.19,
+    "fold4": 169.19,
+    "query": 51.88
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 75,
+   "proven_udr_bits": 51,
+   "simple_lb_q_plus_pow": 130
+  },
+  "target": 128,
+  "label": "conjectured 128 only (proven JB 74.93)"
+ },
+ "mimc-C128-zkmin-0.json": {
+  "JB": {
+   "lambda": 74.93,
+   "lambda_iop": 74.93,
+   "lambda_strict_digest": 74.93,
+   "binding": "query",
+   "m": 24,
+   "rounds": {
+    "ali": 182.09,
+    "deep": 156.66,
+    "batch": 110.76,
+    "fold1": 119.97,
+    "fold2": 125.97,
+    "fold3": 131.97,
+    "fold4": 137.97,
+    "query": 74.93
+   }
+  },
+  "UD": {
+   "lambda": 51.88,
+   "lambda_iop": 51.88,
+   "lambda_strict_digest": 51.88,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 171.83,
+    "batch": 165.98,
+    "fold1": 169.19,
+    "fold2": 169.19,
+    "fold3": 169.19,
+    "fold4": 169.19,
+    "query": 51.88
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 75,
+   "proven_udr_bits": 51,
+   "simple_lb_q_plus_pow": 130
+  },
+  "target": 128,
+  "label": "conjectured 128 only (proven JB 74.93)"
+ },
+ "mimc-P100-0.json": {
+  "JB": {
+   "lambda": 100,
+   "lambda_iop": 100.11,
+   "lambda_strict_digest": 99.21,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 181.09,
+    "deep": 156.83,
+    "batch": 120.97,
+    "fold1": 127.63,
+    "fold2": 133.63,
+    "fold3": 139.63,
+    "fold4": 144.85,
+    "query": 100.11
+   }
+  },
+  "UD": {
+   "lambda": 49.75,
+   "lambda_iop": 49.75,
+   "lambda_strict_digest": 49.75,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.0,
+    "batch": 165.54,
+    "fold1": 166.19,
+    "fold2": 166.19,
+    "fold3": 166.19,
+    "fold4": 167.42,
+    "query": 49.75
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 100,
+   "legacy_conjectured_bits": 100,
+   "proven_ldr_bits": 100,
+   "proven_udr_bits": 49,
+   "simple_lb_q_plus_pow": 182
+  },
+  "target": 100,
+  "label": "100 JB (proven, Soundness bound)"
+ },
+ "mimc-P100-zk-0.json": {
+  "JB": {
+   "lambda": 103.59,
+   "lambda_iop": 103.59,
+   "lambda_strict_digest": 103.59,
+   "binding": "query",
+   "m": 11,
+   "rounds": {
+    "ali": 179.22,
+    "deep": 150.91,
+    "batch": 104.17,
+    "fold1": 113.61,
+    "fold2": 119.61,
+    "fold3": 125.61,
+    "fold4": 131.61,
+    "query": 103.59
+   }
+  },
+  "UD": {
+   "lambda": 49.75,
+   "lambda_iop": 49.75,
+   "lambda_strict_digest": 49.75,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 171.83,
+    "batch": 161.75,
+    "fold1": 165.19,
+    "fold2": 165.19,
+    "fold3": 165.19,
+    "fold4": 165.19,
+    "query": 49.75
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 104,
+   "proven_udr_bits": 49,
+   "simple_lb_q_plus_pow": 182
+  },
+  "target": 100,
+  "label": "103.59 JB (proven, Soundness bound)"
+ },
+ "mimc-P100-zkmin-0.json": {
+  "JB": {
+   "lambda": 103.59,
+   "lambda_iop": 103.59,
+   "lambda_strict_digest": 103.59,
+   "binding": "query",
+   "m": 11,
+   "rounds": {
+    "ali": 179.22,
+    "deep": 150.91,
+    "batch": 104.4,
+    "fold1": 113.61,
+    "fold2": 119.61,
+    "fold3": 125.61,
+    "fold4": 131.61,
+    "query": 103.59
+   }
+  },
+  "UD": {
+   "lambda": 49.75,
+   "lambda_iop": 49.75,
+   "lambda_strict_digest": 49.75,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 171.83,
+    "batch": 161.98,
+    "fold1": 165.19,
+    "fold2": 165.19,
+    "fold3": 165.19,
+    "fold4": 165.19,
+    "query": 49.75
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 104,
+   "proven_udr_bits": 49,
+   "simple_lb_q_plus_pow": 182
+  },
+  "target": 100,
+  "label": "103.59 JB (proven, Soundness bound)"
+ },
+ "mimc-P128-0.json": {
+  "JB": {
+   "lambda": 125.94,
+   "lambda_iop": 125.94,
+   "lambda_strict_digest": 125.94,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 183.09,
+    "deep": 160.83,
+    "batch": 127.97,
+    "fold1": 134.63,
+    "fold2": 140.63,
+    "fold3": 146.63,
+    "fold4": 151.85,
+    "query": 125.94
+   }
+  },
+  "UD": {
+   "lambda": 69.09,
+   "lambda_iop": 69.09,
+   "lambda_strict_digest": 69.09,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.0,
+    "batch": 167.54,
+    "fold1": 168.19,
+    "fold2": 168.19,
+    "fold3": 168.19,
+    "fold4": 169.42,
+    "query": 69.09
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 69,
+   "simple_lb_q_plus_pow": 243
+  },
+  "target": 128,
+  "label": "125.94 JB (below 128; Plonky3 LDR estimator 128)"
+ },
+ "mimc-P128-zk-0.json": {
+  "JB": {
+   "lambda": 123.19,
+   "lambda_iop": 123.19,
+   "lambda_strict_digest": 123.19,
+   "binding": "batch",
+   "m": 3,
+   "rounds": {
+    "ali": 183.09,
+    "deep": 158.66,
+    "batch": 123.19,
+    "fold1": 132.63,
+    "fold2": 138.63,
+    "fold3": 144.63,
+    "fold4": 150.63,
+    "query": 125.94
+   }
+  },
+  "UD": {
+   "lambda": 69.09,
+   "lambda_iop": 69.09,
+   "lambda_strict_digest": 69.09,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 171.83,
+    "batch": 163.75,
+    "fold1": 167.19,
+    "fold2": 167.19,
+    "fold3": 167.19,
+    "fold4": 167.19,
+    "query": 69.09
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 69,
+   "simple_lb_q_plus_pow": 243
+  },
+  "target": 128,
+  "label": "123.19 JB (below 128; Plonky3 LDR estimator 128)"
+ },
+ "mimc-P128-zkmin-0.json": {
+  "JB": {
+   "lambda": 123.41,
+   "lambda_iop": 123.41,
+   "lambda_strict_digest": 123.41,
+   "binding": "batch",
+   "m": 3,
+   "rounds": {
+    "ali": 183.09,
+    "deep": 158.66,
+    "batch": 123.41,
+    "fold1": 132.63,
+    "fold2": 138.63,
+    "fold3": 144.63,
+    "fold4": 150.63,
+    "query": 125.94
+   }
+  },
+  "UD": {
+   "lambda": 69.09,
+   "lambda_iop": 69.09,
+   "lambda_strict_digest": 69.09,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 171.83,
+    "batch": 163.98,
+    "fold1": 167.19,
+    "fold2": 167.19,
+    "fold3": 167.19,
+    "fold4": 167.19,
+    "query": 69.09
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 69,
+   "simple_lb_q_plus_pow": 243
+  },
+  "target": 128,
+  "label": "123.41 JB (below 128; Plonky3 LDR estimator 128)"
+ },
+ "mimc-S100-0.json": {
+  "JB": {
+   "lambda": 101.11,
+   "lambda_iop": 101.11,
+   "lambda_strict_digest": 101.11,
+   "binding": "query",
+   "m": 24,
+   "rounds": {
+    "ali": 180.09,
+    "deep": 154.83,
+    "batch": 108.32,
+    "fold1": 114.97,
+    "fold2": 120.97,
+    "fold3": 126.97,
+    "query": 101.11
+   }
+  },
+  "UD": {
+   "lambda": 55.67,
+   "lambda_iop": 55.67,
+   "lambda_strict_digest": 55.67,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.0,
+    "batch": 167.54,
+    "fold1": 168.19,
+    "fold2": 168.19,
+    "fold3": 168.19,
+    "query": 55.67
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 101,
+   "proven_udr_bits": 55,
+   "simple_lb_q_plus_pow": 177
+  },
+  "target": 100,
+  "label": "101.11 JB (proven, Soundness bound)"
+ },
+ "mimc-S100b-0.json": {
+  "JB": {
+   "lambda": 100.25,
+   "lambda_iop": 100.25,
+   "lambda_strict_digest": 100.25,
+   "binding": "query",
+   "m": 18,
+   "rounds": {
+    "ali": 177.51,
+    "deep": 149.66,
+    "batch": 100.66,
+    "fold1": 108.21,
+    "fold2": 116.21,
+    "query": 100.25
+   }
+  },
+  "UD": {
+   "lambda": 43.89,
+   "lambda_iop": 43.89,
+   "lambda_strict_digest": 43.89,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.0,
+    "batch": 164.54,
+    "fold1": 164.09,
+    "fold2": 164.09,
+    "query": 43.89
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 100,
+   "proven_udr_bits": 43,
+   "simple_lb_q_plus_pow": 177
+  },
+  "target": 100,
+  "label": "100.25 JB (proven, Soundness bound)"
+ },
+ "mimc-S128-0.json": {
+  "JB": {
+   "lambda": 128,
+   "lambda_iop": 128.17,
+   "lambda_strict_digest": 127.21,
+   "binding": "query",
+   "m": 10,
+   "rounds": {
+    "ali": 178.36,
+    "deep": 151.36,
+    "batch": 129.38,
+    "fold1": 128.93,
+    "fold2": 136.93,
+    "query": 128.17
+   }
+  },
+  "UD": {
+   "lambda": 51.85,
+   "lambda_iop": 51.85,
+   "lambda_strict_digest": 51.85,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.0,
+    "batch": 187.54,
+    "fold1": 179.09,
+    "fold2": 179.09,
+    "query": 51.85
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 51,
+   "simple_lb_q_plus_pow": 234
+  },
+  "target": 128,
+  "label": "128 JB (proven, Soundness bound)"
+ },
+ "mimc-S128b-0.json": {
+  "JB": {
+   "lambda": 128,
+   "lambda_iop": 128.09,
+   "lambda_strict_digest": 127.21,
+   "binding": "query",
+   "m": 12,
+   "rounds": {
+    "ali": 181.09,
+    "deep": 156.83,
+    "batch": 129.12,
+    "fold1": 128.77,
+    "fold2": 134.77,
+    "fold3": 140.77,
+    "query": 128.09
+   }
+  },
+  "UD": {
+   "lambda": 67.18,
+   "lambda_iop": 67.18,
+   "lambda_strict_digest": 67.18,
+   "binding": "query",
+   "m": 3,
+   "rounds": {
+    "ali": 189.68,
+    "deep": 174.0,
+    "batch": 181.54,
+    "fold1": 175.19,
+    "fold2": 175.19,
+    "fold3": 175.19,
+    "query": 67.18
+   }
+  },
+  "plonky3": {
+   "conjectured_bits": 128,
+   "legacy_conjectured_bits": 128,
+   "proven_ldr_bits": 128,
+   "proven_udr_bits": 67,
+   "simple_lb_q_plus_pow": 233
+  },
+  "target": 128,
+  "label": "128 JB (proven, Soundness bound)"
+ }
+}
