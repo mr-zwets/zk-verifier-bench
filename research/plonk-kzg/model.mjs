@@ -131,17 +131,21 @@ const vkBytes = 8 * 64 /* S1,S2,S3,Ql,Qr,Qm,Qo,Qk raw (hashed into gamma as is) 
 const CODE = 6000;                  // estimate: KZG event kernels 0.75k, G1 kernels 0.2-0.3k, Straus loop 0.4k, transcript + Fr 1.5k, SI setup/terminal 1.5k, dispatch/layout 1.4k
 
 // mFold fixed bases of plan B moved from the G1 MSM into GT (GT-GLS against [1]_2): Qk first, then the full-scalar ones
+// mFold fixed bases moved from the G1 MSM into GT (GT-GLS against [1]_2). Plan B: Qk first, then the full-scalar ones (up to 9).
+// Plan A: only the 3 fixed bases outside Lambda (S1, S2, G1) can move (Lambda's must stay in G1: it is hashed into v).
 function total(plan, wf, wv, fA, mFold = 0, L = 2) {
-  if (mFold && plan !== 'B') throw new Error('GT folding needs plan B (Lambda witnessed)');
-  const saved = PLANS.B; if (mFold) PLANS.B = PLANS.B.map((c) => c.fixed === 8 ? {...c, f64: 0, fixed: 8 - Math.max(0, mFold - 1)} : c);
-  const savedFB = fixedBases.B; if (mFold) fixedBases.B = 9 - mFold;
-  const m = msmCost(plan, wf, wv, fA); PLANS.B = saved; fixedBases.B = savedFB;
+  if (plan === 'A' && mFold > 3) throw new Error('plan A folds at most S1, S2, G1');
+  const saved = PLANS[plan], savedFB = fixedBases[plan];
+  if (mFold && plan === 'B') PLANS.B = PLANS.B.map((c) => c.fixed === 8 ? {...c, f64: 0, fixed: 8 - Math.max(0, mFold - 1)} : c);
+  if (mFold && plan === 'A') PLANS.A = PLANS.A.map((c) => c.name === 'P_left rest' ? {...c, fixed: 3 - mFold} : c);
+  fixedBases[plan] = savedFB - mFold;
+  const m = msmCost(plan, wf, wv, fA); PLANS[plan] = saved; fixedBases[plan] = savedFB;
   const pr = pairingCost(mFold, L);
-  const opAll = decode + curve + transcriptOp + frOp + m.op + pr.op;
-  const bytes = proofBytes + piBytes + frBytes + m.bytes + pr.bytes + vkBytes + CODE;
+  const lamW = plan === 'B' ? {op: 3 * U.mm + 2500 + 1800, bytes: 64} : {op: 0, bytes: 0}; // plan B: witnessed Lambda (decode + on-curve)
+  const opAll = decode + curve + transcriptOp + frOp + m.op + pr.op + lamW.op;
+  const bytes = proofBytes + piBytes + frBytes + m.bytes + pr.bytes + vkBytes + CODE + lamW.bytes;
   return {plan, wf, wv, fA, mFold, L, op: opAll, bytes, msm: m, pairing: pr};
 }
-
 // ---------------- regimes ----------------
 const TX1 = 63, LOCK = 35;          // single-input tx overhead and P2SH32 locking, as the bench scores SI-GLS (21,852 + 63)
 function regimeSpec(t) { const L = Math.max(t.bytes + 70, Math.ceil(t.op / 800 - 10000)); return {unlocking: L, score: L + LOCK + TX1, pad: L - t.bytes - 70, bchnOp: t.op + CODE}; }
@@ -160,6 +164,7 @@ function regimeToday(t) {
 const best = {}; const rows = [];
 const SPACE = [];
 for (const plan of ['A', 'B']) for (const wf of [3, 4, 5, 6, 7]) for (const wv of [3, 4, 5, 6]) for (let i = 0; i <= 10; i++) SPACE.push([plan, wf, wv, i / 10, 0, 2]);
+for (const mFold of [1, 2, 3]) for (const wf of [4, 5]) for (const wv of [3, 4, 5, 6]) for (let i = 0; i <= 10; i++) SPACE.push(['A', wf, wv, i / 10, mFold, 1]);
 for (const mFold of [1, 3, 5, 7, 9]) for (const L of [1, 2]) for (const wv of [3, 4, 5, 6]) for (let i = 0; i <= 10; i++) SPACE.push(['B', 4, wv, i / 10, mFold, L]);
 const bestBy = {}; // best per (gt folding on/off) and regime
 for (const args of SPACE) {
@@ -168,7 +173,7 @@ for (const args of SPACE) {
   rows.push({t, r});
   for (const g of ['spec', 'k100', 'today']) {
     if (!best[g] || r[g].score < best[g].r[g].score) best[g] = {t, r};
-    const key = g + (t.mFold ? '/gtfold' : '/g1only');
+    const key = g + '/' + t.plan + (t.mFold ? '-gtfold' : '-g1only');
     if (!bestBy[key] || r[g].score < bestBy[key].r[g].score) bestBy[key] = {t, r};
   }
 }
@@ -184,6 +189,14 @@ for (const [key, {t, r}] of Object.entries(bestBy)) {
   const g = key.split('/')[0];
   console.log(`best ${key}: plan ${t.plan} wf=${t.wf} wv=${t.wv} fA=${t.fA} mFold=${t.mFold} L=${t.L}: op ${fmt(t.op)}, content ${Math.round(t.bytes)} B, MSM ${fmt(t.msm.op)} / ${Math.round(t.msm.bytes)} B, pairing ${fmt(t.pairing.op)} / ${t.pairing.bytes} B ->`, JSON.stringify(r[g]));
 }
+const opts = [
+  ['naive: plan A, all-Jacobian MSM w=4, no folding', ['A', 4, 4, 0, 0, 2]],
+  ['plan A, all affine-witness MSM w=4, no folding', ['A', 4, 4, 1, 0, 2]],
+];
+for (const g of ['spec', 'k100', 'today']) for (const k of ['A-g1only', 'A-gtfold', 'B-g1only', 'B-gtfold']) { const b = bestBy[g + '/' + k]; if (b) opts.push([`best for ${g}: ${k} (wf ${b.t.wf}, wv ${b.t.wv}, fA ${b.t.fA}, mFold ${b.t.mFold}, L ${b.t.L})`, [b.t.plan, b.t.wf, b.t.wv, b.t.fA, b.t.mFold, b.t.L]]); }
+console.log('\n| design | op (std) | content B | MSM op / B | pairing op / B | bch-spec | 100 KB input | today (inputs) |\n|---|--:|--:|--:|--:|--:|--:|--:|');
+for (const [n, a] of opts) { const t = total(...a); const td = regimeToday(t);
+  console.log(`| ${n} | ${fmt(t.op)} | ${Math.round(t.bytes)} | ${fmt(t.msm.op)} / ${Math.round(t.msm.bytes)} | ${fmt(t.pairing.op)} / ${t.pairing.bytes} | ${Math.round(regimeSpec(t).score)} | ${Math.round(regime100k(t).score)}${regime100k(t).fits ? '' : ' (over 100 KB)'} | ${Math.round(td.score)} (${td.inputs}) |`); }
 writeFileSync(new URL('./model-result.json', import.meta.url), JSON.stringify({nPI: NPI, log2n: LOG2N, units: U, constants: {INSITU, FRMM, ADD_OVH, AFF_GUARD, CODE, GTGLS},
   statement: {proofBytes, piBytes, decode, curve}, transcript: {hashes, op: transcriptOp}, fr: {muls: frMuls, op: frOp}, pairingNoFold: pairing0, naf: NAF,
   vkBytes, reference: {pureJacobian: {...pureJ, regimes: {spec: regimeSpec(pureJ), k100: regime100k(pureJ), today: regimeToday(pureJ)}},
