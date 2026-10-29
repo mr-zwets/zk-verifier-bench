@@ -1,6 +1,6 @@
 # Track 6: a universal-setup PLONK/KZG verifier on CashVM (gnark, BN254, SHA-256 transcript)
 
-Date: 2026-10-29. Status: research. **Not a leaderboard entry.** Nothing is in REGISTRY, results.json or score-history.json, and the website is unchanged. Two internal reviews were done: protocol/soundness (pass, 1 major, 3 minors) and measurement (pass, 7 minors). No fix phase ran. Every finding is therefore stated below, either as a corrected figure or as a caveat. The figures in this report already include the measurement review's corrections, so a few of them differ from the verifier README on its wip branch.
+Date: 2026-10-29. Status: research. **Not a leaderboard entry.** Nothing is in REGISTRY, results.json or score-history.json, and the website is unchanged. Two internal reviews were done: protocol/soundness (pass, 1 major, 3 minors) and measurement (pass, 7 minors). No fix phase ran; the major item (a written soundness argument) was done afterwards, see §6. Every finding is therefore stated below, either as a corrected figure or as a caveat. The figures in this report already include the measurement review's corrections, so a few of them differ from the verifier README on its wip branch.
 
 ## 1. Question
 
@@ -77,7 +77,7 @@ The design document is [DESIGN.md](DESIGN.md). It contains a cost model ([model.
 **Today's regime** follows the SI-MX3 pattern of `chunked/bn254/bn-native-sound`:
 - **Shared redeem.** Every input uses one 102-byte redeem. It loads two hash-checked code blobs by OP_INPUTBYTECODE: C0 is 7.3–7.6 KB and C1 is 3.6 KB.
 - **Graph pin:** TXINPUTCOUNT = 10, and every UTXO bytecode equals the input's own.
-- **Remote reads** sit at fixed offsets, and their push headers are checked.
+- **Remote reads** sit at fixed offsets, pinned by each owner's size and DEPTH checks and the minimal-push rule, so the push headers need no separate check.
 - **Hand-overs** between inputs are byte-exact canonical words.
 - **Roles:** MSM Jacobian ×3; statement/transcript ×1; MSM affine ×4; SI pairing ×2.
 - **Published tables.** The MSM tables cannot be handed between inputs, so they are published. The variable-base tables (TV, 9.6 KB) are checked by chord/tangent equations in their host input. The fixed-base tables (TF, 7.7 / 8.6 KB) are a SHA-256-checked VK constant.
@@ -189,12 +189,7 @@ The witness dominates the score. For mul2 at J = 13 it is slopes 38.6 KB, SI sta
 
 ## 6. Caveats
 
-- **Not reviewed for soundness in writing.** The verifier deviates from gnark in three places that need a written argument: the t'-fold of the witnessed Λ', the batching with u = u1 + λu2, and the chain's hand-over and graph argument. The protocol review calls this major (not a blocker) and sketches each:
-  - **t'-fold:** Λ' is hashed into v before uRaw, and t' uses bytes separate from u. If Λ' ≠ Λ, each u allows exactly one t' mod r, an error of 2^-128 per hash query.
-  - **u batching:** Lagrange reduction of the lattice {(a,b): a + λb ≡ 0 mod r} gives a shortest vector of about 2^127. So (u1, u2) ∈ [0, 2^64)² ↦ u is injective, with 2^128 distinct u values.
-  - **Chain:** the graph pin, minimal pushes with size and DEPTH checks, checked push headers, the EQUALVERIFY of G0, canonical hand-overs, and hash-checked TF, DS and code blobs.
-
-  These sketches are not a written proof. Until one exists, treat soundness as reviewed by reading and tests only.
+- **Soundness argument.** The verifier deviates from gnark in three places: the t'-fold of the witnessed Λ', the batching with u = u1 + λu2, and the chain's hand-over and graph argument. Each is proved in [SOUNDNESS.md](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/plonk-kzg/verifier/SOUNDNESS.md) next to the verifier, and an independent review passed it. On top of PLONK's own soundness (gnark's Fiat-Shamir instantiation, AGM/q-DLOG, honest SRS) the added error is at most Q·2^-128 plus negligible terms, about 2^-64 for Q ≤ 2^64 hash queries. The scope is VKs without BSB22 commitments. The kernel formulas are tested, not proved.
 - **Unsafe test SRS.** No real ceremony file was loaded. Proofs for these keys can be forged by anyone who recomputes τ.
 - **Thin liveness margins, tested on 5 proofs per circuit.**
   - bch-spec margins are 3.3–4.35% at J = 13; a 6th proof could need J = 12.
