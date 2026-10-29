@@ -187,10 +187,10 @@
    "max": 64,
    "mean": 64
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
@@ -236,10 +236,10 @@
    "max": 3,
    "mean": 3
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
@@ -334,10 +334,10 @@
    "max": 146,
    "mean": 146
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
@@ -481,10 +481,10 @@
    "max": 6,
    "mean": 6
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
@@ -579,10 +579,10 @@
    "max": 6,
    "mean": 6
   },
-  "defBytes": 2102,
-  "prologueBytes": 2227,
-  "defineLibauth": 11433,
-  "defineBchn": 13535,
+  "defBytes": 2101,
+  "prologueBytes": 2226,
+  "defineLibauth": 11432,
+  "defineBchn": 13533,
   "real": [
    "ok"
   ]
@@ -677,10 +677,10 @@
    "max": 6,
    "mean": 6
   },
-  "defBytes": 2102,
-  "prologueBytes": 2227,
-  "defineLibauth": 11433,
-  "defineBchn": 13535,
+  "defBytes": 2101,
+  "prologueBytes": 2226,
+  "defineLibauth": 11432,
+  "defineBchn": 13533,
   "real": [
    "ok"
   ]
@@ -775,10 +775,10 @@
    "max": 6,
    "mean": 6
   },
-  "defBytes": 2102,
-  "prologueBytes": 2227,
-  "defineLibauth": 11433,
-  "defineBchn": 13535,
+  "defBytes": 2101,
+  "prologueBytes": 2226,
+  "defineLibauth": 11432,
+  "defineBchn": 13533,
   "real": [
    "ok"
   ]
@@ -873,10 +873,10 @@
    "max": 6,
    "mean": 6
   },
-  "defBytes": 2102,
-  "prologueBytes": 2227,
-  "defineLibauth": 11433,
-  "defineBchn": 13535,
+  "defBytes": 2101,
+  "prologueBytes": 2226,
+  "defineLibauth": 11432,
+  "defineBchn": 13533,
   "real": [
    "ok"
   ]
@@ -971,10 +971,10 @@
    "max": 3,
    "mean": 3
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
@@ -1069,10 +1069,10 @@
    "max": 170,
    "mean": 170
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "ok"
   ]
@@ -1118,10 +1118,10 @@
    "max": 185,
    "mean": 185
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "ok"
   ]
@@ -1167,10 +1167,10 @@
    "max": 265,
    "mean": 265
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "ok"
   ]
@@ -1265,10 +1265,10 @@
    "max": 93,
    "mean": 93
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "ok"
   ]
@@ -1363,10 +1363,10 @@
    "max": 249,
    "mean": 249
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "ok"
   ]
@@ -1412,10 +1412,10 @@
    "max": 218,
    "mean": 218
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "ok"
   ]
@@ -1461,10 +1461,10 @@
    "max": 281,
    "mean": 281
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "ok"
   ]
@@ -1559,10 +1559,10 @@
    "max": 93,
    "mean": 93
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "ok"
   ]
@@ -1657,10 +1657,10 @@
    "max": 393,
    "mean": 393
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "over one standard input"
   ]
@@ -1706,10 +1706,10 @@
    "max": 297,
    "mean": 297
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "over one standard input"
   ]
@@ -1755,10 +1755,10 @@
    "max": 314,
    "mean": 314
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "over one standard input"
   ]
@@ -1853,10 +1853,10 @@
    "max": 94,
    "mean": 94
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "over one standard input"
   ]
@@ -1951,10 +1951,10 @@
    "max": 682,
    "mean": 682
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "over one standard input"
   ]
@@ -2000,10 +2000,10 @@
    "max": 441,
    "mean": 441
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "over one standard input"
   ]
@@ -2049,10 +2049,10 @@
    "max": 393,
    "mean": 393
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "over one standard input"
   ]
@@ -2147,10 +2147,10 @@
    "max": 98,
    "mean": 98
   },
-  "defBytes": 1725,
-  "prologueBytes": 1839,
-  "defineLibauth": 10454,
-  "defineBchn": 12179,
+  "defBytes": 1724,
+  "prologueBytes": 1838,
+  "defineLibauth": 10453,
+  "defineBchn": 12177,
   "real": [
    "over one standard input"
   ]
@@ -2196,10 +2196,10 @@
    "max": 142,
    "mean": 142
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
@@ -2245,10 +2245,10 @@
    "max": 162,
    "mean": 162
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
@@ -2392,10 +2392,10 @@
    "max": 103,
    "mean": 103
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
@@ -2456,19 +2456,19 @@
   "name": "parse a 192-byte FRI leaf into 8 packed F_p^3 values (Track 5 PKL, 26-byte slots)",
   "trials": 8,
   "opStd": {
-   "min": 22852,
-   "max": 22856,
-   "mean": 22854.375
+   "min": 21988,
+   "max": 21992,
+   "mean": 21990.375
   },
   "opCons": {
-   "min": 22852,
-   "max": 22856,
-   "mean": 22854.375
+   "min": 21988,
+   "max": 21992,
+   "mean": 21990.375
   },
   "instr": {
-   "min": 196,
-   "max": 196,
-   "mean": 196
+   "min": 180,
+   "max": 180,
+   "mean": 180
   },
   "arith": {
    "min": 0,
@@ -2476,9 +2476,9 @@
    "mean": 0
   },
   "pushed": {
-   "min": 3252,
-   "max": 3256,
-   "mean": 3254.375
+   "min": 3988,
+   "max": 3992,
+   "mean": 3990.375
   },
   "iters": {
    "min": 0,
@@ -2490,10 +2490,10 @@
    "max": 3,
    "mean": 3
   },
-  "defBytes": 1832,
-  "prologueBytes": 1951,
-  "defineLibauth": 10862,
-  "defineBchn": 12694,
+  "defBytes": 1831,
+  "prologueBytes": 1950,
+  "defineLibauth": 10861,
+  "defineBchn": 12692,
   "real": [
    "ok"
   ]
