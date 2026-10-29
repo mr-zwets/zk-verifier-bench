@@ -1,0 +1,2482 @@
+{
+ "P100": {
+  "rbr": {
+   "rounds": {
+    "ali": 183.41,
+    "deep": 156.83,
+    "batch+fold1": 124.19,
+    "fold2": 131.63,
+    "fold3": 137.63,
+    "query": 100.11
+   },
+   "lam_iop": 100.11,
+   "binding": "query",
+   "lam": 100,
+   "lam_strict": 99.21
+  },
+  "track4_model": {
+   "rounds": {
+    "ali": 184.69,
+    "deep": 157.37,
+    "batch+folds": 123.85,
+    "query": 100.11
+   },
+   "lam_iop": 100.11,
+   "lam": 100,
+   "limited_by": "digest"
+  },
+  "bytes": 50022,
+  "params": {
+   "name": "P100",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 7,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 22,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 25,
+   "omit": false
+  }
+ },
+ "P128": {
+  "rbr": {
+   "rounds": {
+    "ali": 185.0,
+    "deep": 160.0,
+    "batch+fold1": 128.65,
+    "fold2": 136.09,
+    "fold3": 142.09,
+    "query": 128.19
+   },
+   "lam_iop": 128.19,
+   "binding": "query",
+   "lam": 128,
+   "lam_strict": 127.21
+  },
+  "track4_model": {
+   "rounds": {
+    "ali": 185.33,
+    "deep": 160.59,
+    "batch+folds": 128.31,
+    "query": 128.19
+   },
+   "lam_iop": 128.19,
+   "lam": 128,
+   "limited_by": "digest"
+  },
+  "bytes": 91468,
+  "params": {
+   "name": "P128",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 5,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 43,
+   "g": 28,
+   "g_c": 0,
+   "m": 4,
+   "h": 32,
+   "omit": false
+  }
+ },
+ "U100": {
+  "rbr": {
+   "rounds": {
+    "ali": 128.0,
+    "deep": 110.0,
+    "batch+fold1": 106.0,
+    "fold2": 105.19,
+    "fold3": 105.19,
+    "query": 100.09
+   },
+   "lam_iop": 100.09,
+   "binding": "query",
+   "lam": 100,
+   "lam_strict": 99.21
+  },
+  "track4_model": {
+   "rounds": {
+    "ali": 126.42,
+    "deep": 106.87,
+    "batch": 108.0,
+    "fold1": 108.42,
+    "fold2": 110.19,
+    "fold3": 113.19,
+    "query": 100.09
+   },
+   "lam_iop": 100.09,
+   "lam": 100,
+   "limited_by": "digest"
+  },
+  "bytes": 107423,
+  "params": {
+   "name": "U100",
+   "regime": "UDR",
+   "e": 2,
+   "log_n": 16,
+   "log_blowup": 4,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 79,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 25,
+   "omit": false
+  }
+ },
+ "U128g": {
+  "rbr": {
+   "rounds": {
+    "ali": 152.0,
+    "deep": 134.0,
+    "batch+fold1": 131.0,
+    "fold2": 130.19,
+    "fold3": 130.19,
+    "query": 128.44
+   },
+   "lam_iop": 128.44,
+   "binding": "query",
+   "lam": 128,
+   "lam_strict": 127.21
+  },
+  "track4_model": {
+   "rounds": {
+    "ali": 150.42,
+    "deep": 131.75,
+    "batch": 133.0,
+    "fold1": 133.42,
+    "fold2": 135.19,
+    "fold3": 138.19,
+    "query": 128.44
+   },
+   "lam_iop": 128.44,
+   "lam": 128,
+   "limited_by": "digest"
+  },
+  "bytes": 166568,
+  "params": {
+   "name": "U128g",
+   "regime": "UDR",
+   "e": 2,
+   "log_n": 16,
+   "log_blowup": 3,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 121,
+   "g": 28,
+   "g_c": 24,
+   "m": 3,
+   "h": 32,
+   "omit": false
+  }
+ },
+ "search_JB_e3_100_gc0": {
+  "params": {
+   "name": "x",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 7,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 22,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 25,
+   "omit": false
+  },
+  "bytes": 50022,
+  "rbr": {
+   "rounds": {
+    "ali": 183.41,
+    "deep": 156.83,
+    "batch+fold1": 124.19,
+    "fold2": 131.63,
+    "fold3": 137.63,
+    "query": 100.11
+   },
+   "lam_iop": 100.11,
+   "binding": "query",
+   "lam": 100,
+   "lam_strict": 99.21
+  }
+ },
+ "search_JB_e3_128_gc0": {
+  "params": {
+   "name": "x",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 5,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 43,
+   "g": 28,
+   "g_c": 0,
+   "m": 4,
+   "h": 32,
+   "omit": false
+  },
+  "bytes": 91468,
+  "rbr": {
+   "rounds": {
+    "ali": 185.0,
+    "deep": 160.0,
+    "batch+fold1": 128.65,
+    "fold2": 136.09,
+    "fold3": 142.09,
+    "query": 128.19
+   },
+   "lam_iop": 128.19,
+   "binding": "query",
+   "lam": 128,
+   "lam_strict": 127.21
+  }
+ },
+ "search_UD_e2_100_gc0": {
+  "params": {
+   "name": "x",
+   "regime": "UD",
+   "e": 2,
+   "log_n": 16,
+   "log_blowup": 4,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 79,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 25,
+   "omit": false
+  },
+  "bytes": 107423,
+  "rbr": {
+   "rounds": {
+    "ali": 128.0,
+    "deep": 110.0,
+    "batch+fold1": 106.0,
+    "fold2": 105.19,
+    "fold3": 105.19,
+    "query": 100.09
+   },
+   "lam_iop": 100.09,
+   "binding": "query",
+   "lam": 100,
+   "lam_strict": 99.21
+  }
+ },
+ "search_UD_e3_100_gc0": {
+  "params": {
+   "name": "x",
+   "regime": "UD",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 4,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 79,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 25,
+   "omit": false
+  },
+  "bytes": 124679,
+  "rbr": {
+   "rounds": {
+    "ali": 192.0,
+    "deep": 174.0,
+    "batch+fold1": 170.0,
+    "fold2": 169.19,
+    "fold3": 169.19,
+    "query": 100.09
+   },
+   "lam_iop": 100.09,
+   "binding": "query",
+   "lam": 100,
+   "lam_strict": 99.21
+  }
+ },
+ "search_UD_e3_128_gc0": {
+  "params": {
+   "name": "x",
+   "regime": "UD",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 4,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 110,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 32,
+   "omit": false
+  },
+  "bytes": 190817,
+  "rbr": {
+   "rounds": {
+    "ali": 192.0,
+    "deep": 174.0,
+    "batch+fold1": 170.0,
+    "fold2": 169.19,
+    "fold3": 169.19,
+    "query": 128.38
+   },
+   "lam_iop": 128.38,
+   "binding": "query",
+   "lam": 128,
+   "lam_strict": 127.21
+  }
+ },
+ "search_UD_e2_128_gc24": {
+  "params": {
+   "name": "x",
+   "regime": "UD",
+   "e": 2,
+   "log_n": 16,
+   "log_blowup": 3,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 121,
+   "g": 28,
+   "g_c": 24,
+   "m": 3,
+   "h": 32,
+   "omit": false
+  },
+  "bytes": 166568,
+  "rbr": {
+   "rounds": {
+    "ali": 152.0,
+    "deep": 134.0,
+    "batch+fold1": 131.0,
+    "fold2": 130.19,
+    "fold3": 130.19,
+    "query": 128.44
+   },
+   "lam_iop": 128.44,
+   "binding": "query",
+   "lam": 128,
+   "lam_strict": 127.21
+  }
+ },
+ "search_gc_JB_e3_100": {
+  "params": {
+   "name": "x",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 8,
+   "k0": 4,
+   "k": 16,
+   "log_df": 7,
+   "s": 19,
+   "g": 28,
+   "g_c": 0,
+   "m": 4,
+   "h": 25,
+   "omit": false
+  },
+  "bytes": 46010,
+  "rbr": {
+   "rounds": {
+    "ali": 182.0,
+    "deep": 154.0,
+    "batch+fold1": 118.15,
+    "fold2": 126.49,
+    "fold3": 133.59,
+    "query": 100.77
+   },
+   "lam_iop": 100.77,
+   "binding": "query",
+   "lam": 100,
+   "lam_strict": 99.21
+  }
+ },
+ "search_gc_JB_e3_128": {
+  "params": {
+   "name": "x",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 8,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 26,
+   "g": 28,
+   "g_c": 12,
+   "m": 5,
+   "h": 32,
+   "omit": false
+  },
+  "bytes": 70320,
+  "rbr": {
+   "rounds": {
+    "ali": 193.68,
+    "deep": 165.36,
+    "batch+fold1": 128.12,
+    "fold2": 135.56,
+    "fold3": 141.56,
+    "query": 128.42
+   },
+   "lam_iop": 128.12,
+   "binding": "batch+fold1",
+   "lam": 128,
+   "lam_strict": 127.21
+  }
+ },
+ "search_gc_JB_e2_100": {
+  "params": {
+   "name": "x",
+   "regime": "JB",
+   "e": 2,
+   "log_n": 16,
+   "log_blowup": 3,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 57,
+   "g": 28,
+   "g_c": 28,
+   "m": 3,
+   "h": 25,
+   "omit": false
+  },
+  "bytes": 75778,
+  "rbr": {
+   "rounds": {
+    "ali": 151.41,
+    "deep": 128.83,
+    "batch+fold1": 102.19,
+    "fold2": 109.63,
+    "fold3": 115.63,
+    "query": 100.82
+   },
+   "lam_iop": 100.82,
+   "binding": "query",
+   "lam": 100,
+   "lam_strict": 99.21
+  }
+ },
+ "search_gc_UD_e2_100": {
+  "params": {
+   "name": "x",
+   "regime": "UD",
+   "e": 2,
+   "log_n": 16,
+   "log_blowup": 4,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 79,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 25,
+   "omit": false
+  },
+  "bytes": 107423,
+  "rbr": {
+   "rounds": {
+    "ali": 128.0,
+    "deep": 110.0,
+    "batch+fold1": 106.0,
+    "fold2": 105.19,
+    "fold3": 105.19,
+    "query": 100.09
+   },
+   "lam_iop": 100.09,
+   "binding": "query",
+   "lam": 100,
+   "lam_strict": 99.21
+  }
+ },
+ "search_gc_UD_e3_128": {
+  "params": {
+   "name": "x",
+   "regime": "UD",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 4,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 110,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 32,
+   "omit": false
+  },
+  "bytes": 190817,
+  "rbr": {
+   "rounds": {
+    "ali": 192.0,
+    "deep": 174.0,
+    "batch+fold1": 170.0,
+    "fold2": 169.19,
+    "fold3": 169.19,
+    "query": 128.38
+   },
+   "lam_iop": 128.38,
+   "binding": "query",
+   "lam": 128,
+   "lam_strict": 127.21
+  }
+ },
+ "plonky3": {
+  "P3-100": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 2,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 93,
+    "query_pow": 28,
+    "commit_pow": 19,
+    "batch_pow": 26,
+    "ood_pow": 0,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 254480,
+    "dedup": 144556,
+    "pt": 4496,
+    "leaves": 32736,
+    "trees": [
+     [
+      "trace",
+      18,
+      16
+     ],
+     [
+      "quotient",
+      18,
+      64
+     ],
+     [
+      "fri0",
+      15,
+      112
+     ],
+     [
+      "fri1",
+      12,
+      112
+     ],
+     [
+      "fri2",
+      10,
+      48
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     4
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 122.41,
+     "deep": 102.51,
+     "batch": 100.47,
+     "fold1": 100.13,
+     "fold2": 106.13,
+     "fold3": 111.35,
+     "query": 100.32
+    },
+    "lam_iop": 100.13,
+    "binding": "fold1",
+    "lam": 100.13,
+    "lam_strict": 100.13
+   }
+  },
+  "P3-100u": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "UD",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 4,
+    "max_log_arity": 4,
+    "log_final_poly_len": 8,
+    "num_queries": 79,
+    "query_pow": 28,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 220600,
+    "dedup": 148025,
+    "pt": 4456,
+    "leaves": 44240,
+    "trees": [
+     [
+      "trace",
+      20,
+      16
+     ],
+     [
+      "quotient",
+      20,
+      64
+     ],
+     [
+      "fri0",
+      16,
+      240
+     ],
+     [
+      "fri1",
+      12,
+      240
+     ]
+    ],
+    "arities": [
+     16,
+     16
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 126.0,
+     "deep": 109.68,
+     "batch": 104.54,
+     "fold1": 104.09,
+     "fold2": 104.09,
+     "query": 100.09
+    },
+    "lam_iop": 100.09,
+    "binding": "query",
+    "lam": 100.09,
+    "lam_strict": 100.09
+   }
+  },
+  "P3-100-zk": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 1,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 260,
+    "query_pow": 28,
+    "commit_pow": 18,
+    "batch_pow": 26,
+    "ood_pow": 0,
+    "m": 3,
+    "zk": true,
+    "rand_cols": 2,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 924400,
+    "dedup": 486117,
+    "pt": 5040,
+    "leaves": 170560,
+    "trees": [
+     [
+      "trace",
+      18,
+      32
+     ],
+     [
+      "quotient",
+      18,
+      256
+     ],
+     [
+      "random",
+      18,
+      32
+     ],
+     [
+      "fri0",
+      15,
+      112
+     ],
+     [
+      "fri1",
+      12,
+      112
+     ],
+     [
+      "fri2",
+      9,
+      112
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 123.41,
+     "deep": 102.66,
+     "batch": 100.01,
+     "fold1": 100.63,
+     "fold2": 106.63,
+     "fold3": 112.62,
+     "query": 100.18
+    },
+    "lam_iop": 100.01,
+    "binding": "batch",
+    "lam": 100.01,
+    "lam_strict": 100.01
+   }
+  },
+  "P3-100 e=3*": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 4,
+    "log_final_poly_len": 8,
+    "num_queries": 19,
+    "query_pow": 25,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 16,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 73576,
+    "dedup": 61174,
+    "pt": 6696,
+    "leaves": 15808,
+    "trees": [
+     [
+      "trace",
+      24,
+      16
+     ],
+     [
+      "quotient",
+      24,
+      96
+     ],
+     [
+      "fri0",
+      20,
+      360
+     ],
+     [
+      "fri1",
+      16,
+      360
+     ]
+    ],
+    "arities": [
+     16,
+     16
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 178.0,
+     "deep": 149.68,
+     "batch": 101.37,
+     "fold1": 109.37,
+     "fold2": 117.37,
+     "query": 100.16
+    },
+    "lam_iop": 100.16,
+    "binding": "query",
+    "lam": 100.16,
+    "lam_strict": 100.16
+   }
+  },
+  "P3-100 e=3* h=25": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 3,
+    "log_final_poly_len": 7,
+    "num_queries": 19,
+    "query_pow": 25,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 16,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 25
+   },
+   "bytes": {
+    "native": 63783,
+    "dedup": 51672,
+    "pt": 3629,
+    "leaves": 11704,
+    "trees": [
+     [
+      "trace",
+      24,
+      16
+     ],
+     [
+      "quotient",
+      24,
+      96
+     ],
+     [
+      "fri0",
+      21,
+      168
+     ],
+     [
+      "fri1",
+      18,
+      168
+     ],
+     [
+      "fri2",
+      15,
+      168
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 178.0,
+     "deep": 149.68,
+     "batch": 101.37,
+     "fold1": 108.47,
+     "fold2": 114.47,
+     "fold3": 120.47,
+     "query": 100.16
+    },
+    "lam_iop": 100.16,
+    "binding": "query",
+    "lam": 100,
+    "lam_strict": 99.21
+   }
+  },
+  "P3-100 e=3* zk": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 4,
+    "log_final_poly_len": 6,
+    "num_queries": 19,
+    "query_pow": 25,
+    "commit_pow": 0,
+    "batch_pow": 3,
+    "ood_pow": 0,
+    "m": 16,
+    "zk": true,
+    "rand_cols": 3,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 106368,
+    "dedup": 87765,
+    "pt": 3312,
+    "leaves": 25840,
+    "trees": [
+     [
+      "trace",
+      25,
+      40
+     ],
+     [
+      "quotient",
+      25,
+      384
+     ],
+     [
+      "random",
+      25,
+      48
+     ],
+     [
+      "fri0",
+      21,
+      360
+     ],
+     [
+      "fri1",
+      17,
+      360
+     ],
+     [
+      "fri2",
+      14,
+      168
+     ]
+    ],
+    "arities": [
+     16,
+     16,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 178.0,
+     "deep": 147.83,
+     "batch": 100.3,
+     "fold1": 107.37,
+     "fold2": 115.37,
+     "fold3": 122.47,
+     "query": 100.16
+    },
+    "lam_iop": 100.16,
+    "binding": "query",
+    "lam": 100.16,
+    "lam_strict": 100.16
+   }
+  },
+  "P3-100 e=5": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 5,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 3,
+    "log_final_poly_len": 7,
+    "num_queries": 19,
+    "query_pow": 25,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 16,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 87608,
+    "dedup": 72106,
+    "pt": 6288,
+    "leaves": 19304,
+    "trees": [
+     [
+      "trace",
+      24,
+      16
+     ],
+     [
+      "quotient",
+      24,
+      160
+     ],
+     [
+      "fri0",
+      21,
+      280
+     ],
+     [
+      "fri1",
+      18,
+      280
+     ],
+     [
+      "fri2",
+      15,
+      280
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 306.0,
+     "deep": 277.68,
+     "batch": 228.75,
+     "fold1": 236.47,
+     "fold2": 242.47,
+     "fold3": 248.47,
+     "query": 100.16
+    },
+    "lam_iop": 100.16,
+    "binding": "query",
+    "lam": 100.16,
+    "lam_strict": 100.16
+   }
+  },
+  "P3-100u e=3*": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "UD",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 4,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 79,
+    "query_pow": 28,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 257640,
+    "dedup": 166918,
+    "pt": 6736,
+    "leaves": 41080,
+    "trees": [
+     [
+      "trace",
+      20,
+      16
+     ],
+     [
+      "quotient",
+      20,
+      96
+     ],
+     [
+      "fri0",
+      17,
+      168
+     ],
+     [
+      "fri1",
+      14,
+      168
+     ],
+     [
+      "fri2",
+      12,
+      72
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     4
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 190.0,
+     "deep": 173.68,
+     "batch": 168.09,
+     "fold1": 169.19,
+     "fold2": 169.19,
+     "fold3": 170.42,
+     "query": 100.09
+    },
+    "lam_iop": 100.09,
+    "binding": "query",
+    "lam": 100.09,
+    "lam_strict": 100.09
+   }
+  },
+  "P3-128 (e=2)": {
+   "feasible": false,
+   "best_lambda": 105,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 1,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 278,
+    "query_pow": 28,
+    "commit_pow": 21,
+    "batch_pow": 28,
+    "ood_pow": 1,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 707280,
+    "dedup": 315023,
+    "pt": 4496,
+    "leaves": 97856,
+    "trees": [
+     [
+      "trace",
+      17,
+      16
+     ],
+     [
+      "quotient",
+      17,
+      64
+     ],
+     [
+      "fri0",
+      14,
+      112
+     ],
+     [
+      "fri1",
+      11,
+      112
+     ],
+     [
+      "fri2",
+      9,
+      48
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     4
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 123.41,
+     "deep": 105.51,
+     "batch": 105.97,
+     "fold1": 105.63,
+     "fold2": 111.63,
+     "fold3": 116.85,
+     "query": 105.17
+    },
+    "lam_iop": 105.17,
+    "binding": "query",
+    "lam": 105.17,
+    "lam_strict": 105.17
+   }
+  },
+  "P3-128u (e=2)": {
+   "feasible": false,
+   "best_lambda": 125,
+   "params": {
+    "name": "x",
+    "regime": "UD",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 4,
+    "max_log_arity": 4,
+    "log_final_poly_len": 8,
+    "num_queries": 107,
+    "query_pow": 28,
+    "commit_pow": 21,
+    "batch_pow": 21,
+    "ood_pow": 16,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 297208,
+    "dedup": 192921,
+    "pt": 4456,
+    "leaves": 59920,
+    "trees": [
+     [
+      "trace",
+      20,
+      16
+     ],
+     [
+      "quotient",
+      20,
+      64
+     ],
+     [
+      "fri0",
+      16,
+      240
+     ],
+     [
+      "fri1",
+      12,
+      240
+     ]
+    ],
+    "arities": [
+     16,
+     16
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 126.0,
+     "deep": 125.68,
+     "batch": 125.54,
+     "fold1": 125.09,
+     "fold2": 125.09,
+     "query": 125.64
+    },
+    "lam_iop": 125.09,
+    "binding": "fold1",
+    "lam": 125.09,
+    "lam_strict": 125.09
+   }
+  },
+  "P3-128 e=5": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 5,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 3,
+    "log_final_poly_len": 7,
+    "num_queries": 26,
+    "query_pow": 26,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 10,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 117568,
+    "dedup": 94429,
+    "pt": 6288,
+    "leaves": 26416,
+    "trees": [
+     [
+      "trace",
+      24,
+      16
+     ],
+     [
+      "quotient",
+      24,
+      160
+     ],
+     [
+      "fri0",
+      21,
+      280
+     ],
+     [
+      "fri1",
+      18,
+      280
+     ],
+     [
+      "fri2",
+      15,
+      280
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 306.68,
+     "deep": 279.03,
+     "batch": 233.32,
+     "fold1": 241.03,
+     "fold2": 247.03,
+     "fold3": 253.03,
+     "query": 128.17
+    },
+    "lam_iop": 128.17,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21
+   }
+  },
+  "P3-128 e=3*": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 4,
+    "log_final_poly_len": 8,
+    "num_queries": 26,
+    "query_pow": 26,
+    "commit_pow": 15,
+    "batch_pow": 23,
+    "ood_pow": 0,
+    "m": 10,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 98216,
+    "dedup": 79704,
+    "pt": 6696,
+    "leaves": 21632,
+    "trees": [
+     [
+      "trace",
+      24,
+      16
+     ],
+     [
+      "quotient",
+      24,
+      96
+     ],
+     [
+      "fri0",
+      20,
+      360
+     ],
+     [
+      "fri1",
+      16,
+      360
+     ]
+    ],
+    "arities": [
+     16,
+     16
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 178.68,
+     "deep": 151.03,
+     "batch": 128.93,
+     "fold1": 128.93,
+     "fold2": 136.93,
+     "query": 128.17
+    },
+    "lam_iop": 128.17,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21
+   }
+  },
+  "P3-128u e=3*": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "UD",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 3,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 121,
+    "query_pow": 28,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 371672,
+    "dedup": 221040,
+    "pt": 6736,
+    "leaves": 62920,
+    "trees": [
+     [
+      "trace",
+      19,
+      16
+     ],
+     [
+      "quotient",
+      19,
+      96
+     ],
+     [
+      "fri0",
+      16,
+      168
+     ],
+     [
+      "fri1",
+      13,
+      168
+     ],
+     [
+      "fri2",
+      11,
+      72
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     4
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 190.0,
+     "deep": 173.68,
+     "batch": 169.09,
+     "fold1": 170.19,
+     "fold2": 170.19,
+     "fold3": 171.42,
+     "query": 128.44
+    },
+    "lam_iop": 128.44,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21
+   }
+  },
+  "P3-128u e=5": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "UD",
+    "e": 5,
+    "log_n": 16,
+    "log_blowup": 4,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 110,
+    "query_pow": 28,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 397728,
+    "dedup": 263007,
+    "pt": 11408,
+    "leaves": 94160,
+    "trees": [
+     [
+      "trace",
+      20,
+      16
+     ],
+     [
+      "quotient",
+      20,
+      160
+     ],
+     [
+      "fri0",
+      17,
+      280
+     ],
+     [
+      "fri1",
+      14,
+      280
+     ],
+     [
+      "fri2",
+      12,
+      120
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     4
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 318.0,
+     "deep": 301.68,
+     "batch": 295.48,
+     "fold1": 297.19,
+     "fold2": 297.19,
+     "fold3": 298.42,
+     "query": 128.38
+    },
+    "lam_iop": 128.38,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21
+   }
+  },
+  "P3-128 e=5 zk": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 5,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 26,
+    "query_pow": 26,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 10,
+    "zk": true,
+    "rand_cols": 5,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 166480,
+    "dedup": 138712,
+    "pt": 14640,
+    "leaves": 42016,
+    "trees": [
+     [
+      "trace",
+      25,
+      56
+     ],
+     [
+      "quotient",
+      25,
+      640
+     ],
+     [
+      "random",
+      25,
+      80
+     ],
+     [
+      "fri0",
+      22,
+      280
+     ],
+     [
+      "fri1",
+      19,
+      280
+     ],
+     [
+      "fri2",
+      16,
+      280
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 306.68,
+     "deep": 277.19,
+     "batch": 229.15,
+     "fold1": 239.03,
+     "fold2": 245.03,
+     "fold3": 251.03,
+     "query": 128.17
+    },
+    "lam_iop": 128.17,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21
+   }
+  },
+  "P3-128 e=3* zk": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 26,
+    "query_pow": 27,
+    "commit_pow": 13,
+    "batch_pow": 22,
+    "ood_pow": 0,
+    "m": 6,
+    "zk": true,
+    "rand_cols": 3,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 143120,
+    "dedup": 115352,
+    "pt": 7920,
+    "leaves": 25376,
+    "trees": [
+     [
+      "trace",
+      25,
+      40
+     ],
+     [
+      "quotient",
+      25,
+      384
+     ],
+     [
+      "random",
+      25,
+      48
+     ],
+     [
+      "fri0",
+      22,
+      168
+     ],
+     [
+      "fri1",
+      19,
+      168
+     ],
+     [
+      "fri2",
+      16,
+      168
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 179.41,
+     "deep": 150.66,
+     "batch": 128.7,
+     "fold1": 128.87,
+     "fold2": 134.87,
+     "fold3": 140.87,
+     "query": 128.0
+    },
+    "lam_iop": 128.0,
+    "binding": "query",
+    "lam": 128.0,
+    "lam_strict": 127.21
+   }
+  },
+  "P3-100 DKT (sens.)": {
+   "feasible": true,
+   "params": {
+    "name": "x",
+    "regime": "DKT",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 8,
+    "max_log_arity": 4,
+    "log_final_poly_len": 8,
+    "num_queries": 19,
+    "query_pow": 25,
+    "commit_pow": 22,
+    "batch_pow": 22,
+    "ood_pow": 0,
+    "m": 16,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 66168,
+    "dedup": 53766,
+    "pt": 4456,
+    "leaves": 10640,
+    "trees": [
+     [
+      "trace",
+      24,
+      16
+     ],
+     [
+      "quotient",
+      24,
+      64
+     ],
+     [
+      "fri0",
+      20,
+      240
+     ],
+     [
+      "fri1",
+      16,
+      240
+     ]
+    ],
+    "arities": [
+     16,
+     16
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 117.96,
+     "deep": 101.63,
+     "batch": 100.99,
+     "fold1": 100.54,
+     "fold2": 100.54,
+     "query": 100.16
+    },
+    "lam_iop": 100.16,
+    "binding": "query",
+    "lam": 100.16,
+    "lam_strict": 100.16
+   }
+  },
+  "P3-128 DKT e=2 (sens.)": {
+   "feasible": false,
+   "best_lambda": 123,
+   "params": {
+    "name": "x",
+    "regime": "DKT",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 2,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 123,
+    "query_pow": 28,
+    "commit_pow": 25,
+    "batch_pow": 26,
+    "ood_pow": 17,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 335120,
+    "dedup": 181975,
+    "pt": 4496,
+    "leaves": 43296,
+    "trees": [
+     [
+      "trace",
+      18,
+      16
+     ],
+     [
+      "quotient",
+      18,
+      64
+     ],
+     [
+      "fri0",
+      15,
+      112
+     ],
+     [
+      "fri1",
+      12,
+      112
+     ],
+     [
+      "fri2",
+      10,
+      48
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     4
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 123.19,
+     "deep": 123.87,
+     "batch": 123.7,
+     "fold1": 123.36,
+     "fold2": 123.36,
+     "fold3": 124.58,
+     "query": 123.65
+    },
+    "lam_iop": 123.19,
+    "binding": "ali",
+    "lam": 123.19,
+    "lam_strict": 123.19
+   }
+  },
+  "P3-100 e=2 UD lb<=5": {
+   "params": {
+    "name": "x",
+    "regime": "UD",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 4,
+    "max_log_arity": 4,
+    "log_final_poly_len": 8,
+    "num_queries": 79,
+    "query_pow": 28,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 220600,
+    "dedup": 148025,
+    "pt": 4456,
+    "leaves": 44240,
+    "trees": [
+     [
+      "trace",
+      20,
+      16
+     ],
+     [
+      "quotient",
+      20,
+      64
+     ],
+     [
+      "fri0",
+      16,
+      240
+     ],
+     [
+      "fri1",
+      12,
+      240
+     ]
+    ],
+    "arities": [
+     16,
+     16
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 126.0,
+     "deep": 109.68,
+     "batch": 104.54,
+     "fold1": 104.09,
+     "fold2": 104.09,
+     "query": 100.09
+    },
+    "lam_iop": 100.09,
+    "binding": "query",
+    "lam": 100.09,
+    "lam_strict": 100.09
+   }
+  },
+  "P3-100 e=2 JB lb<=5": {
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 2,
+    "log_n": 16,
+    "log_blowup": 2,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 93,
+    "query_pow": 28,
+    "commit_pow": 19,
+    "batch_pow": 26,
+    "ood_pow": 0,
+    "m": 3,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 254480,
+    "dedup": 144556,
+    "pt": 4496,
+    "leaves": 32736,
+    "trees": [
+     [
+      "trace",
+      18,
+      16
+     ],
+     [
+      "quotient",
+      18,
+      64
+     ],
+     [
+      "fri0",
+      15,
+      112
+     ],
+     [
+      "fri1",
+      12,
+      112
+     ],
+     [
+      "fri2",
+      10,
+      48
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     4
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 122.41,
+     "deep": 102.51,
+     "batch": 100.47,
+     "fold1": 100.13,
+     "fold2": 106.13,
+     "fold3": 111.35,
+     "query": 100.32
+    },
+    "lam_iop": 100.13,
+    "binding": "fold1",
+    "lam": 100.13,
+    "lam_strict": 100.13
+   }
+  },
+  "P3-100 e=3* JB lb<=5": {
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 5,
+    "max_log_arity": 3,
+    "log_final_poly_len": 7,
+    "num_queries": 30,
+    "query_pow": 27,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 12,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 105664,
+    "dedup": 77966,
+    "pt": 3664,
+    "leaves": 18480,
+    "trees": [
+     [
+      "trace",
+      21,
+      16
+     ],
+     [
+      "quotient",
+      21,
+      96
+     ],
+     [
+      "fri0",
+      18,
+      168
+     ],
+     [
+      "fri1",
+      15,
+      168
+     ],
+     [
+      "fri2",
+      12,
+      168
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 181.41,
+     "deep": 156.51,
+     "batch": 114.67,
+     "fold1": 121.77,
+     "fold2": 127.77,
+     "fold3": 133.77,
+     "query": 100.23
+    },
+    "lam_iop": 100.23,
+    "binding": "query",
+    "lam": 100.23,
+    "lam_strict": 100.23
+   }
+  },
+  "P3-128 e=3* JB lb<=5": {
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 3,
+    "log_n": 16,
+    "log_blowup": 5,
+    "max_log_arity": 3,
+    "log_final_poly_len": 7,
+    "num_queries": 41,
+    "query_pow": 28,
+    "commit_pow": 7,
+    "batch_pow": 14,
+    "ood_pow": 0,
+    "m": 12,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 143064,
+    "dedup": 102218,
+    "pt": 3664,
+    "leaves": 25256,
+    "trees": [
+     [
+      "trace",
+      21,
+      16
+     ],
+     [
+      "quotient",
+      21,
+      96
+     ],
+     [
+      "fri0",
+      18,
+      168
+     ],
+     [
+      "fri1",
+      15,
+      168
+     ],
+     [
+      "fri2",
+      12,
+      168
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     8
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 181.41,
+     "deep": 156.51,
+     "batch": 128.67,
+     "fold1": 128.77,
+     "fold2": 134.77,
+     "fold3": 140.77,
+     "query": 128.09
+    },
+    "lam_iop": 128.09,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21
+   }
+  },
+  "P3-128 e=5 JB lb<=5": {
+   "params": {
+    "name": "x",
+    "regime": "JB",
+    "e": 5,
+    "log_n": 16,
+    "log_blowup": 5,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "num_queries": 41,
+    "query_pow": 28,
+    "commit_pow": 0,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "m": 12,
+    "zk": false,
+    "rand_cols": 0,
+    "width": 2,
+    "pre_width": 0,
+    "num_constraints": 4,
+    "max_deg": 4,
+    "max_combo": 2,
+    "h": 32
+   },
+   "bytes": {
+    "native": 161960,
+    "dedup": 121104,
+    "pt": 11408,
+    "leaves": 35096,
+    "trees": [
+     [
+      "trace",
+      21,
+      16
+     ],
+     [
+      "quotient",
+      21,
+      160
+     ],
+     [
+      "fri0",
+      18,
+      280
+     ],
+     [
+      "fri1",
+      15,
+      280
+     ],
+     [
+      "fri2",
+      13,
+      120
+     ]
+    ],
+    "arities": [
+     8,
+     8,
+     4
+    ]
+   },
+   "rbr": {
+    "rounds": {
+     "ali": 309.41,
+     "deep": 284.51,
+     "batch": 242.05,
+     "fold1": 249.77,
+     "fold2": 255.77,
+     "fold3": 260.99,
+     "query": 128.09
+    },
+    "lam_iop": 128.09,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21
+   }
+  }
+ },
+ "rec_T5-100": {
+  "params": {
+   "name": "T5-100",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 8,
+   "k0": 4,
+   "k": 16,
+   "log_df": 7,
+   "s": 19,
+   "g": 28,
+   "g_c": 0,
+   "m": 4,
+   "h": 25,
+   "omit": false
+  },
+  "raw_rounds": {
+   "ali": 181.99982387800802,
+   "deep": 153.99963675017605,
+   "batch+fold1": 118.14755997617263,
+   "fold2": 126.4885968929483,
+   "fold3": 133.58813249484484,
+   "query": 72.77142497259607
+  },
+  "grinding_needed": {
+   "ali": 0,
+   "deep": 0,
+   "batch+fold1": 0,
+   "fold2": 0,
+   "fold3": 0,
+   "query": 28
+  },
+  "bytes": 46010
+ },
+ "rec_T5-128": {
+  "params": {
+   "name": "T5-128",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 8,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 26,
+   "g": 28,
+   "g_c": 0,
+   "m": 5,
+   "h": 32,
+   "omit": false
+  },
+  "raw_rounds": {
+   "ali": 181.67785174951493,
+   "deep": 153.3556924931899,
+   "batch+fold1": 116.12101365580848,
+   "fold2": 123.56158624710956,
+   "fold3": 129.56158624174145,
+   "query": 100.42490838250168
+  },
+  "grinding_needed": {
+   "ali": 0,
+   "deep": 0,
+   "batch+fold1": 12,
+   "fold2": 5,
+   "fold3": 0,
+   "query": 28
+  },
+  "bytes": 70272
+ },
+ "rec_P100": {
+  "params": {
+   "name": "P100",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 7,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 22,
+   "g": 28,
+   "g_c": 0,
+   "m": 3,
+   "h": 25,
+   "omit": false
+  },
+  "raw_rounds": {
+   "ali": 183.41490540954862,
+   "deep": 156.8297998132573,
+   "batch+fold1": 124.18555053184815,
+   "fold2": 131.62612311812035,
+   "fold3": 137.6261227947873,
+   "query": 72.10736673059814
+  },
+  "grinding_needed": {
+   "ali": 0,
+   "deep": 0,
+   "batch+fold1": 0,
+   "fold2": 0,
+   "fold3": 0,
+   "query": 28
+  },
+  "bytes": 50022
+ },
+ "rec_P128": {
+  "params": {
+   "name": "P128",
+   "regime": "JB",
+   "e": 3,
+   "log_n": 16,
+   "log_blowup": 5,
+   "k0": 4,
+   "k": 8,
+   "log_df": 8,
+   "s": 43,
+   "g": 28,
+   "g_c": 0,
+   "m": 4,
+   "h": 32,
+   "omit": false
+  },
+  "raw_rounds": {
+   "ali": 184.99982387800802,
+   "deep": 159.99963675017605,
+   "batch+fold1": 128.64755997610823,
+   "fold2": 136.08813254938093,
+   "fold3": 142.088131404123,
+   "query": 100.19322493798056
+  },
+  "grinding_needed": {
+   "ali": 0,
+   "deep": 0,
+   "batch+fold1": 0,
+   "fold2": 0,
+   "fold3": 0,
+   "query": 28
+  },
+  "bytes": 91468
+ }
+}

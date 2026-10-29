@@ -1,0 +1,127 @@
+====================================================================================================
+A. Track 4 sets under the per-round (RBR) bounds  [ADK Thm 2 (JB) / Thm 3 (UD); BCIKS Lemma 8.2 per-event split]
+====================================================================================================
+P100 [JB] e=3 rho=2^-7 m=3 s=22 g=28 g_c=0 h=25: lam_IOP 100.11 (binding: query), lam 100 (strict-digest 99.21); Track 4 model lam_IOP 100.11
+     ali 183.41, deep 156.83, batch+fold1 124.19, fold2 131.63, fold3 137.63, query 100.11
+     target 100: MET; proof 50022 B
+     sensitivity DKT26 (unreviewed): lam_IOP 100.11 (ali 186.69, deep 168.69, batch+fold1 152.36, fold2 152.36, fold3 152.36, query 100.11)
+P128 [JB] e=3 rho=2^-5 m=4 s=43 g=28 g_c=0 h=32: lam_IOP 128.19 (binding: query), lam 128 (strict-digest 127.21); Track 4 model lam_IOP 128.19
+     ali 185.00, deep 160.00, batch+fold1 128.65, fold2 136.09, fold3 142.09, query 128.19
+     target 128: MET; proof 91468 B
+     sensitivity DKT26 (unreviewed): lam_IOP 128.19 (ali 187.33, deep 169.33, batch+fold1 155.27, fold2 155.27, fold3 155.27, query 128.19)
+U100 [UD] e=2 rho=2^-4 m=3 s=79 g=28 g_c=0 h=25: lam_IOP 100.09 (binding: query), lam 100 (strict-digest 99.21); Track 4 model lam_IOP 100.09
+     ali 128.00, deep 110.00, batch+fold1 106.00, fold2 105.19, fold3 105.19, query 100.09
+     target 100: MET; proof 107423 B
+U128g [UD] e=2 rho=2^-3 m=3 s=121 g=28 g_c=24 h=32: lam_IOP 128.44 (binding: query), lam 128 (strict-digest 127.21); Track 4 model lam_IOP 128.44
+     ali 152.00, deep 134.00, batch+fold1 131.00, fold2 130.19, fold3 130.19, query 128.44
+     target 128: MET; proof 166568 B
+
+-- P128 safety margins: cheapest Track 4-format change for lam_IOP >= 128 + x (rho 2^-4..2^-6, m 3..8, g_c 0/4/8, g = 28)
+   +0 bits: rho=2^-6 m=5 s=35 g_c=8: 81514 B (-9954 B vs P128); ali 191.68, deep 165.36, batch+fold1 131.12, fold2 138.56, fold3 144.56, query 128.19
+   +0.5 bits: rho=2^-6 m=6 s=35 g_c=8: 81514 B (-9954 B vs P128); ali 191.41, deep 164.83, batch+fold1 129.43, fold2 136.87, fold3 142.87, query 128.96
+   +1 bits: rho=2^-6 m=4 s=36 g_c=4: 83469 B (-7999 B vs P128); ali 188.00, deep 162.00, batch+fold1 129.15, fold2 136.59, fold3 142.59, query 129.88
+   +2 bits: rho=2^-6 m=5 s=36 g_c=8: 83469 B (-7999 B vs P128); ali 191.68, deep 165.36, batch+fold1 131.12, fold2 138.56, fold3 144.56, query 131.05
+   +4 bits: rho=2^-6 m=4 s=37 g_c=8: 85418 B (-6050 B vs P128); ali 192.00, deep 166.00, batch+fold1 133.15, fold2 140.59, fold3 146.59, query 132.71
+
+-- strict digest reading (BGKTTZ Cor. 5 constant): h needed for 4h - 0.79 >= target
+   100: h >= 26 bytes (ok)
+   128: h >= 33 bytes (impossible with SHA-256 (32 B))
+
+====================================================================================================
+B. Track 4 format: cheapest provable sets under RBR bounds (search, n = 2^16, g = 28)
+====================================================================================================
+  JB e=3 100-bit g_c=0:   50022 B  rho=2^-7 k0=4 k=8 df=2^8 m=3 s=22 h=25  lam_IOP=100.11 (query)
+  JB e=3 128-bit g_c=0:   91468 B  rho=2^-5 k0=4 k=8 df=2^8 m=4 s=43 h=32  lam_IOP=128.19 (query)
+  UD e=2 100-bit g_c=0:  107423 B  rho=2^-4 k0=4 k=8 df=2^8 m=3 s=79 h=25  lam_IOP=100.09 (query)
+  UD e=3 100-bit g_c=0:  124679 B  rho=2^-4 k0=4 k=8 df=2^8 m=3 s=79 h=25  lam_IOP=100.09 (query)
+  UD e=3 128-bit g_c=0:  190817 B  rho=2^-4 k0=4 k=8 df=2^8 m=3 s=110 h=32  lam_IOP=128.38 (query)
+  UD e=2 128-bit g_c=24:  166568 B  rho=2^-3 k0=4 k=8 df=2^8 m=3 s=121 h=32  lam_IOP=128.44 (query)
+  JB e=2 100-bit g_c=0: infeasible
+
+-- Track 4 format with commit-phase grinding g_c (one 8-byte nonce per commit challenge, as U128g) and m <= 16
+  JB e=3 100-bit:   46010 B  rho=2^-8 k0=4 k=16 df=2^7 m=4 s=19 g=28 g_c=0 h=25  lam_IOP=100.77 (query); ali 182.00, deep 154.00, batch+fold1 118.15, fold2 126.49, fold3 133.59, query 100.77
+  JB e=3 128-bit:   70320 B  rho=2^-8 k0=4 k=8 df=2^8 m=5 s=26 g=28 g_c=12 h=32  lam_IOP=128.12 (batch+fold1); ali 193.68, deep 165.36, batch+fold1 128.12, fold2 135.56, fold3 141.56, query 128.42
+  JB e=2 100-bit:   75778 B  rho=2^-3 k0=4 k=8 df=2^8 m=3 s=57 g=28 g_c=28 h=25  lam_IOP=100.82 (query); ali 151.41, deep 128.83, batch+fold1 102.19, fold2 109.63, fold3 115.63, query 100.82
+  UD e=2 100-bit:  107423 B  rho=2^-4 k0=4 k=8 df=2^8 m=3 s=79 g=28 g_c=0 h=25  lam_IOP=100.09 (query); ali 128.00, deep 110.00, batch+fold1 106.00, fold2 105.19, fold3 105.19, query 100.09
+  UD e=3 128-bit:  190817 B  rho=2^-4 k0=4 k=8 df=2^8 m=3 s=110 g=28 g_c=0 h=32  lam_IOP=128.38 (query); ali 192.00, deep 174.00, batch+fold1 170.00, fold2 169.19, fold3 169.19, query 128.38
+
+====================================================================================================
+C. Plonky3-style FRI (Goldilocks, SHA-256 MMCS h=32), reference MiMC AIR (w=2, deg 4 with selectors, 4 constraints)
+   per-site PoW cap 28 bits; score = dedup bytes (CashVM format), native = Plonky3 proof as serialized
+====================================================================================================
+  P3-100                 [JB] e=2 zk=False: log_blowup=2 max_log_arity=3 log_final_poly_len=8 num_queries=93 query_pow=28 commit_pow=19 batch_pow=26 ood_pow=0 m=3 t=12
+      lam_IOP 100.13 (fold1); bytes native 254480, dedup 144556; arities [8, 8, 4]
+       ali 122.41, deep 102.51, batch 100.47, fold1 100.13, fold2 106.13, fold3 111.35, query 100.32
+  P3-100u                [UD] e=2 zk=False: log_blowup=4 max_log_arity=4 log_final_poly_len=8 num_queries=79 query_pow=28 commit_pow=0 batch_pow=0 ood_pow=0 m=3 t=12
+      lam_IOP 100.09 (query); bytes native 220600, dedup 148025; arities [16, 16]
+       ali 126.00, deep 109.68, batch 104.54, fold1 104.09, fold2 104.09, query 100.09
+  P3-100-zk              [JB] e=2 zk=True: log_blowup=1 max_log_arity=3 log_final_poly_len=8 num_queries=260 query_pow=28 commit_pow=18 batch_pow=26 ood_pow=0 m=3 t=44
+      lam_IOP 100.01 (batch); bytes native 924400, dedup 486117; arities [8, 8, 8]
+       ali 123.41, deep 102.66, batch 100.01, fold1 100.63, fold2 106.63, fold3 112.62, query 100.18
+  P3-100 e=3*            [JB] e=3 zk=False: log_blowup=8 max_log_arity=4 log_final_poly_len=8 num_queries=19 query_pow=25 commit_pow=0 batch_pow=0 ood_pow=0 m=16 t=16
+      lam_IOP 100.16 (query); bytes native 73576, dedup 61174; arities [16, 16]
+       ali 178.00, deep 149.68, batch 101.37, fold1 109.37, fold2 117.37, query 100.16
+  P3-100 e=3* h=25       [JB] e=3 zk=False: log_blowup=8 max_log_arity=3 log_final_poly_len=7 num_queries=19 query_pow=25 commit_pow=0 batch_pow=0 ood_pow=0 m=16 t=16
+      lam_IOP 100.16 (query); bytes native 63783, dedup 51672; arities [8, 8, 8]
+       ali 178.00, deep 149.68, batch 101.37, fold1 108.47, fold2 114.47, fold3 120.47, query 100.16
+  P3-100 e=3* zk         [JB] e=3 zk=True: log_blowup=8 max_log_arity=4 log_final_poly_len=6 num_queries=19 query_pow=25 commit_pow=0 batch_pow=3 ood_pow=0 m=16 t=64
+      lam_IOP 100.16 (query); bytes native 106368, dedup 87765; arities [16, 16, 8]
+       ali 178.00, deep 147.83, batch 100.30, fold1 107.37, fold2 115.37, fold3 122.47, query 100.16
+  P3-100 e=5             [JB] e=5 zk=False: log_blowup=8 max_log_arity=3 log_final_poly_len=7 num_queries=19 query_pow=25 commit_pow=0 batch_pow=0 ood_pow=0 m=16 t=24
+      lam_IOP 100.16 (query); bytes native 87608, dedup 72106; arities [8, 8, 8]
+       ali 306.00, deep 277.68, batch 228.75, fold1 236.47, fold2 242.47, fold3 248.47, query 100.16
+  P3-100u e=3*           [UD] e=3 zk=False: log_blowup=4 max_log_arity=3 log_final_poly_len=8 num_queries=79 query_pow=28 commit_pow=0 batch_pow=0 ood_pow=0 m=3 t=16
+      lam_IOP 100.09 (query); bytes native 257640, dedup 166918; arities [8, 8, 4]
+       ali 190.00, deep 173.68, batch 168.09, fold1 169.19, fold2 169.19, fold3 170.42, query 100.09
+  P3-128 (e=2)           [JB] e=2 target 128: INFEASIBLE with <= 28-bit PoW per site; best reachable 105 bits
+      best: log_blowup=1 max_log_arity=3 log_final_poly_len=8 num_queries=278 pow q/c/b/ood=28/21/28/1 m=3 bytes native 707280 dedup 315023; ali 123.41, deep 105.51, batch 105.97, fold1 105.63, fold2 111.63, fold3 116.85, query 105.17
+  P3-128u (e=2)          [UD] e=2 target 128: INFEASIBLE with <= 28-bit PoW per site; best reachable 125 bits
+      best: log_blowup=4 max_log_arity=4 log_final_poly_len=8 num_queries=107 pow q/c/b/ood=28/21/21/16 m=3 bytes native 297208 dedup 192921; ali 126.00, deep 125.68, batch 125.54, fold1 125.09, fold2 125.09, query 125.64
+  P3-128 e=5             [JB] e=5 zk=False: log_blowup=8 max_log_arity=3 log_final_poly_len=7 num_queries=26 query_pow=26 commit_pow=0 batch_pow=0 ood_pow=0 m=10 t=24
+      lam_IOP 128.17 (query); bytes native 117568, dedup 94429; arities [8, 8, 8]
+       ali 306.68, deep 279.03, batch 233.32, fold1 241.03, fold2 247.03, fold3 253.03, query 128.17
+  P3-128 e=3*            [JB] e=3 zk=False: log_blowup=8 max_log_arity=4 log_final_poly_len=8 num_queries=26 query_pow=26 commit_pow=15 batch_pow=23 ood_pow=0 m=10 t=16
+      lam_IOP 128.17 (query); bytes native 98216, dedup 79704; arities [16, 16]
+       ali 178.68, deep 151.03, batch 128.93, fold1 128.93, fold2 136.93, query 128.17
+  P3-128u e=3*           [UD] e=3 zk=False: log_blowup=3 max_log_arity=3 log_final_poly_len=8 num_queries=121 query_pow=28 commit_pow=0 batch_pow=0 ood_pow=0 m=3 t=16
+      lam_IOP 128.44 (query); bytes native 371672, dedup 221040; arities [8, 8, 4]
+       ali 190.00, deep 173.68, batch 169.09, fold1 170.19, fold2 170.19, fold3 171.42, query 128.44
+  P3-128u e=5            [UD] e=5 zk=False: log_blowup=4 max_log_arity=3 log_final_poly_len=8 num_queries=110 query_pow=28 commit_pow=0 batch_pow=0 ood_pow=0 m=3 t=24
+      lam_IOP 128.38 (query); bytes native 397728, dedup 263007; arities [8, 8, 4]
+       ali 318.00, deep 301.68, batch 295.48, fold1 297.19, fold2 297.19, fold3 298.42, query 128.38
+  P3-128 e=5 zk          [JB] e=5 zk=True: log_blowup=8 max_log_arity=3 log_final_poly_len=8 num_queries=26 query_pow=26 commit_pow=0 batch_pow=0 ood_pow=0 m=10 t=104
+      lam_IOP 128.17 (query); bytes native 166480, dedup 138712; arities [8, 8, 8]
+       ali 306.68, deep 277.19, batch 229.15, fold1 239.03, fold2 245.03, fold3 251.03, query 128.17
+  P3-128 e=3* zk         [JB] e=3 zk=True: log_blowup=8 max_log_arity=3 log_final_poly_len=8 num_queries=26 query_pow=27 commit_pow=13 batch_pow=22 ood_pow=0 m=6 t=64
+      lam_IOP 128.0 (query); bytes native 143120, dedup 115352; arities [8, 8, 8]
+       ali 179.41, deep 150.66, batch 128.70, fold1 128.87, fold2 134.87, fold3 140.87, query 128.00
+  P3-100 DKT (sens.)     [DKT] e=2 zk=False: log_blowup=8 max_log_arity=4 log_final_poly_len=8 num_queries=19 query_pow=25 commit_pow=22 batch_pow=22 ood_pow=0 m=16 t=12
+      lam_IOP 100.16 (query); bytes native 66168, dedup 53766; arities [16, 16]
+       ali 117.96, deep 101.63, batch 100.99, fold1 100.54, fold2 100.54, query 100.16
+  P3-128 DKT e=2 (sens.) [DKT] e=2 target 128: INFEASIBLE with <= 28-bit PoW per site; best reachable 123 bits
+      best: log_blowup=2 max_log_arity=3 log_final_poly_len=8 num_queries=123 pow q/c/b/ood=28/25/26/17 m=3 bytes native 335120 dedup 181975; ali 123.19, deep 123.87, batch 123.70, fold1 123.36, fold2 123.36, fold3 124.58, query 123.65
+
+-- P3 e=2 best reachable lambda (cap 28 per site), JB and UD:
+   JB: 105 bits
+   UD: 125 bits
+
+-- P3 trace-length sensitivity (dedup bytes / native bytes), non-ZK
+   100 JB e=2: 2^12: 49772/73536 (lb=4,a=2^4,s=40); 2^14: 78222/125016 (lb=3,a=2^3,s=55); 2^16: 144556/254480 (lb=2,a=2^3,s=93); 2^18: 396596/832376 (lb=1,a=2^3,s=260); 2^20: infeasible
+   100 UD e=2: 2^12: 85420/146400 (lb=3,a=2^4,s=87); 2^14: 113793/195160 (lb=3,a=2^3,s=87); 2^16: 148025/220600 (lb=4,a=2^4,s=79); 2^18: 184269/274992 (lb=4,a=2^4,s=79); 2^20: 219646/310384 (lb=4,a=2^4,s=79)
+   128 JB e=3: 2^12: 51636/65520 (lb=8,a=2^4,s=26); 2^14: 65560/84072 (lb=8,a=2^3,s=26); 2^16: 79704/98216 (lb=8,a=2^4,s=26); 2^18: 95549/118688 (lb=8,a=2^4,s=26); 2^20: 111100/134240 (lb=8,a=2^4,s=26)
+   128 JB e=5: 2^12: 62617/81128 (lb=8,a=2^3,s=26); 2^14: 77720/96232 (lb=8,a=2^3,s=26); 2^16: 94429/117568 (lb=8,a=2^3,s=26); 2^18: 113761/141528 (lb=8,a=2^3,s=26); 2^20: 132192/159960 (lb=8,a=2^3,s=26)
+
+-- P3 with log_blowup <= 5 (prover memory: LDE 2^21 rows at n = 2^16), non-ZK
+  P3-100 e=2   [UD] log_blowup=4 max_log_arity=4 log_final_poly_len=8 num_queries=79 query_pow=28 commit_pow=0 batch_pow=0 ood_pow=0 m=3: lam_IOP 100.09 (query); native 220600 dedup 148025
+  P3-100 e=2   [JB] log_blowup=2 max_log_arity=3 log_final_poly_len=8 num_queries=93 query_pow=28 commit_pow=19 batch_pow=26 ood_pow=0 m=3: lam_IOP 100.13 (fold1); native 254480 dedup 144556
+  P3-100 e=3*  [JB] log_blowup=5 max_log_arity=3 log_final_poly_len=7 num_queries=30 query_pow=27 commit_pow=0 batch_pow=0 ood_pow=0 m=12: lam_IOP 100.23 (query); native 105664 dedup 77966
+  P3-128 e=3*  [JB] log_blowup=5 max_log_arity=3 log_final_poly_len=7 num_queries=41 query_pow=28 commit_pow=7 batch_pow=14 ood_pow=0 m=12: lam_IOP 128.09 (query); native 143064 dedup 102218
+  P3-128 e=5   [JB] log_blowup=5 max_log_arity=3 log_final_poly_len=8 num_queries=41 query_pow=28 commit_pow=0 batch_pow=0 ood_pow=0 m=12: lam_IOP 128.09 (query); native 161960 dedup 121104
+
+-- Track 4 format, recommended Track 5 sets: per-round requirement (bits before grinding) and grinding to add
+  T5-100: raw ali 182.00, deep 154.00, batch+fold1 118.15, fold2 126.49, fold3 133.59, query 72.77; grinding needed {'ali': 0, 'deep': 0, 'batch+fold1': 0, 'fold2': 0, 'fold3': 0, 'query': 28}; proof 46010 B (+0 B nonces if g_c per site)
+  T5-128: raw ali 181.68, deep 153.36, batch+fold1 116.12, fold2 123.56, fold3 129.56, query 100.42; grinding needed {'ali': 0, 'deep': 0, 'batch+fold1': 12, 'fold2': 5, 'fold3': 0, 'query': 28}; proof 70272 B (+16 B nonces if g_c per site)
+  P100: raw ali 183.41, deep 156.83, batch+fold1 124.19, fold2 131.63, fold3 137.63, query 72.11; grinding needed {'ali': 0, 'deep': 0, 'batch+fold1': 0, 'fold2': 0, 'fold3': 0, 'query': 28}; proof 50022 B (+0 B nonces if g_c per site)
+  P128: raw ali 185.00, deep 160.00, batch+fold1 128.65, fold2 136.09, fold3 142.09, query 100.19; grinding needed {'ali': 0, 'deep': 0, 'batch+fold1': 0, 'fold2': 0, 'fold3': 0, 'query': 28}; proof 91468 B (+0 B nonces if g_c per site)
+
+-- P100 with h = 26 (strict digest reading): proof 51209 B vs 50022
