@@ -155,9 +155,12 @@ function regime100k(t) { const L = Math.max(t.bytes + 70, Math.ceil(t.op / 800 -
 function regimeToday(t) {
   for (let k = 1; k < 40; k++) {
     const content = t.bytes + k * 70 + (k - 1) * 128;
-    const op = t.op + k * 500000 + (k - 1) * 20000;
+    // every input that runs pairing events recomputes the z setup (powers, S_c) and its GT-GLS tables (SI-MX3: sharing
+    // the tables through bytes is worse than recomputing them); the single-input regimes pay this once (in t.op)
+    const kPair = Math.ceil(t.pairing.op / 7.4e6);
+    const op = t.op + k * 500000 + (k - 1) * 20000 + (kPair - 1) * (300000 + t.mFold * GTGLS.perBaseTables);
     const L = Math.max(content, Math.ceil(op / 800 - 41 * k));
-    if (L <= k * 9900) return {inputs: k, unlocking: L, score: L + 22 + k * (LOCK + 43), pad: L - content, opWithSetup: op, bchnOp: op + k * CODE};
+    if (L <= k * 9900) return {inputs: k, pairingInputs: kPair, unlocking: L, score: L + 22 + k * (LOCK + 43), pad: L - content, opWithSetup: op, bchnOp: op + k * CODE};
   }
 }
 

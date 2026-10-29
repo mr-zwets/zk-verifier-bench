@@ -243,11 +243,12 @@
     },
     "today": {
      "inputs": 12,
-     "unlocking": 115445,
-     "score": 116403,
-     "pad": 77755,
-     "opWithSetup": 92749573.95,
-     "bchnOp": 92821573.95
+     "pairingInputs": 2,
+     "unlocking": 115820,
+     "score": 116778,
+     "pad": 78130,
+     "opWithSetup": 93049573.95,
+     "bchnOp": 93121573.95
     }
    }
   },
@@ -333,11 +334,12 @@
     },
     "today": {
      "inputs": 9,
+     "pairingInputs": 2,
      "unlocking": 84360,
      "score": 85084,
      "pad": 0,
-     "opWithSetup": 50427741.95,
-     "bchnOp": 50481741.95
+     "opWithSetup": 50727741.95,
+     "bchnOp": 50781741.95
     }
    }
   }
@@ -558,11 +560,12 @@
    },
    "regime": {
     "inputs": 8,
+    "pairingInputs": 2,
     "unlocking": 71446.8,
     "score": 72092.8,
     "pad": 0,
-    "opWithSetup": 56637853.150000006,
-    "bchnOp": 56685853.150000006
+    "opWithSetup": 56937853.150000006,
+    "bchnOp": 56985853.150000006
    }
   },
   "spec/B-g1only": {
@@ -759,11 +762,12 @@
    },
    "regime": {
     "inputs": 8,
+    "pairingInputs": 2,
     "unlocking": 70647.2,
     "score": 71293.2,
     "pad": 0,
-    "opWithSetup": 54758029.95,
-    "bchnOp": 54806029.95
+    "opWithSetup": 55058029.95,
+    "bchnOp": 55106029.95
    }
   },
   "spec/A-gtfold": {
@@ -915,22 +919,22 @@
   },
   "today/A-gtfold": {
    "plan": "A",
-   "wf": 4,
+   "wf": 5,
    "wv": 5,
    "fA": 0.7,
    "mFold": 3,
    "L": 1,
-   "op": 53494843.55,
-   "bytes": 69501.4,
+   "op": 51584227.55,
+   "bytes": 70657.4,
    "msm": {
-    "op": 36871293.6,
-    "bytes": 34442.399999999994,
+    "op": 34960677.6,
+    "bytes": 35598.399999999994,
     "parts": [
      {
       "chain": "Lambda",
-      "op": 19329925.6,
-      "bytes": 15331.199999999999,
-      "adds": 530,
+      "op": 17473309.6,
+      "bytes": 13927.199999999999,
+      "adds": 470,
       "dbl": 128
      },
      {
@@ -948,7 +952,7 @@
       "dbl": 64
      }
     ],
-    "tableBytesFixed": 2560,
+    "tableBytesFixed": 5120,
     "varTableOps": 135,
     "nFull": 14
    },
@@ -981,11 +985,12 @@
    },
    "regime": {
     "inputs": 8,
-    "unlocking": 71716,
-    "score": 72362,
-    "pad": 758.6000000000058,
-    "opWithSetup": 57634843.55,
-    "bchnOp": 57682843.55
+    "pairingInputs": 3,
+    "unlocking": 72113.4,
+    "score": 72759.4,
+    "pad": 0,
+    "opWithSetup": 57398227.55,
+    "bchnOp": 57446227.55
    }
   },
   "spec/B-gtfold": {
@@ -1125,26 +1130,26 @@
    "plan": "B",
    "wf": 4,
    "wv": 5,
-   "fA": 0.7,
+   "fA": 0.8,
    "mFold": 9,
    "L": 1,
-   "op": 46156190.75,
-   "bytes": 61849.399999999994,
+   "op": 44233981.15,
+   "bytes": 64140.600000000006,
    "msm": {
-    "op": 23888196.800000004,
-    "bytes": 21728.399999999998,
+    "op": 21965987.2,
+    "bytes": 24019.600000000002,
     "parts": [
      {
       "chain": "P_left (t-folded Lambda check)",
-      "op": 18255667.200000003,
-      "bytes": 14503.599999999999,
+      "op": 16525804.8,
+      "bytes": 16500.4,
       "adds": 496,
       "dbl": 128
      },
      {
       "chain": "P_right",
-      "op": 2331329.6,
-      "bytes": 2118.7999999999997,
+      "op": 2138982.4,
+      "bytes": 2413.2000000000003,
       "adds": 28,
       "dbl": 64
      }
@@ -1182,11 +1187,12 @@
    },
    "regime": {
     "inputs": 7,
-    "unlocking": 63107.399999999994,
-    "score": 63675.399999999994,
+    "pairingInputs": 3,
+    "unlocking": 65398.600000000006,
+    "score": 65966.6,
     "pad": 0,
-    "opWithSetup": 49776190.75,
-    "bchnOp": 49818190.75
+    "opWithSetup": 51675981.15,
+    "bchnOp": 51717981.15
    }
   }
  }
