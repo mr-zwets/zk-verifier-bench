@@ -1,0 +1,66 @@
+{
+ "vm": "libauth BCH_2026 standard (createVirtualMachineBch2026(true)), op-cost net of input pushes",
+ "schedIters": 3000,
+ "kernels": [
+  {
+   "name": "G1 Jacobian doubling (dbl-2009-l)",
+   "opCost": 34218,
+   "codeBytes": 81,
+   "schedulerEstimate": 30173
+  },
+  {
+   "name": "G1 mixed addition Jacobian + affine (madd-2007-bl)",
+   "opCost": 48596,
+   "codeBytes": 112,
+   "schedulerEstimate": 45898
+  },
+  {
+   "name": "G1 full addition Jacobian + Jacobian (add-2007-bl)",
+   "opCost": 68032,
+   "codeBytes": 140,
+   "schedulerEstimate": 62997
+  },
+  {
+   "name": "G1 affine addition, witnessed slope (+32 B witness)",
+   "opCost": 17424,
+   "codeBytes": 54,
+   "schedulerEstimate": 15176
+  },
+  {
+   "name": "G1 affine doubling, witnessed slope (+32 B witness)",
+   "opCost": 16939,
+   "codeBytes": 47,
+   "schedulerEstimate": 16999
+  },
+  {
+   "name": "modular multiply (Fp or Fr)",
+   "opCost": 3696,
+   "codeBytes": 4,
+   "schedulerEstimate": 3672
+  },
+  {
+   "name": "modular multiply-accumulate",
+   "opCost": 4024,
+   "codeBytes": 6,
+   "schedulerEstimate": 4000
+  },
+  {
+   "name": "SI delta step kDStep (one fixed-G2 chain, Groth16 reference)",
+   "opCost": 46666,
+   "codeBytes": 153,
+   "schedulerEstimate": 43858
+  },
+  {
+   "name": "KZG event, two fixed-G2 chains + F update (doubling: F^2 La Lb)",
+   "opCost": 101404,
+   "codeBytes": 367,
+   "schedulerEstimate": 95635
+  },
+  {
+   "name": "KZG event, two fixed-G2 chains + F update (addition: F La Lb c)",
+   "opCost": 101673,
+   "codeBytes": 376,
+   "schedulerEstimate": 95837
+  }
+ ]
+}

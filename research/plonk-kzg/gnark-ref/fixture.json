@@ -1,0 +1,57 @@
+{
+ "gnark": "github.com/consensys/gnark v0.16.4, gnark-crypto v0.21.1-0.20260913224755-1409fe592052",
+ "circuit": "x^3 + x + 5 == Y, x*Y == Z (Y, Z public); witness x = 3",
+ "srs": "test/unsafekzg (toxic waste known: testing only)",
+ "domainSize": 8,
+ "nbPublic": 2,
+ "gnarkProofRawBytes": 808,
+ "hex": {
+  "Lambda": "226d205d07ed3a1d5d2112a0d6984fc687e9f3421777b95608f7ec8da1ad0b4c2aa5b81709d803c4f3bd2cd1d34e296dd94355b93f018412f05233cd49331008",
+  "P_left": "1b3b1762d5d3cf7322db3d616f538e6a3b603283ca087943c44d752469c5dc312f01bcb81c1a917172fdacbb5a6425b0ad5d602ad6c2338047ce28c26d51feb7",
+  "P_right": "1f81e200976a8cdce71c8fcab850282ae7458cfc7918395dceb7150f8c70a12100345a4fa36b66cd3fe0ddccbb24ef051f1a0cd2e1e0f4694b17989cfdeeac03",
+  "alpha_raw": "906728149fcadaac72d404ede92e62f3092bdd136df67c5d5b00677786842e0f",
+  "batch_inverse_witness": "1d6d120ffd1626d8999bbfe0ae41e2dd92c095f062fdbc144aaf96269212b3ac",
+  "beta_raw": "c45c520c9266b79d7ab013299eeb7de444f85c2e791e8a488575b7b19603e6dd",
+  "gamma_raw": "03de11f78895d3c6397303adf94535bf91b8514f2d3136c664c88b9140ce2ad4",
+  "t": "02d8eb2a0439b79a87f292acdddbbd305f1c2bd0bfdac33b765ab3eaf3a965da",
+  "u": "2ad89e127068a125f3d6d0e1d71d60485fd74132505a8fd4baa82a5761a8b658",
+  "u_raw": "7bfe82f8433cc41ad6a26d893b8d5acd534cf0d57db56db340db8e638ed68f63",
+  "v": "2f1492954b031f1ccea6c09dab2c54d4e4f683cf72089ccb5ecba3bd4b8794ea",
+  "v_raw": "2f1492954b031f1ccea6c09dab2c54d4e4f683cf72089ccb5ecba3bd4b8794ea",
+  "vk_x2": "2229c325a88f0d0b423f79eda18c2b2e7416226dcbad3b97ba5dd8f58b4e5ea41f3ce6b210d71f388801c602f8d629d1f51de051275c95fedf5f602f9ba0e2c60e095f1d15f8da6d7787529b2766fff5652342903910f507c853166c3dd0796a0edc8511da7a90a5322689d26f2114c06afef1f0442386c70302403a9a0cf292",
+  "zeta": "02e1c8bd567cec801f20817cd7d8b963a6fe2f226397b18faf4ca08131221470",
+  "zeta_raw": "940eb415fa11ccfd481152a05c5cc27b1f99e7fbd0c403437af2813d01221473"
+ },
+ "checks": {
+  "gnark accepts honest proof": true,
+  "reference accepts honest proof (u, t ours; Lambda = MSM)": true,
+  "reference accepts honest proof with witnessed Lambda (plan B)": true,
+  "reference rejects a wrong witnessed Lambda (plan B)": true
+ },
+ "tamperRejected": {
+  "H[1] + G": [
+   true,
+   true
+  ],
+  "L and R swapped": [
+   true,
+   true
+  ],
+  "W_zeta doubled": [
+   true,
+   true
+  ],
+  "claimed l(zeta) + 1": [
+   true,
+   true
+  ],
+  "public input Y + 1": [
+   true,
+   true
+  ],
+  "z(omega zeta) + 1": [
+   true,
+   true
+  ]
+ }
+}
