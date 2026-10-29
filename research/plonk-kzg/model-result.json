@@ -1,0 +1,1199 @@
+{
+ "nPI": 2,
+ "log2n": 16,
+ "units": {
+  "jdbl": 34218,
+  "jmadd": 48596,
+  "jadd": 68032,
+  "adbl": 16939,
+  "aadd": 17424,
+  "mm": 3696,
+  "mma": 4024,
+  "evDbl": 101404,
+  "evAdd": 101673,
+  "dstep": 46666
+ },
+ "constants": {
+  "INSITU": 1.05,
+  "FRMM": 5000,
+  "ADD_OVH": 3748,
+  "AFF_GUARD": 600,
+  "CODE": 6000,
+  "GTGLS": {
+   "perBaseEvent": 10153.846153846154,
+   "perBaseTables": 179000,
+   "perBaseBinding": 20000,
+   "perBaseBytes": 449
+  }
+ },
+ "statement": {
+  "proofBytes": 768,
+  "piBytes": 64,
+  "decode": 23400,
+  "curve": 122292
+ },
+ "transcript": {
+  "hashes": {
+   "gamma": {
+    "it": 13,
+    "op": 3401
+   },
+   "beta": {
+    "it": 1,
+    "op": 360
+   },
+   "alpha": {
+    "it": 2,
+    "op": 617
+   },
+   "zeta": {
+    "it": 4,
+    "op": 1128
+   },
+   "v": {
+    "it": 11,
+    "op": 2889
+   },
+   "u": {
+    "it": 3,
+    "op": 869
+   }
+  },
+  "op": 21264
+ },
+ "fr": {
+  "muls": 74,
+  "op": 370000
+ },
+ "pairingNoFold": {
+  "chunking": {
+   "L": 2,
+   "states": 33,
+   "maxDeg": 126,
+   "nq": 60
+  },
+  "ops": {
+   "events": 9376225.95,
+   "boundaries": 1541100,
+   "quotient": 388200,
+   "setup": 300000,
+   "terminal": 350000,
+   "siTranscript": 35092,
+   "gtgls": 0
+  },
+  "op": 11990617.95,
+  "bytesBy": {
+   "slopes": 11264,
+   "states": 6336,
+   "residueRoot": 192,
+   "quotient": 1920,
+   "siConsts": 320,
+   "gtgls": 0
+  },
+  "bytes": 20032
+ },
+ "naf": [
+  0,
+  -1,
+  0,
+  1,
+  0,
+  0,
+  0,
+  -1,
+  0,
+  -1,
+  0,
+  0,
+  0,
+  -1,
+  0,
+  1,
+  0,
+  -1,
+  0,
+  0,
+  -1,
+  0,
+  0,
+  0,
+  0,
+  0,
+  1,
+  0,
+  0,
+  -1,
+  0,
+  1,
+  0,
+  0,
+  -1,
+  0,
+  0,
+  0,
+  0,
+  -1,
+  0,
+  1,
+  0,
+  0,
+  0,
+  -1,
+  0,
+  -1,
+  0,
+  0,
+  1,
+  0,
+  0,
+  0,
+  -1,
+  0,
+  0,
+  -1,
+  0,
+  1,
+  0,
+  1,
+  0,
+  0,
+  0
+ ],
+ "vkBytes": 672,
+ "reference": {
+  "pureJacobian": {
+   "plan": "A",
+   "wf": 4,
+   "wv": 4,
+   "fA": 0,
+   "mFold": 0,
+   "L": 2,
+   "op": 86529573.95,
+   "bytes": 35442,
+   "msm": {
+    "op": 74002000,
+    "bytes": 7874,
+    "parts": [
+     {
+      "chain": "Lambda",
+      "op": 34656912,
+      "bytes": 608,
+      "adds": 578,
+      "dbl": 128
+     },
+     {
+      "chain": "P_left rest",
+      "op": 32959728,
+      "bytes": 544,
+      "adds": 546,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 3969648,
+      "bytes": 32,
+      "adds": 34,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 4096,
+    "varTableOps": 63,
+    "nFull": 17
+   },
+   "pairing": {
+    "chunking": {
+     "L": 2,
+     "states": 33,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 1541100,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 35092,
+     "gtgls": 0
+    },
+    "op": 11990617.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 6336,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 0
+    },
+    "bytes": 20032
+   },
+   "regimes": {
+    "spec": {
+     "unlocking": 98162,
+     "score": 98260,
+     "pad": 62650,
+     "bchnOp": 86535573.95
+    },
+    "k100": {
+     "unlocking": 108121,
+     "score": 108219,
+     "pad": 72609,
+     "fits": false,
+     "bchnOp": 86535573.95
+    },
+    "today": {
+     "inputs": 12,
+     "pairingInputs": 2,
+     "unlocking": 115820,
+     "score": 116778,
+     "pad": 78130,
+     "opWithSetup": 93049573.95,
+     "bchnOp": 93121573.95
+    }
+   }
+  },
+  "pureAffine": {
+   "plan": "A",
+   "wf": 4,
+   "wv": 4,
+   "fA": 1,
+   "mFold": 0,
+   "L": 2,
+   "op": 45767741.95,
+   "bytes": 82706,
+   "msm": {
+    "op": 33240168,
+    "bytes": 55138,
+    "parts": [
+     {
+      "chain": "Lambda",
+      "op": 14829208,
+      "bytes": 23168,
+      "adds": 578,
+      "dbl": 128
+     },
+     {
+      "chain": "P_left rest",
+      "op": 14132504,
+      "bytes": 22112,
+      "adds": 546,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 1862744,
+      "bytes": 3168,
+      "adds": 34,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 4096,
+    "varTableOps": 63,
+    "nFull": 17
+   },
+   "pairing": {
+    "chunking": {
+     "L": 2,
+     "states": 33,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 1541100,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 35092,
+     "gtgls": 0
+    },
+    "op": 11990617.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 6336,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 0
+    },
+    "bytes": 20032
+   },
+   "regimes": {
+    "spec": {
+     "unlocking": 82776,
+     "score": 82874,
+     "pad": 0,
+     "bchnOp": 45773741.95
+    },
+    "k100": {
+     "unlocking": 82776,
+     "score": 82874,
+     "pad": 0,
+     "fits": true,
+     "bchnOp": 45773741.95
+    },
+    "today": {
+     "inputs": 9,
+     "pairingInputs": 2,
+     "unlocking": 84360,
+     "score": 85084,
+     "pad": 0,
+     "opWithSetup": 50727741.95,
+     "bchnOp": 50781741.95
+    }
+   }
+  }
+ },
+ "best": {
+  "spec/A-g1only": {
+   "plan": "A",
+   "wf": 4,
+   "wv": 5,
+   "fA": 0.6,
+   "mFold": 0,
+   "L": 2,
+   "op": 59261940.349999994,
+   "bytes": 63795.600000000006,
+   "msm": {
+    "op": 46734366.4,
+    "bytes": 36227.600000000006,
+    "parts": [
+     {
+      "chain": "Lambda",
+      "op": 21163732.8,
+      "bytes": 13225.6,
+      "adds": 530,
+      "dbl": 128
+     },
+     {
+      "chain": "P_left rest",
+      "op": 19441516.8,
+      "bytes": 12183.6,
+      "adds": 480,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2523676.8,
+      "bytes": 1824.3999999999999,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 4096,
+    "varTableOps": 135,
+    "nFull": 17
+   },
+   "pairing": {
+    "chunking": {
+     "L": 2,
+     "states": 33,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 1541100,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 35092,
+     "gtgls": 0
+    },
+    "op": 11990617.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 6336,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 0
+    },
+    "bytes": 20032
+   },
+   "regime": {
+    "unlocking": 64078,
+    "score": 64176,
+    "pad": 212.39999999999418,
+    "bchnOp": 59267940.349999994
+   }
+  },
+  "k100/A-g1only": {
+   "plan": "A",
+   "wf": 4,
+   "wv": 5,
+   "fA": 0.7,
+   "mFold": 0,
+   "L": 2,
+   "op": 55554838.75,
+   "bytes": 68141.2,
+   "msm": {
+    "op": 43027264.800000004,
+    "bytes": 40573.2,
+    "parts": [
+     {
+      "chain": "Lambda",
+      "op": 19329925.6,
+      "bytes": 15331.199999999999,
+      "adds": 530,
+      "dbl": 128
+     },
+     {
+      "chain": "P_left rest",
+      "op": 17760569.6,
+      "bytes": 14129.199999999999,
+      "adds": 480,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2331329.6,
+      "bytes": 2118.7999999999997,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 4096,
+    "varTableOps": 135,
+    "nFull": 17
+   },
+   "pairing": {
+    "chunking": {
+     "L": 2,
+     "states": 33,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 1541100,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 35092,
+     "gtgls": 0
+    },
+    "op": 11990617.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 6336,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 0
+    },
+    "bytes": 20032
+   },
+   "regime": {
+    "unlocking": 69403,
+    "score": 69501,
+    "pad": 1191.800000000003,
+    "fits": true,
+    "bchnOp": 55560838.75
+   }
+  },
+  "today/A-g1only": {
+   "plan": "A",
+   "wf": 5,
+   "wv": 5,
+   "fA": 0.7,
+   "mFold": 0,
+   "L": 2,
+   "op": 52497853.150000006,
+   "bytes": 69990.8,
+   "msm": {
+    "op": 39970279.2,
+    "bytes": 42422.8,
+    "parts": [
+     {
+      "chain": "Lambda",
+      "op": 17473309.6,
+      "bytes": 13927.199999999999,
+      "adds": 470,
+      "dbl": 128
+     },
+     {
+      "chain": "P_left rest",
+      "op": 16646600,
+      "bytes": 13286.8,
+      "adds": 444,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2331329.6,
+      "bytes": 2118.7999999999997,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 8192,
+    "varTableOps": 135,
+    "nFull": 17
+   },
+   "pairing": {
+    "chunking": {
+     "L": 2,
+     "states": 33,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 1541100,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 35092,
+     "gtgls": 0
+    },
+    "op": 11990617.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 6336,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 0
+    },
+    "bytes": 20032
+   },
+   "regime": {
+    "inputs": 8,
+    "pairingInputs": 2,
+    "unlocking": 71446.8,
+    "score": 72092.8,
+    "pad": 0,
+    "opWithSetup": 56937853.150000006,
+    "bchnOp": 56985853.150000006
+   }
+  },
+  "spec/B-g1only": {
+   "plan": "B",
+   "wf": 5,
+   "wv": 5,
+   "fA": 0.5,
+   "mFold": 0,
+   "L": 2,
+   "op": 57165013.95,
+   "bytes": 61780,
+   "msm": {
+    "op": 44622052,
+    "bytes": 34148,
+    "parts": [
+     {
+      "chain": "P_left (t-folded Lambda check)",
+      "op": 38095028,
+      "bytes": 18024,
+      "adds": 938,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2716024,
+      "bytes": 1530,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 9216,
+    "varTableOps": 150,
+    "nFull": 17
+   },
+   "pairing": {
+    "chunking": {
+     "L": 2,
+     "states": 33,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 1541100,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 35092,
+     "gtgls": 0
+    },
+    "op": 11990617.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 6336,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 0
+    },
+    "bytes": 20032
+   },
+   "regime": {
+    "unlocking": 61850,
+    "score": 61948,
+    "pad": 0,
+    "bchnOp": 57171013.95
+   }
+  },
+  "k100/B-g1only": {
+   "plan": "B",
+   "wf": 4,
+   "wv": 5,
+   "fA": 0.7,
+   "mFold": 0,
+   "L": 2,
+   "op": 53866077.150000006,
+   "bytes": 66970,
+   "msm": {
+    "op": 41323115.2,
+    "bytes": 39338,
+    "parts": [
+     {
+      "chain": "P_left (t-folded Lambda check)",
+      "op": 35088985.6,
+      "bytes": 27233.199999999997,
+      "adds": 1040,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2331329.6,
+      "bytes": 2118.7999999999997,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 4608,
+    "varTableOps": 150,
+    "nFull": 17
+   },
+   "pairing": {
+    "chunking": {
+     "L": 2,
+     "states": 33,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 1541100,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 35092,
+     "gtgls": 0
+    },
+    "op": 11990617.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 6336,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 0
+    },
+    "bytes": 20032
+   },
+   "regime": {
+    "unlocking": 67292,
+    "score": 67390,
+    "pad": 252,
+    "fits": true,
+    "bchnOp": 53872077.150000006
+   }
+  },
+  "today/B-g1only": {
+   "plan": "B",
+   "wf": 5,
+   "wv": 5,
+   "fA": 0.7,
+   "mFold": 0,
+   "L": 2,
+   "op": 50618029.95,
+   "bytes": 69191.2,
+   "msm": {
+    "op": 38075068,
+    "bytes": 41559.2,
+    "parts": [
+     {
+      "chain": "P_left (t-folded Lambda check)",
+      "op": 31932738.4,
+      "bytes": 24846.399999999998,
+      "adds": 938,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2331329.6,
+      "bytes": 2118.7999999999997,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 9216,
+    "varTableOps": 150,
+    "nFull": 17
+   },
+   "pairing": {
+    "chunking": {
+     "L": 2,
+     "states": 33,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 1541100,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 35092,
+     "gtgls": 0
+    },
+    "op": 11990617.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 6336,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 0
+    },
+    "bytes": 20032
+   },
+   "regime": {
+    "inputs": 8,
+    "pairingInputs": 2,
+    "unlocking": 70647.2,
+    "score": 71293.2,
+    "pad": 0,
+    "opWithSetup": 55058029.95,
+    "bchnOp": 55106029.95
+   }
+  },
+  "spec/A-gtfold": {
+   "plan": "A",
+   "wf": 5,
+   "wv": 5,
+   "fA": 0.5,
+   "mFold": 3,
+   "L": 1,
+   "op": 57457601.95,
+   "bytes": 63579,
+   "msm": {
+    "op": 40834052,
+    "bytes": 28520,
+    "parts": [
+     {
+      "chain": "Lambda",
+      "op": 20774060,
+      "bytes": 10100,
+      "adds": 470,
+      "dbl": 128
+     },
+     {
+      "chain": "P_left rest",
+      "op": 14007328,
+      "bytes": 6974,
+      "adds": 288,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2716024,
+      "bytes": 1530,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 5120,
+    "varTableOps": 135,
+    "nFull": 14
+   },
+   "pairing": {
+    "chunking": {
+     "L": 1,
+     "states": 65,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 3035500,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 59668,
+     "gtgls": 2577000
+    },
+    "op": 16086593.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 12480,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 1347
+    },
+    "bytes": 27523
+   },
+   "regime": {
+    "unlocking": 63649,
+    "score": 63747,
+    "pad": 0,
+    "bchnOp": 57463601.95
+   }
+  },
+  "k100/A-gtfold": {
+   "plan": "A",
+   "wf": 5,
+   "wv": 5,
+   "fA": 0.6,
+   "mFold": 3,
+   "L": 1,
+   "op": 54520914.75,
+   "bytes": 67118.20000000001,
+   "msm": {
+    "op": 37897364.8,
+    "bytes": 32059.200000000004,
+    "parts": [
+     {
+      "chain": "Lambda",
+      "op": 19123684.8,
+      "bytes": 12013.6,
+      "adds": 470,
+      "dbl": 128
+     },
+     {
+      "chain": "P_left rest",
+      "op": 12913363.2,
+      "bytes": 8305.2,
+      "adds": 288,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2523676.8,
+      "bytes": 1824.3999999999999,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 5120,
+    "varTableOps": 135,
+    "nFull": 14
+   },
+   "pairing": {
+    "chunking": {
+     "L": 1,
+     "states": 65,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 3035500,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 59668,
+     "gtgls": 2577000
+    },
+    "op": 16086593.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 12480,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 1347
+    },
+    "bytes": 27523
+   },
+   "regime": {
+    "unlocking": 68111,
+    "score": 68209,
+    "pad": 922.7999999999884,
+    "fits": true,
+    "bchnOp": 54526914.75
+   }
+  },
+  "today/A-gtfold": {
+   "plan": "A",
+   "wf": 5,
+   "wv": 5,
+   "fA": 0.7,
+   "mFold": 3,
+   "L": 1,
+   "op": 51584227.55,
+   "bytes": 70657.4,
+   "msm": {
+    "op": 34960677.6,
+    "bytes": 35598.399999999994,
+    "parts": [
+     {
+      "chain": "Lambda",
+      "op": 17473309.6,
+      "bytes": 13927.199999999999,
+      "adds": 470,
+      "dbl": 128
+     },
+     {
+      "chain": "P_left rest",
+      "op": 11819398.4,
+      "bytes": 9636.4,
+      "adds": 288,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2331329.6,
+      "bytes": 2118.7999999999997,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 5120,
+    "varTableOps": 135,
+    "nFull": 14
+   },
+   "pairing": {
+    "chunking": {
+     "L": 1,
+     "states": 65,
+     "maxDeg": 126,
+     "nq": 60
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 3035500,
+     "quotient": 388200,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 59668,
+     "gtgls": 2577000
+    },
+    "op": 16086593.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 12480,
+     "residueRoot": 192,
+     "quotient": 1920,
+     "siConsts": 320,
+     "gtgls": 1347
+    },
+    "bytes": 27523
+   },
+   "regime": {
+    "inputs": 8,
+    "pairingInputs": 3,
+    "unlocking": 72113.4,
+    "score": 72759.4,
+    "pad": 0,
+    "opWithSetup": 57398227.55,
+    "bchnOp": 57446227.55
+   }
+  },
+  "spec/B-gtfold": {
+   "plan": "B",
+   "wf": 4,
+   "wv": 5,
+   "fA": 0.4,
+   "mFold": 9,
+   "L": 1,
+   "op": 51922819.55,
+   "bytes": 54975.8,
+   "msm": {
+    "op": 29654825.599999998,
+    "bytes": 14854.800000000001,
+    "parts": [
+     {
+      "chain": "P_left (t-folded Lambda check)",
+      "op": 23445254.4,
+      "bytes": 8513.2,
+      "adds": 496,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2908371.2,
+      "bytes": 1235.6000000000001,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 0,
+    "varTableOps": 150,
+    "nFull": 9
+   },
+   "pairing": {
+    "chunking": {
+     "L": 1,
+     "states": 65,
+     "maxDeg": 270,
+     "nq": 132
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 3035500,
+     "quotient": 854040,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 68884,
+     "gtgls": 7731000
+    },
+    "op": 21715649.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 12480,
+     "residueRoot": 192,
+     "quotient": 4224,
+     "siConsts": 320,
+     "gtgls": 4041
+    },
+    "bytes": 32521
+   },
+   "regime": {
+    "unlocking": 55045.8,
+    "score": 55143.8,
+    "pad": 0,
+    "bchnOp": 51928819.55
+   }
+  },
+  "k100/B-gtfold": {
+   "plan": "B",
+   "wf": 4,
+   "wv": 5,
+   "fA": 0.6,
+   "mFold": 9,
+   "L": 1,
+   "op": 48078400.35,
+   "bytes": 59558.2,
+   "msm": {
+    "op": 25810406.400000002,
+    "bytes": 19437.199999999997,
+    "parts": [
+     {
+      "chain": "P_left (t-folded Lambda check)",
+      "op": 19985529.6,
+      "bytes": 12506.8,
+      "adds": 496,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2523676.8,
+      "bytes": 1824.3999999999999,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 0,
+    "varTableOps": 150,
+    "nFull": 9
+   },
+   "pairing": {
+    "chunking": {
+     "L": 1,
+     "states": 65,
+     "maxDeg": 270,
+     "nq": 132
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 3035500,
+     "quotient": 854040,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 68884,
+     "gtgls": 7731000
+    },
+    "op": 21715649.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 12480,
+     "residueRoot": 192,
+     "quotient": 4224,
+     "siConsts": 320,
+     "gtgls": 4041
+    },
+    "bytes": 32521
+   },
+   "regime": {
+    "unlocking": 60058,
+    "score": 60156,
+    "pad": 429.8000000000029,
+    "fits": true,
+    "bchnOp": 48084400.35
+   }
+  },
+  "today/B-gtfold": {
+   "plan": "B",
+   "wf": 4,
+   "wv": 5,
+   "fA": 0.8,
+   "mFold": 9,
+   "L": 1,
+   "op": 44233981.15,
+   "bytes": 64140.600000000006,
+   "msm": {
+    "op": 21965987.2,
+    "bytes": 24019.600000000002,
+    "parts": [
+     {
+      "chain": "P_left (t-folded Lambda check)",
+      "op": 16525804.8,
+      "bytes": 16500.4,
+      "adds": 496,
+      "dbl": 128
+     },
+     {
+      "chain": "P_right",
+      "op": 2138982.4,
+      "bytes": 2413.2000000000003,
+      "adds": 28,
+      "dbl": 64
+     }
+    ],
+    "tableBytesFixed": 0,
+    "varTableOps": 150,
+    "nFull": 9
+   },
+   "pairing": {
+    "chunking": {
+     "L": 1,
+     "states": 65,
+     "maxDeg": 270,
+     "nq": 132
+    },
+    "ops": {
+     "events": 9376225.95,
+     "boundaries": 3035500,
+     "quotient": 854040,
+     "setup": 300000,
+     "terminal": 350000,
+     "siTranscript": 68884,
+     "gtgls": 7731000
+    },
+    "op": 21715649.95,
+    "bytesBy": {
+     "slopes": 11264,
+     "states": 12480,
+     "residueRoot": 192,
+     "quotient": 4224,
+     "siConsts": 320,
+     "gtgls": 4041
+    },
+    "bytes": 32521
+   },
+   "regime": {
+    "inputs": 7,
+    "pairingInputs": 3,
+    "unlocking": 65398.600000000006,
+    "score": 65966.6,
+    "pad": 0,
+    "opWithSetup": 51675981.15,
+    "bchnOp": 51717981.15
+   }
+  }
+ }
+}

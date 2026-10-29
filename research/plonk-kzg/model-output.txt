@@ -1,0 +1,72 @@
+units (standard op): {
+  jdbl: 34218,
+  jmadd: 48596,
+  jadd: 68032,
+  adbl: 16939,
+  aadd: 17424,
+  mm: 3696,
+  mma: 4024,
+  evDbl: 101404,
+  evAdd: 101673,
+  dstep: 46666
+}
+statement decode 0.02M, curve checks 0.12M, transcript 0.02M (34 SHA-256 blocks), Fr 0.37M (74 mul-mods)
+pairing (no GT folding, 2-event chunks) 11.99M: {
+  events: '9.38M',
+  boundaries: '1.54M',
+  quotient: '0.39M',
+  setup: '0.30M',
+  terminal: '0.35M',
+  siTranscript: '0.04M',
+  gtgls: '0.00M'
+} bytes {
+  slopes: 11264,
+  states: 6336,
+  residueRoot: 192,
+  quotient: 1920,
+  siConsts: 320,
+  gtgls: 0
+} { L: 2, states: 33, maxDeg: 126, nq: 60 }
+  chunking L=1, 0 GT-folded bases: {"L":1,"states":65,"maxDeg":54,"nq":24}
+  chunking L=2, 0 GT-folded bases: {"L":2,"states":33,"maxDeg":126,"nq":60}
+  chunking L=3, 0 GT-folded bases: {"L":3,"states":22,"maxDeg":294,"nq":144}
+  chunking L=1, 1 GT-folded bases: {"L":1,"states":65,"maxDeg":78,"nq":36}
+  chunking L=2, 1 GT-folded bases: {"L":2,"states":33,"maxDeg":198,"nq":96}
+  chunking L=3, 1 GT-folded bases: {"L":3,"states":22,"maxDeg":462,"nq":228}
+  chunking L=1, 3 GT-folded bases: {"L":1,"states":65,"maxDeg":126,"nq":60}
+  chunking L=2, 3 GT-folded bases: {"L":2,"states":33,"maxDeg":342,"nq":168}
+  chunking L=3, 3 GT-folded bases: {"L":3,"states":22,"maxDeg":798,"nq":396}
+  chunking L=1, 9 GT-folded bases: {"L":1,"states":65,"maxDeg":270,"nq":132}
+  chunking L=2, 9 GT-folded bases: {"L":2,"states":33,"maxDeg":774,"nq":384}
+  chunking L=3, 9 GT-folded bases: {"L":3,"states":22,"maxDeg":1806,"nq":900}
+MSM plan A, w=4/4, all Jacobian: MSM 74.00M / 7874 B; total 86.53M / 35442 B; spec 98260, 100k 108219, today {"inputs":12,"pairingInputs":2,"unlocking":115820,"score":116778,"pad":78130,"opWithSetup":93049573.95,"bchnOp":93121573.95}
+MSM plan A, w=4/4, all affine-witness: MSM 33.24M / 55138 B; total 45.77M / 82706 B; spec 82874, 100k 82874, today {"inputs":9,"pairingInputs":2,"unlocking":84360,"score":85084,"pad":0,"opWithSetup":50727741.95,"bchnOp":50781741.95}
+best spec/A-g1only: plan A wf=4 wv=5 fA=0.6 mFold=0 L=2: op 59.26M, content 63796 B, MSM 46.73M / 36228 B, pairing 11.99M / 20032 B -> {"unlocking":64078,"score":64176,"pad":212.39999999999418,"bchnOp":59267940.349999994}
+best k100/A-g1only: plan A wf=4 wv=5 fA=0.7 mFold=0 L=2: op 55.55M, content 68141 B, MSM 43.03M / 40573 B, pairing 11.99M / 20032 B -> {"unlocking":69403,"score":69501,"pad":1191.800000000003,"fits":true,"bchnOp":55560838.75}
+best today/A-g1only: plan A wf=5 wv=5 fA=0.7 mFold=0 L=2: op 52.50M, content 69991 B, MSM 39.97M / 42423 B, pairing 11.99M / 20032 B -> {"inputs":8,"pairingInputs":2,"unlocking":71446.8,"score":72092.8,"pad":0,"opWithSetup":56937853.150000006,"bchnOp":56985853.150000006}
+best spec/B-g1only: plan B wf=5 wv=5 fA=0.5 mFold=0 L=2: op 57.17M, content 61780 B, MSM 44.62M / 34148 B, pairing 11.99M / 20032 B -> {"unlocking":61850,"score":61948,"pad":0,"bchnOp":57171013.95}
+best k100/B-g1only: plan B wf=4 wv=5 fA=0.7 mFold=0 L=2: op 53.87M, content 66970 B, MSM 41.32M / 39338 B, pairing 11.99M / 20032 B -> {"unlocking":67292,"score":67390,"pad":252,"fits":true,"bchnOp":53872077.150000006}
+best today/B-g1only: plan B wf=5 wv=5 fA=0.7 mFold=0 L=2: op 50.62M, content 69191 B, MSM 38.08M / 41559 B, pairing 11.99M / 20032 B -> {"inputs":8,"pairingInputs":2,"unlocking":70647.2,"score":71293.2,"pad":0,"opWithSetup":55058029.95,"bchnOp":55106029.95}
+best spec/A-gtfold: plan A wf=5 wv=5 fA=0.5 mFold=3 L=1: op 57.46M, content 63579 B, MSM 40.83M / 28520 B, pairing 16.09M / 27523 B -> {"unlocking":63649,"score":63747,"pad":0,"bchnOp":57463601.95}
+best k100/A-gtfold: plan A wf=5 wv=5 fA=0.6 mFold=3 L=1: op 54.52M, content 67118 B, MSM 37.90M / 32059 B, pairing 16.09M / 27523 B -> {"unlocking":68111,"score":68209,"pad":922.7999999999884,"fits":true,"bchnOp":54526914.75}
+best today/A-gtfold: plan A wf=5 wv=5 fA=0.7 mFold=3 L=1: op 51.58M, content 70657 B, MSM 34.96M / 35598 B, pairing 16.09M / 27523 B -> {"inputs":8,"pairingInputs":3,"unlocking":72113.4,"score":72759.4,"pad":0,"opWithSetup":57398227.55,"bchnOp":57446227.55}
+best spec/B-gtfold: plan B wf=4 wv=5 fA=0.4 mFold=9 L=1: op 51.92M, content 54976 B, MSM 29.65M / 14855 B, pairing 21.72M / 32521 B -> {"unlocking":55045.8,"score":55143.8,"pad":0,"bchnOp":51928819.55}
+best k100/B-gtfold: plan B wf=4 wv=5 fA=0.6 mFold=9 L=1: op 48.08M, content 59558 B, MSM 25.81M / 19437 B, pairing 21.72M / 32521 B -> {"unlocking":60058,"score":60156,"pad":429.8000000000029,"fits":true,"bchnOp":48084400.35}
+best today/B-gtfold: plan B wf=4 wv=5 fA=0.8 mFold=9 L=1: op 44.23M, content 64141 B, MSM 21.97M / 24020 B, pairing 21.72M / 32521 B -> {"inputs":7,"pairingInputs":3,"unlocking":65398.600000000006,"score":65966.6,"pad":0,"opWithSetup":51675981.15,"bchnOp":51717981.15}
+
+| design | op (std) | content B | MSM op / B | pairing op / B | bch-spec | 100 KB input | today (inputs) |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| naive: plan A, all-Jacobian MSM w=4, no folding | 86.53M | 35442 | 74.00M / 7874 | 11.99M / 20032 | 98260 | 108219 (over 100 KB) | 116778 (12) |
+| plan A, all affine-witness MSM w=4, no folding | 45.77M | 82706 | 33.24M / 55138 | 11.99M / 20032 | 82874 | 82874 | 85084 (9) |
+| best for spec: A-g1only (wf 4, wv 5, fA 0.6, mFold 0, L 2) | 59.26M | 63796 | 46.73M / 36228 | 11.99M / 20032 | 64176 | 74135 | 80633 (9) |
+| best for spec: A-gtfold (wf 5, wv 5, fA 0.5, mFold 3, L 1) | 57.46M | 63579 | 40.83M / 28520 | 16.09M / 27523 | 63747 | 71880 | 79408 (8) |
+| best for spec: B-g1only (wf 5, wv 5, fA 0.5, mFold 0, L 2) | 57.17M | 61780 | 44.62M / 34148 | 11.99M / 20032 | 61948 | 71514 | 77325 (8) |
+| best for spec: B-gtfold (wf 4, wv 5, fA 0.4, mFold 9, L 1) | 51.92M | 54976 | 29.65M / 14855 | 21.72M / 32521 | 55144 | 64961 | 75175 (8) |
+| best for k100: A-g1only (wf 4, wv 5, fA 0.7, mFold 0, L 2) | 55.55M | 68141 | 43.03M / 40573 | 11.99M / 20032 | 68309 | 69501 | 75312 (8) |
+| best for k100: A-gtfold (wf 5, wv 5, fA 0.6, mFold 3, L 1) | 54.52M | 67118 | 37.90M / 32059 | 16.09M / 27523 | 67286 | 68209 | 75737 (8) |
+| best for k100: B-g1only (wf 4, wv 5, fA 0.7, mFold 0, L 2) | 53.87M | 66970 | 41.32M / 39338 | 11.99M / 20032 | 67138 | 67390 | 73201 (8) |
+| best for k100: B-gtfold (wf 4, wv 5, fA 0.6, mFold 9, L 1) | 48.08M | 59558 | 25.81M / 19437 | 21.72M / 32521 | 59726 | 60156 | 69682 (7) |
+| best for today: A-g1only (wf 5, wv 5, fA 0.7, mFold 0, L 2) | 52.50M | 69991 | 39.97M / 42423 | 11.99M / 20032 | 70159 | 70159 | 72093 (8) |
+| best for today: A-gtfold (wf 5, wv 5, fA 0.7, mFold 3, L 1) | 51.58M | 70657 | 34.96M / 35598 | 16.09M / 27523 | 70825 | 70825 | 72759 (8) |
+| best for today: B-g1only (wf 5, wv 5, fA 0.7, mFold 0, L 2) | 50.62M | 69191 | 38.08M / 41559 | 11.99M / 20032 | 69359 | 69359 | 71293 (8) |
+| best for today: B-gtfold (wf 4, wv 5, fA 0.8, mFold 9, L 1) | 44.23M | 64141 | 21.97M / 24020 | 21.72M / 32521 | 64309 | 64309 | 65967 (7) |
