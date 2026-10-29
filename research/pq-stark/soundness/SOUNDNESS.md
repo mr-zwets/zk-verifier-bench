@@ -22,7 +22,8 @@ Calculator: [params5.py](params5.py) (`python3 params5.py --json`). It imports T
   - ~100 bits works, but needs 79 queries (unique decoding) or 93 (Johnson). That is about 148 KB in CashVM format.
   - 128 bits is unreachable: the best is 125 bits, with 16–28-bit grinding at four sites.
   - The ceiling comes from the ALI round. uni-stark has no proof-of-work site before the constraint-folding challenge, so that round is stuck at 128 − log2(L·#constraints).
-  - Recommendation: a degree-3 extension, which needs a small `BinomiallyExtendable<3>` impl for Goldilocks, or the shipped degree-5 extension (§5).
+  - Recommendation: a degree-3 extension. Plonky3's stock `CubicTrinomialExtensionField` (u³ = u + 1) works with no patch (§5, condition 2); the shipped degree-5 extension also works (§5).
+- **Status of the Plonky3 figures.** Plonky3 batches with powers of one challenge. The batching term for that, (t−1)(A0 + B1), is our adaptation of [ADK] Thm 2 (sketch in §2.1). It is not a published statement, so every Plonky3 figure here is labelled "JB, powers-batching adaptation, unpublished", not "proven". Only the Track 4-format sets (P100, P128, U*, T5-*), which draw independent γ_j, rest on [ADK] Thm 2 as published.
 
 ## 2. The bound used (with theorem numbers)
 
@@ -57,6 +58,17 @@ Each paper was read in the version listed below. Theorem numbers refer to those 
   - Fold rounds use a_i·B1, not B1.
   - L is m/ρ ([ADK], [BGKTTZ] Lemma 1), not the tighter (m+½)/√ρ that Track 4 and Plonky3 use.
   - z is drawn from F_q \ F_p.
+### 2.1 Powers batching (Plonky3): proof sketch of the adaptation (ours, not peer reviewed)
+
+Plonky3 combines the t DEEP quotients u_0..u_{t−1} as f0 = Σ_j α'^j·u_j (one challenge α'), where [ADK] Protocol 1 uses f0 = Σ_j γ_j·u_j with independent γ_j. The sketch below says why only the batching-round error changes, and by the factor t−1. It has not been checked by anyone outside this project.
+
+1. **Where independence is used.** In the proof of [ADK] Thm 2, the batching round's bad event is the [BCIKS] Lemma 8.2 event E^(0): the u_j have no correlated agreement of weight above the Johnson threshold α, yet the sampled combination f0 has agreement above α. Its probability is bounded by applying the correlated-agreement theorem to the family {Σ_j γ_j u_j}. That is the only place where the distribution of the batching challenge enters. The later rounds (folds, query) and the RBR state function look only at f0 and its agreement set, not at how f0 was formed.
+2. **The curve version.** With powers, the family is the curve z ↦ Σ_j z^j u_j of degree t−1 in z. [BCIKS] Thm 7.2 (weighted, Johnson range, explicit m) states correlated agreement for such curves with the error multiplied by the curve degree: if Pr_z[agreement of u_z > α] > (t−1)·ε, then the u_j have correlated agreement. In the proof, each count of bad z values comes from a nonzero polynomial in z, whose degree grows from 1 (line) to t−1 (curve). That is the source of the factor.
+3. **Substitution.** Using Thm 7.2 in place of Thm 7.4 bounds Pr[E^(0)] by (t−1)(A0 + B1) instead of A0 + B1. The other per-round errors are unchanged, so the [ADK] Thm 1 / [BGKTTZ] Cor. 5 composition goes through as before, with this one summand replaced.
+4. **ALI with powers of α.** For each of the at most L codewords in the list, the combined constraint is a nonzero polynomial in α of degree #constraints−1 unless every constraint vanishes. Schwartz-Zippel then gives L·#constraints/q (charged with #constraints, not #constraints−1).
+
+Until this sketch is written out as a proof and checked, the Plonky3 figures (S*, and the P*/C* rows of the verifier phase, which are all Plonky3 proofs) are reported as "JB, powers-batching adaptation, unpublished". The factor (t−1) is already charged in every Plonky3 figure (log2(t−1) ≈ 3.9 bits at t = 16), and the S sets depend on it materially: their batching round sits close to the binding query round (per-vector security.json: S100b batch 100.66 vs query 100.25; S100z 100.39 vs 100.21; S128 129.38 vs 128.17, with 23 bits of batch PoW). If the adaptation needed a larger factor, these sets would drop below target unless batch PoW is raised. Batch PoW is a free knob in Plonky3 (`batch_proof_of_work_bits`), so the fix would be cheap.
+
 - **How Track 4 departs from [ADK]'s Protocol 1, and why each departure is safe:**
   - No ZK mask. The mask is prover-chosen, and R = 0 is allowed.
   - γ_1..5 and β_1 are drawn in one round, because f0 is virtual and nothing is committed in between. That merged round is charged batch + fold1 (union bound).
@@ -98,33 +110,33 @@ If the strict digest reading is wanted at 100 bits, use h = 26: 51,209 B instead
 **Assumptions.**
 - Plonky3 main as of 0d80373 (2026-10-26). `FriParameters` has `log_blowup`, `log_final_poly_len`, `max_log_arity`, `num_queries`, `batch_proof_of_work_bits`, `commit_proof_of_work_bits` and `query_proof_of_work_bits`; uni-stark adds `ood_pow_bits`.
 - m is an analysis parameter, not a Plonky3 knob.
-- Reference AIR: Track 4's MiMC-7 in Plonky3 form:
+- Reference AIR (used for the tables in this section only): Track 4's MiMC-7 in a planning shape that differs from the AIR the Prover phase finally built (width 3, 5 constraints, degree 3). The per-vector figures for the AIRs as built are in zk-verifier-bench `wip/pq-stark-verifier`, `research/pq-stark/verifier/security.json` (S128 128.17, S100b 100.25, mimc-P128 125.94). The planning shape was:
   - width 2;
   - 4 constraints of degree 4 including the selectors;
   - 4 quotient chunks (8 under ZK);
   - max_combo 2;
   - t = 12 batched openings at e = 2 (16 at e = 3).
 - PoW cap: 28 bits per site.
-- Bytes are reported two ways:
-  - "native": Plonky3's own proof with full paths;
-  - "dedup": deduplicated multiproofs, as a CashVM verifier would carry them.
+- Bytes are reported two ways, both from the byte model (not measured):
+  - "full-path" (labelled `native` in params5.py): every query carries its full Merkle paths with no sharing. This **overstates** Plonky3's real proofs, whose multiproofs are already pruned;
+  - "dedup": deduplicated multiproofs. This is the column that matches measured Plonky3 proofs: the S128 row (model 79,704 B) was measured at 78,393 B (mimc-S128-0), and the e = 3 JB lb 8 ~100 row (model 61,174 B) at 60,793 B (mimc-S100b-0). Use the Prover phase's measured bytes wherever a vector exists.
 
-| target | field | regime | log_blowup | max_log_arity | log_final_poly_len | num_queries | query / commit / batch / ood PoW | m | λ_IOP (binding) | native B | dedup B |
+| target | field | regime | log_blowup | max_log_arity | log_final_poly_len | num_queries | query / commit / batch / ood PoW | m | λ_IOP (binding) | full-path B (model) | dedup B (model) |
 |---|---|---|--:|--:|--:|--:|---|--:|---|--:|--:|
 | ~100 | e=2 (stock) | UD | 4 | 4 | 8 | 79 | 28 / 0 / 0 / 0 | – | 100.09 (query) | 220,600 | 148,025 |
 | ~100 | e=2 (stock) | JB | 2 | 3 | 8 | 93 | 28 / 19 / 26 / 0 | 3 | 100.13 (fold1) | 254,480 | 144,556 |
-| **~100** | **e=3 (patch)** | JB | 5 | 3 | 7 | 30 | 27 / 0 / 0 / 0 | 12 | 100.23 (query) | 105,664 | 77,966 |
-| ~100 | e=3 (patch) | JB | 8 | 4 | 8 | 19 | 25 / 0 / 0 / 0 | 16 | 100.16 (query) | 73,576 | 61,174 |
+| **~100** | **e=3 (stock trinomial)** | JB | 5 | 3 | 7 | 30 | 27 / 0 / 0 / 0 | 12 | 100.23 (query) | 105,664 | 77,966 |
+| ~100 | e=3 (stock trinomial) | JB | 8 | 4 | 8 | 19 | 25 / 0 / 0 / 0 | 16 | 100.16 (query) | 73,576 | 61,174 |
 | ~100 | e=5 (stock) | JB | 8 | 3 | 7 | 19 | 25 / 0 / 0 / 0 | 16 | 100.16 | 87,608 | 72,106 |
 | 128 | e=2 (stock) | – | **not reachable**: best is 125 (UD, lb 4, a 2^4, 107 queries, PoW 28/21/21/16; ALI ceiling 126) | | | | | | | 297,208 | 192,921 |
-| **128** | **e=3 (patch)** | JB | 8 | 4 | 8 | 26 | 26 / 15 / 23 / 0 | 10 | 128.17 (query) | 98,216 | 79,704 |
-| 128 | e=3 (patch) | JB | 5 | 3 | 7 | 41 | 28 / 7 / 14 / 0 | 12 | 128.09 (query) | 143,064 | 102,218 |
+| **128** | **e=3 (stock trinomial)** | JB | 8 | 4 | 8 | 26 | 26 / 15 / 23 / 0 | 10 | 128.17 (query) | 98,216 | 79,704 |
+| 128 | e=3 (stock trinomial) | JB | 5 | 3 | 7 | 41 | 28 / 7 / 14 / 0 | 12 | 128.09 (query) | 143,064 | 102,218 |
 | 128 | e=5 (stock) | JB | 8 | 3 | 7 | 26 | 26 / 0 / 0 / 0 | 10 | 128.17 (query) | 117,568 | 94,429 |
 | 128 | e=5 (stock) | JB | 5 | 3 | 8 | 41 | 28 / 0 / 0 / 0 | 12 | 128.09 | 161,960 | 121,104 |
 
 **ZK** (HidingFriPcs with `num_random_codewords = e`, the minimum Plonky3 allows; the trace domain doubles):
 
-| target | field | regime | log_blowup | max_log_arity | log_final_poly_len | num_queries | query / commit / batch / ood PoW | λ_IOP | native B | dedup B |
+| target | field | regime | log_blowup | max_log_arity | log_final_poly_len | num_queries | query / commit / batch / ood PoW | λ_IOP | full-path B (model) | dedup B (model) |
 |---|---|---|--:|--:|--:|--:|---|--:|--:|--:|
 | ~100 | e=3 | JB | 8 | 4 | 6 | 19 | 25 / 0 / 3 / 0 | 100.16 | 106,368 | 87,765 |
 | ~100 | e=2 | JB | 1 | 3 | 8 | 260 | 28 / 18 / 26 / 0 | 100.01 | 924,400 | 486,117 |
@@ -133,7 +145,7 @@ If the strict digest reading is wanted at 100 bits, use h = 26: 51,209 B instead
 
 **Conditions for the Prover/Verifier phases:**
 1. **Keep every committed matrix at the same height.** A shorter input joins a later fold multiplied by β^a, a curve of degree a rather than a−1. The bounds above assume it does not; p3-security's `FriRegime` doc says the same.
-2. **e = 3 needs a patch.** Add `BinomiallyExtendable<3>` and `HasTwoAdicBinomialExtension<3>` for Goldilocks (W = 7; u³ − 7 is irreducible, per Track 4). The 2-adicity stays 32, since p² + p + 1 is odd. This is a fork or patch of `p3-goldilocks`.
+2. **e = 3 needs no patch.** The stock `CubicTrinomialExtensionField` (u³ = u + 1) works, and the Prover phase used it. x³ − x − 1 is irreducible over Goldilocks: x^p ≠ x mod f (no root in F_p) and x^(p³) = x mod f, checked in this phase. The bound depends only on |F| = p³, so the choice of irreducible polynomial does not change any figure. The binomial u³ = 7 used by Track 4 would need a `BinomiallyExtendable<3>` patch; that is not required.
 3. **The ALI round has no PoW site.** This is what caps e = 2 at about 121 bits (JB) or 126 bits (UD).
 4. **Check query-index uniformity** of `SerializingChallenger64` + `HashChallenger<Sha256>` `sample_bits` in the Verifier phase. The bounds assume uniform indices.
 5. **Plonky3's own `p3-security` JB numbers are higher** because it uses the 2026 linear-in-n line count (ePrint 2026/2056, DKT26, Thm 5.12). We list that only as sensitivity, not peer reviewed:
@@ -156,11 +168,11 @@ UD costs roughly 2–3× the bytes of the Johnson-regime sets: about 1 bit per q
 
 ## 7. What is not settled / caveats
 
-- **Thm 2 is applied, not re-proved.** [ADK] Thm 2 is applied to Track 4's protocol with the departures listed in §2. The powers-batching variant (Plonky3) swaps BCIKS Thm 7.4 for Thm 7.2 inside the same proof; this is our adaptation, not a published statement.
+- **Thm 2 is applied, not re-proved.** [ADK] Thm 2 is applied to Track 4's protocol with the departures listed in §2. The powers-batching variant (Plonky3) swaps BCIKS Thm 7.4 for Thm 7.2 inside the same proof; this is our adaptation, not a published statement. §2.1 gives a sketch only. Every Plonky3 figure is therefore labelled "JB, powers-batching adaptation, unpublished".
 - **The bound is classical.** Quantum: see Track 4 SPEC §4.5. Roughly half the bits.
 - **Large-m sets are large-LDE sets.** The cheapest sets use ρ = 2^−8 and m = 10–16. That is allowed, since [ADK] Thm 2 needs only 3 ≤ m < k/2, but it costs a 2^24-row LDE.
 - **Not used.** Above-Johnson preprints (ePrint 2026/858, 2026/861) and DKT26 (2026/2056) are excluded. The conjectured regime is excluded as well.
-- **Bytes are model figures.** Plonky3 native bytes follow our serializer model (full paths, sibling values, OOD, final poly, PoW witnesses); they are not measured.
+- **Bytes are model figures.** The full-path bytes follow our serializer model (full paths, sibling values, OOD, final poly, PoW witnesses) and overstate real Plonky3 proofs; the dedup bytes match the measured proofs to within 2%. Measured sizes are in the Prover phase's vectors.
 
 ## 8. Reproduce
 

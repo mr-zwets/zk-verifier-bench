@@ -47,7 +47,7 @@ B. Track 4 format: cheapest provable sets under RBR bounds (search, n = 2^16, g 
 
 ====================================================================================================
 C. Plonky3-style FRI (Goldilocks, SHA-256 MMCS h=32), reference MiMC AIR (w=2, deg 4 with selectors, 4 constraints)
-   per-site PoW cap 28 bits; score = dedup bytes (CashVM format), native = Plonky3 proof as serialized
+   per-site PoW cap 28 bits; score = dedup bytes (CashVM format; matches measured Plonky3 proofs), native = full-path model (overstates real Plonky3 proofs)
 ====================================================================================================
   P3-100                 [JB] e=2 zk=False: log_blowup=2 max_log_arity=3 log_final_poly_len=8 num_queries=93 query_pow=28 commit_pow=19 batch_pow=26 ood_pow=0 m=3 t=12
       lam_IOP 100.13 (fold1); bytes native 254480, dedup 144556; arities [8, 8, 4]

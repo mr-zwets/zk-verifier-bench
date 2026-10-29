@@ -180,7 +180,7 @@ class P3:
     before the constraint-folding challenge alpha (ALI)."""
     name: str
     regime: str               # 'JB' | 'UD' | 'DKT'
-    e: int                    # extension degree (Plonky3 Goldilocks ships 2 and 5; 3 needs a BinomiallyExtendable<3> impl)
+    e: int                    # extension degree (Plonky3 Goldilocks ships 2, 5 and CubicTrinomialExtensionField u^3 = u + 1 for 3)
     log_n: int                # trace rows (before ZK doubling)
     log_blowup: int
     max_log_arity: int
@@ -491,7 +491,7 @@ def main():
 
     print('\n' + '=' * 100)
     print('C. Plonky3-style FRI (Goldilocks, SHA-256 MMCS h=32), reference MiMC AIR (w=2, deg 4 with selectors, 4 constraints)')
-    print('   per-site PoW cap 28 bits; score = dedup bytes (CashVM format), native = Plonky3 proof as serialized')
+    print('   per-site PoW cap 28 bits; score = dedup bytes (CashVM format; matches measured Plonky3 proofs), native = full-path model (overstates real Plonky3 proofs)')
     print('=' * 100)
     p3rows = {}
     for label, reg, e, tgt, zk, h in (('P3-100', 'JB', 2, 100, False, 32), ('P3-100u', 'UD', 2, 100, False, 32),
