@@ -271,7 +271,7 @@ Ranges span all four circuits. Against sound-si-gls-dproj (16,571 B, bch-spec on
 - **m ≥ 2 commitments** are built by the same code but untested. For m ≥ 3, the γ and v hash lengths can coincide (SOUNDNESS §8).
 - **k = 0 is refused,** not supported. Supporting it needs the ω⁰ denominator as an extra batch-inverse entry.
 - **SRS:** Ignition is verified as far as the verifier relies on it. The full transcripts (about 1.1 TB) and the signatures were not checked. Builds above n = 2^22 need the tool to read further transcript files.
-- **No BCHN node run.** The BCHN op-cost is modelled from the DEFINE body bytes, not measured.
+- **BCHN node run (Track 8a, [node-check](../node-check/README.md)):** on stock BCHN 29.1.0 all four circuits' chains are accepted and the sampled tampered proofs and manipulations rejected, matching libauth. BCHN's op-cost is libauth's plus the DEFINE body bytes (a one-byte boundary test on both bases), so the modelled BCHN-adjusted figures hold. A default-policy node allows every chain tx. Verify time is about 11 ms per proof.
 - **Reviewed once:** the review fixes passed a re-review, including the three-piece quotient argument (SOUNDNESS §0, §1, Lemma 3). The re-review's own six minor fixes (plans, stress tests, test rules) were not reviewed again.
 
 ### T7.9 Sources
@@ -519,7 +519,7 @@ The witness dominates the score. For mul2 at J = 13 it is slopes 38.6 KB, SI sta
   - Circuits with zero public inputs: the build asserts at build time, with no clear error. **Track 7:** `parseVK` now refuses k = 0 with a clear error; still unsupported.
 - **Overstated claim in PROTOCOL.md.** It says ζ in the domain is rejected. Only ζ = ωⁱ for i < k (the public-input points) is rejected; elsewhere in the domain verification continues, as in gnark. The probability is about n/r, so soundness is unaffected.
 - **Not done:**
-  - no BCHN node run (the BCHN figures are computed); **Track 7:** still not done;
+  - no BCHN node run (the BCHN figures are computed); **Track 7:** still not done; **resolved** by Track 8a ([node-check](../node-check/README.md));
   - GT folding not built; **Track 7:** built (§T7.4);
   - the snarkjs/Keccak variant not built;
   - the bch-spec model not re-run for 3 public inputs.

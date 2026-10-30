@@ -1,0 +1,196 @@
+195 workloads (timing)
+ok  plonk-mul2:valid0 K=4 verify=43.47ms accepted lib=true
+ok  plonk-mul2:valid1 K=4 verify=44.73ms accepted lib=true
+ok  plonk-mul2:valid2 K=4 verify=43.79ms accepted lib=true
+ok  plonk-mul2:valid3 K=4 verify=43.63ms accepted lib=true
+ok  plonk-mul2:valid4 K=4 verify=43.75ms accepted lib=true
+ok  plonk-mul2:tampered:point.L.plusG K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:tampered:point.H0.negated K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:tampered:point.Z.infinity K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:tampered:scalar.s1_zeta.plus1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:tampered:point.R.offCurve K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:tampered:point.H1.xPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:tampered:point.Wzeta.yPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:tampered:pi.0.plusR K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:MA hand-over word + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:SI hand-over R word flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:slope bit flip (MA) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:TV entry bit flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:WS state bit flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:code blob C0 byte flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:WQc word flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:two MA inputs swapped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:extra foreign input K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:input dropped (last SI) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:adaptive: Lambda' = 2 Lambda K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:manip:adaptive: proof 1 with the public inputs of proof 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-mul2:define-probe-cons-under K=1 verify=undefinedms rejected:blk-bad-inputs lib=true
+ok  plonk-mul2:define-probe-cons-over K=4 verify=65.98ms accepted lib=true
+ok  plonk-mul2:define-probe-std-under K=4 verify=32.64ms accepted lib=true
+ok  plonk-mul2:define-probe-std-over K=4 verify=32.65ms accepted lib=true
+ok  plonk-merkle16:valid0 K=4 verify=50.21ms accepted lib=true
+ok  plonk-merkle16:valid1 K=4 verify=49.6ms accepted lib=true
+ok  plonk-merkle16:valid2 K=4 verify=44.51ms accepted lib=true
+ok  plonk-merkle16:valid3 K=4 verify=47.74ms accepted lib=true
+ok  plonk-merkle16:valid4 K=4 verify=47.52ms accepted lib=true
+ok  plonk-merkle16:tampered:point.L.plusG K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:tampered:point.H0.negated K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:tampered:point.Z.infinity K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:tampered:scalar.s1_zeta.plus1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:tampered:point.L.yPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:tampered:point.H1.offCurve K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:tampered:point.Wzeta.xPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:tampered:scalar.z_zetaOmega.plusR K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:MA hand-over word + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:SI hand-over R word flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:slope bit flip (MA) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:TV entry bit flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:WS state bit flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:code blob C0 byte flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:WQc word flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:two MA inputs swapped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:extra foreign input K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:input dropped (last SI) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:adaptive: Lambda' = 2 Lambda K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:manip:adaptive: proof 1 with the public inputs of proof 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:define-probe-cons-under K=1 verify=undefinedms rejected:blk-bad-inputs lib=true
+ok  plonk-merkle16:define-probe-cons-over K=4 verify=33.27ms accepted lib=true
+ok  plonk-merkle16:define-probe-std-under K=4 verify=33.17ms accepted lib=true
+ok  plonk-merkle16:define-probe-std-over K=4 verify=33.35ms accepted lib=true
+ok  plonk-range64:valid0 K=3 verify=35.5ms accepted lib=true
+ok  plonk-range64:valid1 K=3 verify=35.41ms accepted lib=true
+ok  plonk-range64:valid2 K=3 verify=35.52ms accepted lib=true
+ok  plonk-range64:valid3 K=3 verify=35.58ms accepted lib=true
+ok  plonk-range64:valid4 K=3 verify=35.43ms accepted lib=true
+ok  plonk-range64:tampered:point.L.plusG K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:tampered:point.H0.infinity K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:tampered:point.Wzeta.negated K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:tampered:scalar.s1_zeta.plus1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:tampered:point.L.offCurve K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:tampered:point.H0.yPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:tampered:point.Wzeta.xPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:tampered:scalar.s1_zeta.plusR K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:MA hand-over word + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:SI hand-over R word flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:slope bit flip (MA) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:TV entry bit flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:WS state bit flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:code blob C0 byte flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:WQc word flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:two MA inputs swapped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:extra foreign input K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:input dropped (last SI) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:adaptive: Lambda' = 2 Lambda K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:manip:adaptive: proof 1 with the public inputs of proof 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:define-probe-cons-under K=1 verify=undefinedms rejected:blk-bad-inputs lib=true
+ok  plonk-range64:define-probe-cons-over K=3 verify=23.69ms accepted lib=true
+ok  plonk-range64:define-probe-std-under K=3 verify=23.65ms accepted lib=true
+ok  plonk-range64:define-probe-std-over K=3 verify=23.69ms accepted lib=true
+ok  plonk-merkle16rc:valid0 K=3 verify=35.56ms accepted lib=true
+ok  plonk-merkle16rc:valid1 K=3 verify=35.25ms accepted lib=true
+ok  plonk-merkle16rc:valid2 K=3 verify=35.38ms accepted lib=true
+ok  plonk-merkle16rc:valid3 K=3 verify=35.45ms accepted lib=true
+ok  plonk-merkle16rc:valid4 K=3 verify=35.97ms accepted lib=true
+ok  plonk-merkle16rc:tampered:point.L.plusG K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:tampered:point.H1.plusG K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:tampered:point.WzetaOmega.plusG K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:tampered:scalar.qcp0_zeta.plus1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:tampered:point.L.xPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:tampered:point.H1.xPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:tampered:point.WzetaOmega.xPlusP K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:tampered:pi.0.plusR K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:MA hand-over word + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:SI hand-over R word flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:slope bit flip (MA) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:TV entry bit flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:WS state bit flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:code blob C0 byte flip K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:WQc word flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:two MA inputs swapped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:extra foreign input K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:input dropped (last SI) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:adaptive: Lambda' = 2 Lambda K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:manip:adaptive: proof 1 with the public inputs of proof 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:define-probe-cons-under K=1 verify=undefinedms rejected:blk-bad-inputs lib=true
+ok  plonk-merkle16rc:define-probe-cons-over K=3 verify=23.64ms accepted lib=true
+ok  plonk-merkle16rc:define-probe-std-under K=3 verify=23.72ms accepted lib=true
+ok  plonk-merkle16rc:define-probe-std-over K=3 verify=23.74ms accepted lib=true
+ok  stark-mimc-S128-0:valid-tx0 K=6 verify=50.16ms accepted lib=true
+ok  stark-mimc-S128-0:valid-tx1 K=7 verify=51.25ms accepted lib=true
+ok  stark-mimc-S128-0:tampered:trace root K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:tampered:OOD trace_next[0] K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:tampered:batch PoW witness + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:tampered:input leaf quotient q25[last] K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:tampered:FRI Merkle sibling (first) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:manip:qry: L byte (row) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:manip:qry: path byte (input tree) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:manip:qry: input missing K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:manip:head: OOD byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:manip:code: byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:manip:graph: one input under a foreign locking K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:thread: tx1 NFT committed to another G K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:thread: tx0 without the thread NFT K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:thread: tx1 holds the NFT of another k K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:valid-tx0 K=5 verify=58.5ms accepted lib=true
+ok  stark-mimc-S100b-0:tampered:trace root K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:tampered:OOD trace_next[0] K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:tampered:input leaf trace q0[0] K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:tampered:input sibling (last) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:tampered:non-canonical field element (0xff..ff in final polynomial) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:tampered:public output + 1 (different statement) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:manip:qry: L byte (row) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:manip:qry: path byte (input tree) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:manip:qry: input missing K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:manip:head: OOD byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:manip:code: byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S100b-0:manip:graph: one input under a foreign locking K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:valid-tx0 K=5 verify=63.15ms accepted lib=true
+ok  stark-fib-S100z-zkmin-0:valid-tx1 K=6 verify=68.93ms accepted lib=true
+ok  stark-fib-S100z-zkmin-0:tampered:trace root K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:tampered:OOD trace_next[0] K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:tampered:query PoW witness + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:tampered:input leaf quotient q0[0] K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:tampered:FRI Merkle sibling (first) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:tampered:truncated by one byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:manip:qry: L byte (row) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:manip:qry: path byte (input tree) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:manip:qry: input missing K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:manip:head: OOD byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:manip:code: byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:manip:graph: one input under a foreign locking K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:thread: tx1 NFT committed to another G K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:thread: tx0 without the thread NFT K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S100z-zkmin-0:thread: tx1 holds the NFT of another k K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:valid-tx0 K=5 verify=59.82ms accepted lib=true
+ok  stark-fib-S128z-zkmin-0:valid-tx1 K=5 verify=60.79ms accepted lib=true
+ok  stark-fib-S128z-zkmin-0:valid-tx2 K=5 verify=53.81ms accepted lib=true
+ok  stark-fib-S128z-zkmin-0:tampered:trace root K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:tampered:OOD trace_next[0] K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:tampered:query PoW witness + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:tampered:input leaf trace q25[last] K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:tampered:FRI sibling value (last) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:tampered:degree_bits + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:manip:qry: L byte (row) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:manip:qry: path byte (input tree) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:manip:qry: input missing K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:manip:head: OOD byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:manip:code: byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:manip:graph: one input under a foreign locking K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:thread: tx1 NFT committed to another G K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:thread: tx0 without the thread NFT K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-fib-S128z-zkmin-0:thread: tx1 holds the NFT of another k K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  bch-groth16-bn254-sound-native:valid K=10 verify=35.22ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra0 K=11 verify=38.09ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra1 K=11 verify=37.96ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra2 K=11 verify=38.07ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:worst K=10 verify=35.45ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:invalid0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  bch-groth16-bls12381-sound-native:valid K=9 verify=27.09ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra0 K=9 verify=27.05ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra1 K=8 verify=25.18ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra2 K=9 verify=27ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra3 K=9 verify=27.64ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra4 K=9 verify=27.54ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra5 K=9 verify=27.59ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:worst K=8 verify=25.22ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:invalid0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false

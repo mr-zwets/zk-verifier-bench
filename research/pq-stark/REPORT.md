@@ -293,7 +293,7 @@ The constraint evaluation generated from each AIR's description is only 0.2-1.1%
   - The untracked `node_modules` link to Track 4's libauth 3.1.0-next.8 install.
   - `PQ_FIELD_SRC` for the field kernels.
   - Run node single-threaded under nice; the Rust prover with high PoW uses every core.
-- **No BCHN timing was measured.**
+- **BCHN node run (Track 8a, [node-check](../node-check/README.md)):** on stock BCHN 29.1.0 the today's-rules txs of mimc-S128-0, mimc-S100b-0, fib-S100z-zkmin-0 and fib-S128z-zkmin-0 are accepted, and the sampled rejection cases rejected, matching libauth. A default-policy node allows every tx (`testmempoolaccept`), including the chained ones. Verify time is 7–13 ms per tx. The 100 KB-input layouts can't run on BCHN today.
 
 ## 9. Sources
 
