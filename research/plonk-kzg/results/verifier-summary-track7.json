@@ -165,7 +165,7 @@
    "tests": {
     "valid": "5/5",
     "tampered": "76/76",
-    "manipulations": "33/33"
+    "manipulations": "34/34"
    }
   },
   "mul2/100 KB input (TXv5)": {
@@ -229,7 +229,7 @@
    "tests": {
     "valid": "5/5",
     "tampered": "76/76",
-    "manipulations": "33/33"
+    "manipulations": "34/34"
    }
   },
   "mul2/today (multi-input)": {
@@ -239,149 +239,149 @@
    "proofBytes": 768,
    "publicInputBytes": 64,
    "codeBlobs": [
-    9588,
-    3641
+    9068,
+    3997
    ],
    "redeemBytes": 154,
    "unlocking": [
-    82201,
-    81990,
-    82102,
-    81879,
-    82076
+    82721,
+    82473,
+    82643,
+    82438,
+    82636
    ],
    "txBytes": [
-    82651,
-    82440,
-    82552,
-    82329,
-    82526
+    83171,
+    82923,
+    83093,
+    82888,
+    83086
    ],
    "score": [
-    83001,
-    82790,
-    82902,
-    82679,
-    82876
+    83521,
+    83273,
+    83443,
+    83238,
+    83436
    ],
    "opCostStandard": [
-    64459274,
-    64250170,
-    64071695,
-    64036965,
-    64348646
+    63991460,
+    63834483,
+    63601768,
+    63540997,
+    63853427
    ],
    "opCostBchnAdjusted": [
-    64803604,
-    64594500,
-    64416025,
-    64381295,
-    64692976
+    64338590,
+    64181613,
+    63948898,
+    63888127,
+    64200557
    ],
-   "defineBodyBytesPerInput": 34433,
+   "defineBodyBytesPerInput": 34713,
    "perInput0": [
     {
      "role": "MJ",
-     "unlocking": 9748,
+     "unlocking": 9228,
      "fill": 0,
-     "opCost": 7726922,
-     "defBytes": 34433,
-     "opCostBchn": 7761355,
-     "budget": 7831200,
-     "bchnMarginPct": 0.892
+     "opCost": 7049747,
+     "defBytes": 34713,
+     "opCostBchn": 7084460,
+     "budget": 7415200,
+     "bchnMarginPct": 4.46
     },
     {
      "role": "ST",
      "unlocking": 8945,
      "fill": 0,
-     "opCost": 6441911,
-     "defBytes": 34433,
-     "opCostBchn": 6476344,
+     "opCost": 6446570,
+     "defBytes": 34713,
+     "opCostBchn": 6481283,
      "budget": 7188800,
-     "bchnMarginPct": 9.911
+     "bchnMarginPct": 9.842
     },
     {
      "role": "MJ",
-     "unlocking": 9858,
+     "unlocking": 8898,
      "fill": 0,
-     "opCost": 7865431,
-     "defBytes": 34433,
-     "opCostBchn": 7899864,
-     "budget": 7919200,
-     "bchnMarginPct": 0.244
+     "opCost": 6816029,
+     "defBytes": 34713,
+     "opCostBchn": 6850742,
+     "budget": 7151200,
+     "bchnMarginPct": 4.202
     },
     {
      "role": "MA",
-     "unlocking": 6965,
-     "fill": 815,
-     "opCost": 5518447,
-     "defBytes": 34433,
-     "opCostBchn": 5552880,
-     "budget": 5604800,
-     "bchnMarginPct": 0.926
+     "unlocking": 7527,
+     "fill": 478,
+     "opCost": 5966620,
+     "defBytes": 34713,
+     "opCostBchn": 6001333,
+     "budget": 6054400,
+     "bchnMarginPct": 0.877
     },
     {
      "role": "MA",
-     "unlocking": 6835,
-     "fill": 524,
-     "opCost": 5414792,
-     "defBytes": 34433,
-     "opCostBchn": 5449225,
-     "budget": 5500800,
-     "bchnMarginPct": 0.938
+     "unlocking": 7326,
+     "fill": 821,
+     "opCost": 5805323,
+     "defBytes": 34713,
+     "opCostBchn": 5840036,
+     "budget": 5893600,
+     "bchnMarginPct": 0.909
     },
     {
      "role": "MA",
-     "unlocking": 6847,
-     "fill": 795,
-     "opCost": 5424157,
-     "defBytes": 34433,
-     "opCostBchn": 5458590,
-     "budget": 5510400,
-     "bchnMarginPct": 0.94
+     "unlocking": 7360,
+     "fill": 563,
+     "opCost": 5833250,
+     "defBytes": 34713,
+     "opCostBchn": 5867963,
+     "budget": 5920800,
+     "bchnMarginPct": 0.892
     },
     {
      "role": "SI",
-     "unlocking": 8736,
+     "unlocking": 9092,
      "fill": 0,
-     "opCost": 6813583,
-     "defBytes": 34433,
-     "opCostBchn": 6848016,
-     "budget": 7021600,
-     "bchnMarginPct": 2.472
+     "opCost": 6814594,
+     "defBytes": 34713,
+     "opCostBchn": 6849307,
+     "budget": 7306400,
+     "bchnMarginPct": 6.256
     },
     {
      "role": "SI",
-     "unlocking": 8000,
-     "fill": 235,
-     "opCost": 6346429,
-     "defBytes": 34433,
-     "opCostBchn": 6380862,
-     "budget": 6432800,
-     "bchnMarginPct": 0.807
+     "unlocking": 8069,
+     "fill": 0,
+     "opCost": 6348081,
+     "defBytes": 34713,
+     "opCostBchn": 6382794,
+     "budget": 6488000,
+     "bchnMarginPct": 1.622
     },
     {
      "role": "SI",
-     "unlocking": 8126,
-     "fill": 247,
-     "opCost": 6447857,
-     "defBytes": 34433,
-     "opCostBchn": 6482290,
-     "budget": 6533600,
-     "bchnMarginPct": 0.785
+     "unlocking": 8130,
+     "fill": 251,
+     "opCost": 6449688,
+     "defBytes": 34713,
+     "opCostBchn": 6484401,
+     "budget": 6536800,
+     "bchnMarginPct": 0.802
     },
     {
      "role": "SI",
-     "unlocking": 8141,
-     "fill": 2053,
-     "opCost": 6459745,
-     "defBytes": 34433,
-     "opCostBchn": 6494178,
-     "budget": 6545600,
-     "bchnMarginPct": 0.786
+     "unlocking": 8146,
+     "fill": 2058,
+     "opCost": 6461558,
+     "defBytes": 34713,
+     "opCostBchn": 6496271,
+     "budget": 6549600,
+     "bchnMarginPct": 0.814
     }
    ],
-   "worstInputMarginPct": 0.23,
+   "worstInputMarginPct": 0.8,
    "nq": [
     225,
     258,
@@ -392,7 +392,68 @@
    "tests": {
     "valid": "5/5",
     "tampered": "76/76",
-    "manipulations": "36/36"
+    "manipulations": "40/40"
+   },
+   "digitStress": {
+    "ok": true,
+    "worstMJ": {
+     "i": 0,
+     "need": 8889,
+     "unfilled": 9228,
+     "headroom": 772
+    },
+    "msmInputs": [
+     {
+      "i": 0,
+      "role": "MJ",
+      "windows": "50..42",
+      "unfilled": 9228,
+      "need": 8889,
+      "fill": 0,
+      "unlocking": 9228,
+      "headroom": 772
+     },
+     {
+      "i": 2,
+      "role": "MJ",
+      "windows": "41..39",
+      "unfilled": 8898,
+      "need": 8528,
+      "fill": 0,
+      "unlocking": 8898,
+      "headroom": 1102
+     },
+     {
+      "i": 3,
+      "role": "MA",
+      "windows": "38..26",
+      "unfilled": 7143,
+      "need": 7556,
+      "fill": 477,
+      "unlocking": 7622,
+      "headroom": 2444
+     },
+     {
+      "i": 4,
+      "role": "MA",
+      "windows": "25..13",
+      "unfilled": 6536,
+      "need": 7300,
+      "fill": 828,
+      "unlocking": 7366,
+      "headroom": 2700
+     },
+     {
+      "i": 5,
+      "role": "MA",
+      "windows": "12..0",
+      "unfilled": 6827,
+      "need": 7339,
+      "fill": 576,
+      "unlocking": 7405,
+      "headroom": 2661
+     }
+    ]
    },
    "liveness": {
     "nqCap": 348,
@@ -402,7 +463,9 @@
     "honestMax": 294,
     "samples": 1000000,
     "samplesOverCap": 0,
-    "pOverCap": "< 3.0e-6 (0 of 1000000, 95%)"
+    "pOverCap": "< 3.0e-6 (0 of 1000000, 95%)",
+    "digitStressOk": true,
+    "worstMJHeadroom": 772
    }
   },
   "merkle16/bch-spec": {
@@ -466,7 +529,7 @@
    "tests": {
     "valid": "5/5",
     "tampered": "78/78",
-    "manipulations": "33/33"
+    "manipulations": "34/34"
    }
   },
   "merkle16/100 KB input (TXv5)": {
@@ -530,7 +593,7 @@
    "tests": {
     "valid": "5/5",
     "tampered": "78/78",
-    "manipulations": "33/33"
+    "manipulations": "34/34"
    }
   },
   "merkle16/today (multi-input)": {
@@ -540,149 +603,149 @@
    "proofBytes": 768,
    "publicInputBytes": 96,
    "codeBlobs": [
-    9702,
+    9301,
     3693
    ],
    "redeemBytes": 154,
    "unlocking": [
-    83906,
-    83983,
-    83788,
-    83960,
-    83924
+    84659,
+    84737,
+    84569,
+    84714,
+    84707
    ],
    "txBytes": [
-    84356,
-    84433,
-    84238,
-    84410,
-    84374
+    85109,
+    85187,
+    85019,
+    85164,
+    85157
    ],
    "score": [
-    84706,
-    84783,
-    84588,
-    84760,
-    84724
+    85459,
+    85537,
+    85369,
+    85514,
+    85507
    ],
    "opCostStandard": [
-    65850130,
-    65980502,
-    65660263,
-    65857031,
-    65832780
+    65384957,
+    65514815,
+    65167315,
+    65390727,
+    65339632
    ],
    "opCostBchnAdjusted": [
-    66210680,
-    66341052,
-    66020813,
-    66217581,
-    66193330
+    65748307,
+    65878165,
+    65530665,
+    65754077,
+    65702982
    ],
-   "defineBodyBytesPerInput": 36055,
+   "defineBodyBytesPerInput": 36335,
    "perInput0": [
     {
      "role": "MJ",
-     "unlocking": 9862,
+     "unlocking": 9461,
      "fill": 0,
-     "opCost": 7686398,
-     "defBytes": 36055,
-     "opCostBchn": 7722453,
-     "budget": 7922400,
-     "bchnMarginPct": 2.524
+     "opCost": 7060308,
+     "defBytes": 36335,
+     "opCostBchn": 7096643,
+     "budget": 7601600,
+     "bchnMarginPct": 6.643
     },
     {
      "role": "ST",
      "unlocking": 9075,
      "fill": 0,
-     "opCost": 6610791,
-     "defBytes": 36055,
-     "opCostBchn": 6646846,
+     "opCost": 6616319,
+     "defBytes": 36335,
+     "opCostBchn": 6652654,
      "budget": 7292800,
-     "bchnMarginPct": 8.857
+     "bchnMarginPct": 8.778
     },
     {
      "role": "MJ",
-     "unlocking": 9858,
+     "unlocking": 8898,
      "fill": 0,
-     "opCost": 7825406,
-     "defBytes": 36055,
-     "opCostBchn": 7861461,
-     "budget": 7919200,
-     "bchnMarginPct": 0.729
+     "opCost": 6726651,
+     "defBytes": 36335,
+     "opCostBchn": 6762986,
+     "budget": 7151200,
+     "bchnMarginPct": 5.429
     },
     {
      "role": "MA",
-     "unlocking": 6974,
-     "fill": 824,
-     "opCost": 5524576,
-     "defBytes": 36055,
-     "opCostBchn": 5560631,
-     "budget": 5612000,
-     "bchnMarginPct": 0.915
+     "unlocking": 7537,
+     "fill": 488,
+     "opCost": 5973189,
+     "defBytes": 36335,
+     "opCostBchn": 6009524,
+     "budget": 6062400,
+     "bchnMarginPct": 0.872
     },
     {
      "role": "MA",
-     "unlocking": 6737,
-     "fill": 556,
-     "opCost": 5334679,
-     "defBytes": 36055,
-     "opCostBchn": 5370734,
-     "budget": 5422400,
-     "bchnMarginPct": 0.953
+     "unlocking": 7227,
+     "fill": 852,
+     "opCost": 5724829,
+     "defBytes": 36335,
+     "opCostBchn": 5761164,
+     "budget": 5814400,
+     "bchnMarginPct": 0.916
     },
     {
      "role": "MA",
-     "unlocking": 6778,
-     "fill": 823,
-     "opCost": 5367186,
-     "defBytes": 36055,
-     "opCostBchn": 5403241,
-     "budget": 5455200,
-     "bchnMarginPct": 0.952
+     "unlocking": 7290,
+     "fill": 591,
+     "opCost": 5775467,
+     "defBytes": 36335,
+     "opCostBchn": 5811802,
+     "budget": 5864800,
+     "bchnMarginPct": 0.904
     },
     {
      "role": "SI",
      "unlocking": 9044,
      "fill": 0,
-     "opCost": 7219886,
-     "defBytes": 36055,
-     "opCostBchn": 7255941,
+     "opCost": 7223141,
+     "defBytes": 36335,
+     "opCostBchn": 7259476,
      "budget": 7268000,
-     "bchnMarginPct": 0.166
+     "bchnMarginPct": 0.117
     },
     {
      "role": "SI",
-     "unlocking": 8409,
+     "unlocking": 8951,
      "fill": 0,
-     "opCost": 6655834,
-     "defBytes": 36055,
-     "opCostBchn": 6691889,
-     "budget": 6760000,
-     "bchnMarginPct": 1.008
+     "opCost": 6657475,
+     "defBytes": 36335,
+     "opCostBchn": 6693810,
+     "budget": 7193600,
+     "bchnMarginPct": 6.948
     },
     {
      "role": "SI",
-     "unlocking": 8529,
-     "fill": 649,
-     "opCost": 6768023,
-     "defBytes": 36055,
-     "opCostBchn": 6804078,
-     "budget": 6856000,
-     "bchnMarginPct": 0.757
+     "unlocking": 8532,
+     "fill": 652,
+     "opCost": 6769132,
+     "defBytes": 36335,
+     "opCostBchn": 6805467,
+     "budget": 6858400,
+     "bchnMarginPct": 0.772
     },
     {
      "role": "SI",
-     "unlocking": 8640,
-     "fill": 2168,
-     "opCost": 6857351,
-     "defBytes": 36055,
-     "opCostBchn": 6893406,
-     "budget": 6944800,
-     "bchnMarginPct": 0.74
+     "unlocking": 8644,
+     "fill": 2172,
+     "opCost": 6858446,
+     "defBytes": 36335,
+     "opCostBchn": 6894781,
+     "budget": 6948000,
+     "bchnMarginPct": 0.766
     }
    ],
-   "worstInputMarginPct": 0.05,
+   "worstInputMarginPct": 0,
    "nq": [
     240,
     252,
@@ -693,7 +756,68 @@
    "tests": {
     "valid": "5/5",
     "tampered": "78/78",
-    "manipulations": "36/36"
+    "manipulations": "40/40"
+   },
+   "digitStress": {
+    "ok": true,
+    "worstMJ": {
+     "i": 0,
+     "need": 8903,
+     "unfilled": 9461,
+     "headroom": 539
+    },
+    "msmInputs": [
+     {
+      "i": 0,
+      "role": "MJ",
+      "windows": "50..42",
+      "unfilled": 9461,
+      "need": 8903,
+      "fill": 0,
+      "unlocking": 9461,
+      "headroom": 539
+     },
+     {
+      "i": 2,
+      "role": "MJ",
+      "windows": "41..39",
+      "unfilled": 8898,
+      "need": 8541,
+      "fill": 0,
+      "unlocking": 8898,
+      "headroom": 1102
+     },
+     {
+      "i": 3,
+      "role": "MA",
+      "windows": "38..26",
+      "unfilled": 7143,
+      "need": 7573,
+      "fill": 494,
+      "unlocking": 7639,
+      "headroom": 2427
+     },
+     {
+      "i": 4,
+      "role": "MA",
+      "windows": "25..13",
+      "unfilled": 6536,
+      "need": 7315,
+      "fill": 843,
+      "unlocking": 7381,
+      "headroom": 2685
+     },
+     {
+      "i": 5,
+      "role": "MA",
+      "windows": "12..0",
+      "unfilled": 6827,
+      "need": 7353,
+      "fill": 590,
+      "unlocking": 7419,
+      "headroom": 2647
+     }
+    ]
    },
    "liveness": {
     "nqCap": 384,
@@ -703,7 +827,9 @@
     "honestMax": 315,
     "samples": 1000000,
     "samplesOverCap": 0,
-    "pOverCap": "< 3.0e-6 (0 of 1000000, 95%)"
+    "pOverCap": "< 3.0e-6 (0 of 1000000, 95%)",
+    "digitStressOk": true,
+    "worstMJHeadroom": 539
    }
   },
   "range64/bch-spec": {
@@ -767,7 +893,7 @@
    "tests": {
     "valid": "5/5",
     "tampered": "86/86",
-    "manipulations": "34/34"
+    "manipulations": "35/35"
    }
   },
   "range64/100 KB input (TXv5)": {
@@ -831,7 +957,7 @@
    "tests": {
     "valid": "5/5",
     "tampered": "86/86",
-    "manipulations": "34/34"
+    "manipulations": "35/35"
    }
   },
   "range64/today (multi-input)": {
@@ -846,39 +972,39 @@
    ],
    "redeemBytes": 154,
    "unlocking": [
-    89162,
-    88920,
-    88943,
-    88879,
-    88820
+    88700,
+    88459,
+    88584,
+    88543,
+    88519
    ],
    "txBytes": [
-    89612,
-    89370,
-    89393,
-    89329,
-    89270
+    89150,
+    88909,
+    89034,
+    88993,
+    88969
    ],
    "score": [
-    89962,
-    89720,
-    89743,
-    89679,
-    89620
+    89500,
+    89259,
+    89384,
+    89343,
+    89319
    ],
    "opCostStandard": [
-    70157898,
-    69821436,
-    69889735,
-    69966708,
-    69808953
+    69784598,
+    69449601,
+    69546858,
+    69596873,
+    69467218
    ],
    "opCostBchnAdjusted": [
-    70538328,
-    70201866,
-    70270165,
-    70347138,
-    70189383
+    70165028,
+    69830031,
+    69927288,
+    69977303,
+    69847648
    ],
    "defineBodyBytesPerInput": 38043,
    "perInput0": [
@@ -886,61 +1012,61 @@
      "role": "MJ",
      "unlocking": 9588,
      "fill": 0,
-     "opCost": 7639376,
+     "opCost": 7633724,
      "defBytes": 38043,
-     "opCostBchn": 7677419,
+     "opCostBchn": 7671767,
      "budget": 7703200,
-     "bchnMarginPct": 0.335
+     "bchnMarginPct": 0.408
     },
     {
      "role": "ST",
      "unlocking": 9235,
      "fill": 0,
-     "opCost": 6850114,
+     "opCost": 6851576,
      "defBytes": 38043,
-     "opCostBchn": 6888157,
+     "opCostBchn": 6889619,
      "budget": 7420800,
-     "bchnMarginPct": 7.178
+     "bchnMarginPct": 7.158
     },
     {
      "role": "MJ",
-     "unlocking": 9846,
-     "fill": 946,
-     "opCost": 7819763,
+     "unlocking": 8898,
+     "fill": 0,
+     "opCost": 7068428,
      "defBytes": 38043,
-     "opCostBchn": 7857806,
-     "budget": 7909600,
-     "bchnMarginPct": 0.655
+     "opCostBchn": 7106471,
+     "budget": 7151200,
+     "bchnMarginPct": 0.625
     },
     {
      "role": "MA",
-     "unlocking": 8636,
-     "fill": 175,
-     "opCost": 6851989,
+     "unlocking": 9119,
+     "fill": 173,
+     "opCost": 7237916,
      "defBytes": 38043,
-     "opCostBchn": 6890032,
-     "budget": 6941600,
-     "bchnMarginPct": 0.743
+     "opCostBchn": 7275959,
+     "budget": 7328000,
+     "bchnMarginPct": 0.71
     },
     {
      "role": "MA",
      "unlocking": 7876,
      "fill": 951,
-     "opCost": 6243943,
+     "opCost": 6242079,
      "defBytes": 38043,
-     "opCostBchn": 6281986,
+     "opCostBchn": 6280122,
      "budget": 6333600,
-     "bchnMarginPct": 0.815
+     "bchnMarginPct": 0.844
     },
     {
      "role": "MA",
-     "unlocking": 7324,
-     "fill": 722,
-     "opCost": 5801971,
+     "unlocking": 7323,
+     "fill": 721,
+     "opCost": 5800109,
      "defBytes": 38043,
-     "opCostBchn": 5840014,
-     "budget": 5892000,
-     "bchnMarginPct": 0.882
+     "opCostBchn": 5838152,
+     "budget": 5891200,
+     "bchnMarginPct": 0.9
     },
     {
      "role": "SI",
@@ -956,34 +1082,34 @@
      "role": "SI",
      "unlocking": 9641,
      "fill": 0,
-     "opCost": 7583902,
+     "opCost": 7583910,
      "defBytes": 38043,
-     "opCostBchn": 7621945,
+     "opCostBchn": 7621953,
      "budget": 7745600,
      "bchnMarginPct": 1.596
     },
     {
      "role": "SI",
-     "unlocking": 8176,
-     "fill": 680,
-     "opCost": 6483573,
+     "unlocking": 8178,
+     "fill": 682,
+     "opCost": 6483585,
      "defBytes": 38043,
-     "opCostBchn": 6521616,
-     "budget": 6573600,
-     "bchnMarginPct": 0.791
+     "opCostBchn": 6521628,
+     "budget": 6575200,
+     "bchnMarginPct": 0.815
     },
     {
      "role": "SI",
-     "unlocking": 9119,
-     "fill": 1367,
-     "opCost": 7237968,
+     "unlocking": 9121,
+     "fill": 1369,
+     "opCost": 7237972,
      "defBytes": 38043,
-     "opCostBchn": 7276011,
-     "budget": 7328000,
-     "bchnMarginPct": 0.709
+     "opCostBchn": 7276015,
+     "budget": 7329600,
+     "bchnMarginPct": 0.731
     }
    ],
-   "worstInputMarginPct": 0.33,
+   "worstInputMarginPct": 0.41,
    "nq": [
     279,
     258,
@@ -994,7 +1120,68 @@
    "tests": {
     "valid": "5/5",
     "tampered": "86/86",
-    "manipulations": "38/38"
+    "manipulations": "41/41"
+   },
+   "digitStress": {
+    "ok": true,
+    "worstMJ": {
+     "i": 0,
+     "need": 9621,
+     "unfilled": 9588,
+     "headroom": 379
+    },
+    "msmInputs": [
+     {
+      "i": 0,
+      "role": "MJ",
+      "windows": "50..42",
+      "unfilled": 9588,
+      "need": 9621,
+      "fill": 97,
+      "unlocking": 9686,
+      "headroom": 379
+     },
+     {
+      "i": 2,
+      "role": "MJ",
+      "windows": "41..39",
+      "unfilled": 8898,
+      "need": 8847,
+      "fill": 0,
+      "unlocking": 8898,
+      "headroom": 1102
+     },
+     {
+      "i": 3,
+      "role": "MA",
+      "windows": "38..25",
+      "unfilled": 9043,
+      "need": 9153,
+      "fill": 174,
+      "unlocking": 9218,
+      "headroom": 847
+     },
+     {
+      "i": 4,
+      "role": "MA",
+      "windows": "24..12",
+      "unfilled": 6956,
+      "need": 7853,
+      "fill": 961,
+      "unlocking": 7919,
+      "headroom": 2147
+     },
+     {
+      "i": 5,
+      "role": "MA",
+      "windows": "11..0",
+      "unfilled": 6730,
+      "need": 7378,
+      "fill": 712,
+      "unlocking": 7444,
+      "headroom": 2622
+     }
+    ]
    },
    "liveness": {
     "nqCap": 420,
@@ -1004,7 +1191,9 @@
     "honestMax": 345,
     "samples": 1000000,
     "samplesOverCap": 0,
-    "pOverCap": "< 3.0e-6 (0 of 1000000, 95%)"
+    "pOverCap": "< 3.0e-6 (0 of 1000000, 95%)",
+    "digitStressOk": true,
+    "worstMJHeadroom": 379
    }
   },
   "merkle16rc/bch-spec": {
@@ -1068,7 +1257,7 @@
    "tests": {
     "valid": "5/5",
     "tampered": "91/91",
-    "manipulations": "34/34"
+    "manipulations": "35/35"
    }
   },
   "merkle16rc/100 KB input (TXv5)": {
@@ -1132,7 +1321,7 @@
    "tests": {
     "valid": "5/5",
     "tampered": "91/91",
-    "manipulations": "34/34"
+    "manipulations": "35/35"
    }
   },
   "merkle16rc/today (multi-input)": {
@@ -1142,149 +1331,149 @@
    "proofBytes": 864,
    "publicInputBytes": 96,
    "codeBlobs": [
-    9713,
-    4114
+    9027,
+    4115
    ],
-   "redeemBytes": 154,
+   "redeemBytes": 205,
    "unlocking": [
-    89458,
-    89357,
-    89068,
-    89512,
-    89379
+    88948,
+    88822,
+    88731,
+    89064,
+    89059
    ],
    "txBytes": [
-    89908,
-    89807,
-    89518,
-    89962,
-    89829
+    89398,
+    89272,
+    89181,
+    89514,
+    89509
    ],
    "score": [
-    90258,
-    90157,
-    89868,
-    90312,
-    90179
+    89748,
+    89622,
+    89531,
+    89864,
+    89859
    ],
    "opCostStandard": [
-    69977146,
-    69949284,
-    69624936,
-    70087730,
-    70061440
+    69861074,
+    69858548,
+    69595193,
+    69974396,
+    69950011
    ],
    "opCostBchnAdjusted": [
-    70363316,
-    70335454,
-    70011106,
-    70473900,
-    70447610
+    70247314,
+    70244788,
+    69981433,
+    70360636,
+    70336251
    ],
-   "defineBodyBytesPerInput": 38617,
+   "defineBodyBytesPerInput": 38624,
    "perInput0": [
     {
      "role": "MJ",
-     "unlocking": 9873,
-     "fill": 0,
-     "opCost": 7491012,
-     "defBytes": 38617,
-     "opCostBchn": 7529629,
-     "budget": 7931200,
-     "bchnMarginPct": 5.063
+     "unlocking": 9462,
+     "fill": 223,
+     "opCost": 7511005,
+     "defBytes": 38624,
+     "opCostBchn": 7549629,
+     "budget": 7602400,
+     "bchnMarginPct": 0.694
     },
     {
      "role": "ST",
-     "unlocking": 9300,
+     "unlocking": 9351,
      "fill": 0,
-     "opCost": 6927431,
-     "defBytes": 38617,
-     "opCostBchn": 6966048,
-     "budget": 7472800,
-     "bchnMarginPct": 6.781
+     "opCost": 6954215,
+     "defBytes": 38624,
+     "opCostBchn": 6992839,
+     "budget": 7513600,
+     "bchnMarginPct": 6.931
     },
     {
      "role": "MJ",
-     "unlocking": 9851,
-     "fill": 951,
-     "opCost": 7823567,
-     "defBytes": 38617,
-     "opCostBchn": 7862184,
-     "budget": 7913600,
-     "bchnMarginPct": 0.65
-    },
-    {
-     "role": "MA",
-     "unlocking": 8555,
-     "fill": 192,
-     "opCost": 6786333,
-     "defBytes": 38617,
-     "opCostBchn": 6824950,
-     "budget": 6876800,
-     "bchnMarginPct": 0.754
-    },
-    {
-     "role": "MA",
-     "unlocking": 7850,
-     "fill": 957,
-     "opCost": 6222204,
-     "defBytes": 38617,
-     "opCostBchn": 6260821,
-     "budget": 6312800,
-     "bchnMarginPct": 0.823
-    },
-    {
-     "role": "MA",
-     "unlocking": 7377,
-     "fill": 711,
-     "opCost": 5844037,
-     "defBytes": 38617,
-     "opCostBchn": 5882654,
-     "budget": 5934400,
-     "bchnMarginPct": 0.872
-    },
-    {
-     "role": "SI",
-     "unlocking": 9721,
+     "unlocking": 8949,
      "fill": 0,
-     "opCost": 7627261,
-     "defBytes": 38617,
-     "opCostBchn": 7665878,
-     "budget": 7809600,
-     "bchnMarginPct": 1.84
+     "opCost": 7098070,
+     "defBytes": 38624,
+     "opCostBchn": 7136694,
+     "budget": 7192000,
+     "bchnMarginPct": 0.769
+    },
+    {
+     "role": "MA",
+     "unlocking": 9072,
+     "fill": 172,
+     "opCost": 7199591,
+     "defBytes": 38624,
+     "opCostBchn": 7238215,
+     "budget": 7290400,
+     "bchnMarginPct": 0.716
+    },
+    {
+     "role": "MA",
+     "unlocking": 7880,
+     "fill": 247,
+     "opCost": 6245638,
+     "defBytes": 38624,
+     "opCostBchn": 6284262,
+     "budget": 6336800,
+     "bchnMarginPct": 0.829
+    },
+    {
+     "role": "MA",
+     "unlocking": 7409,
+     "fill": 692,
+     "opCost": 5868046,
+     "defBytes": 38624,
+     "opCostBchn": 5906670,
+     "budget": 5960000,
+     "bchnMarginPct": 0.895
     },
     {
      "role": "SI",
-     "unlocking": 9643,
+     "unlocking": 9773,
      "fill": 0,
-     "opCost": 7539659,
-     "defBytes": 38617,
-     "opCostBchn": 7578276,
-     "budget": 7747200,
-     "bchnMarginPct": 2.18
+     "opCost": 7652649,
+     "defBytes": 38624,
+     "opCostBchn": 7691273,
+     "budget": 7851200,
+     "bchnMarginPct": 2.037
     },
     {
      "role": "SI",
-     "unlocking": 8175,
-     "fill": 679,
-     "opCost": 6482752,
-     "defBytes": 38617,
-     "opCostBchn": 6521369,
-     "budget": 6572800,
-     "bchnMarginPct": 0.782
+     "unlocking": 9696,
+     "fill": 0,
+     "opCost": 7565180,
+     "defBytes": 38624,
+     "opCostBchn": 7603804,
+     "budget": 7789600,
+     "bchnMarginPct": 2.385
     },
     {
      "role": "SI",
-     "unlocking": 9113,
-     "fill": 1233,
-     "opCost": 7232890,
-     "defBytes": 38617,
-     "opCostBchn": 7271507,
-     "budget": 7323200,
-     "bchnMarginPct": 0.706
+     "unlocking": 8209,
+     "fill": 662,
+     "opCost": 6508237,
+     "defBytes": 38624,
+     "opCostBchn": 6546861,
+     "budget": 6600000,
+     "bchnMarginPct": 0.805
+    },
+    {
+     "role": "SI",
+     "unlocking": 9147,
+     "fill": 1216,
+     "opCost": 7258443,
+     "defBytes": 38624,
+     "opCostBchn": 7297067,
+     "budget": 7350400,
+     "bchnMarginPct": 0.726
     }
    ],
-   "worstInputMarginPct": 0.65,
+   "worstInputMarginPct": 0.69,
    "nq": [
     282,
     273,
@@ -1295,7 +1484,68 @@
    "tests": {
     "valid": "5/5",
     "tampered": "91/91",
-    "manipulations": "38/38"
+    "manipulations": "42/42"
+   },
+   "digitStress": {
+    "ok": true,
+    "worstMJ": {
+     "i": 0,
+     "need": 9661,
+     "unfilled": 9238,
+     "headroom": 339
+    },
+    "msmInputs": [
+     {
+      "i": 0,
+      "role": "MJ",
+      "windows": "50..42",
+      "unfilled": 9238,
+      "need": 9661,
+      "fill": 487,
+      "unlocking": 9727,
+      "headroom": 339
+     },
+     {
+      "i": 2,
+      "role": "MJ",
+      "windows": "41..39",
+      "unfilled": 8949,
+      "need": 8888,
+      "fill": 0,
+      "unlocking": 8949,
+      "headroom": 1051
+     },
+     {
+      "i": 3,
+      "role": "MA",
+      "windows": "38..25",
+      "unfilled": 9094,
+      "need": 9190,
+      "fill": 160,
+      "unlocking": 9255,
+      "headroom": 810
+     },
+     {
+      "i": 4,
+      "role": "MA",
+      "windows": "24..12",
+      "unfilled": 7697,
+      "need": 7891,
+      "fill": 258,
+      "unlocking": 7957,
+      "headroom": 2109
+     },
+     {
+      "i": 5,
+      "role": "MA",
+      "windows": "11..0",
+      "unfilled": 6781,
+      "need": 7418,
+      "fill": 701,
+      "unlocking": 7484,
+      "headroom": 2582
+     }
+    ]
    },
    "liveness": {
     "nqCap": 420,
@@ -1305,7 +1555,9 @@
     "honestMax": 351,
     "samples": 1000000,
     "samplesOverCap": 0,
-    "pOverCap": "< 3.0e-6 (0 of 1000000, 95%)"
+    "pOverCap": "< 3.0e-6 (0 of 1000000, 95%)",
+    "digitStressOk": true,
+    "worstMJHeadroom": 339
    }
   }
  },
