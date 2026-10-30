@@ -1,0 +1,135 @@
+Track 8 S8: lambda for every (shape, parameter set) the on-chain scripts were tested on, rebuilt from VK data in
+the committed vectors. JB, powers-batching adaptation (unpublished); digest term 128 (strict 127.21).
+vectors read: 45; byte-model view of the VK equals the exported shape: 45/45
+
+PTZ: mul_lookups(reps=2, local=true, global=true) [n 2^5, w 7, pre 0, C 12, deg 3, lookups 3 x6 W2] + fib_lookups(log_n=5, global=true) [n 2^5, w 2, pre 1, C 9, deg 2, lookups 1 x1 W2]
+   vectors 1: P3/both_lookups_zk-PTZ.json
+   t by height {8: 186}; schedule [1, 1, 1, 1]; checks: strict True, full-arity True, hiding True; multiplicity sum w*h = 224 < p
+   TEST PARAMETERS (Q = 2, log_blowup 2): not a security set, used only for coverage; lambda not computed
+PT: fib(log_n=4) [n 2^4, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^4, w 7, pre 0, C 6, deg 2]
+   vectors 1: P3/mixed_preprocessed-PT.json
+   t by height {6: 26}; schedule [1, 1]; checks: strict True, full-arity True, hiding True
+   TEST PARAMETERS (Q = 2, log_blowup 2): not a security set, used only for coverage; lambda not computed
+PTZ: periodic [n 2^6, w 2, pre 0, C 2, deg 1]
+   vectors 1: P3/periodic_air_zk-PTZ.json
+   t by height {9: 33}; schedule [1, 1, 1, 1, 1]; checks: strict True, full-arity True, hiding True
+   TEST PARAMETERS (Q = 2, log_blowup 2): not a security set, used only for coverage; lambda not computed
+PT: fib(log_n=5) [n 2^5, w 2, pre 1, C 5, deg 2]
+   vectors 1: P3/single_instance-PT.json
+   t by height {7: 9}; schedule [1, 1, 1]; checks: strict True, full-arity True, hiding True
+   TEST PARAMETERS (Q = 2, log_blowup 2): not a security set, used only for coverage; lambda not computed
+PT: fib(log_n=4) [n 2^4, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^3, w 7, pre 0, C 6, deg 2] + fib(log_n=3) [n 2^3, w 2, pre 1, C 5, deg 2]
+   vectors 1: P3/three_instances_mixed_sizes-PT.json
+   t by height {6: 9, 5: 26}; schedule [1, 1]; checks: strict True, full-arity True, hiding True
+   TEST PARAMETERS (Q = 2, log_blowup 2): not a security set, used only for coverage; lambda not computed
+Z128: m1(depth=30, log_n=10) [n 2^10, w 17, pre 0, C 53, deg 4]
+   vectors 6: S2/m1-0-Z128.json, S2/m1-1073741823-Z128.json, S2/m1-723295799-Z128.json, S4/m1-s4-0-Z128.json ...
+   t by height {20: 94}; schedule [3]; checks: strict True, full-arity True, hiding True
+   lambda_IOP 128.06 (binding fold1, m=5); lambda 128; rounds: ali 174.94, deep 155.17, batch 136.33, fold1 128.06, query 128.70
+Z128+cap=5: m1(depth=30, log_n=10) [n 2^10, w 17, pre 0, C 53, deg 4]
+   vectors 6: S2/m1-0-Z128_cap5.json, S2/m1-1073741823-Z128_cap5.json, S2/m1-723295799-Z128_cap5.json, S7/m1-s7-0-Z128_cap5.json ...
+   t by height {20: 94}; schedule [3]; checks: strict True, full-arity True, hiding True
+   lambda_IOP 128.06 (binding fold1, m=5); lambda 128; rounds: ali 174.94, deep 155.17, batch 136.33, fold1 128.06, query 128.70
+Z128g+cpow=3+lpow=8: m2.t_hash(log_n=10) [n 2^10, w 24, pre 1, C 44, deg 4, lookups 1 x1 W13] + m2.t_ctl(log_n=7) [n 2^7, w 13, pre 5, C 35, deg 2, lookups 1 x1 W13]
+   vectors 5: S2/m2-0-Z128g_cpow3_lpow8.json, S2/m2-1073741823-Z128g_cpow3_lpow8.json, S2/m2-723295799-Z128g_cpow3_lpow8.json, S5/m2-s5-0-Z128g_cpow3_lpow8.json ...
+   t by height {20: 127, 17: 85}; schedule [3, 3]; checks: strict True, full-arity True, hiding True; multiplicity sum w*h = 1152 < p
+   lambda_IOP 128.7 (binding query, m=5); lambda 128; rounds: logup 174.54, ali 174.34, deep 155.07, batch 135.15, fold1 128.87, fold2 135.06, query 128.70
+Z128: mul_lookups(reps=2, local=true, global=true) [n 2^10, w 7, pre 0, C 12, deg 3, lookups 3 x6 W2] + fib_lookups(log_n=10, global=true) [n 2^10, w 2, pre 1, C 9, deg 2, lookups 1 x1 W2]
+   vectors 1: Z128/both_lookups_zk-Z128-n1024.json
+   t by height {20: 164}; schedule [3]; checks: strict True, full-arity True, hiding True; multiplicity sum w*h = 7168 < p
+   lambda_IOP 128.06 (binding fold1, m=5); lambda 128; rounds: logup 165.86, ali 176.28, deep 154.53, batch 135.52, fold1 128.06, query 128.70
+Z128: mul_lookups(reps=2, local=true, global=true) [n 2^8, w 7, pre 0, C 12, deg 3, lookups 3 x6 W2] + fib_lookups(log_n=8, global=true) [n 2^8, w 2, pre 1, C 9, deg 2, lookups 1 x1 W2]
+   vectors 1: Z128/both_lookups_zk-Z128.json
+   t by height {18: 164}; schedule [1]; checks: strict True, full-arity False, hiding True; multiplicity sum w*h = 1792 < p
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: logup 167.57, ali 175.99, deep 155.95, batch 137.83, fold1 129.18, query 129.23
+Z128+cap=5: mul_lookups(reps=2, local=true, global=true) [n 2^8, w 7, pre 0, C 12, deg 3, lookups 3 x6 W2] + fib_lookups(log_n=8, global=true) [n 2^8, w 2, pre 1, C 9, deg 2, lookups 1 x1 W2]
+   vectors 1: Z128/both_lookups_zk-Z128_cap5.json
+   t by height {18: 164}; schedule [1]; checks: strict True, full-arity False, hiding True; multiplicity sum w*h = 1792 < p
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: logup 167.57, ali 175.99, deep 155.95, batch 137.83, fold1 129.18, query 129.23
+Z128+zk=0: mul_lookups(reps=2, local=true, global=true) [n 2^9, w 7, pre 0, C 12, deg 3, lookups 3 x6 W2] + fib_lookups(log_n=9, global=true) [n 2^9, w 2, pre 1, C 9, deg 2, lookups 1 x1 W2]
+   vectors 1: Z128/both_lookups_zk-Z128_zk0.json
+   t by height {18: 65}; schedule [1]; checks: strict True, full-arity False, hiding True; multiplicity sum w*h = 3584 < p
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: logup 166.57, ali 175.99, deep 156.95, batch 139.18, fold1 129.18, query 129.23
+Z128g: mul_lookups(reps=2, local=true, global=true) [n 2^6, w 7, pre 0, C 12, deg 3, lookups 3 x6 W2] + fib_lookups(log_n=6, global=true) [n 2^6, w 2, pre 1, C 9, deg 2, lookups 1 x1 W2]
+   vectors 1: Z128/both_lookups_zk-Z128g.json
+   t by height {16: 164}; schedule [2]; checks: strict True, full-arity False, hiding True; multiplicity sum w*h = 448 < p
+   lambda_IOP 129.9 (binding query, m=8); lambda 128; rounds: logup 169.00, ali 175.42, deep 156.81, batch 139.12, fold1 130.89, query 129.90
+Z128: fib(log_n=8) [n 2^8, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^8, w 7, pre 0, C 6, deg 2]
+   vectors 1: Z128/mixed_preprocessed-Z128.json
+   t by height {18: 92}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 176.92, deep 156.44, batch 138.67, fold1 129.18, query 129.23
+Z128+cap=5: fib(log_n=8) [n 2^8, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^8, w 7, pre 0, C 6, deg 2]
+   vectors 1: Z128/mixed_preprocessed-Z128_cap5.json
+   t by height {18: 92}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 176.92, deep 156.44, batch 138.67, fold1 129.18, query 129.23
+Z128+zk=0: fib(log_n=9) [n 2^9, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^9, w 7, pre 0, C 6, deg 2]
+   vectors 1: Z128/mixed_preprocessed-Z128_zk0.json
+   t by height {18: 26}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 176.92, deep 157.18, batch 140.54, fold1 129.18, query 129.23
+Z128g: fib(log_n=6) [n 2^6, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^6, w 7, pre 0, C 6, deg 2]
+   vectors 1: Z128/mixed_preprocessed-Z128g.json
+   t by height {16: 92}; schedule [2]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.9 (binding query, m=8); lambda 128; rounds: ali 176.35, deep 157.29, batch 139.96, fold1 130.89, query 129.90
+Z128: periodic [n 2^8, w 2, pre 0, C 2, deg 1]
+   vectors 1: Z128/periodic_air_zk-Z128.json
+   t by height {18: 28}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 179.38, deep 158.18, batch 140.43, fold1 129.18, query 129.23
+Z128+cap=5: periodic [n 2^8, w 2, pre 0, C 2, deg 1]
+   vectors 1: Z128/periodic_air_zk-Z128_cap5.json
+   t by height {18: 28}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 179.38, deep 158.18, batch 140.43, fold1 129.18, query 129.23
+Z128+zk=0: periodic [n 2^9, w 2, pre 0, C 2, deg 1]
+   vectors 1: Z128/periodic_air_zk-Z128_zk0.json
+   t by height {18: 7}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 179.38, deep 158.76, batch 142.60, fold1 129.18, query 129.23
+Z128g: periodic [n 2^6, w 2, pre 0, C 2, deg 1]
+   vectors 1: Z128/periodic_air_zk-Z128g.json
+   t by height {16: 28}; schedule [2]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.9 (binding query, m=8); lambda 128; rounds: ali 178.81, deep 159.03, batch 141.72, fold1 130.89, query 129.90
+Z128: fib(log_n=10) [n 2^10, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/single_instance-Z128-n1024.json
+   t by height {20: 42}; schedule [3]; checks: strict True, full-arity True, hiding True
+   lambda_IOP 128.06 (binding fold1, m=5); lambda 128; rounds: ali 178.35, deep 156.02, batch 137.51, fold1 128.06, query 128.70
+Z128: fib(log_n=8) [n 2^8, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/single_instance-Z128.json
+   t by height {18: 42}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 178.06, deep 157.44, batch 139.82, fold1 129.18, query 129.23
+Z128+cap=5: fib(log_n=8) [n 2^8, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/single_instance-Z128_cap5.json
+   t by height {18: 42}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 178.06, deep 157.44, batch 139.82, fold1 129.18, query 129.23
+Z128+zk=0: fib(log_n=9) [n 2^9, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/single_instance-Z128_zk0.json
+   t by height {18: 9}; schedule [1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.18 (binding fold1, m=6); lambda 128; rounds: ali 178.06, deep 158.18, batch 142.18, fold1 129.18, query 129.23
+Z128g: fib(log_n=6) [n 2^6, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/single_instance-Z128g.json
+   t by height {16: 42}; schedule [2]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.9 (binding query, m=8); lambda 128; rounds: ali 177.49, deep 158.29, batch 141.12, fold1 130.89, query 129.90
+Z128: fib(log_n=9) [n 2^9, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^8, w 7, pre 0, C 6, deg 2] + fib(log_n=8) [n 2^8, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/three_instances_mixed_sizes-Z128.json
+   t by height {19: 42, 18: 92}; schedule [1, 1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 127.92 (binding query, m=4); lambda 127.92; rounds: ali 176.98, deep 156.64, batch 139.85, fold1 129.90, fold2 132.90, query 127.92
+Z128+cap=5: fib(log_n=9) [n 2^9, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^8, w 7, pre 0, C 6, deg 2] + fib(log_n=8) [n 2^8, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/three_instances_mixed_sizes-Z128_cap5.json
+   t by height {19: 42, 18: 92}; schedule [1, 1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 127.92 (binding query, m=4); lambda 127.92; rounds: ali 176.98, deep 156.64, batch 139.85, fold1 129.90, fold2 132.90, query 127.92
+Z128+zk=0: fib(log_n=10) [n 2^10, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^9, w 7, pre 0, C 6, deg 2] + fib(log_n=9) [n 2^9, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/three_instances_mixed_sizes-Z128_zk0.json
+   t by height {19: 9, 18: 26}; schedule [1, 1]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 127.92 (binding query, m=4); lambda 127.92; rounds: ali 176.98, deep 157.38, batch 141.85, fold1 129.90, fold2 132.90, query 127.92
+Z128g: fib(log_n=10) [n 2^10, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^9, w 7, pre 0, C 6, deg 2] + fib(log_n=9) [n 2^9, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/three_instances_mixed_sizes-Z128g-n1024.json
+   t by height {20: 42, 19: 92}; schedule [1, 3, 2]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 127.9 (binding fold1, m=4); lambda 127.9; rounds: ali 176.99, deep 155.66, batch 137.85, fold1 127.90, fold2 132.09, fold3 137.31, query 127.92
+Z128g: fib(log_n=7) [n 2^7, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^6, w 7, pre 0, C 6, deg 2] + fib(log_n=6) [n 2^6, w 2, pre 1, C 5, deg 2]
+   vectors 1: Z128/three_instances_mixed_sizes-Z128g.json
+   t by height {17: 42, 16: 92}; schedule [1, 2]; checks: strict True, full-arity False, hiding True
+   lambda_IOP 129.23 (binding query, m=6); lambda 128; rounds: ali 176.30, deep 157.29, batch 140.14, fold1 130.18, fold2 133.60, query 129.23
+
+M1: S0 tables vs as-built DAG/shape: identical
+M2: S0 tables vs as-built DAG/shape: identical
+
+Dependence on the unpublished powers-batching adaptation (Track 5 SOUNDNESS sec. 2.1) and its curve extensions:
+  M1 / Z128: batch round 136.33 (margin +8.33 bits over 128; the (t_h - 1) powers factor costs -6.54 bits against independent challenges, 142.87); roll-in rounds none
+  M2 / Z128-g cpow 3: batch round 135.15 (margin +7.15 bits over 128; the (t_h - 1) powers factor costs -6.72 bits against independent challenges, 141.87); roll-in rounds ['fold1']; fold1 128.87 (margin +0.87)

@@ -417,5 +417,183 @@ def main():
         json.dump(js, fh, indent=1, default=str)
 
 
+# ============================================================== S8: as-built shapes (read from the committed vectors)
+# `python3 params8.py --asbuilt DIR...` reads every p3b-v1 vector JSON under the given directories (the vectors the
+# on-chain scripts were tested on), rebuilds Table / FriSet from VK data only (shape, dag, set), checks that the byte
+# model's commitment rounds, chunk counts, fold schedule and ladders equal the exported shape, compares M1 / M2 with the
+# hand-entered tables above, and computes lambda per distinct (shape, set). Writes asbuilt8-output.{txt,json}.
+DEG0 = {'public', 'const', 'ext_const', 'challenge', 'perm_value', 'is_transition'}
+DEG1 = {'main', 'pre', 'perm', 'periodic', 'is_first_row', 'is_last_row'}
+
+
+def dag_degree(dag):
+    """Constraint degree from the exported DAG, in units of n - 1: columns, periodic columns and the first/last-row
+    selectors count 1, is_transition 0 (polynomial degree 1). Periodic columns are charged 1 although Plonky3 charges
+    (n - n/P)/(n - 1) < 1, so this is >= Plonky3's degree (conservative for the DEEP numerator)."""
+    d = []
+    for nd in dag['nodes']:
+        op = nd['op']
+        if op in DEG0:
+            d.append(0)
+        elif op in DEG1:
+            d.append(1)
+        elif op in ('add', 'sub'):
+            d.append(max(d[nd['a']], d[nd['b']]))
+        elif op == 'mul':
+            d.append(d[nd['a']] + d[nd['b']])
+        elif op == 'neg':
+            d.append(d[nd['a']])
+        else:
+            raise ValueError('DAG op ' + op)
+    return max(d[c['node']] for c in dag['constraints'])
+
+
+def tables_from_vector(v):
+    sh = v['shape']
+    out = []
+    for I, dag in zip(sh['instances'], v['dag']):
+        lk = dag.get('lookups') or []
+        out.append(b8.Table(I['label'], I['log_n'], I['width'], main_next=I['opens_next'],
+                            pre_width=I['preprocessed_width'], pre_next=I['preprocessed_next'],
+                            num_constraints=len(dag['constraints']), max_deg=dag_degree(dag),
+                            num_lookups=I['num_lookups'],
+                            interactions_per_row=sum(len(l['elements']) for l in lk),
+                            bus_width=max([len(e) for l in lk for e in l['elements']] or [0]),
+                            public_values=I['num_public_values'], periodic=I['num_periodic']))
+    return out
+
+
+def set_from_vector(v):
+    s = v['set']
+    return b8.FriSet(s['name'], D=s['ext'], log_blowup=s['log_blowup'], max_log_arity=s['max_log_arity'],
+                     log_final_poly_len=s['log_final_poly_len'], Q=s['num_queries'], query_pow=s['query_pow_bits'],
+                     commit_pow=s['commit_pow_bits'], batch_pow=s['batch_pow_bits'], ood_pow=s['ood_pow_bits'],
+                     lookup_pow=s['lookup_pow_bits'], zk=bool(s['zk']), rc=s['num_random_codewords'] if s['zk'] else 0,
+                     salt=s['salt'] if s['zk'] else 0, cap=s['cap_height'], digest=s['digest'])
+
+
+def shape_agrees(v, tables, s):
+    """The byte model's view of the VK equals the exported shape (rounds, widths, heights, points, chunks, schedule)."""
+    sh = v['shape']
+    errs = []
+    for t, I in zip(tables, sh['instances']):
+        if b8.num_chunks(t, s.zk) != I['num_chunks']:
+            errs.append(f"{t.name}: chunks model {b8.num_chunks(t, s.zk)} != shape {I['num_chunks']} (DAG degree {t.max_deg})")
+        if b8.lde_log_height(t, s) != I['log_lde']:
+            errs.append(f'{t.name}: log_lde')
+    g = b8.fri_geometry(tables, s)
+    if g['schedule'] != sh['log_arities']:
+        errs.append(f"schedule {g['schedule']} != {sh['log_arities']}")
+    names = {'random': 'random', 'main': 'trace', 'quotient': 'quotient', 'pre': 'preprocessed', 'perm': 'permutation'}
+    model = [(names[r], sorted((m.log_h, m.width, m.points) for m in mats)) for r, _, mats in b8.commitment_rounds(tables, s)]
+    real = [(r['name'], sorted((m['log_height'], m['width'], m['points']) for m in r['matrices'])) for r in sh['rounds']]
+    if sorted(model) != sorted(real):
+        errs.append(f'commitment rounds differ: model {model} shape {real}')
+    th = {}
+    for r in sh['rounds']:
+        for m in r['matrices']:
+            th[m['log_height']] = th.get(m['log_height'], 0) + m['points'] * m['width']
+    if th != b8.t_by_height(tables, s):
+        errs.append(f't_by_height model {b8.t_by_height(tables, s)} shape {th}')
+    return errs
+
+
+def asbuilt(dirs):
+    lines, js = [], dict(vectors=[], groups={}, hand_tables={})
+
+    def P(x=''):
+        lines.append(x)
+        print(x)
+
+    files = []
+    for d in dirs:
+        for root, _, fs in os.walk(d):
+            files += [os.path.join(root, f) for f in sorted(fs) if f.endswith('.json') and 'report' not in root]
+    groups = {}
+    for f in sorted(files):
+        try:
+            v = json.load(open(f))
+        except Exception:
+            continue
+        if v.get('format') != 'p3b-v1' or 'shape' not in v:
+            continue
+        tables, s = tables_from_vector(v), set_from_vector(v)
+        errs = shape_agrees(v, tables, s)
+        key = json.dumps([[asdict(t) | {'name': ''} for t in tables], asdict(s)], sort_keys=True)
+        rel = os.path.relpath(f, os.path.commonpath(dirs) if len(dirs) > 1 else dirs[0])
+        js['vectors'].append(dict(file=rel, shape_agrees=not errs, errors=errs))
+        g = groups.setdefault(key, dict(files=[], tables=tables, set=s, labels=[t.name for t in tables]))
+        g['files'].append(rel)
+    P('Track 8 S8: lambda for every (shape, parameter set) the on-chain scripts were tested on, rebuilt from VK data in')
+    P('the committed vectors. JB, powers-batching adaptation (unpublished); digest term 128 (strict 127.21).')
+    P(f"vectors read: {len(js['vectors'])}; byte-model view of the VK equals the exported shape: "
+      f"{sum(x['shape_agrees'] for x in js['vectors'])}/{len(js['vectors'])}")
+    for x in js['vectors']:
+        if not x['shape_agrees']:
+            P(f"  MISMATCH {x['file']}: {x['errors']}")
+    P()
+    for key, g in groups.items():
+        tables, s = g['tables'], g['set']
+        ck = b8.checks(tables, s)
+        mult = sum(t.interactions_per_row * 2 ** t.log_n for t in tables if t.num_lookups)
+        sec = s.Q >= 20
+        r = soundness(tables, s) if sec else None
+        desc = ' + '.join(f'{t.name} [n 2^{t.log_n}, w {t.width}, pre {t.pre_width}, C {t.num_constraints}, deg {t.max_deg}'
+                          + (f', lookups {t.num_lookups} x{t.interactions_per_row} W{t.bus_width}' if t.num_lookups else '') + ']'
+                          for t in tables)
+        P(f'{s.name}: {desc}')
+        P(f"   vectors {len(g['files'])}: {', '.join(g['files'][:4])}{' ...' if len(g['files']) > 4 else ''}")
+        P(f"   t by height {b8.t_by_height(tables, s)}; schedule {b8.fri_geometry(tables, s)['schedule']}; checks: strict "
+          f"{ck['strict_height']['ok']}, full-arity {ck['arity_grid']['ok']}, hiding {ck['hiding_budget']['ok']}"
+          + (f'; multiplicity sum w*h = {mult} < p' if mult else ''))
+        if sec:
+            P(f"   lambda_IOP {r['lam_iop']} (binding {r['binding']}, m={r['m']}); lambda {r['lam']}; rounds: {fmt(r['rounds'])}")
+        else:
+            P(f"   TEST PARAMETERS (Q = {s.Q}, log_blowup {s.log_blowup}): not a security set, used only for coverage; lambda not computed")
+        js['groups'][g['files'][0]] = dict(files=g['files'], set=asdict(s), tables=[asdict(t) for t in tables],
+                                           checks_ok=ck['ok'], soundness=r, security_set=sec)
+    # hand-entered M1 / M2 (S0) against the as-built vectors
+    P()
+    for nm, hand, pat in (('M1', b8.M1, 'm1-'), ('M2', b8.M2, 'm2-')):
+        built = next((g for g in groups.values() if any(os.path.basename(f).startswith(pat) for f in g['files'])), None)
+        if not built:
+            continue
+        diffs = []
+        for a, b in zip(hand, built['tables']):
+            for fld in ('log_n', 'width', 'main_next', 'pre_width', 'pre_next', 'num_constraints', 'max_deg', 'num_lookups',
+                        'interactions_per_row', 'bus_width', 'public_values', 'periodic'):
+                if getattr(a, fld) != getattr(b, fld):
+                    diffs.append(f'{a.name}.{fld}: S0 {getattr(a, fld)} built {getattr(b, fld)}')
+        P(f"{nm}: S0 tables vs as-built DAG/shape: {'identical' if not diffs else diffs}")
+        js['hand_tables'][nm] = diffs
+    # margins: how much the powers-batching adaptation (and the roll-in curve charge) could be off before 128 is lost
+    P()
+    P('Dependence on the unpublished powers-batching adaptation (Track 5 SOUNDNESS sec. 2.1) and its curve extensions:')
+    js['dependence'] = {}
+    for nm, tables, s in (('M1 / Z128', b8.M1, b8.Z128), ('M2 / Z128-g cpow 3', b8.M2, replace(b8.Z128g, commit_pow=3))):
+        r = soundness(tables, s)
+        rr = r['rounds']
+        dep = {k: round(rr[k] - 128, 2) for k in rr if k == 'batch' or k.startswith('fold')}
+        g = b8.fri_geometry(tables, s)
+        roll = [f'fold{i + 1}' for i, x in enumerate(g['rounds']) if x['rollin']]
+        # the same rounds with independent batching challenges (published ADK Thm 2: no (t_h - 1) factor)
+        rho = 2.0 ** -s.log_blowup
+        th = b8.t_by_height(tables, s)
+        top = max(th)
+        a0, b1 = p5.A0(r['m'], rho, 2 ** top, log_q(s.D)), p5.B1(r['m'], rho, 2 ** top, log_q(s.D))
+        indep = -lg(len(th) * (2 ** a0 + 2 ** b1)) + s.batch_pow
+        P(f"  {nm}: batch round {rr['batch']} (margin {dep['batch']:+.2f} bits over 128; the (t_h - 1) powers factor costs "
+          f"{rr['batch'] - indep:+.2f} bits against independent challenges, {indep:.2f}); roll-in rounds {roll or 'none'}"
+          + (''.join(f"; {k} {rr[k]} (margin {dep[k]:+.2f})" for k in roll)))
+        js['dependence'][nm] = dict(rounds=rr, margins=dep, rollin_rounds=roll, batch_independent=round(indep, 2))
+    with open(os.path.join(HERE, 'asbuilt8-output.txt'), 'w') as fh:
+        fh.write('\n'.join(lines) + '\n')
+    with open(os.path.join(HERE, 'asbuilt8-output.json'), 'w') as fh:
+        json.dump(js, fh, indent=1, default=str)
+
+
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) > 2 and sys.argv[1] == '--asbuilt':
+        asbuilt(sys.argv[2:])
+    else:
+        main()
