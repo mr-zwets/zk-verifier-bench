@@ -1,0 +1,1249 @@
+{
+ "consistency": {
+  "bytes8": {
+   "S128": {
+    "file": "mimc-S128-0.json",
+    "measured": 78393,
+    "model": 78569,
+    "dev_pct": 0.225,
+    "exact_mismatch": {},
+    "sib_model": 51376,
+    "sib_meas": 51200
+   },
+   "S128z": {
+    "file": "fib-S128z-zkmin-0.json",
+    "measured": 112501,
+    "model": 113533,
+    "dev_pct": 0.917,
+    "exact_mismatch": {},
+    "sib_model": 82056,
+    "sib_meas": 81024
+   },
+   "n": 45,
+   "mean_dev_pct": 0.251,
+   "max_abs_dev_pct": 3.582,
+   "exact_parts_ok": true,
+   "pass_1pct": true
+  },
+  "params": {
+   "5": {
+    "params5": {
+     "ali": 174.943,
+     "deep": 155.172,
+     "batch": 136.33,
+     "fold1": 128.062,
+     "query": 128.7
+    },
+    "params8": {
+     "ali": 174.943,
+     "deep": 155.172,
+     "batch": 136.33,
+     "fold1": 128.062,
+     "query": 128.7
+    },
+    "t5": 94,
+    "t8": 94,
+    "max_abs_diff": 0.0
+   },
+   "S128": {
+    "m": 10,
+    "rounds": {
+     "ali": 178.36,
+     "deep": 151.36,
+     "batch": 129.38,
+     "fold1": 128.93,
+     "fold2": 136.93,
+     "query": 128.17
+    },
+    "lam_iop": 128.17,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "S128z": {
+    "m": 6,
+    "rounds": {
+     "ali": 179.09,
+     "deep": 151.51,
+     "batch": 129.4,
+     "fold1": 128.87,
+     "fold2": 134.87,
+     "fold3": 140.87,
+     "query": 128.0
+    },
+    "lam_iop": 128.0,
+    "binding": "query",
+    "lam": 128.0,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   }
+  }
+ },
+ "lambda": {
+  "M1 / Z128 (cap 0 and cap 5: identical soundness)": {
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 5,
+    "raw": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 116.33,
+     "fold1": 126.06,
+     "query": 104.7
+    },
+    "need": {
+     "ali": 0,
+     "deep": 0,
+     "batch": 12,
+     "fold1": 2,
+     "query": 24
+    }
+   },
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   }
+  },
+  "M1 / Z128, batch PoW 12 (design B; shows why 20)": {
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 128.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 5,
+    "raw": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 116.33,
+     "fold1": 126.06,
+     "query": 104.7
+    },
+    "need": {
+     "ali": 0,
+     "deep": 0,
+     "batch": 12,
+     "fold1": 2,
+     "query": 24
+    }
+   },
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 12,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   }
+  },
+  "M1 / Z128-s stretch (Q 23, query PoW 28, cap 5)": {
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.34
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 5,
+    "raw": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 116.33,
+     "fold1": 126.06,
+     "query": 100.34
+    },
+    "need": {
+     "ali": 0,
+     "deep": 0,
+     "batch": 12,
+     "fold1": 2,
+     "query": 28
+    }
+   },
+   "set": {
+    "name": "Z128-s (Q23, qPoW28)",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 23,
+    "query_pow": 28,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 5,
+    "digest": 32
+   }
+  },
+  "M2 / Z128-g (as designed: commit PoW 2)": {
+   "soundness": {
+    "m": 4,
+    "rounds": {
+     "logup": 174.88,
+     "ali": 174.67,
+     "deep": 155.72,
+     "batch": 137.18,
+     "fold1": 129.9,
+     "fold2": 136.09,
+     "query": 127.92
+    },
+    "lam_iop": 127.92,
+    "binding": "query",
+    "lam": 127.92,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 4,
+    "raw": {
+     "logup": 166.88,
+     "ali": 174.67,
+     "deep": 155.72,
+     "batch": 117.18,
+     "fold1": 127.9,
+     "fold2": 134.09,
+     "query": 103.92
+    },
+    "need": {
+     "logup": 0,
+     "ali": 0,
+     "deep": 0,
+     "batch": 11,
+     "fold1": 1,
+     "fold2": 0,
+     "query": 25
+    }
+   },
+   "set": {
+    "name": "Z128-g",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 8,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   }
+  },
+  "M2 / Z128-g, commit PoW 3": {
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "logup": 174.54,
+     "ali": 174.34,
+     "deep": 155.07,
+     "batch": 135.15,
+     "fold1": 128.87,
+     "fold2": 135.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.7,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 5,
+    "raw": {
+     "logup": 166.54,
+     "ali": 174.34,
+     "deep": 155.07,
+     "batch": 115.15,
+     "fold1": 125.87,
+     "fold2": 132.06,
+     "query": 104.7
+    },
+    "need": {
+     "logup": 0,
+     "ali": 0,
+     "deep": 0,
+     "batch": 13,
+     "fold1": 3,
+     "fold2": 0,
+     "query": 24
+    }
+   },
+   "set": {
+    "name": "Z128-g",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 3,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 8,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   }
+  },
+  "M2 single-height sensitivity": {
+   "m": 5,
+   "rounds": {
+    "logup": 174.54,
+    "ali": 174.34,
+    "deep": 155.07,
+    "batch": 135.15,
+    "fold1": 129.06,
+    "fold2": 135.06,
+    "query": 128.7
+   },
+   "lam_iop": 128.7,
+   "binding": "query",
+   "lam": 128,
+   "lam_strict": 127.21,
+   "label": "JB, powers-batching adaptation (unpublished)"
+  },
+  "M2 sharp-batch sensitivity": {
+   "m": 5,
+   "rounds": {
+    "logup": 174.54,
+    "ali": 174.34,
+    "deep": 155.07,
+    "batch": 135.88,
+    "fold1": 128.87,
+    "fold2": 135.06,
+    "query": 128.7
+   },
+   "lam_iop": 128.7,
+   "binding": "query",
+   "lam": 128,
+   "lam_strict": 127.21,
+   "label": "JB, powers-batching adaptation (unpublished)"
+  }
+ },
+ "sizes": {
+  "M1 / Z128 cap 0": {
+   "bytes": {
+    "header": 1,
+    "roots": 128,
+    "ood_values": 2256,
+    "lookup_terminals": 0,
+    "pow_witnesses": 24,
+    "final_poly": 6144,
+    "input_leaves": 14208,
+    "input_salts": 3840,
+    "input_siblings": 33535,
+    "fri_leaves": 4032,
+    "fri_salts": 384,
+    "fri_siblings": 8875,
+    "counts": 8,
+    "total": 73435,
+    "t": 94,
+    "t_by_height": {
+     "20": 94
+    },
+    "schedule": [
+     3
+    ],
+    "heights": [
+     20
+    ],
+    "n_commitments_in_proof": 4
+   },
+   "checks": {
+    "strict_height": {
+     "ok": true,
+     "rule": "log_lde_height > log_final_poly_len + log_blowup = 17",
+     "heights": {
+      "M1": 20
+     }
+    },
+    "arity_grid": {
+     "ok": true,
+     "schedule": [
+      3
+     ],
+     "note": "every round folds by the full arity, every input height is reached exactly"
+    },
+    "hiding_budget": {
+     "ok": true,
+     "rows": [
+      {
+       "round": "random",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "main",
+       "table": "M1",
+       "mask": 1024,
+       "need": 60,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      }
+     ],
+     "rule": "mask_height = domain.size()/2 >= 2*(D*points + Q)"
+    },
+    "rc_ge_D": {
+     "ok": true
+    },
+    "ok": true
+   },
+   "p99_factor": 0.02026717505276775,
+   "per_query_full_path": {
+    "leaves": 752,
+    "fri_leaves": 184,
+    "path_digests": 77,
+    "total": 3408
+   },
+   "merkle": {
+    "leaf_hashes": 95.99710476817563,
+    "leaf_blocks": 431.98789264820516,
+    "node_compressions": 1417.30990275403,
+    "sha_blocks": 3266.607698156265
+   },
+   "tables": [
+    {
+     "name": "M1",
+     "log_n": 10,
+     "width": 17,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 53,
+     "max_deg": 4,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 12,
+     "periodic": 11,
+     "chunks": 8,
+     "lde_log_height": 20
+    }
+   ]
+  },
+  "M1 / Z128 cap 5": {
+   "bytes": {
+    "header": 1,
+    "roots": 4096,
+    "ood_values": 2256,
+    "lookup_terminals": 0,
+    "pow_witnesses": 24,
+    "final_poly": 6144,
+    "input_leaves": 14208,
+    "input_salts": 3840,
+    "input_siblings": 32459,
+    "fri_leaves": 4032,
+    "fri_salts": 384,
+    "fri_siblings": 8516,
+    "counts": 8,
+    "total": 75968,
+    "t": 94,
+    "t_by_height": {
+     "20": 94
+    },
+    "schedule": [
+     3
+    ],
+    "heights": [
+     20
+    ],
+    "n_commitments_in_proof": 4
+   },
+   "checks": {
+    "strict_height": {
+     "ok": true,
+     "rule": "log_lde_height > log_final_poly_len + log_blowup = 17",
+     "heights": {
+      "M1": 20
+     }
+    },
+    "arity_grid": {
+     "ok": true,
+     "schedule": [
+      3
+     ],
+     "note": "every round folds by the full arity, every input height is reached exactly"
+    },
+    "hiding_budget": {
+     "ok": true,
+     "rows": [
+      {
+       "round": "random",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "main",
+       "table": "M1",
+       "mask": 1024,
+       "need": 60,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      }
+     ],
+     "rule": "mask_height = domain.size()/2 >= 2*(D*points + Q)"
+    },
+    "rc_ge_D": {
+     "ok": true
+    },
+    "ok": true
+   },
+   "p99_factor": 0.019886267902274657,
+   "per_query_full_path": {
+    "leaves": 752,
+    "fri_leaves": 184,
+    "path_digests": 57,
+    "total": 2768
+   },
+   "merkle": {
+    "leaf_hashes": 95.99710476817563,
+    "leaf_blocks": 431.98789264820516,
+    "node_compressions": 1308.2226499489511,
+    "sha_blocks": 3048.4331925461074
+   },
+   "tables": [
+    {
+     "name": "M1",
+     "log_n": 10,
+     "width": 17,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 53,
+     "max_deg": 4,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 12,
+     "periodic": 11,
+     "chunks": 8,
+     "lde_log_height": 20
+    }
+   ]
+  },
+  "M1 / Z128-s cap 5 (stretch)": {
+   "bytes": {
+    "header": 1,
+    "roots": 4096,
+    "ood_values": 2256,
+    "lookup_terminals": 0,
+    "pow_witnesses": 24,
+    "final_poly": 6144,
+    "input_leaves": 13616,
+    "input_salts": 3680,
+    "input_siblings": 31181,
+    "fri_leaves": 3864,
+    "fri_salts": 368,
+    "fri_siblings": 8186,
+    "counts": 8,
+    "total": 73423,
+    "t": 94,
+    "t_by_height": {
+     "20": 94
+    },
+    "schedule": [
+     3
+    ],
+    "heights": [
+     20
+    ],
+    "n_commitments_in_proof": 4
+   },
+   "checks": {
+    "strict_height": {
+     "ok": true,
+     "rule": "log_lde_height > log_final_poly_len + log_blowup = 17",
+     "heights": {
+      "M1": 20
+     }
+    },
+    "arity_grid": {
+     "ok": true,
+     "schedule": [
+      3
+     ],
+     "note": "every round folds by the full arity, every input height is reached exactly"
+    },
+    "hiding_budget": {
+     "ok": true,
+     "rows": [
+      {
+       "round": "random",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      },
+      {
+       "round": "main",
+       "table": "M1",
+       "mask": 1024,
+       "need": 58,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "M1",
+       "mask": 1024,
+       "need": 52,
+       "ok": true
+      }
+     ],
+     "rule": "mask_height = domain.size()/2 >= 2*(D*points + Q)"
+    },
+    "rc_ge_D": {
+     "ok": true
+    },
+    "ok": true
+   },
+   "p99_factor": 0.023334377511134097,
+   "per_query_full_path": {
+    "leaves": 752,
+    "fri_leaves": 184,
+    "path_digests": 57,
+    "total": 2768
+   },
+   "merkle": {
+    "leaf_hashes": 91.99734603235265,
+    "leaf_blocks": 413.98890157346614,
+    "node_compressions": 1255.8692840087633,
+    "sha_blocks": 2925.7274695909928
+   },
+   "tables": [
+    {
+     "name": "M1",
+     "log_n": 10,
+     "width": 17,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 53,
+     "max_deg": 4,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 12,
+     "periodic": 11,
+     "chunks": 8,
+     "lde_log_height": 20
+    }
+   ]
+  },
+  "M2 / Z128-g cap 0": {
+   "bytes": {
+    "header": 2,
+    "roots": 192,
+    "ood_values": 5088,
+    "lookup_terminals": 48,
+    "pow_witnesses": 40,
+    "final_poly": 768,
+    "input_leaves": 28992,
+    "input_salts": 7680,
+    "input_siblings": 55892,
+    "fri_leaves": 8064,
+    "fri_salts": 768,
+    "fri_siblings": 15447,
+    "counts": 14,
+    "total": 122995,
+    "t": 212,
+    "t_by_height": {
+     "20": 127,
+     "17": 85
+    },
+    "schedule": [
+     3,
+     3
+    ],
+    "heights": [
+     20,
+     17
+    ],
+    "n_commitments_in_proof": 6
+   },
+   "checks": {
+    "strict_height": {
+     "ok": true,
+     "rule": "log_lde_height > log_final_poly_len + log_blowup = 14",
+     "heights": {
+      "T_hash": 20,
+      "T_ctl": 17
+     }
+    },
+    "arity_grid": {
+     "ok": true,
+     "schedule": [
+      3,
+      3
+     ],
+     "note": "every round folds by the full arity, every input height is reached exactly"
+    },
+    "hiding_budget": {
+     "ok": true,
+     "rows": [
+      {
+       "round": "random",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "random",
+       "table": "T_ctl",
+       "mask": 128,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "main",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 60,
+       "ok": true
+      },
+      {
+       "round": "main",
+       "table": "T_ctl",
+       "mask": 128,
+       "need": 60,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_ctl",
+       "mask": 128,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_ctl",
+       "mask": 128,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_ctl",
+       "mask": 128,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "quotient",
+       "table": "T_ctl",
+       "mask": 128,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "pre",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "pre",
+       "table": "T_ctl",
+       "mask": 128,
+       "need": 54,
+       "ok": true
+      },
+      {
+       "round": "perm",
+       "table": "T_hash",
+       "mask": 1024,
+       "need": 60,
+       "ok": true
+      },
+      {
+       "round": "perm",
+       "table": "T_ctl",
+       "mask": 128,
+       "need": 60,
+       "ok": true
+      }
+     ],
+     "rule": "mask_height = domain.size()/2 >= 2*(D*points + Q)"
+    },
+    "rc_ge_D": {
+     "ok": true
+    },
+    "ok": true
+   },
+   "p99_factor": 0.021164437578763327,
+   "per_query_full_path": {
+    "leaves": 1528,
+    "fri_leaves": 368,
+    "path_digests": 131,
+    "total": 6096
+   },
+   "merkle": {
+    "leaf_hashes": 287.9692122027336,
+    "leaf_blocks": 959.8900088059017,
+    "node_compressions": 2510.3121931418896,
+    "sha_blocks": 5980.514395089681
+   },
+   "tables": [
+    {
+     "name": "T_hash",
+     "log_n": 10,
+     "width": 24,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": false,
+     "num_constraints": 44,
+     "max_deg": 4,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 13,
+     "public_values": 0,
+     "periodic": 11,
+     "chunks": 8,
+     "lde_log_height": 20
+    },
+    {
+     "name": "T_ctl",
+     "log_n": 7,
+     "width": 13,
+     "main_next": true,
+     "pre_width": 5,
+     "pre_next": false,
+     "num_constraints": 35,
+     "max_deg": 2,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 13,
+     "public_values": 12,
+     "periodic": 0,
+     "chunks": 4,
+     "lde_log_height": 17
+    }
+   ]
+  },
+  "M2 / Z128 negative": {
+   "ok": false,
+   "rule": "log_lde_height > log_final_poly_len + log_blowup = 17",
+   "heights": {
+    "T_hash": 20,
+    "T_ctl": 17
+   }
+  }
+ },
+ "layouts": {
+  "opcost": {
+   "per_query": 699732,
+   "queries": 16793568,
+   "merkle": 7232172,
+   "fixed": 4230000,
+   "total": 28255740
+  },
+  "layouts": {
+   "M1 b (one input), redeem 13000": {
+    "needs": "per-input unlocking limit raised to 100,000 B; tx size limit unchanged",
+    "proof": 73435,
+    "unlocking": 87158,
+    "unlocking_p99": 88646,
+    "tx_bytes": 87461,
+    "op_libauth": 28255740,
+    "op_bchn_adj": 28260740,
+    "budget_base41": 69759200,
+    "pct_base41": 40.5,
+    "pct_bchspec": 36.4,
+    "fits": true
+   },
+   "M1 b (one input), redeem 18000": {
+    "needs": "per-input unlocking limit raised to 100,000 B; tx size limit unchanged",
+    "proof": 73435,
+    "unlocking": 92158,
+    "unlocking_p99": 93646,
+    "tx_bytes": 92461,
+    "op_libauth": 28255740,
+    "op_bchn_adj": 28260740,
+    "budget_base41": 73759200,
+    "pct_base41": 38.3,
+    "pct_bchspec": 34.6,
+    "fits": true
+   },
+   "M1 b2 (two inputs), redeem 13000": {
+    "needs": "per-input unlocking limit raised to 100,000 B",
+    "proof": 73435,
+    "unlocking_total": 90778,
+    "tx_bytes": 91124,
+    "fits_tx_100k": true,
+    "split": "input 0: redeem + PT + queries [0,Q_A); input 1: P2SH32 loader + queries [Q_A,Q) (+3.2 KB split)"
+   },
+   "M1 b2 (two inputs), redeem 18000": {
+    "needs": "per-input unlocking limit raised to 100,000 B",
+    "proof": 73435,
+    "unlocking_total": 95778,
+    "tx_bytes": 96124,
+    "fits_tx_100k": true,
+    "split": "input 0: redeem + PT + queries [0,Q_A); input 1: P2SH32 loader + queries [Q_A,Q) (+3.2 KB split)"
+   },
+   "M2 b2 (two inputs), redeem 18000": {
+    "needs": "per-input unlocking limit raised to 100,000 B AND tx size limit raised",
+    "proof": 122995,
+    "unlocking_total": 145823,
+    "tx_bytes": 146169,
+    "fits_two_inputs": true,
+    "op_model": 38856696
+   },
+   "M2 b2 (two inputs), redeem 24000": {
+    "needs": "per-input unlocking limit raised to 100,000 B AND tx size limit raised",
+    "proof": 122995,
+    "unlocking_total": 151823,
+    "tx_bytes": 152169,
+    "fits_two_inputs": true,
+    "op_model": 38856696
+   },
+   "M1 a' Z128 cap 5, code 7500": {
+    "needs": "today's standard rules (10,000 B unlocking, 100,000 B tx)",
+    "head": 6376,
+    "fin": 8444,
+    "per_query": 2768,
+    "qry_input_bytes": 8424,
+    "qry_inputs": 8,
+    "inputs": 12,
+    "total": 98468,
+    "one_tx": true,
+    "plan": "1 tx"
+   },
+   "M1 a' Z128 cap 5, code 9000": {
+    "needs": "today's standard rules (10,000 B unlocking, 100,000 B tx)",
+    "head": 6376,
+    "fin": 8444,
+    "per_query": 2768,
+    "qry_input_bytes": 8424,
+    "qry_inputs": 8,
+    "inputs": 12,
+    "total": 101468,
+    "one_tx": false,
+    "plan": "2 txs (NFT thread binding H(consts))"
+   },
+   "M1 a' Z128-s (Q 23, qPoW 28) cap 5, code 7500": {
+    "needs": "today's standard rules (10,000 B unlocking, 100,000 B tx)",
+    "head": 6376,
+    "fin": 8444,
+    "per_query": 2768,
+    "qry_input_bytes": 8424,
+    "qry_inputs": 8,
+    "inputs": 12,
+    "total": 95700,
+    "one_tx": true,
+    "plan": "1 tx"
+   },
+   "M1 a' Z128-s (Q 23, qPoW 28) cap 5, code 9000": {
+    "needs": "today's standard rules (10,000 B unlocking, 100,000 B tx)",
+    "head": 6376,
+    "fin": 8444,
+    "per_query": 2768,
+    "qry_input_bytes": 8424,
+    "qry_inputs": 8,
+    "inputs": 12,
+    "total": 98700,
+    "one_tx": true,
+    "plan": "1 tx"
+   }
+  },
+  "opc": {
+   "q_x": 15200,
+   "deep_base": 61000,
+   "deep_per_t": 2320,
+   "fold_arity8": 128600,
+   "final_base": 35700,
+   "final_per_coef": 942,
+   "merkle_per_block": null,
+   "fixed_base": 3630000,
+   "air_m1": 600000
+  }
+ }
+}

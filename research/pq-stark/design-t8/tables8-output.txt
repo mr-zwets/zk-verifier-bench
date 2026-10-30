@@ -1,0 +1,69 @@
+Track 8 S0 tables (params8.py + bytes8.py). All lambda figures: JB, powers-batching adaptation (unpublished),
+best m in 3..24; digest term 4h = 128 (birthday convention), strict reading 127.21. Sizes: expected values.
+
+==============================================================================================================
+0. Consistency
+==============================================================================================================
+  bytes8 vs Track 5 S128  : measured 78,393 B, model 78,569 B (+0.23%)  [acceptance <= 1%: PASS]
+  bytes8 vs Track 5 S128z : measured 112,501 B, model 113,533 B (+0.92%)  [acceptance <= 1%: PASS]
+  bytes8 over all 45 Track 5 vectors: mean +0.251%, max |dev| 3.58% (single proofs vary with the random query set; deterministic parts exact: True)
+  params8 one-table path vs params5 (M1, Z128, m=5): max |round diff| 0.0 bits; t params5 94 = bytes8 94
+  params8 on Track 5 S128 (mimc): lambda_IOP 128.17 (m=10, Track 5 128.17); S128z (fib): 128.0 (m=6, Track 5 128.00)
+
+==============================================================================================================
+1. Lambda tables
+==============================================================================================================
+  M1 / Z128 (cap 0 and cap 5: identical soundness)
+     lambda_IOP 128.06 (binding fold1, m=5); lambda 128, strict-digest 127.21; target 128: MET
+     rounds: ali 174.94, deep 155.17, batch 136.33, fold1 128.06, query 128.70
+     raw (no PoW, m=5): ali 174.94, deep 155.17, batch 116.33, fold1 126.06, query 104.70; PoW needed per site for 128: {'ali': 0, 'deep': 0, 'batch': 12, 'fold1': 2, 'query': 24}
+  M1 / Z128, batch PoW 12 (design B; shows why 20)
+     lambda_IOP 128.06 (binding fold1, m=5); lambda 128, strict-digest 127.21; target 128: MET
+     rounds: ali 174.94, deep 155.17, batch 128.33, fold1 128.06, query 128.70
+     raw (no PoW, m=5): ali 174.94, deep 155.17, batch 116.33, fold1 126.06, query 104.70; PoW needed per site for 128: {'ali': 0, 'deep': 0, 'batch': 12, 'fold1': 2, 'query': 24}
+  M1 / Z128-s stretch (Q 23, query PoW 28, cap 5)
+     lambda_IOP 128.06 (binding fold1, m=5); lambda 128, strict-digest 127.21; target 128: MET
+     rounds: ali 174.94, deep 155.17, batch 136.33, fold1 128.06, query 128.34
+     raw (no PoW, m=5): ali 174.94, deep 155.17, batch 116.33, fold1 126.06, query 100.34; PoW needed per site for 128: {'ali': 0, 'deep': 0, 'batch': 12, 'fold1': 2, 'query': 28}
+  M2 / Z128-g (as designed: commit PoW 2)
+     lambda_IOP 127.92 (binding query, m=4); lambda 127.92, strict-digest 127.21; target 128: SHORT by 0.08
+     rounds: logup 174.88, ali 174.67, deep 155.72, batch 137.18, fold1 129.90, fold2 136.09, query 127.92
+     raw (no PoW, m=4): logup 166.88, ali 174.67, deep 155.72, batch 117.18, fold1 127.90, fold2 134.09, query 103.92; PoW needed per site for 128: {'logup': 0, 'ali': 0, 'deep': 0, 'batch': 11, 'fold1': 1, 'fold2': 0, 'query': 25}
+  M2 / Z128-g, commit PoW 3
+     lambda_IOP 128.7 (binding query, m=5); lambda 128, strict-digest 127.21; target 128: MET
+     rounds: logup 174.54, ali 174.34, deep 155.07, batch 135.15, fold1 128.87, fold2 135.06, query 128.70
+     raw (no PoW, m=5): logup 166.54, ali 174.34, deep 155.07, batch 115.15, fold1 125.87, fold2 132.06, query 104.70; PoW needed per site for 128: {'logup': 0, 'ali': 0, 'deep': 0, 'batch': 13, 'fold1': 3, 'fold2': 0, 'query': 24}
+  M2 sensitivity (Z128-g, commit PoW 3) with Plonky3 single-height formulas (no per-height batching, roll-in as a-1): lambda_IOP 128.7 (logup 174.54, ali 174.34, deep 155.07, batch 135.15, fold1 129.06, fold2 135.06, query 128.70)
+  M2 sensitivity (Z128-g, commit PoW 3), batching charged at each height's own N_h: lambda_IOP 128.7 (batch 135.88)
+
+==============================================================================================================
+2. Size tables (proof bytes, expected value; p99 = expected + Monte-Carlo 99th-percentile sibling excess)
+==============================================================================================================
+  M1 / Z128 cap 0: proof 73,435 B (p99 ~74,923 B), t=94 {20: 94}, heights [20], fold schedule [3], per-query full path 3408 B
+     header 1, roots 128, ood_values 2,256, lookup_terminals 0, pow_witnesses 24, final_poly 6,144, input_leaves 14,208, input_salts 3,840, input_siblings 33,535, fri_leaves 4,032, fri_salts 384, fri_siblings 8,875, counts 8
+     checks: strict height True {'M1': 20} > 17; arity grid True; hiding budget True (min mask 1024 >= need 60); all True
+  M1 / Z128 cap 5: proof 75,968 B (p99 ~77,479 B), t=94 {20: 94}, heights [20], fold schedule [3], per-query full path 2768 B
+     header 1, roots 4,096, ood_values 2,256, lookup_terminals 0, pow_witnesses 24, final_poly 6,144, input_leaves 14,208, input_salts 3,840, input_siblings 32,459, fri_leaves 4,032, fri_salts 384, fri_siblings 8,516, counts 8
+     checks: strict height True {'M1': 20} > 17; arity grid True; hiding budget True (min mask 1024 >= need 60); all True
+  M1 / Z128-s cap 5 (stretch): proof 73,423 B (p99 ~75,136 B), t=94 {20: 94}, heights [20], fold schedule [3], per-query full path 2768 B
+     header 1, roots 4,096, ood_values 2,256, lookup_terminals 0, pow_witnesses 24, final_poly 6,144, input_leaves 13,616, input_salts 3,680, input_siblings 31,181, fri_leaves 3,864, fri_salts 368, fri_siblings 8,186, counts 8
+     checks: strict height True {'M1': 20} > 17; arity grid True; hiding budget True (min mask 1024 >= need 58); all True
+  M2 / Z128-g cap 0: proof 122,995 B (p99 ~125,598 B), t=212 {20: 127, 17: 85}, heights [20, 17], fold schedule [3, 3], per-query full path 6096 B
+     header 2, roots 192, ood_values 5,088, lookup_terminals 48, pow_witnesses 40, final_poly 768, input_leaves 28,992, input_salts 7,680, input_siblings 55,892, fri_leaves 8,064, fri_salts 768, fri_siblings 15,447, counts 14
+     checks: strict height True {'T_hash': 20, 'T_ctl': 17} > 14; arity grid True; hiding budget True (min mask 128 >= need 60); all True
+  negative check: M2 under plain Z128 (final 2^8): strict height False (T_ctl LDE 2^17 is not > 17) -> Z128-g is required, as the design says
+
+==============================================================================================================
+3. Layout model (MODEL, before building; op-cost coefficients calibrated on Track 5 layout b)
+==============================================================================================================
+  op-cost model M1/Z128 cap 0: per query 699,732 x 24 = 16,793,568; Merkle 7,232,172; fixed 4,230,000; total 28,255,740 (design: 0.70M/query, Merkle 7.1M, fixed 6.3M, 30-32M)
+  M1 b (one input), redeem 13000: needs=per-input unlocking limit raised to 100,000 B; tx size limit unchanged, proof=73435, unlocking=87158, unlocking_p99=88646, tx_bytes=87461, op_libauth=28255740, op_bchn_adj=28260740, budget_base41=69759200, pct_base41=40.5, pct_bchspec=36.4, fits=True
+  M1 b (one input), redeem 18000: needs=per-input unlocking limit raised to 100,000 B; tx size limit unchanged, proof=73435, unlocking=92158, unlocking_p99=93646, tx_bytes=92461, op_libauth=28255740, op_bchn_adj=28260740, budget_base41=73759200, pct_base41=38.3, pct_bchspec=34.6, fits=True
+  M1 b2 (two inputs), redeem 13000: needs=per-input unlocking limit raised to 100,000 B, proof=73435, unlocking_total=90778, tx_bytes=91124, fits_tx_100k=True, split=input 0: redeem + PT + queries [0,Q_A); input 1: P2SH32 loader + queries [Q_A,Q) (+3.2 KB split)
+  M1 b2 (two inputs), redeem 18000: needs=per-input unlocking limit raised to 100,000 B, proof=73435, unlocking_total=95778, tx_bytes=96124, fits_tx_100k=True, split=input 0: redeem + PT + queries [0,Q_A); input 1: P2SH32 loader + queries [Q_A,Q) (+3.2 KB split)
+  M2 b2 (two inputs), redeem 18000: needs=per-input unlocking limit raised to 100,000 B AND tx size limit raised, proof=122995, unlocking_total=145823, tx_bytes=146169, fits_two_inputs=True, op_model=38856696
+  M2 b2 (two inputs), redeem 24000: needs=per-input unlocking limit raised to 100,000 B AND tx size limit raised, proof=122995, unlocking_total=151823, tx_bytes=152169, fits_two_inputs=True, op_model=38856696
+  M1 a' Z128 cap 5, code 7500: needs=today's standard rules (10,000 B unlocking, 100,000 B tx), head=6376, fin=8444, per_query=2768, qry_input_bytes=8424, qry_inputs=8, inputs=12, total=98468, one_tx=True, plan=1 tx
+  M1 a' Z128 cap 5, code 9000: needs=today's standard rules (10,000 B unlocking, 100,000 B tx), head=6376, fin=8444, per_query=2768, qry_input_bytes=8424, qry_inputs=8, inputs=12, total=101468, one_tx=False, plan=2 txs (NFT thread binding H(consts))
+  M1 a' Z128-s (Q 23, qPoW 28) cap 5, code 7500: needs=today's standard rules (10,000 B unlocking, 100,000 B tx), head=6376, fin=8444, per_query=2768, qry_input_bytes=8424, qry_inputs=8, inputs=12, total=95700, one_tx=True, plan=1 tx
+  M1 a' Z128-s (Q 23, qPoW 28) cap 5, code 9000: needs=today's standard rules (10,000 B unlocking, 100,000 B tx), head=6376, fin=8444, per_query=2768, qry_input_bytes=8424, qry_inputs=8, inputs=12, total=98700, one_tx=True, plan=1 tx
