@@ -133,7 +133,7 @@ The production AIR must be checked against Plonky3's exact round order: `add_rc 
 
 - **T_hash:** 2^10 rows. M1's 17 columns plus an 8-column carried input. It receives (in[8], out[4]) on a global bus, with multiplicity C.
 - **T_ctl:** 2^7 rows under Z128-g. It holds the level index, the sibling and the bit, and sends one tuple per used row. The padding rows have multiplicity 0.
-- **Preprocessed:** a level tag and the null/leaf mode flags. The commitment is transparent and can be recomputed from the AIR.
+- **Preprocessed:** a level tag and the null/leaf mode flags. Under ZK the hiding MMCS salts the commitment, so it is not recomputable from the AIR alone; it is recomputable from the AIR plus the published setup seed `SETUP_SEED` = 0x7438534554555031 ("t8SETUP1", salts from `StdRng::seed_from_u64(SETUP_SEED ^ 0x5a5a_0001)`; S1 prover README). (Corrected in S8b; the S0 text said "transparent".)
 - **Coverage:** two heights, injection, roll-in, preprocessed columns, the permutation tree, terminals that sum to 0, and the lookup PoW.
 - **Size** is estimated at 100–120 KB (A modelled 118–128 KB with a wider AIR; B modelled 97 KB). It is recomputed in S0.
 

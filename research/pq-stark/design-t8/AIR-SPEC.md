@@ -208,7 +208,7 @@ Notes on the constraints:
 | per-query leaf total | **936 B** |
 | proof (bytes8.py) | **73,434 B** (cap 0) and **75,967 B** (cap 5), expected values |
 
-### 3.6 AIR ⇒ relation (sketch for S8, SOUNDNESS-T8 lemma 8)
+### 3.6 AIR ⇒ relation (sketch for S8, SOUNDNESS-T8 Lemma 11)
 
 1. **Selectors partition every slot.** The periodic F, Pt, C and L are 0/1 with exactly one equal to 1 on every row.
 2. **One row type = one Poseidon2 round.** On F rows A forces u_i = (s_i + rc_i)^3 for all i, so C gives s′ = M_E·(s + rc)^7. On Pt rows A forces u_0, so C gives the partial round. On the L row C gives s′ = M_E·s.
@@ -321,9 +321,8 @@ Checks (bytes8.py `checks`, all pass):
 
 Under plain Z128 (final 2^8), T_ctl's 17 is not > 17, so that set is rejected. This is the negative check.
 
-**Preprocessed commitment.** The preprocessed root sits in the verifying key, but `HidingFriPcs::commit_preprocessing` commits through the hiding MMCS. Its salts are random (`hiding_mmcs.rs` `commit`), so the root is **not** recomputable from the AIR alone.
-- S1 must export the salts, or the RNG seed, with the verifying key, so that anyone can recompute the root.
-- Otherwise the root is a trusted-setup value. DESIGN §4 calls it "transparent"; that holds only with the salts published.
+**Preprocessed commitment.** The preprocessed root sits in the verifying key, but `HidingFriPcs::commit_preprocessing` commits through the hiding MMCS. Its salts are random (`hiding_mmcs.rs` `commit`), so the root is not recomputable from the AIR alone.
+- **Resolved (S1/S2; text updated in S8b):** statement cases build the verifying key from the published setup seed `SETUP_SEED` = 0x7438534554555031 ("t8SETUP1"); the salts are `StdRng::seed_from_u64(SETUP_SEED ^ 0x5a5a_0001)` (prover README, "Verifying-key setup seed"). Anyone can recompute the root from the AIR and that seed, so it is not a trusted-setup value. DESIGN §4 is corrected accordingly.
 
 ## 5. Parameters this specification is checked against (params8.py and bytes8.py)
 
@@ -340,7 +339,7 @@ Under plain Z128 (final 2^8), T_ctl's 17 is not > 17, so that set is rejected. T
 ## 6. Open items handed to later stages
 
 1. **CTX binding** is through the transcript only (Plonky3 observes public values before α). SOUNDNESS-T8 (S8) must state this as a lemma: Fiat-Shamir binding of public inputs, with the ZK caveat. S3's tamper set covers changed outputs (CTX differs).
-2. **Preprocessed salts** (§4.3): S1 exports them, and the M2 verifying key records how the root was made.
+2. **Preprocessed salts** (§4.3): resolved; the M2 verifying key is built from the published `SETUP_SEED`, so the root is recomputable.
 3. **Constraint order** (§1): Rust `eval` must emit exactly the order of §3.4 and §4. S3 checks this by comparing the folded constraint value at ζ against Rust on every vector.
 4. **p3b-v1 format (S1 FORMAT.md).** It omits zero-bit PoW witnesses, and the decoder inserts 0. degree_bits are verifying-key data, so the proof has no header byte. bytes8 follows this.
    - Against S1's 28 real p3b-v1 proofs, every deterministic section matches exactly, and so do the fold schedules (`s1-crosscheck.json`).
