@@ -410,6 +410,8 @@ export interface BenchmarkResult {
   bchCompatible: boolean;
   /** short reason the first incompatible step failed on the real VM */
   bchIncompatibleReason?: string;
+  /** which step failed on the real VM and the VM's error text (executed entries only) */
+  bchIncompatibleDetail?: string;
   /**
    * The valid run is relayable under BCH 2026 STANDARD (mempool) policy — strictly
    * stronger than `bchCompatible` (consensus). Requires ALL of: every step validates

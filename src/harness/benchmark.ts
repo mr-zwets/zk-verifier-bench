@@ -489,9 +489,13 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
   // on the VM this entry targets" — a bch-spec entry is NOT valid on current-BCH BCH_2026.
   const realVm = isSpec ? createRealVmSpec() : createRealVm();
   const realOutcomes = scenario.valid.map((s) => evaluatePair(realVm, s.lockingBytecode, s.unlockingBytecode, s.covenant, s.intraTx, s.grouped));
-  const firstFail = realOutcomes.find((o) => !o.accepted);
+  const failIdx = realOutcomes.findIndex((o) => !o.accepted);
+  const firstFail = failIdx < 0 ? undefined : realOutcomes[failIdx];
   const bchCompatible = firstFail === undefined && validPassed;
   const bchIncompatibleReason = firstFail?.error === undefined ? undefined : limitReason(firstFail.error);
+  const bchIncompatibleDetail = firstFail === undefined
+    ? undefined
+    : `step ${failIdx + 1}/${realOutcomes.length} (${scenario.valid[failIdx]!.label}) rejected: ${firstFail.error ?? 'did not end with a single truthy stack item'}`;
 
   // invalid runs: explicit, else derived by tampering each step's witness in turn
   const invalidRuns: Step[][] =
@@ -595,6 +599,7 @@ export const benchmark = (impl: Implementation, scenario: Awaited<ReturnType<Imp
     worstCase,
     bchCompatible,
     bchIncompatibleReason,
+    bchIncompatibleDetail,
     fitsBchStandardness: std.fits,
     bchStandardnessReason: std.reason,
     securePackaging: env.secure,

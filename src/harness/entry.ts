@@ -32,18 +32,32 @@ export const bchCell = (r: BenchmarkResult) => {
   const sizeCap = r.impl.vm === 'bch-spec' ? SPEC_SCRIPT_SIZE_CAP : SIZE_CAP;
   const scriptSize = r.steps.some((s) => s.lockingBytes > sizeCap || s.unlockingBytes > sizeCap);
   const opCost = r.inputsForHeaviestStep > 1;
-  const blockers = [...(scriptSize ? ['script-size'] : []), ...(opCost ? ['op-cost'] : [])];
+  // The real-VM replay (benchmark.ts) is the verdict. The two size/op-cost blockers above are
+  // derived from the step metrics against the cap; a step can still fail the real VM for a
+  // reason they do not see (e.g. a bch-spec input whose op-cost exceeds ITS budget,
+  // (10,000 + unlocking length) * 800, while staying under the 88M budget at the 100 kB cap).
+  // Name that failure too, so an incompatible row never has an empty blocker list or detail.
+  const realReason = r.bchCompatible || r.profileOnly ? undefined : r.bchIncompatibleReason;
+  const realBlocker =
+    realReason === undefined || (realReason === 'script-size' && scriptSize) || (realReason === 'op-cost' && opCost)
+      ? undefined
+      : realReason;
+  const blockers = [...(scriptSize ? ['script-size'] : []), ...(opCost ? ['op-cost'] : []), ...(realBlocker ? [realBlocker] : [])];
   const overByBytes = r.steps.filter((s) => s.lockingBytes > sizeCap || s.unlockingBytes > sizeCap).length;
+  const vmName = r.impl.vm === 'bch-spec' ? 'bch-spec' : 'BCH 2026';
+  const reasons = [
+    scriptSize ? `${overByBytes}/${r.stepCount} step(s) over the ${sizeCap.toLocaleString('en-US')} B script cap` : null,
+    opCost ? `heaviest step ~${r.inputsForHeaviestStep}× one input's op-cost budget` : null,
+    !r.validPassed && !r.profileOnly ? 'valid run not accepted' : null,
+    (realBlocker || !blockers.length) && r.bchIncompatibleDetail ? `real ${vmName} VM: ${r.bchIncompatibleDetail}` : null,
+  ].filter(Boolean);
   const detail = r.bchCompatible
     ? r.impl.vm === 'bch-spec'
       ? 'every step fits the proposed bch-spec per-tx limits (100 kB scripts) — NOT current BCH'
       : 'every step fits BCH per-tx limits'
-    : [
-        scriptSize ? `${overByBytes}/${r.stepCount} step(s) over the ${sizeCap.toLocaleString('en-US')} B script cap` : null,
-        opCost ? `heaviest step ~${r.inputsForHeaviestStep}× one input's op-cost budget` : null,
-      ]
-        .filter(Boolean)
-        .join('; ');
+    : reasons.length
+      ? reasons.join('; ')
+      : `rejected on the real ${vmName} VM`;
   // standardness is strictly stronger than consensus compatibility: a consensus-valid
   // verifier can still be non-standard (e.g. an intra-tx bundle is one ~626 KB tx, over
   // the 100 KB standard size, so it must be mined directly rather than relayed).

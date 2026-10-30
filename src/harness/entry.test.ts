@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 
 import { bchGroth16Singleton } from '../implementations/bch-groth16-singleton.js';
-import { correctnessOf, entryOf } from './entry.js';
+import { bchCell, correctnessOf, entryOf } from './entry.js';
 import type { BenchmarkResult } from './types.js';
 
 // Reporting inputs only: no VM execution or new proof/witness bytes. These counters
@@ -66,4 +66,22 @@ test('does not describe undeclared proof identity as runtime-general by construc
   });
   assert.equal(row.generality.runtimeGeneral, false);
   assert.match(row.generality.detail, /NOT DEMONSTRATED/);
+});
+
+test('names the real-VM failure when no size/op-cost blocker applies', () => {
+  const detail = "step 1/1 (single) rejected: Program attempted an operation that would exceed the operation cost density limit.";
+  const cell = bchCell({
+    ...result,
+    impl: { ...bchGroth16Singleton, vm: 'bch-spec' },
+    steps: [{ label: 'single', lockingBytes: 35, unlockingBytes: 16_473, padBytes: 0, txOverheadBytes: 0, operationCost: 33_000_000, instructionCount: 0, accepted: true, error: undefined }],
+    stepCount: 1, inputsForHeaviestStep: 1,
+    bchCompatible: false, bchIncompatibleReason: 'op-cost', bchIncompatibleDetail: detail,
+  });
+  assert.deepEqual(cell.blockers, ['op-cost']);
+  assert.equal(cell.detail, `real bch-spec VM: ${detail}`);
+});
+
+test('never leaves an incompatible row without a detail', () => {
+  const cell = bchCell({ ...result, bchCompatible: false });
+  assert.notEqual(cell.detail, '');
 });
