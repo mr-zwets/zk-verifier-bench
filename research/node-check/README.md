@@ -23,7 +23,8 @@ every input ≤ 10,000 B unlocking, every tx ≤ 100,000 B.
     exporter's OP_DEFINE body bytes.
   - **Policy mode:** a separate fresh node with `acceptnonstdtxn=0` and the default relay policy. The source outputs
     are funded in a mined block, then `testmempoolaccept` runs on each workload tx. Multi-tx STARK plans are replayed
-    as the real chain: tx k ≥ 1 spends the thread NFT that the mined tx0 created. Each tx is mined after the test.
+    as the real chain: tx k ≥ 1 spends the thread NFT that the mined tx0 created. Each tx is mined after the test, so
+    every parent was confirmed; acceptance with unconfirmed ancestors (a mempool chain) was not tested.
 - **Workloads.**
   - `export-plonk.mjs` (groth16_cashscript main 3af2ad8, `research/plonk-kzg/verifier`, chain.mjs/chaintest.mjs
     logic): per circuit, the 5 valid proofs, 8 tampered proofs spread over the list, 12 chain manipulations, and 4
@@ -34,9 +35,10 @@ every input ≤ 10,000 B unlocking, every tx ≤ 100,000 B.
     sound-native chain.
 - Runs:
   - `raw/nc1-*`: full timing run (195 workloads) and policy run (57).
-  - `raw/nc2-*`: a second fresh timing node, valid workloads only (45). **Run 2 is the timing reference**, because
-    run 1's merkle16 reps were noisy (spread up to 52%). Run 2 / run 1 per-tx medians: 0.91–1.00. The verdicts are
-    identical.
+  - `raw/nc2-*`: a second fresh timing node, the valid workloads (41 txs) plus 4 `manip:extra foreign input` rejects, 45 in all. **Run 2 is the timing reference**, because
+    run 1's merkle16 reps were noisy (spread up to 52%). Run 2 / run 1 per-tx medians: 0.87–1.01. The verdicts are
+    identical. Run 2 was started by hand on node `nc2-t` with the same workload files as run 1 (not via `run.sh`), so
+    `raw/nc2-env.txt` holds only the node line and load averages.
 
 Reproduce: run `export-*.mjs` into `work/node-check/data` (category: `npx tsx nc.ts category`), then
 `run.sh NAME 9 7 11`, then `node summarize.mjs raw/NAME-timing.jsonl raw/NAME-policy.jsonl`.
@@ -53,7 +55,7 @@ Reproduce: run `export-*.mjs` into `work/node-check/data` (category: `npx tsx nc
 | STARK mimc-S100b-0 (1 tx, 12 in) | 1/1 / 1/1 | 12/12 / 12/12 | 83,515 | 11.40 | 0.241 | 92.04 / 92.48 / 94.00% | 1/1 allowed |
 | STARK fib-S100z-zkmin-0 (2 tx, 13+12 in) | 2/2 / 2/2 | 15/15 / 15/15 | 71,142 + 65,414 | 12.61 + 11.42 = 24.0 | 0.300 | 91.90 / 92.44 / 94.00% | 2/2 allowed (tx1 chained) |
 | STARK fib-S128z-zkmin-0 (3 tx, 12+12+11 in) | 3/3 / 3/3 | 15/15 / 15/15 | 80,591 + 80,331 + 73,631 | 12.05 + 11.99 + 10.66 = 34.7 | 0.263 | 92.05 / 92.50 / 94.00% | 3/3 allowed (tx1, tx2 chained) |
-| Reference: BN254 sound-native (3 in) | 5/5 / 5/5 | 1/1 / 1/1 | 27,026–28,082 | 3.42–3.51 | 0.170 | 93.58 / 93.58 / 94.00% | min relay fee not met as built (1,000-sat inputs); 5/5 allowed at 2 sat/B |
+| Reference: BN254 sound-native (3 in) | 5/5 / 5/5 | 1/1 / 1/1 | 27,026–28,082 | 3.42–3.51 | 0.169–0.173 | 93.54 / 93.54 / 94.00% | min relay fee not met as built (1,000-sat inputs); 5/5 allowed at 2 sat/B |
 | Reference: BLS12-381 sound-native (4 in) | 8/8 / 8/8 | 1/1 / 1/1 | 34,041–37,497 | 2.98–3.14 | 0.121–0.125 | ≤ 93.58 / same / ≤ 93.82% | same: fee only; 8/8 allowed at 2 sat/B |
 
 Notes:
@@ -61,7 +63,7 @@ Notes:
 - Rejections: the BCHN column is the block verdict (`blk-bad-inputs`); `testmempoolaccept` on the timing node gave
   the script error (OP_VERIFY, OP_NUMEQUALVERIFY, ...). The reference rejections show only the fee error, because the
   fee check runs first.
-- PLONK verification costs about 3.1–3.4× the BN254 leader on BCHN: 10.7–11.7 ms against 3.5 ms. It sits at the same
+- PLONK verification costs about 3.0–3.4× the BN254 leader on BCHN: 10.7–11.7 ms against 3.5 ms. It sits at the same
   0.17 ns per op-cost unit. STARK runs at 0.24–0.30 ns per op-cost unit, and its whole proof costs 11.4 ms (S100b) to
   34.7 ms (fib-S128z, 3 txs).
 
@@ -92,8 +94,8 @@ reports' "BCHN-adjusted" model is right and necessary.
 
 1. **libauth vs BCHN, OP_DEFINE.** This is the only discrepancy between the two engines. It is real and is quantified
    above: it is the DEFINE body bytes, 34.7k–38.6k per input for PLONK and 16.2k–24.2k for STARK. Every published
-   chain was sized with the adjustment and passes. No other verdict differed: 195/195 rows match between libauth and
-   BCHN.
+   chain was sized with the adjustment and passes. All 195/195 rows are as expected; the only libauth/BCHN differences are the 4 consensus-basis DEFINE probes,
+   which differ by design.
 2. **Policy: every valid workload passes `testmempoolaccept` under the default policy.** That covers 20 PLONK txs,
    8 STARK txs including the chained NFT-thread txs, and the reference once fees are paid. No unmodelled rule (P2SH32
    locking, dust on the 1,000-sat token outputs, OP_RETURN, tx size, sigchecks, input standardness) rejected
@@ -104,7 +106,8 @@ reports' "BCHN-adjusted" model is right and necessary.
    `66: min relay fee not met`. With the source values raised to pay 2 sat/B, all 13 are allowed, so the scripts do
    not read input values. The PLONK (12 sat/B) and STARK (1.2–1.8 sat/B) exports already pay the fee.
 4. **Rig caveat for the record.** On a node with `acceptnonstdtxn=1`, BCHN does not set `SCRIPT_VM_LIMITS_STANDARD`
-   for the mempool (validation.cpp: the flag needs `fRequireStandard`). The standard op-cost and hash limits are then
+   for the mempool (validation.cpp around line 1590 in BCHN master abd433a, checked in a local clone with no v29.1.0 tag; the flag
+   needs `fRequireStandard`; the run data agrees). The standard op-cost and hash limits are then
    only checked on a `POLICY=1` node. Track 1's mempool reasons are therefore relaxed-standard. This does not affect
    its block timings.
 5. BCHN labels standard-only VM-cost failures `mandatory-script-verify-flag-failed (VM cost limit exceeded)` even when
@@ -112,11 +115,11 @@ reports' "BCHN-adjusted" model is right and necessary.
 
 ## Not covered
 
-- Only today's rules. Layout (b)/TXv5/bch-spec cannot run on BCHN. The other STARK rows in REPORT §6 (P100, P128,
+- Only today's rules. One-100 KB-input layouts and bch-spec cannot run on BCHN today. The other STARK rows in REPORT §6 (P100, P128,
   S128b, mimc-P128-zkmin) were not asked for and were not run.
 - Rejections are a sample of the existing tamper and manipulation vectors: 8 + 12 per PLONK circuit, 12–15 per STARK
   vector. The full libauth suites are not re-run on BCHN. No new attacks were constructed.
 - The funding transactions themselves (the creation of the P2SH32 and token source outputs) were mined directly and
   not policy-tested.
-- The workload JSON files (about 30 MB) are not committed. Their sha256 values are in `raw/nc1-env.txt`, and the
+- The workload JSON files (about 30 MB) are not committed. The first 16 hex characters of their sha256 are in `raw/nc1-env.txt`, and the
   exporters regenerate them deterministically.
