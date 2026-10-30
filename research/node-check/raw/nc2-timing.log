@@ -1,0 +1,46 @@
+45 workloads (timing)
+ok  plonk-mul2:valid0 K=4 verify=42.9ms accepted lib=true
+ok  plonk-mul2:valid1 K=4 verify=42.76ms accepted lib=true
+ok  plonk-mul2:valid2 K=4 verify=42.73ms accepted lib=true
+ok  plonk-mul2:valid3 K=4 verify=42.59ms accepted lib=true
+ok  plonk-mul2:valid4 K=4 verify=42.84ms accepted lib=true
+ok  plonk-mul2:manip:extra foreign input K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16:valid0 K=4 verify=43.85ms accepted lib=true
+ok  plonk-merkle16:valid1 K=4 verify=43.7ms accepted lib=true
+ok  plonk-merkle16:valid2 K=4 verify=43.52ms accepted lib=true
+ok  plonk-merkle16:valid3 K=4 verify=43.64ms accepted lib=true
+ok  plonk-merkle16:valid4 K=4 verify=43.65ms accepted lib=true
+ok  plonk-merkle16:manip:extra foreign input K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-range64:valid0 K=3 verify=35.03ms accepted lib=true
+ok  plonk-range64:valid1 K=3 verify=34.86ms accepted lib=true
+ok  plonk-range64:valid2 K=3 verify=34.9ms accepted lib=true
+ok  plonk-range64:valid3 K=3 verify=34.85ms accepted lib=true
+ok  plonk-range64:valid4 K=3 verify=34.76ms accepted lib=true
+ok  plonk-range64:manip:extra foreign input K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  plonk-merkle16rc:valid0 K=3 verify=35.06ms accepted lib=true
+ok  plonk-merkle16rc:valid1 K=3 verify=35.11ms accepted lib=true
+ok  plonk-merkle16rc:valid2 K=3 verify=34.82ms accepted lib=true
+ok  plonk-merkle16rc:valid3 K=3 verify=35.05ms accepted lib=true
+ok  plonk-merkle16rc:valid4 K=3 verify=34.85ms accepted lib=true
+ok  plonk-merkle16rc:manip:extra foreign input K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  stark-mimc-S128-0:valid-tx0 K=6 verify=49.26ms accepted lib=true
+ok  stark-mimc-S128-0:valid-tx1 K=7 verify=49.73ms accepted lib=true
+ok  stark-mimc-S100b-0:valid-tx0 K=5 verify=56.99ms accepted lib=true
+ok  stark-fib-S100z-zkmin-0:valid-tx0 K=5 verify=63.06ms accepted lib=true
+ok  stark-fib-S100z-zkmin-0:valid-tx1 K=6 verify=68.53ms accepted lib=true
+ok  stark-fib-S128z-zkmin-0:valid-tx0 K=5 verify=60.27ms accepted lib=true
+ok  stark-fib-S128z-zkmin-0:valid-tx1 K=5 verify=59.93ms accepted lib=true
+ok  stark-fib-S128z-zkmin-0:valid-tx2 K=5 verify=53.28ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:valid K=10 verify=34.94ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra0 K=11 verify=37.65ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra1 K=11 verify=37.81ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra2 K=11 verify=37.75ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:worst K=10 verify=35.05ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:valid K=9 verify=26.85ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra0 K=9 verify=27.04ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra1 K=8 verify=24.99ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra2 K=9 verify=26.83ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra3 K=9 verify=27.47ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra4 K=9 verify=27.33ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra5 K=9 verify=27.31ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:worst K=8 verify=25.09ms accepted lib=true

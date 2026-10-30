@@ -14,3 +14,4 @@ Track 8a node-check: research verifiers on stock BCHN 29.1.0.
 - FINDING: with acceptnonstdtxn=1 BCHN mempool does NOT set SCRIPT_VM_LIMITS_STANDARD (validation.cpp:1590, needs fRequireStandard) -> std op-cost (hash iter 192) only on a POLICY=1 node. Added std-basis probes.
 - policy smoke OK (nc-psmoke1, stopped): std probes bracket BCHN std op-cost = libauth std + DEFINE within 1 B; bn254 ref needs fee retry (harness 1000-sat inputs)
 - full run started: research/node-check/run.sh nc1 9 7 11 -> raw/nc1-{timing,policy}.jsonl (nodes nc1-t, nc1-p; datadirs work/node-check/bchn-nc1-*)
+- DONE: nc1 (timing 195 + policy 57) and nc2 (timing valid 45) runs; all nodes stopped; README.md report draft written

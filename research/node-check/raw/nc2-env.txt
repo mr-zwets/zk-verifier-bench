@@ -1,0 +1,3 @@
+loadavg start: 1.43 2.30 2.28 2/1932 386864
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/node-check/bchn-nc2-t","rpcport":39566,"cpu":"9","pid":386873}
+loadavg end: 1.41 2.12 2.22 1/1954 387521
