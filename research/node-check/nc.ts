@@ -224,7 +224,8 @@ const main = async () => {
   const f = new Funder(chain); await f.genesis();
   const filter = opt('--filter') ? new RegExp(opt('--filter')!) : undefined;
   let wls = all('--src').flatMap(load).filter((w) => !filter || filter.test(w.id));
-  if (mode === 'policy') wls = wls.filter((w) => w.expect === 'accept' && w.kind !== 'define-probe');
+  // policy: every consensus-valid workload (valid txs and the DEFINE probes that libauth consensus accepts)
+  if (mode === 'policy') wls = wls.filter((w) => w.expect === 'accept' || (w.kind === 'define-probe' && w.expectLibauth === 'accept'));
   console.error(`${wls.length} workloads (${mode})`);
   for (const wl of wls) {
     try {

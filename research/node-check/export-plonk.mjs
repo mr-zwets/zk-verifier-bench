@@ -77,17 +77,20 @@ man('input dropped (last SI)', () => {}, (tx) => tx.slice(0, -1));
   add('manip:adaptive: proof 1 with the public inputs of proof 0', 'manipulation', 'reject', chainTx(vk, plan, built, w.pushes, sizeFills(vk, plan, built, w.pushes, {strict: false}))); }
 console.error('manipulations done');
 // ---- DEFINE probes on valid proof 0 ----
+// basis cons: libauth consensus op-cost (hash iteration cost 64; BCHN block validation); basis std: libauth standard
+// op-cost (192; BCHN mempool with fRequireStandard, i.e. acceptnonstdtxn=0). For each basis, the input's budget is set
+// one byte (800) under, or at/above, op-cost + DEFINE body bytes.
 {
   const iP = base.fills.indexOf(Math.max(...base.fills));
-  const at = (fill) => { const fl = base.fills.slice(); fl[iP] = fill; const tx = chainTx(vk, plan, built, base.w.pushes, fl); const c = spendTx('bch2026', 'consensus', tx); return {fl, tx, c: c[iP].opCost, u: c[iP].unlockingLen}; };
-  // FILL with budget (41 + u) * 800 just below / at-or-above c + defBytes (fixpoint: c moves with the FILL's own push)
-  const solve = (under) => { let f = base.fills[iP];
-    for (let it = 0; it < 6; it++) { const r = at(f); const target = r.c + built.defBytes; const uWant = under ? Math.ceil(target / 800) - 41 - 1 : Math.ceil(target / 800) - 41; const nf = f + (uWant - r.u); if (nf === f) break; f = nf; }
-    if (f < 0) throw new Error('probe needs a negative FILL'); return at(f); };
-  for (const under of [true, false]) {
-    const r = solve(under); const budget = (41 + r.u) * 800;
-    add(`define-probe-${under ? 'under' : 'over'}`, 'define-probe', under ? 'reject' : 'accept', r.tx, {expectLibauth: 'accept', probeInput: iP, probeFill: r.fl[iP],
-      description: `input ${iP} (${plan.roles[iP].kind}) FILL ${r.fl[iP]}: budget ${budget}, libauth consensus op ${r.c}, + DEFINE bodies ${built.defBytes} = ${r.c + built.defBytes} (${under ? 'over' : 'within'} budget by ${Math.abs(budget - r.c - built.defBytes)})`});
+  const at = (fill, mode) => { const fl = base.fills.slice(); fl[iP] = fill; const tx = chainTx(vk, plan, built, base.w.pushes, fl); const c = spendTx('bch2026', mode, tx); return {fl, tx, c: c[iP].opCost, u: c[iP].unlockingLen}; };
+  const solve = (under, mode) => { let f = base.fills[iP];
+    for (let it = 0; it < 6; it++) { const r = at(f, mode); const target = r.c + built.defBytes; const uWant = under ? Math.ceil(target / 800) - 41 - 1 : Math.ceil(target / 800) - 41; const nf = f + (uWant - r.u); if (nf === f) break; f = nf; }
+    if (f < 0) throw new Error('probe needs a negative FILL'); return at(f, mode); };
+  for (const mode of ['consensus', 'standard']) for (const under of [true, false]) {
+    const r = solve(under, mode); const budget = (41 + r.u) * 800; const b = mode === 'consensus' ? 'cons' : 'std';
+    const libCons = verifyTx('bch2026', 'consensus', r.tx).accepted;
+    add(`define-probe-${b}-${under ? 'under' : 'over'}`, 'define-probe', mode === 'consensus' && under ? 'reject' : 'accept', r.tx, {expectLibauth: libCons ? 'accept' : 'reject', probeInput: iP, probeFill: r.fl[iP], probeBasis: b,
+      description: `input ${iP} (${plan.roles[iP].kind}) FILL ${r.fl[iP]}: budget ${budget}, libauth ${mode} op ${r.c} + DEFINE bodies ${built.defBytes} = ${r.c + built.defBytes} (${under ? 'over' : 'within'} budget by ${Math.abs(budget - r.c - built.defBytes)})`});
   }
 }
 writeFileSync(outFile, JSON.stringify({circuit, defBytes: built.defBytes, redeemBytes: built.redeem.length, workloads: wls}) + '\n');

@@ -21,27 +21,36 @@ const {sha} = await imp('model.mjs');
 
 const [name, catHex, outFile] = process.argv.slice(2);
 const {v, vk, proof, pis} = loadVector(`${G16}/research/pq-stark/prover/vectors/${name}.json`);
-const {plan, pg: pg0} = planAndProgram(vk, pis, {});
-const nc = pg0.nc;
-if (plan.thread) plan.thread.category = Buffer.from(catHex, 'hex');
-const pg = plan.thread ? programA(vk, pis, plan, {codeBlobs: nc}) : pg0;
-if (pg.redeem.length !== pg0.redeem.length) throw new Error('redeem size changed with the category');
 const enc = encodeA(vk, proof, pis);
-const defineBytes = pg.code.reduce((a, c) => a + c.length, 0) + [...pg.fns.values()].reduce((a, f) => a + f.body.length, 0);
-// ---- pads: gradeA's least fixpoint (BCHN-adjusted standard op-cost <= 94% of budget, hash iterations) ----
-const MARGIN = 0.94; const pads = {};
-let txs;
-for (let it = 0; it < 12; it++) {
-  txs = txsA(vk, plan, pg, witnessesA(vk, plan, pg, enc, pads), enc.G);
-  const res = txs.map((tx) => evaluateTx(tx, 'looseStd')); let changed = false;
-  res.forEach((rs, t) => rs.forEach((r, i) => {
-    if (i >= 1 && i <= pg.nc) return;
-    const need = Math.max(Math.ceil((r.opCost + defineBytes) / (800 * MARGIN)) - 41, Math.ceil(r.iters / 0.5) - 41);
-    if (need > r.unlocking) { pads[`${t}:${i}`] = (pads[`${t}:${i}`] ?? 0) + need - r.unlocking; changed = true; }
-  }));
-  if (!changed) break;
-}
-if (txs.some((t) => t.txBytes > 100_000)) throw new Error('a padded transaction exceeds 100,000 B (gradeA would re-plan; not handled here)');
+// gradeA(): plan, program with the real category, pads by least fixpoint (BCHN-adjusted standard op-cost <= 94% of
+// budget, hash iterations); re-planned with the pads counted if a padded transaction exceeds 100,000 B
+const MARGIN = 0.94;
+const grade = (padPerQry) => {
+  const {plan, pg: pg0} = planAndProgram(vk, pis, {}, padPerQry);
+  const nc = pg0.nc;
+  if (plan.thread) plan.thread.category = Buffer.from(catHex, 'hex');
+  const pg = plan.thread ? programA(vk, pis, plan, {codeBlobs: nc}) : pg0;
+  if (pg.redeem.length !== pg0.redeem.length) throw new Error('redeem size changed with the category');
+  const defineBytes = pg.code.reduce((a, c) => a + c.length, 0) + [...pg.fns.values()].reduce((a, f) => a + f.body.length, 0);
+  const pads = {}; let txs;
+  for (let it = 0; it < 12; it++) {
+    txs = txsA(vk, plan, pg, witnessesA(vk, plan, pg, enc, pads), enc.G);
+    const res = txs.map((tx) => evaluateTx(tx, 'looseStd')); let changed = false;
+    res.forEach((rs, t) => rs.forEach((r, i) => {
+      if (i >= 1 && i <= pg.nc) return;
+      const need = Math.max(Math.ceil((r.opCost + defineBytes) / (800 * MARGIN)) - 41, Math.ceil(r.iters / 0.5) - 41);
+      if (need > r.unlocking) { pads[`${t}:${i}`] = (pads[`${t}:${i}`] ?? 0) + need - r.unlocking; changed = true; }
+    }));
+    if (!changed) break;
+  }
+  if (txs.some((t) => t.txBytes > 100_000) && padPerQry < 20_000) {
+    const mx = Math.max(0, ...Object.entries(pads).filter(([k]) => Number(k.split(':')[1]) > pg.nc).map(([, x]) => x));
+    if (mx > padPerQry) return grade(mx + 64);
+  }
+  if (txs.some((t) => t.txBytes > 100_000)) throw new Error('a padded transaction exceeds 100,000 B');
+  return {plan, pg, nc, defineBytes, pads, txs, padPerQry};
+};
+const {plan, pg, nc, defineBytes, pads, txs, padPerQry} = grade(0);
 const T = plan.txs.length;
 const hex = (b) => Buffer.from(b).toString('hex');
 const tokJ = (t) => t && {categoryHex: hex(t.category), amount: String(t.amount), ...(t.nft ? {nft: {capability: t.nft.capability, commitmentHex: hex(t.nft.commitment)}} : {})};
@@ -66,8 +75,10 @@ const build = (e, {g = pg, mutate, G} = {}) => { let wit = witnessesA(vk, plan, 
 const cases = casesOf(v).slice(1); const step = Math.ceil(cases.length / 6);
 for (const c of cases.filter((_, i) => i % step === 0).slice(0, 6)) {
   const g = programA(vk, c.pis, plan, {codeBlobs: nc}); const e = encodeA(vk, c.proof, c.pis);
-  if (e.malformed) { console.error(`skip ${c.name}: encoder flags it (${e.malformed})`); continue; }
-  const [tx, t] = firstRej(build(e, {g})); add(`tampered:${c.name}`, 'tampered', 'reject', tx, t);
+  const ts = build(e, {g});
+  // test-a.mjs: a malformed proof the script still accepts is an encoder-only rejection; not a node test, skipped
+  if (e.malformed && ts.every((x) => verifyTx(x, 'bchCons') === true)) { console.error(`skip ${c.name}: encoder-only rejection (${e.malformed})`); continue; }
+  const [tx, t] = firstRej(ts); add(`tampered:${c.name}`, 'tampered', 'reject', tx, t, e.malformed ? {malformed: e.malformed} : {});
 }
 const q0 = nc + 1; const flip = (b, i) => { const x = Buffer.from(b); x[i < 0 ? x.length + i : i] ^= 1; return x; };
 const mut = (nm, f) => { const [tx, t] = firstRej(build(enc, {mutate: f})); add(`manip:${nm}`, 'manipulation', 'reject', tx, t); };
@@ -83,5 +94,5 @@ if (plan.thread) {
   { const ts = build(enc); const so = ts[1].sourceOutputs[0];
     ts[1].sourceOutputs[0] = {...so, token: {...so.token, nft: {...so.token.nft, commitment: threadCommit(enc.G, 2)}}}; add('thread: tx1 holds the NFT of another k', 'thread', 'reject', ts[1], 1); }
 }
-writeFileSync(outFile, JSON.stringify({vector: name, transactions: T, defBytes: defineBytes, redeemBytes: pg.redeem.length, codeBytes: pg.code.map((c) => c.length), pads, workloads: wls}) + '\n');
+writeFileSync(outFile, JSON.stringify({vector: name, transactions: T, defBytes: defineBytes, redeemBytes: pg.redeem.length, codeBytes: pg.code.map((c) => c.length), pads, padPerQry, workloads: wls}) + '\n');
 console.error(`${wls.length} workloads -> ${outFile}`);
