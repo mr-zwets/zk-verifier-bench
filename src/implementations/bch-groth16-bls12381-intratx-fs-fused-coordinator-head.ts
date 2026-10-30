@@ -32,6 +32,7 @@ import { readFileSync } from 'node:fs';
 import { hexToBin } from '@bitauth/libauth';
 
 import type { Implementation, Step } from '../harness/types.js';
+import { bls12381IntratxFsProofInputs } from './groth16-proof-inputs.js';
 
 interface RawStep {
   label: string;
@@ -77,6 +78,7 @@ export const bchGroth16Bls12381IntratxFsFusedCoordinatorHead: Implementation = {
   field: 'BLS12-381',
   structure: 'single-tx',
   proofBinding: 'runtime',
+  proofInputs: bls12381IntratxFsProofInputs,
   source:
     'Complete BLS12-381 Groth16 verification in one current-BCH standard transaction. ' +
     'The unchanged 528-byte arithmetic initializer is carried by the Regular representative. The externally anchored coordinator commits to the 8 worker lockings, while worker ' +

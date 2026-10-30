@@ -122,3 +122,21 @@ export const bn254CovenantResidueProofInputs: ProofInput[] = numericPushes(0, 7,
 // pushes 1..8 =
 // Cy, Cx, Byb, Bya, Bxb, Bxa, -A.y, -A.x. The genesis carries only public inputs.
 export const bls12381CovenantResidueProofInputs: ProofInput[] = numericPushes(4, 1, 8);
+
+// BLS12-381 intra-tx Fiat-Shamir PIT family (bch-groth16-bls12381-intratx-fs and its 12 variants, all
+// emitted by chunked/bls12-381/measure_d3_two_chart_binary.mjs with RPA_SKIP_GAMMA=1): the coordinator
+// (input 0) pushes [transcriptHeader, statement, ...]; every input reads the statement as that second
+// push (statementExpression = secondPushExpression(0, ...), measure_d3_two_chart_binary.mjs:1243). The
+// 737-byte statement (statementFields, :967-993) has the same SKIP_GAMMA layout as the FS singleton above:
+//   [0,1) Bidentity, [1,193) effective B, [193,257) public inputs, [257,545) residue root,
+//   [545,641) unit(-A) = (p0u, p0v), [641,737) unit(C) = (p3u, p3v)
+// (pairs = qsplitPairsFor(inputs, effectiveProof), :442; unitG1 as above). When B is the identity the
+// generator zeroes A and ships G2.BASE as B (effectiveProof, :277-282), so distinctness is judged on what
+// the contract consumes. Checked on every shipped run of all 13 vector files (valid, 8 extras, worst case):
+// push 1 of input 0 is 737 bytes, B is on the twist, both unit points satisfy v = 4u^3 + 16v^3 with
+// canonical limbs, and the nine honest fingerprints are pairwise distinct.
+export const bls12381IntratxFsProofInputs: ProofInput[] = [
+  { input: 0, push: 1, encoding: 'bytes', offset: 0, length: 1 },
+  ...packedFields(0, 1, 1, 48, 4),
+  ...packedFields(0, 1, 545, 48, 4),
+];
