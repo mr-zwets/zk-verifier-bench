@@ -161,28 +161,45 @@ const runTiming = async (chain: Chain, f: Funder, wl: Wl, o: { reps: number; tar
 
 // ---------------------------------------------------------------- policy mode (testmempoolaccept, acceptnonstdtxn=0)
 const chainTxids = new Map<string, Map<number, { txid: Uint8Array; outputs: Out[] }>>(); // group -> chainIndex -> mined tx
-const runPolicy = async (chain: Chain, f: Funder, wl0: Wl) => {
+// A tx whose fee is below the default relay fee (the exporters' nominal source values were never meant to pay fees) is
+// retried once with every funded source value raised so that the fee is 2 sat/B; if a script introspected input values
+// the retry would fail with a script error, which is reported as such.
+const tokStr = (t: unknown) => JSON.stringify(t, (_, v) => (typeof v === 'bigint' ? String(v) : v instanceof Uint8Array ? binToHex(v) : v));
+const policyAttempt = async (chain: Chain, f: Funder, wl0: Wl, bump: bigint) => {
   let wl = wl0;
-  const toFund = wl.tx.inputs.filter((i) => !i.fromTx).map((i) => i.source);
+  const toFund = wl.tx.inputs.filter((i) => !i.fromTx).map((i) => ({ ...i.source, value: i.source.value + bump }));
   const funded = toFund.length ? await f.fund(toFund) : [];
   let k = 0;
   // chained inputs spend the real output of the earlier chain transaction (its value, e.g. 1,000 sat, replaces the
   // exporter's nominal source value; locking and token must match)
-  const sources = wl.tx.inputs.map((i) => { if (!i.fromTx) return i.source; const t = chainTxids.get(wl.group)?.get(i.fromTx.tx); if (!t) throw new Error(`${wl.id}: chain tx ${i.fromTx.tx} not replayed yet`);
-    const o = t.outputs[i.fromTx.vout]!; if (binToHex(o.locking) !== binToHex(i.source.locking) || JSON.stringify(o.token, (_, v) => (typeof v === 'bigint' ? String(v) : v instanceof Uint8Array ? binToHex(v) : v)) !== JSON.stringify(i.source.token, (_, v) => (typeof v === 'bigint' ? String(v) : v instanceof Uint8Array ? binToHex(v) : v))) throw new Error(`${wl.id}: chained output differs from the source`);
+  const sources = wl.tx.inputs.map((i) => { if (!i.fromTx) return { ...i.source, value: i.source.value + bump }; const t = chainTxids.get(wl.group)?.get(i.fromTx.tx); if (!t) throw new Error(`${wl.id}: chain tx ${i.fromTx.tx} not replayed yet`);
+    const o = t.outputs[i.fromTx.vout]!; if (binToHex(o.locking) !== binToHex(i.source.locking) || tokStr(o.token) !== tokStr(i.source.token)) throw new Error(`${wl.id}: chained output differs from the source`);
     return o; });
   const outpoints = wl.tx.inputs.map((i) => (!i.fromTx ? funded[k++]! : { txid: chainTxids.get(wl.group)!.get(i.fromTx.tx)!.txid, vout: i.fromTx.vout }));
   wl = { ...wl, tx: { ...wl.tx, inputs: wl.tx.inputs.map((i, j) => ({ ...i, source: sources[j]! })) } };
   const tx = toLibauth(wl, outpoints); const raw = encodeTransaction(tx as any);
-  const rep = opReport(wl, tx, wl.tx.inputs.map((i) => libTx(i.source)));
   let tma: any; try { tma = (await chain.rpc.call<any[]>('testmempoolaccept', [binToHex(raw)]))[0]; } catch (e) { tma = { rpcError: String((e as Error).message) }; }
-  // then mine it (consensus), so that later chain transactions can spend its outputs
-  const sub = await chain.submit(chain.buildBlock([raw]));
-  if (sub.accepted && wl.chainIndex !== undefined) { if (!chainTxids.has(wl.group)) chainTxids.set(wl.group, new Map()); chainTxids.get(wl.group)!.set(wl.chainIndex, { txid: txidInternal(raw), outputs: wl.tx.outputs }); }
   const fee = wl.tx.inputs.reduce((s, i) => s + i.source.value, 0n) - wl.tx.outputs.reduce((s, o) => s + o.value, 0n);
+  return { wl, tx, raw, tma, fee, nFunded: toFund.length };
+};
+const runPolicy = async (chain: Chain, f: Funder, wl0: Wl) => {
+  const first = await policyAttempt(chain, f, wl0, 0n);
+  let last = first; let retry: any;
+  if (first.tma?.allowed !== true && /fee/i.test(first.tma?.['reject-reason'] ?? '') && first.nFunded > 0) {
+    const bump = (2n * BigInt(first.raw.length) - first.fee + BigInt(first.nFunded) - 1n) / BigInt(first.nFunded);
+    last = await policyAttempt(chain, f, wl0, bump > 0n ? bump : 1n);
+    retry = { bumpPerFundedInputSat: String(bump), testmempoolaccept: last.tma, allowed: last.tma?.allowed === true, rejectReason: last.tma?.['reject-reason'], feeSat: String(last.fee), feeRateSatPerB: Number(last.fee) / last.raw.length };
+  }
+  const wl = last.wl;
+  const rep = opReport(wl, last.tx, wl.tx.inputs.map((i) => libTx(i.source)));
+  // then mine it (consensus), so that later chain transactions can spend its outputs
+  const sub = await chain.submit(chain.buildBlock([last.raw]));
+  if (sub.accepted && wl.chainIndex !== undefined) { if (!chainTxids.has(wl.group)) chainTxids.set(wl.group, new Map()); chainTxids.get(wl.group)!.set(wl.chainIndex, { txid: txidInternal(last.raw), outputs: wl.tx.outputs }); }
   return { mode: 'policy', id: wl.id, group: wl.group, kind: wl.kind, expect: wl.expect, chainedInputs: wl.tx.inputs.filter((i) => i.fromTx).length,
-    testmempoolaccept: tma, allowed: tma?.allowed === true, rejectReason: tma?.['reject-reason'], minedAfter: sub.accepted, minedResult: sub.result,
-    txBytes: raw.length, inputs: wl.tx.inputs.length, outputs: wl.tx.outputs.length, feeSat: String(fee), feeRateSatPerB: Number(fee) / raw.length,
+    testmempoolaccept: first.tma, allowed: first.tma?.allowed === true, rejectReason: first.tma?.['reject-reason'], feeSat: String(first.fee), feeRateSatPerB: Number(first.fee) / first.raw.length,
+    feeRetry: retry, allowedAfterFee: last.tma?.allowed === true,
+    minedAfter: sub.accepted, minedResult: sub.result,
+    txBytes: last.raw.length, inputs: wl.tx.inputs.length, outputs: wl.tx.outputs.length,
     maxSourceLocking: Math.max(...wl.tx.inputs.map((i) => i.source.locking.length)), ...rep };
 };
 
