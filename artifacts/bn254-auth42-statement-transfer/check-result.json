@@ -1,0 +1,31 @@
+{
+  "status": "PASS_PUBLIC_KEY_ABI_ANCHOR",
+  "inputs": {
+    "originalPublicBenchmark": "PR11",
+    "checkedPacket": "src/bch/groth16-intratx-authenticated-p2s-checked-vectors.json"
+  },
+  "publicHashes": {
+    "pairing": "e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e",
+    "intratx": "9ed76575922d82af5cb1cd39c78e06ef7840a3bd14359694c60d2c0d171357ab",
+    "grouped": "b8aed2b6062ce3fa9b283764774467a8e475c61cc012e0ff7611e6fb3fbc93a5",
+    "originalAuth": "34bb01c525668364b30c04232a912af5485318c8cde8f3a9267b2705ead31074",
+    "checkedAuth": "a33b25eb132d1222d6550b0bf94df08ec48760eb2f7d30bf6ff9b97bf361fcd3",
+    "proofBlob": "e8d1b60dac29422889d9b41398fe8bff3b18f1872fd6c9da10b567f979cc1d1b",
+    "scalarBlob": "ce02ce1a17239280c5210126efe441ac9d4ddd04c37bdb345cadc2054b23e3aa",
+    "stateBlob": "47425fd5490e20ce904b684503abb3ce9c1d879d98b8d9ad3992efb34dc8af45",
+    "millerBlob": "ab13a947b1f093e942ffe7ebc402881d1c1b148c9bd8a38a5c013a478b893b27"
+  },
+  "checkedInputs": 42,
+  "vkx": {
+    "x": "8849706566265323475308844786466876320844339848804625399173904868893806414653",
+    "y": "2254663182535014285995571660012964805318114046081299626852514798513036795127"
+  },
+  "anchors": {
+    "proofBytes": 256,
+    "scalarBytes": 64,
+    "stateBytes": 160,
+    "millerBytes": 320
+  },
+  "vmExecutions": 0,
+  "newFixtures": 0
+}

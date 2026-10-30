@@ -1,0 +1,3631 @@
+{
+  "schema": "source6-raw14-conditional-graph-join/v1",
+  "status": "PASS_CONDITIONAL_FULL14_GRAPH_JOIN",
+  "scope": {
+    "claim": "The corrected raw14 graph has a joined conditional mathematical equation proof and a positive-only replay over one existing proof fixture.",
+    "notClaimed": [
+      "universal producer completeness",
+      "arbitrary-VK correctness",
+      "native resource admission",
+      "mainnet or relay acceptance",
+      "the separate generic-affine component"
+    ],
+    "executionPolicy": "read-only certificate join; no generator, compiler, prover, VM, mutation, negative case, or optimization executed"
+  },
+  "pins": [
+    {
+      "path": "public-source/source-manifest.json",
+      "sha256": "9f3707aa8ff4217e460c49cd7ec78fddf2480ebde1b23d8299e1242340780ab0"
+    },
+    {
+      "path": "public-artifact/program-bodies.json",
+      "sha256": "273cd035163c2196f0bad07a4f8a991451f7a998ee1d3fe5cf158dea2a0eed41"
+    },
+    {
+      "path": "public-artifact/domain-ownership-v1.json",
+      "sha256": "e77bce2b3bb142ff3c73f5d208c21a79c78175ec24ca9cdd5dc2105742fa5445"
+    },
+    {
+      "path": "public-artifact/existing-positive-context.json",
+      "sha256": "6e49adec5a388595bc99c7f94b0fcbba7cf7b5427f5e0ed398646b831d15b0ef"
+    }
+  ],
+  "source": {
+    "sourceHead": "0b5b2240cbb2f723a87dce2f43b92fc6f38e4b4d",
+    "compilerHead": "1c707c1dbf87396b30ba5e0704b1db44475ce893",
+    "originalArchivedProgramCount": 0,
+    "repairedArchivedProgramCount": 0,
+    "repairedProgramCount": 14
+  },
+  "programs": [
+    {
+      "input": 0,
+      "kind": "genesis",
+      "range": [
+        0,
+        41
+      ],
+      "original": {
+        "sha256": "f70a293f9b709c6d36167a7eae79d73fa1bd9c75dfc1e05d4f960dff58cf7733",
+        "bytes": 2399,
+        "locking": "aa207c162edafebc8e0e3bfd631a5404ed349eebe27890100ac95b8f4bf3a3a5e7c687",
+        "successorLocking": "aa20be438222b72ab84b282476f203163a76de6430e28e71fedc4bf3f9bcf5c9e2ad87"
+      },
+      "repaired": {
+        "sha256": "d9c068cd6e20ff2df98afc76e4a99341530447f5cfb99260ad66bcd90b946fed",
+        "bytes": 2399,
+        "locking": "aa200229372a116f4a2305e75a63bcf6e0e02a3f08bc8f8e1e0ac487d82029efd13d87",
+        "successorLocking": "aa203d445d90589e0a1e0bc9d04f45d162c8a17ec4b1230e81a7e940140b334f40b687"
+      },
+      "bodyDiff": {
+        "count": 32,
+        "ranges": [
+          [
+            2365,
+            2396
+          ]
+        ]
+      },
+      "transferClaim": "entire program except exact successor locking digest literal",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "Ax",
+              "type": "int"
+            },
+            {
+              "name": "Ay",
+              "type": "int"
+            },
+            {
+              "name": "Bxa",
+              "type": "int"
+            },
+            {
+              "name": "Bxb",
+              "type": "int"
+            },
+            {
+              "name": "Bya",
+              "type": "int"
+            },
+            {
+              "name": "Byb",
+              "type": "int"
+            },
+            {
+              "name": "Cx",
+              "type": "int"
+            },
+            {
+              "name": "Cy",
+              "type": "int"
+            },
+            {
+              "name": "in0",
+              "type": "int"
+            },
+            {
+              "name": "in1",
+              "type": "int"
+            },
+            {
+              "name": "k10",
+              "type": "int"
+            },
+            {
+              "name": "k20",
+              "type": "int"
+            },
+            {
+              "name": "k11",
+              "type": "int"
+            },
+            {
+              "name": "k21",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "04b200a0e93c8d5b47d82b0375d7d1805be3efdea98e9400e407234ccca61786",
+        "definitionCount": 7,
+        "staticCallCount": 64,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": true,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": null,
+        "expectedOutputCommitment": "fadd76fd4225fdaa5ade01e06112007cc08aa02b66615c48fef86ec8f69c6969"
+      }
+    },
+    {
+      "input": 1,
+      "kind": "forward",
+      "range": [
+        41,
+        80
+      ],
+      "original": {
+        "sha256": "47d842a452202a02a0391b8df35b058688be3ad9e93498c33643a432cf2a68b5",
+        "bytes": 2107,
+        "locking": "aa20be438222b72ab84b282476f203163a76de6430e28e71fedc4bf3f9bcf5c9e2ad87",
+        "successorLocking": "aa207938123af64561ea8a97f465ddb39b4a311f7c868905e577589d9e979d2683e487"
+      },
+      "repaired": {
+        "sha256": "31dfcc4d545e1844102e02d22dea278d8d05d16fff0d25876a568fb82629192e",
+        "bytes": 2107,
+        "locking": "aa203d445d90589e0a1e0bc9d04f45d162c8a17ec4b1230e81a7e940140b334f40b687",
+        "successorLocking": "aa205cfb8cc33affdc2f5a2911363668a097bb88d3fd5edcc71c153ba07d2fa78b9c87"
+      },
+      "bodyDiff": {
+        "count": 32,
+        "ranges": [
+          [
+            2073,
+            2104
+          ]
+        ]
+      },
+      "transferClaim": "entire program except exact successor locking digest literal",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "rX",
+              "type": "int"
+            },
+            {
+              "name": "rY",
+              "type": "int"
+            },
+            {
+              "name": "rZ",
+              "type": "int"
+            },
+            {
+              "name": "in0",
+              "type": "int"
+            },
+            {
+              "name": "in1",
+              "type": "int"
+            },
+            {
+              "name": "k10",
+              "type": "int"
+            },
+            {
+              "name": "k20",
+              "type": "int"
+            },
+            {
+              "name": "k11",
+              "type": "int"
+            },
+            {
+              "name": "k21",
+              "type": "int"
+            },
+            {
+              "name": "Ax",
+              "type": "int"
+            },
+            {
+              "name": "Ay",
+              "type": "int"
+            },
+            {
+              "name": "Bxa",
+              "type": "int"
+            },
+            {
+              "name": "Bxb",
+              "type": "int"
+            },
+            {
+              "name": "Bya",
+              "type": "int"
+            },
+            {
+              "name": "Byb",
+              "type": "int"
+            },
+            {
+              "name": "Cx",
+              "type": "int"
+            },
+            {
+              "name": "Cy",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "04b200a0e93c8d5b47d82b0375d7d1805be3efdea98e9400e407234ccca61786",
+        "definitionCount": 7,
+        "staticCallCount": 64,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "fadd76fd4225fdaa5ade01e06112007cc08aa02b66615c48fef86ec8f69c6969",
+        "expectedOutputCommitment": "fadd76fd4225fdaa5ade01e06112007cc08aa02b66615c48fef86ec8f69c6969"
+      }
+    },
+    {
+      "input": 2,
+      "kind": "forward",
+      "range": [
+        80,
+        118
+      ],
+      "original": {
+        "sha256": "5ccab22c51bdaedc46587b7be4d7c4086438d825efe5c050fbadeef6bbef37fb",
+        "bytes": 2107,
+        "locking": "aa207938123af64561ea8a97f465ddb39b4a311f7c868905e577589d9e979d2683e487",
+        "successorLocking": "aa20c097f1ebd1672beb627192531d3391047a495c74576c685970a73ac99a06d73587"
+      },
+      "repaired": {
+        "sha256": "70571b5f66eb08cfd0fdc5270f6168ac182940c254e63c3a241a28e141d5d1e3",
+        "bytes": 2107,
+        "locking": "aa205cfb8cc33affdc2f5a2911363668a097bb88d3fd5edcc71c153ba07d2fa78b9c87",
+        "successorLocking": "aa206b211a7bdd0c5f7dcd25490cc227fcb4439fd7887bff47a12dac1a4b6f1f49b487"
+      },
+      "bodyDiff": {
+        "count": 32,
+        "ranges": [
+          [
+            2073,
+            2104
+          ]
+        ]
+      },
+      "transferClaim": "entire program except exact successor locking digest literal",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "rX",
+              "type": "int"
+            },
+            {
+              "name": "rY",
+              "type": "int"
+            },
+            {
+              "name": "rZ",
+              "type": "int"
+            },
+            {
+              "name": "in0",
+              "type": "int"
+            },
+            {
+              "name": "in1",
+              "type": "int"
+            },
+            {
+              "name": "k10",
+              "type": "int"
+            },
+            {
+              "name": "k20",
+              "type": "int"
+            },
+            {
+              "name": "k11",
+              "type": "int"
+            },
+            {
+              "name": "k21",
+              "type": "int"
+            },
+            {
+              "name": "Ax",
+              "type": "int"
+            },
+            {
+              "name": "Ay",
+              "type": "int"
+            },
+            {
+              "name": "Bxa",
+              "type": "int"
+            },
+            {
+              "name": "Bxb",
+              "type": "int"
+            },
+            {
+              "name": "Bya",
+              "type": "int"
+            },
+            {
+              "name": "Byb",
+              "type": "int"
+            },
+            {
+              "name": "Cx",
+              "type": "int"
+            },
+            {
+              "name": "Cy",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "04b200a0e93c8d5b47d82b0375d7d1805be3efdea98e9400e407234ccca61786",
+        "definitionCount": 7,
+        "staticCallCount": 64,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "fadd76fd4225fdaa5ade01e06112007cc08aa02b66615c48fef86ec8f69c6969",
+        "expectedOutputCommitment": "cec494c32bf78ef5dea32c3e174c5fe1bcc9fd24da556d7fd219943b9dd1ebff"
+      }
+    },
+    {
+      "input": 3,
+      "kind": "forward",
+      "range": [
+        118,
+        128
+      ],
+      "original": {
+        "sha256": "f936288ff4b2dbdb65d78f57309a05704fe7ced5f4f9c49fd0380c78e0c5cf81",
+        "bytes": 2171,
+        "locking": "aa20c097f1ebd1672beb627192531d3391047a495c74576c685970a73ac99a06d73587",
+        "successorLocking": "aa20429c0efa5a90066b95c85ca4fe0cd1b6b6399e44c49f8bee6a3455b3df8ae26987"
+      },
+      "repaired": {
+        "sha256": "c527b78f1ac268759293a0f308984a67c6aceec1988a7655defc14abfee7a56f",
+        "bytes": 2171,
+        "locking": "aa206b211a7bdd0c5f7dcd25490cc227fcb4439fd7887bff47a12dac1a4b6f1f49b487",
+        "successorLocking": "aa20f8d1a51e815600423abf21f64ec314fb2187d815030d595f354f1a4b778beee287"
+      },
+      "bodyDiff": {
+        "count": 32,
+        "ranges": [
+          [
+            2134,
+            2165
+          ]
+        ]
+      },
+      "transferClaim": "entire program except exact successor locking digest literal",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "rX",
+              "type": "int"
+            },
+            {
+              "name": "rY",
+              "type": "int"
+            },
+            {
+              "name": "rZ",
+              "type": "int"
+            },
+            {
+              "name": "in0",
+              "type": "int"
+            },
+            {
+              "name": "in1",
+              "type": "int"
+            },
+            {
+              "name": "k10",
+              "type": "int"
+            },
+            {
+              "name": "k20",
+              "type": "int"
+            },
+            {
+              "name": "k11",
+              "type": "int"
+            },
+            {
+              "name": "k21",
+              "type": "int"
+            },
+            {
+              "name": "Ax",
+              "type": "int"
+            },
+            {
+              "name": "Ay",
+              "type": "int"
+            },
+            {
+              "name": "Bxa",
+              "type": "int"
+            },
+            {
+              "name": "Bxb",
+              "type": "int"
+            },
+            {
+              "name": "Bya",
+              "type": "int"
+            },
+            {
+              "name": "Byb",
+              "type": "int"
+            },
+            {
+              "name": "Cx",
+              "type": "int"
+            },
+            {
+              "name": "Cy",
+              "type": "int"
+            },
+            {
+              "name": "zInv",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "04b200a0e93c8d5b47d82b0375d7d1805be3efdea98e9400e407234ccca61786",
+        "definitionCount": 7,
+        "staticCallCount": 70,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "cec494c32bf78ef5dea32c3e174c5fe1bcc9fd24da556d7fd219943b9dd1ebff",
+        "expectedOutputCommitment": "288c48394814ff6bdf4bd2dead6201356c3a059b094ee6f16fc43d3420989cb8"
+      }
+    },
+    {
+      "input": 4,
+      "kind": "forward",
+      "range": [
+        0,
+        38
+      ],
+      "original": {
+        "sha256": "835f85832a0717d296e3ba091afd42617687124504977c77b43ae07d02c7354b",
+        "bytes": 8187,
+        "locking": "aa20429c0efa5a90066b95c85ca4fe0cd1b6b6399e44c49f8bee6a3455b3df8ae26987",
+        "successorLocking": "aa20d08caee89d0c329aeffe753e236983e754d705d77963d134c7c056c04f63b8a087"
+      },
+      "repaired": {
+        "sha256": "d64ad31a5d64a06c9f85f8924849431614b3f57c96efb9534dcf67c133e8d295",
+        "bytes": 8039,
+        "locking": "aa20f8d1a51e815600423abf21f64ec314fb2187d815030d595f354f1a4b778beee287",
+        "successorLocking": "aa20d08caee89d0c329aeffe753e236983e754d705d77963d134c7c056c04f63b8a087"
+      },
+      "bodyDiff": {
+        "count": 4653,
+        "ranges": [
+          [
+            3458,
+            3494
+          ],
+          [
+            3496,
+            3612
+          ],
+          [
+            3614,
+            3655
+          ],
+          [
+            3657,
+            3659
+          ],
+          [
+            3661,
+            3685
+          ],
+          [
+            3688,
+            3721
+          ],
+          [
+            3723,
+            3852
+          ],
+          [
+            3854,
+            3898
+          ],
+          [
+            3900,
+            3904
+          ],
+          [
+            3906,
+            4018
+          ],
+          [
+            4020,
+            4069
+          ],
+          [
+            4071,
+            4217
+          ],
+          [
+            4219,
+            4223
+          ],
+          [
+            4225,
+            4277
+          ],
+          [
+            4279,
+            4283
+          ],
+          [
+            4285,
+            4289
+          ],
+          [
+            4291,
+            4431
+          ],
+          [
+            4433,
+            4437
+          ],
+          [
+            4439,
+            4602
+          ],
+          [
+            4604,
+            4760
+          ],
+          [
+            4762,
+            4762
+          ],
+          [
+            4764,
+            4764
+          ],
+          [
+            4766,
+            4908
+          ],
+          [
+            4910,
+            4931
+          ],
+          [
+            4933,
+            5171
+          ],
+          [
+            5173,
+            5177
+          ],
+          [
+            5179,
+            5342
+          ],
+          [
+            5344,
+            5461
+          ],
+          [
+            5463,
+            5484
+          ],
+          [
+            5486,
+            5492
+          ],
+          [
+            5494,
+            5505
+          ],
+          [
+            5507,
+            5507
+          ],
+          [
+            5509,
+            5516
+          ],
+          [
+            5518,
+            5526
+          ],
+          [
+            5528,
+            5530
+          ],
+          [
+            5532,
+            5536
+          ],
+          [
+            5538,
+            5542
+          ],
+          [
+            5544,
+            5549
+          ],
+          [
+            5551,
+            5555
+          ],
+          [
+            5557,
+            5561
+          ],
+          [
+            5563,
+            5650
+          ],
+          [
+            5652,
+            5703
+          ],
+          [
+            5705,
+            5709
+          ],
+          [
+            5711,
+            5797
+          ],
+          [
+            5799,
+            5874
+          ],
+          [
+            5876,
+            6039
+          ],
+          [
+            6041,
+            6079
+          ],
+          [
+            6081,
+            6204
+          ],
+          [
+            6206,
+            6255
+          ],
+          [
+            6257,
+            6267
+          ],
+          [
+            6269,
+            6444
+          ],
+          [
+            6446,
+            6450
+          ],
+          [
+            6452,
+            6466
+          ],
+          [
+            6468,
+            6615
+          ],
+          [
+            6617,
+            6855
+          ],
+          [
+            6857,
+            6861
+          ],
+          [
+            6863,
+            7026
+          ],
+          [
+            7028,
+            7203
+          ],
+          [
+            7205,
+            7266
+          ],
+          [
+            7268,
+            7272
+          ],
+          [
+            7274,
+            7437
+          ],
+          [
+            7439,
+            7523
+          ],
+          [
+            7525,
+            7585
+          ],
+          [
+            7587,
+            7595
+          ],
+          [
+            7597,
+            7610
+          ],
+          [
+            7612,
+            7615
+          ],
+          [
+            7617,
+            7641
+          ],
+          [
+            7643,
+            7645
+          ],
+          [
+            7647,
+            7650
+          ],
+          [
+            7652,
+            7654
+          ],
+          [
+            7657,
+            7689
+          ],
+          [
+            7691,
+            7733
+          ],
+          [
+            7735,
+            7763
+          ],
+          [
+            7765,
+            7960
+          ],
+          [
+            7962,
+            8186
+          ]
+        ]
+      },
+      "transferClaim": "independently reexecuted compiled genesis polynomial/Boolean/byte predicates and integer trace",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "Px0",
+              "type": "int"
+            },
+            {
+              "name": "Py0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Px3",
+              "type": "int"
+            },
+            {
+              "name": "Py3",
+              "type": "int"
+            },
+            {
+              "name": "Px2",
+              "type": "int"
+            },
+            {
+              "name": "Py2",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "pyInv0",
+              "type": "int"
+            },
+            {
+              "name": "pyInv2",
+              "type": "int"
+            },
+            {
+              "name": "pyInv3",
+              "type": "int"
+            },
+            {
+              "name": "m1_0a",
+              "type": "int"
+            },
+            {
+              "name": "m1_0b",
+              "type": "int"
+            },
+            {
+              "name": "m6_0a",
+              "type": "int"
+            },
+            {
+              "name": "m6_0b",
+              "type": "int"
+            },
+            {
+              "name": "m7_0a",
+              "type": "int"
+            },
+            {
+              "name": "m7_0b",
+              "type": "int"
+            },
+            {
+              "name": "m13_0a",
+              "type": "int"
+            },
+            {
+              "name": "m13_0b",
+              "type": "int"
+            },
+            {
+              "name": "m18_0a",
+              "type": "int"
+            },
+            {
+              "name": "m18_0b",
+              "type": "int"
+            },
+            {
+              "name": "m19_0a",
+              "type": "int"
+            },
+            {
+              "name": "m19_0b",
+              "type": "int"
+            },
+            {
+              "name": "m25_0a",
+              "type": "int"
+            },
+            {
+              "name": "m25_0b",
+              "type": "int"
+            },
+            {
+              "name": "m29_0a",
+              "type": "int"
+            },
+            {
+              "name": "m29_0b",
+              "type": "int"
+            },
+            {
+              "name": "m33_0a",
+              "type": "int"
+            },
+            {
+              "name": "m33_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "ce7c0c8932057f961dda83b1881f8642cbcd6e704fe4c0331727003e8aeef50a",
+        "definitionCount": 16,
+        "staticCallCount": 145,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "288c48394814ff6bdf4bd2dead6201356c3a059b094ee6f16fc43d3420989cb8",
+        "expectedOutputCommitment": "90489c1682c67c2fe42168ef1d086a8a4bf8a5f72fc6a3dfc7cf3b7247d06e2a"
+      }
+    },
+    {
+      "input": 5,
+      "kind": "forward",
+      "range": [
+        38,
+        76
+      ],
+      "original": {
+        "sha256": "c149300cfb2ab21f454fba3449852559fe66c346abc887069728de95e34d42c8",
+        "bytes": 7989,
+        "locking": "aa20d08caee89d0c329aeffe753e236983e754d705d77963d134c7c056c04f63b8a087",
+        "successorLocking": "aa202e0109651f9c3d4e31a4715e95ca70265a7eb13776abe7ec766f6da2b2f5cd2287"
+      },
+      "repaired": {
+        "sha256": "c149300cfb2ab21f454fba3449852559fe66c346abc887069728de95e34d42c8",
+        "bytes": 7989,
+        "locking": "aa20d08caee89d0c329aeffe753e236983e754d705d77963d134c7c056c04f63b8a087",
+        "successorLocking": "aa202e0109651f9c3d4e31a4715e95ca70265a7eb13776abe7ec766f6da2b2f5cd2287"
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m38_0a",
+              "type": "int"
+            },
+            {
+              "name": "m38_0b",
+              "type": "int"
+            },
+            {
+              "name": "m39_0a",
+              "type": "int"
+            },
+            {
+              "name": "m39_0b",
+              "type": "int"
+            },
+            {
+              "name": "m45_0a",
+              "type": "int"
+            },
+            {
+              "name": "m45_0b",
+              "type": "int"
+            },
+            {
+              "name": "m50_0a",
+              "type": "int"
+            },
+            {
+              "name": "m50_0b",
+              "type": "int"
+            },
+            {
+              "name": "m51_0a",
+              "type": "int"
+            },
+            {
+              "name": "m51_0b",
+              "type": "int"
+            },
+            {
+              "name": "m57_0a",
+              "type": "int"
+            },
+            {
+              "name": "m57_0b",
+              "type": "int"
+            },
+            {
+              "name": "m61_0a",
+              "type": "int"
+            },
+            {
+              "name": "m61_0b",
+              "type": "int"
+            },
+            {
+              "name": "m65_0a",
+              "type": "int"
+            },
+            {
+              "name": "m65_0b",
+              "type": "int"
+            },
+            {
+              "name": "m70_0a",
+              "type": "int"
+            },
+            {
+              "name": "m70_0b",
+              "type": "int"
+            },
+            {
+              "name": "m71_0a",
+              "type": "int"
+            },
+            {
+              "name": "m71_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "8bd1e36919bfa2a86951173ebb3d3ae1b880693dafa7e188df833852361a9516",
+        "definitionCount": 15,
+        "staticCallCount": 121,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "90489c1682c67c2fe42168ef1d086a8a4bf8a5f72fc6a3dfc7cf3b7247d06e2a",
+        "expectedOutputCommitment": "0d17d0192b703965196a107582fd250b9898349d2bf9c6a0371d98118421d439"
+      }
+    },
+    {
+      "input": 6,
+      "kind": "forward",
+      "range": [
+        76,
+        114
+      ],
+      "original": {
+        "sha256": "c45b0eb129a42e2a61ae32bb9ff3841f90cbe2321e5a4cbed2e5564b34446197",
+        "bytes": 7782,
+        "locking": "aa202e0109651f9c3d4e31a4715e95ca70265a7eb13776abe7ec766f6da2b2f5cd2287",
+        "successorLocking": "aa20cbf77ad8e64e9501e57cbebe7c15e48085c9f4768c405bbdd12fe21ad6aca96987"
+      },
+      "repaired": {
+        "sha256": "c45b0eb129a42e2a61ae32bb9ff3841f90cbe2321e5a4cbed2e5564b34446197",
+        "bytes": 7782,
+        "locking": "aa202e0109651f9c3d4e31a4715e95ca70265a7eb13776abe7ec766f6da2b2f5cd2287",
+        "successorLocking": "aa20cbf77ad8e64e9501e57cbebe7c15e48085c9f4768c405bbdd12fe21ad6aca96987"
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m77_0a",
+              "type": "int"
+            },
+            {
+              "name": "m77_0b",
+              "type": "int"
+            },
+            {
+              "name": "m82_0a",
+              "type": "int"
+            },
+            {
+              "name": "m82_0b",
+              "type": "int"
+            },
+            {
+              "name": "m83_0a",
+              "type": "int"
+            },
+            {
+              "name": "m83_0b",
+              "type": "int"
+            },
+            {
+              "name": "m89_0a",
+              "type": "int"
+            },
+            {
+              "name": "m89_0b",
+              "type": "int"
+            },
+            {
+              "name": "m94_0a",
+              "type": "int"
+            },
+            {
+              "name": "m94_0b",
+              "type": "int"
+            },
+            {
+              "name": "m95_0a",
+              "type": "int"
+            },
+            {
+              "name": "m95_0b",
+              "type": "int"
+            },
+            {
+              "name": "m101_0a",
+              "type": "int"
+            },
+            {
+              "name": "m101_0b",
+              "type": "int"
+            },
+            {
+              "name": "m105_0a",
+              "type": "int"
+            },
+            {
+              "name": "m105_0b",
+              "type": "int"
+            },
+            {
+              "name": "m110_0a",
+              "type": "int"
+            },
+            {
+              "name": "m110_0b",
+              "type": "int"
+            },
+            {
+              "name": "m111_0a",
+              "type": "int"
+            },
+            {
+              "name": "m111_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "6b4946c831e6c2c4f039789ecac472bc34b9ec7f5bc6d1bee0e5049c1d75ad91",
+        "definitionCount": 16,
+        "staticCallCount": 125,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "0d17d0192b703965196a107582fd250b9898349d2bf9c6a0371d98118421d439",
+        "expectedOutputCommitment": "37fa441b39a7342f3dc2b1c58cafdd116c5d660ede8c8e57c5771a88f3dedb8e"
+      }
+    },
+    {
+      "input": 7,
+      "kind": "forward",
+      "range": [
+        114,
+        153
+      ],
+      "original": {
+        "sha256": "92ab3601bd9600ebf4ec374f971bc1c71d09d79b709fd05b3b7ca6fb79d1bcfa",
+        "bytes": 7939,
+        "locking": "aa20cbf77ad8e64e9501e57cbebe7c15e48085c9f4768c405bbdd12fe21ad6aca96987",
+        "successorLocking": "aa20f37f171db2b7a2e3775c0262c995b4304936005ae9d613f75e424865f36fac9487"
+      },
+      "repaired": {
+        "sha256": "92ab3601bd9600ebf4ec374f971bc1c71d09d79b709fd05b3b7ca6fb79d1bcfa",
+        "bytes": 7939,
+        "locking": "aa20cbf77ad8e64e9501e57cbebe7c15e48085c9f4768c405bbdd12fe21ad6aca96987",
+        "successorLocking": "aa20f37f171db2b7a2e3775c0262c995b4304936005ae9d613f75e424865f36fac9487"
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m117_0a",
+              "type": "int"
+            },
+            {
+              "name": "m117_0b",
+              "type": "int"
+            },
+            {
+              "name": "m121_0a",
+              "type": "int"
+            },
+            {
+              "name": "m121_0b",
+              "type": "int"
+            },
+            {
+              "name": "m125_0a",
+              "type": "int"
+            },
+            {
+              "name": "m125_0b",
+              "type": "int"
+            },
+            {
+              "name": "m129_0a",
+              "type": "int"
+            },
+            {
+              "name": "m129_0b",
+              "type": "int"
+            },
+            {
+              "name": "m133_0a",
+              "type": "int"
+            },
+            {
+              "name": "m133_0b",
+              "type": "int"
+            },
+            {
+              "name": "m138_0a",
+              "type": "int"
+            },
+            {
+              "name": "m138_0b",
+              "type": "int"
+            },
+            {
+              "name": "m139_0a",
+              "type": "int"
+            },
+            {
+              "name": "m139_0b",
+              "type": "int"
+            },
+            {
+              "name": "m145_0a",
+              "type": "int"
+            },
+            {
+              "name": "m145_0b",
+              "type": "int"
+            },
+            {
+              "name": "m149_0a",
+              "type": "int"
+            },
+            {
+              "name": "m149_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "09d2b7cef32e3d82171f7eac95a6105abc68ea3d52ff5c95ea7d32c36ac042ae",
+        "definitionCount": 14,
+        "staticCallCount": 122,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "37fa441b39a7342f3dc2b1c58cafdd116c5d660ede8c8e57c5771a88f3dedb8e",
+        "expectedOutputCommitment": "0312d7918346ab7168c5f6c2fc6e71755708d1f45a361c813ccc5d7cbf1e5ea3"
+      }
+    },
+    {
+      "input": 8,
+      "kind": "forward",
+      "range": [
+        153,
+        190
+      ],
+      "original": {
+        "sha256": "a6c6759e3f0963bcb2559152b587a397f16d818234b3830e6e715503623ee7e8",
+        "bytes": 7756,
+        "locking": "aa20f37f171db2b7a2e3775c0262c995b4304936005ae9d613f75e424865f36fac9487",
+        "successorLocking": "aa206648572a43349e961c1e33f987416f24dab973e16dfd0bfe1da76703cd4e5c7787"
+      },
+      "repaired": {
+        "sha256": "a6c6759e3f0963bcb2559152b587a397f16d818234b3830e6e715503623ee7e8",
+        "bytes": 7756,
+        "locking": "aa20f37f171db2b7a2e3775c0262c995b4304936005ae9d613f75e424865f36fac9487",
+        "successorLocking": "aa206648572a43349e961c1e33f987416f24dab973e16dfd0bfe1da76703cd4e5c7787"
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m154_0a",
+              "type": "int"
+            },
+            {
+              "name": "m154_0b",
+              "type": "int"
+            },
+            {
+              "name": "m155_0a",
+              "type": "int"
+            },
+            {
+              "name": "m155_0b",
+              "type": "int"
+            },
+            {
+              "name": "m161_0a",
+              "type": "int"
+            },
+            {
+              "name": "m161_0b",
+              "type": "int"
+            },
+            {
+              "name": "m166_0a",
+              "type": "int"
+            },
+            {
+              "name": "m166_0b",
+              "type": "int"
+            },
+            {
+              "name": "m167_0a",
+              "type": "int"
+            },
+            {
+              "name": "m167_0b",
+              "type": "int"
+            },
+            {
+              "name": "m173_0a",
+              "type": "int"
+            },
+            {
+              "name": "m173_0b",
+              "type": "int"
+            },
+            {
+              "name": "m177_0a",
+              "type": "int"
+            },
+            {
+              "name": "m177_0b",
+              "type": "int"
+            },
+            {
+              "name": "m182_0a",
+              "type": "int"
+            },
+            {
+              "name": "m182_0b",
+              "type": "int"
+            },
+            {
+              "name": "m183_0a",
+              "type": "int"
+            },
+            {
+              "name": "m183_0b",
+              "type": "int"
+            },
+            {
+              "name": "m189_0a",
+              "type": "int"
+            },
+            {
+              "name": "m189_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "c7d9ec58e3c5ad935ec29696e0ca9b76eab041b9264598b8bc9fec2b798ba0a5",
+        "definitionCount": 16,
+        "staticCallCount": 124,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "0312d7918346ab7168c5f6c2fc6e71755708d1f45a361c813ccc5d7cbf1e5ea3",
+        "expectedOutputCommitment": "77e3b38af05e203f9ea1559f8379e6ed5b02008bce16c647b0fb7520908e5ecd"
+      }
+    },
+    {
+      "input": 9,
+      "kind": "forward",
+      "range": [
+        190,
+        229
+      ],
+      "original": {
+        "sha256": "36e11dcb3adfe4f60d065b1295befecde6669600ace4b2641d13788a06fde718",
+        "bytes": 8001,
+        "locking": "aa206648572a43349e961c1e33f987416f24dab973e16dfd0bfe1da76703cd4e5c7787",
+        "successorLocking": "aa206c40a463eaea73874a3e159d43fe0aaf0d233f69f3a1012ed398336d217c377187"
+      },
+      "repaired": {
+        "sha256": "36e11dcb3adfe4f60d065b1295befecde6669600ace4b2641d13788a06fde718",
+        "bytes": 8001,
+        "locking": "aa206648572a43349e961c1e33f987416f24dab973e16dfd0bfe1da76703cd4e5c7787",
+        "successorLocking": "aa206c40a463eaea73874a3e159d43fe0aaf0d233f69f3a1012ed398336d217c377187"
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m193_0a",
+              "type": "int"
+            },
+            {
+              "name": "m193_0b",
+              "type": "int"
+            },
+            {
+              "name": "m197_0a",
+              "type": "int"
+            },
+            {
+              "name": "m197_0b",
+              "type": "int"
+            },
+            {
+              "name": "m201_0a",
+              "type": "int"
+            },
+            {
+              "name": "m201_0b",
+              "type": "int"
+            },
+            {
+              "name": "m206_0a",
+              "type": "int"
+            },
+            {
+              "name": "m206_0b",
+              "type": "int"
+            },
+            {
+              "name": "m207_0a",
+              "type": "int"
+            },
+            {
+              "name": "m207_0b",
+              "type": "int"
+            },
+            {
+              "name": "m213_0a",
+              "type": "int"
+            },
+            {
+              "name": "m213_0b",
+              "type": "int"
+            },
+            {
+              "name": "m218_0a",
+              "type": "int"
+            },
+            {
+              "name": "m218_0b",
+              "type": "int"
+            },
+            {
+              "name": "m219_0a",
+              "type": "int"
+            },
+            {
+              "name": "m219_0b",
+              "type": "int"
+            },
+            {
+              "name": "m225_0a",
+              "type": "int"
+            },
+            {
+              "name": "m225_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "386f2accfefa5bf96db132a7e9acffc2b0e6adc57ebe8fdbba5f5e8b62860a64",
+        "definitionCount": 16,
+        "staticCallCount": 125,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "77e3b38af05e203f9ea1559f8379e6ed5b02008bce16c647b0fb7520908e5ecd",
+        "expectedOutputCommitment": "5c211ad48ca9e15514ca54c375d7cf131ba62fbb9e14db06a6fca5d18a1beace"
+      }
+    },
+    {
+      "input": 10,
+      "kind": "forward",
+      "range": [
+        229,
+        267
+      ],
+      "original": {
+        "sha256": "017fe80fc5ba203a5adb3cecf1d9028ed8ac3b6256d4819fd4a0eaeb04f91913",
+        "bytes": 7754,
+        "locking": "aa206c40a463eaea73874a3e159d43fe0aaf0d233f69f3a1012ed398336d217c377187",
+        "successorLocking": "aa207dc813abc9b897713d926c180da179a51bf2069140c88a70c91e0916fcd79e6687"
+      },
+      "repaired": {
+        "sha256": "017fe80fc5ba203a5adb3cecf1d9028ed8ac3b6256d4819fd4a0eaeb04f91913",
+        "bytes": 7754,
+        "locking": "aa206c40a463eaea73874a3e159d43fe0aaf0d233f69f3a1012ed398336d217c377187",
+        "successorLocking": "aa207dc813abc9b897713d926c180da179a51bf2069140c88a70c91e0916fcd79e6687"
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m229_0a",
+              "type": "int"
+            },
+            {
+              "name": "m229_0b",
+              "type": "int"
+            },
+            {
+              "name": "m233_0a",
+              "type": "int"
+            },
+            {
+              "name": "m233_0b",
+              "type": "int"
+            },
+            {
+              "name": "m238_0a",
+              "type": "int"
+            },
+            {
+              "name": "m238_0b",
+              "type": "int"
+            },
+            {
+              "name": "m239_0a",
+              "type": "int"
+            },
+            {
+              "name": "m239_0b",
+              "type": "int"
+            },
+            {
+              "name": "m245_0a",
+              "type": "int"
+            },
+            {
+              "name": "m245_0b",
+              "type": "int"
+            },
+            {
+              "name": "m250_0a",
+              "type": "int"
+            },
+            {
+              "name": "m250_0b",
+              "type": "int"
+            },
+            {
+              "name": "m251_0a",
+              "type": "int"
+            },
+            {
+              "name": "m251_0b",
+              "type": "int"
+            },
+            {
+              "name": "m257_0a",
+              "type": "int"
+            },
+            {
+              "name": "m257_0b",
+              "type": "int"
+            },
+            {
+              "name": "m261_0a",
+              "type": "int"
+            },
+            {
+              "name": "m261_0b",
+              "type": "int"
+            },
+            {
+              "name": "m266_0a",
+              "type": "int"
+            },
+            {
+              "name": "m266_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "b7e2bfea0308622a8d11850f9e62aa5e80e9d1a364b36f98985e33b090936404",
+        "definitionCount": 16,
+        "staticCallCount": 125,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "5c211ad48ca9e15514ca54c375d7cf131ba62fbb9e14db06a6fca5d18a1beace",
+        "expectedOutputCommitment": "9cd517d49dc1f38b88ccf7f2ba8aca6b10bb7ccf2d403e4894051156546cd498"
+      }
+    },
+    {
+      "input": 11,
+      "kind": "forward",
+      "range": [
+        267,
+        304
+      ],
+      "original": {
+        "sha256": "718e397f865503f959328a1a2c0c4256477adce35b3e67067b2b69d709768313",
+        "bytes": 7677,
+        "locking": "aa207dc813abc9b897713d926c180da179a51bf2069140c88a70c91e0916fcd79e6687",
+        "successorLocking": "aa20196fd3596e4ee122acc3aca222880aea57d9cb758cf57dc74752003bcd598d1187"
+      },
+      "repaired": {
+        "sha256": "718e397f865503f959328a1a2c0c4256477adce35b3e67067b2b69d709768313",
+        "bytes": 7677,
+        "locking": "aa207dc813abc9b897713d926c180da179a51bf2069140c88a70c91e0916fcd79e6687",
+        "successorLocking": "aa20196fd3596e4ee122acc3aca222880aea57d9cb758cf57dc74752003bcd598d1187"
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m267_0a",
+              "type": "int"
+            },
+            {
+              "name": "m267_0b",
+              "type": "int"
+            },
+            {
+              "name": "m273_0a",
+              "type": "int"
+            },
+            {
+              "name": "m273_0b",
+              "type": "int"
+            },
+            {
+              "name": "m277_0a",
+              "type": "int"
+            },
+            {
+              "name": "m277_0b",
+              "type": "int"
+            },
+            {
+              "name": "m281_0a",
+              "type": "int"
+            },
+            {
+              "name": "m281_0b",
+              "type": "int"
+            },
+            {
+              "name": "m286_0a",
+              "type": "int"
+            },
+            {
+              "name": "m286_0b",
+              "type": "int"
+            },
+            {
+              "name": "m287_0a",
+              "type": "int"
+            },
+            {
+              "name": "m287_0b",
+              "type": "int"
+            },
+            {
+              "name": "m293_0a",
+              "type": "int"
+            },
+            {
+              "name": "m293_0b",
+              "type": "int"
+            },
+            {
+              "name": "m297_0a",
+              "type": "int"
+            },
+            {
+              "name": "m297_0b",
+              "type": "int"
+            },
+            {
+              "name": "m302_0a",
+              "type": "int"
+            },
+            {
+              "name": "m302_0b",
+              "type": "int"
+            },
+            {
+              "name": "m303_0a",
+              "type": "int"
+            },
+            {
+              "name": "m303_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "3c875ddb74d9044535c92b2bb1bd97060be27aac52ccfe1c499a828fd33e541e",
+        "definitionCount": 15,
+        "staticCallCount": 120,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "9cd517d49dc1f38b88ccf7f2ba8aca6b10bb7ccf2d403e4894051156546cd498",
+        "expectedOutputCommitment": "2c0af50065701cdbc93d175074e87bf74182b8aa8685a94807616589296929fd"
+      }
+    },
+    {
+      "input": 12,
+      "kind": "forward",
+      "range": [
+        304,
+        342
+      ],
+      "original": {
+        "sha256": "2fdab1ab18b650ed38a89c6c4d9e359f307127c263af47eef8512f2c2b62e24c",
+        "bytes": 7969,
+        "locking": "aa20196fd3596e4ee122acc3aca222880aea57d9cb758cf57dc74752003bcd598d1187",
+        "successorLocking": "aa208e84627fee6e56c7ee38fca9e73cab3ccee7fd40a6996f3bffb4d6fff7bfc86787"
+      },
+      "repaired": {
+        "sha256": "2fdab1ab18b650ed38a89c6c4d9e359f307127c263af47eef8512f2c2b62e24c",
+        "bytes": 7969,
+        "locking": "aa20196fd3596e4ee122acc3aca222880aea57d9cb758cf57dc74752003bcd598d1187",
+        "successorLocking": "aa208e84627fee6e56c7ee38fca9e73cab3ccee7fd40a6996f3bffb4d6fff7bfc86787"
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m309_0a",
+              "type": "int"
+            },
+            {
+              "name": "m309_0b",
+              "type": "int"
+            },
+            {
+              "name": "m314_0a",
+              "type": "int"
+            },
+            {
+              "name": "m314_0b",
+              "type": "int"
+            },
+            {
+              "name": "m315_0a",
+              "type": "int"
+            },
+            {
+              "name": "m315_0b",
+              "type": "int"
+            },
+            {
+              "name": "m321_0a",
+              "type": "int"
+            },
+            {
+              "name": "m321_0b",
+              "type": "int"
+            },
+            {
+              "name": "m326_0a",
+              "type": "int"
+            },
+            {
+              "name": "m326_0b",
+              "type": "int"
+            },
+            {
+              "name": "m327_0a",
+              "type": "int"
+            },
+            {
+              "name": "m327_0b",
+              "type": "int"
+            },
+            {
+              "name": "m333_0a",
+              "type": "int"
+            },
+            {
+              "name": "m333_0b",
+              "type": "int"
+            },
+            {
+              "name": "m337_0a",
+              "type": "int"
+            },
+            {
+              "name": "m337_0b",
+              "type": "int"
+            },
+            {
+              "name": "m341_0a",
+              "type": "int"
+            },
+            {
+              "name": "m341_0b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "977c2425f78cc1b941130c78845d89126477f5149e57be3b1eb37aa52158b21e",
+        "definitionCount": 16,
+        "staticCallCount": 123,
+        "byteEqualityCount": 6,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": true,
+        "terminalSameLockingBound": false,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "2c0af50065701cdbc93d175074e87bf74182b8aa8685a94807616589296929fd",
+        "expectedOutputCommitment": "a7e70045a693fc7252cc4ea3fbb6f44491081a984655e9cde1027b472616d08c"
+      }
+    },
+    {
+      "input": 13,
+      "kind": "terminal",
+      "range": [
+        342,
+        348
+      ],
+      "original": {
+        "sha256": "97e43d207298cad0e261364b7f3af5efdd83a237805c8eef78755706c3be29e3",
+        "bytes": 4607,
+        "locking": "aa208e84627fee6e56c7ee38fca9e73cab3ccee7fd40a6996f3bffb4d6fff7bfc86787",
+        "successorLocking": null
+      },
+      "repaired": {
+        "sha256": "97e43d207298cad0e261364b7f3af5efdd83a237805c8eef78755706c3be29e3",
+        "bytes": 4607,
+        "locking": "aa208e84627fee6e56c7ee38fca9e73cab3ccee7fd40a6996f3bffb4d6fff7bfc86787",
+        "successorLocking": null
+      },
+      "bodyDiff": {
+        "count": 0,
+        "ranges": []
+      },
+      "transferClaim": "exact entire program bytes",
+      "allFunctionDefinitionsIdentical": true,
+      "abi": [
+        {
+          "name": "spend",
+          "inputs": [
+            {
+              "name": "f0",
+              "type": "int"
+            },
+            {
+              "name": "f1",
+              "type": "int"
+            },
+            {
+              "name": "f2",
+              "type": "int"
+            },
+            {
+              "name": "f3",
+              "type": "int"
+            },
+            {
+              "name": "f4",
+              "type": "int"
+            },
+            {
+              "name": "f5",
+              "type": "int"
+            },
+            {
+              "name": "f6",
+              "type": "int"
+            },
+            {
+              "name": "f7",
+              "type": "int"
+            },
+            {
+              "name": "f8",
+              "type": "int"
+            },
+            {
+              "name": "f9",
+              "type": "int"
+            },
+            {
+              "name": "f10",
+              "type": "int"
+            },
+            {
+              "name": "f11",
+              "type": "int"
+            },
+            {
+              "name": "R0xa",
+              "type": "int"
+            },
+            {
+              "name": "R0xb",
+              "type": "int"
+            },
+            {
+              "name": "R0ya",
+              "type": "int"
+            },
+            {
+              "name": "R0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu0",
+              "type": "int"
+            },
+            {
+              "name": "Pv0",
+              "type": "int"
+            },
+            {
+              "name": "Q0xa",
+              "type": "int"
+            },
+            {
+              "name": "Q0xb",
+              "type": "int"
+            },
+            {
+              "name": "Q0ya",
+              "type": "int"
+            },
+            {
+              "name": "Q0yb",
+              "type": "int"
+            },
+            {
+              "name": "Pu2",
+              "type": "int"
+            },
+            {
+              "name": "Pv2",
+              "type": "int"
+            },
+            {
+              "name": "Pu3",
+              "type": "int"
+            },
+            {
+              "name": "Pv3",
+              "type": "int"
+            },
+            {
+              "name": "u0",
+              "type": "int"
+            },
+            {
+              "name": "u1",
+              "type": "int"
+            },
+            {
+              "name": "u2",
+              "type": "int"
+            },
+            {
+              "name": "u3",
+              "type": "int"
+            },
+            {
+              "name": "u4",
+              "type": "int"
+            },
+            {
+              "name": "u5",
+              "type": "int"
+            },
+            {
+              "name": "m344_0a",
+              "type": "int"
+            },
+            {
+              "name": "m344_0b",
+              "type": "int"
+            },
+            {
+              "name": "m344_1a",
+              "type": "int"
+            },
+            {
+              "name": "m344_1b",
+              "type": "int"
+            },
+            {
+              "name": "zeroPadding",
+              "type": "bytes"
+            }
+          ]
+        }
+      ],
+      "calleeBinding": {
+        "registrySha256": "20fe7cb55b58621424220eaf8340c65fc72c6efc41bd10962c8a44b4663060d8",
+        "definitionCount": 17,
+        "staticCallCount": 92,
+        "byteEqualityCount": 4,
+        "allFunctionIdEncodingsCanonicalAndInjective": true,
+        "everyInvokeExactByteIdBound": true,
+        "allOpaqueByteEqualitiesRequiredByAcceptance": true
+      },
+      "lifecycle": {
+        "countOwnersBound": true,
+        "emptyCommitmentOwnersBound": true,
+        "categoryOwnersBound": true,
+        "successorLockingBound": false,
+        "terminalSameLockingBound": true,
+        "mintingBatonRecreated": false,
+        "arbitraryCallerSuffixPreserved": true
+      },
+      "stateHandoff": {
+        "argumentMatch": true,
+        "inputCommitmentMatch": true,
+        "outputCommitmentMatch": true,
+        "expectedInputCommitment": "a7e70045a693fc7252cc4ea3fbb6f44491081a984655e9cde1027b472616d08c",
+        "expectedOutputCommitment": null
+      }
+    }
+  ],
+  "successorEdges": [
+    {
+      "input": 0,
+      "pointsToNext": true
+    },
+    {
+      "input": 1,
+      "pointsToNext": true
+    },
+    {
+      "input": 2,
+      "pointsToNext": true
+    },
+    {
+      "input": 3,
+      "pointsToNext": true
+    },
+    {
+      "input": 4,
+      "pointsToNext": true
+    },
+    {
+      "input": 5,
+      "pointsToNext": true
+    },
+    {
+      "input": 6,
+      "pointsToNext": true
+    },
+    {
+      "input": 7,
+      "pointsToNext": true
+    },
+    {
+      "input": 8,
+      "pointsToNext": true
+    },
+    {
+      "input": 9,
+      "pointsToNext": true
+    },
+    {
+      "input": 10,
+      "pointsToNext": true
+    },
+    {
+      "input": 11,
+      "pointsToNext": true
+    },
+    {
+      "input": 12,
+      "pointsToNext": true
+    },
+    {
+      "input": 13,
+      "pointsToNext": true
+    }
+  ],
+  "invariants": {
+    "genesis": {
+      "program": "d9c068cd6e20ff2df98afc76e4a99341530447f5cfb99260ad66bcd90b946fed",
+      "proofPayloadBytes": 320,
+      "statePayloadBytes": 1024,
+      "identityPredicate": "pyInv0=0 if and only if rawA=(0,0); finite rawA uniquely binds its nonzero inverse and unit encoding",
+      "scalarEquationOwner": [
+        "k10+lambda*k20",
+        "k11+lambda*k21"
+      ],
+      "scalarComponentBounds": [
+        0,
+        "340282366920938463463374607431768211455"
+      ]
+    },
+    "handoff": {
+      "allFourteenArguments": true,
+      "allThirteenCommitmentSeams": true,
+      "rootStateLimbCount": 6,
+      "denominatorWitnesses": [
+        "21207902427352967640991985080331173471241656773640306040910644707342838093850",
+        "807784034018899161614767429103942718182594565598127861281617108262294721495",
+        "14306408760761931427936287274436114927013561352236350205868866671942836573472"
+      ],
+      "owner": {
+        "glv": "chunked/pairing/gen_vkx_glv.mjs::vkxGlvStateAt",
+        "miller": "chunked/pairing/_residuemath.mjs::millerFusedAffineOps",
+        "rawNormalization": "chunked/pairing/gen_miller_residue.mjs::pyInv0/pyInv2/pyInv3 and Pu/Pv canonical equations",
+        "commitment": "chunked/pairing/_millermath.mjs::commitBin",
+        "root": "chunked/pairing/_residuemath.mjs::residueTorusWitness"
+      }
+    },
+    "terminal": {
+      "program": "97e43d207298cad0e261364b7f3af5efdd83a237805c8eef78755706c3be29e3",
+      "range": [
+        342,
+        348
+      ],
+      "outputCommitment": null,
+      "sameLockingBound": true
+    }
+  },
+  "theoremJoin": {
+    "equation": "Every mathematically accepting rooted14program repairedgraph satisfies e(-A,B)e(alpha,beta)e(IC0+n0IC1+n1IC2,gamma)e(C,delta)=1.",
+    "proofSteps": [
+      "ExactZ prefix binds canonicalpublicscalars to boundedGLVcomponents; every128bitdigit and canonicalgrouphelper branch is certified; finalIC0 addition and finiteinverse bind exactVKx while carryingrawproof unchanged.",
+      "Repairedgenesis actualBoolean/polynomial predicates enforce correctA/C identities, inverseunitencoding, finiteBtwistmembership andcanonicalroot. All348actualMillerSSA events bind currentF/R and originalpoints/root; canonicalhelpers, exact8half integerpolynomials and nestedintegertraces justify fieldinterpretation and committedbytes.",
+      "IndependentVK arithmetic proves all176gamma/deltalines and thealpha/beta fixedfactor. ThelineLaurentidentity, ordinaryoptimalAte theorem and endpointkernel calculation give the intendedpairing product. ActualterminalFrobenius and6crossproducts withnonzero guard give [g]=[c^lambda]; gcd(lambda,p^6+1)=R makes the image exactly reducedpairingkernel.",
+      "Fullcompiledtokenlifecycle, compulsorybyteequalities andhashpreimages bind every320B/544B/1024B seam toits designated successor. The unchanged9continuations and first4programs differingonly successorhashliteral transfer theiralreadyexecuted mathematics; repairedgenesis/ranges/lifecycle/byteIDs/Zprefix are independently reexecuted."
+    ],
+    "externalPremises": [
+      "Assumes standardBN254 group orders/primality/Frobenius/optimalAte and collisionresistance plus a validledger thread rooted in the designated mintingauthority.",
+      "This is an isolated source repair. It does not change the publishedhead, reproduce the inherited archivedcovenant programs, establishproducer completeness orclaimresource/live-network acceptance.",
+      "The rawproof domain has finiteB; admitting rawBidentity would require a separately authenticatedrawidentity normalization, not reusing a finitegenerator sentinel."
+    ],
+    "graphPremise": "The exact repaired 14-program P2SH32 graph and its successor locks are supplied/authenticated externally; each program and callee namespace is pinned above.",
+    "ledgerPremise": "A valid-ledger thread rooted in the designated initial minting NFT with zero fungible amount and token conservation is required.",
+    "finiteDomain": "The repaired raw-proof theorem requires finite raw B; raw B identity is not admitted by the finite-generator correction.",
+    "genericAffineSeparation": "The generic grouped-affine component is not part of this raw14 graph proof and remains separately qualified."
+  },
+  "qualification": {
+    "conditionalGraphProofSamePrograms": true,
+    "positiveReplaySamePrograms": true,
+    "fullUniversalVerifierCorrectness": false,
+    "disposition": "conditional repair qualification joined; publish only with the listed domain, graph, ledger, hash, and standard BN premises"
+  },
+  "portability": {
+    "privateEvidencePathsRemoved": true,
+    "archivedEvidencePinsRetained": false,
+    "packageOwners": [
+      "public-source/source-manifest.json",
+      "public-artifact/program-bodies.json",
+      "public-artifact/domain-ownership-v1.json",
+      "public-artifact/existing-positive-context.json"
+    ]
+  },
+  "reviewedTheoremCertificatePins": [
+    {
+      "certificate": "original-graph-compile",
+      "sha256": "bd679678d0ab2a36a854596ffa927d21f14afe694114949f90d94e5896eb354c",
+      "bytes": 695818
+    },
+    {
+      "certificate": "repaired-graph-compile",
+      "sha256": "aa02e8e9df6f03f3b573cd972b9aeff845ed4cbbf3a9e358d39e6c9d92a84f48",
+      "bytes": 695539
+    },
+    {
+      "certificate": "compiled-full-equation-composition",
+      "sha256": "a826bd5d90a44c3b929e2f7d8e949d38cd6f696fc7dc416f2c9379a896013ecc",
+      "bytes": 20011
+    },
+    {
+      "certificate": "raw-genesis-predicates",
+      "sha256": "dd6780042d4919a60022a25a99083937d4d506be347798a1fda890aa02abbc67",
+      "bytes": 23438
+    },
+    {
+      "certificate": "canonical-range-owners",
+      "sha256": "c3f7a6e61b353807736787bdbacf2d0f8b44b7ab4178c2903fdc9ed720d67051",
+      "bytes": 1572
+    },
+    {
+      "certificate": "token-lifecycle",
+      "sha256": "4938286d602fd6ff69035fc87a03d39656163878b39118917ad9670e5a90a5a5",
+      "bytes": 8065
+    },
+    {
+      "certificate": "compiled-engine-bindings",
+      "sha256": "23c533ccd963ef0857063d1567f6ec3c87819d9792dc137004d43e7fd26b85dc",
+      "bytes": 354508
+    },
+    {
+      "certificate": "exact-integer-scalars",
+      "sha256": "891c55dbb091ed5591d1f3bd6a11d1a222fdb041a938c5bc4261cb4eca57ba0c",
+      "bytes": 1378
+    }
+  ],
+  "sourceRelocation": {
+    "sourceManifestSha256": "9f3707aa8ff4217e460c49cd7ec78fddf2480ebde1b23d8299e1242340780ab0",
+    "change": "Import paths only for stages4..13; same fourteen compiled programs and ABIs reproduced under the fixed compiler policy."
+  }
+}

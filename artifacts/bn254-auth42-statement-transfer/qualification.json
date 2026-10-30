@@ -1,0 +1,36 @@
+{
+  "schema": "bn254-auth42-statement-transfer-qualification/v1",
+  "status": "CONDITIONAL_FUNCTIONAL_MATHEMATICAL_REPLACEMENT_FOR_NATIVE42_GROUPED42",
+  "affectedOriginalSourcePr": 5,
+  "affectedOriginalBenchmarkPr": 11,
+  "existingCheckedPacket": "src/bch/groth16-intratx-authenticated-p2s-checked-vectors.json",
+  "existingCheckedPacketSha256": "a33b25eb132d1222d6550b0bf94df08ec48760eb2f7d30bf6ff9b97bf361fcd3",
+  "keyAndAbiCertificate": "certificate.json",
+  "checker": "check.mjs",
+  "checkResult": "check-result.json",
+  "replacementBoundary": {
+    "replacedClaim": "Finite-domain Groth16 mathematical soundness for the source5 native42 and grouped42 identified constructions, with proof/scalar/VK state ownership joined to the fixed BN254 VK.",
+    "replacement": "The independently checked public authenticated42 full verifier and its exact conditional theorem/equation.",
+    "notReplaced": [
+      "Original native/grouped architecture, lifecycle, transaction layout, and performance/resource claims remain withdrawn.",
+      "Neutral/infinity completeness, arbitrary setup, universal producer totality, and standard/relay admission remain unclaimed.",
+      "This package does not silently combine an old theorem with an unrelated new program; it binds the public checked authenticated42 packet to the same public PR11 VK and runtime ABI anchors."
+    ]
+  },
+  "existingPositiveEvidence": "The independently qualified public authenticated42 packet retains its existing126/126 arithmetic and declared-consensus observations; this transfer introduces no new VM execution.",
+  "files": {
+    "README.md": "78bd626ba87f028813cc6c19a1b5d41392db4fa555bb19d7ba7c7cba23c64dec",
+    "certificate.json": "a65013f86c4c7badbd37247300bcbb32aa2389d1ed211df70d86af3a34c221bf",
+    "check-result.json": "56368a229bf6fdf19f64747465a1af9244dd06f05152f7ab4d80414afeb8a905",
+    "check.mjs": "f878021b4809e1113e07a448c8a8a7558c0c262743f4e2e1a379c86a5fbdc2dc"
+  },
+  "scope": {
+    "mathematicsOnly": true,
+    "existingPositiveFixturesOnly": true,
+    "newProofs": 0,
+    "vmExecutions": 0,
+    "deliberateNegativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false
+  }
+}

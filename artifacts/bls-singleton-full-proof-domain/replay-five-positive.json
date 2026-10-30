@@ -1,7 +1,7 @@
 {
   "schema": "bls-full-proof-domain-existing-positive-replay/v1",
   "status": "PASS_EXISTING_POSITIVES_ARITHMETIC_NATIVE_ADMISSION_HOLD",
-  "node": "v24.19.0",
+  "node": "v26.12.0",
   "sourceFile": "singleton/bls12-381/groth16_strict.cash",
   "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
   "lockingSha256": "c34b223e101f14b5a53bb9d6ab9fed3fd6a7174501a9a4fb1ddc36897f466ca1",
@@ -9,7 +9,7 @@
   "positivePacketSha256": "5c07dbe90d46a088141b7c2a3d4437e26a954925666cd140417203a47db523b6",
   "neutralCaseSha256": "55e262ca14852e5653e10b1b240cbed0b543adfe372e742a5388bb60c676374a",
   "neutralComputedVkx": true,
-  "replayToolSha256": "e546aabdd1368a6cd5b9e1690100f9ebca3e989ee74f831a581c6117700048d7",
+  "replayToolSha256": "a8956b487ea5ac80fd39eade3ae4fb62172f82bf2ff887ea1120e3b89fb68a44",
   "results": [
     {
       "index": 0,

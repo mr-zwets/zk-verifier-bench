@@ -1,0 +1,59 @@
+{
+  "schema": "source4-finite-theorem-binding/v2",
+  "status": "CONDITIONAL_FINITE_DOMAIN_ONLY",
+  "scope": "The 134 compiled BN254/BLS12-381 covenant programs and corrected state codecs; existing positive fixtures only.",
+  "source4CompileIdentity": {
+    "sourceOwner": "public-source/source-manifest-v2.json",
+    "sourceManifestSha256": "4630ed5d3a31785118d6b56011856599e2b16cb826ab2f23cf7789b8e763874b",
+    "compiledCatalog": "compiled-catalog.json",
+    "logicalReceiptId": "source4-master-covenant-equivalence-v1",
+    "programs": 134,
+    "curves": {
+      "bn254": 48,
+      "bls12-381": 86
+    },
+    "exactProgramBytesStoredOnce": true,
+    "sourceClosureHasNoUnresolvedImports": true,
+    "sourceQualificationSha256": "93c6f8200d4274ffd811291a7d74ffb1b6ca8064bb492be064dc42e43c978da9",
+    "catalogSha256": "8c6220c366eeba5c4d2e8fbe65af0d46f53f659dc78706c026b4be923900e5e7"
+  },
+  "mathematicalTheorems": [
+    {
+      "file": "theorem/whole-bls-composition-peer-v2.json",
+      "sha256": "b457588f2a3cb84360638814684fd5faecc177bec0d7b29662327f4801570337",
+      "status": "CONDITIONALLY_SEALED_FINITE_CANONICAL_WHOLE_COMPOSITION",
+      "scope": "Finite canonical external A/C, finite canonical strict-r B, reviewed four-pair equation, and final-exponent unit predicate."
+    },
+    {
+      "owner": "source4-theorem-transfer-review-v2.json",
+      "status": "CONDITIONAL_FINITE_DOMAIN_TRANSFER_CONFIRMED",
+      "scope": "The theorem transfers to the exact current compiled catalog and source closure by the pinned logical receipt."
+    }
+  ],
+  "compiler": {
+    "name": "cashc",
+    "packageVersion": "0.14.0-next.1",
+    "gitHead": "1c707c1dbf87396b30ba5e0704b1db44475ce893",
+    "packageJsonSha256": "672de1d16406b72316157d2f3c34eca9e089960f8eeeae2432afd9cb24ea1c48",
+    "entrySha256": "2ebf0b95e78a2b7dc12c4778a1ee2fcac258aa3244d9f3a6871d8000b2b3e6fc",
+    "options": {
+      "rescheduleStacks": true
+    },
+    "frozenPerProgramPolicies": {
+      "rawBlsInputs": [
+        79,
+        81,
+        83,
+        84
+      ],
+      "rescheduledPrograms": 130
+    }
+  },
+  "notEstablished": [
+    "Unrestricted raw-input soundness or valid-proof completeness.",
+    "Neutral/infinity endpoint completeness for the finite compiled artifacts.",
+    "Native or standard admission for rows exceeding the 10,000-byte per-input policy.",
+    "SNARK knowledge, trusted setup, circuit identity, or zero-knowledge security.",
+    "Mainnet deployment or relayability."
+  ]
+}

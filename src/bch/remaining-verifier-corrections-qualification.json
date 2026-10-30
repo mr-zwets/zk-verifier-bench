@@ -1,5 +1,5 @@
 {
-  "schema": "remaining-verifier-corrections-qualification/v5",
+  "schema": "remaining-verifier-corrections-qualification/v6",
   "sourceRevision": "c0b0a824fc9018b4ef344d2b68538f7159ffffdd",
   "benchmarkBase": "b140f64ca073c6d0466083fe14b5d9c83776d844",
   "status": "STANDALONE_CORRECTED_REFERENCES_DEFAULT_REGISTRY_AND_FEED_UNCHANGED",
@@ -46,11 +46,11 @@
   "blsLarge": {
     "existingProofGraphs": 3,
     "inputEvaluations": 27,
-    "checkedVectorSha256": "9b0ca5517eacf50d52a7991b90a89ded64e10c907fce9f2273c735a5a18af5d1",
+    "checkedVectorSha256": "e5d352105aee57abdeac865c1125c2b66085f0112ccfeace275e13dc024dc90d",
     "repairManifestSha256": "48f4b0efa19935e1b09df630036e470e007fad79dd6f493e96ef746ead8fcffb",
-    "repairHelperSha256": "db44031eef5c85985dbf38f524f8774525ea8d4e1107a152083df676a011f071",
+    "repairHelperSha256": "2d99a6fc88010b305fb683ab44c1596ed7b9b05c04afac5a6e547cab2ee8f3f3",
     "positiveReplay": "artifacts/maintainer-review-followup/replay-large.json",
-    "positiveReplaySha256": "8bafb9bfdc3aeff30049d120a5d3ac1e53bc516565e1339eb1d91f23f49face1",
+    "positiveReplaySha256": "d95adf0dbb6ee414d27897d1cdcded3d58fef11064e893fae8a6d6902878f502",
     "modes": [
       "resource-loosened arithmetic oracle",
       "proposed-spec consensus",
@@ -80,7 +80,7 @@
     "limits": "Proposed-spec profile only; the 288-byte GLV, 768-byte input-validation, and 1632-byte terminal frames require the proposed per-script limits. Current BCH, whole-transaction and relay admission remain HOLD.",
     "graphPremises": "The three-input intra-transaction graph preserves the archived input order, exact OP_INPUTBYTECODE successor links, state-carrier ownership, and P2SH32 locking transport. The positive replay is an existing-fixture artifact check, not a live ancestry or deployment claim.",
     "replayTool": "artifacts/maintainer-review-followup/replay-large.mjs",
-    "replayToolSha256": "a16d4cfb4aa64568f888bb4f44399270a6ddb7647dc28c2c344f390bfffe1fc0"
+    "replayToolSha256": "ebcfc107785581e9c8896b2a65c299076e3353c05d6f09ffbef79bbf6ab79f00"
   },
   "blsVkx": {
     "scope": "public-input aggregation component only",
@@ -236,7 +236,7 @@
   "blsPlainSingletonFullProofDomain": {
     "artifactDirectory": "artifacts/bls-singleton-full-proof-domain",
     "qualification": "artifacts/bls-singleton-full-proof-domain/qualification.json",
-    "qualificationSha256": "90c01832de620b2fd68dde9a02c863f0c2df0718401ae276ad21774cbf3f7c2a",
+    "qualificationSha256": "d37cdfebe54768bc3e4e5192edd6681bbaecc122bc731634bff20568d32bc0f0",
     "sourceRevision": "c0b0a824fc9018b4ef344d2b68538f7159ffffdd",
     "sourceFile": "singleton/bls12-381/groth16_strict.cash",
     "sourceSha256": "4cd3efad1c050a11b2d13c189ffb9335d8ec130d76e3b1257e43b74ea83d610d",
@@ -448,5 +448,95 @@
     "negativeCases": 0,
     "cybersecurityTesting": false,
     "byteOptimization": false
+  },
+  "raw14FullVerifierReference": {
+    "id": "bn254-pr6-raw14-reference",
+    "affectedHistoricalSourcePr": 6,
+    "qualification": "artifacts/bn254-pr6-raw14-reference/qualification.json",
+    "qualificationSha256": "2f554ab593ef8232995bf0abf6821ecb783832f33d64fc301788bd1238fb2f41",
+    "sourceRevision": "70b0f04150d0f19467df41c5b8d170f78aa1691a",
+    "sourceDirectory": "chunked/pairing/pr6-raw14-reference",
+    "sourceQualificationSha256": "6a25a08a9ff936c5bd179c8969cc445d2102ae02213d59d1196934dfa966ca8d",
+    "programCount": 14,
+    "existingProofPublicTuples": 1,
+    "standardPerInputAccepted": 14,
+    "consensusPerInputAccepted": 14,
+    "fullEquationProof": "conditional fixed-key, finite raw-B and normalization charts, exact graph, hash binding and valid designated NFT lineage",
+    "nativeAdmission": "EXISTING_PER_INPUT_CONTEXT_ACCEPTED_LINKED_LIVE_CHAIN_NOT_ESTABLISHED",
+    "genericGroupedAffineScope": "Separate finite-domain component only; this row makes no full704-byte generic-verifier claim.",
+    "newProofs": 0,
+    "deliberateNegativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false
+  },
+  "historicalConnectedGraphReference": {
+    "qualification": "artifacts/pr4-connected-reference/qualification.json",
+    "qualificationSha256": "70c954e74cfe3428e3391530715cc00a4131058737288b42e5b7ff3c70f5d3ff",
+    "sourceDirectory": "chunked/pr4-connected-reference",
+    "sourceRevision": "e18f0cd34f5ad6facf4cbaa7c06040aadd20f7e9",
+    "sourceQualificationSha256": "93c6f8200d4274ffd811291a7d74ffb1b6ca8064bb492be064dc42e43c978da9",
+    "affectedHistoricalPrs": {
+      "source": [
+        4
+      ],
+      "benchmark": [
+        10
+      ]
+    },
+    "programs": {
+      "bn254": 48,
+      "bls12-381": 86
+    },
+    "existingProofGraphs": {
+      "bn254": 3,
+      "bls12-381": 2
+    },
+    "arithmeticOracleInputsAccepted": {
+      "bn254": 144,
+      "bls12-381": 172
+    },
+    "nativeResourceAdmission": "HOLD",
+    "domain": "Finite canonical fixed-key graphs; subgroup/regular-walk/normalization and rooted-ledger premises remain explicit. No neutral/infinity or arbitrary-key claim.",
+    "exactCompilerRebuilds": 134,
+    "successorLocks": 132
+  },
+  "authenticated42StatementTransfer": {
+    "qualification": "artifacts/bn254-auth42-statement-transfer/qualification.json",
+    "qualificationSha256": "cd08ef0d0df49230830cfffb3dcd7b3e896861c738cf7c92a13102c6768822c1",
+    "affectedHistoricalPrs": {
+      "source": [
+        5
+      ],
+      "benchmark": [
+        11
+      ]
+    },
+    "replacement": "Existing independently qualified public authenticated42 full verifier, with explicit same-key/proof/scalar/state anchor transfer.",
+    "originalNativeGroupedArchitectureAndPerformanceRemainWithdrawn": true,
+    "existingPublicKeyAbiCheck": "PASS_PUBLIC_KEY_ABI_ANCHOR",
+    "newVmExecution": false
+  },
+  "maintainerEmitterFollowup": {
+    "sourceRevision": "a9d20b5f2f88c6d9ff82004587e4a43f7e524556",
+    "registeredBlsHelper": "chunked/intratx/repair_registered_bls_large.mjs",
+    "registeredBlsHelperSha256": "2d99a6fc88010b305fb683ab44c1596ed7b9b05c04afac5a6e547cab2ee8f3f3",
+    "checkedVectorReproducesByteForByte": true,
+    "largeExistingPositiveInputsAccepted": 27,
+    "strictExistingPositiveProofsAccepted": 5,
+    "verifierProgramBytesChanged": false,
+    "existingProofPublicPayloadsChanged": false
+  },
+  "withdrawnReplacementMap": {
+    "qualification": "artifacts/withdrawn-replacement-map/qualification.json",
+    "qualificationSha256": "938a4ce9b4ea1cd8723f571f622baf88c5b3bc740d4c9a70c1ec7169e4d96edc",
+    "counts": {
+      "historicalWithdrawals": 31,
+      "completeConditionalMathematicalReplacements": 31,
+      "partialRepairsWithinIdentifiedScope": 0,
+      "noReplacementWithinIdentifiedScope": 0,
+      "constructionFamilies": 16
+    },
+    "originalWithdrawalsUnchanged": true,
+    "unrestrictedOrUniversalCorrectnessEstablished": false
   }
 }

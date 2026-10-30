@@ -45,7 +45,7 @@
   "neutralCaseSha256": "55e262ca14852e5653e10b1b240cbed0b543adfe372e742a5388bb60c676374a",
   "existingPositiveProofs": 5,
   "neutralCase": "One unchanged mathematical positive from benchmark PR14 extraValidProofs[13] under source PR7, decoded and canonically reencoded for the existing 10-int singleton ABI. Its public inputs are [1,r-1], and actual fixed-key aggregation is neutral. Four other positive unlockings are byte-identical to the original plain multiproof artifact.",
-  "replayToolSha256": "e546aabdd1368a6cd5b9e1690100f9ebca3e989ee74f831a581c6117700048d7",
+  "replayToolSha256": "a8956b487ea5ac80fd39eade3ae4fb62172f82bf2ff887ea1120e3b89fb68a44",
   "validation": {
     "existingPositiveProofs": 5,
     "arithmeticOracleAccepted": 5,

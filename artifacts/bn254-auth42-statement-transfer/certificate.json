@@ -1,0 +1,161 @@
+{
+  "schema": "source5-42-key-abi-public-v1",
+  "status": "PASS_PORTABLE_PUBLIC_AUTH42_REPLACEMENT_ANCHOR",
+  "historicalCertificate": {
+    "logicalId": "source5-42-key-abi-repair-v1",
+    "sha256": "23835cbbbe44998e175c4322e6f2394259bb5b12ddddd0e8f3055ee18924839b"
+  },
+  "publicInputs": {
+    "originalBenchmark": {
+      "repositoryHead": "d1004f640e9ef7de1a3d64da9027c4dd54888cb2",
+      "rootArgument": "<pr11-benchmark-root>",
+      "files": {
+        "src/checkpoints/pairing-vectors.json": "e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e",
+        "src/bch/groth16-intratx-vectors.json": "9ed76575922d82af5cb1cd39c78e06ef7840a3bd14359694c60d2c0d171357ab",
+        "src/bch/groth16-grouped-vectors.json": "b8aed2b6062ce3fa9b283764774467a8e475c61cc012e0ff7611e6fb3fbc93a5",
+        "src/bch/groth16-intratx-authenticated-p2s-vectors.json": "34bb01c525668364b30c04232a912af5485318c8cde8f3a9267b2705ead31074"
+      }
+    },
+    "publicAuthenticated42": {
+      "rootArgument": "<auth42-benchmark-root>",
+      "file": "src/bch/groth16-intratx-authenticated-p2s-checked-vectors.json",
+      "sha256": "a33b25eb132d1222d6550b0bf94df08ec48760eb2f7d30bf6ff9b97bf361fcd3",
+      "numInputs": 42,
+      "repairOriginalFixtureSha256": "34bb01c525668364b30c04232a912af5485318c8cde8f3a9267b2705ead31074",
+      "statement": "Every accepting complete selected42-program graph satisfies e(-A,B)*e(alpha,beta)*e(IC0+u0*IC1+u1*IC2,gamma)*e(C,delta)=1."
+    }
+  },
+  "replacementBoundary": {
+    "replacedClaim": "Finite-domain Groth16 mathematical soundness for the source5 native42 and grouped42 identified constructions, with proof/scalar/VK state ownership joined to the fixed BN254 VK.",
+    "replacement": "The independently checked public authenticated42 full verifier and its exact conditional theorem/equation.",
+    "notReplaced": [
+      "Original native/grouped architecture, lifecycle, transaction layout, and performance/resource claims remain withdrawn.",
+      "Neutral/infinity completeness, arbitrary setup, universal producer totality, and standard/relay admission remain unclaimed.",
+      "This package does not silently combine an old theorem with an unrelated new program; it binds the public checked authenticated42 packet to the same public PR11 VK and runtime ABI anchors."
+    ]
+  },
+  "keyAnchor": {
+    "vectorPath": "src/checkpoints/pairing-vectors.json",
+    "sourceOwner": "The public PR11 pairing vector owns alpha, beta, gamma, delta, IC0, IC1, and IC2. The source5 current private generator reads this vector through VERIFIER_DIR; this package intentionally does not publish dangling current-generator source pins.",
+    "pairRoles": [
+      "e(-A,B): runtime proof A/B",
+      "e(alpha,beta): fixed VK alpha/beta",
+      "e(VKx,gamma): runtime VKx and fixed VK gamma",
+      "e(C,delta): runtime proof C and fixed VK delta"
+    ],
+    "independentVKx": {
+      "publicInputs": [
+        "42540",
+        "732739"
+      ],
+      "formula": "IC0 + 42540*IC1 + 732739*IC2 over BN254 G1",
+      "expected": {
+        "x": "8849706566265323475308844786466876320844339848804625399173904868893806414653",
+        "y": "2254663182535014285995571660012964805318114046081299626852514798513036795127"
+      },
+      "goldenMatch": true
+    }
+  },
+  "abiAnchor": {
+    "proof": {
+      "order": [
+        "-A.x",
+        "-A.y",
+        "B.x.c0",
+        "B.x.c1",
+        "B.y.c0",
+        "B.y.c1",
+        "C.x",
+        "C.y"
+      ],
+      "widthBytes": 32,
+      "proofBlobSha256": "e8d1b60dac29422889d9b41398fe8bff3b18f1872fd6c9da10b567f979cc1d1b"
+    },
+    "publicScalars": {
+      "order": [
+        "u0",
+        "u1"
+      ],
+      "values": [
+        "42540",
+        "732739"
+      ],
+      "genesisBlobSha256": "ce02ce1a17239280c5210126efe441ac9d4ddd04c37bdb345cadc2054b23e3aa"
+    },
+    "vkxState": {
+      "order": [
+        "rX",
+        "rY",
+        "rZ",
+        "u0",
+        "u1"
+      ],
+      "values": [
+        "0",
+        "1",
+        "0",
+        "42540",
+        "732739"
+      ],
+      "stateBlobSha256": "47425fd5490e20ce904b684503abb3ce9c1d879d98b8d9ad3992efb34dc8af45"
+    },
+    "millerGenesis": {
+      "order": [
+        "8 proof limbs",
+        "VKx.x",
+        "VKx.y"
+      ],
+      "widthBytes": 32,
+      "blobSha256": "ab13a947b1f093e942ffe7ebc402881d1c1b148c9bd8a38a5c013a478b893b27"
+    },
+    "anchorEquality": "The mechanical checker extracts these four first data pushes from public authenticated42 steps 0, 3, 8, and 9 and verifies their hashes and values. These same hashes are present in the existing native and grouped PR11 vectors; grouped lifecycle differences are therefore not treated as equation-input differences."
+  },
+  "provenanceBoundary": {
+    "historicalPrivateOrigin": {
+      "logicalSourceHead": "2831928fe224d252fc90dfc26ecfdf52f29e9399",
+      "description": "Private source5 current-integration candidate used for the historical certificate.",
+      "matchingPins": [
+        "chunked/pairing/_millermath.mjs",
+        "chunked/pairing/gen_vkx.mjs",
+        "chunked/pairing/gen_vkx_glv.mjs"
+      ],
+      "excludedPins": [
+        "chunked/intratx/build_vectors.mjs",
+        "chunked/grouped/build_vectors.mjs"
+      ],
+      "reason": "The excluded builder files do not match that head or the current canonical source; they are not published as if they were stable public source owners."
+    },
+    "stablePublicOwners": [
+      "PR11 public pairing-vectors.json",
+      "PR11 public original intratx/grouped vector byte anchors",
+      "public authenticated42 checked vector packet",
+      "public authenticated42 repair metadata and statement"
+    ]
+  },
+  "checker": {
+    "file": "check.mjs",
+    "command": "node check.mjs <pr11-benchmark-root> <auth42-benchmark-root>",
+    "allowedInputs": "Only the public relative files named in publicInputs; no source builders, VM, producer, prover, negative fixture, or network input is used.",
+    "expectedResult": "PASS_PUBLIC_KEY_ABI_ANCHOR"
+  },
+  "stablePublicSourcePins": [
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "revision": "2831928fe224d252fc90dfc26ecfdf52f29e9399",
+      "file": "chunked/pairing/_millermath.mjs",
+      "sha256": "114059dc318cb8fdfe7e246ebb1abaf33a9f4fa7f2fe51bc3ae90742445138d4"
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "revision": "2831928fe224d252fc90dfc26ecfdf52f29e9399",
+      "file": "chunked/pairing/gen_vkx.mjs",
+      "sha256": "c3691e970c8d1264b7e53580e3023d9887713ad25e4d6ae1e8492616838c0eea"
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "revision": "2831928fe224d252fc90dfc26ecfdf52f29e9399",
+      "file": "chunked/pairing/gen_vkx_glv.mjs",
+      "sha256": "abecc16a9d5a8303b6f5d8fe3f5b61d10e766b39d43013f9a9f4be274377562d"
+    }
+  ]
+}

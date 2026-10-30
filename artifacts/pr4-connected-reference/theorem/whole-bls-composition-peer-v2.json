@@ -1,0 +1,127 @@
+{
+  "schema": "bls-whole-composition-peer/v2",
+  "status": "CONDITIONALLY_SEALED_FINITE_CANONICAL_WHOLE_COMPOSITION",
+  "policy": {
+    "compilerRuns": 0,
+    "vmRuns": 0,
+    "proofRuns": 0,
+    "newCases": 0,
+    "negativeCases": 0,
+    "cybersecurityTests": 0,
+    "optimizations": 0,
+    "sourceEdits": 0,
+    "publicEdits": 0
+  },
+  "artifact": {
+    "path": "bls-domain/neutral-vkx-repair-v1/public-packet-v1/compiled-locking.hex",
+    "bytes": 14246,
+    "sha256": "bec94008264eefa667247df1cbb3376299a5061cdcb5a1e4cda8b92c9a91abbb"
+  },
+  "coverage": {
+    "defineCount": 42,
+    "staticInvokeCount": 358,
+    "rosterStatus": "PASS_CURRENT_42_DEFINE_BODY_HASH_ROSTER_WITH_EXPLICIT_CONDITIONALS",
+    "rawNamespaceStatus": "PASS_RAW_NAMESPACE_AND_ENTRY_BOUNDARY"
+  },
+  "disposition": {
+    "theorem": "Conditional finite-domain mathematical correctness of the current compiled singleton ABI: canonical Fr public inputs (including the neutral-vk_x case), finite canonical A/C, and finite strict-r B imply the reviewed Groth16 pairing equation and final-exponent unit predicate.",
+    "discharged": [
+      "The actual final-exponent call graph, including norm/adjugate IDs 1658, 1786, and 1807, is bound to decoded trace operands.",
+      "Nonzero finite pairing output discharges the Fp12 inverse denominator premise using the independently pinned irreducible tower field.",
+      "The actual easy result is f^((p^12-1)/Phi12), hence lies in Phi12; the hard chain consumes only subgroup-derived tuples.",
+      "DEFINE45/47 Phi12 typing is discharged from the easy-result relation, actual hard-chain provenance, and the pinned cyclotomic-square receipt.",
+      "The exact hard exponent is independently recombined as 3*(p^12-1)/r, with the explicit inverse of 3 modulo r and twelve terminal unit comparisons.",
+      "Raw 42-DEFINE namespace, all 358 static invokes, entry guards, fixed-key identity, neutral unit branch, and current ABI hashes are cross-pinned."
+    ],
+    "standardMathematicalPremises": [
+      "The displayed BLS base-field modulus is prime and ordinary finite-field/norm facts apply.",
+      "The ordinary nonsingular elliptic-curve tangent/chord law and the pinned optimal-Ate pairing theorem apply to the declared finite subgroup inputs."
+    ],
+    "explicitImplementationDomainPremises": [
+      "External A/C are finite canonical G1 points in the declared subgroup domain.",
+      "External B is finite canonical strict-r G2; the current bytecode receipts do not turn arbitrary B into a subgroup proof.",
+      "The endpoint/regular-walk and nonzero-Miller bridge conditions hold for that finite strict-r input domain."
+    ],
+    "circularityReview": "No circular implementation claim was found in the final type discharge: raw call IDs and operands are independently decoded; field irreducibility, curve geometry, and pairing facts are explicit mathematical premises; the remaining strict-r external-input premise is named rather than inferred."
+  },
+  "evidence": [
+    {
+      "path": "parent/bls-final-composition-v1.json",
+      "sha256": "015de926bfce98394c974e52ee9953ffa3b664ccc43343018a18b2fae33a4195"
+    },
+    {
+      "path": "parent/callee-closure-roster-v1.json",
+      "sha256": "38b94872d6442f5d404d891a738b2d17411f6522c6331359831ac1383e213862"
+    },
+    {
+      "path": "bls-domain/finalexp-main-stack-trace-v1.json",
+      "sha256": "9ccd8b10283af229885b5108b6eb7553551a4a20dbd13dd26f606f285242bff7"
+    },
+    {
+      "path": "bls-domain/finalexp-main-stack-proof-v3.json",
+      "sha256": "88393a4f42e21c2ec12a4e24fb0b24a5d88cdd1e3f37635e3449ba3434e571cf"
+    },
+    {
+      "path": "parent/bls-hard-chain-v1.json",
+      "sha256": "dcf28dc29d11c90d088c49bd94c2e41a57dc4d4463cbf4da9b4f7455037147b0"
+    },
+    {
+      "path": "parent/bls-final-exponent-v1.json",
+      "sha256": "db514118ba8b53102df030594316645c11d846e522110d8ae03689ff936efc3a"
+    },
+    {
+      "path": "parent/bls-tower-field-v1.json",
+      "sha256": "76828f454a7dd3938f558d78229c1ab8ba778566d1c2d51113885f83db08cf3a"
+    },
+    {
+      "path": "parent/g2-affine-geometry-v1.json",
+      "sha256": "7f97198bcb7163a7616244e6fa3186c05115588f98642d96750f9144c9f1e6e4"
+    },
+    {
+      "path": "parent/bls-namespace-v1.json",
+      "sha256": "c72397884d1f309df4e26624841bcc694b9459c69f9915d6797f73c72c2cb583"
+    },
+    {
+      "path": "bls-domain/pairing-finite-domain-bridge-v1/pairing-finite-domain-bridge-v1.json",
+      "sha256": "9be2e553767c859cc82d7ec0df67ac9f5bd6d42fc2ef939b1e613d96fd583687"
+    },
+    {
+      "path": "bls-domain/pairing-composition-proof-v1/pairing-composition-proof-finite-v1.json",
+      "sha256": "04ef42c469571127f8b1ecd478f28523c3d0e6693e3aebd308c386103c3ba674"
+    },
+    {
+      "path": "parent/bls-entry-domain-v1.json",
+      "sha256": "8dcb6f2d6def6a138c672f6468e7227fc89d05b6b337bde76c974718dffbc7d5"
+    },
+    {
+      "path": "parent/bls-fixed-msm-v2.json",
+      "sha256": "8c52c4d8080b8325fde8a6f0c873b8c01c370a01920bb327af959eda447eca14"
+    },
+    {
+      "path": "parent/bls-main-routing-v3.json",
+      "sha256": "baa2a21931cd555abb9b6d0c36438db690853bc42c19d0ca5f8d01147af054b0"
+    },
+    {
+      "path": "parent/check-bls-neutral-branches-v3.json",
+      "sha256": "196c3d65d58bbe2a9fd2f6cb01928e4ed4de80613eedff316cf36b2c59e58dc1"
+    },
+    {
+      "path": "parent/public-mathematics-peer-v1.json",
+      "sha256": "352d91336f00f86187ae91b8e0cfb9f87e981323c48ad06120319c6d27ba95a7"
+    },
+    {
+      "path": "bls-domain/pow-x-proof-v1/pow-x-proof-v2.json",
+      "sha256": "6531355e72ab7202008743b8842abce3547217f773a085fc86a8c9cc3003b134"
+    },
+    {
+      "path": "bls-domain/cyclo-square-proof-v2.json",
+      "sha256": "1263b6c09429f2ebfd867b5c39bdc35b5ee1f409eeef1b0c8a2db46f7aa56f2e"
+    }
+  ],
+  "boundary": {
+    "nativeAdmission": "HOLD: the raw 14,246-byte locking artifact remains beyond the cited BCH2026 admission/resource limit.",
+    "externalInfinity": "HOLD: no external infinity encoding or neutral external A/B/C ABI is claimed.",
+    "arbitraryKeyOrCircuit": "HOLD: current fixed key identity is covered; arbitrary VK, setup, circuit, knowledge, and SNARK correctness are outside scope.",
+    "mainnet": "HOLD: this is not a mainnet deployment or consensus-admission claim."
+  }
+}

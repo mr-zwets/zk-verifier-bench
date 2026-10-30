@@ -1,0 +1,61 @@
+{
+  "schema": "bn254-pr6-raw14-artifact-qualification/v1",
+  "status": "CONDITIONAL_FIXED_KEY_RAW14_FULL_EQUATION",
+  "sourceRepository": "mr-zwets/groth16_cashscript",
+  "sourceDirectory": "chunked/pairing/pr6-raw14-reference",
+  "sourceQualificationSha256": "6a25a08a9ff936c5bd179c8969cc445d2102ae02213d59d1196934dfa966ca8d",
+  "compiledCatalog": "program-bodies.json",
+  "programCount": 14,
+  "existingProofs": 1,
+  "perInputConsensusAccepted": 14,
+  "perInputStandardAccepted": 14,
+  "wholeTransactionOrLiveLedgerAdmission": "NOT_ESTABLISHED",
+  "replayTool": "replay.mjs",
+  "domainAndPremises": {
+    "equation": "Every mathematically accepting rooted14program repairedgraph satisfies e(-A,B)e(alpha,beta)e(IC0+n0IC1+n1IC2,gamma)e(C,delta)=1.",
+    "proofSteps": [
+      "ExactZ prefix binds canonicalpublicscalars to boundedGLVcomponents; every128bitdigit and canonicalgrouphelper branch is certified; finalIC0 addition and finiteinverse bind exactVKx while carryingrawproof unchanged.",
+      "Repairedgenesis actualBoolean/polynomial predicates enforce correctA/C identities, inverseunitencoding, finiteBtwistmembership andcanonicalroot. All348actualMillerSSA events bind currentF/R and originalpoints/root; canonicalhelpers, exact8half integerpolynomials and nestedintegertraces justify fieldinterpretation and committedbytes.",
+      "IndependentVK arithmetic proves all176gamma/deltalines and thealpha/beta fixedfactor. ThelineLaurentidentity, ordinaryoptimalAte theorem and endpointkernel calculation give the intendedpairing product. ActualterminalFrobenius and6crossproducts withnonzero guard give [g]=[c^lambda]; gcd(lambda,p^6+1)=R makes the image exactly reducedpairingkernel.",
+      "Fullcompiledtokenlifecycle, compulsorybyteequalities andhashpreimages bind every320B/544B/1024B seam toits designated successor. The unchanged9continuations and first4programs differingonly successorhashliteral transfer theiralreadyexecuted mathematics; repairedgenesis/ranges/lifecycle/byteIDs/Zprefix are independently reexecuted."
+    ],
+    "externalPremises": [
+      "Assumes standardBN254 group orders/primality/Frobenius/optimalAte and collisionresistance plus a validledger thread rooted in the designated mintingauthority.",
+      "This is an isolated source repair. It does not change the publishedhead, reproduce the inherited archivedcovenant programs, establishproducer completeness orclaimresource/live-network acceptance.",
+      "The rawproof domain has finiteB; admitting rawBidentity would require a separately authenticatedrawidentity normalization, not reusing a finitegenerator sentinel."
+    ],
+    "graphPremise": "The exact repaired 14-program P2SH32 graph and its successor locks are supplied/authenticated externally; each program and callee namespace is pinned above.",
+    "ledgerPremise": "A valid-ledger thread rooted in the designated initial minting NFT with zero fungible amount and token conservation is required.",
+    "finiteDomain": "The repaired raw-proof theorem requires finite raw B; raw B identity is not admitted by the finite-generator correction.",
+    "genericAffineSeparation": "The generic grouped-affine component is not part of this raw14 graph proof and remains separately qualified."
+  },
+  "fullGenericAffineVerifierClaim": false,
+  "originalWithdrawalsUnchanged": true,
+  "scope": {
+    "existingProofPublicInputsOnly": true,
+    "sameProofAuxiliaryReencoding": true,
+    "newProofs": 0,
+    "deliberateNegativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false
+  },
+  "files": {
+    "README.md": "94f869dbc5101bc3e4f0a15d7b417bfc5aca45970dc8a3697ec4006668678175",
+    "conditional-graph-join-result-v1.json": "e87de8fbfeb3200320024d57a4930aa3613d52eb52afc00ab466d31c0a3a525b",
+    "domain-ownership-v1.json": "e77bce2b3bb142ff3c73f5d208c21a79c78175ec24ca9cdd5dc2105742fa5445",
+    "existing-positive-context.json": "6e49adec5a388595bc99c7f94b0fcbba7cf7b5427f5e0ed398646b831d15b0ef",
+    "fixed-policy-source-rebuild-receipt-v2.json": "7ddb615a004fa1ea85a6b55ab0b01345985b376bdb560501a726f83acb0065ae",
+    "helper-side-effect-metadata.json": "b8d1db87a1f0126411e86b78a521d809b5fe221b244932ed5fd83ceecf68e374",
+    "libauth-pin.json": "389c260f10dedd8a15fc6a50f08dbc01fd0667a0637738b3852cd41988c6360d",
+    "program-bodies.json": "273cd035163c2196f0bad07a4f8a991451f7a998ee1d3fe5cf158dea2a0eed41",
+    "replay.mjs": "9cacb812ea1cfbad4053b17f03c1d2d7c9809b5c845ab21c18ceffaa7d9eb16a",
+    "standalone-replay-receipt-v2.json": "81b27bd17e49619c20b690bea6beb788291d73ed50e6fd6a78decd946702548a",
+    "state-handoff-result-v2.json": "657c52dd3f46804f2a6a281e9029aad9ef41b7f2fd193895305819168dcc5d09",
+    "statement-compatibility.json": "1850173e93a5074819f4d4fe07dd06e83fb0ba7cfc3ff1e57212b262009d31f4"
+  },
+  "sourceRevision": "70b0f04150d0f19467df41c5b8d170f78aa1691a",
+  "logicalRoots": {
+    "public-source": "sourceRepository/sourceDirectory",
+    "public-artifact": "this artifact directory"
+  }
+}

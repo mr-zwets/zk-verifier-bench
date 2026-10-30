@@ -49,7 +49,7 @@ for (const run of runs) {
 
 const vectorPath = join(repo, 'src/bch/groth16-bls12381-intratx-residue-large-checked-vectors.json');
 const vectorSha256 = sha(readFileSync(vectorPath));
-assert.equal(vectorSha256, '9b0ca5517eacf50d52a7991b90a89ded64e10c907fce9f2273c735a5a18af5d1',
+assert.equal(vectorSha256, 'e5d352105aee57abdeac865c1125c2b66085f0112ccfeace275e13dc024dc90d',
   'unexpected checked BLS-large vector; use the pinned existing positive artifact');
 const report = {
   schema: 'bls12381-residue-large-corrected-positive-replay/v1',

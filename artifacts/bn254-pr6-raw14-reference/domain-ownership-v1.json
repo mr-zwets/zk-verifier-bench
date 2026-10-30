@@ -1,0 +1,24 @@
+{
+  "schema": "source6-raw14-domain-ownership/v1",
+  "status": "PASS_EXPLICIT_FINITE_B_AND_G2_SUBGROUP_OWNERSHIP",
+  "rawB": {
+    "domain": "finite affine BN254 twist point",
+    "programOwner": "public-source/fixed-programs/stage-04.cash",
+    "guards": [
+      "Q0xa,Q0xb,Q0ya,Q0yb are each constrained to [0,p)",
+      "the two twist-equation limbs are constrained modulo p to zero"
+    ],
+    "identitySemantics": "point-at-infinity is not an admitted affine Q encoding; raw-B identity remains outside the theorem domain"
+  },
+  "g2Subgroup": {
+    "programOwner": "public-source/fixed-programs/stage-13.cash",
+    "relation": "R + psi(B) - psi^2(B) = -psi^3(B)",
+    "guards": "four Fp2 coordinate congruences modulo p",
+    "constantOwner": "pinned BN254 twist/Frobenius constants in the repaired source and standard BN254 premises"
+  },
+  "limits": [
+    "No arbitrary-VK or universal-producer claim",
+    "No mainnet, relay, or resource-admission claim",
+    "The generic grouped-affine sibling is separate and remains unqualified by this raw14 package"
+  ]
+}
