@@ -206,7 +206,7 @@ Notes on the constraints:
 | random | 64 B |
 | FRI round-0 leaf | 7 ext + salt = 184 B |
 | per-query leaf total | **936 B** |
-| proof (bytes8.py) | **73,435 B** (cap 0) and **75,968 B** (cap 5), expected values |
+| proof (bytes8.py) | **73,434 B** (cap 0) and **75,967 B** (cap 5), expected values |
 
 ### 3.6 AIR ⇒ relation (sketch for S8, SOUNDNESS-T8 lemma 8)
 
@@ -312,7 +312,7 @@ Every commitment has matrices at both heights: random, main, quotient (8 + 4 chu
 | t_17 (T_ctl) | 32 + 24 + 6 + 5 + 18 = 85 |
 | total t | 212 |
 | lookup terminals | 2 |
-| proof (bytes8.py, expected) | 122,995 B |
+| proof (bytes8.py, expected) | 122,993 B |
 
 Checks (bytes8.py `checks`, all pass):
 - **strict heights:** 20, 17 > 14;
@@ -342,7 +342,10 @@ Under plain Z128 (final 2^8), T_ctl's 17 is not > 17, so that set is rejected. T
 1. **CTX binding** is through the transcript only (Plonky3 observes public values before α). SOUNDNESS-T8 (S8) must state this as a lemma: Fiat-Shamir binding of public inputs, with the ZK caveat. S3's tamper set covers changed outputs (CTX differs).
 2. **Preprocessed salts** (§4.3): S1 exports them, and the M2 verifying key records how the root was made.
 3. **Constraint order** (§1): Rust `eval` must emit exactly the order of §3.4 and §4. S3 checks this by comparing the folded constraint value at ζ against Rust on every vector.
-4. **p3b-v1 PoW witnesses:** Plonky3 requires a zero witness at 0 bits. If p3b-v1 omits zero-bit witnesses (as p3s-v1 did), the decoder must insert 0. bytes8 assumes this.
+4. **p3b-v1 format (S1 FORMAT.md).** It omits zero-bit PoW witnesses, and the decoder inserts 0. degree_bits are verifying-key data, so the proof has no header byte. bytes8 follows this.
+   - Against S1's 28 real p3b-v1 proofs, every deterministic section matches exactly, and so do the fold schedules (`s1-crosscheck.json`).
+   - **Periodic columns are not bound by batch-stark's transcript** (S1 finding), so the 11 × 32 periodic values of §3.3 are verifying-key constants and must be compiled into the script.
+   - **Lookup PoW:** S1 currently uses 0 bits. The LogUp round is 166.5 bits even without PoW. params8 uses 8 bits for M2 to cover the lookup-PoW site (DESIGN §4). Either value keeps λ.
 5. **Sizes are expected values.** A single proof's sibling count varies. Over Track 5's 45 vectors the deviation had a standard deviation of 1.2% and a maximum of 3.6%. M1's p99 is about +2.0%. S2's "within ±3% of S0" should be read against these expected values, with that spread.
 6. **Changes against DESIGN-T8 §3–4,** which are details within the design:
    - M1 has 53 constraints, not "about 32": B and J were added for mutation completeness, and the remaining constraints are written out explicitly.

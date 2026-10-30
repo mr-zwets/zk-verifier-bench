@@ -18,9 +18,10 @@ What it models (each item was read from the pinned Plonky3 source, file named in
 
 Wire format: p3b-v1 is defined by S1 (FORMAT.md). This model assumes the p3s-v1 conventions carried over
 (FORMAT.md of Track 5): u16 sibling counts, 8-byte base elements, D*8-byte extension elements, PoW witness
-present only when its bits are > 0, plus per batch proof: 1 byte degree_bits per instance, one extension
-element per lookup terminal, the lookup / OOD PoW witnesses (if > 0 bits). Deviations by S1 are expected to be
-a few bytes, far inside the 1% reproduction tolerance.
+present only when its bits are > 0, plus per batch proof: one extension element per lookup terminal, the
+lookup / OOD PoW witnesses (if > 0 bits); degree_bits are verifying-key data (no header byte). S1's FORMAT.md
+(groth16_cashscript wip/stark-usable, research/pq-stark-batch/prover/FORMAT.md) confirmed these conventions;
+`python3 bytes8.py --s1 <vectors dir>` compares the model with S1's real p3b-v1 vectors (s1-crosscheck.json).
 
 Run:  python3 bytes8.py            self-test against Track 5 (S128 78,393 B, S128z 112,501 B, all 45 vectors)
       python3 bytes8.py --shapes   print the Track 8 shapes (M1, M2) with checks
@@ -218,7 +219,7 @@ def proof_bytes(tables, s: FriSet, header_bytes=None):
     lookup_tables = [t for t in tables if t.num_lookups]
     capd = (2 ** s.cap) * s.digest
     b = {}
-    b['header'] = len(tables) if header_bytes is None else header_bytes
+    b['header'] = 0 if header_bytes is None else header_bytes   # p3b-v1: degree_bits are VK data (S1 FORMAT.md)
     n_proof_commits = sum(1 for _, inp, _ in rounds if inp)
     # effective cap per input tree (mixed heights)
     tree_caps = {}
@@ -387,6 +388,45 @@ def selftest(verbose=True):
     return res
 
 
+def s1_crosscheck(vdir):
+    """Compare the model with S1's p3b-v1 vectors (Plonky3 batch test AIRs re-configured to SHA-256/Goldilocks/D3)."""
+    import glob
+    rows = []
+    for f in sorted(glob.glob(os.path.join(vdir, '*', '*.json'))):
+        v = json.load(open(f))
+        if 'shape' not in v or 'sizes' not in v:
+            continue
+        sh, st = v['shape'], v['set']
+        zk = bool(st['zk'])
+        tables = []
+        for ins in sh['instances']:
+            t = Table(ins['label'], ins['log_n'], ins['width'], main_next=ins['opens_next'],
+                      pre_width=ins['preprocessed_width'], pre_next=ins['preprocessed_next'],
+                      num_lookups=ins['num_lookups'])
+            t.max_deg = next(d for d in range(1, 40) if num_chunks(replace(t, max_deg=d), zk) == ins['num_chunks'])
+            tables.append(t)
+        s = FriSet(st['name'], D=st['ext'], log_blowup=st['log_blowup'], max_log_arity=st['max_log_arity'],
+                   log_final_poly_len=st['log_final_poly_len'], Q=st['num_queries'], query_pow=st['query_pow_bits'],
+                   commit_pow=st['commit_pow_bits'], batch_pow=st['batch_pow_bits'], ood_pow=st['ood_pow_bits'],
+                   lookup_pow=st['lookup_pow_bits'], zk=zk, rc=st['num_random_codewords'] if zk else 0,
+                   salt=st['salt'] if zk else 0, cap=st['cap_height'], digest=st['digest'])
+        b = proof_bytes(tables, s)
+        meas = v['sizes']['total']
+        DET = ('header', 'roots', 'ood_values', 'lookup_terminals', 'pow_witnesses', 'final_poly', 'input_leaves',
+               'input_salts', 'fri_leaves', 'fri_salts', 'counts')
+        det = (meas - v['sizes']['input_siblings'] - v['sizes']['fri_siblings'], sum(b[k] for k in DET))
+        rows.append(dict(file=os.path.relpath(f, vdir), measured=meas, model=b['total'],
+                         dev_pct=round((b['total'] - meas) / meas * 100, 3), deterministic_exact=det[0] == det[1],
+                         det_measured=det[0], det_model=det[1], schedule_ok=b['schedule'] == sh['log_arities']))
+    devs = [r['dev_pct'] for r in rows]
+    z = [r['dev_pct'] for r in rows if r['file'].startswith('Z128')]
+    return dict(n=len(rows), z128_n=len(z), z128_mean_dev_pct=round(sum(z) / max(1, len(z)), 3),
+                z128_max_abs_dev_pct=round(max((abs(d) for d in z), default=0), 3), mean_dev_pct=round(sum(devs) / max(1, len(devs)), 3),
+                max_abs_dev_pct=round(max((abs(d) for d in devs), default=0), 3),
+                deterministic_exact=all(r['deterministic_exact'] for r in rows),
+                schedules_ok=all(r['schedule_ok'] for r in rows), rows=rows)
+
+
 def describe(tables, s):
     b = proof_bytes(tables, s)
     c = checks(tables, s)
@@ -400,6 +440,15 @@ def describe(tables, s):
 
 def main():
     r = selftest()
+    if '--s1' in sys.argv:
+        x = s1_crosscheck(sys.argv[sys.argv.index('--s1') + 1])
+        print(f'S1 p3b-v1 vectors: {x["n"]} proofs, mean deviation {x["mean_dev_pct"]:+.3f}%, max |dev| {x["max_abs_dev_pct"]:.2f}% '
+              f'(Z128 family: {x["z128_n"]} proofs, mean {x["z128_mean_dev_pct"]:+.3f}%, max |dev| {x["z128_max_abs_dev_pct"]:.2f}%), '
+              f'deterministic parts exact: {x["deterministic_exact"]}, fold schedules: {x["schedules_ok"]}')
+        for row in x['rows']:
+            if not row['deterministic_exact']:
+                print('   mismatch', row)
+        json.dump(x, open(os.path.join(HERE, 's1-crosscheck.json'), 'w'), indent=1)
     if '--shapes' in sys.argv or True:
         for label, tables, s in (('M1 / Z128 cap 0', M1, Z128), ('M1 / Z128 cap 5', M1, Z128c5),
                                  ('M2 / Z128-g cap 0', M2, Z128g), ('M2 / Z128 (negative check)', M2, Z128)):

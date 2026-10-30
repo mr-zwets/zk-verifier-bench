@@ -1,0 +1,292 @@
+{
+ "n": 28,
+ "z128_n": 23,
+ "z128_mean_dev_pct": 1.056,
+ "z128_max_abs_dev_pct": 6.864,
+ "mean_dev_pct": 1.11,
+ "max_abs_dev_pct": 16.515,
+ "deterministic_exact": true,
+ "schedules_ok": true,
+ "rows": [
+  {
+   "file": "P3/both_lookups_zk-PTZ.json",
+   "measured": 12442,
+   "model": 12239,
+   "dev_pct": -1.632,
+   "deterministic_exact": true,
+   "det_measured": 9626,
+   "det_model": 9626,
+   "schedule_ok": true
+  },
+  {
+   "file": "P3/mixed_preprocessed-PT.json",
+   "measured": 2642,
+   "model": 2496,
+   "dev_pct": -5.526,
+   "deterministic_exact": true,
+   "det_measured": 1234,
+   "det_model": 1234,
+   "schedule_ok": true
+  },
+  {
+   "file": "P3/periodic_air_zk-PTZ.json",
+   "measured": 5848,
+   "model": 5668,
+   "dev_pct": -3.078,
+   "deterministic_exact": true,
+   "det_measured": 3224,
+   "det_model": 3224,
+   "schedule_ok": true
+  },
+  {
+   "file": "P3/single_instance-PT.json",
+   "measured": 2484,
+   "model": 2497,
+   "dev_pct": 0.523,
+   "deterministic_exact": true,
+   "det_measured": 756,
+   "det_model": 756,
+   "schedule_ok": true
+  },
+  {
+   "file": "P3/three_instances_mixed_sizes-PT.json",
+   "measured": 2410,
+   "model": 2808,
+   "dev_pct": 16.515,
+   "deterministic_exact": true,
+   "det_measured": 1546,
+   "det_model": 1546,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128-n1024.json",
+   "measured": 110932,
+   "model": 110611,
+   "dev_pct": -0.289,
+   "deterministic_exact": true,
+   "det_measured": 45844,
+   "det_model": 45844,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128.json",
+   "measured": 98644,
+   "model": 99475,
+   "dev_pct": 0.842,
+   "deterministic_exact": true,
+   "det_measured": 42388,
+   "det_model": 42388,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128_cap5.json",
+   "measured": 99764,
+   "model": 102283,
+   "dev_pct": 2.525,
+   "deterministic_exact": true,
+   "det_measured": 47348,
+   "det_model": 47348,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128_zk0.json",
+   "measured": 61546,
+   "model": 63039,
+   "dev_pct": 2.426,
+   "deterministic_exact": true,
+   "det_measured": 15594,
+   "det_model": 15594,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128g.json",
+   "measured": 84436,
+   "model": 85270,
+   "dev_pct": 0.988,
+   "deterministic_exact": true,
+   "det_measured": 38164,
+   "det_model": 38164,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/mixed_preprocessed-Z128.json",
+   "measured": 76290,
+   "model": 76503,
+   "dev_pct": 0.279,
+   "deterministic_exact": true,
+   "det_measured": 29058,
+   "det_model": 29058,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/mixed_preprocessed-Z128_cap5.json",
+   "measured": 77218,
+   "model": 78678,
+   "dev_pct": 1.891,
+   "deterministic_exact": true,
+   "det_measured": 33026,
+   "det_model": 33026,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/mixed_preprocessed-Z128_zk0.json",
+   "measured": 48176,
+   "model": 48346,
+   "dev_pct": 0.353,
+   "deterministic_exact": true,
+   "det_measured": 10544,
+   "det_model": 10544,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/mixed_preprocessed-Z128g.json",
+   "measured": 63938,
+   "model": 63833,
+   "dev_pct": -0.164,
+   "deterministic_exact": true,
+   "det_measured": 24834,
+   "det_model": 24834,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/periodic_air_zk-Z128.json",
+   "measured": 52288,
+   "model": 51690,
+   "dev_pct": -1.144,
+   "deterministic_exact": true,
+   "det_measured": 13888,
+   "det_model": 13888,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/periodic_air_zk-Z128_cap5.json",
+   "measured": 53952,
+   "model": 54224,
+   "dev_pct": 0.504,
+   "deterministic_exact": true,
+   "det_measured": 17856,
+   "det_model": 17856,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/periodic_air_zk-Z128_zk0.json",
+   "measured": 35238,
+   "model": 36134,
+   "dev_pct": 2.543,
+   "deterministic_exact": true,
+   "det_measured": 7974,
+   "det_model": 7974,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/periodic_air_zk-Z128g.json",
+   "measured": 37952,
+   "model": 40557,
+   "dev_pct": 6.864,
+   "deterministic_exact": true,
+   "det_measured": 9664,
+   "det_model": 9664,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/single_instance-Z128-n1024.json",
+   "measured": 75346,
+   "model": 74918,
+   "dev_pct": -0.568,
+   "deterministic_exact": true,
+   "det_measured": 21330,
+   "det_model": 21330,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/single_instance-Z128.json",
+   "measured": 64146,
+   "model": 65319,
+   "dev_pct": 1.829,
+   "deterministic_exact": true,
+   "det_measured": 17874,
+   "det_model": 17874,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/single_instance-Z128_cap5.json",
+   "measured": 66834,
+   "model": 67494,
+   "dev_pct": 0.988,
+   "deterministic_exact": true,
+   "det_measured": 21842,
+   "det_model": 21842,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/single_instance-Z128_zk0.json",
+   "measured": 45336,
+   "model": 46018,
+   "dev_pct": 1.504,
+   "deterministic_exact": true,
+   "det_measured": 8216,
+   "det_model": 8216,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/single_instance-Z128g.json",
+   "measured": 53554,
+   "model": 52649,
+   "dev_pct": -1.69,
+   "deterministic_exact": true,
+   "det_measured": 13650,
+   "det_model": 13650,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128.json",
+   "measured": 98652,
+   "model": 100827,
+   "dev_pct": 2.205,
+   "deterministic_exact": true,
+   "det_measured": 40668,
+   "det_model": 40668,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128_cap5.json",
+   "measured": 103804,
+   "model": 103635,
+   "dev_pct": -0.163,
+   "deterministic_exact": true,
+   "det_measured": 45628,
+   "det_model": 45628,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128_zk0.json",
+   "measured": 61266,
+   "model": 62279,
+   "dev_pct": 1.653,
+   "deterministic_exact": true,
+   "det_measured": 12530,
+   "det_model": 12530,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128g-n1024.json",
+   "measured": 108838,
+   "model": 110705,
+   "dev_pct": 1.715,
+   "deterministic_exact": true,
+   "det_measured": 40902,
+   "det_model": 40902,
+   "schedule_ok": true
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128g.json",
+   "measured": 87324,
+   "model": 86621,
+   "dev_pct": -0.805,
+   "deterministic_exact": true,
+   "det_measured": 36444,
+   "det_model": 36444,
+   "schedule_ok": true
+  }
+ ]
+}

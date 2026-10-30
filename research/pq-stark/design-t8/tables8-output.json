@@ -1,4 +1,14 @@
 {
+ "s1_crosscheck": {
+  "n": 28,
+  "z128_n": 23,
+  "z128_mean_dev_pct": 1.056,
+  "z128_max_abs_dev_pct": 6.864,
+  "mean_dev_pct": 1.11,
+  "max_abs_dev_pct": 16.515,
+  "deterministic_exact": true,
+  "schedules_ok": true
+ },
  "consistency": {
   "bytes8": {
    "S128": {
@@ -391,7 +401,7 @@
  "sizes": {
   "M1 / Z128 cap 0": {
    "bytes": {
-    "header": 1,
+    "header": 0,
     "roots": 128,
     "ood_values": 2256,
     "lookup_terminals": 0,
@@ -404,7 +414,7 @@
     "fri_salts": 384,
     "fri_siblings": 8875,
     "counts": 8,
-    "total": 73435,
+    "total": 73434,
     "t": 94,
     "t_by_height": {
      "20": 94
@@ -513,7 +523,7 @@
     },
     "ok": true
    },
-   "p99_factor": 0.02026717505276775,
+   "p99_factor": 0.020267451044475308,
    "per_query_full_path": {
     "leaves": 752,
     "fri_leaves": 184,
@@ -548,7 +558,7 @@
   },
   "M1 / Z128 cap 5": {
    "bytes": {
-    "header": 1,
+    "header": 0,
     "roots": 4096,
     "ood_values": 2256,
     "lookup_terminals": 0,
@@ -561,7 +571,7 @@
     "fri_salts": 384,
     "fri_siblings": 8516,
     "counts": 8,
-    "total": 75968,
+    "total": 75967,
     "t": 94,
     "t_by_height": {
      "20": 94
@@ -670,7 +680,7 @@
     },
     "ok": true
    },
-   "p99_factor": 0.019886267902274657,
+   "p99_factor": 0.01988652967735992,
    "per_query_full_path": {
     "leaves": 752,
     "fri_leaves": 184,
@@ -705,7 +715,7 @@
   },
   "M1 / Z128-s cap 5 (stretch)": {
    "bytes": {
-    "header": 1,
+    "header": 0,
     "roots": 4096,
     "ood_values": 2256,
     "lookup_terminals": 0,
@@ -718,7 +728,7 @@
     "fri_salts": 368,
     "fri_siblings": 8186,
     "counts": 8,
-    "total": 73423,
+    "total": 73422,
     "t": 94,
     "t_by_height": {
      "20": 94
@@ -827,7 +837,7 @@
     },
     "ok": true
    },
-   "p99_factor": 0.023334377511134097,
+   "p99_factor": 0.02333469532292772,
    "per_query_full_path": {
     "leaves": 752,
     "fri_leaves": 184,
@@ -862,7 +872,7 @@
   },
   "M2 / Z128-g cap 0": {
    "bytes": {
-    "header": 2,
+    "header": 0,
     "roots": 192,
     "ood_values": 5088,
     "lookup_terminals": 48,
@@ -875,7 +885,7 @@
     "fri_salts": 768,
     "fri_siblings": 15447,
     "counts": 14,
-    "total": 122995,
+    "total": 122993,
     "t": 212,
     "t_by_height": {
      "20": 127,
@@ -1059,7 +1069,7 @@
     },
     "ok": true
    },
-   "p99_factor": 0.021164437578763327,
+   "p99_factor": 0.02116478173554589,
    "per_query_full_path": {
     "leaves": 1528,
     "fri_leaves": 368,
@@ -1129,59 +1139,59 @@
   "layouts": {
    "M1 b (one input), redeem 13000": {
     "needs": "per-input unlocking limit raised to 100,000 B; tx size limit unchanged",
-    "proof": 73435,
-    "unlocking": 87158,
-    "unlocking_p99": 88646,
-    "tx_bytes": 87461,
+    "proof": 73434,
+    "unlocking": 87157,
+    "unlocking_p99": 88645,
+    "tx_bytes": 87460,
     "op_libauth": 28255740,
     "op_bchn_adj": 28260740,
-    "budget_base41": 69759200,
+    "budget_base41": 69758400,
     "pct_base41": 40.5,
     "pct_bchspec": 36.4,
     "fits": true
    },
    "M1 b (one input), redeem 18000": {
     "needs": "per-input unlocking limit raised to 100,000 B; tx size limit unchanged",
-    "proof": 73435,
-    "unlocking": 92158,
-    "unlocking_p99": 93646,
-    "tx_bytes": 92461,
+    "proof": 73434,
+    "unlocking": 92157,
+    "unlocking_p99": 93645,
+    "tx_bytes": 92460,
     "op_libauth": 28255740,
     "op_bchn_adj": 28260740,
-    "budget_base41": 73759200,
+    "budget_base41": 73758400,
     "pct_base41": 38.3,
     "pct_bchspec": 34.6,
     "fits": true
    },
    "M1 b2 (two inputs), redeem 13000": {
     "needs": "per-input unlocking limit raised to 100,000 B",
-    "proof": 73435,
-    "unlocking_total": 90778,
-    "tx_bytes": 91124,
+    "proof": 73434,
+    "unlocking_total": 90777,
+    "tx_bytes": 91123,
     "fits_tx_100k": true,
     "split": "input 0: redeem + PT + queries [0,Q_A); input 1: P2SH32 loader + queries [Q_A,Q) (+3.2 KB split)"
    },
    "M1 b2 (two inputs), redeem 18000": {
     "needs": "per-input unlocking limit raised to 100,000 B",
-    "proof": 73435,
-    "unlocking_total": 95778,
-    "tx_bytes": 96124,
+    "proof": 73434,
+    "unlocking_total": 95777,
+    "tx_bytes": 96123,
     "fits_tx_100k": true,
     "split": "input 0: redeem + PT + queries [0,Q_A); input 1: P2SH32 loader + queries [Q_A,Q) (+3.2 KB split)"
    },
    "M2 b2 (two inputs), redeem 18000": {
     "needs": "per-input unlocking limit raised to 100,000 B AND tx size limit raised",
-    "proof": 122995,
-    "unlocking_total": 145823,
-    "tx_bytes": 146169,
+    "proof": 122993,
+    "unlocking_total": 145821,
+    "tx_bytes": 146167,
     "fits_two_inputs": true,
     "op_model": 38856696
    },
    "M2 b2 (two inputs), redeem 24000": {
     "needs": "per-input unlocking limit raised to 100,000 B AND tx size limit raised",
-    "proof": 122995,
-    "unlocking_total": 151823,
-    "tx_bytes": 152169,
+    "proof": 122993,
+    "unlocking_total": 151821,
+    "tx_bytes": 152167,
     "fits_two_inputs": true,
     "op_model": 38856696
    },

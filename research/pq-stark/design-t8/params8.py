@@ -327,6 +327,13 @@ def main():
           f'[acceptance <= 1%: {"PASS" if abs(r["dev_pct"]) <= 1 else "FAIL"}]')
     P(f'  bytes8 over all {st["n"]} Track 5 vectors: mean {st["mean_dev_pct"]:+.3f}%, max |dev| {st["max_abs_dev_pct"]:.2f}% '
       f'(single proofs vary with the random query set; deterministic parts exact: {st["exact_parts_ok"]})')
+    s1p = os.path.join(HERE, 's1-crosscheck.json')
+    if os.path.exists(s1p):
+        x = json.load(open(s1p))
+        P(f'  bytes8 vs S1 p3b-v1 vectors ({x["n"]} real batch-stark proofs, S1 commit f1b1c3f; `bytes8.py --s1 <dir>`): '
+          f'deterministic parts exact: {x["deterministic_exact"]}; fold schedules equal: {x["schedules_ok"]}; Z128 family '
+          f'({x["z128_n"]}) total mean {x["z128_mean_dev_pct"]:+.2f}%, max |dev| {x["z128_max_abs_dev_pct"]:.2f}% (model >= real on average)')
+        js['s1_crosscheck'] = {k: x[k] for k in x if k != 'rows'}
     cons = track5_consistency()
     P(f'  params8 one-table path vs params5 (M1, Z128, m=5): max |round diff| {cons[5]["max_abs_diff"]} bits; '
       f't params5 {cons[5]["t5"]} = bytes8 {cons[5]["t8"]}')
