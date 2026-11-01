@@ -1,6 +1,169 @@
-# Track 9: a post-quantum shielded pool on the Track 8 STARK verifier (S0–S3)
+# Track 9: a post-quantum shielded pool on the Track 8 STARK verifier (S0–S4, soundness)
 
 Status: research. **Not a leaderboard entry.** Nothing is in REGISTRY, results.json or score-history.json.
+
+## Track 9b (2026-11-01): deposits, flush and soundness
+
+The sources are in groth16_cashscript `research/pq-pool/` (merged to `main` at 88f0719; developed on `wip/pool9b`: S4 8953563 … 2f8f931, SOUNDNESS-T9 545b8c8, review fixes 029d8f2, summary 8808381). The integrated summary is [`research/pq-pool/summary-s4.json`](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-pool/summary-s4.json). The design is [DESIGN-T9.md](DESIGN-T9.md).
+
+**Scope.** Track 9 (below) stopped at a static genesis tree. Track 9b adds S4 (deposits, the queue, the permissionless flush, the 16-slot ring, R pinning the pool's W) and S7a (SOUNDNESS-T9 with one review round). The relayer (S5) and M1-N (S6) are still not built.
+
+**Answer: a pool that takes deposits works under today's standard rules and on stock BCHN.**
+- A deposit is 645 B. A flush of 16 deposits is one 42.1 KB transaction (D, W and 4 worker inputs, 41 Poseidon2 compressions) with every input under its BCHN-adjusted budget, the busiest at 91.1% (91.9% in a synthetic edge state).
+- On BCHN 29.1.0 regtest (POLICY=1): a policy-tested genesis, 272 deposits, 17 flushes whose roots all equal the offline Poseidon2 tree, 5 fresh proofs and 4 withdrawals against flushed roots. A root 17 flushes old was rejected by W in the mempool and in a block.
+- SOUNDNESS-T9 argues L1–L7 per pool (state uniqueness, nullifier set, ring, verifier, one NF per leaf, conservation, binding) under stated hash, proof-system and deployment assumptions. The review found 0 blocker, 0 major and 8 minor issues, all fixed in documentation.
+
+### 9b.1 What changed
+
+| | change | where (`research/pq-pool/`) |
+|---|---|---|
+| **D state** | New P2SH32 covenant (291 B redeem), the second mutable NFT of the pool category CAT (prefix 0x44; W is 0x57). Commitment `0x44 ‖ queue ‖ depHash`: queue = SHA-256(len ‖ chain) of up to 16 queued leaves, depHash = SHA-256(count ‖ frontier at levels 4..29). | `d/dcov.mjs` `buildD` |
+| **Deposit** | Requires len < 16, a 32 B leaf with every lane < p, and D′ = D + δ + f with the extended queue. | `d/dcov.mjs` |
+| **Flush coordinator** | D's redeem runs a 2,209 B blob it holds by HASH256. It re-derives the queue from the 16 leaves (so len = 16, order kept), checks the frontier against depHash, writes the new root into ring slot epoch mod 16 (old slot proven with 4 siblings), builds each worker's expected IO program and compares it with that worker's first push, and moves 16δ from D to W. The keeper takes the released 16f. | `d/dcov.mjs` `flushBlob` |
+| **Flush workers** | One 43 B P2S locking (`DEPTH 3`, H(WBLOB)) running S0's compression plus a 4-op IO interpreter. The 41 compressions split 10 / 12 / 12 / 7. | `d/dcov.mjs` `workerBlob`, `workerLocking` |
+| **W flush branch** | W accepts a flush only with the real D at input 0 whose value drops by 16(δ + f), which only D's flush branch allows. W's redeem grows from 499 to 671 B. | `w/wcov.mjs` |
+| **R pins W (A3)** | In tx1, HEAD checks input 5: category CAT ‖ 0x01 and commitment prefix 0x57 (the prefix is needed because D shares CAT). R becomes pool specific. | `r/gena.mjs` |
+| **Genesis** | CAT is the txid of a funding outpoint, fixed before R, W and D are built (no hash cycle). The genesis creates exactly two mutable NFTs of CAT and no minting NFT. | `d/dpool.mjs`, `node/s4.ts` |
+
+### 9b.2 Sizes and op-cost per input
+
+libauth BCH 2026, today's standard rules. Op-cost is **BCHN-adjusted** (libauth plus the OP_DEFINE body bytes BCHN charges per input). Budget (41 + unlocking) × 800. Ranges over the 17 flushes of the libauth run.
+
+| transaction / input | bytes | op-cost (BCHN-adjusted) | share of its budget |
+|---|--:|--:|--:|
+| **deposit** (2 inputs, 2 outputs) | **645** | D input 18,598–18,611 | 5.8% |
+| **flush** (6 inputs, 3 outputs) | **42,127–42,129** | 25.4M in all | **max 91.1%** |
+| – D (coordinator) | unlocking 4,213 | 0.699–0.700M | 20.6% |
+| – W (flush branch) | 674 | 0.048M | 8.3% |
+| – worker 1 (10 compressions) | 8,600 | 6.07M | 87.9% |
+| – worker 2 (12) | 10,000 | 7.27–7.32M | **91.1%** |
+| – worker 3 (12) | 10,000 | 7.24M | 90.2% (91.9% when every bit of count is set) |
+| – worker 4 (7) | 8,036 | 4.25M | 65.9% |
+| **withdrawal** at the genesis state (2-tx a′ + W) | 91,229 + 41,675 = **132,904** | max 91.1% (QRY) | Track 9: 132,640 |
+
+- **The S0 flush estimate holds.** S0 measured 41 compressions at 23.75M in 4 inputs; the built flush is 4 workers plus D and W. The non-Poseidon2 work S0 left open (queue hashes, frontier, ring, IO building, reading the worker unlockings, W) costs about 0.75M, and the lane checks and interpreter add about 2% per worker.
+- **Depositors cannot push a flush over budget.** The review measured worker op-cost for honest flushes with leaf lanes random, 0, 1, p − 1, 2^63 and all-ones: it moves by at most about 0.2%. The worker IO sizes depend only on count's bits and the position of the lowest zero bit, never on the data (472–~560 B), so the fixed PUSHDATA2 IO header is always minimal.
+- **What A3 costs the withdrawal.** tx0 and tx1 each grow by 46 B, and BCHN's per-R-input OP_DEFINE charge grows by 92 B (37,790 → 37,882 B). Proofs are not pool specific.
+- **Fees.** On BCHN the flush paid 1.19 sat/B (50,000 sat); the keeper output got 118,000 sat (16f = 160,000 minus the fee, plus 4 × 2,000 sat workers). A third-party keeper breaks even only if 16f ≥ (flush bytes + worker-setup bytes) × feerate: f_min ≈ (42,129 + ~400) × feerate / 16 ≈ **2.7k sat at 1 sat/B** (the ~400 B setup transaction is an estimate). The regtest f = 10,000 sat covers about 3.7 sat/B.
+
+### 9b.3 BCHN end to end (S4)
+
+One fresh node (`t9s4a`): stock BCHN 29.1.0 regtest, POLICY=1 (`acceptnonstdtxn=0`, default relay policy), `node.sh` identical to the bench copy, stopped afterwards.
+
+| step | result |
+|---|---|
+| **genesis** | Spends a P2SH32(OP_1) output, so it was **policy-tested** (allowed). BCHN decodes exactly 2 outputs of CAT, both mutable (0x44, 0x57), no minting NFT. 389 B. |
+| **272 deposits** | 645 B each, allowed by testmempoolaccept, sent as unconfirmed chains on D, mined 16 per block. |
+| **17 flushes** | 42,127–42,129 B, max input 90.5–91.1%, all allowed and mined. **Root = offline tree 17/17.** After every step, `gettxout` of D and W matched the JS state (value, category, capability, commitment, locking). |
+| **proofs** | The Track 8 prover with an explicit witness (nk, r, 30 siblings from the offline tree): 5 proofs, 73,744–76,208 B, 2.5–5.6 s; public values equal (flush root, NF, CTX). |
+| **4 withdrawals** | Note 3 @ root 0 and note 20 @ root 1 (after the second flush), note 5 @ root 0 at epoch 16, note 9 @ root 16 (new proof). Each tx0 + tx1 allowed and mined: 91,229 + 41,675–41,739 B, max input 91.1%, W 33–35%. |
+| **stale root** | Note 9 @ root 0 at epoch 17 (slot 0 overwritten): tx0 valid and mined; tx1 rejected by W in libauth (OP_VERIFY), by testmempoolaccept (`16: mandatory-script-verify-flag-failed (Script failed an OP_EQUALVERIFY operation)`), by sendrawtransaction and as a block (`blk-bad-inputs`). |
+| **testmempoolaccept totals** | **299 valid transactions allowed** (genesis, 272 deposits, 17 flushes, 9 withdrawal transactions); the single refusal is the expected stale tx1. |
+
+W's end value checks conservation: 268,100,000 sat = 100,000 + 272δ − 4δ, and D is back at 100,000. The funding transactions (deposit inputs, worker UTXOs, R carriers, the thread NFT) still come from bare-OP_1 coinbases through submitblock (A4). BCHN timing was not measured.
+
+### 9b.4 Tests
+
+All tests are plain acceptance and rejection tests, with no attack construction. A rejection counts only if the input also rejects on the loose VM (no 'limit' verdicts).
+
+| suite | cases | result |
+|---|--:|---|
+| `d/test-d.mjs` (libauth, 14 s) | **72** | **0 unexpected**: 59 rejections + 13 required accepts (its family table sums to 76 because `seq` also counts 4 root/ring equality checks) |
+| – root = offline tree | 4 flushes / 64 deposits; 17 / 272 | all equal |
+| – ring wraparound | 5 | root 0 accepted at epoch 16, **rejected by W at epoch 17**; root 16 and root 1 still accepted |
+| – premature flush / wrong frontier / leaf lane ≥ p | 2 / 7 / 4 | all rejected by D (lane ≥ p in a queue a deposit could never build: rejected by worker 1) |
+| – other families (deposit, ring, mid, io, wout, dout, wbranch, edge) | 46 rejections | all rejected; consistent wrong claims across D and the workers (wrong ROOT, X, H11, A8) are rejected by the worker that computes them |
+| S1 `test-w` re-run with the S4 W | 10,000 + 10,000 + 203 | PASS, 0 disagreements |
+| S2 grading re-run (pool-specific R) | 24 statements | 24/24, 132,904 B, max 91.1% |
+| S2 production sweep re-run | **5,055** | 0 unexpected = 4,912 chain rejections + 88 required accepts + 55 encoder-only relabels; includes the new `wpin` family (78: a non-W input, another pool's W naming this R, CAT with prefix 0x44; all rejected by HEAD) |
+| S2 harness sweep re-run | 2,387 | 0 unexpected = 2,232 chain rejections + 51 accepts + 69 encoder-only + 35 not run on chain |
+| S3 BCHN re-run (`t9s3b`, one R per pool) | 81 transactions | same verdicts as Track 9: 24/24, 76/76 allowed, the same 5 expected refusals |
+| S4 BCHN (`t9s4a`) | 300 transactions | 299 allowed, 1 expected refusal (§9b.3) |
+
+### 9b.5 A1 and A3
+
+- **A3 (R does not pin W): closed.** The final HEAD checks input 5's category CAT ‖ 0x01 and prefix 0x57; under L1 that is the pool's W. Each pool now needs its own R (and R carriers). The S2 `documented` case became the `wpin` rejection family.
+- **A1 (nullifiers are per pool): resolved by G, no script change.** The pin does not stop one proof from working in another pool whose ring holds the same root. It does not need to: a pool's ring starts empty (16 × Z, and W rejects ROOT = Z), and only its own flushes, built from its own paid deposits, write roots. So withdrawals from a pool ≤ distinct NFs over its leaves ≤ its deposits. A note can be withdrawn from two pools only if its leaf was deposited and paid in both. The "never seed a funded pool's ring" rule is now part of the genesis check G. A pool-specific NF would need an AIR change.
+- **New consequence of S4:** with a minting NFT of CAT someone could forge a W and take a flush's 16δ, or forge a D. The off-chain genesis check (A2/G) now protects funds, not only state uniqueness.
+
+### 9b.6 Soundness summary
+
+[SOUNDNESS-T9.md](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-pool/SOUNDNESS-T9.md) argues, **per pool**, under H1 (SHA-256 collision resistance, no preimage of Z), H2 (Poseidon2 T∘P collision resistance), KS (Track 8's 128.06-bit result for M1, Z128, cap 5, from [SOUNDNESS-T8](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-stark-batch/SOUNDNESS-T8.md)), SE (simulation extractability) and the deployment checks G and T:
+
+| | property |
+|---|---|
+| L1 | Exactly one D and one W of CAT exist at any time; each spend replaces it by its own successor (G, CashTokens rules, successor pins). |
+| L2 | An accepted withdrawal inserts a key absent from the nullifier set; 64-bit key truncation only causes a false "spent" (about 2^-25 at 2^20 spends), never a payout. |
+| L3 | Every non-empty ring entry is the Poseidon2 root of a 16e-leaf prefix of the pool's own deposits, written by its own flush (induction over deposits, flushes, withdrawals, including the frontier append). |
+| L4 | An accepted tx0 + tx1 is one fully verified Track 8 proof; each Track 9 change to R (ROOT push and lane check, CTX over outputs[1..], graph slot, W pin) keeps T8's argument. |
+| L5 | One leaf yields one NF. |
+| L6 | Withdrawals ≤ 16 · flushes ≤ deposits; W's value = genesis value + δ(16E − w), so W always covers what can still be withdrawn. |
+| L7 | Outputs ≥ 1 are bound by CTX and output 0 is fixed by W; a relayer can censor but not redirect (redirection with a fresh proof excluded under SE). |
+
+An owner table maps every accept-relevant value of the genesis, deposit, flush and withdrawal to the script that checks it.
+
+**Assumptions A1–A6:** A1 resolved by G; A2 carried as G, now a full list (exactly two mutable NFTs of CAT, no minting NFT, no fungible amount, the reference D and W lockings, the empty initial commitments with the ring all Z); A3 closed; A4 carried as a test-scope note; A5 carried as the reading rule for sweep totals. **New A6 (assumption T, fund relevant):** every minting NFT of the thread category TCAT must be locked by a reference R. tx1 alone skips the AIR identity check and queries 0..20; only the thread NFT ties it to a checked tx0. The S3/S4 regtest rig keeps a TCAT minting NFT at OP_1 in the faucet, a fixture that breaks T on purpose; a deployment must not.
+
+**Open items:** SE is assumed; the powers-batching λ label is unpublished; G and T have no standalone checker (natural S5 task); the frontier append is argued and tested but not machine-checked; L6's multi-proof extraction bound is not written out.
+
+### 9b.7 Review and fixes
+
+One internal review (S7b) covered the D/flush protocol against the code, value conservation, the permissionless flush, A1/A3, SOUNDNESS-T9's L1 case analysis and L3 induction, BCHN accounting and harness accounting. **Verdict: fix, with 0 blocker, 0 major and 8 minor findings.** It confirmed conservation in every branch, the end-to-end queue binding, the frontier update in every case, full pinning of the worker IO and hand-overs, and that a keeper cannot take more than 16f.
+
+All 8 were fixed in 029d8f2; all are documentation or accounting, and no script or test changed, so no re-run was needed.
+
+| # | finding | resolution |
+|---|---|---|
+| 1 | d/README overstated "54 more" rejections | 46 more, 59 in all; 72 = 59 rejections + 13 accepts; family table 76 explained |
+| 2 | Harness sweep reported without a split | 2,387 = 2,232 + 51 + 69 + 35 not run on chain, everywhere |
+| 3 | Full-tree end state misdescribed | After count = 2^30, D still accepts one queue of up to 16 deposits that can never be flushed or refunded (up to 16(δ + f) locked). Unreachable in practice; a sentinel-queue final flush is noted, not implemented |
+| 4 | Worker UTXOs are anyone-can-spend | Keeper-side griefing documented (pool funds unaffected, D binds every worker's IO); keepers fund workers at about dust (~600 sat, computed) and broadcast setup and flush together |
+| 5 | No keeper fee lower bound | f_min ≈ 2.7k sat at 1 sat/B stated; below it, only self-flushing keeps the pool moving, no theft |
+| 6 | Assumption T worded for a single R | Reworded for pool-specific R sharing TCAT (each R mints thread NFTs only to its own locking) |
+| 7 | A1 status words differed | "Resolved by G (initial ring all Z); no script change" everywhere |
+| 8 | PUSHDATA2 precondition unstated | Worker IO sizes are data-independent and ≥ 256 B (sampled 472–~560 B), so the header is always minimal |
+
+### 9b.8 Caveats
+
+- **Simulation extractability is assumed, not proved** (from Track 8). It is what stops a relayer or mempool observer from re-binding someone's proof to new outputs[1..].
+- **Track 5's powers-batching adaptation is unpublished and unreviewed.** Every λ figure, and so L4, rests on it.
+- **About 85-bit quantum collision level.** 128 bits is the classical figure; generic quantum collision search on SHA-256 and the 4-lane Poseidon2 digests reaches about 85 bits.
+- **Fixed denomination.** Every note is δ (0.01 BCH on regtest); W releases exactly δ per withdrawal. No variable amounts, no change.
+- **Anonymity set grows per flush.** It is per pool, grows in chunks of 16 leaves, and a note only hides among notes whose roots are still in the 16-slot ring. A withdrawal against an expired root must be re-proved against a newer one (BCHN: note 9).
+- **Off-chain checks protect funds.** G (pool genesis) and T (thread-category batons) are not enforced by any script and have no standalone checker yet. The regtest rig fails T on purpose.
+- **Liveness, not safety:** deposits stall at len = 16 until someone flushes; there is no partial flush or refund; with f below f_min third-party keepers have no incentive; worker UTXOs can be swept before a flush confirms; after 2^30 leaves up to 16 deposits lock for good.
+- **Flush size.** 42 KB in one transaction under today's rules, plus a worker-setup transaction. With 100 KB per-input limits it would be one worker.
+- **Tight budgets.** QRY at 91.1%, flush worker 2 at 91.1%, worker 3 at 91.9% in the synthetic all-bits-set state.
+- **Not built:** the relayer (S5) and M1-N (S6). **Not measured:** BCHN timing; the worker dust and setup sizes in the fee bound are computed estimates.
+- **Withdrawals in `d/test-d.mjs` use S1's stand-in R**; the real R with real proofs is the BCHN run.
+
+### 9b.9 Sources
+
+groth16_cashscript `main`, [`research/pq-pool/`](https://github.com/mr-zwets/groth16_cashscript/tree/main/research/pq-pool):
+- [`README.md`](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-pool/README.md): stage index, S4 headline, A1–A5 with S4 updates.
+- [`SOUNDNESS-T9.md`](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-pool/SOUNDNESS-T9.md): L1–L7, owner table, A1–A6, liveness, open items.
+- [`summary-s4.mjs`, `summary-s4.json`](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-pool/summary-s4.json): S4 results, the S1–S3 re-runs, soundness and review summary (`summary-t9.json` stays the S0–S3 snapshot).
+- [`d/`](https://github.com/mr-zwets/groth16_cashscript/tree/main/research/pq-pool/d) (S4): `README.md`, `dcov.mjs` (`buildD`, `flushBlob`, `workerBlob`, `workerLocking`), `dpool.mjs` (`DState`, `WState`, `flushPlan`, transaction builders), `test-d.mjs`, `results/s4-d.json`.
+- [`w/wcov.mjs`](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-pool/w/wcov.mjs): W with the flush branch; re-run in `w/results/s4rerun/`.
+- [`r/gena.mjs`](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-pool/r/gena.mjs): R's W-slot pin; re-runs in `r/results/s4rerun/` (`grade-a.json`, `test-a-2tx-pool.json`, `test-a-harness.json`).
+- [`node/`](https://github.com/mr-zwets/groth16_cashscript/tree/main/research/pq-pool/node): `s4.ts`, `run-s4.sh`, `summarize-s4.mjs`, `results/t9s4a{.jsonl,.log,-summary.json}`; `s3.ts` with one R per pool, `results/t9s3b*`.
+- `rerun-s4.sh`: the S1–S3 re-runs.
+
+Track 8's verifier ([`research/pq-stark-batch/`](https://github.com/mr-zwets/groth16_cashscript/tree/main/research/pq-stark-batch)) is unchanged.
+
+**Reproduce** (groth16_cashscript `research/pq-pool`; same environment rules as Track 9 §9.10):
+
+```sh
+node d/test-d.mjs                                   # libauth acceptance (14 s); --flushes 17
+./rerun-s4.sh                                       # S1 test-w, S2 grade and sweeps
+CARGO_TARGET_DIR=$C/target nice cargo build --release --offline -j4 --manifest-path prover/Cargo.toml
+cd node && S2_VEC=$C/s2/vec PROVER=$C/target/release/pq-pool-prover S4_CACHE=$C/s4 \
+  OPCOST_DIR=<datadirs> ./run-s4.sh <fresh NAME> 9 7 --wrap      # BCHN, about 6 minutes
+cd .. && node summary-s4.mjs                        # summary-s4.json
+```
+
+---
+
 
 ## Track 9 (2026-11-01)
 
