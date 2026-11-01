@@ -18,7 +18,7 @@
 //   of a funded output, so multi-transaction plans are replayed as the real chain.
 import { appendFileSync, readFileSync, statSync, openSync, readSync, closeSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { binToHex, createVirtualMachineBch2026, encodeTransaction, hash160, hexToBin, lockingBytecodeToCashAddress, sha256 } from '@bitauth/libauth';
+import { binToHex, createTestAuthenticationProgramBch, createVirtualMachineBch2026, encodeTransaction, hash160, hexToBin, lockingBytecodeToCashAddress, sha256 } from '@bitauth/libauth';
 import { Chain, Rpc, txidInternal, type Workload as RigWorkload } from '../opcost-timing/bchn/rig.js';
 import { soundNative } from '../opcost-timing/bchn/workloads.js';
 
@@ -115,12 +115,18 @@ const stats = (xs: number[]) => { const s = [...xs].sort((a, b) => a - b); const
   return { median: med, min: s[0]!, max: s[n - 1]!, n, spreadPct: med > 0 ? ((s[n - 1]! - s[0]!) / med) * 100 : 0 }; };
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+// Does this libauth charge OP_DEFINE bodies (bench's pnpm patch, as BCHN; bitauth/libauth#166)? Probe: <4-byte body> <0>
+// OP_DEFINE costs the body's 4 bytes more than the same pushes dropped by OP_2DROP iff it is charged. If charged, the
+// libauth op-cost already is BCHN's and the exporter's DEFINE bytes are not added again.
+const DEFINE_CHARGED = (() => { const op = (l: string) => vmCons.evaluate(createTestAuthenticationProgramBch({ lockingBytecode: hexToBin(l), unlockingBytecode: OP_1, valueSatoshis: 1000n }) as any).metrics.operationCost;
+  const d = op('0451515151008951') - op('0451515151006d51'); if (d !== 0 && d !== 4) throw new Error('DEFINE charge probe: unexpected ' + d); return d === 4; })();
 const opReport = (wl: Wl, tx: any, so: any[]) => {
   const l = libauthCheck(tx, so);
   const budget = wl.tx.inputs.map((i) => (41 + i.unlocking.length) * 800);
-  const per = wl.tx.inputs.map((inp, i) => ({ unlocking: inp.unlocking.length, opCons: l.cons.per[i].op, opStd: l.std.per[i].op, bchnAdjCons: l.cons.per[i].op + wl.defBytes, bchnAdjStd: l.std.per[i].op + wl.defBytes, budget: budget[i]! }));
+  const add = DEFINE_CHARGED ? 0 : wl.defBytes;
+  const per = wl.tx.inputs.map((inp, i) => ({ unlocking: inp.unlocking.length, opCons: l.cons.per[i].op, opStd: l.std.per[i].op, bchnAdjCons: l.cons.per[i].op + add, bchnAdjStd: l.std.per[i].op + add, budget: budget[i]! }));
   const worst = (k: 'opCons' | 'opStd' | 'bchnAdjCons' | 'bchnAdjStd') => Math.max(...per.map((x) => x[k] / x.budget));
-  return { libauthCons: l.cons.ok, libauthConsError: l.cons.error, libauthStd: l.std.ok, libauthStdError: l.std.error, perInput: per,
+  return { libauthChargesDefine: DEFINE_CHARGED, libauthCons: l.cons.ok, libauthConsError: l.cons.error, libauthStd: l.std.ok, libauthStdError: l.std.error, perInput: per,
     maxUnlocking: Math.max(...per.map((x) => x.unlocking)), worst: { opCons: worst('opCons'), opStd: worst('opStd'), bchnAdjCons: worst('bchnAdjCons'), bchnAdjStd: worst('bchnAdjStd') },
     opConsTotal: per.reduce((s, x) => s + x.opCons, 0) };
 };
@@ -289,7 +295,7 @@ const main = async () => {
     }
     return;
   }
-  console.error(`${wls.length} workloads (${mode})`);
+  console.error(`${wls.length} workloads (${mode}); libauth charges OP_DEFINE bodies: ${DEFINE_CHARGED}`);
   for (const wl of wls) {
     try {
       const r = mode === 'timing'

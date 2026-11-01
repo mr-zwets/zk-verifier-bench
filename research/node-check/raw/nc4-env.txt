@@ -1,0 +1,65 @@
+date: 2026-11-01T14:16:22+01:00
+host: Linux 7.2.8-9-omarchy x86_64
+Model name:                              AMD Ryzen 9 7900 12-Core Processor
+governor(cpu9): performance epp: performance
+bchn: Bitcoin Cash Node Daemon version v29.1.0-b31ed10b4
+bench: b540493  groth16_cashscript: 2d96adc
+node cpu: 9 driver cpu: 7 reps: 11
+workload files:
+  fac1aadb2aec5f69 t8-1tx-m1-s7-0-Z128_cap5.json
+  55c9f1bb29787602 t8-1tx-m1-s7-1-Z128_cap5.json
+  f252529332c1ce0d t8-1tx-m1-s7-2-Z128_cap5.json
+  6f2c6ba2942d7e1b t8-1tx-m1-s7-3-Z128_cap5.json
+  31498a754a4447bf t8-1tx-m1-s7-4-Z128_cap5.json
+  77a89c0f9268505e t8-1tx-m1-s7-5-Z128_cap5.json
+  5f7e7237ff8cf678 t8-1tx-m1-s7-6-Z128_cap5.json
+  800c86623392e133 t8-1tx-m1-s7-7-Z128_cap5.json
+  768012942006f950 t8-1tx-m1-s7-8-Z128_cap5.json
+  9c7628610c64ba01 t8-1tx-m1-s7-9-Z128_cap5.json
+  0c387892caf71067 t8-1tx-m1-s7-10-Z128_cap5.json
+  265a60c1b48f0f68 t8-1tx-m1-s7-11-Z128_cap5.json
+  55756de1e4338098 t8-1tx-m1-s7-12-Z128_cap5.json
+  7a5c491171870c93 t8-1tx-m1-s7-13-Z128_cap5.json
+  5614d5bc3aebe64a t8-1tx-m1-s7-14-Z128_cap5.json
+  e9c9468a2cc4b681 t8-1tx-m1-s7-15-Z128_cap5.json
+  c345e612d54df496 t8-1tx-m1-s7-16-Z128_cap5.json
+  8d63649f2b73c916 t8-1tx-m1-s7-17-Z128_cap5.json
+  6e8a857fd36e4cd3 t8-1tx-m1-s7-18-Z128_cap5.json
+  da3ff8ee5ea75a20 t8-1tx-m1-s7-19-Z128_cap5.json
+  8aae120838e58eeb t8-1tx-m1-s7-20-Z128_cap5.json
+  ef046c040b5d3ab0 t8-1tx-m1-s7-21-Z128_cap5.json
+  8de0cb2a575da766 t8-1tx-m1-s7-22-Z128_cap5.json
+  d9bbe0860389f012 t8-1tx-m1-s7-23-Z128_cap5.json
+  6079eb02580cc5da t8-2tx-m1-s7-0-Z128_cap5.json
+  5467b65b9ae32664 t8-2tx-m1-s7-1-Z128_cap5.json
+  0271ec15828400a6 t8-2tx-m1-s7-2-Z128_cap5.json
+  5e63b8dc8b3648b8 t8-2tx-m1-s7-3-Z128_cap5.json
+  d50768af1d0d913f t8-2tx-m1-s7-4-Z128_cap5.json
+  e0972e6c8eca6f5f t8-2tx-m1-s7-5-Z128_cap5.json
+  141c26b7f9b96995 t8-2tx-m1-s7-6-Z128_cap5.json
+  485de63467d2aa6a t8-2tx-m1-s7-7-Z128_cap5.json
+  7f918929de86ef7c t8-2tx-m1-s7-8-Z128_cap5.json
+  a7174c61d55fa715 t8-2tx-m1-s7-9-Z128_cap5.json
+  5ebdf5247864e2c6 t8-2tx-m1-s7-10-Z128_cap5.json
+  96b97065070cab8a t8-2tx-m1-s7-11-Z128_cap5.json
+  320db36c0b9a489f t8-2tx-m1-s7-12-Z128_cap5.json
+  174978d831d7e6e9 t8-2tx-m1-s7-13-Z128_cap5.json
+  f0d06bfe555a4393 t8-2tx-m1-s7-14-Z128_cap5.json
+  faa0fa057378c989 t8-2tx-m1-s7-15-Z128_cap5.json
+  b32d9f7ca0a3f4ca t8-2tx-m1-s7-16-Z128_cap5.json
+  eab2d7e1d559a3a0 t8-2tx-m1-s7-17-Z128_cap5.json
+  ca59b886c2324eaa t8-2tx-m1-s7-18-Z128_cap5.json
+  fdb992a298eacbae t8-2tx-m1-s7-19-Z128_cap5.json
+  a506b91ad75da23f t8-2tx-m1-s7-20-Z128_cap5.json
+  26e9cc1a7d92e713 t8-2tx-m1-s7-21-Z128_cap5.json
+  8506e879ddc6a0be t8-2tx-m1-s7-22-Z128_cap5.json
+  4c4cd0a33bc7be47 t8-2tx-m1-s7-23-Z128_cap5.json
+loadavg start: 1.61 1.14 0.84 2/1023 112347
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/node-check3/bchn-nc4-t","rpcport":40270,"cpu":"9","pid":112356}
+Bitcoin server stopping
+loadavg after timing: 2.14 1.74 1.16 2/1053 113556
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/node-check3/bchn-nc4-p","rpcport":39596,"cpu":"9","pid":113565}
+Bitcoin server stopping
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/node-check3/bchn-nc4-m","rpcport":39500,"cpu":"9","pid":113896}
+Bitcoin server stopping
+loadavg end: 2.09 1.80 1.22 2/1065 113980

@@ -160,3 +160,78 @@ Reproduce: `POLICY=1 node.sh start NAME 9`, then
   not policy-tested.
 - The workload JSON files (about 30 MB) are not committed. The first 16 hex characters of their sha256 are in `raw/nc1-env.txt`, and the
   exporters regenerate them deterministically.
+
+## Track 8 (STARK M1)
+
+Branch `wip/node-check-t8`. Date 2026-11-01. Question: does the Track 8 a′ verifier (Plonky3 batch-STARK proof of
+post-quantum ZK Merkle membership plus a nullifier, 128 bits; REPORT §T8.4) run on stock BCHN 29.1.0 as graded?
+The two plans are 1 tx / 12 inputs / 98,690 B, and 2 txs of 91,059 + 40,497 B linked by an NFT thread.
+
+**Workloads.** `export-stark-t8.mjs` (groth16_cashscript main 2d96adc) imports Track 8's own `onchain/` code: the
+`layouta.mjs` spend and the `grade-a.mjs` plans. It also uses Track 8's libauth, unpatched 3.1.0-next.8. It covers
+all **24** M1 statements, using the cached cap-5 proofs in `work/stark-usable/cache/s7/vec`. Proofs 0–2 are
+byte-identical to the committed `prover/vectors/S7`. Nothing was re-proved.
+- **Assertions.** For every statement and plan, the exporter checks the graded build against
+  `results/grade-a.json`. Each transaction's size must be 98,690, or 91,059 and 40,497. Each input's unlocking
+  length and libauth standard op-cost must be equal, and every input must be accepted.
+- **1tx.** This plan has no token, so it is exported exactly as graded. The node uses only real outpoints.
+- **2tx.** The thread NFT's category must be a real genesis outpoint. The plan is therefore rebuilt with the node
+  faucet's category, which is 32 bytes inside the code. This changes no size and no per-input op-cost (0
+  differences). `programA`'s cache does not key on the category, so the exporter passes a distinct `gen` option.
+- **Reject sample** (statements 0 and 23, both plans; 106 cases, test-a.mjs families):
+  - 9 prover tampers (S3 families cap, ood, random, pow, final, row, salt, sibling, fri_value) and NF + 1;
+  - tx output − 1 sat (CTX differs);
+  - script ROOT + 1;
+  - constants: FIN TBL, ACC₁ + 1 with ACC₂ compensated, NF lane;
+  - inputs: OOD, QRY hint, path, missing query;
+  - graph: code blob byte, QRY input order, foreign locking;
+  - mix: a QRY input from another statement, tx1 replayed from another statement;
+  - 2tx thread cases: foreign-G NFT, mutable NFT, no NFT, a tx0 QRY in tx1, baton not returned, NFT minted mutable.
+
+  Each case is the first transaction that Track 8's libauth consensus VM rejects.
+
+**Runs** (`run-t8.sh nc4 9 7 11`; node on CPU 9, driver on CPU 7, nice, GOMAXPROCS=4). There were three fresh nodes,
+each stopped afterwards: `nc4-t` (timing), `nc4-p` (POLICY=1, testmempoolaccept; tx1 spends the mined tx0's NFT) and
+`nc4-m` (POLICY=1, mempool mode). Raw data: `raw/nc4-*`; the full table is in `raw/nc4-summary.md`, from
+`summarize-t8.mjs`.
+- **DEFINE accounting.** Bench's libauth is now patched to charge OP_DEFINE bodies. `nc.ts` detects this with a
+  probe and no longer adds the DEFINE bytes again in that case. Track 8 itself still uses unpatched libauth plus
+  `defineBytes`: 36,844 B in 1tx, 37,622 B in 2tx.
+
+| plan | valid: BCHN / libauth (bench) / libauth (T8) | rejections: BCHN / libauth (bench) / libauth (T8) | Verify ms per tx (median, K copies) | ns / op-cost | worst input op/budget: bench libauth cons / std (incl. DEFINE) ; T8 std alone / + DEFINE | testmempoolaccept (acceptnonstdtxn=0) |
+|---|---|---|--:|--:|---|---|
+| a′ 1 tx (12 in, 98,690 B) | 24/24 / 24/24 / 24/24 | 46/46 / 46/46 / 46/46 | 16.64–17.00 | 0.264–0.269 | 89.69 / **91.01%** ; 90.45 / 91.01% | **24/24 allowed** (1.24 sat/B as exported) |
+| a′ 2 txs (11 + 5 in, 91,059 + 40,497 B) | 48/48 / 48/48 / 48/48 | 60/60 / 60/60 / 60/60 | 15.32–15.57 + 2.85–2.93 = 18.20–18.47 | 0.268–0.278 | 89.77 / **91.10%** ; 90.54 / 91.10% | 48/48 allowed (2.31 / 2.74 sat/B), tx1 chained on mined tx0 |
+
+- **Op-cost.** On all 672 valid inputs, bench's patched libauth op-cost equals Track 8's libauth op-cost plus
+  `defineBytes`, exactly, on both bases. The patch and Track 8's "BCHN-adjusted" figure agree.
+- **Binding input.** The worst input is QRY in both plans, at 90.67–91.10% of its budget on the standard basis. Other
+  roles: HEAD 25%, CODE1/2 73/67%, FIN 72%. In 2tx, tx1 re-runs HEAD/CODE at 10% and 3%.
+- **Rejections.**
+  - All 106 got BCHN block verdict `blk-bad-inputs`.
+  - On the timing node, `testmempoolaccept` gave script errors: `mandatory-script-verify-flag-failed` with
+    OP_NUMEQUALVERIFY, OP_EQUALVERIFY, or Invalid OP_SPLIT range (tx1 without the NFT).
+  - No rejection came from size, token or fee rules.
+- **Mempool mode (2tx).** For all 24 statements, tx0 and then tx1 were sent with tx0 unconfirmed:
+  - `testmempoolaccept` allowed both, and both were accepted into the mempool;
+  - BCHN's own assembler mined both in one block, and the mempool was empty afterwards;
+  - tx1 sent first is rejected with `missing-inputs`;
+  - the chain is 131,556 B at 2.44 sat/B.
+- **Policy.** No unmodelled relay rule rejected anything. The 118 B P2S locking on every input, 12 non-P2SH inputs of
+  6.4–9.5 KB, the 5,000-sat token outputs and the 98,690 B transaction all pass. **"M1 in one standard transaction
+  today" holds on BCHN 29.1.0**, for all 24 statements.
+
+Not covered:
+- Only cached proofs were used; the prover was not re-run.
+- Rejections are a sample of 2 statements, not the 3,765 / 4,181-case sweeps.
+- Encoder-only (malformed) tamper cases are skipped, as in test-a.mjs.
+- The "NFT of another category", "extra input" (the transaction would exceed 100,000 B) and VK-variant families
+  were not run.
+- 2tx ran with the node's category, not Track 8's test constant.
+- The funding transactions were mined directly and were not policy-tested.
+- The workload JSON (30 MB, `work/node-check3/data/t8`) is not committed. The first 16 hex characters of each file's
+  sha256 are in `raw/nc4-env.txt`.
+
+Reproduce: `npx tsx nc.ts category` gives CAT. Then
+`G16=<g16 checkout> node export-stark-t8.mjs --cat CAT --out <data>/t8 --rej 0,23 <s7 vec>/*.json`, then
+`DATA=<data>/t8 run-t8.sh NAME 9 7 11`, then `node summarize-t8.mjs <data>/t8 raw/NAME > raw/NAME-summary.md`.
