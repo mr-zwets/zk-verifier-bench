@@ -41,10 +41,15 @@
 // not establish circuit knowledge, secure binding of the public-input vector, or independent-setup
 // interoperability.
 //
-// Committed fixture: 86,457 benchmark script bytes; 86,565 serialized transaction bytes;
-// 86,950 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,489,869 op-cost.
-// Proof-independent relay encoding: 99,079 serialized bytes; 79,226,279 op-cost ceiling;
-// 921-byte standard-transaction margin.
+// Committed fixture: 86,481 benchmark script bytes; 86,589 serialized transaction bytes;
+// 86,974 verifier.cash bytes including 11 spent 35-byte P2SH32 lockings; 68,512,967 op-cost.
+// Proof-independent relay encoding: 99,110 serialized bytes; 79,249,398 op-cost ceiling;
+// 890-byte standard-transaction margin.
+// Re-sized 2026-11-01 for BCHN OP_DEFINE accounting (bench libauth patch): regenerated from the
+// source and compiler below with groth16_cashscript's libauth carrying the same patch (branch
+// wip/residue-std-intratx = 7436d04 + patch + refreshed certificate constants). Only unused
+// padding grew (was 86,565 serialized / 86,950 score / 99,079-byte certificate); every locking
+// program and the locking graph hash below are unchanged.
 // Against published main a86b230 (source 551f1b2), this advances the byte-ranked score by
 // 1,828 bytes while adding 18,237 committed op-cost. The universal encoding is 349 bytes larger
 // and its summed ceiling is 602,150 op-cost higher; it remains within standard relay policy.
@@ -54,11 +59,11 @@
 // Input fixture SHA-256:
 //   multiproof d513f1fe45d7aba20f289cbc38439d5ebdb05a9975950a5e32d2bf21239d4abc
 //   pairing checkpoint e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e
-// Vector SHA-256: 593111c80eab0c8c933430770e8d622eeadf6df1f4bd08b7e2ed2c69aad17367
+// Vector SHA-256: c0be30028fb273f285a7392d2ff8d4d23e679624655395b4c82f1c575a4c9138
 // Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
 // aa4b7607776c5dc68234195ad060c1fd154904a5c713a0dbd6c0324e49951682
 // Synthetic zero-outpoint fixture serialization hash256:
-// 7793e03ecf3f0953f9ff76d7a48f8c943adf46357be67a0d2323f23ff8f7cd25
+// 34e4f7eec916c4b6ec8f37b33a3badae91d63600457b8fdda3bca795702de98f
 // Locking-bytecode SHA-256 values, in input order:
 //   00 967609d602c1512f0e91c3953d4fd4b309085c34cc6a472c61ee079a8fef6bd9
 //   01 5587abaf915c53c3c54cfd3f1a51e3f61bf6a85c311a332aa9c720f801d186ed
@@ -147,7 +152,7 @@ export const bchGroth16IntratxResidue: Implementation = {
     'The quotient-torus Miller chunks use scoped raw affine kernels whose compiled probes, field ' +
     'equivalence, and integer ranges are checked by the source pipeline. Executable certificates ' +
     'also cover the projective handoff, nonzero-Y invariant, subgroup endpoint, quotient relation, ' +
-    'and a proof-independent 99,079-byte standard relay encoding. Its grouped-GLV certificate ' +
+    'and a proof-independent 99,110-byte standard relay encoding. Its grouped-GLV certificate ' +
     'charges the fallback at all 58 and 70 physical lookup slots without using setup or IC scalar ' +
     'relations. Generated fixtures cover every ' +
     'combination of identity A, B, and C, exact layout changes, all successor programs, table ' +

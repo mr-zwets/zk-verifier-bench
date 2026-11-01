@@ -13,7 +13,7 @@
 // fixture's published scalar relations to collapse the statement.
 //
 // Committed fixture: 58,268 script B; 58,320 serialized B; 58,460 verifier.cash score;
-// 67,309,488 op. The dense worst-case fixture is 68,068 serialized B / 80,757,210 op.
+// 67,316,974 op. The dense worst-case fixture is 68,068 serialized B / 80,764,696 op.
 // All 14 accepting fixture families use the same locking graph and pass the bch-spec consensus
 // and standard-policy VMs with default-minimum-fee-funded deterministic templates. This requires
 // the proposed VM because
@@ -32,7 +32,11 @@
 //   pairing checkpoint e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e
 // (shipped vectors: bench 2f0a920, the compiler-optimizations-8 recompile; two independent reviews
 // on 2026-10-27 regenerated them byte-identically from the source and compiler above)
-// Vector SHA-256: 8d9deb752b01e6078b27091d9518da578a5b0b9c78466bdc08ffd4d1e54d061c
+// Re-sized 2026-11-01 for BCHN OP_DEFINE accounting (bench libauth patch): regenerated from the
+// same source and compiler with groth16_cashscript's libauth carrying the same patch (branch
+// wip/residue-std-large = e1e322a + patch). Extra proofs #6, #7, #8, #12 each gained one padding
+// byte; the committed fixture, every locking program and the graph hash are unchanged.
+// Vector SHA-256: 5b9b80711eea14ca25e18f9009d7b40d4ffcc77ab2b900d88184f6eb0d706165
 // Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
 // 5d7431b8f0608246498a68e130047e82d5f5ec28f19c15699602f033870c64bd
 // Locking-bytecode SHA-256 values, in input order:
