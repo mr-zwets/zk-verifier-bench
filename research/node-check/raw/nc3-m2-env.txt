@@ -1,0 +1,14 @@
+date: 2026-11-01T13:25:10+01:00
+bchn: Bitcoin Cash Node Daemon version v29.1.0-b31ed10b4
+bench: 0eff7a7 + nc.ts mempool mode
+node cpu 9, driver cpu 7, POLICY=1 (acceptnonstdtxn=0)
+workload files:
+  32d10898e1f86be5 stark-mimc-S128-0.json
+  9d6480ad634cdddd stark-fib-S100z-zkmin-0.json
+  b99e1b21f59e74aa stark-fib-S128z-zkmin-0.json
+chain-limit options (limitancestor*/limitdescendant*) in bitcoind -help -help-debug: 0
+loadavg start: 1.43 1.87 2.24 2/1045 92926
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/node-check2/bchn-nc3-m2","rpcport":39562,"cpu":"9","pid":92935}
+rpcbind=127.0.0.1 listen=0 connect=0 acceptnonstdtxn=0 
+Bitcoin server stopping
+loadavg end: 1.43 1.87 2.24 2/1066 93032

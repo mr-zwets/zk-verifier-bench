@@ -8,6 +8,7 @@
 //   npx tsx nc.ts category                         -> the faucet category (internal byte order, hex)
 //   npx tsx nc.ts timing --node NAME --src json:F [--src builtin:sound-native] [--reps 11] [--filter RE] --out F.jsonl
 //   npx tsx nc.ts policy --node NAME --src json:F ... --out F.jsonl      (node started with POLICY=1, see node.sh)
+//   npx tsx nc.ts mempool --node NAME --src json:F ... --out F.jsonl     (POLICY=1 node; multi-tx chains sent unconfirmed)
 //
 // json: format (export-plonk.mjs / export-stark.mjs): {workloads: [{id, group, kind, expect, expectLibauth?, defBytes,
 //   txs: [{label, version, locktime, inputs: [{source: {lockingHex, valueSatoshis, token?}, unlockingHex, sequenceNumber,
@@ -17,7 +18,7 @@
 //   of a funded output, so multi-transaction plans are replayed as the real chain.
 import { appendFileSync, readFileSync, statSync, openSync, readSync, closeSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
-import { binToHex, createVirtualMachineBch2026, encodeTransaction, hexToBin, sha256 } from '@bitauth/libauth';
+import { binToHex, createVirtualMachineBch2026, encodeTransaction, hash160, hexToBin, lockingBytecodeToCashAddress, sha256 } from '@bitauth/libauth';
 import { Chain, Rpc, txidInternal, type Workload as RigWorkload } from '../opcost-timing/bchn/rig.js';
 import { soundNative } from '../opcost-timing/bchn/workloads.js';
 
@@ -203,6 +204,59 @@ const runPolicy = async (chain: Chain, f: Funder, wl0: Wl) => {
     maxSourceLocking: Math.max(...wl.tx.inputs.map((i) => i.source.locking.length)), ...rep };
 };
 
+// ---------------------------------------------------------------- mempool mode (unconfirmed chains, acceptnonstdtxn=0)
+// Per multi-transaction group: fund every non-chained input in one mined block, then sendrawtransaction tx0, tx1, ...
+// with no block in between (tx k >= 1 spends tx0's unconfirmed thread NFT), recording testmempoolaccept before each send,
+// the mempool entries, getmempoolinfo; then one block is mined
+// and inclusion of every chain tx is checked (block mined by generatetoaddress, see below).
+const rpcTry = async (chain: Chain, m: string, p: unknown[]) => { try { return await chain.rpc.call<any>(m, ...p); } catch (e) { return { rpcError: String((e as Error).message).slice(0, 300) }; } };
+const runMempool = async (chain: Chain, f: Funder, group: string, wls: Wl[]) => {
+  const txsW = wls.filter((w) => w.group === group && w.kind === 'valid' && w.chainIndex !== undefined).sort((a, b) => a.chainIndex! - b.chainIndex!);
+  const toFund = txsW.flatMap((w) => w.tx.inputs.filter((i) => !i.fromTx).map((i) => i.source));
+  const funded = await f.fund(toFund);
+  let k = 0; const built: { wl: Wl; raw: Uint8Array; txid: string; fee: bigint }[] = [];
+  for (const w of txsW) {
+    const sources = w.tx.inputs.map((i) => { if (!i.fromTx) return i.source; const t = built[i.fromTx.tx]!; const o = t.wl.tx.outputs[i.fromTx.vout]!;
+      if (binToHex(o.locking) !== binToHex(i.source.locking) || tokStr(o.token) !== tokStr(i.source.token)) throw new Error(`${w.id}: chained output differs from the source`); return o; });
+    const outpoints = w.tx.inputs.map((i) => (!i.fromTx ? funded[k++]! : { txid: txidInternal(built[i.fromTx.tx]!.raw), vout: i.fromTx.vout }));
+    const wl = { ...w, tx: { ...w.tx, inputs: w.tx.inputs.map((i, j) => ({ ...i, source: sources[j]! })) } };
+    const raw = encodeTransaction(toLibauth(wl, outpoints) as any);
+    const fee = wl.tx.inputs.reduce((s, i) => s + i.source.value, 0n) - wl.tx.outputs.reduce((s, o) => s + o.value, 0n);
+    built.push({ wl, raw, txid: binToHex(rev(txidInternal(raw))), fee });
+  }
+  const hexes = built.map((b) => binToHex(b.raw));
+  const pre = { // before anything is sent: a child alone (parent unknown) and the whole package in one call
+    childAloneTma: built.length > 1 ? await rpcTry(chain, 'testmempoolaccept', [[hexes[1]]]) : undefined,
+    packageTma: await rpcTry(chain, 'testmempoolaccept', [hexes]) };
+  const steps: any[] = [];
+  for (const [i, b] of built.entries()) {
+    const tma = await rpcTry(chain, 'testmempoolaccept', [[hexes[i]]]);
+    const send = await rpcTry(chain, 'sendrawtransaction', [hexes[i]]);
+    steps.push({ id: b.wl.id, chainIndex: b.wl.chainIndex, txid: b.txid, txBytes: b.raw.length, feeSat: String(b.fee), feeRateSatPerB: Number(b.fee) / b.raw.length,
+      unconfirmedParents: [...new Set(b.wl.tx.inputs.filter((x) => x.fromTx).map((x) => x.fromTx!.tx))],
+      testmempoolaccept: Array.isArray(tma) ? tma[0] : tma, sendrawtransaction: send, inMempool: typeof send === 'string' && send === b.txid });
+  }
+  const entries = await Promise.all(built.map((b) => rpcTry(chain, 'getmempoolentry', [b.txid])));
+  const mempoolInfo = await rpcTry(chain, 'getmempoolinfo', []);
+  const rawMempool = await rpcTry(chain, 'getrawmempool', []);
+  // getblocktemplate refuses on a node without peers ("Bitcoin is not connected!", connect=0), so the block is mined by
+  // generatetoaddress, which runs BCHN's own block assembler on the mempool (coinbase to P2SH(OP_1)); the rig's chain
+  // state is then re-read from the node
+  const addr = lockingBytecodeToCashAddress({ bytecode: Uint8Array.of(0xa9, 0x14, ...hash160(OP_1), 0x87), prefix: 'bchreg' } as any);
+  const gen = await rpcTry(chain, 'generatetoaddress', [1, typeof addr === 'string' ? addr : (addr as any).address]);
+  await chain.init();
+  const blockHash: string | undefined = Array.isArray(gen) ? gen[0] : undefined;
+  const blockInfo = blockHash ? await rpcTry(chain, 'getblock', [blockHash, 1]) : undefined;
+  const inBlock: string[] = blockInfo?.tx ?? [];
+  const mempoolAfter = await rpcTry(chain, 'getrawmempool', []);
+  const totFee = built.reduce((s, b) => s + b.fee, 0n), totBytes = built.reduce((s, b) => s + b.raw.length, 0);
+  return { mode: 'mempool', group, chainLength: built.length, pre, steps, mempoolEntries: entries, mempoolInfo, rawMempool,
+    block: { generate: gen, hash: blockHash, height: blockInfo?.height, bytes: blockInfo?.size, accepted: !!blockHash && chain.height === blockInfo?.height, txCount: inBlock.length, txids: inBlock,
+      allChainTxsIncluded: built.every((b) => inBlock.includes(b.txid)) },
+    mempoolAfter, allSent: steps.every((x) => x.inMempool),
+    totalFeeSat: String(totFee), totalBytes: totBytes, chainFeeRateSatPerB: Number(totFee) / totBytes };
+};
+
 // ---------------------------------------------------------------- cli
 const args = process.argv.slice(2); const mode = args[0];
 const opt = (k: string, d?: string) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1]! : d; };
@@ -226,6 +280,15 @@ const main = async () => {
   let wls = all('--src').flatMap(load).filter((w) => !filter || filter.test(w.id));
   // policy: every consensus-valid workload (valid txs and the DEFINE probes that libauth consensus accepts)
   if (mode === 'policy') wls = wls.filter((w) => w.expect === 'accept' || (w.kind === 'define-probe' && w.expectLibauth === 'accept'));
+  if (mode === 'mempool') {
+    const groups = [...new Set(wls.filter((w) => w.kind === 'valid' && (w.chainIndex ?? 0) >= 1).map((w) => w.group))];
+    for (const g of groups) {
+      try { const r = await runMempool(chain, f, g, wls); appendFileSync(out, JSON.stringify(r, (_, v) => (typeof v === 'bigint' ? String(v) : v)) + '\n');
+        console.error(`${g}: sent ${r.steps.map((x: any) => (x.inMempool ? 'ok' : 'FAIL:' + JSON.stringify(x.sendrawtransaction))).join(',')} block=${r.block.accepted} included=${r.block.allChainTxsIncluded} rate=${r.chainFeeRateSatPerB.toFixed(3)}`); }
+      catch (e) { appendFileSync(out, JSON.stringify({ mode, group: g, error: String((e as Error).message) }) + '\n'); console.error(`ERR ${g}: ${(e as Error).message}`); }
+    }
+    return;
+  }
   console.error(`${wls.length} workloads (${mode})`);
   for (const wl of wls) {
     try {
