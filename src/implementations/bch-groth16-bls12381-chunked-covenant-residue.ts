@@ -27,9 +27,9 @@
 // (n0, n1) from the genesis unlocking at the end of the verdict's unique one-input ancestry:
 // push 6 is in0 (n0) and push 5 is in1 (n1).
 //
-// Committed proof: 207,633 script B (945 locking + 206,688 unlocking) across 27 transactions;
-// 156,963,474 op; largest step 7,592,796 op. The vector file's worst-case run (not loaded here)
-// totals 190,454,163 op with largest step 7,845,354 op (the file's maxStepOperationCost). Evaluated on the standard BCH 2026 VM. The
+// Committed proof: 207,672 script B (945 locking + 206,727 unlocking) across 27 transactions;
+// 157,009,009 op; largest step 7,594,750 op. The vector file's worst-case run (not loaded here)
+// totals 190,500,325 op with largest step 7,847,554 op (the file's maxStepOperationCost). Evaluated on the standard BCH 2026 VM. The
 // synthetic-key caveat of the BLS12-381 checkpoint applies.
 //
 // Reproduction (byte-identical; both 2026-10-27 reviews): groth16_cashscript
@@ -37,7 +37,11 @@
 // compiler-optimizations-2 9fb14833713449403104c8a77cb10973130993e1, fixtures from bench 082da7c^:
 //   VERIFIER_DIR=/path/to/zk-verifier-bench node chunked/bls12-381/generate_covenant_residue.mjs
 // Shipped by bench 082da7c (co-2 regeneration).
-// Vector SHA-256: 28d3778efd9bbcce198dc64e3217106fe0ca994b3a2ff70d856a0658da2cce95
+// Re-sized 2026-11-01 for BCHN OP_DEFINE accounting (bench libauth patch): regenerated from the
+// same source and compiler, with groth16_cashscript's libauth carrying the same patch
+// (branch wip/residue-std-covenant = 35561c7 + patch). Only unused padding grew; every locking
+// program, and so the locking graph hash below, is unchanged.
+// Vector SHA-256: 6b6c6d2d4df89eb3ca4d47cd9373621f1fbf79a1ace0a7d64e9b1818b5433574
 // Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
 // 752daa10f3d52dd7f90a128d3eedaed23d54cdaa60ffc9365ad49998c1f4b072
 import { readFileSync } from 'node:fs';

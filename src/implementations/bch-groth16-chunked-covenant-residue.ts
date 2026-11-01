@@ -26,10 +26,10 @@
 // P2SH32 locking; the terminal verdict NFT is immutable. The genesis recreates its minting baton
 // under the same locking and category.
 //
-// Committed proof (from the shipped vector file): 92,207 script B; 93,800 actually serialized B
-// across 12 transactions; 69,858,891 op; largest transaction 10,091 B; largest step 7,716,482 op.
-// The second proof is 93,814 wire B, and the dense (worst-case) proof is 110,769 wire B /
-// 85,348,784 op. All 14 valid runs (committed, second, dense, 11 identity/boundary) pass the BCH
+// Committed proof (from the shipped vector file): 92,224 script B; 93,817 actually serialized B
+// across 12 transactions; 69,885,222 op; largest transaction 10,091 B; largest step 7,718,690 op.
+// The second proof is 93,833 wire B, and the dense (worst-case) proof is 110,793 wire B /
+// 85,375,530 op. All 14 valid runs (committed, second, dense, 11 identity/boundary) pass the BCH
 // 2026 consensus and standard-policy VMs under the same lockings. Harness-score totals are in
 // results.json; the harness covenant overhead model counts an empty-commitment length byte for the
 // baton and the terminal NFT. The companion source generator certifies exact 1 satoshi-per-
@@ -55,6 +55,10 @@
 // 082da7c^:
 //   VERIFIER_DIR=/path/to/zk-verifier-bench pnpm vectors:covenant:torus
 // Shipped by bench 082da7c (co-2 regeneration).
+// Re-sized 2026-11-01 for BCHN OP_DEFINE accounting (bench libauth patch): regenerated from the
+// same source and compiler, with groth16_cashscript's libauth carrying the same patch
+// (branch wip/residue-std-covenant = 35561c7 + patch). Only unused padding grew; every locking
+// program, and so the locking graph hash below, is unchanged.
 //
 // Input fixture SHA-256 (at bench 082da7c^; the current multiproof file differs, so reproduce
 // from that revision's fixtures):
@@ -63,7 +67,7 @@
 //   pairing checkpoint (src/checkpoints/pairing-vectors.json)
 //     e393e8b6af6f528c93f97f37656802bf44daefa5819640a557fbff95e236739e
 //
-// Vector SHA-256: 059b319c7ef8d6803d7d8ff0144e990fdd6f5c5bc842176b8bb2211adaeeb6cb
+// Vector SHA-256: d4d87e6e2fde32684e0d16e8ce7c5644c6566018e5bfc3738748ad3185bc841a
 // Locking graph SHA-256 (UTF-8 concatenated locking-hex text):
 // b0370a991a55fcce4d71b4e4ffa154838e44a1f8a4133ddfc5891c273217c36c
 //
