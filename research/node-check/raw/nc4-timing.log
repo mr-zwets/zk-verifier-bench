@@ -1,0 +1,179 @@
+178 workloads (timing); libauth charges OP_DEFINE bodies: true
+ok  t8-1tx-m1-s7-0-Z128_cap5:valid-tx0 K=4 verify=66.68ms accepted lib=true
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:cap:cap: cap.trace[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:ood:ood: ood[0].trace_local[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:random:random: random_values.random[0][0][0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:pow:pow: pow.batch + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:final:final: final_poly[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:row:row: random matrix 0 (instance 0, 2^20) q0 col 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:salt:salt: random matrix 0 (instance 0, 2^20) q0 salt 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:sibling:sibling: sib.random[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:fri_value:fri_value: fri[0] q0 value 0 c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tampered:statement:statement: NF[0] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:tx:output value - 1 sat (CTX differs) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:root:script ROOT[3] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:constants:FIN: TBL byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:constants:CODE: ACC_1 + 1 and ACC_2 compensated (HEAD sum unchanged) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:constants:HEAD: NF lane 0 byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:input:HEAD: OOD byte 100 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:input:QRY: hint T + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:input:QRY: path byte (input tree) flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:input:QRY: last query (L, path) missing K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:graph:CODE 1: code blob byte flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:graph:two QRY inputs swapped (order) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:graph:one input with another locking (R + one byte) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-0-Z128_cap5:mix:one QRY input from another statement (m1-s7-1-Z128_cap5) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-1-Z128_cap5:valid-tx0 K=4 verify=67.27ms accepted lib=true
+ok  t8-1tx-m1-s7-2-Z128_cap5:valid-tx0 K=4 verify=67.23ms accepted lib=true
+ok  t8-1tx-m1-s7-3-Z128_cap5:valid-tx0 K=4 verify=67.73ms accepted lib=true
+ok  t8-1tx-m1-s7-4-Z128_cap5:valid-tx0 K=4 verify=67.27ms accepted lib=true
+ok  t8-1tx-m1-s7-5-Z128_cap5:valid-tx0 K=4 verify=67.15ms accepted lib=true
+ok  t8-1tx-m1-s7-6-Z128_cap5:valid-tx0 K=4 verify=67.5ms accepted lib=true
+ok  t8-1tx-m1-s7-7-Z128_cap5:valid-tx0 K=4 verify=66.56ms accepted lib=true
+ok  t8-1tx-m1-s7-8-Z128_cap5:valid-tx0 K=4 verify=67.62ms accepted lib=true
+ok  t8-1tx-m1-s7-9-Z128_cap5:valid-tx0 K=4 verify=67.27ms accepted lib=true
+ok  t8-1tx-m1-s7-10-Z128_cap5:valid-tx0 K=4 verify=67.31ms accepted lib=true
+ok  t8-1tx-m1-s7-11-Z128_cap5:valid-tx0 K=4 verify=67.33ms accepted lib=true
+ok  t8-1tx-m1-s7-12-Z128_cap5:valid-tx0 K=4 verify=67.51ms accepted lib=true
+ok  t8-1tx-m1-s7-13-Z128_cap5:valid-tx0 K=4 verify=67.22ms accepted lib=true
+ok  t8-1tx-m1-s7-14-Z128_cap5:valid-tx0 K=4 verify=67.98ms accepted lib=true
+ok  t8-1tx-m1-s7-15-Z128_cap5:valid-tx0 K=4 verify=67.63ms accepted lib=true
+ok  t8-1tx-m1-s7-16-Z128_cap5:valid-tx0 K=4 verify=67.11ms accepted lib=true
+ok  t8-1tx-m1-s7-17-Z128_cap5:valid-tx0 K=4 verify=67.95ms accepted lib=true
+ok  t8-1tx-m1-s7-18-Z128_cap5:valid-tx0 K=4 verify=67.73ms accepted lib=true
+ok  t8-1tx-m1-s7-19-Z128_cap5:valid-tx0 K=4 verify=66.87ms accepted lib=true
+ok  t8-1tx-m1-s7-20-Z128_cap5:valid-tx0 K=4 verify=67.71ms accepted lib=true
+ok  t8-1tx-m1-s7-21-Z128_cap5:valid-tx0 K=4 verify=67.81ms accepted lib=true
+ok  t8-1tx-m1-s7-22-Z128_cap5:valid-tx0 K=4 verify=67.41ms accepted lib=true
+ok  t8-1tx-m1-s7-23-Z128_cap5:valid-tx0 K=4 verify=67.8ms accepted lib=true
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:cap:cap: cap.trace[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:ood:ood: ood[0].trace_local[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:random:random: random_values.random[0][0][0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:pow:pow: pow.batch + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:final:final: final_poly[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:row:row: random matrix 0 (instance 0, 2^20) q0 col 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:salt:salt: random matrix 0 (instance 0, 2^20) q0 salt 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:sibling:sibling: sib.random[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:fri_value:fri_value: fri[0] q0 value 0 c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tampered:statement:statement: NF[0] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:tx:output value - 1 sat (CTX differs) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:root:script ROOT[3] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:constants:FIN: TBL byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:constants:CODE: ACC_1 + 1 and ACC_2 compensated (HEAD sum unchanged) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:constants:HEAD: NF lane 0 byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:input:HEAD: OOD byte 100 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:input:QRY: hint T + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:input:QRY: path byte (input tree) flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:input:QRY: last query (L, path) missing K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:graph:CODE 1: code blob byte flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:graph:two QRY inputs swapped (order) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:graph:one input with another locking (R + one byte) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-1tx-m1-s7-23-Z128_cap5:mix:one QRY input from another statement (m1-s7-0-Z128_cap5) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:valid-tx0 K=4 verify=61.67ms accepted lib=true
+ok  t8-2tx-m1-s7-0-Z128_cap5:valid-tx1 K=20 verify=57.5ms accepted lib=true
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:cap:cap: cap.trace[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:ood:ood: ood[0].trace_local[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:random:random: random_values.random[0][0][0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:pow:pow: pow.batch + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:final:final: final_poly[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:row:row: random matrix 0 (instance 0, 2^20) q0 col 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:salt:salt: random matrix 0 (instance 0, 2^20) q0 salt 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:sibling:sibling: sib.random[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:fri_value:fri_value: fri[0] q0 value 0 c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tampered:statement:statement: NF[0] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:tx:output value - 1 sat (CTX differs) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:root:script ROOT[3] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:constants:FIN: TBL byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:constants:CODE: ACC_1 + 1 and ACC_2 compensated (HEAD sum unchanged) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:constants:HEAD: NF lane 0 byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:input:HEAD: OOD byte 100 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:input:QRY: hint T + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:input:QRY: path byte (input tree) flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:input:QRY: last query (L, path) missing K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:graph:CODE 1: code blob byte flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:graph:two QRY inputs swapped (order) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:graph:one input with another locking (R + one byte) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:mix:one QRY input from another statement (m1-s7-1-Z128_cap5) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:mix:transaction 1 (all inputs) from another statement, the NFT of this proof (replay) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:thread:tx1: spends an NFT minted for another proof (commitment of another G) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:thread:tx1: input 0 NFT is mutable K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:thread:tx1: input 0 without the NFT K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:thread:tx1: a QRY input of tx0 (queries 0-2) instead of its own K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:thread:tx0: baton not returned (output 0 is the NFT only) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-0-Z128_cap5:thread:tx0: thread NFT minted mutable K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-1-Z128_cap5:valid-tx0 K=4 verify=61.84ms accepted lib=true
+ok  t8-2tx-m1-s7-1-Z128_cap5:valid-tx1 K=20 verify=57.2ms accepted lib=true
+ok  t8-2tx-m1-s7-2-Z128_cap5:valid-tx0 K=4 verify=61.36ms accepted lib=true
+ok  t8-2tx-m1-s7-2-Z128_cap5:valid-tx1 K=20 verify=57.17ms accepted lib=true
+ok  t8-2tx-m1-s7-3-Z128_cap5:valid-tx0 K=4 verify=62.23ms accepted lib=true
+ok  t8-2tx-m1-s7-3-Z128_cap5:valid-tx1 K=20 verify=58.18ms accepted lib=true
+ok  t8-2tx-m1-s7-4-Z128_cap5:valid-tx0 K=4 verify=61.3ms accepted lib=true
+ok  t8-2tx-m1-s7-4-Z128_cap5:valid-tx1 K=20 verify=57.82ms accepted lib=true
+ok  t8-2tx-m1-s7-5-Z128_cap5:valid-tx0 K=4 verify=61.69ms accepted lib=true
+ok  t8-2tx-m1-s7-5-Z128_cap5:valid-tx1 K=20 verify=57.69ms accepted lib=true
+ok  t8-2tx-m1-s7-6-Z128_cap5:valid-tx0 K=4 verify=61.83ms accepted lib=true
+ok  t8-2tx-m1-s7-6-Z128_cap5:valid-tx1 K=20 verify=58.25ms accepted lib=true
+ok  t8-2tx-m1-s7-7-Z128_cap5:valid-tx0 K=4 verify=61.36ms accepted lib=true
+ok  t8-2tx-m1-s7-7-Z128_cap5:valid-tx1 K=20 verify=57.14ms accepted lib=true
+ok  t8-2tx-m1-s7-8-Z128_cap5:valid-tx0 K=4 verify=61.86ms accepted lib=true
+ok  t8-2tx-m1-s7-8-Z128_cap5:valid-tx1 K=19 verify=55.09ms accepted lib=true
+ok  t8-2tx-m1-s7-9-Z128_cap5:valid-tx0 K=4 verify=61.66ms accepted lib=true
+ok  t8-2tx-m1-s7-9-Z128_cap5:valid-tx1 K=20 verify=57.01ms accepted lib=true
+ok  t8-2tx-m1-s7-10-Z128_cap5:valid-tx0 K=4 verify=62.07ms accepted lib=true
+ok  t8-2tx-m1-s7-10-Z128_cap5:valid-tx1 K=20 verify=57.88ms accepted lib=true
+ok  t8-2tx-m1-s7-11-Z128_cap5:valid-tx0 K=4 verify=62.06ms accepted lib=true
+ok  t8-2tx-m1-s7-11-Z128_cap5:valid-tx1 K=20 verify=58.15ms accepted lib=true
+ok  t8-2tx-m1-s7-12-Z128_cap5:valid-tx0 K=4 verify=61.81ms accepted lib=true
+ok  t8-2tx-m1-s7-12-Z128_cap5:valid-tx1 K=19 verify=54.81ms accepted lib=true
+ok  t8-2tx-m1-s7-13-Z128_cap5:valid-tx0 K=4 verify=62.05ms accepted lib=true
+ok  t8-2tx-m1-s7-13-Z128_cap5:valid-tx1 K=19 verify=54.68ms accepted lib=true
+ok  t8-2tx-m1-s7-14-Z128_cap5:valid-tx0 K=4 verify=62.22ms accepted lib=true
+ok  t8-2tx-m1-s7-14-Z128_cap5:valid-tx1 K=20 verify=57.56ms accepted lib=true
+ok  t8-2tx-m1-s7-15-Z128_cap5:valid-tx0 K=4 verify=61.9ms accepted lib=true
+ok  t8-2tx-m1-s7-15-Z128_cap5:valid-tx1 K=20 verify=58.29ms accepted lib=true
+ok  t8-2tx-m1-s7-16-Z128_cap5:valid-tx0 K=4 verify=62.06ms accepted lib=true
+ok  t8-2tx-m1-s7-16-Z128_cap5:valid-tx1 K=20 verify=57.54ms accepted lib=true
+ok  t8-2tx-m1-s7-17-Z128_cap5:valid-tx0 K=4 verify=61.78ms accepted lib=true
+ok  t8-2tx-m1-s7-17-Z128_cap5:valid-tx1 K=20 verify=57.8ms accepted lib=true
+ok  t8-2tx-m1-s7-18-Z128_cap5:valid-tx0 K=4 verify=62.16ms accepted lib=true
+ok  t8-2tx-m1-s7-18-Z128_cap5:valid-tx1 K=20 verify=57.78ms accepted lib=true
+ok  t8-2tx-m1-s7-19-Z128_cap5:valid-tx0 K=4 verify=61.56ms accepted lib=true
+ok  t8-2tx-m1-s7-19-Z128_cap5:valid-tx1 K=20 verify=57.7ms accepted lib=true
+ok  t8-2tx-m1-s7-20-Z128_cap5:valid-tx0 K=4 verify=61.89ms accepted lib=true
+ok  t8-2tx-m1-s7-20-Z128_cap5:valid-tx1 K=20 verify=58.33ms accepted lib=true
+ok  t8-2tx-m1-s7-21-Z128_cap5:valid-tx0 K=4 verify=62.3ms accepted lib=true
+ok  t8-2tx-m1-s7-21-Z128_cap5:valid-tx1 K=20 verify=57.75ms accepted lib=true
+ok  t8-2tx-m1-s7-22-Z128_cap5:valid-tx0 K=4 verify=61.79ms accepted lib=true
+ok  t8-2tx-m1-s7-22-Z128_cap5:valid-tx1 K=20 verify=57.16ms accepted lib=true
+ok  t8-2tx-m1-s7-23-Z128_cap5:valid-tx0 K=4 verify=62.08ms accepted lib=true
+ok  t8-2tx-m1-s7-23-Z128_cap5:valid-tx1 K=19 verify=55.58ms accepted lib=true
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:cap:cap: cap.trace[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:ood:ood: ood[0].trace_local[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:random:random: random_values.random[0][0][0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:pow:pow: pow.batch + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:final:final: final_poly[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:row:row: random matrix 0 (instance 0, 2^20) q0 col 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:salt:salt: random matrix 0 (instance 0, 2^20) q0 salt 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:sibling:sibling: sib.random[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:fri_value:fri_value: fri[0] q0 value 0 c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tampered:statement:statement: NF[0] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:tx:output value - 1 sat (CTX differs) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:root:script ROOT[3] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:constants:FIN: TBL byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:constants:CODE: ACC_1 + 1 and ACC_2 compensated (HEAD sum unchanged) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:constants:HEAD: NF lane 0 byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:input:HEAD: OOD byte 100 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:input:QRY: hint T + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:input:QRY: path byte (input tree) flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:input:QRY: last query (L, path) missing K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:graph:CODE 1: code blob byte flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:graph:two QRY inputs swapped (order) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:graph:one input with another locking (R + one byte) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:mix:one QRY input from another statement (m1-s7-0-Z128_cap5) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:mix:transaction 1 (all inputs) from another statement, the NFT of this proof (replay) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:thread:tx1: spends an NFT minted for another proof (commitment of another G) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:thread:tx1: input 0 NFT is mutable K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:thread:tx1: input 0 without the NFT K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:thread:tx1: a QRY input of tx0 (queries 0-2) instead of its own K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:thread:tx0: baton not returned (output 0 is the NFT only) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  t8-2tx-m1-s7-23-Z128_cap5:thread:tx0: thread NFT minted mutable K=1 verify=undefinedms rejected:blk-bad-inputs lib=false

@@ -180,7 +180,7 @@ How to read the counts:
 **Coverage limits:**
 - The lookup-PoW and FRI final-polynomial checks cannot be reached by plain tampering: any edit before the query indices are drawn changes the indices, and a Merkle check rejects first. In a fault-injection run of the suite, removing either check gave 0 disagreements. Both are checked by code reading, not by tests.
 - No test exercises a consistently built proof with non-canonical lanes. That case is covered by the §T8.6 congruence argument and an op-level check.
-- No BCHN node run was made on the Track 8 scripts.
+- BCHN node run ([node-check](../node-check/README.md#track-8-stark-m1)): all 24 M1 statements in both a′ plans accepted on stock BCHN 29.1.0, 106 sampled rejections rejected, matching libauth; the default relay policy allows every tx, and the 2-tx plan also broadcasts with tx0 unconfirmed.
 
 ### T8.6 Soundness summary
 
@@ -264,7 +264,7 @@ Against the design and S0 models:
 - **Model miss.** The op-cost model missed by +26.8% (§T8.8). The design's ±15% acceptance criterion for layout b is not met.
 - **M2 needs the transaction size limit raised** in layout b2, and M2 does not fit one 100 KB input (152.4 KB in layout b).
 - **Coverage vectors are below 128.** Plonky3's three_instances_mixed_sizes vectors come out at 127.90–127.92 bits under our accounting. They are coverage only and are not used by any claim.
-- **Not run on BCHN.** No Track 8 script ran on a BCHN node. The BCHN-adjusted figures use the rule Track 8a measured on stock BCHN 29.1.0 for the Track 5 and PLONK chains. Layouts b and b2 cannot run on BCHN today anyway, because they need raised limits.
+- **BCHN node run ([node-check](../node-check/README.md#track-8-stark-m1)):** layout a′ ran on stock BCHN 29.1.0. All 24 statements in both plans were accepted, worst input 91.01% (1 tx) / 91.10% (2 txs) of the budget under BCHN's accounting, with 16.6–17.0 ms Verify per 1-tx proof. `testmempoolaccept` on a default-policy node allows every tx. Layouts b and b2 cannot run on BCHN today, because they need raised limits.
 - **Size spread.** Proof size varies with the random query set: M1 by −2.2% to +1.8%, M2 by about ±3.3% (one of 65 proofs fell at −3.29% against S0's ±3%). Prover timings vary widely on this machine.
 - **The generators' scope:** ood PoW 0 only; cap 0 for b and b2 and cap 5 for a′.
 
