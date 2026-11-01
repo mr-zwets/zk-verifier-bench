@@ -1,4 +1,318 @@
-# Track 5: a usable post-quantum SHA-256 STARK verifier on CashVM
+# Tracks 5 and 8: a post-quantum SHA-256 STARK verifier on CashVM (Plonky3, Goldilocks)
+
+Status: research. **Not a leaderboard entry.** Nothing is in REGISTRY, results.json or score-history.json.
+
+- **Track 8** (2026-11-01, first part below) makes the verifier usable: a real statement (a zero-knowledge Merkle-membership spend with a nullifier, bound to the spending transaction), Plonky3's multi-table `batch-stark` protocol, and all three deployment layouts at 128 bits.
+- **Track 5** (2026-10-29, second part) is the first Plonky3 build. Its text is kept as it was.
+
+---
+
+## Track 8 (2026-11-01): a usable verifier for a real statement
+
+Two internal reviews ran on the build: protocol/soundness, which also checked the AIRs against their spec (verdict fix: 1 major, 3 minors), and measurement (verdict fix: 1 major, 5 minors). A fix phase handled every finding. Before the reviews, the soundness write-up itself found one gap in the scripts as built: proof field lanes were not reduced safely. It was fixed, and every on-chain suite was re-run on the fixed scripts (§T8.6, §T8.7). An independent re-review of the fix phase and of this report passed with minors (all applied: proof-size range, limits framing, s8-arith wording, reproduce notes); it re-ran the layout-b production suite byte-identically.
+
+The sources are on groth16_cashscript branch `wip/stark-usable` (scripts at 12d47d4, results at c47d104, summary at 0d23832). The links in §T8.10 point to `main` paths, which are valid once the branch is merged. The design, the calculators and the AIR spec are on zk-verifier-bench branch `wip/stark-usable-design` (6050eaf). The integrated summary is copied here as [results/verifier-summary-track8.json](results/verifier-summary-track8.json).
+
+### T8.1 What changed
+
+Track 5 verified Plonky3 proofs of toy AIRs (MiMC, Fibonacci) in Plonky3's single-table `uni-stark` format. It left four gaps between that and a deployment. Track 8 closes each one:
+
+| | Track 5 (main) | Track 8 |
+|---|---|---|
+| statement | toy AIRs, no public meaning | **M1:** depth-30 Merkle membership, nullifier, outputs binding (§T8.2) |
+| protocol | `uni-stark`, one table | `p3-batch-stark`: N tables, mixed heights, preprocessed columns, LogUp lookups (M2 and Plonky3's five batch test AIRs) |
+| zero knowledge at 128 bits | fib-S128z: 112.5 KB, did not fit one 100 KB input; 3 txs / 35 inputs / 234.6 KB today | M1 with ZK: one 100 KB input (91.4–95.0 KB); **1 tx / 12 inputs / 98,690 B today** |
+| two 100 KB inputs | not built | layout b2 with one shared code library (M1 and M2) |
+| binding to the transaction | none | CTX = SHA-256 of the spending transaction's outputs, computed by the script and bound by the transcript |
+| constraint check | hand-written per AIR | a byte-coded interpreter for the constraint graph exported from Plonky3 |
+
+**Every layout now reaches 128 bits with ZK, on one statement that means something.** Today's standard rules need no raised limit and fit in one transaction.
+
+### T8.2 Statement
+
+**M1** is a fixed-denomination, zero-knowledge spend. It has no value field; value-carrying notes are for a later track.
+
+- **Public values** (12 Goldilocks elements, each checked < p):
+  - ROOT[4], a constant compiled into the script;
+  - NF[4], a witness item; the script checks each lane < p;
+  - CTX[4], computed by the script from the spending transaction's outputs: SHA-256 over an injective output serialization, truncated to 28 bytes, as four 56-bit chunks (prover/FORMAT.md, "CTX serialization").
+- **Witness:** nk[4], r[4], 30 path bits and 30 siblings.
+- **Relation.** P is Poseidon2-Goldilocks width 8, with the stock p3-goldilocks constants; T keeps the first 4 lanes.
+  - NF = T(P(nk‖0,0,0,TAG_NF))
+  - leaf = T(P(NF‖r))
+  - node_i = T(P(swap_{b_i}(node_{i−1}, S_i)))
+  - ROOT = node_30
+- **AIR:** one table of 2^10 rows × 17 columns, 11 periodic columns, 53 constraints of degree ≤ 4, 8 ZK quotient chunks, 94 opened values.
+  - The spec (`design-t8/AIR-SPEC.md`) is checked in both directions:
+    - a Python reference and the Rust AIR produce identical traces;
+    - Poseidon2 agrees with p3-goldilocks on 10,002 inputs plus the test vector;
+    - every single-cell mutation of an honest trace breaks a constraint (17,408 of 17,408).
+- **CTX is not read by any constraint.** It is bound only because it is a public value, observed in the transcript before every challenge (SOUNDNESS-T8 Lemma 13). The generator refuses a constraint graph that reads it.
+- **Prover:** M1 takes about 1.0 s with 4 threads under nice (3.8 s with 1 thread), with a peak RSS of 1.06 GB. M2 takes 1.3 s (6.7 s with 1 thread) at 1.45 GB.
+
+**M2** is a generality test vector, not the production statement. It expresses the same relation as two tables:
+- **T_hash:** 2^10 rows × 24 columns, plus 1 preprocessed column.
+- **T_ctl:** 2^7 rows × 13 columns, plus 5 preprocessed columns.
+- **The bus:** one LogUp bus of width 13 joins the tables. Σw·h = 1152 < p.
+
+M2 covers two heights, mixed-height Merkle injection, a FRI roll-in, a salted preprocessed commitment, the permutation tree, terminals and the lookup PoW.
+- Under ZK, the preprocessed commitment is salted, so it cannot be recomputed from the AIR alone.
+- It can be recomputed from the AIR plus a published setup seed (`SETUP_SEED` = "t8SETUP1").
+
+What M1 does not do, and Track 9 must: it does not publish NF in an output, keep a nullifier set or update ROOT. **Replaying one valid proof in two transactions is not prevented by the verifier.**
+
+### T8.3 Parameters
+
+| set | used by | blowup | fold | final poly | Q | PoW (query / commit / batch / lookup) | ZK | cap |
+|---|---|--:|---|--:|--:|---|---|---|
+| Z128 | M1 | 2^9 (LDE 2^20) | one arity-8 fold | 256 | 24 | 24 / 2 / 20 / – | yes (rc 3, salt 2) | 0 (b, b2) or 5 (a′) |
+| Z128-g | M2 | 2^9 | [3, 3] (20 → 17 → 14) | 32 | 24 | 24 / **3** / 20 / 8 | yes | 0 |
+
+- The field is Goldilocks with a cubic trinomial extension. Commitments and the transcript use SHA-256. The prover is Plonky3 at 0d80373, and the wire format is our own p3b-v1 (prover/FORMAT.md).
+- **Batch PoW 20,** not 12: at 12, the batch round would sit at 128.33 bits.
+- **M2 needs commit PoW 3,** not the designed 2. Charging the roll-in curve at degree a costs 0.19 bits on fold1, and with commit PoW 2, M2 reaches only 127.92.
+- **Each deployment's verifying key fixes its own Merkle cap.** A proof made for another cap, set, PoW, setup seed or statement is rejected.
+
+### T8.4 Results per layout and regime
+
+All figures below are post-fix (§T8.7). The proof and statement sets are:
+- M1: 24 transaction-bound statements (leaves 0, 2^30 − 1 and 22 derived), cap 0 for b and b2, re-proved at cap 5 for a′;
+- M2: 8 statements.
+
+The op-cost columns use these conventions:
+- **BCHN-adjusted** = libauth op-cost + OP_DEFINE body bytes (Track 8a; it is exact on stock BCHN 29.1.0), gated as max(standard, consensus) + define bytes.
+- **Budget** = (41 + unlocking length) × 800 per input.
+
+| layout | statement | limits to raise (consensus / relay) | inputs (txs) | proof B | unlocking B | tx B | BCHN-adj. op-cost per input | % of budget | accepted |
+|---|---|---|--:|--:|--:|--:|--:|--:|--:|
+| b, one input | M1 | consensus: per-input unlocking, bytecode and stack-item limits raised to 100,000 B; relay tx size unchanged | 1 (1) | 71,344–74,928 | 91,388–94,968 | 91,477–95,057 | 35.53–36.04M | 47.4–48.6% | 24/24 |
+| b2, two inputs | M1 | consensus per-input limits raised to 100,000 B; relay tx size 100,000 B unchanged | 2 (1) | 71,344–74,928 | 61,919–63,555 + 33,335–35,245 | **96,153–98,321** | 27.16–27.38M / 19.56–19.82M | 53.8–54.8% / 70.2–73.3% | 24/24 |
+| b2, two inputs | M2 | consensus per-input limits raised to 100,000 B **and** the relay tx-size limit raised (passes at 200,000 B) | 2 (1) | 121,350–124,710 | 79,778–82,436 + 75,783–77,391 | 156,384–159,749 | 35.20–35.52M / 33.20–33.51M | 53.8–55.1% / 54.1–54.8% | 8/8 per input; whole tx 0/8 at 100,000 B, 8/8 at 200,000 B |
+| a′, today, 1 tx | M1 (cap 5) | **none** | 12 (1) | 73,648–78,512 | 6,454–9,322 per input | **98,690** | 1.31–6.09M | max input 90.80–91.01% (QRY; all QRY inputs 90.67–91.01%) | 24/24 |
+| a′, today, 2 txs | M1 (cap 5) | none | 16 (2) | same | same roles | 91,059 + 40,497 = 131,556 | ≤ 6.09M | max 91.10% | 24/24 |
+
+- **bch-spec** (base 10,000): layout b passes 24/24 at 42.9–43.8%. b2 passes M1 24/24 (46.5–47.2% / 54.8–56.4%) and M2 8/8 per input; M2's whole transaction again needs the size limit raised.
+- **Today's rules** reject layouts b and b2 (0/24 and 0/32): the unlocking exceeds 10,000 B.
+- **Policy controls are live.** libauth's standard mode rejects a 10,025 B unlocking, a 100,118 B transaction and a 208 B output locking.
+- **The a′ 1-transaction plan fits at Z128 itself.** It needs no parameter trade (the design's fallback was Q 23 with query PoW 28), and its margin under 100,000 B is 1,310 B. Its bytes are the same for every statement, because full paths have fixed length.
+- **b2 for M1 fits a standard 100,000 B transaction.** Only the per-input limits must rise.
+
+**Layout a′ per role** (1 transaction; BCHN-adjusted includes 36,844 B of OP_DEFINE bodies per input):
+
+| role | inputs | unlocking B | op-cost | % of budget | what it does |
+|---|--:|--:|--:|--:|---|
+| HEAD | 1 | 6,454 | 1.31M | 25.2% | caps, OOD values, PoW, NF, CTX; transcript; combines the AIR parts with the quotient |
+| CODE1 / CODE2 | 2 | 9,322 / 9,316 | 5.47M / 4.98M | 73.1% / 66.6% | code blobs (9.3 KB each); constraint ranges [0,21) and [21,53) at ζ |
+| FIN | 1 | 6,462 | 3.76M | 72.4% | final polynomial; checks a 312 B table of query indices, α′, β, DEEP constants and A sums |
+| QRY | 8 | 8,322 | 6.07–6.09M | **90.7–91.0%** | 3 queries each, full paths to the cap; recomputes the α′ ladder |
+
+- Every input has the same 118 B P2S locking. That locking authenticates both code blobs by SHA-256, then pins the input graph: the input count and every locking.
+- Values move between inputs only as pushes. Each push is checked by its owner, and readers parse it with exact headers.
+- **QRY is the binding input, at about 91% of its budget.**
+  - Its op-cost: row keys 1.40M, final-polynomial unpack 1.26M, three queries with paths about 2.95M.
+  - Publishing the α′ powers instead would save 1.4M per QRY input, but add about 2.3 KB and break the 1-transaction fit.
+- **The 2-transaction baseline** links the transactions with Track 5's NFT thread, whose commitment binds the final transcript digest. tx1 carries HEAD, FIN and both code inputs again, which is why it is larger than the design's 14 inputs and 115–120 KB.
+
+**Where layout b's op-cost goes** (statement 0, 35.98M libauth):
+
+| part | op-cost | S0 model |
+|---|--:|--:|
+| queries (24 × 0.67M) | 16.09M | 16.79M |
+| Merkle | 7.05M | 7.23M |
+| fixed part | 12.83M | 4.23M |
+| of which: AIR at ζ | 8.03M | 0.6M |
+| of which: constraint-graph interpreter | 5.79M | – |
+| of which: periodic columns | 1.19M | – |
+| of which: DEEP constants | 3.16M | – |
+
+- The constraint graph (551 nodes, 53 constraints) runs as a 2.1 KB byte program on an OP_INVOKE-based interpreter.
+- Inlining it would be faster but makes the redeem too large to fit; this was measured. It would grow from 19,024 B to about 48 KB.
+- **Track 5's finding that "the AIR is under 1% of op-cost" does not carry over to a real statement:** here the AIR is 22% of the op-cost.
+
+**b2 profile:**
+- Input 0 for M1: AIR 7.85M, DEEP/FRI constants 4.68M, 12 queries 8.04M, Merkle 3.80M, entry 2.76M.
+- Input 1 re-derives the constants: a 4.7M duplicate for M1 and 8.2M for M2.
+- The library defines (19,468 B for M1, 27,759 B for M2) are part of the BCHN adjustment on both inputs.
+
+**Plonky3's own batch AIRs on chain.** single_instance, three_instances_mixed_sizes, mixed_preprocessed, both_lookups_zk and periodic_air_zk verify on chain under Z128, Z128-g, ZK off and n = 2^10, in layouts b and b2. They are coverage vectors and are not graded. At Plonky3's own small parameters (Q = 2), the b2 split leaves input 1 too few bytes for its op-cost budget, so those three files run in layout b.
+
+### T8.5 Tests
+
+Every suite has 0 unexpected verdicts. Each on-chain case must get the same verdict from the script, from the JS model of the on-chain algorithm and from the independent reference verifier `verify-batch.mjs`. The reference in turn agrees with Plonky3's Rust `verify_batch`.
+
+**Agreement:**
+
+| check | cases | result |
+|---|--:|---|
+| Rust `verify_batch` vs JS reference (S3): 128 valid proofs, tamper families, VK variants, forced proofs | 14,027 | 0 disagreements; all 128 transcripts byte-identical (every SHA-256 challenger input) |
+| on-chain model vs reference, M1 (S4) | 3,762 | 0 disagreements |
+| on-chain model vs reference, all S3 cap-0 files, unsplit and with the b2 split (S5) | 17,911 | 0 disagreements, transcripts identical |
+| forced unsatisfying traces, proved by the release prover | 16 | 16/16 rejected by Rust and JS (bus-only cases on the LogUp terminal sum) |
+| CTX script block vs JS serialization | 4 txs | 0 mismatches; other output sets rejected |
+
+**On-chain sweeps** (post-fix; [summary](results/verifier-summary-track8.json)):
+
+| suite | cases | not run on chain | encoder-only | files skipped |
+|---|--:|--:|--:|--:|
+| b production, M1 (CTX from the tx) | 2,929 | 0 | 0 | 0 |
+| b harness, S3's M1 cap-0 case files | 3,309 | 33 | 1 | 2 |
+| b2, M2 + Plonky3 AIRs | 8,252 | 59 | 0 | 3 |
+| b2 harness, M1 | 2,558 | 35 | 1 | 2 |
+| b2 production, 24 M1 + 8 M2 | 1,030 | 0 | 0 | 0 |
+| a′ production, 1 tx | 3,765 | 0 | 55 | 2 |
+| a′ production, 2 txs | 4,181 | 0 | 55 | 2 |
+| a′ harness, S3's M1 cap-5 case files | 2,387 | 35 | 69 | 2 |
+
+The families are DESIGN-T8 §8's test matrix:
+- **Tampered proofs:** every cap digest, OOD value, terminal, random-codeword value, PoW witness, final coefficient, row and salt (injected short-table rows included), sibling and FRI value; truncation, extension and non-canonical encodings.
+- **Statement:** each public value + 1, NF − 1, NF + p, foreign or stale ROOT, foreign NF or CTX, permuted values.
+- **Other VKs:** cap, parameter set, ZK on/off, PoW bits, setup seed, M1 ↔ M2.
+- **Transaction:** changed value or recipient, extra or split output, added token, another statement's outputs.
+- **Witness manipulations (1,014 in b):** hints, record repacking, item sizes, NF lanes.
+- **b2 layout (814):** mismatched proofs across the inputs, a third input, another locking, a tampered or truncated library, swapped inputs, moved blobs or records, bad injection paths.
+- **a′:** tampered HEAD/FIN/CODE constants (650), including ACC_1 + 1 with ACC_2 compensated; input (598), graph (208), cross-input and cross-transaction mixing (130/156); NFT thread and replay (390).
+
+How to read the counts:
+- **Not run on chain:** the statement layer or the generator refuses the case before a script exists, for example a CTX lane ≥ 2^56 or a VK the generator does not support. The verdict (reject) is right, but no script ran.
+- **Encoder-only:** malformed-by-length proofs whose on-chain witness is the valid proof's, so the script accepts the valid witness, as in Track 5's layout a. A production encoder refuses them.
+- **Files skipped:** cap + 1 and ood-PoW = 1 VKs, which are outside the generators' scope, and cap-0 files in a′.
+
+**Coverage limits:**
+- The lookup-PoW and FRI final-polynomial checks cannot be reached by plain tampering: any edit before the query indices are drawn changes the indices, and a Merkle check rejects first. In a fault-injection run of the suite, removing either check gave 0 disagreements. Both are checked by code reading, not by tests.
+- No test exercises a consistently built proof with non-canonical lanes. That case is covered by the §T8.6 congruence argument and an op-level check.
+- No BCHN node run was made on the Track 8 scripts.
+
+### T8.6 Soundness summary
+
+Details are in [SOUNDNESS-T8.md](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-stark-batch/SOUNDNESS-T8.md). The calculator is `design-t8/params8.py --asbuilt`, which reads every shape from the 45 committed vectors' VK data. All 45 match the exported shapes, and the S0 tables match the built constraint graphs field by field.
+
+| statement / set | λ_IOP | binding round | λ (digest 4h) | strict digest |
+|---|--:|---|--:|--:|
+| M1, Z128 (cap 0 and cap 5) | 128.06 | fold1 | **128** | 127.21 |
+| M2, Z128-g, commit PoW 3, lookup PoW 8 | 128.70 | query | **128** | 127.21 |
+
+All figures are "JB, powers-batching adaptation, unpublished".
+
+- **Each new charge has its own lemma and round term:** multi-table ALI, DEEP (the script checks Z_H(ζ) ≠ 0 and ζ^n ≠ −1 per instance), batching per height, roll-in at degree a, LogUp, preprocessed columns, and caps with mixed-height injection.
+- **AIR ⇒ relation** is proved row type by row type for M1, and through the bus for M2.
+- **Chain lemmas cover b2, a′ (1 tx) and the NFT thread,** and an owner table names the script step that fixes or checks every value the verdict depends on.
+- **What rests on our unreviewed adaptation:** the batching round (margin 8.33 bits over 128 for M1, 7.15 for M2), M2's roll-in fold1 (margin 0.87, the tightest), and the per-height split of the batching term.
+  - M1's binding round, the query round, ALI, DEEP and LogUp do not depend on it.
+- **One gap was found and closed.** The scripts read proof lanes as unreduced 8-byte integers, as Track 5 did. The constraint interpreter's subtract and negate ops added only p, so a lane in [p + 1, 2^64) could drive an intermediate negative, and the packed extension product was then wrong mod p.
+  - The fix adds 2p to the four ops, at no byte cost. An op-level check runs the generated op bodies in libauth on maximal lanes: 64/64 congruent; the pre-fix subtraction form gives a wrong residue on negative lanes (2/2, s8-arith Part A).
+  - Every S4–S7 suite was then re-run (§T8.5).
+  - No exploit was built or attempted. With the fix, a non-canonical lane is only another encoding of the same residue. That is malleability, with no soundness effect.
+- **CTX is bound by the transcript.** The same proof bytes with changed outputs change every challenge while the openings stay fixed, so they are rejected except with negligible probability; the transaction families test exactly this.
+  - That a mempool observer cannot make a fresh proof for new outputs needs simulation extractability of the compiled ZK proof. It is **not proved; it is an assumption.**
+
+### T8.7 Reviews and fixes
+
+**Found while writing SOUNDNESS-T8, before the reviews:** the interpreter residue gap (§T8.6). It was fixed at 12d47d4, which also added generator asserts:
+- packed-slot bounds;
+- next-row reads;
+- count_weight;
+- ROOT lanes < p;
+- the b2 tail length.
+
+**Protocol/soundness review** (it also checked the AIRs against AIR-SPEC): fix, 1 major and 3 minors.
+- *Major:* SOUNDNESS-T8 claimed that every suite had been re-run, but the re-run had stopped inside the b2 block when the machine went down, so no b2 or a′ result was post-fix. The re-run was resumed and completed (2026-11-01), every count was regenerated, and the results were committed (726ea25, c47d104).
+- *Minor:* Lemma 13 used round-by-round soundness for a true statement. It is now split into same-bytes replay, which is argued directly, and a new proof, which rests on the simulation-extractability assumption.
+- *Minor:* stale commit citations, now corrected.
+- *Minor:* the case totals mixed in cases that never ran on chain. They are now counted separately (§T8.5).
+- The review's code reading confirmed the following against Plonky3 at the pin: the transcript order and domain separators, zero-bit PoW elision, query-bit sampling, the roll-in β^arity, the presence of the lookup-PoW and final-polynomial checks, and the AIRs against AIR-SPEC (M1 53, T_hash 40 + lookup, T_ctl 31 + lookup).
+
+**Measurement review:** fix, 1 major and 5 minors. It re-ran grading for all 32 b2 statements and all 24 a′ statements, plus subset sweeps. Its findings:
+- *Major:* the same incomplete re-run.
+- *Minor:* quote the post-fix op-cost. It moved by +193 to +307 on the means; bytes are identical, and no budget percentage moved by more than 0.1 point.
+- *Minor:* the b2 library hash changed (now 95630cef…26b9).
+- *Minor:* separate the not-run-on-chain counts.
+- *Minor:* state the S0 op-cost model miss.
+- *Minor:* use one BCHN gate, max(std, cons), in every grader. No verdict changed.
+
+Its check of false rejections, using copies of the harnesses that log every chain error, found every rejection to be a real script failure (OP_VERIFY in nearly all cases), never a limit or encoding error.
+
+**Re-review:** An independent re-review of the fix phase and of this report passed with minors (all applied: proof-size range, limits framing, s8-arith wording, reproduce notes); it re-ran the layout-b production suite byte-identically.
+
+### T8.8 Comparison with Track 5 and the design model
+
+| | Track 5 best at 128 bits | Track 8 M1 (ZK, real statement) |
+|---|---|---|
+| one 100 KB input | mimc-S128 (no ZK, toy AIR): 88.3 KB, 33.9M; fib-S128z (ZK): does not fit | 91.4–95.0 KB, 35.5–36.0M (47.4–48.6%) |
+| today's standard rules | mimc-S128: 2 txs, 17 inputs, 123,452 B; fib-S128z (ZK): 3 txs, 35 inputs, 234,553 B | **1 tx, 12 inputs, 98,690 B** |
+
+Against the design and S0 models:
+
+| layout | design (DESIGN-T8 §0) | S0 model | built |
+|---|---|---|---|
+| b, unlocking | 89–94 KB, about 32M | 87.2–92.2 KB, 28.26M | 91.4–95.0 KB, 35.5–36.0M |
+| b2 M1, tx | about 97 KB | 91–96 KB | 96.2–98.3 KB |
+| b2 M2, tx | 100–120 KB proof, tx size raised | 146–152 KB | 156.4–159.7 KB |
+| a′, today | 2 txs, about 14 inputs, 115–120 KB; 1 tx stretch 101–103 KB | 98.5–101.5 KB (1 tx only with 7.5 KB code) | 1 tx 98,690 B / 2 txs 131,556 B |
+
+- **The op-cost model missed by +26.8%** on layout b (acceptance band ±15%). Queries and Merkle match it. The fixed part does not: the constraint check at ζ costs 7.85–8.03M against an assumed 0.6M, because the model was calibrated on Track 5's toy AIR.
+- **The code is larger than modelled:** 19.0 KB redeem (13–18 KB assumed), 19.5 / 27.8 KB b2 libraries (18–24 KB), 9.3 KB a′ code blobs (7.5–9 KB). Put the real code sizes into the byte model and it agrees within about +0.5% to +1.3%.
+- **a′ still fits one transaction because of a different design choice:** each QRY input recomputes the α′ ladder, so FIN publishes a 312 B table instead of a 2.3 KB one.
+
+### T8.9 Caveats (Track 8)
+
+- **Post-quantum meaning, stated plainly.** 128 bits is a **classical** figure. Digests are 4-element Poseidon2-Goldilocks (in the circuit) and SHA-256 (commitments and transcript). Generic quantum collision search (BHT) on either reaches **about 85 bits**. That is the level of SHA-256 itself; the maintainer accepted it, and Track 8 has no 6-element digests.
+- **The strict reading** of the Fiat–Shamir digest term gives 127.21 bits; "128" uses the usual birthday convention.
+- **Every λ rests on Track 5's powers-batching adaptation, which is unpublished and unreviewed** (Track 5 SOUNDNESS §2.1, extended here to per-height ladders and degree-a roll-ins). M2's roll-in has only 0.87 bits of slack. If the adaptation needed a larger factor, raising the batch or commit PoW would restore the sets at no byte cost, but none of this has been checked by anyone outside the project.
+- **Simulation extractability is assumed, not proved.** It is what stops a mempool observer from re-binding someone else's proof to new outputs. ZK holds by construction; FRI-layer hiding is open.
+- **Not a pool.** ROOT is a script constant, NF is not published in an output, and nothing prevents spending the same note twice. That is Track 9's pool covenant. In the 2-transaction a′ plan, tx0 alone is a partial check: it can mint an NFT for a proof that tx1 would reject, with no other effect. The minting baton must be created at deployment.
+- **Tight budget.** The a′ QRY inputs run at about 91% of their op-cost budget, the highest of any input. a′ fits one transaction with 1,310 B to spare.
+- **Model miss.** The op-cost model missed by +26.8% (§T8.8). The design's ±15% acceptance criterion for layout b is not met.
+- **M2 needs the transaction size limit raised** in layout b2, and M2 does not fit one 100 KB input (152.4 KB in layout b).
+- **Coverage vectors are below 128.** Plonky3's three_instances_mixed_sizes vectors come out at 127.90–127.92 bits under our accounting. They are coverage only and are not used by any claim.
+- **Not run on BCHN.** No Track 8 script ran on a BCHN node. The BCHN-adjusted figures use the rule Track 8a measured on stock BCHN 29.1.0 for the Track 5 and PLONK chains. Layouts b and b2 cannot run on BCHN today anyway, because they need raised limits.
+- **Size spread.** Proof size varies with the random query set: M1 by −2.2% to +1.8%, M2 by about ±3.3% (one of 65 proofs fell at −3.29% against S0's ±3%). Prover timings vary widely on this machine.
+- **The generators' scope:** ood PoW 0 only; cap 0 for b and b2 and cap 5 for a′.
+
+### T8.10 Sources
+
+groth16_cashscript `main` (once wip/stark-usable is merged), [`research/pq-stark-batch/`](https://github.com/mr-zwets/groth16_cashscript/tree/main/research/pq-stark-batch):
+- [`prover/`](https://github.com/mr-zwets/groth16_cashscript/tree/main/research/pq-stark-batch/prover):
+  - the batch-stark prover crate at Plonky3 0d80373: `src/cfg.rs` (sets), `src/stmt.rs` (M1, M2 AIRs and witness), `src/wire.rs`, `src/dag.rs`, `src/s2.rs`;
+  - FORMAT.md (p3b-v1, CTX serialization), README.md;
+  - `gen-vectors.sh`, `gen-s2.sh`, `vectors/{P3,Z128,S2,S4,S5,S7}`.
+- [`verifier/`](https://github.com/mr-zwets/groth16_cashscript/tree/main/research/pq-stark-batch/verifier): `verify-batch.mjs` (reference), `gen-cases.mjs`, `agree.mjs`, `gen-s3.sh`, `report/`, README.md.
+- [`onchain/`](https://github.com/mr-zwets/groth16_cashscript/tree/main/research/pq-stark-batch/onchain):
+  - models: `model.mjs`, `modeln.mjs`, `modela.mjs`;
+  - generators: `gen.mjs` (b), `genn.mjs` (N tables, b2), `gena.mjs` (a′);
+  - layouts: `layout-b.mjs`, `layoutn.mjs`, `layouta.mjs`; `ctx.mjs`, `vm.mjs`, `vmn.mjs`;
+  - test and grading scripts: `test-*.mjs`, `grade-*.mjs`, `profile-*.mjs`, `s8-arith.mjs`, `summary-t8.mjs`;
+  - pipelines: `gen-s4.sh`, `gen-s5.sh`, `gen-s7.sh`, `rerun-s8b.sh`, `rerun-s8b-resume.sh`;
+  - `results/` (all post-fix, including `summary-t8.json`) and README.md (Track 8 S4 through S8b sections).
+- [SOUNDNESS-T8.md](https://github.com/mr-zwets/groth16_cashscript/blob/main/research/pq-stark-batch/SOUNDNESS-T8.md).
+
+zk-verifier-bench (this folder, from branch `wip/stark-usable-design` 6050eaf):
+- `DESIGN-T8.md`, with the maintainer decisions;
+- `design-t8/`: AIR-SPEC.md, air8_ref.py, params8.py (λ tables and `--asbuilt`), bytes8.py, and poseidon2-gl8-constants.json.
+
+Development branch: groth16_cashscript `wip/stark-usable` (S1 f1b1c3f … S8b a6fd286, summary 0d23832).
+
+**Reproduce** (groth16_cashscript `research/pq-stark-batch`; Rust under nice with RAYON_NUM_THREADS=4 and `-j4`; one heavy job at a time; a repo-root `node_modules` (gitignored) holding libauth 3.1.0-next.8):
+
+```sh
+export CARGO_TARGET_DIR=/path/cache/target C=/path/cache
+cd prover && nice cargo build --release --offline -j4
+./gen-vectors.sh                                              # S1: Plonky3 batch AIRs, about 1 min
+S2_CACHE=$C/s2 AIR8_REF_DIR=<bench>/research/pq-stark/design-t8 ./gen-s2.sh   # M1/M2, about 4 min
+cd ../verifier && S3_CACHE=$C/s3 S2_BATCH=$C/s2/batch ./gen-s3.sh             # Rust/JS agreement, about 3 min
+cd ../onchain
+S4_CACHE=$C/s4 S3_CACHE=$C/s3 ./gen-s4.sh                                     # layout b, about 20 min
+S5_CACHE=$C/s5 S4_CACHE=$C/s4 S3_CACHE=$C/s3 ./gen-s5.sh                      # layout b2
+S7_CACHE=$C/s7 S4_CACHE=$C/s4 S3_CACHE=$C/s3 ./gen-s7.sh                      # layout a'
+node s8-arith.mjs                                                             # residue check, seconds
+S3_CACHE=$C/s3 S4_CACHE=$C/s4 S5_CACHE=$C/s5 S7_CACHE=$C/s7 ./rerun-s8b.sh    # all node suites on cached proofs, about 2 h
+node summary-t8.mjs                                                           # results/summary-t8.json
+# soundness tables (bench, research/pq-stark/design-t8):
+python3 params8.py && python3 params8.py --asbuilt $V/S2 $V/S4 $V/S5 $V/S7 $V/Z128 $V/P3   # V = prover/vectors
+```
+
+---
+
+## Track 5 (2026-10-29): the first Plonky3 build
 
 Date: 2026-10-29. Status: research. **Not a leaderboard entry.** Nothing is in REGISTRY, results.json or score-history.json, and the website is unchanged. Two internal reviews were done: protocol/soundness (2 majors, 4 minors) and measurement (pass, 7 minors). All findings are fixed or stated as caveats below.
 

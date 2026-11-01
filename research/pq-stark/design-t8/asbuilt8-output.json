@@ -1,0 +1,2356 @@
+{
+ "vectors": [
+  {
+   "file": "P3/both_lookups_zk-PTZ.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "P3/mixed_preprocessed-PT.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "P3/periodic_air_zk-PTZ.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "P3/single_instance-PT.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "P3/three_instances_mixed_sizes-PT.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m1-0-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m1-0-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m1-1073741823-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m1-1073741823-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m1-723295799-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m1-723295799-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m2-0-Z128g_cpow3_lpow8.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m2-1073741823-Z128g_cpow3_lpow8.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S2/m2-723295799-Z128g_cpow3_lpow8.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S4/m1-s4-0-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S4/m1-s4-1-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S4/m1-s4-2-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S5/m2-s5-0-Z128g_cpow3_lpow8.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S5/m2-s5-1-Z128g_cpow3_lpow8.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S7/m1-s7-0-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S7/m1-s7-1-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "S7/m1-s7-2-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128-n1024.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128_zk0.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/both_lookups_zk-Z128g.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/mixed_preprocessed-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/mixed_preprocessed-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/mixed_preprocessed-Z128_zk0.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/mixed_preprocessed-Z128g.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/periodic_air_zk-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/periodic_air_zk-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/periodic_air_zk-Z128_zk0.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/periodic_air_zk-Z128g.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/single_instance-Z128-n1024.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/single_instance-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/single_instance-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/single_instance-Z128_zk0.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/single_instance-Z128g.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128_cap5.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128_zk0.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128g-n1024.json",
+   "shape_agrees": true,
+   "errors": []
+  },
+  {
+   "file": "Z128/three_instances_mixed_sizes-Z128g.json",
+   "shape_agrees": true,
+   "errors": []
+  }
+ ],
+ "groups": {
+  "P3/both_lookups_zk-PTZ.json": {
+   "files": [
+    "P3/both_lookups_zk-PTZ.json"
+   ],
+   "set": {
+    "name": "PTZ",
+    "D": 3,
+    "log_blowup": 2,
+    "max_log_arity": 1,
+    "log_final_poly_len": 2,
+    "Q": 2,
+    "query_pow": 1,
+    "commit_pow": 1,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 4,
+    "salt": 4,
+    "cap": 2,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "mul_lookups(reps=2, local=true, global=true)",
+     "log_n": 5,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 12,
+     "max_deg": 3,
+     "num_lookups": 3,
+     "interactions_per_row": 6,
+     "bus_width": 2,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib_lookups(log_n=5, global=true)",
+     "log_n": 5,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 9,
+     "max_deg": 2,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 2,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": true,
+   "soundness": null,
+   "security_set": false
+  },
+  "P3/mixed_preprocessed-PT.json": {
+   "files": [
+    "P3/mixed_preprocessed-PT.json"
+   ],
+   "set": {
+    "name": "PT",
+    "D": 3,
+    "log_blowup": 2,
+    "max_log_arity": 1,
+    "log_final_poly_len": 2,
+    "Q": 2,
+    "query_pow": 1,
+    "commit_pow": 1,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": false,
+    "rc": 0,
+    "salt": 0,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=4)",
+     "log_n": 4,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 4,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": true,
+   "soundness": null,
+   "security_set": false
+  },
+  "P3/periodic_air_zk-PTZ.json": {
+   "files": [
+    "P3/periodic_air_zk-PTZ.json"
+   ],
+   "set": {
+    "name": "PTZ",
+    "D": 3,
+    "log_blowup": 2,
+    "max_log_arity": 1,
+    "log_final_poly_len": 2,
+    "Q": 2,
+    "query_pow": 1,
+    "commit_pow": 1,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 4,
+    "salt": 4,
+    "cap": 2,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "periodic",
+     "log_n": 6,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 2,
+     "max_deg": 1,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 2
+    }
+   ],
+   "checks_ok": true,
+   "soundness": null,
+   "security_set": false
+  },
+  "P3/single_instance-PT.json": {
+   "files": [
+    "P3/single_instance-PT.json"
+   ],
+   "set": {
+    "name": "PT",
+    "D": 3,
+    "log_blowup": 2,
+    "max_log_arity": 1,
+    "log_final_poly_len": 2,
+    "Q": 2,
+    "query_pow": 1,
+    "commit_pow": 1,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": false,
+    "rc": 0,
+    "salt": 0,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=5)",
+     "log_n": 5,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": true,
+   "soundness": null,
+   "security_set": false
+  },
+  "P3/three_instances_mixed_sizes-PT.json": {
+   "files": [
+    "P3/three_instances_mixed_sizes-PT.json"
+   ],
+   "set": {
+    "name": "PT",
+    "D": 3,
+    "log_blowup": 2,
+    "max_log_arity": 1,
+    "log_final_poly_len": 2,
+    "Q": 2,
+    "query_pow": 1,
+    "commit_pow": 1,
+    "batch_pow": 0,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": false,
+    "rc": 0,
+    "salt": 0,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=4)",
+     "log_n": 4,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 3,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib(log_n=3)",
+     "log_n": 3,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": true,
+   "soundness": null,
+   "security_set": false
+  },
+  "S2/m1-0-Z128.json": {
+   "files": [
+    "S2/m1-0-Z128.json",
+    "S2/m1-1073741823-Z128.json",
+    "S2/m1-723295799-Z128.json",
+    "S4/m1-s4-0-Z128.json",
+    "S4/m1-s4-1-Z128.json",
+    "S4/m1-s4-2-Z128.json"
+   ],
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "m1(depth=30, log_n=10)",
+     "log_n": 10,
+     "width": 17,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 53,
+     "max_deg": 4,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 12,
+     "periodic": 11
+    }
+   ],
+   "checks_ok": true,
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "S2/m1-0-Z128_cap5.json": {
+   "files": [
+    "S2/m1-0-Z128_cap5.json",
+    "S2/m1-1073741823-Z128_cap5.json",
+    "S2/m1-723295799-Z128_cap5.json",
+    "S7/m1-s7-0-Z128_cap5.json",
+    "S7/m1-s7-1-Z128_cap5.json",
+    "S7/m1-s7-2-Z128_cap5.json"
+   ],
+   "set": {
+    "name": "Z128+cap=5",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 5,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "m1(depth=30, log_n=10)",
+     "log_n": 10,
+     "width": 17,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 53,
+     "max_deg": 4,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 12,
+     "periodic": 11
+    }
+   ],
+   "checks_ok": true,
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "S2/m2-0-Z128g_cpow3_lpow8.json": {
+   "files": [
+    "S2/m2-0-Z128g_cpow3_lpow8.json",
+    "S2/m2-1073741823-Z128g_cpow3_lpow8.json",
+    "S2/m2-723295799-Z128g_cpow3_lpow8.json",
+    "S5/m2-s5-0-Z128g_cpow3_lpow8.json",
+    "S5/m2-s5-1-Z128g_cpow3_lpow8.json"
+   ],
+   "set": {
+    "name": "Z128g+cpow=3+lpow=8",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 3,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 8,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "m2.t_hash(log_n=10)",
+     "log_n": 10,
+     "width": 24,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": false,
+     "num_constraints": 44,
+     "max_deg": 4,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 13,
+     "public_values": 0,
+     "periodic": 11
+    },
+    {
+     "name": "m2.t_ctl(log_n=7)",
+     "log_n": 7,
+     "width": 13,
+     "main_next": true,
+     "pre_width": 5,
+     "pre_next": false,
+     "num_constraints": 35,
+     "max_deg": 2,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 13,
+     "public_values": 12,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": true,
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "logup": 174.54,
+     "ali": 174.34,
+     "deep": 155.07,
+     "batch": 135.15,
+     "fold1": 128.87,
+     "fold2": 135.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.7,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/both_lookups_zk-Z128-n1024.json": {
+   "files": [
+    "Z128/both_lookups_zk-Z128-n1024.json"
+   ],
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "mul_lookups(reps=2, local=true, global=true)",
+     "log_n": 10,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 12,
+     "max_deg": 3,
+     "num_lookups": 3,
+     "interactions_per_row": 6,
+     "bus_width": 2,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib_lookups(log_n=10, global=true)",
+     "log_n": 10,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 9,
+     "max_deg": 2,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 2,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": true,
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "logup": 165.86,
+     "ali": 176.28,
+     "deep": 154.53,
+     "batch": 135.52,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/both_lookups_zk-Z128.json": {
+   "files": [
+    "Z128/both_lookups_zk-Z128.json"
+   ],
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "mul_lookups(reps=2, local=true, global=true)",
+     "log_n": 8,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 12,
+     "max_deg": 3,
+     "num_lookups": 3,
+     "interactions_per_row": 6,
+     "bus_width": 2,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib_lookups(log_n=8, global=true)",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 9,
+     "max_deg": 2,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 2,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "logup": 167.57,
+     "ali": 175.99,
+     "deep": 155.95,
+     "batch": 137.83,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/both_lookups_zk-Z128_cap5.json": {
+   "files": [
+    "Z128/both_lookups_zk-Z128_cap5.json"
+   ],
+   "set": {
+    "name": "Z128+cap=5",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 5,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "mul_lookups(reps=2, local=true, global=true)",
+     "log_n": 8,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 12,
+     "max_deg": 3,
+     "num_lookups": 3,
+     "interactions_per_row": 6,
+     "bus_width": 2,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib_lookups(log_n=8, global=true)",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 9,
+     "max_deg": 2,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 2,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "logup": 167.57,
+     "ali": 175.99,
+     "deep": 155.95,
+     "batch": 137.83,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/both_lookups_zk-Z128_zk0.json": {
+   "files": [
+    "Z128/both_lookups_zk-Z128_zk0.json"
+   ],
+   "set": {
+    "name": "Z128+zk=0",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": false,
+    "rc": 0,
+    "salt": 0,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "mul_lookups(reps=2, local=true, global=true)",
+     "log_n": 9,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 12,
+     "max_deg": 3,
+     "num_lookups": 3,
+     "interactions_per_row": 6,
+     "bus_width": 2,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib_lookups(log_n=9, global=true)",
+     "log_n": 9,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 9,
+     "max_deg": 2,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 2,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "logup": 166.57,
+     "ali": 175.99,
+     "deep": 156.95,
+     "batch": 139.18,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/both_lookups_zk-Z128g.json": {
+   "files": [
+    "Z128/both_lookups_zk-Z128g.json"
+   ],
+   "set": {
+    "name": "Z128g",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "mul_lookups(reps=2, local=true, global=true)",
+     "log_n": 6,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 12,
+     "max_deg": 3,
+     "num_lookups": 3,
+     "interactions_per_row": 6,
+     "bus_width": 2,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib_lookups(log_n=6, global=true)",
+     "log_n": 6,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 9,
+     "max_deg": 2,
+     "num_lookups": 1,
+     "interactions_per_row": 1,
+     "bus_width": 2,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 8,
+    "rounds": {
+     "logup": 169.0,
+     "ali": 175.42,
+     "deep": 156.81,
+     "batch": 139.12,
+     "fold1": 130.89,
+     "query": 129.9
+    },
+    "lam_iop": 129.9,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/mixed_preprocessed-Z128.json": {
+   "files": [
+    "Z128/mixed_preprocessed-Z128.json"
+   ],
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=8)",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 8,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 176.92,
+     "deep": 156.44,
+     "batch": 138.67,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/mixed_preprocessed-Z128_cap5.json": {
+   "files": [
+    "Z128/mixed_preprocessed-Z128_cap5.json"
+   ],
+   "set": {
+    "name": "Z128+cap=5",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 5,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=8)",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 8,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 176.92,
+     "deep": 156.44,
+     "batch": 138.67,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/mixed_preprocessed-Z128_zk0.json": {
+   "files": [
+    "Z128/mixed_preprocessed-Z128_zk0.json"
+   ],
+   "set": {
+    "name": "Z128+zk=0",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": false,
+    "rc": 0,
+    "salt": 0,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=9)",
+     "log_n": 9,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 9,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 176.92,
+     "deep": 157.18,
+     "batch": 140.54,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/mixed_preprocessed-Z128g.json": {
+   "files": [
+    "Z128/mixed_preprocessed-Z128g.json"
+   ],
+   "set": {
+    "name": "Z128g",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=6)",
+     "log_n": 6,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 6,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 8,
+    "rounds": {
+     "ali": 176.35,
+     "deep": 157.29,
+     "batch": 139.96,
+     "fold1": 130.89,
+     "query": 129.9
+    },
+    "lam_iop": 129.9,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/periodic_air_zk-Z128.json": {
+   "files": [
+    "Z128/periodic_air_zk-Z128.json"
+   ],
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "periodic",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 2,
+     "max_deg": 1,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 2
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 179.38,
+     "deep": 158.18,
+     "batch": 140.43,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/periodic_air_zk-Z128_cap5.json": {
+   "files": [
+    "Z128/periodic_air_zk-Z128_cap5.json"
+   ],
+   "set": {
+    "name": "Z128+cap=5",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 5,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "periodic",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 2,
+     "max_deg": 1,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 2
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 179.38,
+     "deep": 158.18,
+     "batch": 140.43,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/periodic_air_zk-Z128_zk0.json": {
+   "files": [
+    "Z128/periodic_air_zk-Z128_zk0.json"
+   ],
+   "set": {
+    "name": "Z128+zk=0",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": false,
+    "rc": 0,
+    "salt": 0,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "periodic",
+     "log_n": 9,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 2,
+     "max_deg": 1,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 2
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 179.38,
+     "deep": 158.76,
+     "batch": 142.6,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/periodic_air_zk-Z128g.json": {
+   "files": [
+    "Z128/periodic_air_zk-Z128g.json"
+   ],
+   "set": {
+    "name": "Z128g",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "periodic",
+     "log_n": 6,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 2,
+     "max_deg": 1,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 2
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 8,
+    "rounds": {
+     "ali": 178.81,
+     "deep": 159.03,
+     "batch": 141.72,
+     "fold1": 130.89,
+     "query": 129.9
+    },
+    "lam_iop": 129.9,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/single_instance-Z128-n1024.json": {
+   "files": [
+    "Z128/single_instance-Z128-n1024.json"
+   ],
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=10)",
+     "log_n": 10,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": true,
+   "soundness": {
+    "m": 5,
+    "rounds": {
+     "ali": 178.35,
+     "deep": 156.02,
+     "batch": 137.51,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/single_instance-Z128.json": {
+   "files": [
+    "Z128/single_instance-Z128.json"
+   ],
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=8)",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 178.06,
+     "deep": 157.44,
+     "batch": 139.82,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/single_instance-Z128_cap5.json": {
+   "files": [
+    "Z128/single_instance-Z128_cap5.json"
+   ],
+   "set": {
+    "name": "Z128+cap=5",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 5,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=8)",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 178.06,
+     "deep": 157.44,
+     "batch": 139.82,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/single_instance-Z128_zk0.json": {
+   "files": [
+    "Z128/single_instance-Z128_zk0.json"
+   ],
+   "set": {
+    "name": "Z128+zk=0",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": false,
+    "rc": 0,
+    "salt": 0,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=9)",
+     "log_n": 9,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 178.06,
+     "deep": 158.18,
+     "batch": 142.18,
+     "fold1": 129.18,
+     "query": 129.23
+    },
+    "lam_iop": 129.18,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/single_instance-Z128g.json": {
+   "files": [
+    "Z128/single_instance-Z128g.json"
+   ],
+   "set": {
+    "name": "Z128g",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=6)",
+     "log_n": 6,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 8,
+    "rounds": {
+     "ali": 177.49,
+     "deep": 158.29,
+     "batch": 141.12,
+     "fold1": 130.89,
+     "query": 129.9
+    },
+    "lam_iop": 129.9,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/three_instances_mixed_sizes-Z128.json": {
+   "files": [
+    "Z128/three_instances_mixed_sizes-Z128.json"
+   ],
+   "set": {
+    "name": "Z128",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=9)",
+     "log_n": 9,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 8,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib(log_n=8)",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 4,
+    "rounds": {
+     "ali": 176.98,
+     "deep": 156.64,
+     "batch": 139.85,
+     "fold1": 129.9,
+     "fold2": 132.9,
+     "query": 127.92
+    },
+    "lam_iop": 127.92,
+    "binding": "query",
+    "lam": 127.92,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/three_instances_mixed_sizes-Z128_cap5.json": {
+   "files": [
+    "Z128/three_instances_mixed_sizes-Z128_cap5.json"
+   ],
+   "set": {
+    "name": "Z128+cap=5",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 5,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=9)",
+     "log_n": 9,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 8,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib(log_n=8)",
+     "log_n": 8,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 4,
+    "rounds": {
+     "ali": 176.98,
+     "deep": 156.64,
+     "batch": 139.85,
+     "fold1": 129.9,
+     "fold2": 132.9,
+     "query": 127.92
+    },
+    "lam_iop": 127.92,
+    "binding": "query",
+    "lam": 127.92,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/three_instances_mixed_sizes-Z128_zk0.json": {
+   "files": [
+    "Z128/three_instances_mixed_sizes-Z128_zk0.json"
+   ],
+   "set": {
+    "name": "Z128+zk=0",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 8,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": false,
+    "rc": 0,
+    "salt": 0,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=10)",
+     "log_n": 10,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 9,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib(log_n=9)",
+     "log_n": 9,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 4,
+    "rounds": {
+     "ali": 176.98,
+     "deep": 157.38,
+     "batch": 141.85,
+     "fold1": 129.9,
+     "fold2": 132.9,
+     "query": 127.92
+    },
+    "lam_iop": 127.92,
+    "binding": "query",
+    "lam": 127.92,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/three_instances_mixed_sizes-Z128g-n1024.json": {
+   "files": [
+    "Z128/three_instances_mixed_sizes-Z128g-n1024.json"
+   ],
+   "set": {
+    "name": "Z128g",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=10)",
+     "log_n": 10,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 9,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib(log_n=9)",
+     "log_n": 9,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 4,
+    "rounds": {
+     "ali": 176.99,
+     "deep": 155.66,
+     "batch": 137.85,
+     "fold1": 127.9,
+     "fold2": 132.09,
+     "fold3": 137.31,
+     "query": 127.92
+    },
+    "lam_iop": 127.9,
+    "binding": "fold1",
+    "lam": 127.9,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  },
+  "Z128/three_instances_mixed_sizes-Z128g.json": {
+   "files": [
+    "Z128/three_instances_mixed_sizes-Z128g.json"
+   ],
+   "set": {
+    "name": "Z128g",
+    "D": 3,
+    "log_blowup": 9,
+    "max_log_arity": 3,
+    "log_final_poly_len": 5,
+    "Q": 24,
+    "query_pow": 24,
+    "commit_pow": 2,
+    "batch_pow": 20,
+    "ood_pow": 0,
+    "lookup_pow": 0,
+    "zk": true,
+    "rc": 3,
+    "salt": 2,
+    "cap": 0,
+    "digest": 32
+   },
+   "tables": [
+    {
+     "name": "fib(log_n=7)",
+     "log_n": 7,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    },
+    {
+     "name": "mul(reps=2)",
+     "log_n": 6,
+     "width": 7,
+     "main_next": true,
+     "pre_width": 0,
+     "pre_next": false,
+     "num_constraints": 6,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 0,
+     "periodic": 0
+    },
+    {
+     "name": "fib(log_n=6)",
+     "log_n": 6,
+     "width": 2,
+     "main_next": true,
+     "pre_width": 1,
+     "pre_next": true,
+     "num_constraints": 5,
+     "max_deg": 2,
+     "num_lookups": 0,
+     "interactions_per_row": 0,
+     "bus_width": 0,
+     "public_values": 3,
+     "periodic": 0
+    }
+   ],
+   "checks_ok": false,
+   "soundness": {
+    "m": 6,
+    "rounds": {
+     "ali": 176.3,
+     "deep": 157.29,
+     "batch": 140.14,
+     "fold1": 130.18,
+     "fold2": 133.6,
+     "query": 129.23
+    },
+    "lam_iop": 129.23,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "security_set": true
+  }
+ },
+ "hand_tables": {
+  "M1": [],
+  "M2": []
+ },
+ "dependence": {
+  "M1 / Z128": {
+   "rounds": {
+    "ali": 174.94,
+    "deep": 155.17,
+    "batch": 136.33,
+    "fold1": 128.06,
+    "query": 128.7
+   },
+   "margins": {
+    "batch": 8.33,
+    "fold1": 0.06
+   },
+   "rollin_rounds": [],
+   "batch_independent": 142.87
+  },
+  "M2 / Z128-g cpow 3": {
+   "rounds": {
+    "logup": 174.54,
+    "ali": 174.34,
+    "deep": 155.07,
+    "batch": 135.15,
+    "fold1": 128.87,
+    "fold2": 135.06,
+    "query": 128.7
+   },
+   "margins": {
+    "batch": 7.15,
+    "fold1": 0.87,
+    "fold2": 7.06
+   },
+   "rollin_rounds": [
+    "fold1"
+   ],
+   "batch_independent": 141.87
+  }
+ }
+}

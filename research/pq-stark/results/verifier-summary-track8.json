@@ -1,0 +1,540 @@
+{
+ "track": 8,
+ "date": "2026-11-01",
+ "build": "groth16_cashscript wip/stark-usable: scripts at 12d47d4 (S8b residue fix), results at c47d104/726ea25",
+ "protocol": "p3-batch-stark at Plonky3 0d80373, SHA-256 / Goldilocks / cubic trinomial, hiding two-adic FRI, wire format p3b-v1",
+ "vm": "libauth 3.1.0-next.8 (BCH 2026); BCHN-adjusted op-cost = libauth op-cost + OP_DEFINE body bytes (Track 8a)",
+ "statements": {
+  "M1": "depth-30 Merkle membership + nullifier + CTX; one table 2^10 x 17, 53 constraints, degree 4, 8 ZK chunks",
+  "M2": "M1 split into T_hash (2^10) + T_ctl (2^7) joined by one LogUp bus (width 13), preprocessed columns"
+ },
+ "parameters": {
+  "Z128": {
+   "logBlowup": 9,
+   "D": 3,
+   "fold": [
+    3
+   ],
+   "finalPolyLen": 256,
+   "queries": 24,
+   "powQuery": 24,
+   "powCommit": 2,
+   "powBatch": 20,
+   "zk": true,
+   "cap": "0 (b, b2) or 5 (a')"
+  },
+  "Z128-g (M2)": {
+   "logBlowup": 9,
+   "D": 3,
+   "fold": [
+    3,
+    3
+   ],
+   "finalPolyLen": 32,
+   "queries": 24,
+   "powQuery": 24,
+   "powCommit": 3,
+   "powBatch": 20,
+   "powLookup": 8,
+   "zk": true,
+   "cap": 0
+  }
+ },
+ "soundness": {
+  "label": "JB, powers-batching adaptation, unpublished",
+  "source": "SOUNDNESS-T8.md §1, params8.py --asbuilt (design 6050eaf)",
+  "M1": {
+   "lambdaIOP": 128.06,
+   "binding": "fold1",
+   "lambda": 128,
+   "strictDigest": 127.21
+  },
+  "M2": {
+   "lambdaIOP": 128.7,
+   "binding": "query",
+   "lambda": 128,
+   "strictDigest": 127.21
+  },
+  "quantumCollisionBits": 85,
+  "adaptationMargins": {
+   "M1batch": 8.33,
+   "M2batch": 7.15,
+   "M2rollInFold1": 0.87
+  }
+ },
+ "layouts": {
+  "b (M1, cap 0, one input)": {
+   "regimeNeeded": "per-input unlocking, bytecode and stack-item limits raised to 100,000 B; tx size unchanged",
+   "statements": 24,
+   "inputs": 1,
+   "transactions": 1,
+   "proofBytes": [
+    71344,
+    74928
+   ],
+   "unlockingBytes": [
+    91388,
+    94968
+   ],
+   "txBytes": [
+    91477,
+    95057
+   ],
+   "redeemBytes": 19024,
+   "opCostBchnAdjusted": [
+    35528878,
+    36043226
+   ],
+   "opCostBchnAdjustedMean": 35833248,
+   "opCostConsensus": [
+    35063244,
+    35548920
+   ],
+   "budgetPctOneInput": [
+    47.4,
+    48.6
+   ],
+   "budgetPctBchSpec": [
+    42.9,
+    43.8
+   ],
+   "accepted": {
+    "oneInput": "24/24",
+    "bchSpec": "24/24",
+    "today": "0/24"
+   },
+   "vsModel": {
+    "params8": 28255740,
+    "deviationPct": 26.8
+   }
+  },
+  "b2 (M1, cap 0, two inputs)": {
+   "regimeNeeded": "per-input unlocking, bytecode and stack-item limits raised to 100,000 B; tx size 100,000 B unchanged",
+   "statements": 24,
+   "inputs": 2,
+   "transactions": 1,
+   "queriesInput0": 12,
+   "proofBytes": [
+    71344,
+    74928
+   ],
+   "libBytes": 19468,
+   "unlockingBytes": [
+    [
+     61919,
+     63555
+    ],
+    [
+     33335,
+     35245
+    ]
+   ],
+   "txBytes": [
+    96153,
+    98321
+   ],
+   "opCostBchnAdjusted": [
+    [
+     27160321,
+     27379655
+    ],
+    [
+     19562843,
+     19824996
+    ]
+   ],
+   "budgetPctOneInput": [
+    [
+     53.8,
+     54.8
+    ],
+    [
+     70.2,
+     73.3
+    ]
+   ],
+   "budgetPctBchSpec": [
+    [
+     46.5,
+     47.2
+    ],
+    [
+     54.8,
+     56.4
+    ]
+   ],
+   "accepted": {
+    "perInputRaised": "24/24",
+    "bchSpec": "24/24",
+    "wholeTxAt100000": "24/24",
+    "wholeTxAt200000": "24/24",
+    "today": "0/24"
+   }
+  },
+  "b2 (M2, cap 0, two inputs)": {
+   "regimeNeeded": "per-input limits raised to 100,000 B and tx size raised (passes at 200,000 B)",
+   "statements": 8,
+   "inputs": 2,
+   "transactions": 1,
+   "queriesInput0": 9,
+   "proofBytes": [
+    121350,
+    124710
+   ],
+   "libBytes": 27759,
+   "unlockingBytes": [
+    [
+     79778,
+     82436
+    ],
+    [
+     75783,
+     77391
+    ]
+   ],
+   "txBytes": [
+    156384,
+    159749
+   ],
+   "opCostBchnAdjusted": [
+    [
+     35204471,
+     35518576
+    ],
+    [
+     33203776,
+     33505565
+    ]
+   ],
+   "budgetPctOneInput": [
+    [
+     53.8,
+     55.1
+    ],
+    [
+     54.1,
+     54.8
+    ]
+   ],
+   "budgetPctBchSpec": [
+    [
+     48,
+     49
+    ],
+    [
+     47.9,
+     48.4
+    ]
+   ],
+   "accepted": {
+    "perInputRaised": "8/8",
+    "bchSpec": "8/8",
+    "wholeTxAt100000": "0/8",
+    "wholeTxAt200000": "8/8",
+    "today": "0/8"
+   }
+  },
+  "a' (M1, cap 5, today's rules, 1tx)": {
+   "regimeNeeded": "none: today's standard rules",
+   "statements": 24,
+   "inputs": 12,
+   "transactions": 1,
+   "txBytes": [
+    [
+     98690,
+     98690
+    ]
+   ],
+   "totalBytes": [
+    98690,
+    98690
+   ],
+   "opCostBchnAdjustedTotal": [
+    64092057,
+    64207225
+   ],
+   "maxInputBudgetPct": [
+    90.8,
+    91.01
+   ],
+   "perRole": {
+    "HEAD": {
+     "unlocking": [
+      6454,
+      6454
+     ],
+     "opBchnAdjusted": [
+      1306276,
+      1307971
+     ],
+     "pct": [
+      25.14,
+      25.17
+     ],
+     "hashIters": 514
+    },
+    "CODE1": {
+     "unlocking": [
+      9322,
+      9322
+     ],
+     "opBchnAdjusted": [
+      5469141,
+      5475822
+     ],
+     "pct": [
+      73.02,
+      73.1
+     ],
+     "hashIters": 513
+    },
+    "CODE2": {
+     "unlocking": [
+      9316,
+      9316
+     ],
+     "opBchnAdjusted": [
+      4978804,
+      4987495
+     ],
+     "pct": [
+      66.51,
+      66.63
+     ],
+     "hashIters": 513
+    },
+    "FIN": {
+     "unlocking": [
+      6462,
+      6462
+     ],
+     "opBchnAdjusted": [
+      3754751,
+      3766116
+     ],
+     "pct": [
+      72.17,
+      72.39
+     ],
+     "hashIters": 513
+    },
+    "QRY": {
+     "unlocking": [
+      8322,
+      8322
+     ],
+     "opBchnAdjusted": [
+      6066097,
+      6088611
+     ],
+     "pct": [
+      90.67,
+      91.01
+     ],
+     "hashIters": 688
+    }
+   },
+   "accepted": "24/24"
+  },
+  "a' (M1, cap 5, today's rules, 2tx)": {
+   "regimeNeeded": "none: today's standard rules",
+   "statements": 24,
+   "inputs": 16,
+   "transactions": 2,
+   "txBytes": [
+    [
+     91059,
+     91059
+    ],
+    [
+     40497,
+     40497
+    ]
+   ],
+   "totalBytes": [
+    131556,
+    131556
+   ],
+   "opCostBchnAdjustedTotal": [
+    68901715,
+    69027445
+   ],
+   "maxInputBudgetPct": [
+    90.89,
+    91.1
+   ],
+   "perRole": {
+    "HEAD": {
+     "unlocking": [
+      6454,
+      6454
+     ],
+     "opBchnAdjusted": [
+      520544,
+      1312673
+     ],
+     "pct": [
+      10.02,
+      25.26
+     ],
+     "hashIters": 521
+    },
+    "CODE1": {
+     "unlocking": [
+      9503,
+      9528
+     ],
+     "opBchnAdjusted": [
+      234248,
+      5482278
+     ],
+     "pct": [
+      3.07,
+      71.62
+     ],
+     "hashIters": 519
+    },
+    "CODE2": {
+     "unlocking": [
+      9497,
+      9522
+     ],
+     "opBchnAdjusted": [
+      234242,
+      4993951
+     ],
+     "pct": [
+      3.07,
+      65.28
+     ],
+     "hashIters": 519
+    },
+    "FIN": {
+     "unlocking": [
+      6462,
+      6462
+     ],
+     "opBchnAdjusted": [
+      3753469,
+      3772366
+     ],
+     "pct": [
+      72.15,
+      72.51
+     ],
+     "hashIters": 519
+    },
+    "QRY": {
+     "unlocking": [
+      8322,
+      8322
+     ],
+     "opBchnAdjusted": [
+      6066372,
+      6094861
+     ],
+     "pct": [
+      90.67,
+      91.1
+     ],
+     "hashIters": 694
+    }
+   },
+   "accepted": "24/24"
+  }
+ },
+ "sweeps": {
+  "S4 b production": {
+   "file": "results/test-b.json",
+   "files": 26,
+   "cases": 2929,
+   "unexpected": 0,
+   "notRunOnChain": 0,
+   "encoderOnly": 0,
+   "notApplicable": 26,
+   "skippedFiles": 0
+  },
+  "S4 b harness": {
+   "file": "results/test-b-harness.json",
+   "files": 36,
+   "cases": 3309,
+   "unexpected": 0,
+   "notRunOnChain": 33,
+   "encoderOnly": 1,
+   "notApplicable": 33,
+   "skippedFiles": 2
+  },
+  "S5/S6 b2 M2 + Plonky3": {
+   "file": "results/test-b2-m2p3.json",
+   "files": 63,
+   "cases": 8252,
+   "unexpected": 0,
+   "notRunOnChain": 59,
+   "encoderOnly": 0,
+   "notApplicable": 17,
+   "skippedFiles": 3
+  },
+  "S5/S6 b2 M1 harness": {
+   "file": "results/test-b2-m1.json",
+   "files": 36,
+   "cases": 2558,
+   "unexpected": 0,
+   "notRunOnChain": 35,
+   "encoderOnly": 1,
+   "notApplicable": 33,
+   "skippedFiles": 2
+  },
+  "S5/S6 b2 production": {
+   "file": "results/test-b2-prod.json",
+   "files": 36,
+   "cases": 1030,
+   "unexpected": 0,
+   "notRunOnChain": 0,
+   "encoderOnly": 0,
+   "notApplicable": 0,
+   "skippedFiles": 0
+  },
+  "S7 a' 1 tx": {
+   "file": "results/test-a-1tx.json",
+   "files": 26,
+   "cases": 3765,
+   "unexpected": 0,
+   "notRunOnChain": 0,
+   "encoderOnly": 55,
+   "notApplicable": 26,
+   "skippedFiles": 2
+  },
+  "S7 a' 2 tx": {
+   "file": "results/test-a-2tx.json",
+   "files": 26,
+   "cases": 4181,
+   "unexpected": 0,
+   "notRunOnChain": 0,
+   "encoderOnly": 55,
+   "notApplicable": 26,
+   "skippedFiles": 2
+  },
+  "S7 a' harness": {
+   "file": "results/test-a-harness.json",
+   "files": 36,
+   "cases": 2387,
+   "unexpected": 0,
+   "notRunOnChain": 35,
+   "encoderOnly": 69,
+   "notApplicable": 33,
+   "skippedFiles": 2
+  }
+ },
+ "agreement": {
+  "rustVsJs": {
+   "cases": 14027,
+   "disagreements": 0,
+   "transcriptsIdentical": "128/128"
+  },
+  "modelVsReference": {
+   "S4": 3762,
+   "S5S6": 17911,
+   "disagreements": 0
+  }
+ }
+}
