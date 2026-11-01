@@ -24,7 +24,8 @@ every input ≤ 10,000 B unlocking, every tx ≤ 100,000 B.
   - **Policy mode:** a separate fresh node with `acceptnonstdtxn=0` and the default relay policy. The source outputs
     are funded in a mined block, then `testmempoolaccept` runs on each workload tx. Multi-tx STARK plans are replayed
     as the real chain: tx k ≥ 1 spends the thread NFT that the mined tx0 created. Each tx is mined after the test, so
-    every parent was confirmed; acceptance with unconfirmed ancestors (a mempool chain) was not tested.
+    every parent was confirmed. Acceptance with unconfirmed parents (a mempool chain) is tested separately, see
+    "Unconfirmed chains" below.
 - **Workloads.**
   - `export-plonk.mjs` (groth16_cashscript main 3af2ad8, `research/plonk-kzg/verifier`, chain.mjs/chaintest.mjs
     logic): per circuit, the 5 valid proofs, 8 tampered proofs spread over the list, 12 chain manipulations, and 4
@@ -35,6 +36,7 @@ every input ≤ 10,000 B unlocking, every tx ≤ 100,000 B.
     sound-native chain.
 - Runs:
   - `raw/nc1-*`: full timing run (195 workloads) and policy run (57).
+  - `raw/nc3-m2-*`: unconfirmed-chain run (mempool mode), see "Unconfirmed chains".
   - `raw/nc2-*`: a second fresh timing node, the valid workloads (41 txs) plus 4 `manip:extra foreign input` rejects, 45 in all. **Run 2 is the timing reference**, because
     run 1's merkle16 reps were noisy (spread up to 52%). Run 2 / run 1 per-tx medians: 0.87–1.01. The verdicts are
     identical. Run 2 was started by hand on node `nc2-t` with the same workload files as run 1 (not via `run.sh`), so
@@ -89,6 +91,41 @@ Notes:
 So BCHN's op-cost equals libauth's plus the executed OP_DEFINE body bytes. It is exact to within one unlocking byte
 (800 op-cost) on both bases, in all four circuits. libauth 3.1.0-next.8 alone would accept txs that BCHN rejects. The
 reports' "BCHN-adjusted" model is right and necessary.
+
+## Unconfirmed chains (mempool mode, 2026-11-01)
+
+Branch `wip/node-check-mempool`. Question: can a user broadcast a multi-transaction STARK chain at once, with
+each parent still unconfirmed?
+
+Method: `nc.ts mempool` on a fresh `POLICY=1` node, `nc3-m2` (acceptnonstdtxn=0, default relay policy, listen=0,
+connect=0, rpcbind 127.0.0.1). The workload files are the same as run 1 (sha256 prefixes in `raw/nc3-m2-env.txt`).
+For each group, the non-chained inputs are funded in one mined block. Then `testmempoolaccept` and
+`sendrawtransaction` run on tx0, tx1 (and tx2) in order, with no block in between. Then `generatetoaddress 1` is
+called (BCHN's own block assembler), and the block's tx list and the empty mempool are checked. `getblocktemplate`
+cannot be used: it refuses with "Bitcoin is not connected!" on a node with connect=0. A first attempt (`nc3-m`) hit
+that refusal and was discarded; its sends had also all succeeded. The chain shape is a fan-out: every tx k ≥ 1
+spends one thread NFT output of tx0. So fib-S128z has 1 parent and 2 children, and the depth is 2.
+
+| vector | send tx0 | send tx1 (parent unconfirmed) | send tx2 (parent unconfirmed) | mined in 1 block | chain bytes | chain fee (rate) |
+|---|---|---|---|---|--:|--:|
+| mimc-S128-0 | accepted | accepted | – | yes (block 223: coinbase + 2) | 123,452 | 158,000 sat (1.280 sat/B) |
+| fib-S100z-zkmin-0 | accepted | accepted | – | yes (block 225: coinbase + 2) | 136,556 | 238,000 sat (1.743 sat/B) |
+| fib-S128z-zkmin-0 | accepted | accepted | accepted | yes (block 227: coinbase + 3) | 234,553 | 327,000 sat (1.394 sat/B) |
+
+- Every per-tx `testmempoolaccept` was `allowed` before its send. Per-tx rates were 1.20–1.80 sat/B. The mempool was
+  empty after each block.
+- A child submitted before its parent is rejected with `missing-inputs`. Broadcasting means sending in order:
+  tx0 first, then its children. Batch `testmempoolaccept` of the whole chain is not available: BCHN answers
+  "Array must contain exactly one raw transaction for now".
+- **Chain limits did not constrain anything.** BCHN 29.1.0 has no `-limitancestor*`/`-limitdescendant*` options
+  (`bitcoind -help -help-debug`). Its `getmempoolentry` has no ancestor or descendant fields, only
+  `depends`/`spentby`. No too-long-mempool-chain or ancestor-limit reason appeared. The chains here are at most
+  depth 2 with 3 txs, about 235 kB, far below `maxmempool` (320 MB).
+- PLONK was not re-run: each chain is a single tx with confirmed inputs, which the policy run above already covers.
+
+Reproduce: `POLICY=1 node.sh start NAME 9`, then
+`npx tsx nc.ts mempool --node NAME --src json:<data>/stark-<vector>.json ... --out raw/NAME-mempool.jsonl`, then
+`node.sh stop NAME`.
 
 ## Discrepancies and findings
 
