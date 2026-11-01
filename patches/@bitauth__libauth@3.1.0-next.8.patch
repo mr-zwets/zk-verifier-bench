@@ -1,0 +1,15 @@
+diff --git a/build/lib/vm/instruction-sets/bch/2026/bch-2026-functions.js b/build/lib/vm/instruction-sets/bch/2026/bch-2026-functions.js
+index 1a01a1e40f85cec53e65a76e6cacad8133a62cc4..d92556f95531922ed622a2c1a8e0fb484ef2113d 100644
+--- a/build/lib/vm/instruction-sets/bch/2026/bch-2026-functions.js
++++ b/build/lib/vm/instruction-sets/bch/2026/bch-2026-functions.js
+@@ -16,6 +16,10 @@ export const createOpDefine = ({ maximumFunctionIdentifierLength = ConsensusBch2
+         finalState.functionTable[functionTableKey] = functionBody;
+         // eslint-disable-next-line functional/no-expression-statements, functional/immutable-data
+         finalState.functionCount += 1;
++        // CHIP-2025-05 Functions, OP_DEFINE clarification 4 (as BCHN): the body is charged as stack-pushed bytes.
++        // Temporary until libauth fixes bitauth/libauth#166.
++        // eslint-disable-next-line functional/no-expression-statements, functional/immutable-data
++        finalState.metrics.stackPushedBytes += functionBody.length;
+         return finalState;
+     });
+ });
