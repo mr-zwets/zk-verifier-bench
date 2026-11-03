@@ -284,8 +284,22 @@ plain core as positive controls.
 - Runs: `raw/t12a-*` (groth16_cashscript c2894d3, inputs funded at 100,000 sat: 88 pinned workloads, all as expected;
   the 2 duplicated-payout runs failed `bad-txns-in-belowout` before the script) and `raw/t12b-*` (043d1b7, 200,000 sat,
   adds `risc0-v3`). Both use a fresh timing node and a fresh POLICY=1 node, both stopped; load average 0.5–1.3.
+- **Current run: `raw/t12c-*`** (groth16_cashscript a7edd02, the review fix round: role 2 rejects outputs paying the
+  covenant's own locking, plus self-payment and input-mixing rejection runs). Fresh timing and POLICY=1 nodes, both
+  stopped; load average 0.6–2.0. **108 pinned workloads, all as expected, BCHN = libauth on every one.**
 
-`t12b`: **92 pinned workloads, all as expected, BCHN = libauth on every one.**
+| workload (`t12c`) | n | BCHN block | testmempoolaccept (POLICY=1) | Verify ms/tx | worst input std + DEFINE |
+|---|--:|---|---|--:|--:|
+| SP1 template controls (test key): exact statement (27,604 B), 1 output (27,634 B), re-randomized proof (27,609 B) | 3 | accept | 3/3 allowed | 3.487–3.503 | 93.99–94.00% |
+| RISC Zero template controls (test key) (27,692–27,738 B) | 3 | accept | 3/3 allowed | 3.471–3.479 | 93.97–94.00% |
+| real proofs re-randomized, plain core (sp1-v5 silvana-add, risc0 V5_0, risc0-v3 V3_0) | 3 | accept | 3/3 allowed | 3.470–3.475 | 94.00% |
+| test-key rejections | 84 | 84/84 rejected (`blk-bad-inputs`) | timing node: `mandatory-script-verify-flag-failed` (57 NUMEQUALVERIFY: covenant + GRAPH input count; 7 OP_VERIFY statement range; 4 OP_VERIFY self-payment guard; 12 EQUALVERIFY mixed spends; 2 OP_SPLIT + 2 EQUALVERIFY permuted inputs) | – | – |
+| real-key rejections (real proofs under the template) | 15 | 15/15 rejected (`blk-bad-inputs`, NUMEQUALVERIFY at the covenant) | – | – | – |
+| reference: bn-native-sound | 1 | accept | fee only; allowed at 2 sat/B | 3.481 | 94.20% |
+
+Earlier run on the pre-fix build:
+
+`t12b` (pre-fix build, superseded by `t12c`): **92 pinned workloads, all as expected, BCHN = libauth on every one.**
 
 | workload | n | BCHN block | testmempoolaccept (POLICY=1) | Verify ms/tx | worst input std + DEFINE |
 |---|--:|---|---|--:|--:|
