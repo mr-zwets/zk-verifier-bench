@@ -66,14 +66,28 @@ Constants, as in params5.py (`A0`, `B1`) and params8.py:
 - A0(N) = (m + ½)^7·N² / (3ρ^{3/2}·q)
 - B1(N) = (2m + 1)(N + 1) / (√ρ·q)
 - Notation used below: **ε_J(n, Mn) := max((m + ½)^7·n² / (3ρ^{3/2}), (2m + 1)(Mn + 1)/√ρ) / q.**
+- *Which leading constant.* [BCIKS20] rev. 3 prints the A-term two ways: Thm 7.2 and eq. (8.8) have
+  (m + ½)^7·n² / (**3**ρ^{3/2}), while ε_C in Lemma 8.2 and ε_FRI in Thm 8.3 have (m + ½)^7·n² / (**2**ρ^{3/2}). We use
+  the theorem statement (3), because Lemma 1 and Theorem 2 apply Thm 7.2 directly and never go through Lemma 8.2's
+  ε_C. Params5/params8 and [ADK] ε_3 use the same 3. The reading with 2 costs log2(3/2) = 0.585 bits on every
+  A0-dominated round. That matters for one figure only: M1 fold1 (128.06, a plain fold that does not depend on this
+  document) has 0.06 bits of margin and would be 127.48 under the 2 reading; commit PoW 2 → 3 (no byte cost) restores
+  it. The next tightest A0-dominated round, M2 fold1 (128.87), would be 128.29, still above 128; the query rounds
+  (128.70) do not involve A0.
 
 ## 2. Setting and notation
 
 **Field and codes.**
 - p = 2^64 − 2^32 + 1 (Goldilocks). The challenges live in F_q with q = p³ (cubic trinomial extension), so
   log2 q = 191.99999999899.
-- For an LDE height h, D_h ⊂ F_p is the size-N_h = 2^h coset on which Plonky3 evaluates. V_h = RS[F_q, D_h, K_h] is
-  the Reed–Solomon code of polynomials of degree < K_h = ρ·N_h, with ρ = 2^−9 (blowup 2^9).
+- For an LDE height h, D_h := H_h ⊂ F_p is the multiplicative **subgroup** of size N_h = 2^h. Plonky3 evaluates on
+  the coset g·H_h (g = `GENERATOR`), but every word is read as G(y) := F(g·y) on H_h (`two_adic_pcs.rs` module doc,
+  lines 1–14; `verifier.rs` around line 1299 sets x = GENERATOR·ω^rev; `fold_row` folds over subgroup points). So
+  u_{h,j}(y) denotes the DEEP quotient evaluated at g·y. The map F ↦ F(g·) preserves degree, so V_h and every agreement
+  value are unchanged, and all words of every height live on the subgroups H_h, which fold onto each other
+  (y ↦ y^a maps H_h onto H_{h − log a}). Without this reading, folding g·H_20 by x ↦ x^8 would give g^8·H_17, not the
+  domain g·H_17 of the roll-in word.
+- V_h = RS[F_q, D_h, K_h] is the Reed–Solomon code of polynomials of degree < K_h = ρ·N_h, with ρ = 2^−9 (blowup 2^9).
 - These are [BCIKS20]'s conventions: dimension k + 1 = K_h and rate ρ = (k + 1)/n.
 - The words u_j are F_q-valued because the DEEP quotients use ζ ∈ F_q. The code is taken over F_q with D_h ⊂ F_p ⊂ F_q,
   so the theorems apply directly with field F_q (no extension-field remark is needed).
@@ -100,6 +114,11 @@ both statements), so α0 = 0.048614 and the proximity is 1 − α0 = 0.951386. T
   - The hiding PCS adds `num_random_codewords` random columns to each committed matrix (`hiding_pcs.rs`, lines
     270–276), so they count in t_h.
   - The powers are contiguous from α′^0 up to α′^{t_h − 1}, so ro_h is a curve of degree exactly t_h − 1.
+  - Not modelled: `open_input` (around lines 1456–1464) also requires the reduced opening to be zero at
+    height == log_blowup (a height-1 trace), relying on α′ against cancellation. That is a separate Schwartz–Zippel
+    event, about (t − 1)/q for powers, which Theorem 2 does not cover. It is unreachable for M1/M2, whose input heights
+    are 2^20 and 2^17. A future VK with a height-1 matrix must either be charged (t − 1)/q for it or be rejected by the
+    generator.
 - *Order.* All u_{h,j} are fixed before α′: the opened values are observed in transcript step 5, and α′ is drawn in
   step 6 behind the batch PoW (SOUNDNESS-T8 §4).
 - *Commit phase.* For r = 0, …, R − 1:
@@ -110,8 +129,7 @@ both statements), so α0 = 0.048614 and the proximity is 1 − α0 = 0.951386. T
   - The roll-in factor is `beta.exp_power_of_2(log_arity)` = β^a, at `verifier.rs` around lines 1094–1100.
   - Fold_a(f; β)(y) is the interpolant of f on the a-coset over y, evaluated at β (`two_adic_pcs.rs` `fold_row`,
     Lagrange or IFFT at β). Writing f(x) = Σ_{i<a} x^i·f_i(x^a), this is Σ_{i<a} β^i·f_i(y): a curve of degree a − 1
-    in β with components f_i : D_{H_{r+1}} → F_q. (Plonky3 indexes the fold over the subgroup; this is the
-    degree-preserving reparametrization x ↦ s·x of the coset and changes nothing below.)
+    in β with components f_i : D_{H_{r+1}} → F_q, all on subgroups (see "Field and codes").
   - The final word f^(R) is sent as coefficients of degree < K_{H_R}, so f^(R) ∈ V_{H_R}.
 - *Shape conditions.* These are enforced by `vkxN` at generation time (SOUNDNESS-T8 Lemma 4):
   - every h ∈ H \ {h0} equals H_i for some 1 ≤ i ≤ R;
@@ -150,8 +168,9 @@ denominator M, and let α ≥ α0. If corr-agree_µ(u_0, …, u_l; V) ≤ α, th
 *Proof.*
 - Let S = {z : agree_µ(u_z, V) > α}, with u_z = Σ z^j·u_j. If S is empty there is nothing to prove.
 - Otherwise let α* := min_{z∈S} agree_µ(u_z, V). Then α* > α ≥ α0, and S = {z : agree_µ(u_z, V) ≥ α*}.
-- If |S| exceeded the right-hand side of (7.1), Thm 7.2 at threshold α* would give correlated µ-agreement ≥ α* > α,
-  which contradicts the hypothesis.
+- The right-hand side of (7.1) is independent of α (it depends only on m, n, M, l and ρ), so the same bound applies
+  at threshold α*. If |S| exceeded it, Thm 7.2 at α* would give correlated µ-agreement ≥ α* > α, which contradicts
+  the hypothesis. (This step does not carry over to bounds that depend on the proximity, such as [BCHKS25] Thm 4.2.)
 - Hence |S| ≤ l·q·ε_J(n, Mn), and the probability is |S|/q. ∎
 
 **Remark (what "the adaptation" was).** Track 5 §2.1 described the step as "replacing Thm 7.4 by Thm 7.2 inside the
@@ -308,6 +327,12 @@ transcript up to the opened values is doomed for DEEP-ALI, then pre is doomed**,
 - If every height's tuple had correlated agreement > α0, then every table's tuple would too, by (F2). [ADK]'s DEEP
   step then makes every table's claimed openings consistent with list codewords, so the per-table DEEP state is not
   doomed.
+- **Same radius.** [ADK]'s DEEP-round list L must be the Johnson list at the same proximity α0 = √ρ(1 + 1/2m) that
+  the FRI chain uses; otherwise "DEEP not doomed" and "some height's tuple has correlated agreement ≤ α0" would refer
+  to different radii. In Track 8 it is: `params8.rounds()` passes one m to every round, and `term_deep` / `term_ali`
+  compute L = `p5.list_size_adk(m, ρ, N_h)` ([ADK] Thm 2 item 1, L = m/(ρ − 2m/|D|)) with that m. The optimum is m = 5
+  for both statements (asbuilt8-output.txt, "m=5"), so the DEEP rows 155.17 (M1) and 155.07 (M2) are at
+  α0 = √ρ(1 + 1/10), the same α0 as Lemma 1 and Theorem 2.
 - **Status of (I): argued, inherited, not proved here.** It rests on [ADK] App. B.1 and on [Sta21] Thm 5, which we
   could not open in this session, and on Track 8 Lemmas 1, 2 and 5. Powers batching cannot affect (I), because (I)
   is about objects fixed before α′.
@@ -353,9 +378,10 @@ Track 8 are unaffected and are not repeated.
 | batching, Track 8 charge (Σ_h, N_max, A0 + B1) | **136.33** (raw 116.33) | **135.15** (raw 115.15) |
 | batching, Theorem 2 exact (max_h, own N_h) | 136.33 (raw 116.33) | 135.89 (raw 115.89; per height 115.89 at 2^20, 122.48 at 2^17) |
 | batching with independent coefficients, for comparison | 142.87 | 141.87 (Track 8 accounting) |
-| cost of powers (log2(t − 1) under Track 8's charge) | 6.54 | 6.71 |
+| cost of powers (independent minus powers, rounded values as in asbuilt8-output.txt) | 6.54 | 6.72 |
 | fold1, Track 8 charge | **128.06** (plain, l = 7) | **128.87** (roll-in, l = 8) |
 | fold1, Theorem 2 exact | 128.06 | 128.87 |
+| fold2, Track 8 charge = Theorem 2 bound (T1) | (none: one fold) | 135.06 (plain, 2^17 → 2^14, l = 7; unchanged) |
 | query (√ρ(1 + 1/2m))^24 + PoW 24 | 128.70 | **128.70** |
 | λ_IOP (min over all Track 8 rounds) | **128.06** (fold1) | **128.70** (query) |
 

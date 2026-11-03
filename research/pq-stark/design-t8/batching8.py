@@ -95,7 +95,7 @@ def main():
         # independent coefficients (ADK Thm 2 eps_3 = A0 alone; Track 8 reports A0 + B1 per height: 142.87 / 141.87)
         r['indep_adk_eps3'] = -A0(Ntop) + BATCH_POW
         r['indep_track8'] = -lg(len(th) * (2 ** A0(Ntop) + 2 ** B1(Ntop))) + BATCH_POW
-        r['powers_cost_bits'] = r['indep_track8'] - r['track8']
+        r['powers_cost_bits'] = round(r['indep_track8'], 2) - round(r['track8'], 2)  # rounded as in asbuilt8-output.txt
         # BCHKS25 Thm 4.2 at the same gamma (sensitivity only)
         for printed in (True, False):
             per = {}
