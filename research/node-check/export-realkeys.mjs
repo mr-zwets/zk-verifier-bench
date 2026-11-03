@@ -13,7 +13,7 @@ import {pathToFileURL} from 'node:url';
 const G16 = process.env.G16 ?? '/home/mrzwets/BCH-projects/verifier.cash/work/real-keys/groth16_cashscript';
 const RK = `${G16}/chunked/bn254/real-keys`;
 const outDir = process.argv[2] ?? '.'; mkdirSync(outDir, {recursive: true});
-const KINDS = new Set(['public-input-binding', 'public-input-encoding', 'invalid-proof-point', 'non-canonical-coordinate', 'g2-subgroup', 'real-public-input', 'real-other-proof', 'staple']);
+const KINDS = new Set(['public-input-binding', 'public-input-encoding', 'invalid-proof-point', 'non-canonical-coordinate', 'g2-subgroup', 'real-public-input', 'real-public-input-deep', 'real-other-proof', 'staple']);
 const key = process.argv[3];
 const {load, scoreOf} = await import(pathToFileURL(`${RK}/build-key.mjs`).href);
 const {math, tx, vm, script} = await load(key);
