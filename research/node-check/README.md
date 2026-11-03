@@ -235,3 +235,29 @@ Not covered:
 Reproduce: `npx tsx nc.ts category` gives CAT. Then
 `G16=<g16 checkout> node export-stark-t8.mjs --cat CAT --out <data>/t8 --rej 0,23 <s7 vec>/*.json`, then
 `DATA=<data>/t8 run-t8.sh NAME 9 7 11`, then `node summarize-t8.mjs <data>/t8 raw/NAME > raw/NAME-summary.md`.
+
+## Track 11: real SP1 v5 and RISC Zero keys on the BN254 sound-native verifier (2026-11-03)
+
+Branch `wip/real-keys`. Research, not a leaderboard change. The verifier, sources, tests and covenant binding are
+documented in groth16_cashscript `chunked/bn254/real-keys/README.md` (branch `wip/real-keys`, 8095777 at the time of
+the runs).
+
+- `export-realkeys.mjs` (`G16=<checkout> node export-realkeys.mjs <dir> sp1-v5|risc0`) writes per key: every
+  published fixture (plain verifier), every red-team run of the public-input, proof-point and staple kinds (patches of
+  fixture 0's transaction), and the covenant build's control and rejections (output 0 = `OP_RETURN <PV>`).
+  libauth (patched, BCHN DEFINE accounting) must agree with each `expect`, both modes, or the export aborts.
+- `run-t11.sh NAME 9 7 11`: run.sh with these sources plus `builtin:sound-native` as the reference.
+- Runs: `raw/t11a-*` (timing node + POLICY=1 node, 148 workloads + the reference), `raw/t11b-*` (a second fresh
+  timing node, the valid workloads only, because run 1's RISC Zero median was noisy; load average 5–11 from other
+  processes during both runs).
+
+| workload | tx B | BCHN block | testmempoolaccept (acceptnonstdtxn=0) | Verify ms/tx (run 2) | worst input std + DEFINE |
+|---|--:|---|---|--:|--:|
+| SP1 v5, 3 published proofs | 27,518–27,553 | 3/3 accept | 3/3 allowed | 3.48–3.69 | 94.00% |
+| SP1 v5 covenant control | 27,608 | accept | allowed | 3.50 | 93.99% |
+| RISC Zero V5_0 test receipt | 27,551 | accept | allowed | 3.50 | 93.99% |
+| RISC Zero covenant control | 27,631 | accept | allowed | 3.48 | 94.00% |
+| rejections (SP1 v5 / RISC Zero) | – | 70/70, 72/72 rejected (`blk-bad-inputs`) | mempool: `mandatory-script-verify-flag-failed` | – | – |
+
+Verdicts: BCHN = libauth on every workload (run 1: "Not as expected / errors: none"). Verify time and op-cost margins
+equal the reference build (3.44–3.53 ms, 94.2%), as expected: the code is the same up to VK constants.

@@ -1,0 +1,4 @@
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/real-keys/cache/bchn-t11b-t","rpcport":39408,"cpu":"9","pid":512796}
+loadavg start: 7.62 5.20 3.34 6/1877 512873
+Bitcoin server stopping
+loadavg end: 9.05 5.60 3.49 4/1908 513953
