@@ -267,3 +267,31 @@ t11c's new runs on BCHN: each false-statement run fails with `finished with a fa
 2's cleanup), and each wrong-program covenant fails with `OP_NUMEQUALVERIFY` (role 2's covenant). Both agree with
 libauth. Verify time and op-cost margins
 equal the reference build (3.44–3.53 ms, 94.2%), as expected: the code is the same up to VK constants.
+
+## Track 12: program-pinned covenant template (SP1 v5 / RISC Zero) on the BN254 sound-native verifier (2026-11-03)
+
+Branch `wip/pinned-template`. Research, not a leaderboard change. The template, its tests and the honest scope are in
+groth16_cashscript `chunked/bn254/pinned/README.md` (branch `wip/pinned-template`). **No real SP1 / RISC Zero proof
+of the template statement exists.** The accept path uses test-key proofs of the exact statement, minted with the
+published trapdoor of the densless fixture VK. Real keys give rejection runs, plus re-randomized real proofs on the
+plain core as positive controls.
+
+- `export-pinned.mjs` (`G16=<checkout> node export-pinned.mjs <dir> test|sp1-v5|risc0|risc0-v3`) reads
+  `<key>.pinned.report.json`, re-checks every run with libauth (patched, both modes) against its expectation, and
+  writes `pinned-<key>.json`. Inputs are funded at 200,000 sat each, so that every rejection run balances and reaches
+  the script. The 2 token-output runs are libauth-only and not exported.
+- `run-t12.sh NAME 9 7 11`: run.sh with these sources plus `builtin:sound-native` as the reference.
+- Runs: `raw/t12a-*` (groth16_cashscript c2894d3, inputs funded at 100,000 sat: 88 pinned workloads, all as expected;
+  the 2 duplicated-payout runs failed `bad-txns-in-belowout` before the script) and `raw/t12b-*` (043d1b7, 200,000 sat,
+  adds `risc0-v3`). Both use a fresh timing node and a fresh POLICY=1 node, both stopped; load average 0.5–1.3.
+
+`t12b`: **92 pinned workloads, all as expected, BCHN = libauth on every one.**
+
+| workload | n | BCHN block | testmempoolaccept (POLICY=1) | Verify ms/tx | worst input std + DEFINE |
+|---|--:|---|---|--:|--:|
+| SP1 template controls (test key): exact statement (27,595 B), 1 output (27,622 B), re-randomized proof (27,598 B) | 3 | accept | 3/3 allowed | 3.475–3.486 | 94.00% |
+| RISC Zero template controls (test key) (27,678–27,722 B) | 3 | accept | 3/3 allowed | 3.472–3.480 | 93.95–93.99% |
+| real proofs re-randomized, plain core (sp1-v5 silvana-add, risc0 V5_0, risc0-v3 V3_0) | 3 | accept | 3/3 allowed | 3.459–3.475 | 94.00% |
+| test-key rejections | 68 | 68/68 rejected (`blk-bad-inputs`) | timing node: `mandatory-script-verify-flag-failed` (53 NUMEQUALVERIFY at the covenant, 4 NUMEQUALVERIFY input count, 7 OP_VERIFY statement range, 2 OP_SPLIT + 2 EQUALVERIFY permuted inputs) | – | – |
+| real-key rejections (real proofs under the template) | 15 | 15/15 rejected (`blk-bad-inputs`, NUMEQUALVERIFY at the covenant) | – | – | – |
+| reference: bn-native-sound | 1 | accept | fee only; allowed at 2 sat/B | 3.476 | 94.20% |

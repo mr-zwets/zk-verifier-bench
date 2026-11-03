@@ -1,0 +1,108 @@
+107 workloads (timing); libauth charges OP_DEFINE bodies: true
+ok  pinned-risc0:risc0:reject:real proof risc0-test-receipt-V5_0 (true statement) under the template pinned to the placeholder application program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-risc0:risc0:reject:real proof risc0-test-receipt-V5_0 under a template pinned to ITS OWN image id (its PV is not of the template layout) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-risc0:risc0:reject:real proof risc0-test-receipt-V5_0 RE-RANDOMIZED, template pinned to its own program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-risc0:risc0:valid:control: real proof risc0-test-receipt-V5_0 re-randomized, PLAIN verifier core (no application binding) K=10 verify=34.71ms accepted lib=true
+ok  pinned-risc0-v3:risc0:reject:real proof risc0-test-receipt-V3_0 (true statement) under the template pinned to the placeholder application program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-risc0-v3:risc0:reject:real proof risc0-test-receipt-V3_0 under a template pinned to ITS OWN image id (its PV is not of the template layout) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-risc0-v3:risc0:reject:real proof risc0-test-receipt-V3_0 RE-RANDOMIZED, template pinned to its own program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-risc0-v3:risc0:valid:control: real proof risc0-test-receipt-V3_0 re-randomized, PLAIN verifier core (no application binding) K=10 verify=34.59ms accepted lib=true
+ok  pinned-sp1-v5:sp1:reject:real proof silvana-add (true statement) under the template pinned to the placeholder application program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-sp1-v5:sp1:reject:real proof silvana-add under a template pinned to ITS OWN programVKey (its PV is not of the template layout) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-sp1-v5:sp1:reject:real proof silvana-add RE-RANDOMIZED, template pinned to its own program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-sp1-v5:sp1:valid:control: real proof silvana-add re-randomized, PLAIN verifier core (no application binding) K=10 verify=34.75ms accepted lib=true
+ok  pinned-sp1-v5:sp1:reject:real proof sparsity-tdx-gcp (true statement) under the template pinned to the placeholder application program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-sp1-v5:sp1:reject:real proof sparsity-tdx-gcp under a template pinned to ITS OWN programVKey (its PV is not of the template layout) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-sp1-v5:sp1:reject:real proof sparsity-tdx-gcp RE-RANDOMIZED, template pinned to its own program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-sp1-v5:sp1:reject:real proof pessina-solana-aa (true statement) under the template pinned to the placeholder application program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-sp1-v5:sp1:reject:real proof pessina-solana-aa under a template pinned to ITS OWN programVKey (its PV is not of the template layout) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-sp1-v5:sp1:reject:real proof pessina-solana-aa RE-RANDOMIZED, template pinned to its own program K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:valid:control: proof of the exact statement (2 outputs: P2PKH payout 200,000 sat + OP_RETURN memo) K=10 verify=34.81ms accepted lib=true
+ok  pinned-test:sp1:valid:control: a 1-output statement (payout only), its own proof K=10 verify=34.75ms accepted lib=true
+ok  pinned-test:sp1:valid:control: the proof RE-RANDOMIZED (A, B, C all differ), same outputs K=10 verify=34.86ms accepted lib=true
+ok  pinned-test:sp1:reject:valid proof of ANOTHER program (programVKey) committing the same PV K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:covenant pinned to another programVKey (last byte xor 1), spent with the application's valid proof K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:valid proof whose PV pays 200,001 sat (tx pays 200,000) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:valid proof whose PV pays another locking (tx pays the original) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:valid proof for the same outputs but ANOTHER instance id K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:valid proof of the same PV with another tag ("BCHPAYv2") K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:valid proof of PV with one trailing byte appended K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:valid proof with n1 = sha256(PV) mod r (wrong reduction instead of the 253-bit mask) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:outputs = [OP_RETURN <PV of O>, payout to another locking] (PV as a pushed carrier) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:outputs = [OP_RETURN <sha256(PV of O)>, payout to another locking] (a pushed digest) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:re-randomized application proof, payout redirected to another locking K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:re-randomized application proof, payout value 199,999 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:payout value - 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:payout value + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:payout to another P2PKH K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:memo output data changed (last byte) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:memo output value 0 -> 546 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:extra output appended (P2PKH 546 sat) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:extra output appended (empty OP_RETURN) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:memo output missing (payout only) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:payout output missing (memo only) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:payout output duplicated K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:outputs swapped (memo first, payout second) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:payout split into two outputs (100,000 + 100,000) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:inputs 0 and 2 swapped (unlockings permuted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:inputs 0 and 1 swapped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:a 4th input (input 2 duplicated) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:only inputs 0 and 1 (2 inputs) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:STMT n0 + r (alias) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:STMT n1 + r (alias) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:STMT n1 = unmasked sha256(PV) (>= r) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:STMT n1 = 2^256 - 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:valid proof of the swapped statement (n1, n0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:sp1:reject:application proof, STMT n0 and n1 swapped (DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:valid:control: proof of the exact statement (2 outputs: P2PKH payout 200,000 sat + OP_RETURN memo) K=10 verify=34.72ms accepted lib=true
+ok  pinned-test:risc0:valid:control: a 1-output statement (payout only), its own proof K=10 verify=34.8ms accepted lib=true
+ok  pinned-test:risc0:valid:control: the proof RE-RANDOMIZED (A, B, C all differ), same outputs K=10 verify=34.77ms accepted lib=true
+ok  pinned-test:risc0:reject:valid proof of ANOTHER image id with the same journal (PV) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:covenant pinned to another image id (last byte xor 1), spent with the application's valid proof K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:valid proof whose PV pays 200,001 sat (tx pays 200,000) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:valid proof whose PV pays another locking (tx pays the original) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:valid proof for the same outputs but ANOTHER instance id K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:valid proof of the same PV with another tag ("BCHPAYv2") K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:valid proof of PV with one trailing byte appended K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:valid proof with the claim-digest halves in big-endian order K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:valid proof with n = splitDigest(sha256(PV)) (journal digest instead of the claim digest) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:outputs = [OP_RETURN <PV of O>, payout to another locking] (PV as a pushed carrier) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:outputs = [OP_RETURN <sha256(PV of O)>, payout to another locking] (a pushed digest) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:re-randomized application proof, payout redirected to another locking K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:re-randomized application proof, payout value 199,999 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:payout value - 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:payout value + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:payout to another P2PKH K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:memo output data changed (last byte) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:memo output value 0 -> 546 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:extra output appended (P2PKH 546 sat) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:extra output appended (empty OP_RETURN) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:memo output missing (payout only) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:payout output missing (memo only) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:payout output duplicated K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:outputs swapped (memo first, payout second) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:payout split into two outputs (100,000 + 100,000) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:inputs 0 and 2 swapped (unlockings permuted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:inputs 0 and 1 swapped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:a 4th input (input 2 duplicated) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:only inputs 0 and 1 (2 inputs) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:STMT n0 + r (alias) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:STMT n1 + r (alias) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:STMT n1 = 2^256 - 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:valid proof of the swapped statement (n1, n0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  pinned-test:risc0:reject:application proof, STMT n0 and n1 swapped (DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  bch-groth16-bn254-sound-native:valid K=10 verify=34.76ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra0 K=11 verify=37.55ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra1 K=11 verify=37.54ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra2 K=11 verify=37.6ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:worst K=10 verify=34.89ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:invalid0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  bch-groth16-bls12381-sound-native:valid K=9 verify=26.79ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra0 K=9 verify=26.87ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra1 K=8 verify=24.84ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra2 K=9 verify=26.74ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra3 K=9 verify=27.4ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra4 K=9 verify=27.26ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra5 K=9 verify=27.23ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:worst K=8 verify=24.93ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:invalid0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
