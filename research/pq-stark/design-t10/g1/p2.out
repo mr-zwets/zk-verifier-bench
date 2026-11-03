@@ -1,0 +1,4 @@
+4 {'DIAG': 4, 'RC': 53, 'HR': 4, 'NP': 21, 'RATE': 4, 'CAP': 4} vector True
+8 {'DIAG': 8, 'RC': 86, 'HR': 4, 'NP': 22, 'RATE': 4, 'CAP': 4} vector True
+12 {'DIAG': 12, 'RC': 118, 'HR': 4, 'NP': 22, 'RATE': 8, 'CAP': 4} vector True
+16 {'DIAG': 16, 'RC': 150, 'HR': 4, 'NP': 22, 'RATE': 12, 'CAP': 4} vector True

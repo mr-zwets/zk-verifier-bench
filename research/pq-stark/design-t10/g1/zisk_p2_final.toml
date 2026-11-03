@@ -1,0 +1,77 @@
+# Poseidon2 vadcop_final / vadcop_final_compressed of ZisK v1.4.0-alpha (64a1f16), taken from
+# verifier/src/poseidon2/{vadcop_final,vadcop_final_compressed}.rs verifier_info(). num_constraints and
+# the connection-lookup shape are NOT in verifier_info (conservative placeholders; their terms are
+# ~2^-170 at |F^3| = 2^192 and do not bind).
+[zkevm]
+name = "ZisK-P2-final"
+version = "1.4.0-alpha (Poseidon2 setup)"
+field = "Goldilocks^3"
+hash_size_bits = 256
+
+[[circuits]]
+name = "Final_P2"
+protocol_family = "FRI_STARK"
+group = "final"
+trace_length = 65536
+rho = 0.0625
+air_max_degree = 8
+num_columns_fixed = 47
+num_columns_witness = 60
+num_columns = 107
+num_constraints = 1000
+opening_points = 5
+batch_size = 130
+power_batching = true
+initial_tree_widths = [47, 48, 12, 21]
+num_evals = 130
+num_queries = 54
+fri_folding_factors = [16, 16, 16, 8]
+fri_early_stop_degree = 32
+grinding_query_phase = 22
+gap_to_radius = 0.0033333333333333335
+
+[[circuits.lookups]]
+name = "Connection_gprod_[1]"
+logup_type = "univariate"
+rows_L = 65536
+rows_T = 65536
+num_columns_S = 2
+num_lookups_M = 48
+grinding_bits_lookup = 0
+
+[[circuits]]
+name = "Final_Compressed_P2"
+protocol_family = "STIR"
+group = "final_compressed"
+trace_length = 32768
+rho = 0.0625
+air_max_degree = 8
+num_columns_fixed = 47
+num_columns_witness = 60
+num_columns = 107
+num_constraints = 1000
+opening_points = 5
+batch_size = 130
+power_batching = true
+initial_tree_widths = [47, 48, 12, 21]
+num_evals = 130
+log_inv_rate = 4
+num_iterations = 2
+folding_factors = [3, 4]
+log_degree = 15
+num_queries = [54, 36]
+num_ood_samples = [1]
+grinding_batching_phase = 0
+grinding_bits_folding = 0
+grinding_bits_queries = [22, 22]
+grinding_bits_ood = [0]
+gap_to_radius = 0.0033333333333333335
+
+[[circuits.lookups]]
+name = "Connection_gprod_[1]"
+logup_type = "univariate"
+rows_L = 32768
+rows_T = 32768
+num_columns_S = 2
+num_lookups_M = 48
+grinding_bits_lookup = 0

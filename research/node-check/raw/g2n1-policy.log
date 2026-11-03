@@ -1,0 +1,15 @@
+14 workloads (policy); libauth charges OP_DEFINE bodies: true
+ALLOWED  g2-a-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0  mined=true
+REJECTED g2-a-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx1 16: bad-txns-in-belowout mined=false
+REJECTED g2-a-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx2 16: bad-txns-in-belowout mined=false
+REJECTED g2-a-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx3 16: bad-txns-in-belowout mined=false
+REJECTED g2-a-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx4 16: bad-txns-in-belowout mined=false
+REJECTED g2-a-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx5 16: bad-txns-in-belowout mined=false
+ALLOWED  g2-a-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx6  mined=true
+ALLOWED  g2-a-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0  mined=true
+REJECTED g2-a-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx1 16: bad-txns-in-belowout mined=false
+REJECTED g2-a-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx2 16: bad-txns-in-belowout mined=false
+REJECTED g2-a-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx3 16: bad-txns-in-belowout mined=false
+REJECTED g2-a-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx4 16: bad-txns-in-belowout mined=false
+REJECTED g2-a-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx5 16: bad-txns-in-belowout mined=false
+ALLOWED  g2-a-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx6  mined=true

@@ -1,0 +1,12 @@
+const  last-level root == vk: True
+cm1    last-level root == proof root: True
+cm2    last-level root == proof root: True
+cm3    last-level root == proof root: True
+fri1   last-level root == proof root: True
+fri2   last-level root == proof root: True
+fri3   last-level root == proof root: True
+fri4   last-level root == proof root: True
+publics[0] (leaf flag) = 1  program_vk = [7446428795450488681, 14079471120546152230, 10336116091114721665, 560677452129968275]  out0 = 190820
+grinding ok (22 bits): True  query[0..4] = [991318, 728441, 794145, 824473]
+merkle paths ok 432, bad 0 (expected 432)
+Poseidon2 permutations used by this replay: width16 3876, width8 1

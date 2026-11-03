@@ -1,0 +1,174 @@
+Track 10 G0: params10.py (field-parametric Track 8 accounting + soundcalc re-implementation).
+Bits per round, unfloored unless marked; grinding added at its site. Labels: T8 = Track 8 accounting
+(BCIKS20, powers-batching adaptation, unpublished); SC = soundcalc model (BCHKS25 Thm 4.1/4.2, powers = (B-1) x line,
+[UNV vs the paper text]); HYB = T8 accounting with BCHKS25 Thm 4.2.
+
+TOML check (hard-coded configs vs soundcalc TOML):
+  ZisK Recursive2: identical
+  ZisK Final: identical
+  ZisK Final_Compressed (STIR): identical
+  RISC Zero rv32im segment (soundcalc): identical
+
+==============================================================================================================
+1. Track 8 reproduction (field Gl^3): params10 vs params8, same inputs
+==============================================================================================================
+  M1 / Z128: params8 lambda_IOP 128.06 (m=5), params10 128.06 (m=5); max |round diff| 0.00e+00  [EXACT]
+  M1 / Z128-s: params8 lambda_IOP 128.06 (m=5), params10 128.06 (m=5); max |round diff| 0.00e+00  [EXACT]
+  M2 / Z128-g cpow 3: params8 lambda_IOP 128.7 (m=5), params10 128.7 (m=5); max |round diff| 0.00e+00  [EXACT]
+  M1 / Z128 batch PoW 12: params8 lambda_IOP 128.06 (m=5), params10 128.06 (m=5); max |round diff| 0.00e+00  [EXACT]
+  ACCEPTANCE: M1 Z128 lambda_IOP = 128.06 (Track 8: 128.06): PASS
+     rounds: ali 174.94, deep 155.17, batch 136.33, fold1 128.06, query 128.70
+  M1 Z128 under HYB (BCHKS25 Thm 4.2 in batch/folds): lambda_IOP 131.29 (m=24, binding query)
+     rounds: ali 172.65, deep 150.59, batch 149.47, fold1 138.20, query 131.29
+
+  Field sweep, M1 / Z128 shape and PoW unchanged (T8 accounting):
+    Goldilocks^3  log|EF|  192.0: lambda_IOP 128.06 (m=5, binding fold1); PoW needed for 128 {'ali': 0, 'deep': 0, 'batch': 12, 'fold1': 2, 'query': 24}
+    BabyBear^4    log|EF|  123.6: lambda_IOP  64.25 (m=3, binding fold1); PoW needed for 128 {'ali': 21, 'deep': 40, 'batch': 76, 'fold1': 66, 'query': 26}
+    BabyBear^5    log|EF|  154.5: lambda_IOP  95.16 (m=3, binding fold1); PoW needed for 128 {'ali': 0, 'deep': 9, 'batch': 45, 'fold1': 35, 'query': 26}
+    KoalaBear^4   log|EF|  124.0: lambda_IOP  64.58 (m=3, binding fold1); PoW needed for 128 {'ali': 21, 'deep': 40, 'batch': 76, 'fold1': 66, 'query': 26}
+    KoalaBear^5   log|EF|  154.9: lambda_IOP  95.57 (m=3, binding fold1); PoW needed for 128 {'ali': 0, 'deep': 9, 'batch': 45, 'fold1': 35, 'query': 26}
+
+  DESIGN-T10 Stage 0 acceptance (RISC Zero bridge shape: P2 2^18 x50, ALU 2^16 x60, W 2^13 x12; no ZK):
+    BabyBear^4 lb6 Q27, PoW q24/c16/b24/l8: lambda_IOP 71.12 (binding batch) -> "< 100 at PoW <= 24": PASS
+    BabyBear^5 lb6 Q28, same PoW:           lambda_IOP 101.77 (binding query) -> ">= 100": PASS
+
+==============================================================================================================
+2. RISC Zero and ZisK: soundcalc model re-implemented (SC), compared with the committed soundcalc reports
+==============================================================================================================
+  RISC Zero rv32im segment (soundcalc)  [soundcalc@b325e30 soundcalc/zkvms/risc0/risc0.toml (Sept 2024 notebook parameters)]
+    SC UDR: lambda 33.90 (floor 33, binding query); soundcalc report total 33: DIFF {'batching': (93, 92), 'commit1': (102, 100), 'commit2': (106, 104), 'commit3': (110, 108), 'commit4': (114, 112)}
+       ALI 115.63, DEEP 100.31, batching 93.90, commit1 102.14, commit2 106.14, commit3 110.13, commit4 114.11, query 33.90
+    SC JBR: lambda 48.22 (floor 48, binding query); soundcalc report total 48: DIFF {'batching': (68, 63), 'commit1': (76, 71), 'commit2': (80, 75), 'commit3': (84, 79), 'commit4': (88, 83)}
+       ALI 109.31, DEEP 93.98, batching 68.29, commit1 76.52, commit2 80.52, commit3 84.52, commit4 88.52, query 48.22
+    stale-report hypothesis UDR (pre-fix m / BCIKS20 eps_U): {'batching': 92, 'commit1': 100, 'commit2': 104, 'commit3': 108, 'commit4': 112} -> matches every report cell
+    stale-report hypothesis JBR (pre-fix m / BCIKS20 eps_U): {'batching': 63, 'commit1': 71, 'commit2': 75, 'commit3': 79, 'commit4': 83} -> matches every report cell
+    SC JBR, multiplicity m chosen by us (eta = sqrt(rho)/2m): lambda 49.86 (m=263, binding query)
+    T8 JB  (BCIKS20 7.2/7.4, ADK Thm 2): lambda 45.63 (m=8, binding query)
+       ali 110.63, deep 90.31, batch 46.46, fold1 58.69, fold2 66.69, fold3 74.69, fold4 82.69, query 45.63
+    T8 UD  (ADK Thm 3):                   lambda 33.90 (binding query); query 33.90, batch 92.49
+    HYB JB (T8 accounting + BCHKS25 4.2): lambda 49.86 (m=263, binding query)
+       ali 105.59, deep 80.23, batch 49.86, fold1 58.10, fold2 62.10, fold3 66.10, fold4 70.10, query 49.86
+    T8 JB: no m in 3..400 brings every non-batching round to 128 (fold rounds also fall short when m is large enough for the query round), so no batching PoW alone repairs it
+    T8 JB at soundcalc's m=20: ali 109.31, deep 87.66, batch 37.57, fold1 49.80, fold2 57.80, fold3 65.80, fold4 73.80, query 48.22
+
+  RISC Zero succinct/recursion (shape UNV)  [risc0 main zkp/src/lib.rs (QUERIES 50, INV_RATE 4); shape from DESIGN-T10 [UNV]]
+    SC UDR: lambda 33.90 (floor 33, binding query)
+       ALI 115.63, DEEP 103.31, batching 97.67, commit1 105.14, commit2 109.13, commit3 113.12, query 33.90
+    SC JBR: lambda 48.22 (floor 48, binding query)
+       ALI 109.31, DEEP 96.98, batching 72.05, commit1 79.52, commit2 83.52, commit3 87.52, query 48.22
+    SC JBR, multiplicity m chosen by us (eta = sqrt(rho)/2m): lambda 49.91 (m=380, binding query)
+    T8 JB  (BCIKS20 7.2/7.4, ADK Thm 2): lambda 47.47 (m=14, binding query)
+       ali 109.82, deep 91.69, batch 47.83, fold1 59.30, fold2 67.30, fold3 75.30, query 47.47
+    T8 UD  (ADK Thm 3):                   lambda 33.90 (binding query); query 33.90, batch 96.25
+    HYB JB (T8 accounting + BCHKS25 4.2): lambda 49.91 (m=380, binding query)
+       ali 105.05, deep 82.16, batch 50.98, fold1 58.45, fold2 62.45, fold3 66.45, query 49.91
+    T8 JB: no m in 3..400 brings every non-batching round to 128 (fold rounds also fall short when m is large enough for the query round), so no batching PoW alone repairs it
+    T8 JB at soundcalc's m=20: ali 109.31, deep 90.66, batch 44.33, fold1 55.80, fold2 63.80, fold3 71.80, query 48.22
+
+  ZisK Final  [soundcalc@b325e30 soundcalc/zkvms/zisk/zisk.toml (ZisK v1.4.0-alpha) [[circuits]] name="Final"]
+    SC UDR: lambda 73.54 (floor 73, binding query); soundcalc report total 73: every cell equal
+       ALI 183.26, DEEP 170.83, batching 160.96, commit1 171.19, commit2 175.19, commit3 179.18, commit4 183.26, query 73.54
+    SC JBR: lambda 128.03 (floor 128, binding query); soundcalc report total 128: every cell equal
+       ALI 174.03, DEEP 161.60, batching 128.12, commit1 138.34, commit2 142.34, commit3 146.34, commit4 150.44, query 128.03
+    SC JBR, multiplicity m chosen by us (eta = sqrt(rho)/2m): lambda 128.04 (m=38, binding query)
+    T8 JB  (BCIKS20 7.2/7.4, ADK Thm 2): lambda 118.26 (m=4, binding batch)
+       ali 177.26, deep 158.83, batch 118.26, fold1 132.49, fold2 140.49, fold3 148.49, fold4 155.57, query 120.33
+    T8 UD  (ADK Thm 3):                   lambda 73.54 (binding query); query 73.54, batch 159.87
+    HYB JB (T8 accounting + BCHKS25 4.2): lambda 128.04 (m=38, binding query)
+       ali 174.01, deep 152.33, batch 128.12, fold1 138.34, fold2 142.34, fold3 146.34, fold4 150.44, query 128.04
+    T8 JB: no m in 3..400 brings every non-batching round to 128 (fold rounds also fall short when m is large enough for the query round), so no batching PoW alone repairs it
+    T8 JB at soundcalc's m=38: ali 174.01, deep 152.33, batch 96.59, fold1 110.81, fold2 118.81, fold3 126.81, fold4 133.91, query 128.04
+
+  ZisK Recursive2  [soundcalc@b325e30 soundcalc/zkvms/zisk/zisk.toml (ZisK v1.4.0-alpha) name="Recursive2"]
+    SC UDR: lambda 95.88 (floor 95, binding query); soundcalc report total 95: every cell equal
+       ALI 182.26, DEEP 170.41, batching 162.24, commit1 172.51, commit2 176.51, commit3 180.60, commit4 183.58, query 95.88
+    SC JBR: lambda 128.47 (floor 128, binding batching); soundcalc report total 128: every cell equal
+       ALI 174.30, DEEP 162.45, batching 128.47, commit1 138.73, commit2 142.73, commit3 146.83, commit4 149.83, query 128.78
+    SC JBR, multiplicity m chosen by us (eta = sqrt(rho)/2m): lambda 128.73 (m=60, binding query)
+    T8 JB  (BCIKS20 7.2/7.4, ADK Thm 2): lambda 118.06 (m=7, binding batch)
+       ali 177.45, deep 160.80, batch 118.06, fold1 132.33, fold2 140.33, fold3 147.43, fold4 153.43, query 119.45
+    T8 UD  (ADK Thm 3):                   lambda 95.87 (binding query); query 95.87, batch 160.83
+    HYB JB (T8 accounting + BCHKS25 4.2): lambda 128.73 (m=60, binding query)
+       ali 174.35, deep 154.60, batch 128.82, fold1 139.08, fold2 143.08, fold3 147.18, fold4 150.18, query 128.73
+    T8 JB: no m in 3..400 brings every non-batching round to 128 (fold rounds also fall short when m is large enough for the query round), so no batching PoW alone repairs it
+    T8 JB at soundcalc's m=63: ali 174.28, deep 154.46, batch 96.49, fold1 110.76, fold2 118.76, fold3 125.86, fold4 131.86, query 128.79
+
+  ZisK Final_Compressed (STIR)  [soundcalc@b325e30 soundcalc/zkvms/zisk/zisk.toml (ZisK v1.4.0-alpha) name="Final_Compressed"]
+    SC UDR: lambda 44.97 (floor 44, binding fin); soundcalc report total 44: every cell equal
+       ALI 183.89, DEEP 170.83, batching 160.71, fold0 170.14, ood1 179.00, shift1 66.18, ood2 182.00, shift2 51.85, fin 44.97
+    SC JBR: lambda 128.05 (floor 128, binding shift2); soundcalc report total 128: every cell equal
+       ALI 174.16, DEEP 161.10, batching 128.84, fold0 138.27, ood1 156.54, shift1 128.40, ood2 157.54, shift2 128.05, fin 129.78
+    SC JBR, multiplicity m chosen by us (eta = sqrt(rho)/2m): lambda 128.21 (m=29, binding shift2)
+
+==============================================================================================================
+3. Where the ZisK Final gap comes from (batching round, m = 38 = soundcalc's m at eta = 1/300)
+==============================================================================================================
+  BCIKS20 Thm 7.4 line error A0 = (m+1/2)^7 |D|^2 / (3 rho^1.5 |F|): 2^-106.72;  B1 = 2^-161.73
+  BCHKS25 Thm 4.2 line error ((2m'^5 + 3m' gamma rho)|D| / (3 rho^1.5) + m'/sqrt(rho)) / |F|: 2^-138.25
+  ratio: -31.53 bits  (|D| = 2^22: one factor |D| = 22 bits, (m+1/2)^2 / 2 = 9.5 bits)
+  times (B-1) = 1121 (10.13 bits), no batching PoW: T8 batch 96.59, SC batch 128.12
+
+==============================================================================================================
+4. Every ZisK circuit in soundcalc's zisk.toml: SC JBR (pinned gap), SC JBR best m, T8 JB (BCIKS20), SC UDR
+==============================================================================================================
+  Final                              SC JBR  128.03 (query     ) best-m  128.04  UDR  73.54  T8 JB 118.26 (batch)
+  Final_Compressed                   SC JBR  128.05 (shift2    ) best-m  128.21  UDR  44.97  T8 JB    n/a (STIR: no T8 model)
+  Main                               SC JBR  128.07 (batching  ) best-m  128.24  UDR 111.99  T8 JB 114.75 (batch)
+  Rom                                SC JBR  128.07 (query     ) best-m  128.37  UDR 111.57  T8 JB 116.26 (batch)
+  Mem                                SC JBR  128.07 (query     ) best-m  128.10  UDR 111.57  T8 JB 115.31 (batch)
+  InputData                          SC JBR  128.07 (query     ) best-m  128.33  UDR 111.57  T8 JB 115.99 (batch)
+  RomData                            SC JBR  128.07 (query     ) best-m  128.37  UDR 111.57  T8 JB 116.33 (batch)
+  MemAlign                           SC JBR  128.07 (query     ) best-m  128.28  UDR 111.57  T8 JB 116.62 (batch)
+  MemAlignByte                       SC JBR  128.07 (query     ) best-m  128.33  UDR 111.57  T8 JB 115.99 (batch)
+  MemAlignReadByte                   SC JBR  128.07 (query     ) best-m  128.40  UDR 111.57  T8 JB 116.49 (batch)
+  MemAlignWriteByte                  SC JBR  128.07 (query     ) best-m  128.35  UDR 111.57  T8 JB 116.12 (batch)
+  MemAlignByteLarge                  SC JBR  128.07 (query     ) best-m  128.18  UDR 111.57  T8 JB 114.84 (batch)
+  MemAlignReadByteLarge              SC JBR  128.07 (query     ) best-m  128.26  UDR 111.57  T8 JB 115.33 (batch)
+  Arith                              SC JBR  128.07 (query     ) best-m  128.27  UDR 111.57  T8 JB 116.56 (batch)
+  Binary                             SC JBR  128.07 (query     ) best-m  128.18  UDR 111.57  T8 JB 115.84 (batch)
+  BinaryAdd                          SC JBR  128.07 (query     ) best-m  128.39  UDR 111.57  T8 JB 116.41 (batch)
+  BinaryAddLarge                     SC JBR  128.07 (query     ) best-m  128.28  UDR 111.57  T8 JB 115.97 (query)
+  BinaryAddHuge                      SC JBR  128.07 (query     ) best-m  128.13  UDR 111.57  T8 JB 115.54 (batch)
+  BinaryAddHi                        SC JBR  128.07 (query     ) best-m  128.37  UDR 111.57  T8 JB 116.26 (batch)
+  BinaryAddHiLarge                   SC JBR  128.07 (query     ) best-m  128.25  UDR 111.57  T8 JB 115.97 (query)
+  BinaryAddHiHuge                    SC JBR  128.07 (query     ) best-m  128.12  UDR 111.57  T8 JB 115.4 (batch)
+  BinaryExtension                    SC JBR  128.07 (query     ) best-m  128.19  UDR 111.57  T8 JB 115.96 (batch)
+  Add256                             SC JBR  128.07 (query     ) best-m  128.40  UDR 111.57  T8 JB 117.71 (batch)
+  Arith256X                          SC JBR  128.07 (query     ) best-m  128.11  UDR 111.57  T8 JB 116.53 (batch)
+  ArithSecp256K1                     SC JBR  128.07 (query     ) best-m  128.09  UDR 111.57  T8 JB 116.45 (batch)
+  TwistedEdwards                     SC JBR  128.07 (query     ) best-m  128.31  UDR 111.57  T8 JB 118.39 (batch)
+  Poseidon                           SC JBR  128.07 (query     ) best-m  128.41  UDR 111.57  T8 JB 119.35 (batch)
+  Blake2br                           SC JBR  128.07 (query     ) best-m  128.11  UDR 111.57  T8 JB 116.54 (batch)
+  Dma                                SC JBR  128.07 (query     ) best-m  128.34  UDR 111.57  T8 JB 117.02 (batch)
+  Dma64Aligned                       SC JBR  128.07 (query     ) best-m  128.28  UDR 111.57  T8 JB 116.65 (batch)
+  Dma64AlignedMemSet                 SC JBR  128.07 (query     ) best-m  128.43  UDR 111.57  T8 JB 117.07 (query)
+  Dma64AlignedMem                    SC JBR  128.07 (query     ) best-m  128.34  UDR 111.57  T8 JB 117.07 (query)
+  Dma64AlignedMemLarge               SC JBR  128.07 (query     ) best-m  128.19  UDR 111.57  T8 JB 115.93 (batch)
+  Dma64AlignedMemCpy                 SC JBR  128.07 (query     ) best-m  128.32  UDR 111.57  T8 JB 116.91 (batch)
+  DmaUnaligned                       SC JBR  128.07 (query     ) best-m  128.32  UDR 111.57  T8 JB 116.91 (batch)
+  DmaPrePost                         SC JBR  128.07 (query     ) best-m  128.22  UDR 111.57  T8 JB 116.22 (batch)
+  JumpDest                           SC JBR  128.07 (query     ) best-m  128.28  UDR 111.57  T8 JB 116.6 (batch)
+  VirtualTableZisk0                  SC JBR  128.07 (query     ) best-m  128.23  UDR 111.57  T8 JB 116.31 (batch)
+  VirtualTableZisk1                  SC JBR  128.07 (query     ) best-m  128.18  UDR 111.57  T8 JB 115.98 (batch)
+  MemAlignLarge                      SC JBR  128.09 (batching  ) best-m  128.36  UDR 111.99  T8 JB 114.38 (batch)
+  Dma64AlignedLarge                  SC JBR  128.12 (batching  ) best-m  128.36  UDR 111.99  T8 JB 114.41 (batch)
+  ArithEqLarge                       SC JBR  128.13 (query     ) best-m  128.18  UDR 111.99  T8 JB 115.08 (query)
+  ArithEq384Large                    SC JBR  128.13 (query     ) best-m  128.14  UDR 111.99  T8 JB 115.08 (query)
+  ArithEq                            SC JBR  128.14 (batching  ) best-m  128.37  UDR 111.99  T8 JB 116.4 (query)
+  Keccakf                            SC JBR  128.16 (batching  ) best-m  128.21  UDR 112.82  T8 JB 113.52 (batch)
+  BinaryHuge                         SC JBR  128.18 (batching  ) best-m  128.26  UDR 111.99  T8 JB 114.85 (batch)
+  Poseidon2KoalaBear-compressor      SC JBR  128.20 (batching  ) best-m  128.72  UDR  96.84  T8 JB 118.11 (query)
+  Arith256XLarge                     SC JBR  128.27 (query     ) best-m  128.34  UDR 111.99  T8 JB 115.37 (batch)
+  ArithSecp256K1Large                SC JBR  128.27 (query     ) best-m  128.32  UDR 111.99  T8 JB 115.3 (batch)
+  ArithBn254Large                    SC JBR  128.27 (batching  ) best-m  128.27  UDR 111.99  T8 JB 115.08 (query)
+  ArithEq384                         SC JBR  128.27 (query     ) best-m  128.32  UDR 111.99  T8 JB 116.31 (batch)
+  Sha256f                            SC JBR  128.27 (query     ) best-m  128.29  UDR 111.99  T8 JB 116.4 (query)
+  Blake3f                            SC JBR  128.27 (query     ) best-m  128.32  UDR 111.99  T8 JB 116.26 (batch)
+  Poseidon2KoalaBear                 SC JBR  128.34 (batching  ) best-m  128.41  UDR 111.99  T8 JB 116.4 (query)
+  BinaryLarge                        SC JBR  128.42 (query     ) best-m  128.44  UDR 111.99  T8 JB 115.08 (query)
+  BinaryExtensionLarge               SC JBR  128.42 (query     ) best-m  128.46  UDR 111.99  T8 JB 115.08 (query)
+  ArithBn254                         SC JBR  128.42 (query     ) best-m  128.46  UDR 111.99  T8 JB 116.4 (query)
+  Blake2s                            SC JBR  128.42 (query     ) best-m  128.44  UDR 111.99  T8 JB 116.4 (query)
+  Recursive2                         SC JBR  128.47 (batching  ) best-m  128.73  UDR  95.88  T8 JB 118.06 (batch)
+  Keccakf-compressor                 SC JBR  128.57 (batching  ) best-m  128.69  UDR  96.84  T8 JB 118.11 (query)
+  ZisK 1.4.0-alpha: 60 circuits; min SC JBR 128.03 (Final); min T8 JB 113.52 (Keccakf); min SC UDR 44.97

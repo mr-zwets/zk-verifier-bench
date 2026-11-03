@@ -1,0 +1,1459 @@
+{
+ "track8": {
+  "M1 / Z128": {
+   "params8": {
+    "m": 5,
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "params10": {
+    "m": 5,
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam": 128,
+    "field": "Goldilocks^3",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "exact": true
+  },
+  "M1 / Z128-s": {
+   "params8": {
+    "m": 5,
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.34
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "params10": {
+    "m": 5,
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.34
+    },
+    "lam": 128,
+    "field": "Goldilocks^3",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "exact": true
+  },
+  "M2 / Z128-g cpow 3": {
+   "params8": {
+    "m": 5,
+    "rounds": {
+     "logup": 174.54,
+     "ali": 174.34,
+     "deep": 155.07,
+     "batch": 135.15,
+     "fold1": 128.87,
+     "fold2": 135.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.7,
+    "binding": "query",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "params10": {
+    "m": 5,
+    "lam_iop": 128.7,
+    "binding": "query",
+    "rounds": {
+     "logup": 174.54,
+     "ali": 174.34,
+     "deep": 155.07,
+     "batch": 135.15,
+     "fold1": 128.87,
+     "fold2": 135.06,
+     "query": 128.7
+    },
+    "lam": 128,
+    "field": "Goldilocks^3",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "exact": true
+  },
+  "M1 / Z128 batch PoW 12": {
+   "params8": {
+    "m": 5,
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 128.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "lam": 128,
+    "lam_strict": 127.21,
+    "label": "JB, powers-batching adaptation (unpublished)"
+   },
+   "params10": {
+    "m": 5,
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 128.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam": 128,
+    "field": "Goldilocks^3",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "exact": true
+  },
+  "acceptance": true,
+  "M1 Z128 HYB": {
+   "m": 24,
+   "lam_iop": 131.29,
+   "binding": "query",
+   "rounds": {
+    "ali": 172.65,
+    "deep": 150.59,
+    "batch": 149.47,
+    "fold1": 138.2,
+    "query": 131.29
+   },
+   "lam": 128,
+   "field": "Goldilocks^3",
+   "label": "HYB: T8 accounting with BCHKS25 Thm 4.2 [UNV vs paper]"
+  }
+ },
+ "field_sweep": {
+  "Gl3": {
+   "soundness": {
+    "m": 5,
+    "lam_iop": 128.06,
+    "binding": "fold1",
+    "rounds": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 136.33,
+     "fold1": 128.06,
+     "query": 128.7
+    },
+    "lam": 128,
+    "field": "Goldilocks^3",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 5,
+    "raw": {
+     "ali": 174.94,
+     "deep": 155.17,
+     "batch": 116.33,
+     "fold1": 126.06,
+     "query": 104.7
+    },
+    "need": {
+     "ali": 0,
+     "deep": 0,
+     "batch": 12,
+     "fold1": 2,
+     "query": 24
+    }
+   }
+  },
+  "BB4": {
+   "soundness": {
+    "m": 3,
+    "lam_iop": 64.25,
+    "binding": "fold1",
+    "rounds": {
+     "ali": 107.31,
+     "deep": 88.28,
+     "batch": 72.39,
+     "fold1": 64.25,
+     "query": 126.66
+    },
+    "lam": 64.25,
+    "field": "BabyBear^4",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 3,
+    "raw": {
+     "ali": 107.31,
+     "deep": 88.28,
+     "batch": 52.39,
+     "fold1": 62.25,
+     "query": 102.66
+    },
+    "need": {
+     "ali": 21,
+     "deep": 40,
+     "batch": 76,
+     "fold1": 66,
+     "query": 26
+    }
+   }
+  },
+  "BB5": {
+   "soundness": {
+    "m": 3,
+    "lam_iop": 95.16,
+    "binding": "fold1",
+    "rounds": {
+     "ali": 138.22,
+     "deep": 119.19,
+     "batch": 103.17,
+     "fold1": 95.16,
+     "query": 126.66
+    },
+    "lam": 95.16,
+    "field": "BabyBear^5",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 3,
+    "raw": {
+     "ali": 138.22,
+     "deep": 119.19,
+     "batch": 83.17,
+     "fold1": 93.16,
+     "query": 102.66
+    },
+    "need": {
+     "ali": 0,
+     "deep": 9,
+     "batch": 45,
+     "fold1": 35,
+     "query": 26
+    }
+   }
+  },
+  "KB4": {
+   "soundness": {
+    "m": 3,
+    "lam_iop": 64.58,
+    "binding": "fold1",
+    "rounds": {
+     "ali": 107.64,
+     "deep": 88.61,
+     "batch": 72.72,
+     "fold1": 64.58,
+     "query": 126.66
+    },
+    "lam": 64.58,
+    "field": "KoalaBear^4",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 3,
+    "raw": {
+     "ali": 107.64,
+     "deep": 88.61,
+     "batch": 52.72,
+     "fold1": 62.58,
+     "query": 102.66
+    },
+    "need": {
+     "ali": 21,
+     "deep": 40,
+     "batch": 76,
+     "fold1": 66,
+     "query": 26
+    }
+   }
+  },
+  "KB5": {
+   "soundness": {
+    "m": 3,
+    "lam_iop": 95.57,
+    "binding": "fold1",
+    "rounds": {
+     "ali": 138.63,
+     "deep": 119.6,
+     "batch": 103.58,
+     "fold1": 95.57,
+     "query": 126.66
+    },
+    "lam": 95.57,
+    "field": "KoalaBear^5",
+    "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+   },
+   "min_pow": {
+    "m": 3,
+    "raw": {
+     "ali": 138.63,
+     "deep": 119.6,
+     "batch": 83.58,
+     "fold1": 93.57,
+     "query": 102.66
+    },
+    "need": {
+     "ali": 0,
+     "deep": 9,
+     "batch": 45,
+     "fold1": 35,
+     "query": 26
+    }
+   }
+  }
+ },
+ "design_t10_stage0": {
+  "bb4": {
+   "m": 3,
+   "lam_iop": 71.12,
+   "binding": "batch",
+   "rounds": {
+    "logup": 100.24,
+    "ali": 109.26,
+    "deep": 87.85,
+    "batch": 71.12,
+    "fold1": 73.56,
+    "fold2": 78.56,
+    "fold3": 84.75,
+    "fold4": 90.75,
+    "fold5": 95.98,
+    "query": 99.0
+   },
+   "lam": 71.12,
+   "field": "BabyBear^4",
+   "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+  },
+  "bb5": {
+   "m": 3,
+   "lam_iop": 101.77,
+   "binding": "query",
+   "rounds": {
+    "logup": 131.15,
+    "ali": 140.17,
+    "deep": 118.76,
+    "batch": 101.94,
+    "fold1": 104.47,
+    "fold2": 109.47,
+    "fold3": 115.66,
+    "fold4": 121.66,
+    "fold5": 126.88,
+    "query": 101.77
+   },
+   "lam": 101.77,
+   "field": "BabyBear^5",
+   "label": "T8: JB, BCIKS20 Thm 7.2/7.4, powers-batching adaptation (unpublished)"
+  }
+ },
+ "external": {
+  "RISC Zero rv32im segment (soundcalc)": {
+   "SC_UDR": {
+    "rounds": {
+     "ALI": 115.628,
+     "DEEP": 100.306,
+     "batching": 93.903,
+     "commit1": 102.136,
+     "commit2": 106.136,
+     "commit3": 110.134,
+     "commit4": 114.106,
+     "query": 33.904
+    },
+    "lam": 33.904,
+    "binding": "query",
+    "report": {
+     "total": 33,
+     "DEEP": 100,
+     "batching": 92,
+     "commit1": 100,
+     "commit2": 104,
+     "commit3": 108,
+     "commit4": 112,
+     "query": 33
+    }
+   },
+   "SC_JBR": {
+    "rounds": {
+     "ALI": 109.306,
+     "DEEP": 93.984,
+     "batching": 68.285,
+     "commit1": 76.518,
+     "commit2": 80.518,
+     "commit3": 84.518,
+     "commit4": 88.518,
+     "query": 48.219
+    },
+    "lam": 48.219,
+    "binding": "query",
+    "report": {
+     "total": 48,
+     "DEEP": 93,
+     "batching": 63,
+     "commit1": 71,
+     "commit2": 75,
+     "commit3": 79,
+     "commit4": 83,
+     "query": 48
+    }
+   },
+   "SC_JBR_best_m": {
+    "m": 263,
+    "lam_iop": 49.86,
+    "binding": "query",
+    "rounds": {
+     "ALI": 105.59,
+     "DEEP": 90.27,
+     "batching": 49.86,
+     "commit1": 58.1,
+     "commit2": 62.1,
+     "commit3": 66.1,
+     "commit4": 70.1,
+     "query": 49.86
+    }
+   },
+   "T8_JB": {
+    "m": 8,
+    "lam_iop": 45.63,
+    "binding": "query",
+    "rounds": {
+     "ali": 110.63,
+     "deep": 90.31,
+     "batch": 46.46,
+     "fold1": 58.69,
+     "fold2": 66.69,
+     "fold3": 74.69,
+     "fold4": 82.69,
+     "query": 45.63
+    }
+   },
+   "T8_UD": {
+    "ali": 115.63,
+    "deep": 100.31,
+    "batch": 92.49,
+    "fold1": 96.72,
+    "fold2": 96.72,
+    "fold3": 96.72,
+    "fold4": 96.72,
+    "query": 33.9
+   },
+   "HYB_JB": {
+    "m": 263,
+    "lam_iop": 49.86,
+    "binding": "query",
+    "rounds": {
+     "ali": 105.59,
+     "deep": 80.23,
+     "batch": 49.86,
+     "fold1": 58.1,
+     "fold2": 62.1,
+     "fold3": 66.1,
+     "fold4": 70.1,
+     "query": 49.86
+    }
+   },
+   "T8_batch_pow_for_128": null
+  },
+  "RISC Zero succinct/recursion (shape UNV)": {
+   "SC_UDR": {
+    "rounds": {
+     "ALI": 115.628,
+     "DEEP": 103.306,
+     "batching": 97.668,
+     "commit1": 105.136,
+     "commit2": 109.135,
+     "commit3": 113.121,
+     "query": 33.904
+    },
+    "lam": 33.904,
+    "binding": "query",
+    "report": null
+   },
+   "SC_JBR": {
+    "rounds": {
+     "ALI": 109.306,
+     "DEEP": 96.984,
+     "batching": 72.05,
+     "commit1": 79.518,
+     "commit2": 83.518,
+     "commit3": 87.518,
+     "query": 48.219
+    },
+    "lam": 48.219,
+    "binding": "query",
+    "report": null
+   },
+   "SC_JBR_best_m": {
+    "m": 380,
+    "lam_iop": 49.91,
+    "binding": "query",
+    "rounds": {
+     "ALI": 105.06,
+     "DEEP": 92.74,
+     "batching": 50.98,
+     "commit1": 58.45,
+     "commit2": 62.45,
+     "commit3": 66.45,
+     "query": 49.91
+    }
+   },
+   "T8_JB": {
+    "m": 14,
+    "lam_iop": 47.47,
+    "binding": "query",
+    "rounds": {
+     "ali": 109.82,
+     "deep": 91.69,
+     "batch": 47.83,
+     "fold1": 59.3,
+     "fold2": 67.3,
+     "fold3": 75.3,
+     "query": 47.47
+    }
+   },
+   "T8_UD": {
+    "ali": 115.63,
+    "deep": 103.31,
+    "batch": 96.25,
+    "fold1": 99.72,
+    "fold2": 99.72,
+    "fold3": 99.72,
+    "query": 33.9
+   },
+   "HYB_JB": {
+    "m": 380,
+    "lam_iop": 49.91,
+    "binding": "query",
+    "rounds": {
+     "ali": 105.05,
+     "deep": 82.16,
+     "batch": 50.98,
+     "fold1": 58.45,
+     "fold2": 62.45,
+     "fold3": 66.45,
+     "query": 49.91
+    }
+   },
+   "T8_batch_pow_for_128": null
+  },
+  "ZisK Final": {
+   "SC_UDR": {
+    "rounds": {
+     "Connection_gprod_[1]": 167.83,
+     "Lookup_gsum_[1000]": 164.508,
+     "Lookup_gsum_[250]": 168.415,
+     "Lookup_gsum_[500]": 170.0,
+     "ALI": 183.262,
+     "DEEP": 170.83,
+     "batching": 160.963,
+     "commit1": 171.186,
+     "commit2": 175.186,
+     "commit3": 179.183,
+     "commit4": 183.262,
+     "query": 73.539
+    },
+    "lam": 73.539,
+    "binding": "query",
+    "report": {
+     "total": 73,
+     "ALI": 183,
+     "DEEP": 170,
+     "batching": 160,
+     "commit1": 171,
+     "commit2": 175,
+     "commit3": 179,
+     "commit4": 183,
+     "query": 73
+    }
+   },
+   "SC_JBR": {
+    "rounds": {
+     "Connection_gprod_[1]": 167.83,
+     "Lookup_gsum_[1000]": 164.508,
+     "Lookup_gsum_[250]": 168.415,
+     "Lookup_gsum_[500]": 170.0,
+     "ALI": 174.033,
+     "DEEP": 161.601,
+     "batching": 128.12,
+     "commit1": 138.344,
+     "commit2": 142.344,
+     "commit3": 146.344,
+     "commit4": 150.444,
+     "query": 128.025
+    },
+    "lam": 128.025,
+    "binding": "query",
+    "report": {
+     "total": 128,
+     "ALI": 174,
+     "DEEP": 161,
+     "batching": 128,
+     "commit1": 138,
+     "commit2": 142,
+     "commit3": 146,
+     "commit4": 150,
+     "query": 128
+    }
+   },
+   "SC_JBR_best_m": {
+    "m": 38,
+    "lam_iop": 128.04,
+    "binding": "query",
+    "rounds": {
+     "Connection_gprod_[1]": 167.83,
+     "Lookup_gsum_[1000]": 164.51,
+     "Lookup_gsum_[250]": 168.42,
+     "Lookup_gsum_[500]": 170.0,
+     "ALI": 174.01,
+     "DEEP": 161.58,
+     "batching": 128.12,
+     "commit1": 138.34,
+     "commit2": 142.34,
+     "commit3": 146.34,
+     "commit4": 150.44,
+     "query": 128.04
+    }
+   },
+   "T8_JB": {
+    "m": 4,
+    "lam_iop": 118.26,
+    "binding": "batch",
+    "rounds": {
+     "Connection_gprod_[1]": 161.75,
+     "Lookup_gsum_[1000]": 159.0,
+     "Lookup_gsum_[250]": 161.77,
+     "Lookup_gsum_[500]": 163.0,
+     "ali": 177.26,
+     "deep": 158.83,
+     "batch": 118.26,
+     "fold1": 132.49,
+     "fold2": 140.49,
+     "fold3": 148.49,
+     "fold4": 155.57,
+     "query": 120.33
+    }
+   },
+   "T8_UD": {
+    "Connection_gprod_[1]": 167.75,
+    "Lookup_gsum_[1000]": 165.0,
+    "Lookup_gsum_[250]": 167.77,
+    "Lookup_gsum_[500]": 169.0,
+    "ali": 183.26,
+    "deep": 170.83,
+    "batch": 159.87,
+    "fold1": 166.09,
+    "fold2": 166.09,
+    "fold3": 166.09,
+    "fold4": 167.19,
+    "query": 73.54
+   },
+   "HYB_JB": {
+    "m": 38,
+    "lam_iop": 128.04,
+    "binding": "query",
+    "rounds": {
+     "Connection_gprod_[1]": 158.5,
+     "Lookup_gsum_[1000]": 155.75,
+     "Lookup_gsum_[250]": 158.52,
+     "Lookup_gsum_[500]": 159.75,
+     "ali": 174.01,
+     "deep": 152.33,
+     "batch": 128.12,
+     "fold1": 138.34,
+     "fold2": 142.34,
+     "fold3": 146.34,
+     "fold4": 150.44,
+     "query": 128.04
+    }
+   },
+   "T8_batch_pow_for_128": null
+  },
+  "ZisK Recursive2": {
+   "SC_UDR": {
+    "rounds": {
+     "Connection_gprod_[1]": 166.83,
+     "Lookup_gsum_[1000]": 163.508,
+     "Lookup_gsum_[250]": 167.415,
+     "Lookup_gsum_[500]": 169.0,
+     "ALI": 182.262,
+     "DEEP": 170.415,
+     "batching": 162.241,
+     "commit1": 172.508,
+     "commit2": 176.508,
+     "commit3": 180.604,
+     "commit4": 183.578,
+     "query": 95.876
+    },
+    "lam": 95.876,
+    "binding": "query",
+    "report": {
+     "total": 95,
+     "ALI": 182,
+     "DEEP": 170,
+     "batching": 162,
+     "commit1": 172,
+     "commit2": 176,
+     "commit3": 180,
+     "commit4": 183,
+     "query": 95
+    }
+   },
+   "SC_JBR": {
+    "rounds": {
+     "Connection_gprod_[1]": 166.83,
+     "Lookup_gsum_[1000]": 163.508,
+     "Lookup_gsum_[250]": 167.415,
+     "Lookup_gsum_[500]": 169.0,
+     "ALI": 174.296,
+     "DEEP": 162.449,
+     "batching": 128.468,
+     "commit1": 138.735,
+     "commit2": 142.735,
+     "commit3": 146.834,
+     "commit4": 149.834,
+     "query": 128.781
+    },
+    "lam": 128.468,
+    "binding": "batching",
+    "report": {
+     "total": 128,
+     "ALI": 174,
+     "DEEP": 162,
+     "batching": 128,
+     "commit1": 138,
+     "commit2": 142,
+     "commit3": 146,
+     "commit4": 149,
+     "query": 128
+    }
+   },
+   "SC_JBR_best_m": {
+    "m": 60,
+    "lam_iop": 128.73,
+    "binding": "query",
+    "rounds": {
+     "Connection_gprod_[1]": 166.83,
+     "Lookup_gsum_[1000]": 163.51,
+     "Lookup_gsum_[250]": 167.42,
+     "Lookup_gsum_[500]": 169.0,
+     "ALI": 174.36,
+     "DEEP": 162.51,
+     "batching": 128.82,
+     "commit1": 139.08,
+     "commit2": 143.08,
+     "commit3": 147.18,
+     "commit4": 150.18,
+     "query": 128.73
+    }
+   },
+   "T8_JB": {
+    "m": 7,
+    "lam_iop": 118.06,
+    "binding": "batch",
+    "rounds": {
+     "Connection_gprod_[1]": 161.94,
+     "Lookup_gsum_[1000]": 159.2,
+     "Lookup_gsum_[250]": 161.96,
+     "Lookup_gsum_[500]": 163.19,
+     "ali": 177.45,
+     "deep": 160.8,
+     "batch": 118.06,
+     "fold1": 132.33,
+     "fold2": 140.33,
+     "fold3": 147.43,
+     "fold4": 153.43,
+     "query": 119.45
+    }
+   },
+   "T8_UD": {
+    "Connection_gprod_[1]": 166.75,
+    "Lookup_gsum_[1000]": 164.0,
+    "Lookup_gsum_[250]": 166.77,
+    "Lookup_gsum_[500]": 168.0,
+    "ali": 182.26,
+    "deep": 170.41,
+    "batch": 160.83,
+    "fold1": 167.09,
+    "fold2": 167.09,
+    "fold3": 168.19,
+    "fold4": 168.19,
+    "query": 95.87
+   },
+   "HYB_JB": {
+    "m": 60,
+    "lam_iop": 128.73,
+    "binding": "query",
+    "rounds": {
+     "Connection_gprod_[1]": 158.84,
+     "Lookup_gsum_[1000]": 156.1,
+     "Lookup_gsum_[250]": 158.86,
+     "Lookup_gsum_[500]": 160.09,
+     "ali": 174.35,
+     "deep": 154.6,
+     "batch": 128.82,
+     "fold1": 139.08,
+     "fold2": 143.08,
+     "fold3": 147.18,
+     "fold4": 150.18,
+     "query": 128.73
+    }
+   },
+   "T8_batch_pow_for_128": null
+  },
+  "ZisK Final_Compressed (STIR)": {
+   "SC_UDR": {
+    "rounds": {
+     "Connection_gprod_[1]": 167.83,
+     "Lookup_gsum_[1000]": 165.508,
+     "Lookup_gsum_[250]": 169.415,
+     "Lookup_gsum_[500]": 171.0,
+     "ALI": 183.891,
+     "DEEP": 170.83,
+     "batching": 160.706,
+     "fold0": 170.139,
+     "ood1": 179.0,
+     "shift1": 66.18,
+     "ood2": 182.0,
+     "shift2": 51.854,
+     "fin": 44.969
+    },
+    "lam": 44.969,
+    "binding": "fin",
+    "report": {
+     "total": 44,
+     "ALI": 183,
+     "DEEP": 170,
+     "ood1": 178,
+     "ood2": 181,
+     "batching": 160,
+     "fin": 44,
+     "fold0": 170,
+     "shift1": 66,
+     "shift2": 51
+    }
+   },
+   "SC_JBR": {
+    "rounds": {
+     "Connection_gprod_[1]": 167.83,
+     "Lookup_gsum_[1000]": 165.508,
+     "Lookup_gsum_[250]": 169.415,
+     "Lookup_gsum_[500]": 171.0,
+     "ALI": 174.163,
+     "DEEP": 161.101,
+     "batching": 128.838,
+     "fold0": 138.271,
+     "ood1": 156.542,
+     "shift1": 128.395,
+     "ood2": 157.542,
+     "shift2": 128.051,
+     "fin": 129.783
+    },
+    "lam": 128.051,
+    "binding": "shift2",
+    "report": {
+     "total": 128,
+     "ALI": 174,
+     "DEEP": 161,
+     "ood1": 156,
+     "ood2": 157,
+     "batching": 128,
+     "fin": 129,
+     "fold0": 138,
+     "shift1": 128,
+     "shift2": 128
+    }
+   },
+   "SC_JBR_best_m": {
+    "m": 29,
+    "lam_iop": 128.21,
+    "binding": "shift2",
+    "rounds": {
+     "Connection_gprod_[1]": 167.83,
+     "Lookup_gsum_[1000]": 165.51,
+     "Lookup_gsum_[250]": 169.42,
+     "Lookup_gsum_[500]": 171.0,
+     "ALI": 174.03,
+     "DEEP": 160.97,
+     "batching": 128.33,
+     "fold0": 137.76,
+     "ood1": 156.28,
+     "shift1": 128.49,
+     "ood2": 157.28,
+     "shift2": 128.21,
+     "fin": 130.05
+    }
+   }
+  }
+ },
+ "gap_final": {
+  "m": 38,
+  "A0": -106.71745671484913,
+  "B1": -161.7332131143321,
+  "bchks_lin": -138.25102975027366
+ },
+ "zisk_all": {
+  "version": "1.4.0-alpha",
+  "rows": [
+   {
+    "name": "Main",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.24,
+    "sc_udr": 111.99,
+    "t8_jb": 114.75,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Rom",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.37,
+    "sc_udr": 111.57,
+    "t8_jb": 116.26,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Mem",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.1,
+    "sc_udr": 111.57,
+    "t8_jb": 115.31,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "InputData",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.33,
+    "sc_udr": 111.57,
+    "t8_jb": 115.99,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "RomData",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.37,
+    "sc_udr": 111.57,
+    "t8_jb": 116.33,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "MemAlign",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.28,
+    "sc_udr": 111.57,
+    "t8_jb": 116.62,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "MemAlignLarge",
+    "sc_jbr": 128.09,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.36,
+    "sc_udr": 111.99,
+    "t8_jb": 114.38,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "MemAlignByte",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.33,
+    "sc_udr": 111.57,
+    "t8_jb": 115.99,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "MemAlignReadByte",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.4,
+    "sc_udr": 111.57,
+    "t8_jb": 116.49,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "MemAlignWriteByte",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.35,
+    "sc_udr": 111.57,
+    "t8_jb": 116.12,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "MemAlignByteLarge",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.18,
+    "sc_udr": 111.57,
+    "t8_jb": 114.84,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "MemAlignReadByteLarge",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.26,
+    "sc_udr": 111.57,
+    "t8_jb": 115.33,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Arith",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.27,
+    "sc_udr": 111.57,
+    "t8_jb": 116.56,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Binary",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.18,
+    "sc_udr": 111.57,
+    "t8_jb": 115.84,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "BinaryLarge",
+    "sc_jbr": 128.42,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.44,
+    "sc_udr": 111.99,
+    "t8_jb": 115.08,
+    "t8_bind": "query"
+   },
+   {
+    "name": "BinaryHuge",
+    "sc_jbr": 128.18,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.26,
+    "sc_udr": 111.99,
+    "t8_jb": 114.85,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "BinaryAdd",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.39,
+    "sc_udr": 111.57,
+    "t8_jb": 116.41,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "BinaryAddLarge",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.28,
+    "sc_udr": 111.57,
+    "t8_jb": 115.97,
+    "t8_bind": "query"
+   },
+   {
+    "name": "BinaryAddHuge",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.13,
+    "sc_udr": 111.57,
+    "t8_jb": 115.54,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "BinaryAddHi",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.37,
+    "sc_udr": 111.57,
+    "t8_jb": 116.26,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "BinaryAddHiLarge",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.25,
+    "sc_udr": 111.57,
+    "t8_jb": 115.97,
+    "t8_bind": "query"
+   },
+   {
+    "name": "BinaryAddHiHuge",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.12,
+    "sc_udr": 111.57,
+    "t8_jb": 115.4,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "BinaryExtension",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.19,
+    "sc_udr": 111.57,
+    "t8_jb": 115.96,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "BinaryExtensionLarge",
+    "sc_jbr": 128.42,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.46,
+    "sc_udr": 111.99,
+    "t8_jb": 115.08,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Add256",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.4,
+    "sc_udr": 111.57,
+    "t8_jb": 117.71,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "ArithEq",
+    "sc_jbr": 128.14,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.37,
+    "sc_udr": 111.99,
+    "t8_jb": 116.4,
+    "t8_bind": "query"
+   },
+   {
+    "name": "ArithEqLarge",
+    "sc_jbr": 128.13,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.18,
+    "sc_udr": 111.99,
+    "t8_jb": 115.08,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Arith256X",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.11,
+    "sc_udr": 111.57,
+    "t8_jb": 116.53,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Arith256XLarge",
+    "sc_jbr": 128.27,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.34,
+    "sc_udr": 111.99,
+    "t8_jb": 115.37,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "ArithSecp256K1",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.09,
+    "sc_udr": 111.57,
+    "t8_jb": 116.45,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "ArithSecp256K1Large",
+    "sc_jbr": 128.27,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.32,
+    "sc_udr": 111.99,
+    "t8_jb": 115.3,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "ArithBn254",
+    "sc_jbr": 128.42,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.46,
+    "sc_udr": 111.99,
+    "t8_jb": 116.4,
+    "t8_bind": "query"
+   },
+   {
+    "name": "ArithBn254Large",
+    "sc_jbr": 128.27,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.27,
+    "sc_udr": 111.99,
+    "t8_jb": 115.08,
+    "t8_bind": "query"
+   },
+   {
+    "name": "ArithEq384",
+    "sc_jbr": 128.27,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.32,
+    "sc_udr": 111.99,
+    "t8_jb": 116.31,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "ArithEq384Large",
+    "sc_jbr": 128.13,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.14,
+    "sc_udr": 111.99,
+    "t8_jb": 115.08,
+    "t8_bind": "query"
+   },
+   {
+    "name": "TwistedEdwards",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.31,
+    "sc_udr": 111.57,
+    "t8_jb": 118.39,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Keccakf",
+    "sc_jbr": 128.16,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.21,
+    "sc_udr": 112.82,
+    "t8_jb": 113.52,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Sha256f",
+    "sc_jbr": 128.27,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.29,
+    "sc_udr": 111.99,
+    "t8_jb": 116.4,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Poseidon",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.41,
+    "sc_udr": 111.57,
+    "t8_jb": 119.35,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Poseidon2KoalaBear",
+    "sc_jbr": 128.34,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.41,
+    "sc_udr": 111.99,
+    "t8_jb": 116.4,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Blake2br",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.11,
+    "sc_udr": 111.57,
+    "t8_jb": 116.54,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Blake3f",
+    "sc_jbr": 128.27,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.32,
+    "sc_udr": 111.99,
+    "t8_jb": 116.26,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Blake2s",
+    "sc_jbr": 128.42,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.44,
+    "sc_udr": 111.99,
+    "t8_jb": 116.4,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Dma",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.34,
+    "sc_udr": 111.57,
+    "t8_jb": 117.02,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Dma64Aligned",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.28,
+    "sc_udr": 111.57,
+    "t8_jb": 116.65,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Dma64AlignedLarge",
+    "sc_jbr": 128.12,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.36,
+    "sc_udr": 111.99,
+    "t8_jb": 114.41,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Dma64AlignedMemSet",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.43,
+    "sc_udr": 111.57,
+    "t8_jb": 117.07,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Dma64AlignedMem",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.34,
+    "sc_udr": 111.57,
+    "t8_jb": 117.07,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Dma64AlignedMemLarge",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.19,
+    "sc_udr": 111.57,
+    "t8_jb": 115.93,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Dma64AlignedMemCpy",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.32,
+    "sc_udr": 111.57,
+    "t8_jb": 116.91,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "DmaUnaligned",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.32,
+    "sc_udr": 111.57,
+    "t8_jb": 116.91,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "DmaPrePost",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.22,
+    "sc_udr": 111.57,
+    "t8_jb": 116.22,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "JumpDest",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.28,
+    "sc_udr": 111.57,
+    "t8_jb": 116.6,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "VirtualTableZisk0",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.23,
+    "sc_udr": 111.57,
+    "t8_jb": 116.31,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "VirtualTableZisk1",
+    "sc_jbr": 128.07,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.18,
+    "sc_udr": 111.57,
+    "t8_jb": 115.98,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Keccakf-compressor",
+    "sc_jbr": 128.57,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.69,
+    "sc_udr": 96.84,
+    "t8_jb": 118.11,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Poseidon2KoalaBear-compressor",
+    "sc_jbr": 128.2,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.72,
+    "sc_udr": 96.84,
+    "t8_jb": 118.11,
+    "t8_bind": "query"
+   },
+   {
+    "name": "Recursive2",
+    "sc_jbr": 128.47,
+    "sc_jbr_bind": "batching",
+    "sc_jbr_best": 128.73,
+    "sc_udr": 95.88,
+    "t8_jb": 118.06,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Final",
+    "sc_jbr": 128.03,
+    "sc_jbr_bind": "query",
+    "sc_jbr_best": 128.04,
+    "sc_udr": 73.54,
+    "t8_jb": 118.26,
+    "t8_bind": "batch"
+   },
+   {
+    "name": "Final_Compressed",
+    "sc_jbr": 128.05,
+    "sc_jbr_bind": "shift2",
+    "sc_jbr_best": 128.21,
+    "sc_udr": 44.97,
+    "t8_jb": null,
+    "t8_bind": null
+   }
+  ]
+ }
+}
