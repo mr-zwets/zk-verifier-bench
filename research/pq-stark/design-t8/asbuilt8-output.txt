@@ -1,5 +1,5 @@
 Track 8 S8: lambda for every (shape, parameter set) the on-chain scripts were tested on, rebuilt from VK data in
-the committed vectors. JB, powers-batching adaptation (unpublished); digest term 128 (strict 127.21).
+the committed vectors. JB, powers batching by BCIKS20 Thm 7.2 (FRI step proved in BATCHING-PROOF.md; internally reviewed, not externally); digest term 128 (strict 127.21).
 vectors read: 45; byte-model view of the VK equals the exported shape: 45/45
 
 PTZ: mul_lookups(reps=2, local=true, global=true) [n 2^5, w 7, pre 0, C 12, deg 3, lookups 3 x6 W2] + fib_lookups(log_n=5, global=true) [n 2^5, w 2, pre 1, C 9, deg 2, lookups 1 x1 W2]
@@ -130,6 +130,6 @@ Z128g: fib(log_n=7) [n 2^7, w 2, pre 1, C 5, deg 2] + mul(reps=2) [n 2^6, w 7, p
 M1: S0 tables vs as-built DAG/shape: identical
 M2: S0 tables vs as-built DAG/shape: identical
 
-Dependence on the unpublished powers-batching adaptation (Track 5 SOUNDNESS sec. 2.1) and its curve extensions:
+Dependence on powers batching (BCIKS20 Thm 7.2; BATCHING-PROOF.md, internally reviewed, not externally) and its curve extensions:
   M1 / Z128: batch round 136.33 (margin +8.33 bits over 128; the (t_h - 1) powers factor costs -6.54 bits against independent challenges, 142.87); roll-in rounds none
   M2 / Z128-g cpow 3: batch round 135.15 (margin +7.15 bits over 128; the (t_h - 1) powers factor costs -6.72 bits against independent challenges, 141.87); roll-in rounds ['fold1']; fold1 128.87 (margin +0.87)

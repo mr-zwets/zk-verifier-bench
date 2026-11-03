@@ -168,7 +168,7 @@ The production AIR must be checked against Plonky3's exact round order: `add_rc 
 **Base.** Unchanged from Track 5:
 - ADK Thm 2 per round, built on BCIKS Lemma 8.2 and Thm 7.2/7.4;
 - Block et al. Cor. 5 for Fiat-Shamir;
-- the powers-batching adaptation, still unpublished and labelled as such.
+- powers batching: a direct application of [BCIKS20] Thm 7.2, with the remaining FRI step (per-height ladders, roll-ins) proved in [BATCHING-PROOF.md](BATCHING-PROOF.md), reviewed internally but not externally (added 2026-11-03; at design time this was labelled an unpublished adaptation).
 
 **New charges, each written as a lemma with its own term in params8.py:**
 1. **Multi-table ALI:** Σ_i L·(|C_i| − 1)/|F|, a union bound over tables.

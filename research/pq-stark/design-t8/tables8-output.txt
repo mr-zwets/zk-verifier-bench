@@ -1,4 +1,4 @@
-Track 8 S0 tables (params8.py + bytes8.py). All lambda figures: JB, powers-batching adaptation (unpublished),
+Track 8 S0 tables (params8.py + bytes8.py). All lambda figures: JB, powers batching by BCIKS20 Thm 7.2 (FRI step proved in BATCHING-PROOF.md; internally reviewed, not externally),
 best m in 3..24; digest term 4h = 128 (birthday convention), strict reading 127.21. Sizes: expected values.
 
 ==============================================================================================================

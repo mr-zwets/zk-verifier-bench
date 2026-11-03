@@ -192,7 +192,7 @@ A 1-tx stretch is possible only if the W logic lives in R's code blobs and W is 
 - Bytes in the 1-tx plan.
 - The anonymity set is per pool and grows in flush-sized chunks.
 - Withdrawal fees of about 0.0013–0.0027 BCH.
-- Simulation extractability is assumed, and Track 5's powers-batching adaptation is unreviewed (both carried over from Track 8).
+- Simulation extractability is assumed, and powers batching (BCIKS20 Thm 7.2; FRI step proved in ../pq-stark/BATCHING-PROOF.md) is reviewed internally, not externally (both carried over from Track 8).
 - Accidental 64-bit key collisions (self-inflicted denial of service; negligible).
 - The P2SH32 redeem size of W.
 - Reorgs: safe, but relayers must rebuild transactions.

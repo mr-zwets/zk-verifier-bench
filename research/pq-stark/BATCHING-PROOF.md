@@ -1,13 +1,13 @@
 # Powers batching in Plonky3's FRI: statement, proof and the numbers it gives Tracks 5 and 8
 
-Date: 2026-11-03. Branch `wip/batching-proof` (zk-verifier-bench). Research only. This document is internal and has
-not been reviewed outside the project.
+Date: 2026-11-03. Branch `wip/batching-proof` (zk-verifier-bench). Research only. This document has been reviewed
+internally but not outside the project.
 Calculator: [design-t8/batching8.py](design-t8/batching8.py) (`python3 batching8.py`), output
 [design-t8/batching8-output.json](design-t8/batching8-output.json).
 
 ## 0. Summary
 
-Every λ figure in Track 5 (Plonky3 sets) and Track 8 carries the label **"JB, powers-batching adaptation,
+Every λ figure in Track 5 (Plonky3 sets) and Track 8 carried the label **"JB, powers-batching adaptation,
 unpublished"**. This document writes that adaptation out as a statement and a proof.
 
 1. **The batching step itself is a published theorem.** Plonky3 batches the opened quotients of one LDE height as
@@ -36,8 +36,8 @@ unpublished"**. This document writes that adaptation out as a statement and a pr
    - Sensitivity only, not used: [BCHKS25] Thm 4.2 (curves with a linear-in-n bound) would put the batching round at
      155.6 (M1) and 155.2 (M2). Its §4 proofs are sketches in a preprint.
 
-**Proposed label** (for the maintainer to decide; this branch does not edit other documents): replace
-"JB, powers-batching adaptation, unpublished" with **"JB; powers batching by [BCIKS20] Thm 7.2, proof in
+**New label** (applied on this branch to the Track 5/8 reports, SOUNDNESS.md, the verifier README and the
+params8 outputs; the maintainer decides on merge): replace "JB, powers-batching adaptation, unpublished" with **"JB; powers batching by [BCIKS20] Thm 7.2, proof in
 BATCHING-PROOF.md (internal, not externally reviewed); DEEP-ALI front end per [ADK] Thm 2"**.
 
 ## 1. The statement being proved
@@ -432,8 +432,9 @@ Track 8 are unaffected and are not repeated.
      recount them.
    - Two shape facts carry the argument: a contiguous α′ ladder per height starting at α′^0, and β^a roll-ins. If a
      future Plonky3 left gaps in the ladder, the curve degree would be the largest exponent used, not t_h − 1.
-6. **External review: none.** This proof has been checked only by its author. Under the project's rules the Track 5/8
-   figures stay labelled as resting on an internal argument until someone outside the project reads §3–§5.
+6. **External review: none.** This proof has had one internal review (verdict: pass, six minor findings, all applied
+   on 2026-11-03), and no review outside the project. Under the project's rules the Track 5/8 figures stay labelled
+   as resting on an internally reviewed argument until someone outside the project reads §3–§5.
 
 ## 8. References
 

@@ -191,12 +191,12 @@ Details are in [SOUNDNESS-T8.md](https://github.com/mr-zwets/groth16_cashscript/
 | M1, Z128 (cap 0 and cap 5) | 128.06 | fold1 | **128** | 127.21 |
 | M2, Z128-g, commit PoW 3, lookup PoW 8 | 128.70 | query | **128** | 127.21 |
 
-All figures are "JB, powers-batching adaptation, unpublished".
+All figures are "JB; powers batching by [BCIKS20] Thm 7.2, FRI step proved in [BATCHING-PROOF.md](BATCHING-PROOF.md) (internally reviewed, not externally)".
 
 - **Each new charge has its own lemma and round term:** multi-table ALI, DEEP (the script checks Z_H(ζ) ≠ 0 and ζ^n ≠ −1 per instance), batching per height, roll-in at degree a, LogUp, preprocessed columns, and caps with mixed-height injection.
 - **AIR ⇒ relation** is proved row type by row type for M1, and through the bus for M2.
 - **Chain lemmas cover b2, a′ (1 tx) and the NFT thread,** and an owner table names the script step that fixes or checks every value the verdict depends on.
-- **What rests on our unreviewed adaptation:** the batching round (margin 8.33 bits over 128 for M1, 7.15 for M2), M2's roll-in fold1 (margin 0.87, the tightest), and the per-height split of the batching term.
+- **What rests on the powers-batching proof:** the batching round (margin 8.33 bits over 128 for M1, 7.15 for M2), M2's roll-in fold1 (margin 0.87, the tightest), and the per-height split of the batching term. The batching step is a direct application of [BCIKS20] Thm 7.2; the remaining FRI step (per-height ladders, degree-a roll-ins) is proved in [BATCHING-PROOF.md](BATCHING-PROOF.md), reviewed internally but not externally.
   - M1's binding round, the query round, ALI, DEEP and LogUp do not depend on it.
 - **One gap was found and closed.** The scripts read proof lanes as unreduced 8-byte integers, as Track 5 did. The constraint interpreter's subtract and negate ops added only p, so a lane in [p + 1, 2^64) could drive an intermediate negative, and the packed extension product was then wrong mod p.
   - The fix adds 2p to the four ops, at no byte cost. An op-level check runs the generated op bodies in libauth on maximal lanes: 64/64 congruent; the pre-fix subtraction form gives a wrong residue on negative lanes (2/2, s8-arith Part A).
@@ -257,7 +257,7 @@ Against the design and S0 models:
 
 - **Post-quantum meaning, stated plainly.** 128 bits is a **classical** figure. Digests are 4-element Poseidon2-Goldilocks (in the circuit) and SHA-256 (commitments and transcript). Generic quantum collision search (BHT) on either reaches **about 85 bits**. That is the level of SHA-256 itself; the maintainer accepted it, and Track 8 has no 6-element digests.
 - **The strict reading** of the Fiat–Shamir digest term gives 127.21 bits; "128" uses the usual birthday convention.
-- **Every λ rests on Track 5's powers-batching adaptation, which is unpublished and unreviewed** (Track 5 SOUNDNESS §2.1, extended here to per-height ladders and degree-a roll-ins). M2's roll-in has only 0.87 bits of slack. If the adaptation needed a larger factor, raising the batch or commit PoW would restore the sets at no byte cost, but none of this has been checked by anyone outside the project.
+- **Every λ rests on the powers-batching argument.** The batching step is a direct application of [BCIKS20] Thm 7.2; the remaining FRI step (per-height ladders, degree-a roll-ins) is proved in [BATCHING-PROOF.md](BATCHING-PROOF.md). That proof has been reviewed internally but not externally, and the DEEP-ALI front end is still inherited from [ADK] Thm 2. M2's roll-in has only 0.87 bits of slack. If the bound needed a larger factor, raising the batch or commit PoW would restore the sets at no byte cost.
 - **Simulation extractability is assumed, not proved.** It is what stops a mempool observer from re-binding someone else's proof to new outputs. ZK holds by construction; FRI-layer hiding is open.
 - **Not a pool.** ROOT is a script constant, NF is not published in an output, and nothing prevents spending the same note twice. That is Track 9's pool covenant. In the 2-transaction a′ plan, tx0 alone is a partial check: it can mint an NFT for a proof that tx1 would reject, with no other effect. The minting baton must be created at deployment.
 - **Tight budget.** The a′ QRY inputs run at about 91% of their op-cost budget, the highest of any input. a′ fits one transaction with 1,310 B to spare.
@@ -364,13 +364,13 @@ The open Fiat-Shamir condition holds. **Track 4's P100 and P128 are at target as
 - **No 256-bit hash meets the strict digest reading at 128 bits.** "128" follows the usual birthday-bound convention. For S128 that means 128.17, or 127.21 under the strict reading.
 
 **Plonky3's protocol is a different statement.** Plonky3 batches constraints and DEEP openings with powers of one challenge, not with independent γ_j.
-- The batching term for that is our own adaptation: BCIKS Thm 7.2 used in place of 7.4 inside ADK Thm 2. SOUNDNESS.md §2.1 has a proof sketch.
-- **It is not peer reviewed.** So every Plonky3 figure below is labelled "JB, powers-batching adaptation, unpublished". Only Track 4-format sets rest on published theorems.
+- The batching term for that is a direct application of BCIKS Thm 7.2 (in place of 7.4 inside ADK Thm 2). The remaining FRI step is proved in [BATCHING-PROOF.md](BATCHING-PROOF.md) (SOUNDNESS.md §2.1 has the original sketch).
+- **That proof is reviewed internally, not externally.** So every Plonky3 figure below is labelled "JB; powers batching by BCIKS20 Thm 7.2, FRI step proved in BATCHING-PROOF.md (internally reviewed, not externally)". Only Track 4-format sets rest entirely on published theorems.
 - This term is close to binding for the S sets (batching round vs query round):
   - S100b: 100.66 vs 100.25.
   - S100z: 100.39 vs 100.21.
   - S128: 129.38 vs 128.17.
-- If the adaptation needed a larger factor, raising Plonky3's batch PoW would restore these sets. That knob costs no proof bytes.
+- If the bound needed a larger factor, raising Plonky3's batch PoW would restore these sets. That knob costs no proof bytes.
 
 **Other Plonky3 findings:**
 - **e = 2 cannot reach 128 bits.** This is the stock BinomialExtensionField<_,2>. The best is 125 bits:
@@ -571,7 +571,7 @@ The constraint evaluation generated from each AIR's description is only 0.2-1.1%
 | | Track 4 P128 | Track 4 P128 + Track 5 field | Track 5 S128 (Plonky3) |
 |---|---|---|---|
 | prover | own MiMC prover | own MiMC prover | Plonky3 0d80373, any supported AIR (fib, mimc built) |
-| soundness | 128.19, per-round bound now settled (published theorems) | same | 128.17 (powers-batching adaptation, unpublished) |
+| soundness | 128.19, per-round bound now settled (published theorems) | same | 128.17 (powers batching by BCIKS20 Thm 7.2; FRI step internally reviewed, not externally) |
 | proof | 91,468 B | 91,468 B | 78,393 B |
 | one 100 KB input | 71.54M, ~90% | 50.05M, 64.9% | **33.87M, 47.9%** |
 | today standard | 19 inputs, 2 txs, 154,831 B | 19 inputs, 2 txs, 150,891 B | **17 inputs, 2 txs, 123,452 B** |
@@ -592,7 +592,7 @@ The constraint evaluation generated from each AIR's description is only 0.2-1.1%
 
 ## 8. Caveats
 
-- **Plonky3 soundness rests on our unpublished powers-batching adaptation** (SOUNDNESS.md §2.1, a sketch that is not peer reviewed). The S sets are close to binding on that term. Only the Track 4-format sets (P100, P128, T5-*) rest on published theorems.
+- **Plonky3 soundness rests on the powers-batching argument:** a direct application of BCIKS20 Thm 7.2, with the remaining FRI step proved in [BATCHING-PROOF.md](BATCHING-PROOF.md), reviewed internally but not externally. The S sets are close to binding on that term. Only the Track 4-format sets (P100, P128, T5-*) rest entirely on published theorems.
 - **P128 in Plonky3 is not 128 bits** under our bound: 125.94 (mimc) and 126.31 (fib), and 123.2-124.2 for the ZK variants. 128 is Plonky3's own estimator only. Use S128 or S128b instead.
 - **The C sets are conjectured secure only:** about 60 bits proven for C100 and 75 for C128.
 - **"128 bits" follows the birthday-bound convention** for 256-bit digests. The strict reading of Cor. 5 is 4h − 0.79, which gives 127.21 for S128.

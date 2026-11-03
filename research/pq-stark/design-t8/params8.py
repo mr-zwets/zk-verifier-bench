@@ -5,7 +5,8 @@ preprocessed columns, LogUp) with the hiding two-adic FRI PCS, Goldilocks, cubic
 Base (unchanged from Track 5, ../soundness/params5.py and SOUNDNESS.md, imported, not copied):
   ADK Thm 2 per round (list decoding, Johnson regime 'JB'), built on BCIKS Lemma 8.2 + Thm 7.2/7.4;
   Block et al. Cor. 5 for Fiat-Shamir (digest term 4h, strict reading 4h - log2(3)/2);
-  the powers-batching adaptation (BCIKS Thm 7.2 with a curve of degree t-1 in the batching round) -- UNPUBLISHED,
+  powers batching (BCIKS Thm 7.2 with a curve of degree t-1 in the batching round): a direct application of BCIKS20
+  Thm 7.2, with the remaining FRI step proved in ../BATCHING-PROOF.md, reviewed internally but not externally;
   every figure below carries that label.
 
 New charges (DESIGN-T8 sec. 6), one function each, every one a separate round term:
@@ -143,7 +144,7 @@ def soundness(tables, s, per_height=True, rollin_charge=True, m=None, sharp=Fals
     h = s.digest
     best['lam'] = round(min(best['lam_iop'], p5.digest_bits(h)), 2)
     best['lam_strict'] = round(min(best['lam_iop'], p5.digest_bits(h, True)), 2)
-    best['label'] = 'JB, powers-batching adaptation (unpublished)'
+    best['label'] = 'JB, powers batching by BCIKS20 Thm 7.2 (FRI step proved in BATCHING-PROOF.md; internally reviewed, not externally)'
     return best
 
 
@@ -314,7 +315,7 @@ def main():
         lines.append(x)
         print(x)
 
-    P('Track 8 S0 tables (params8.py + bytes8.py). All lambda figures: JB, powers-batching adaptation (unpublished),')
+    P('Track 8 S0 tables (params8.py + bytes8.py). All lambda figures: JB, powers batching by BCIKS20 Thm 7.2 (FRI step proved in BATCHING-PROOF.md; internally reviewed, not externally),')
     P('best m in 3..24; digest term 4h = 128 (birthday convention), strict reading 127.21. Sizes: expected values.')
     P()
     P('=' * 110)
@@ -525,7 +526,7 @@ def asbuilt(dirs):
         g = groups.setdefault(key, dict(files=[], tables=tables, set=s, labels=[t.name for t in tables]))
         g['files'].append(rel)
     P('Track 8 S8: lambda for every (shape, parameter set) the on-chain scripts were tested on, rebuilt from VK data in')
-    P('the committed vectors. JB, powers-batching adaptation (unpublished); digest term 128 (strict 127.21).')
+    P('the committed vectors. JB, powers batching by BCIKS20 Thm 7.2 (FRI step proved in BATCHING-PROOF.md; internally reviewed, not externally); digest term 128 (strict 127.21).')
     P(f"vectors read: {len(js['vectors'])}; byte-model view of the VK equals the exported shape: "
       f"{sum(x['shape_agrees'] for x in js['vectors'])}/{len(js['vectors'])}")
     for x in js['vectors']:
@@ -566,9 +567,9 @@ def asbuilt(dirs):
                     diffs.append(f'{a.name}.{fld}: S0 {getattr(a, fld)} built {getattr(b, fld)}')
         P(f"{nm}: S0 tables vs as-built DAG/shape: {'identical' if not diffs else diffs}")
         js['hand_tables'][nm] = diffs
-    # margins: how much the powers-batching adaptation (and the roll-in curve charge) could be off before 128 is lost
+    # margins: how much the powers-batching bound (and the roll-in curve charge) could be off before 128 is lost
     P()
-    P('Dependence on the unpublished powers-batching adaptation (Track 5 SOUNDNESS sec. 2.1) and its curve extensions:')
+    P('Dependence on powers batching (BCIKS20 Thm 7.2; BATCHING-PROOF.md, internally reviewed, not externally) and its curve extensions:')
     js['dependence'] = {}
     for nm, tables, s in (('M1 / Z128', b8.M1, b8.Z128), ('M2 / Z128-g cpow 3', b8.M2, replace(b8.Z128g, commit_pow=3))):
         r = soundness(tables, s)
