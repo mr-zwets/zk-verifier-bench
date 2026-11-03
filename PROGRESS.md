@@ -121,3 +121,47 @@ Note: `research/pq-stark/design-t10/ZISK-FINAL.md`. Scripts and outputs: `resear
 - The only argument in Final is the connection grand product; there is no LogUp.
 - The public values are flag + program_vk(4) + 64 u32 outputs. program_vk is a covenant constant. The outputs can carry a SHA-256 that OP_SHA256 rebuilds. The bridge must re-impose the host-side checks: flag = 1, outputs < 2^32.
 - Verifying one Final costs 3,876 P2-16 permutations.
+
+## G2: shape twin (done, heavy: prover + BCHN)
+
+Code: groth16_cashscript wip/t10-gates `research/pq-wrap/` (copies of Track 8's prover/verifier/onchain; commits 8014fd2, ffa3b32, daad7db). Results: `research/pq-wrap/onchain/results/g2/`. Here: `research/pq-stark/design-t10/g2/params-g2.py`, `research/node-check/{export-g2.mjs,run-g2.sh,raw/g2n2-*}`.
+
+### Gate G2: **FAIL under today's rules** (b2 meets the numbers only under raised limits that no node implements)
+
+- **Twin.** Two tables: M1's Poseidon2-Gl AIR lengthened to 2^18 rows (17 cols, deg 4) and a dummy Gl^3 mul-add table at 2^16 rows (12 cols, deg 2). Gl^3, SHA-256 trees, ZK on.
+- **Parameters.** lb 5, final poly 2^8, Q 43, PoW query 24 / batch 20 / commit 11. params10's T8 accounting gives **128.15** bits (JB, query-bound, m 9); HYB gives 130.22.
+  - lb 5 is forced by RAM. lb 6 (Q 36) would be about 39 GB.
+  - lb 8 (Q 28, about 172 KB proof) would need roughly 85 to 155 GB.
+- **Prover.** Proof 224,142 to 225,262 B at cap 0 (228,846 to 231,534 B at cap 5). Proving time 15.1 to 22.0 s at RAYON_NUM_THREADS=4. **Peak RSS 19.5 GB** (VmHWM 19,521,448 kB, sampled from /proc), which is under 24 GB with about 4.5 GB to spare.
+- **a' (today's rules), cap 0.** Cap 5 found no plan: one query per input needs about 10.6 KB of unlocking.
+  - Size: **7 tx, 78 inputs, 639,351 / 637,951 B** (91.6 + 5 × 89.8 + 98.5 KB).
+  - Op-cost: 3 CODE inputs + DEFINE 53,001 B; max **92.72%** of an input's budget (BCHN-adjusted); total op-cost 339.6 M.
+  - libauth: 286/286 accept/reject cases as expected (0 unexpected).
+  - Stock BCHN 29.1.0 (run g2n2):
+    - block validation 43/43 as expected (14 valid accepted; 27 rejects and 2 b2 txs rejected);
+    - testmempoolaccept with POLICY=1: 14/14 allowed;
+    - unconfirmed 7-tx chain: all in mempool, mined in one block.
+  - Verify time: about 59 ms per tx, **about 414 ms per proof**, 0.264 to 0.278 ns per op-cost unit.
+  - → Fails the ≤ 300 KB and ≤ 4 tx limits (2.1× and 1.75× over); passes the ≤ 95% input budget and RAM limits.
+- **b2.** QA 19 of 43.
+  - Size: **1 tx, 2 inputs, 260,355 / 260,784 B**; unlocking 134,965 + 125,256 B.
+  - Op-cost: 47.6% / 51.7% of each input's budget under r150 (spec accounting: 44.3 / 47.9%).
+  - libauth r150/r150t (per-input 150,000 B, tx 300,000 B): valid accepted, 172/172 sweep cases as expected.
+  - Today: rejected by libauth (unlocking > 10,000 B; tx > 100,000 B) and by stock BCHN (blk-bad-inputs), as expected.
+  - → Meets ≤ 300 KB / ≤ 4 tx / ≤ 95% only under raised limits. Not standard today.
+- **Floor estimate (modelled, not built).** Even at lb 8, a' needs about 28 × 9.5 KB of QRY inputs plus 4 or 5 tx of HEAD/CODE/FIN overhead (about 37 KB each), roughly 430 to 450 KB. So a' cannot reach 300 KB with this verifier at any blowup.
+
+### Fixes during G2
+
+- test-a2: the cap-5 offsets (ROOTS 578, FROOTS 992) fell outside the cap-0 items, so those flips were no-ops and the cases accepted (test artefact). The offsets are now cap-independent and throw if out of range.
+- test-a2: the "tx1 outputs changed" case targets the final tx. A middle tx's plain output is not bound by the covenant, as with Track 8 tx0's extra outputs; this is by design, not a hole, since the statement's CTX is the final tx's.
+- test-b2w: the shebang was not on the first line.
+- layouta (daad7db): middle txs of T > 2 chains were underfunded (tx0's NFT outputs carried 5,000 sat; the middle txs assumed 200,000). BCHN policy run g2n1 (kept in raw/) rejected tx1 to tx5 with bad-txns-in-belowout. Only values changed; sizes and op-cost are identical. Rerun as g2n2: all allowed.
+
+### Caveats
+
+- The twin matches the target's size and shape (rows, columns, field, hash), not ZisK's verifier logic.
+- The bridge needs Poseidon2-16 with pil2's linear layers (G1), 3,876 perms, 130-eval DEEP. Whether 2^18 rows hold that is not checked.
+- The 128 bits rests on Track 8's unpublished powers-batching adaptation (G0).
+- The RAM figure comes from 0.2 s sampling of VmHWM, which is a high-water mark, so only the last < 0.2 s before exit could be missed.
+- g2n2's env.txt records groth16_cashscript ffa3b32 plus the uncommitted layouta funding fix, later committed as daad7db.
