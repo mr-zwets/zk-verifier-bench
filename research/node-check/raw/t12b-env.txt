@@ -1,0 +1,18 @@
+date: 2026-11-03T17:39:40+01:00
+host: Linux 7.2.15-1-omarchy x86_64
+Model name:                              AMD Ryzen 9 7900 12-Core Processor
+governor(cpu9): performance epp: performance
+bchn: Bitcoin Cash Node Daemon version v29.1.0-b31ed10b4
+bench: 66b1e4b  groth16_cashscript: 043d1b7
+node cpu: 9 driver cpu: 7 reps: 11
+workload files:
+  69377da6865e47f7 pinned-risc0.json
+  5e9d916da21420bd pinned-risc0-v3.json
+  6f96ad45b6dc4b56 pinned-sp1-v5.json
+  aba78718ffea856c pinned-test.json
+loadavg start: 0.46 0.51 0.80 1/1763 554030
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/pinned/cache/bchn-t12b-t","rpcport":39870,"cpu":"9","pid":554039}
+Bitcoin server stopping
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/pinned/cache/bchn-t12b-p","rpcport":39300,"cpu":"9","pid":554408}
+Bitcoin server stopping
+loadavg end: 1.28 0.74 0.87 2/1780 554508
