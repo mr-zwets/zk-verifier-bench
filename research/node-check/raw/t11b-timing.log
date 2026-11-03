@@ -1,0 +1,14 @@
+13 workloads (timing); libauth charges OP_DEFINE bodies: true
+ok  realkeys-sp1-v5:valid:silvana-add K=10 verify=36.87ms accepted lib=true
+ok  realkeys-sp1-v5:valid:sparsity-tdx-gcp K=10 verify=34.84ms accepted lib=true
+ok  realkeys-sp1-v5:valid:pessina-solana-aa K=10 verify=35.03ms accepted lib=true
+ok  realkeys-sp1-v5:covenant:control: application proof, output 0 = OP_RETURN <PV> K=10 verify=34.98ms accepted lib=true
+ok  realkeys-sp1-v5:covenant:valid proof of another program (sparsity-tdx-gcp) with the application's PV in output 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:valid proof of another program (pessina-solana-aa, programVKey 0x00390c74c8…) with its own PV in output 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:valid proof of another program (pessina-solana-aa) with the application's PV in output 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:valid:risc0-test-receipt-V5_0 K=10 verify=34.98ms accepted lib=true
+ok  realkeys-risc0:reject:whole statement of risc0-test-receipt-V3_0 (a real proof valid under control root 274eccaf) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:whole statement of risc0-test-receipt-V2_2 (a real proof valid under control root 6c4fb313) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:whole statement of risc0-test-receipt-V2_1 (a real proof valid under control root dc9d181c) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:whole statement of risc0-test-receipt-V2_0 (a real proof valid under control root 90877d9a) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:control: application proof, output 0 = OP_RETURN <PV> K=10 verify=34.79ms accepted lib=true
