@@ -1,0 +1,3 @@
+  Final_Compressed_P2                SC JBR  128.63 (fin       ) best-m  129.31  UDR  57.19  T8 JB    n/a (STIR: no T8 model)
+  Final_P2                           SC JBR  128.97 (query     ) best-m  129.40  UDR  71.28  T8 JB 122.57 (query)
+  ZisK 1.4.0-alpha (Poseidon2 setup): 2 circuits; min SC JBR 128.63 (Final_Compressed_P2); min T8 JB 122.57 (Final_P2); min SC UDR 57.19

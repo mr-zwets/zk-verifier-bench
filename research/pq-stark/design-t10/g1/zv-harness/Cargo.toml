@@ -1,0 +1,19 @@
+[package]
+name = "zisk-verifier"
+version = "1.4.0-alpha"
+edition = "2021"
+publish = false
+
+[dependencies]
+proofman-verifier = { version = "=1.4.0-alpha", default-features = false }
+proofman-fields = "=1.4.0-alpha"
+
+[features]
+default = []
+std = ["proofman-verifier/std"]
+
+[[example]]
+name = "g1probe"
+path = "examples/g1probe.rs"
+
+[workspace]

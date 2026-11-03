@@ -91,3 +91,33 @@ The HYB variant keeps T8's accounting and swaps in BCHKS25. It gives Final 128.0
   - The Track 8 outer layer would be reported at 131.29 under the same BCHKS25 model, or 128.06 under BCIKS20.
 - The ZisK Final margin is 0.03 bits (query: 51 × 1.98 + 27). Any small change in the gap convention flips it below 128.
 - To read BCHKS25 Thm 4.1/4.2 (and any curve corollary), the maintainer needs to fetch https://eprint.iacr.org/2025/2055.pdf. It is blocked from this session (HTTP 403, and a retry was refused).
+
+## G1: ZisK final-proof extraction (done, light compute)
+
+Note: `research/pq-stark/design-t10/ZISK-FINAL.md`. Scripts and outputs: `research/pq-stark/design-t10/g1/`.
+
+### Gate G1: **PASS (narrow)**
+
+- **Pins.** ZisK v1.4.0-alpha `64a1f16` and pil2-proofman v1.4.0-alpha `27b2fc2`. The crates.io `proofman-verifier` and `proofman-fields` sources are identical to the tag.
+- **Real proofs without a GPU.** Six published fixtures (`fib_mod`, three hash families, leaf and compressed) verify on CPU with the stock no_std `zisk-verifier`. Plain rejection checks: 706/706 rejected.
+- **Independent check.** A Python replay (our own Poseidon2, transcript and Merkle code) matches the Poseidon2 leaf fixture: all 432 Merkle paths, all 8 roots (the constant root equals the release vk), and the 22-bit grinding.
+- **Narrow, part 1.** One program only, and no Poseidon2 proving key is published (HTTP 404). Only BLAKE3 (6.5 GB) and Poseidon1 (4.9 GB) keys exist.
+- **Narrow, part 2.** Local CPU proving needs sudo-level setup: system packages and memlock. Its RAM use within 24 GB is unverified.
+
+### Correction for G0 and the T10 panel
+
+- soundcalc's ZisK "Final" is the **BLAKE3** setup (51 queries / 27-bit grinding / 1,122 evals / 2^18).
+- The **Poseidon2** Final is 2^16 rows, 54 queries, 22-bit grinding, 130 evals, 5 opening points, P2-16 arity-4 trees, 369,368 B.
+- Its soundness, from our toml:
+  - soundcalc and params10 SC: **128.97 JBR** (compressed 128.63);
+  - Track 8 accounting: **122.57** (query-bound);
+  - UDR: 71.28 / 57.19.
+
+### Other facts the bridge needs
+
+- The extension is Gl³ with u³ = u + 1, the same as Track 8.
+- Poseidon2's round constants match Plonky3's. The internal diagonal and the M4 matrix do **not**, so Track 8's AIR needs pil2's linear layers.
+- Final is not ZK: plain LDE, no blinding.
+- The only argument in Final is the connection grand product; there is no LogUp.
+- The public values are flag + program_vk(4) + 64 u32 outputs. program_vk is a covenant constant. The outputs can carry a SHA-256 that OP_SHA256 rebuilds. The bridge must re-impose the host-side checks: flag = 1, outputs < 2^32.
+- Verifying one Final costs 3,876 P2-16 permutations.
