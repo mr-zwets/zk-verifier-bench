@@ -19,8 +19,9 @@ and the zero-knowledge (HidingFriPcs) variants.
     verdicts were as expected. Most manipulations keep the item count and size.
   - Layout (a): `test-a` ran 417 cases on 8 representative vectors (see `results/test-a.log`), 0 unexpected. One honest caveat is below.
 - **The best 128-bit set is S128** (mimc, 78,393 B proof):
-  - Security: 128.17 bits λ_IOP under the Soundness phase's per-round bound (Johnson regime, m = 10), **with the
-    powers-batching adaptation, which is not a published statement** (see the security section). That is
+  - Security: 128.17 bits λ_IOP under the Soundness phase's per-round bound (Johnson regime, m = 10), **with
+    powers batching by BCIKS20 Thm 7.2, FRI step proved in BATCHING-PROOF.md, reviewed internally but not
+    externally** (see the security section). That is
     λ = 128 under the usual digest convention, and 127.21 under the strict reading.
   - Layout (b): 33.87M op-cost (BCHN-adjusted 33.87M), **47.9% of the base-41 budget** of one 88.3 KB input. Track 5 field P128
     (Track 4 format, 92 KB) was 50.05M, 64.9%.
@@ -99,30 +100,30 @@ phase's calculator (`params5.py`, P3 model) run on each vector's exact FriParame
 regime is per-round Johnson-bound list decoding, with Fiat-Shamir per Block et al. Cor. 5. λ is capped at 4h (the
 usual birthday convention).
 
-**None of these figures is a proven bound as published.** Every vector here is a Plonky3 proof, and Plonky3 batches
+**None of these figures rests on published theorems alone.** Every vector here is a Plonky3 proof, and Plonky3 batches
 the DEEP quotients (and the constraints) with powers of one challenge. The batching term for that, (t−1)(A0 + B1), is
-the Soundness phase's adaptation of [ADK] Thm 2 (BCIKS Thm 7.2 in place of Thm 7.4). A proof sketch is in
-zk-verifier-bench `wip/pq-stark-soundness` `research/pq-stark/soundness/SOUNDNESS.md` §2.1; it is not published and
-not peer reviewed. Only Track 4-format proofs (independent γ_j, the Track 5 field phase's P100/P128) rest on [ADK]
-Thm 2 as published. The S sets depend on this term: their batching round is within 0.2-1.2 bits of the binding query
+a direct application of BCIKS Thm 7.2 (in place of Thm 7.4) inside [ADK] Thm 2, with the remaining FRI step proved in
+[research/pq-stark/BATCHING-PROOF.md](../BATCHING-PROOF.md) (sketch in `../soundness/SOUNDNESS.md` §2.1). That proof is
+reviewed internally but not externally. Only Track 4-format proofs (independent γ_j, the Track 5 field phase's
+P100/P128) rest entirely on [ADK] Thm 2 as published. The S sets depend on this term: their batching round is within 0.2-1.2 bits of the binding query
 round (S100b 100.66 vs 100.25, S100z 100.39 vs 100.21, S128 129.38 vs 128.17).
 
 | set | D | λ (JB) | binding round | regime / note |
 |---|---|---|---|---|
-| S128 | 3 | 128 (λ_IOP 128.17) | query | JB, powers-batching adaptation, unpublished; m = 10; 127.21 under the strict digest reading |
-| S128b | 3 | 128 (λ_IOP 128.09) | query | JB, powers-batching adaptation, unpublished |
-| S128z (ZK) | 3 | 128.00 | query | JB, powers-batching adaptation, unpublished |
-| S100 | 3 | 101.11 | query | JB, powers-batching adaptation, unpublished |
-| S100b | 3 | 100.25 (mimc), 100.32 (fib) | query | JB, powers-batching adaptation, unpublished |
-| S100z (ZK) | 3 | 100.21 | query | JB, powers-batching adaptation, unpublished |
-| P100 | 3 | 100 (λ_IOP 100.11) | query / digest | JB, powers-batching adaptation, unpublished; h = 25: 99.21 under the strict digest reading. The ZK variants (h = 32): 103.6 |
-| P128 | 3 | **125.94 (mimc), 126.31 (fib)** | query / batch | **below 128** (JB, powers-batching adaptation). Plonky3's own LDR estimator says 128. ZK variants: 123.2-124.2 |
+| S128 | 3 | 128 (λ_IOP 128.17) | query | JB, powers batching by BCIKS20 Thm 7.2 (FRI step: BATCHING-PROOF.md, internally reviewed, not externally); m = 10; 127.21 under the strict digest reading |
+| S128b | 3 | 128 (λ_IOP 128.09) | query | JB, powers batching by BCIKS20 Thm 7.2 (FRI step: BATCHING-PROOF.md, internally reviewed, not externally) |
+| S128z (ZK) | 3 | 128.00 | query | JB, powers batching by BCIKS20 Thm 7.2 (FRI step: BATCHING-PROOF.md, internally reviewed, not externally) |
+| S100 | 3 | 101.11 | query | JB, powers batching by BCIKS20 Thm 7.2 (FRI step: BATCHING-PROOF.md, internally reviewed, not externally) |
+| S100b | 3 | 100.25 (mimc), 100.32 (fib) | query | JB, powers batching by BCIKS20 Thm 7.2 (FRI step: BATCHING-PROOF.md, internally reviewed, not externally) |
+| S100z (ZK) | 3 | 100.21 | query | JB, powers batching by BCIKS20 Thm 7.2 (FRI step: BATCHING-PROOF.md, internally reviewed, not externally) |
+| P100 | 3 | 100 (λ_IOP 100.11) | query / digest | JB, powers batching by BCIKS20 Thm 7.2 (FRI step: BATCHING-PROOF.md, internally reviewed, not externally); h = 25: 99.21 under the strict digest reading. The ZK variants (h = 32): 103.6 |
+| P128 | 3 | **125.94 (mimc), 126.31 (fib)** | query / batch | **below 128** (JB, powers batching by BCIKS20 Thm 7.2 (FRI step: BATCHING-PROOF.md, internally reviewed, not externally)). Plonky3's own LDR estimator says 128. ZK variants: 123.2-124.2 |
 | C128 | 3 | 74.93 | query | conjectured 128 only |
 | C100, C100h | 2 | 59.6-59.8 | query | conjectured 100 only (degree 2) |
 
 Every unique-decoding figure is far lower (43-69 bits). Caveats carried over from the Soundness phase:
-- Plonky3 batches with powers of one challenge. Using BCIKS Thm 7.2 inside the ADK proof for that is the Soundness
-  phase's adaptation, not a published statement (see above).
+- Plonky3 batches with powers of one challenge. Using BCIKS Thm 7.2 inside the ADK proof for that is a direct
+  application of that theorem; the remaining FRI step (BATCHING-PROOF.md) is reviewed internally, not externally (see above).
 - Zero knowledge of the ZK variants is by Plonky3's construction (HidingFriPcs, ePrint 2024/1037 §4.2), not proven
   here; the conditions are in the prover README. This verifier only checks the proofs; it does not affect hiding.
 - The AIR shape passed to the calculator (width, 5 constraints, degree 3 for mimc and 2 for fib) is this phase's
@@ -133,7 +134,7 @@ Every unique-decoding figure is far lower (43-69 bits). Caveats carried over fro
 The full tables are in [results/tables.md](results/tables.md), generated by `node tables.mjs`. They cover every
 AIR × set × ZK variant, both regimes, and the per-phase profile. Selected rows (mimc unless noted):
 
-Security is λ under the per-round bound with the powers-batching adaptation (not published; see above). BCHN-adjusted
+Security is λ under the per-round bound with powers batching by BCIKS20 Thm 7.2 (FRI step internally reviewed, not externally; see above). BCHN-adjusted
 op-cost is on the standard basis (libauth standard op-cost + OP_DEFINE body bytes); the consensus-basis figure is in
 the JSON as `opBchnAdjustedCons` / `opBchnConsTotal`.
 

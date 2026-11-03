@@ -104,7 +104,7 @@ An owner table maps every accept-relevant value of the genesis, deposit, flush a
 
 **Assumptions A1–A6:** A1 resolved by G; A2 carried as G, now a full list (exactly two mutable NFTs of CAT, no minting NFT, no fungible amount, the reference D and W lockings, the empty initial commitments with the ring all Z); A3 closed; A4 carried as a test-scope note; A5 carried as the reading rule for sweep totals. **New A6 (assumption T, fund relevant):** every minting NFT of the thread category TCAT must be locked by a reference R. tx1 alone skips the AIR identity check and queries 0..20; only the thread NFT ties it to a checked tx0. The S3/S4 regtest rig keeps a TCAT minting NFT at OP_1 in the faucet, a fixture that breaks T on purpose; a deployment must not.
 
-**Open items:** SE is assumed; the powers-batching λ label is unpublished; G and T have no standalone checker (natural S5 task); the frontier append is argued and tested but not machine-checked; L6's multi-proof extraction bound is not written out.
+**Open items:** SE is assumed; the powers-batching proof (BCIKS20 Thm 7.2 plus the FRI step in ../pq-stark/BATCHING-PROOF.md) is reviewed internally, not externally; G and T have no standalone checker (natural S5 task); the frontier append is argued and tested but not machine-checked; L6's multi-proof extraction bound is not written out.
 
 ### 9b.7 Review and fixes
 
@@ -126,7 +126,7 @@ All 8 were fixed in 029d8f2; all are documentation or accounting, and no script 
 ### 9b.8 Caveats
 
 - **Simulation extractability is assumed, not proved** (from Track 8). It is what stops a relayer or mempool observer from re-binding someone's proof to new outputs[1..].
-- **Track 5's powers-batching adaptation is unpublished and unreviewed.** Every λ figure, and so L4, rests on it.
+- **Powers batching is reviewed internally, not externally.** Every λ figure, and so L4, rests on it: the powers-batching step is a direct application of [BCIKS20] Thm 7.2, with the remaining FRI step proved in [BATCHING-PROOF.md](../pq-stark/BATCHING-PROOF.md), reviewed internally but not externally.
 - **About 85-bit quantum collision level.** 128 bits is the classical figure; generic quantum collision search on SHA-256 and the 4-lane Poseidon2 digests reaches about 85 bits.
 - **Fixed denomination.** Every note is δ (0.01 BCH on regtest); W releases exactly δ per withdrawal. No variable amounts, no change.
 - **Anonymity set grows per flush.** It is per pool, grows in chunks of 16 leaves, and a note only hides among notes whose roots are still in the 16-slot ring. A withdrawal against an expired root must be re-proved against a newer one (BCHN: note 9).
@@ -371,7 +371,7 @@ All tests are plain rejection tests, with no attack construction.
 **Caveats:**
 - **Static genesis tree: no deposits and no flush yet.** The history is a fixed ring of 2 epoch roots over 32 genesis notes (k = 4), built offline. S1 builds it with the JS Poseidon2, and S2's proofs confirm it matches the Rust prover. The D-state, the queue, the flush covenant and ring wraparound do not exist (S4). Only the Poseidon2 cost of a flush is measured; a pool that takes deposits has not been demonstrated.
 - **Simulation extractability is assumed, not proved** (carried over from Track 8). It is what stops a relayer or mempool observer from re-binding someone's proof to new outputs[1..].
-- **Track 5's powers-batching adaptation is unpublished and unreviewed.** Every λ figure rests on it, carried over unchanged from Track 8.
+- **Powers batching is reviewed internally, not externally.** Every λ figure rests on it, carried over unchanged from Track 8: the powers-batching step is a direct application of [BCIKS20] Thm 7.2, with the remaining FRI step proved in [BATCHING-PROOF.md](../pq-stark/BATCHING-PROOF.md), reviewed internally but not externally.
 - **About 85-bit quantum collision level.** 128 bits is the classical figure. Digests are 4-element Poseidon2-Goldilocks in the circuit and SHA-256 in the transcript, the SMT and the ring. Generic quantum collision search (BHT) on these reaches about 85 bits, the level of SHA-256 itself, which the maintainer accepted in Track 8. The 64-bit SMT key affects only liveness: an accidental collision gives a false "already spent".
 - **Fixed denomination.** Every note is worth D = 0.01 BCH (regtest), and W releases exactly D per withdrawal. There is no variable amount and no change.
 - **Anonymity set.** It is per pool. Today it is the 32 genesis notes, whose secrets are published in `w/results/genesis.json`, so this setup provides **no privacy at all**; it is a test pool. With S4, the set grows in flush-sized chunks of 16, and a withdrawal hides only among notes whose roots are still in the ring (16 epochs).

@@ -326,7 +326,7 @@ Under plain Z128 (final 2^8), T_ctl's 17 is not > 17, so that set is rejected. T
 
 ## 5. Parameters this specification is checked against (params8.py and bytes8.py)
 
-| set | used by | λ_IOP (JB, powers-batching adaptation, unpublished) | binding round |
+| set | used by | λ_IOP (JB; powers batching by BCIKS20 Thm 7.2, FRI step in ../BATCHING-PROOF.md, internally reviewed, not externally) | binding round |
 |---|---|---|---|
 | Z128 (lb 9, arity 8, final 2^8, Q 24; PoW q 24 / c 2 / batch 20; rc 3; salt 2) | M1, cap 0 and 5 | **128.06** (m = 5) | fold1 |
 | Z128, batch PoW 12 (design B) | – | 128.06; batch round 128.33 | – |
