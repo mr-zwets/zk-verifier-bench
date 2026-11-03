@@ -1,0 +1,16 @@
+date: 2026-11-03T16:59:07+01:00
+host: Linux 7.2.15-1-omarchy x86_64
+Model name:                              AMD Ryzen 9 7900 12-Core Processor
+governor(cpu9): performance epp: performance
+bchn: Bitcoin Cash Node Daemon version v29.1.0-b31ed10b4
+bench: 5c75073  groth16_cashscript: 8a9fa1c
+node cpu: 9 driver cpu: 7 reps: 5
+workload files:
+  b6b6dd4e42d761f1 realkeys-risc0.json
+  9459bfcf64169e79 realkeys-sp1-v5.json
+loadavg start: 1.40 2.12 2.47 2/1736 531890
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/real-keys/cache/bchn-t11c-t","rpcport":39454,"cpu":"9","pid":531899}
+Bitcoin server stopping
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/real-keys/cache/bchn-t11c-p","rpcport":40260,"cpu":"9","pid":532233}
+Bitcoin server stopping
+loadavg end: 2.21 2.24 2.49 3/1764 532342

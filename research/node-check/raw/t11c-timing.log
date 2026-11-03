@@ -1,0 +1,168 @@
+167 workloads (timing); libauth charges OP_DEFINE bodies: true
+ok  realkeys-risc0:valid:risc0-test-receipt-V5_0 K=10 verify=35.01ms accepted lib=true
+ok  realkeys-risc0:reject:claim n0 + 1 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:claim n0 - 1 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:claim n1 + 1 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:claim n0 = 0 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:claim n0, n1 swapped (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:claim n0 := risc0-test-receipt-V3_0 n0 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n0 + r (non-canonical alias of n0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n1 + r (non-canonical alias of n1) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n0 with the top bit set K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n0 = 2^256 - 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n0 + 1 without recommitting DG K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:A.x + 1 (off curve) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:A.y + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:B.x.c0 + 1 (off twist) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:B.y.c1 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:C.x + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:C.y + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:A.x + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:A.y + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:B.x.c1 + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:B.y.c0 + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:C.x + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:C.y + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:A = (0, 0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:C = (0, 0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:B = (0, 0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:-A (y negated, on the curve) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:-C (y negated) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:-B (y negated, on the twist) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:A from risc0-test-receipt-V3_0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:B from risc0-test-receipt-V3_0 (in G2; the inverse-norm witnesses no longer match) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:B on the twist but outside G2 (t, DG, rho, z, handovers recomputed; states, quotient honest) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:role 0 stream from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:role 1 stream from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:role 2 stream from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:HAND_1 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:HAND_2 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:input 0 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:input 1 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:input 2 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:inputs 0, 1 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:inputs 1, 2 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:wrong image id (program): last byte flipped, claim digest recomputed K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:wrong image id: risc0-test-receipt-V3_0's image id with this journal K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:wrong image id: risc0-test-receipt-V2_2's image id with this journal K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:wrong image id: risc0-test-receipt-V2_1's image id with this journal K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:wrong image id: risc0-test-receipt-V2_0's image id with this journal K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:wrong journal (public values): one byte appended, claim digest recomputed K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:wrong journal: first byte flipped, claim digest recomputed K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:claim halves big-endian instead of splitDigest order K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n0 = r K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n1 = r K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n0 + r and n1 + r K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n1 = 2^254 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:n1 + 2r K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:whole statement of risc0-test-receipt-V3_0 (a real proof valid under control root 274eccaf) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:whole statement of risc0-test-receipt-V2_2 (a real proof valid under control root 6c4fb313) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:whole statement of risc0-test-receipt-V2_1 (a real proof valid under control root dc9d181c) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:whole statement of risc0-test-receipt-V2_0 (a real proof valid under control root 90877d9a) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:fixture 0's public inputs with risc0-test-receipt-V3_0's proof points K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:fixture 0's public inputs with risc0-test-receipt-V2_2's proof points K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:fixture 0's public inputs with risc0-test-receipt-V2_1's proof points K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:fixture 0's public inputs with risc0-test-receipt-V2_0's proof points K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:reject:false statement: wrong journal (first byte flipped), (n0, n1) = its claim digest halves, GT-GLS digits + t + states recomputed; residue root and quotient of fixture 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:control: application proof, output 0 = OP_RETURN <PV> K=10 verify=34.86ms accepted lib=true
+ok  realkeys-risc0:covenant:PV first byte flipped (same length) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:PV last byte flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:PV with one byte appended K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:PV truncated by one byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:output 0 is a plain OP_RETURN (no PV) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:PV moved to output 1 (output 0 a plain OP_RETURN) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:PV pushed with a non-minimal PUSHDATA1 header K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:output 0 = OP_RETURN <sha256(PV)> (a digest instead of the data) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:PV = journal with every byte xor 0x20 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-risc0:covenant:covenant pinned to another image id (51350de41e57…, last byte xor 1), spent with the application's valid proof and PV K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:valid:silvana-add K=10 verify=34.9ms accepted lib=true
+ok  realkeys-sp1-v5:valid:sparsity-tdx-gcp K=10 verify=34.73ms accepted lib=true
+ok  realkeys-sp1-v5:valid:pessina-solana-aa K=10 verify=34.95ms accepted lib=true
+ok  realkeys-sp1-v5:reject:claim n0 + 1 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:claim n0 - 1 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:claim n1 + 1 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:claim n0 = 0 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:claim n0, n1 swapped (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:claim n0 := sparsity-tdx-gcp n0 (honest witness otherwise; DG recommitted) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n0 + r (non-canonical alias of n0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n1 + r (non-canonical alias of n1) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n0 with the top bit set K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n0 = 2^256 - 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n0 + 1 without recommitting DG K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:A.x + 1 (off curve) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:A.y + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:B.x.c0 + 1 (off twist) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:B.y.c1 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:C.x + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:C.y + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:A.x + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:A.y + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:B.x.c1 + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:B.y.c0 + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:C.x + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:C.y + p (non-canonical alias of the same point) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:A = (0, 0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:C = (0, 0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:B = (0, 0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:-A (y negated, on the curve) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:-C (y negated) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:-B (y negated, on the twist) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:A from sparsity-tdx-gcp K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:B from sparsity-tdx-gcp (in G2; the inverse-norm witnesses no longer match) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:B on the twist but outside G2 (t, DG, rho, z, handovers recomputed; states, quotient honest) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:role 0 stream from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:role 1 stream from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:role 2 stream from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:HAND_1 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:HAND_2 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:input 0 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:input 1 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:input 2 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:inputs 0, 1 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:inputs 1, 2 from proof 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:wrong program vkey: sparsity-tdx-gcp's programVKey 0x008228a87e… K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:wrong program vkey: pessina-solana-aa's programVKey 0x00390c74c8… K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:wrong program vkey: programVKey with its last byte + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:wrong public values: first byte flipped, digest recomputed (sha256 & 2^253-1) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:wrong public values: one zero byte appended, digest recomputed K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:wrong public values: sparsity-tdx-gcp's public values K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:wrong public values: pessina-solana-aa's public values K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:unmasked sha256(publicValues) as n1 (>= r) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n0 = r K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n1 = r K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n0 + r and n1 + r K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n1 = 2^254 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:n1 + 2r K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:whole statement of sparsity-tdx-gcp (a real proof) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:whole statement of pessina-solana-aa (a real proof) with fixture 0's witness K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:fixture 0's public inputs with sparsity-tdx-gcp's proof points K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:fixture 0's public inputs with pessina-solana-aa's proof points K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:reject:false statement: wrong public values (first byte flipped), n1 = its digest, GT-GLS digits + t + states recomputed; residue root and quotient of fixture 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:control: application proof, output 0 = OP_RETURN <PV> K=10 verify=35.24ms accepted lib=true
+ok  realkeys-sp1-v5:covenant:valid proof of another program (sparsity-tdx-gcp) with the application's PV in output 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:valid proof of another program (pessina-solana-aa, programVKey 0x00390c74c8…) with its own PV in output 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:valid proof of another program (pessina-solana-aa) with the application's PV in output 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:PV first byte flipped (same length) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:PV last byte flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:PV with one byte appended K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:PV truncated by one byte K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:output 0 is a plain OP_RETURN (no PV) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:PV moved to output 1 (output 0 a plain OP_RETURN) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:PV pushed with a non-minimal PUSHDATA1 header K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:output 0 = OP_RETURN <sha256(PV)> (a digest instead of the data) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  realkeys-sp1-v5:covenant:covenant pinned to another programVKey (0x00bee99e7c…, last byte xor 1), spent with the application's valid proof and PV K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  bch-groth16-bn254-sound-native:valid K=10 verify=35.07ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra0 K=11 verify=38.12ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra1 K=11 verify=37.85ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:extra2 K=11 verify=37.98ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:worst K=10 verify=35.41ms accepted lib=true
+ok  bch-groth16-bn254-sound-native:invalid0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  bch-groth16-bls12381-sound-native:valid K=9 verify=27.09ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra0 K=9 verify=27.02ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra1 K=8 verify=25.18ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra2 K=9 verify=26.9ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra3 K=9 verify=27.73ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra4 K=9 verify=27.49ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:extra5 K=9 verify=27.44ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:worst K=8 verify=25.03ms accepted lib=true
+ok  bch-groth16-bls12381-sound-native:invalid0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
