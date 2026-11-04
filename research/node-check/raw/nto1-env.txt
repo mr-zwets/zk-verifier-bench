@@ -1,0 +1,19 @@
+date: 2026-11-04T12:15:25+01:00
+host: Linux 7.2.15-1-omarchy x86_64
+Model name:                              AMD Ryzen 9 7900 12-Core Processor
+governor(cpu9): performance epp: performance
+bchn: Bitcoin Cash Node Daemon version v29.1.0-b31ed10b4
+bench: 775dfba  groth16_cashscript: b8075c8 + scratch patch:  M research/pq-wrap/onchain/gena.mjs  M research/pq-wrap/onchain/vm.mjs ?? research/pq-wrap/onchain/grade-lim.mjs 
+node cpu: 9 driver cpu: 7 reps: 11
+workload files:
+  de436da92616944d t10opt-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json
+  6f536f37a07001be t10opt-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json
+loadavg start: 0.76 0.81 0.48 1/1710 166986
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/nc-t10opt/node/bchn-nto1-t","rpcport":39406,"cpu":"9","pid":166995}
+Bitcoin server stopping
+loadavg after timing: 1.35 0.96 0.56 1/1635 169857
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/nc-t10opt/node/bchn-nto1-p","rpcport":39564,"cpu":"9","pid":169866}
+Bitcoin server stopping
+{"datadir":"/home/mrzwets/BCH-projects/verifier.cash/work/nc-t10opt/node/bchn-nto1-m","rpcport":40132,"cpu":"9","pid":170028}
+Bitcoin server stopping
+loadavg end: 1.41 1.00 0.57 1/1621 170127

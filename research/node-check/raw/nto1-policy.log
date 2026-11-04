@@ -1,0 +1,11 @@
+10 workloads (policy); libauth charges OP_DEFINE bodies: true
+ALLOWED  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0  mined=true
+ALLOWED  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx1  mined=true
+ALLOWED  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx2  mined=true
+ALLOWED  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx3  mined=true
+REJECTED o1-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0 64: tx-size mined=true
+ALLOWED  o4-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0  mined=true
+ALLOWED  o4-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx1  mined=true
+ALLOWED  o4-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx2  mined=true
+ALLOWED  o4-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx3  mined=true
+REJECTED o1-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0 64: tx-size mined=true

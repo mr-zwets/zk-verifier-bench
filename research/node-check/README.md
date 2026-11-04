@@ -309,3 +309,127 @@ Earlier run on the pre-fix build:
 | test-key rejections | 68 | 68/68 rejected (`blk-bad-inputs`) | timing node: `mandatory-script-verify-flag-failed` (53 NUMEQUALVERIFY at the covenant, 4 NUMEQUALVERIFY input count, 7 OP_VERIFY statement range, 2 OP_SPLIT + 2 EQUALVERIFY permuted inputs) | – | – |
 | real-key rejections (real proofs under the template) | 15 | 15/15 rejected (`blk-bad-inputs`, NUMEQUALVERIFY at the covenant) | – | – | – |
 | reference: bn-native-sound | 1 | accept | fee only; allowed at 2 sat/B | 3.476 | 94.20% |
+
+## Track 10 optimized: 4-tx and 1-tx (2026-11-04)
+
+Branch `wip/nc-t10opt`. Research, not a leaderboard change. This puts the Track 10 G2 bridge stand-in (a ZisK-sized
+STARK, 43 queries, proof 224,814 B; not reviewed for soundness, see research/pq-wrap/REPORT.md) on a stock BCHN
+node. It uses the optimized layout a′ (`--nc 3 --opt sib,lad,state,cap=3`). The libauth figures in
+research/limits-table become node measurements here.
+
+**Setup.** BCHN v29.1.0-b31ed10b4 (stock binaries), local regtest, started only by `node.sh`. The machine is an
+AMD Ryzen 9 7900, Linux 7.2.15, governor `performance`. Node pinned to CPU 9 with `par=1`, script and signature
+caches 0. Driver on CPU 7, nice 5. Load average 0.8–1.4. **One machine, one run (`nto1`).** Every number below is
+MEASURED (BCHN) unless labelled otherwise.
+
+**Workloads.** `export-t10opt.mjs` imports groth16_cashscript `main` b8075c8 `research/pq-wrap/onchain`, from a
+detached worktree; main itself was not edited. It runs on the two cached G2 vectors
+(`work/t10-gates/cache/g2/vec0`, proofs 0 and 1; nothing re-proved).
+- **o4, the standard plan.** `grade-a2.mjs` `planFor`. It is rebuilt with the node faucet's NFT category, as in
+  export-g2.mjs. The exporter asserts the same tx sizes, the same OP_DEFINE bytes (R0 49,996, R1 18,317) and the
+  same per-input op-cost as the graded build. Result: 4 txs, 57 inputs, 99,491 + 3 × 85,442 = **355,817 B**, as in
+  libauth. tx k ≥ 1 spends output k of tx0 (the thread NFT that carries the state).
+- **o1, the one-tx plan.** The limits-table scratch generator: `research/limits-table/scratch-gen/grade-lim.mjs`,
+  plus its diff against groth16_cashscript db1860d (the `vm.mjs` and `gena.mjs` hunks, applied with `patch` to the
+  worktree), at U = 10,000 and X = 1,000,000 (consensus only). Result: 1 tx, 48 inputs, **293,514 B**, no thread.
+  libauth: every input standard on its own; the whole tx is consensus-valid and fails standard only on size.
+- **Reject sample.** On proof 0, as in g2n2:
+  - for o4, 32 cases:
+    - 9 prover tampers;
+    - outputs − 1 sat;
+    - ROOT + 1;
+    - FIN TBL;
+    - NF lane;
+    - HEAD OOD;
+    - QRY hint;
+    - QRY path;
+    - 2 pads;
+    - CODE blob;
+    - QRY order;
+    - foreign locking;
+    - 2 mix cases;
+    - 4 thread cases;
+    - plus the opt cases: 3 state (tx1 STATE TBL, library blob, STATE locked to R0) and 2 cap layer (HEAD LAYER,
+      tx1 TOP).
+  - for o1, 3 cases: fri_value tamper, outputs − 1 sat, QRY hint.
+
+  Each case is the first tx that libauth consensus rejects.
+- **Runs.** The command is `run-t10opt.sh nto1 9 7 11`, a copy of run-g2.sh. It starts three fresh nodes and stops
+  each one:
+  - `nto1-t`: timing node, `acceptnonstdtxn=1`;
+  - `nto1-p`: POLICY=1. Each valid tx gets `testmempoolaccept`, then is mined by `submitblock` (rig `Chain.submit`);
+  - `nto1-m`: POLICY=1, mempool mode.
+
+  Raw data: `raw/nto1-*`. The workload JSON (11 MB, `work/nc-t10opt/data`) is not committed; sha256 prefixes are in
+  `raw/nto1-env.txt`.
+
+**Timing method.** As Track 8a: K copies of one tx go in one block. `validateblocktemplate` runs 11 times, and each
+run's BCHN `- Verify N txins` bench line is parsed; ms per tx = median ÷ K. `submitblock` of the same block agrees
+within 2%.
+
+| plan, tx | inputs | bytes | BCHN verdict (block) | testmempoolaccept, POLICY=1 | Verify ms per tx (median; K) | ms per input | ns per byte | ns per op-cost | worst input, BCHN-adj. std |
+|---|--:|--:|---|---|--:|--:|--:|--:|--:|
+| o4 tx0 (HEAD, 3 CODE, FIN, 10 QRY) | 15 | 99,491 | accepted | allowed (2.19 sat/B) | 16.15 / 16.08 (K 4) | 1.08 | 162 | 0.250 | 91.62% |
+| o4 tx1–tx3 (STATE, LIB, TOP, 11 QRY), each | 14 | 85,442 | accepted | allowed, chained on tx0 (1.47–1.51 sat/B) | 10.51–10.60 (K 5) | 0.75 | 123–124 | 0.233 | 87.29% |
+| **o4 per proof (4 txs)** | 57 | 355,817 | 8/8 accepted | 8/8 allowed | **47.83 / 47.69** | 0.84 | **134** | 0.240 | 91.62% |
+| **o1 (1 tx)** | 48 | 293,514 | **accepted (mined by `submitblock`, consensus-valid)** | **rejected: `64: tx-size`** | **48.74 / 48.88 (K 1)** | 1.02 | **166** | 0.236 | 92.78% |
+| o4 rejections | – | 85,442–99,491 | 32/32 rejected, `blk-bad-inputs` | timing node: `mandatory-script-verify-flag-failed` (25 EQUALVERIFY, 6 NUMEQUALVERIFY, 1 OP_SPLIT range: tx1 without the NFT) | – | – | – | – | – |
+| o1 rejections | – | 293,514 | 3/3 rejected, `blk-bad-inputs` | timing node: `66: min relay fee not met` (the fee check runs before the script) | – | – | – | – | – |
+
+Pairs of numbers are proofs 0 / 1. Other columns are equal for both proofs to the digits shown.
+
+- **Mempool mode (o4), both proofs.**
+  - tx0, then tx1–tx3, were sent with tx0 unconfirmed. `testmempoolaccept` allowed each one, and each entered the
+    mempool (4 txs, 355,817 B).
+  - BCHN's own assembler (`generatetoaddress`) mined all 4 in one block of 355,995 B, and the mempool was empty
+    afterwards.
+  - tx1 sent alone first is rejected with `missing-inputs`.
+  - The chain pays 1.68 sat/B.
+- **o1 is non-standard on size alone.** On the POLICY=1 node, `testmempoolaccept` gives
+  `"reject-reason": "64: tx-size"`. The same tx in a block (`submitblock`) is accepted on that node and on the
+  timing node. Every input passes on its own (≤ 10,000 B, op-cost ≤ 92.78%). It needs a cooperating miner and no
+  rule change. As exported it pays only 0.66 sat/B: under a raised standard size it would also fail the 1 sat/B
+  relay fee unless funded higher. This is why the three o1 rejections show the fee error, not a script error, on
+  `testmempoolaccept`.
+- **All 45 workloads behaved as expected; BCHN = libauth on every verdict.** Sizes match libauth to the byte. The
+  worst-input op-cost (bench libauth, OP_DEFINE charged) equals the generator's BCHN-adjusted figure: 91.62% (o4)
+  and 92.78% (o1).
+
+**Comparison** (all BCHN 29.1.0 on this machine, ms per tx = Verify median ÷ K):
+
+| workload | txs / inputs / bytes | ms per proof | ns per byte | source |
+|---|---|--:|--:|---|
+| Groth16 BN254 sound-native | 1 / 3 / ~27.6 KB | 3.5 | ~125 | Results table above, t12c |
+| Track 8 M1 a′ | 1 / 12 / 98,690 | 16.6–17.0 | ~170 | Track 8 section |
+| Track 10 G2 baseline a′ (g2n2) | 7 / 78 / 639,351 | **88.4–89.2** (corrected, see below) | 138–140 | `raw/g2n2-timing.jsonl` |
+| **Track 10 G2 opt, 4 txs (o4)** | 4 / 57 / 355,817 | **47.7–47.8** | 134 | this run |
+| **Track 10 G2 opt, 1 tx (o1)** | 1 / 48 / 293,514 | **48.7–48.9** | 166 | this run |
+| worst 100 KB standard tx today (l0fhm3) | 1 / – / ~100 KB | 97.2 per tx | 972 | research/worst-case-timing |
+
+- **Opt versus baseline.** The optimized layout halves the node time per proof (89 → 48 ms) and the bytes
+  (639 → 356 KB).
+- **One tx versus four.** The one-tx plan costs the same as the four-tx chain: 48.8 ms against 47.8 ms, +2%. It has
+  fewer bytes but more QRY work per input.
+- **Against the worst case.** The single 293,514 B tx validates in about half the time of today's worst 100 KB
+  standard tx (48.7 against 97.2 ms), at about 1/6 of its cost per byte (166 against 972 ns/B). Per proof, G2 costs
+  about 14× Groth16 and about 2.9× Track 8.
+
+**Correction to the earlier G2 timing (g2n2).** research/pq-wrap/REPORT.md says "about 59 ms per transaction, about
+414 ms per proof". Those are the Verify medians of the whole K-copy block (K = 4–5), not per transaction. Divided by
+K, as `nsPerTx` in `raw/g2n2-timing.jsonl` already records, g2n2 is 11.7–16.4 ms per tx and **88.4 / 89.2 ms per
+proof**, at 0.266 ns per op-cost. That is in line with Track 8 (0.264–0.269). The undivided figure would be
+1.33 ns per op-cost, which does not fit. The REPORT is not edited on this branch.
+
+Not covered:
+- Two proofs of one shape twin; no real ZisK proof.
+- The reject sample is not the 286-case libauth sweep.
+- The o1 plan was only mined by `submitblock`. No miner policy or block template with `acceptnonstdtxn=1` was tried.
+- Funding txs were mined directly.
+- One machine; no cross-machine spread.
+
+Leftover datadirs (nodes stopped): `work/nc-t10opt/node/bchn-nto1-{t,p,m}`, about 18 MB each.
+
+Reproduce: `npx tsx nc.ts category` gives CAT. Make a groth16_cashscript worktree at main, apply the scratch-gen
+diff and add grade-lim.mjs (G16). Then run
+`G16=<it> node export-t10opt.mjs --cat CAT --out <data> --cases <g2>/cases0 --rej 0 <g2>/vec0/*.json`, then
+`DATA=<data> run-t10opt.sh NAME 9 7 11`.
