@@ -8,7 +8,7 @@ Status: research, 2026-11-03. **Not a leaderboard entry.** Nothing is in REGISTR
 
 - A **same-size stand-in** for the bridge's outer proof (a Track 8-style STARK with the size and shape the bridge would have, **not a real ZisK proof verified end to end**) needs **7 standard transactions, 78 inputs, about 639 KB**. We measured this with libauth and with stock BCHN 29.1.0 on a local regtest node (the node-check harness), not on chipnet. The gate allowed at most 4 transactions and 300 KB, and no blowup that fits in prover RAM gets there.
 - These numbers are **measured, not sound**. Nobody has reviewed the soundness of the 7-transaction layout, and multi-transaction chains have seams between transactions (the F3 class of issues) that still need a review.
-- **A bridge that is not post-quantum remains viable.** Track 11 (on `main`: groth16_cashscript 075689b, bench ef58440) verifies real SP1 v5 Groth16 proofs, under the production SP1 v5 verifying key, in one 27.5 KB standard transaction. So an Ethereum-to-BCH bridge via SP1-Helios + Groth16 works today. It rests on BN254, which is not post-quantum, and on a trusted setup.
+- **A bridge that is not post-quantum remains viable.** Track 11 (on `main`: groth16_cashscript 075689b, bench ef58440) verifies real SP1 v5 Groth16 proofs, under the production SP1 v5 verifying key, in one 27.5 KB standard transaction. So the proof-check step of an Ethereum-to-BCH bridge via SP1-Helios + Groth16 works today. The bridge itself (an SP1-Helios light-client covenant) has not been built, and SP1 v5's own security is not assessed here. It rests on BN254, which is not post-quantum, and on a trusted setup.
 - With raised limits (about 150 KB per input and 300 KB per transaction), the same stand-in fits in **1 transaction of about 260 KB**. That is what a future limit change would unlock. **No May 2027 upgrade candidate raises these limits.**
 
 ## Gate summary
@@ -131,13 +131,13 @@ Light compute only, with no downloads, against the soundcalc clone at b325e30.
 
 ## Cost comparison
 
-This is a computed figure; nothing was paid on any network.
+This is a computed, illustrative figure; nothing was paid on any network. It sets an unreviewed same-size stand-in against an unverified gas estimate, so treat the ratios below as rough orders of magnitude, not a result.
 
 - **BCH:** about **$1.80** to verify one proof. That is 639,351 B at 1 sat/B = $1.76 at BCH ~$276.
 - **Ethereum** (gas prices and ETH ~$2,279 from the prover.cash market research, `prover.cash/BUSINESS-CASE.md`, measured 2026-11-03; the ~6M gas for Starknet's verification is a reviewer's estimate, unverified and not from that file):
   - At today's unusually low gas (~0.13 gwei), it costs about $1.78.
   - At the 95-day median (~0.77 gwei), it costs about $10.5.
-- **So BCH sits between the two:** about the same as Ethereum at today's low gas, and about **6× cheaper** than at the median.
+- **So BCH sits between the two:** about the same as Ethereum at today's low gas, and roughly 6× cheaper than at the median (illustrative only).
 - **Ethereum amortises its check over a batch of proofs; BCH does not here.** The BCH figure is for one proof.
 - Under the raised limits (b2, ~260 KB), the BCH figure would be about $0.72.
 
