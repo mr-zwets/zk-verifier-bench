@@ -7,6 +7,13 @@ Status: research, 2026-11-03. **Not a leaderboard entry.** Nothing is in REGISTR
 **No-go for the post-quantum ZisK bridge under today's BCH limits. This is a measured result, not an abandoned one.**
 
 - A **same-size stand-in** for the bridge's outer proof (a Track 8-style STARK with the size and shape the bridge would have, **not a real ZisK proof verified end to end**) needs **7 standard transactions, 78 inputs, about 639 KB**. We measured this with libauth and with stock BCHN 29.1.0 on a local regtest node (the node-check harness), not on chipnet. The gate allowed at most 4 transactions and 300 KB, and no blowup that fits in prover RAM gets there.
+- **Layout update (2026-11-04).** A layout review found that the path-checking code, not the path bytes, was the waste. Four layout changes cut the same stand-in to **4 standard transactions, 57 inputs, 355,817 B**, measured with libauth (groth16_cashscript db1860d, behind `--opt`; `layout-review/PLAN.md` here):
+  - Merkle siblings are pushed one at a time;
+  - the alpha' ladder is computed once, in the FIN input;
+  - state is carried in the thread NFT, and later transactions use a query-only library;
+  - each transaction gets a Merkle cap layer.
+
+  The baseline is still reproduced byte for byte. This still fails the gate on size (300 KB), so the no-go stands. These results have not been rerun on BCHN and have not been reviewed for soundness. The ordering gap below still applies.
 - These numbers are **measured, not sound**. Nobody has reviewed the soundness of the 7-transaction layout, and multi-transaction chains have seams between transactions (the F3 class of issues) that still need a review.
 - **A bridge that is not post-quantum remains viable.** Track 11 (on `main`: groth16_cashscript 075689b, bench ef58440) verifies real SP1 v5 Groth16 proofs, under the production SP1 v5 verifying key, in one 27.5 KB standard transaction. So the proof-check step of an Ethereum-to-BCH bridge via SP1-Helios + Groth16 works today. The bridge itself (an SP1-Helios light-client covenant) has not been built, and SP1 v5's own security is not assessed here. It rests on BN254, which is not post-quantum, and on a trusted setup.
 - With raised limits (about 150 KB per input and 300 KB per transaction), the same stand-in fits in **1 transaction of about 260 KB**. That is what a future limit change would unlock. **No May 2027 upgrade candidate raises these limits.**
