@@ -1,0 +1,15 @@
+== g2-opt-u10000-t100000 10:19:05
+n: ACCEPTED 4 tx, 57 inputs (1 queries per QRY input), 99491 + 85442 + 85442 + 85442 = 355817 B, whole-tx true/true/true/true, max 91.62% of an input's budget, op-cost (BCHN-adj.) 203788274, spec 
+== x-g2-opt-u10000-t293514 10:19:20
+n: ACCEPTED 1 tx, 48 inputs (1 queries per QRY input), 293514 = 293514 B, whole-tx true, max 92.78% of an input's budget, op-cost (BCHN-adj.) 210829468, spec true, code 8389+8389+8382 B, define 49
+== x-g2-opt-u10000-t293513 10:19:28
+n: ACCEPTED 2 tx, 51 inputs (1 queries per QRY input), 288103 + 25681 = 313784 B, whole-tx true/true, max 92.77% of an input's budget, op-cost (BCHN-adj.) 211269343, spec true, code 8444+8438+8443
+== x-g2-opt-u10000-t300000 10:19:37
+n: ACCEPTED 1 tx, 48 inputs (1 queries per QRY input), 293514 = 293514 B, whole-tx true, max 92.78% of an input's budget, op-cost (BCHN-adj.) 210829468, spec true, code 8389+8389+8382 B, define 49
+== x-g2-opt-u100000-t400000-per4 10:19:45
+n: NO PLAN [{"per":4,"probe":0,"finOp":6196999,"qryOp":9150905,"pad":{"fin":0,"qry":0}},{"per":4,"T":1,"maxUnlocking":23417,"txBytes":[291713]},{"per":4,"T":1,"invalid":"tx0 in5 std: Program attem
+== x-g2-opt-u10000-t400000-vec1 10:19:47
+n: ACCEPTED 1 tx, 48 inputs (1 queries per QRY input), 293514 = 293514 B, whole-tx true, max 92.76% of an input's budget, op-cost (BCHN-adj.) 210780187, spec true, code 8389+8389+8382 B, define 49
+== x-g2-opt-u10000-t100000-vec1 10:19:55
+n: ACCEPTED 4 tx, 57 inputs (1 queries per QRY input), 99491 + 85442 + 85442 + 85442 = 355817 B, whole-tx true/true/true/true, max 91.58% of an input's budget, op-cost (BCHN-adj.) 203738993, spec 
+DONE

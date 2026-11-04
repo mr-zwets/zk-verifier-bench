@@ -1,0 +1,47 @@
+== g2-opt-u10000-t200000 10:12:10
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 2 tx, 51 inputs (1 queries per QRY input), 199438 + 114347 = 313785 B, whole-tx true/true, max 92.21% of an input's budget, op-cost (BCHN-adj.) 206536171, spec true, code 8379+8373+8378 B, defin
+== g2-opt-u10000-t400000 10:12:19
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 48 inputs (1 queries per QRY input), 293514 = 293514 B, whole-tx true, max 92.78% of an input's budget, op-cost (BCHN-adj.) 210829468, spec true, code 8389+8389+8382 B, define 49796 B
+== g2-opt-u10000-t1000000 10:12:28
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 48 inputs (1 queries per QRY input), 293514 = 293514 B, whole-tx true, max 90.93% of an input's budget, op-cost (BCHN-adj.) 206686748, spec true, code 8389+8389+8382 B, define 49796 B
+== g2-opt-u100000-t100000 10:12:36
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 4 tx, 29 inputs (3 queries per QRY input), 93252 + 79015 + 90723 + 90723 = 353713 B, whole-tx true/true/true/true, max 86.92% of an input's budget, op-cost (BCHN-adj.) 131587097, spec true, code
+== g2-opt-u100000-t200000 10:12:59
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 2 tx, 23 inputs (3 queries per QRY input), 198433 + 113776 = 312209 B, whole-tx true/true, max 86.74% of an input's budget, op-cost (BCHN-adj.) 131538968, spec true, code 8308+8307+8302 B, defin
+== g2-opt-u100000-t400000 10:13:11
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 20 inputs (3 queries per QRY input), 291940 = 291940 B, whole-tx true, max 91.65% of an input's budget, op-cost (BCHN-adj.) 132294578, spec true, code 8277+8270+8271 B, define 49252 B
+== g2-opt-u100000-t1000000 10:13:22
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 20 inputs (3 queries per QRY input), 291940 = 291940 B, whole-tx true, max 89.81% of an input's budget, op-cost (BCHN-adj.) 129586482, spec true, code 8277+8270+8271 B, define 49252 B
+== g2-opt-u150000-t100000 10:13:31
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 4 tx, 29 inputs (3 queries per QRY input), 93252 + 79015 + 90723 + 90723 = 353713 B, whole-tx true/true/true/true, max 86.92% of an input's budget, op-cost (BCHN-adj.) 131587097, spec true, code
+== g2-opt-u150000-t200000 10:13:54
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 2 tx, 23 inputs (3 queries per QRY input), 198433 + 113776 = 312209 B, whole-tx true/true, max 86.74% of an input's budget, op-cost (BCHN-adj.) 131538968, spec true, code 8308+8307+8302 B, defin
+== g2-opt-u150000-t400000 10:14:06
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 20 inputs (3 queries per QRY input), 291940 = 291940 B, whole-tx true, max 91.65% of an input's budget, op-cost (BCHN-adj.) 132294578, spec true, code 8277+8270+8271 B, define 49252 B
+== g2-opt-u150000-t1000000 10:14:17
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 20 inputs (3 queries per QRY input), 291940 = 291940 B, whole-tx true, max 89.81% of an input's budget, op-cost (BCHN-adj.) 129586482, spec true, code 8277+8270+8271 B, define 49252 B
+== g2-base-u10000-t100000 10:14:26
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 7 tx, 78 inputs (1 queries per QRY input), 91633 + 89848 + 89848 + 89848 + 89848 + 89848 + 98478 = 639351 B, whole-tx true/true/true/true/true/true/true, max 92.72% of an input's budget, op-cost
+== g2-base-u10000-t200000 10:14:49
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 3 tx, 58 inputs (1 queries per QRY input), 158444 + 157675 + 166305 = 482424 B, whole-tx true/true/true, max 92.6% of an input's budget, op-cost (BCHN-adj.) 310489626, spec true, code 8548+8547+
+== g2-base-u10000-t400000 10:15:12
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 2 tx, 53 inputs (1 queries per QRY input), 218295 + 226410 = 444705 B, whole-tx true/true, max 92.69% of an input's budget, op-cost (BCHN-adj.) 303650262, spec true, code 8441+8448+8448 B, defin
+== g2-base-u10000-t1000000 10:15:34
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 48 inputs (1 queries per QRY input), 407290 = 407290 B, whole-tx true, max 91.7% of an input's budget, op-cost (BCHN-adj.) 293158727, spec true, code 8306+8304+8302 B, define 49305 B
+== g2-base-u100000-t100000 10:15:56
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 5 tx, 40 inputs (3 queries per QRY input), 85371 + 94822 + 94822 + 94822 + 94822 = 464659 B, whole-tx true/true/true/true/true, max 93.07% of an input's budget, op-cost (BCHN-adj.) 208084047, sp
+== g2-base-u100000-t200000 10:16:22
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 2 tx, 25 inputs (3 queries per QRY input), 160843 + 190342 = 351185 B, whole-tx true/true, max 92.95% of an input's budget, op-cost (BCHN-adj.) 186797878, spec true, code 8301+8308+8300 B, defin
+== g2-base-u100000-t400000 10:16:46
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 20 inputs (3 queries per QRY input), 314268 = 314268 B, whole-tx true, max 92.97% of an input's budget, op-cost (BCHN-adj.) 179849217, spec true, code 8165+8157+8164 B, define 48593 B
+== g2-base-u100000-t1000000 10:17:09
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 20 inputs (3 queries per QRY input), 314268 = 314268 B, whole-tx true, max 91.7% of an input's budget, op-cost (BCHN-adj.) 176937857, spec true, code 8165+8157+8164 B, define 48593 B
+== g2-base-u150000-t100000 10:17:30
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 5 tx, 40 inputs (3 queries per QRY input), 85371 + 94822 + 94822 + 94822 + 94822 = 464659 B, whole-tx true/true/true/true/true, max 93.07% of an input's budget, op-cost (BCHN-adj.) 208084047, sp
+== g2-base-u150000-t200000 10:17:56
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 2 tx, 25 inputs (3 queries per QRY input), 160843 + 190342 = 351185 B, whole-tx true/true, max 92.95% of an input's budget, op-cost (BCHN-adj.) 186797878, spec true, code 8301+8308+8300 B, defin
+== g2-base-u150000-t400000 10:18:20
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 20 inputs (3 queries per QRY input), 314268 = 314268 B, whole-tx true, max 92.97% of an input's budget, op-cost (BCHN-adj.) 179849217, spec true, code 8165+8157+8164 B, define 48593 B
+== g2-base-u150000-t1000000 10:18:43
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 1 tx, 20 inputs (3 queries per QRY input), 314268 = 314268 B, whole-tx true, max 91.7% of an input's budget, op-cost (BCHN-adj.) 176937857, spec true, code 8165+8157+8164 B, define 48593 B
+DONE

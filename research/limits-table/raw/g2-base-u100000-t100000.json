@@ -1,0 +1,1061 @@
+{
+ "rows": [
+  {
+   "vector": "tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json",
+   "opt": {},
+   "per": 3,
+   "T": 5,
+   "pad": {
+    "fin": 532,
+    "qry": [
+     [
+      0,
+      0,
+      2098
+     ],
+     [
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "counts": [
+    [
+     3,
+     3,
+     1
+    ],
+    [
+     3,
+     3,
+     3
+    ],
+    [
+     3,
+     3,
+     3
+    ],
+    [
+     3,
+     3,
+     3
+    ],
+    [
+     3,
+     3,
+     3
+    ]
+   ],
+   "txs": 5,
+   "inputs": 40,
+   "totalBytes": 464659,
+   "proofBytes": 224814,
+   "accepted": true,
+   "limits": {
+    "unl": 100000,
+    "tx": 100000,
+    "consensusOnly": false
+   },
+   "code": [
+    8607,
+    8606,
+    8606
+   ],
+   "redeem": 177,
+   "defineBytes": 51125,
+   "opTotalBchnAdjusted": 208084047,
+   "maxPct": 93.07,
+   "le95": true,
+   "tried": [
+    {
+     "per": 3,
+     "probe": 0,
+     "finOp": 5378832,
+     "qryOp": 10866456,
+     "pad": {
+      "fin": 530,
+      "qry": 2086
+     }
+    },
+    {
+     "per": 3,
+     "probe": 1,
+     "finOp": 5380498,
+     "qryOp": 10868124,
+     "pad": {
+      "fin": 532,
+      "qry": 2098
+     }
+    },
+    {
+     "per": 3,
+     "probe": 2,
+     "finOp": 5380504,
+     "qryOp": 10868130,
+     "pad": {
+      "fin": 532,
+      "qry": 2098
+     }
+    },
+    {
+     "per": 3,
+     "T": 1,
+     "maxUnlocking": 19243,
+     "txBytes": [
+      314268
+     ]
+    },
+    {
+     "per": 3,
+     "T": 2,
+     "maxUnlocking": 19243,
+     "txBytes": [
+      160843,
+      190342
+     ]
+    },
+    {
+     "per": 3,
+     "T": 3,
+     "maxUnlocking": 19243,
+     "txBytes": [
+      122827,
+      132786,
+      132786
+     ]
+    },
+    {
+     "per": 3,
+     "T": 4,
+     "maxUnlocking": 19243,
+     "txBytes": [
+      84813,
+      113804,
+      113804,
+      113804
+     ]
+    },
+    {
+     "per": 3,
+     "T": 5,
+     "maxUnlocking": 19243,
+     "txBytes": [
+      85371,
+      94822,
+      94822,
+      94822,
+      94822
+     ]
+    },
+    {
+     "per": 2,
+     "probe": 0,
+     "finOp": 5391567,
+     "qryOp": 8625505,
+     "pad": {
+      "fin": 546,
+      "qry": 2104
+     }
+    },
+    {
+     "per": 2,
+     "probe": 1,
+     "finOp": 5393281,
+     "qryOp": 8627221,
+     "pad": {
+      "fin": 550,
+      "qry": 2114
+     }
+    },
+    {
+     "per": 2,
+     "probe": 2,
+     "finOp": 5393293,
+     "qryOp": 8627233,
+     "pad": {
+      "fin": 550,
+      "qry": 2114
+     }
+    },
+    {
+     "per": 2,
+     "T": 1,
+     "maxUnlocking": 12829,
+     "txBytes": [
+      314695
+     ]
+    },
+    {
+     "per": 2,
+     "T": 2,
+     "maxUnlocking": 12829,
+     "txBytes": [
+      173966,
+      177749
+     ]
+    },
+    {
+     "per": 2,
+     "T": 3,
+     "maxUnlocking": 12829,
+     "txBytes": [
+      123036,
+      126565,
+      139437
+     ]
+    },
+    {
+     "per": 2,
+     "T": 4,
+     "maxUnlocking": 12829,
+     "txBytes": [
+      97850,
+      101125,
+      113997,
+      113997
+     ]
+    },
+    {
+     "per": 2,
+     "T": 5,
+     "maxUnlocking": 12829,
+     "txBytes": [
+      85536,
+      88557,
+      88557,
+      101429,
+      101429
+     ]
+    },
+    {
+     "per": 2,
+     "T": 6,
+     "maxUnlocking": 12829,
+     "txBytes": [
+      73222,
+      75989,
+      88861,
+      88861,
+      88861,
+      88861
+     ]
+    },
+    {
+     "per": 1,
+     "probe": 0,
+     "finOp": 5428634,
+     "qryOp": 6409308,
+     "pad": {
+      "fin": 596,
+      "qry": 2158
+     }
+    },
+    {
+     "per": 1,
+     "probe": 1,
+     "finOp": 5431086,
+     "qryOp": 6418238,
+     "pad": {
+      "fin": 600,
+      "qry": 2170
+     }
+    },
+    {
+     "per": 1,
+     "probe": 2,
+     "finOp": 5431098,
+     "qryOp": 6418286,
+     "pad": {
+      "fin": 600,
+      "qry": 2170
+     }
+    },
+    {
+     "per": 1,
+     "T": 1,
+     "maxUnlocking": 8587,
+     "txBytes": [
+      407290
+     ]
+    },
+    {
+     "per": 1,
+     "T": 2,
+     "maxUnlocking": 8587,
+     "txBytes": [
+      218295,
+      226410
+     ]
+    },
+    {
+     "per": 1,
+     "T": 3,
+     "maxUnlocking": 8587,
+     "txBytes": [
+      158444,
+      157675,
+      166305
+     ]
+    },
+    {
+     "per": 1,
+     "T": 4,
+     "maxUnlocking": 8681,
+     "txBytes": [
+      124479,
+      132086,
+      132086,
+      132086
+     ]
+    },
+    {
+     "per": 1,
+     "T": 5,
+     "maxUnlocking": 8782,
+     "txBytes": [
+      107777,
+      106500,
+      115130,
+      115130,
+      115130
+     ]
+    },
+    {
+     "per": 1,
+     "T": 6,
+     "maxUnlocking": 8880,
+     "txBytes": [
+      99705,
+      98174,
+      98174,
+      98174,
+      98174,
+      106804
+     ]
+    },
+    {
+     "per": 1,
+     "T": 7,
+     "maxUnlocking": 8982,
+     "txBytes": [
+      91633,
+      89848,
+      89848,
+      89848,
+      89848,
+      89848,
+      98478
+     ]
+    }
+   ],
+   "txsDetail": [
+    {
+     "tx": 0,
+     "bytes": 85371,
+     "inputs": 8,
+     "whole": true,
+     "allStd": true,
+     "allSpec": true,
+     "detail": [
+      {
+       "role": "HEAD",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 3684,
+       "opCost": 2449380,
+       "opCons": 2372452,
+       "opBchnAdjusted": 2500505,
+       "budget": 2980000,
+       "pct": 83.91,
+       "bchnWithinBudget": true,
+       "hashIters": 601,
+       "iterLimit": 1862
+      },
+      {
+       "role": "CODE1",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8635,
+       "opCost": 4889494,
+       "opCons": 4813078,
+       "opBchnAdjusted": 4940619,
+       "budget": 6940800,
+       "pct": 71.18,
+       "bchnWithinBudget": true,
+       "hashIters": 597,
+       "iterLimit": 4338
+      },
+      {
+       "role": "CODE2",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8634,
+       "opCost": 4205777,
+       "opCons": 4129361,
+       "opBchnAdjusted": 4256902,
+       "budget": 6940000,
+       "pct": 61.34,
+       "bchnWithinBudget": true,
+       "hashIters": 597,
+       "iterLimit": 4337
+      },
+      {
+       "role": "CODE3",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8634,
+       "opCost": 4318597,
+       "opCons": 4242181,
+       "opBchnAdjusted": 4369722,
+       "budget": 6940000,
+       "pct": 62.96,
+       "bchnWithinBudget": true,
+       "hashIters": 597,
+       "iterLimit": 4337
+      },
+      {
+       "role": "FIN",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 7193,
+       "opCost": 5335137,
+       "opCons": 5258721,
+       "opBchnAdjusted": 5386262,
+       "budget": 5787200,
+       "pct": 93.07,
+       "bchnWithinBudget": true,
+       "hashIters": 597,
+       "iterLimit": 3617
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10807139,
+       "opCons": 10629347,
+       "opBchnAdjusted": 10858264,
+       "budget": 15427200,
+       "pct": 70.38,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10813945,
+       "opCons": 10636153,
+       "opBchnAdjusted": 10865070,
+       "budget": 15427200,
+       "pct": 70.43,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8515,
+       "opCost": 6317029,
+       "opCons": 6223205,
+       "opBchnAdjusted": 6368154,
+       "budget": 6844800,
+       "pct": 93.04,
+       "bchnWithinBudget": true,
+       "hashIters": 733,
+       "iterLimit": 4278
+      }
+     ]
+    },
+    {
+     "tx": 1,
+     "bytes": 94822,
+     "inputs": 8,
+     "whole": true,
+     "allStd": true,
+     "allSpec": true,
+     "detail": [
+      {
+       "role": "HEAD",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 3684,
+       "opCost": 637014,
+       "opCons": 560470,
+       "opBchnAdjusted": 688139,
+       "budget": 2980000,
+       "pct": 23.09,
+       "bchnWithinBudget": true,
+       "hashIters": 598,
+       "iterLimit": 1862
+      },
+      {
+       "role": "CODE1",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8610,
+       "opCost": 265922,
+       "opCons": 214082,
+       "opBchnAdjusted": 317047,
+       "budget": 6920800,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "CODE2",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8609,
+       "opCost": 265921,
+       "opCons": 214081,
+       "opBchnAdjusted": 317046,
+       "budget": 6920000,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "CODE3",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8609,
+       "opCost": 265921,
+       "opCons": 214081,
+       "opBchnAdjusted": 317046,
+       "budget": 6920000,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "FIN",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 7193,
+       "opCost": 5334982,
+       "opCons": 5258566,
+       "opBchnAdjusted": 5386107,
+       "budget": 5787200,
+       "pct": 93.07,
+       "bchnWithinBudget": true,
+       "hashIters": 597,
+       "iterLimit": 3617
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10817704,
+       "opCons": 10639912,
+       "opBchnAdjusted": 10868829,
+       "budget": 15427200,
+       "pct": 70.45,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10816019,
+       "opCons": 10638227,
+       "opBchnAdjusted": 10867144,
+       "budget": 15427200,
+       "pct": 70.44,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10818058,
+       "opCons": 10640266,
+       "opBchnAdjusted": 10869183,
+       "budget": 15427200,
+       "pct": 70.45,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      }
+     ]
+    },
+    {
+     "tx": 2,
+     "bytes": 94822,
+     "inputs": 8,
+     "whole": true,
+     "allStd": true,
+     "allSpec": true,
+     "detail": [
+      {
+       "role": "HEAD",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 3684,
+       "opCost": 637018,
+       "opCons": 560474,
+       "opBchnAdjusted": 688143,
+       "budget": 2980000,
+       "pct": 23.09,
+       "bchnWithinBudget": true,
+       "hashIters": 598,
+       "iterLimit": 1862
+      },
+      {
+       "role": "CODE1",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8610,
+       "opCost": 265926,
+       "opCons": 214086,
+       "opBchnAdjusted": 317051,
+       "budget": 6920800,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "CODE2",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8609,
+       "opCost": 265925,
+       "opCons": 214085,
+       "opBchnAdjusted": 317050,
+       "budget": 6920000,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "CODE3",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8609,
+       "opCost": 265925,
+       "opCons": 214085,
+       "opBchnAdjusted": 317050,
+       "budget": 6920000,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "FIN",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 7193,
+       "opCost": 5334986,
+       "opCons": 5258570,
+       "opBchnAdjusted": 5386111,
+       "budget": 5787200,
+       "pct": 93.07,
+       "bchnWithinBudget": true,
+       "hashIters": 597,
+       "iterLimit": 3617
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10818366,
+       "opCons": 10640574,
+       "opBchnAdjusted": 10869491,
+       "budget": 15427200,
+       "pct": 70.46,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10820162,
+       "opCons": 10642370,
+       "opBchnAdjusted": 10871287,
+       "budget": 15427200,
+       "pct": 70.47,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10817867,
+       "opCons": 10640075,
+       "opBchnAdjusted": 10868992,
+       "budget": 15427200,
+       "pct": 70.45,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      }
+     ]
+    },
+    {
+     "tx": 3,
+     "bytes": 94822,
+     "inputs": 8,
+     "whole": true,
+     "allStd": true,
+     "allSpec": true,
+     "detail": [
+      {
+       "role": "HEAD",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 3684,
+       "opCost": 637018,
+       "opCons": 560474,
+       "opBchnAdjusted": 688143,
+       "budget": 2980000,
+       "pct": 23.09,
+       "bchnWithinBudget": true,
+       "hashIters": 598,
+       "iterLimit": 1862
+      },
+      {
+       "role": "CODE1",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8610,
+       "opCost": 265926,
+       "opCons": 214086,
+       "opBchnAdjusted": 317051,
+       "budget": 6920800,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "CODE2",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8609,
+       "opCost": 265925,
+       "opCons": 214085,
+       "opBchnAdjusted": 317050,
+       "budget": 6920000,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "CODE3",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8609,
+       "opCost": 265925,
+       "opCons": 214085,
+       "opBchnAdjusted": 317050,
+       "budget": 6920000,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "FIN",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 7193,
+       "opCost": 5334986,
+       "opCons": 5258570,
+       "opBchnAdjusted": 5386111,
+       "budget": 5787200,
+       "pct": 93.07,
+       "bchnWithinBudget": true,
+       "hashIters": 597,
+       "iterLimit": 3617
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10818108,
+       "opCons": 10640316,
+       "opBchnAdjusted": 10869233,
+       "budget": 15427200,
+       "pct": 70.45,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10819300,
+       "opCons": 10641508,
+       "opBchnAdjusted": 10870425,
+       "budget": 15427200,
+       "pct": 70.46,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10819054,
+       "opCons": 10641262,
+       "opBchnAdjusted": 10870179,
+       "budget": 15427200,
+       "pct": 70.46,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      }
+     ]
+    },
+    {
+     "tx": 4,
+     "bytes": 94822,
+     "inputs": 8,
+     "whole": true,
+     "allStd": true,
+     "allSpec": true,
+     "detail": [
+      {
+       "role": "HEAD",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 3684,
+       "opCost": 645821,
+       "opCons": 569149,
+       "opBchnAdjusted": 696946,
+       "budget": 2980000,
+       "pct": 23.39,
+       "bchnWithinBudget": true,
+       "hashIters": 599,
+       "iterLimit": 1862
+      },
+      {
+       "role": "CODE1",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8610,
+       "opCost": 265926,
+       "opCons": 214086,
+       "opBchnAdjusted": 317051,
+       "budget": 6920800,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "CODE2",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8609,
+       "opCost": 265925,
+       "opCons": 214085,
+       "opBchnAdjusted": 317050,
+       "budget": 6920000,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "CODE3",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 8609,
+       "opCost": 265925,
+       "opCons": 214085,
+       "opBchnAdjusted": 317050,
+       "budget": 6920000,
+       "pct": 4.58,
+       "bchnWithinBudget": true,
+       "hashIters": 405,
+       "iterLimit": 4325
+      },
+      {
+       "role": "FIN",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 7193,
+       "opCost": 5334986,
+       "opCons": 5258570,
+       "opBchnAdjusted": 5386111,
+       "budget": 5787200,
+       "pct": 93.07,
+       "bchnWithinBudget": true,
+       "hashIters": 597,
+       "iterLimit": 3617
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10813960,
+       "opCons": 10636168,
+       "opBchnAdjusted": 10865085,
+       "budget": 15427200,
+       "pct": 70.43,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10814473,
+       "opCons": 10636681,
+       "opBchnAdjusted": 10865598,
+       "budget": 15427200,
+       "pct": 70.43,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      },
+      {
+       "role": "QRY",
+       "std": true,
+       "cons": true,
+       "spec": true,
+       "err": null,
+       "unlocking": 19243,
+       "opCost": 10821575,
+       "opCons": 10643783,
+       "opBchnAdjusted": 10872700,
+       "budget": 15427200,
+       "pct": 70.48,
+       "bchnWithinBudget": true,
+       "hashIters": 1389,
+       "iterLimit": 9642
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
