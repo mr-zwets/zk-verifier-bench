@@ -1,0 +1,125 @@
+{
+  "schema": "source6-raw14-generic-statement-compatibility/v1",
+  "status": "RAW14_COMPLETE_CONDITIONAL_REPLACEMENT_FOR_AFFECTED_RAW_PATH;_GENERIC_AFFINE_REMAINS_COMPONENT_ONLY",
+  "reviewType": "read-only mathematical affected-gap accounting",
+  "constraints": {
+    "existingFixturesOnly": true,
+    "newProofs": false,
+    "newCases": false,
+    "negativeVmCases": false,
+    "cybersecurityTesting": false,
+    "byteOptimization": false,
+    "canonicalRepositoryEdits": false
+  },
+  "fixedStatementCompatibility": {
+    "equation": "e(-A,B)e(alpha,beta)e(IC0+n0*IC1+n1*IC2,gamma)e(C,delta)=1",
+    "IC0": [
+      "15723390722547469201346605927630336729729463607293657950235977012003655267936",
+      "14617976463853845616027311884626760527376622737858716767193455441349641383825"
+    ],
+    "IC1": [
+      "9269869340829791644953940526610795845982127221382366381974052273854848284744",
+      "12340830433822638848259976740304056841548514693917037023437897137808450264577"
+    ],
+    "IC2": [
+      "6442706084407552401539720969529928260622245802604045626376932056434206076947",
+      "13805589277496019078136496656829548863642318729315912795941464570275337353000"
+    ],
+    "comparison": {
+      "genericComponent": "The generic-affine mathematical scope lists exactly the three coordinates above.",
+      "raw14FullReference": "stage-03.cash contains the same IC0 literal; its 960-byte GLV table is byte-identical to the current generator table, whose first little-endian table point is IC1. The same pinned _millermath vk.ic declaration supplies IC0/IC1/IC2 for the source-owned full graph.",
+      "tableSha256": "74c90edcfda0dcd172faccc929c5bf015a713e049d4fea365b649491235e61d9",
+      "tableBytes": 960,
+      "genericSplitTableNote": "The isolated generic component uses a different 2880-byte three-shift table schedule. This is a layout/ABI difference, not a fixed-key statement difference; no byte-for-byte program or fixture transfer is claimed."
+    }
+  },
+  "affectedGapAccounting": [
+    {
+      "gap": "raw-A omission / zero inverse witness in raw-proof normalization",
+      "repair": "Repaired raw14 genesis normalization and inverse/unit encoding; raw-A finite/identity predicate and the subsequent Miller graph are joined in the conditional 14-program theorem.",
+      "replacement": "COMPLETE_CONDITIONAL_REPLACEMENT_FOR_RAW14_FIXED_GRAPH",
+      "evidence": [
+        "conditional-graph-join-result-v1.json",
+        "standalone-replay-receipt-v2.json"
+      ],
+      "limits": [
+        "finite raw B only",
+        "exact repaired 14-program graph and successor locks are premises",
+        "fixed VK and stated ledger premise only",
+        "not universal producer or live admission"
+      ]
+    },
+    {
+      "gap": "missing mulFp/sqrFp helper ownership in grouped GLV prologue",
+      "repair": "Both corrected two-window grouped affine CashScript programs include the required helper definitions and have exact compiled-byte bindings.",
+      "replacement": "COMPLETE_COMPONENT_REPLACEMENT",
+      "evidence": [
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/pairing/pr6-grouped-affine-reference/qualification.json"
+        },
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/pairing/pr6-grouped-affine-reference/mathematical-scope.json"
+        }
+      ],
+      "limits": [
+        "component ABI and ordered two-window graph only",
+        "no complete generic 704-byte verifier claim",
+        "no archived positive affine fixture"
+      ]
+    },
+    {
+      "gap": "equal-point final IC0 addition using the unequal-point formula",
+      "repair": "The corrected generic component branches on equality and doubles the original accumulator; the raw14 fixed stage-03 helper contains the same equality/doubling owner, and the raw14 theorem joins final IC0 addition with finite inverse and downstream state binding.",
+      "replacement": "COMPLETE_CONDITIONAL_REPLACEMENT_FOR_RAW14_AND_COMPLETE_COMPONENT_REPLACEMENT_FOR_GENERIC_AFFINE",
+      "evidence": [
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/pairing/pr6-raw14-reference/fixed-programs/stage-03.cash"
+        },
+        "conditional-graph-join-result-v1.json",
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/pairing/pr6-grouped-affine-reference/mathematical-scope.json"
+        }
+      ],
+      "limits": [
+        "raw14 finite-domain theorem excludes raw-B identity",
+        "generic affine T=O remains outside its finite affine output domain"
+      ]
+    }
+  ],
+  "scopeDisposition": {
+    "source6Raw14": {
+      "classification": "COMPLETE_REPLACEMENT_FOR_IDENTIFIED_RAW14_CONSTRUCTION_CONDITIONAL_ON_DECLARED_PREMISES",
+      "basis": "All three original mathematical defects are addressed in the fixed 14-program source, joined conditional equation proof, and existing-positive same-program replay. The full universal verifier/producer claim remains false by explicit qualification."
+    },
+    "source6GenericGroupedAffine": {
+      "classification": "COMPLETE_REPLACEMENT_FOR_COMPONENT_ONLY",
+      "basis": "Helper ownership and finite affine MSM theorem are repaired and compiled for the isolated two-window artifact. Its external graph premises are explicit; it is not promoted to a full verifier."
+    },
+    "source6UniversalOrFull704Graph": {
+      "classification": "UNCLAIMED_NOT_WITHDRAWN_AS_A_NEW_DEFECT",
+      "basis": "No current full generic 704-byte graph is actually emitted or advertised by the repaired component package. A full claim would require a current-generator graph qualification and exact matching fixture; the projective archive is not transferable."
+    }
+  },
+  "evidencePins": [
+    {
+      "owner": "source",
+      "file": "chunked/pairing/pr6-raw14-reference/fixed-programs/stage-03.cash",
+      "sha256": "8972a31e6792670f7480ce4dcd0ad8bb7ad84345191315ef1fb07cccd4784889"
+    },
+    {
+      "owner": "artifact",
+      "file": "conditional-graph-join-result-v1.json",
+      "sha256": "e87de8fbfeb3200320024d57a4930aa3613d52eb52afc00ab466d31c0a3a525b"
+    },
+    {
+      "owner": "source",
+      "file": "chunked/pairing/pr6-grouped-affine-reference/mathematical-scope.json",
+      "sha256": "48dfb8c4b4b5fc96b32bf9bf95ff3c377923e7aebc9dae897e9caa177a1b11ce"
+    }
+  ],
+  "conclusion": "Yes: the raw14 successor can close the three identified source6 mathematical gaps for its fixed VK/public statement and declared finite/domain/graph/ledger premises, while remaining explicitly conditional and non-universal. The generic grouped-affine successor closes only its component scope. No withdrawal of the repaired raw14 construction is indicated; no full generic 704-byte verifier claim should be added."
+}

@@ -1,0 +1,310 @@
+{
+  "schema": "source6-raw14-standalone-pinned-libauth-replay/v2",
+  "status": "PASS_ALL14_STANDARD_AND_CONSENSUS",
+  "policy": {
+    "existingContextOnly": true,
+    "contextPrefixOnly": true,
+    "producerExecuted": false,
+    "proverExecuted": false,
+    "compilerExecuted": false,
+    "generatorImported": false,
+    "negativeCases": false,
+    "newProofGenerated": false,
+    "optimization": false
+  },
+  "pins": {
+    "artifactDirectory": "public-artifact",
+    "context": "public-artifact/existing-positive-context.json",
+    "contextSha256": "6e49adec5a388595bc99c7f94b0fcbba7cf7b5427f5e0ed398646b831d15b0ef",
+    "libauthModule": "@bitauth/libauth/build/index.js",
+    "libauthModuleSha256": "c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d"
+  },
+  "rows": [
+    {
+      "index": 0,
+      "label": "vk_x GLV [0,41)",
+      "programSha256": "d9c068cd6e20ff2df98afc76e4a99341530447f5cfb99260ad66bcd90b946fed",
+      "repairedLocking": "aa200229372a116f4a2305e75a63bcf6e0e02a3f08bc8f8e1e0ac487d82029efd13d87",
+      "repairedSuccessorLocking": "aa203d445d90589e0a1e0bc9d04f45d162c8a17ec4b1230e81a7e940140b334f40b687",
+      "originalPrefixBytes": 284,
+      "repairedUnlockingBytes": 2686,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 1035258
+      }
+    },
+    {
+      "index": 1,
+      "label": "vk_x GLV [41,80)",
+      "programSha256": "31dfcc4d545e1844102e02d22dea278d8d05d16fff0d25876a568fb82629192e",
+      "repairedLocking": "aa203d445d90589e0a1e0bc9d04f45d162c8a17ec4b1230e81a7e940140b334f40b687",
+      "repairedSuccessorLocking": "aa205cfb8cc33affdc2f5a2911363668a097bb88d3fd5edcc71c153ba07d2fa78b9c87",
+      "originalPrefixBytes": 287,
+      "repairedUnlockingBytes": 2397,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 994635
+      }
+    },
+    {
+      "index": 2,
+      "label": "vk_x GLV [80,118)",
+      "programSha256": "70571b5f66eb08cfd0fdc5270f6168ac182940c254e63c3a241a28e141d5d1e3",
+      "repairedLocking": "aa205cfb8cc33affdc2f5a2911363668a097bb88d3fd5edcc71c153ba07d2fa78b9c87",
+      "repairedSuccessorLocking": "aa206b211a7bdd0c5f7dcd25490cc227fcb4439fd7887bff47a12dac1a4b6f1f49b487",
+      "originalPrefixBytes": 698,
+      "repairedUnlockingBytes": 2808,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 2085293
+      }
+    },
+    {
+      "index": 3,
+      "label": "vk_x GLV [118,128) bind (-A,B,C,vk_x)",
+      "programSha256": "c527b78f1ac268759293a0f308984a67c6aceec1988a7655defc14abfee7a56f",
+      "repairedLocking": "aa206b211a7bdd0c5f7dcd25490cc227fcb4439fd7887bff47a12dac1a4b6f1f49b487",
+      "repairedSuccessorLocking": "aa20f8d1a51e815600423abf21f64ec314fb2187d815030d595f354f1a4b778beee287",
+      "originalPrefixBytes": 416,
+      "repairedUnlockingBytes": 2590,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 1638611
+      }
+    },
+    {
+      "index": 4,
+      "label": "quotient-torus Miller ops[0,38)",
+      "programSha256": "d64ad31a5d64a06c9f85f8924849431614b3f57c96efb9534dcf67c133e8d295",
+      "repairedLocking": "aa20f8d1a51e815600423abf21f64ec314fb2187d815030d595f354f1a4b778beee287",
+      "repairedSuccessorLocking": "aa20d08caee89d0c329aeffe753e236983e754d705d77963d134c7c056c04f63b8a087",
+      "originalPrefixBytes": 1797,
+      "repairedUnlockingBytes": 9839,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 7178141
+      }
+    },
+    {
+      "index": 5,
+      "label": "quotient-torus Miller ops[38,76)",
+      "programSha256": "c149300cfb2ab21f454fba3449852559fe66c346abc887069728de95e34d42c8",
+      "repairedLocking": "aa20d08caee89d0c329aeffe753e236983e754d705d77963d134c7c056c04f63b8a087",
+      "repairedSuccessorLocking": "aa202e0109651f9c3d4e31a4715e95ca70265a7eb13776abe7ec766f6da2b2f5cd2287",
+      "originalPrefixBytes": 1717,
+      "repairedUnlockingBytes": 9709,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 7080131
+      }
+    },
+    {
+      "index": 6,
+      "label": "quotient-torus Miller ops[76,114)",
+      "programSha256": "c45b0eb129a42e2a61ae32bb9ff3841f90cbe2321e5a4cbed2e5564b34446197",
+      "repairedLocking": "aa202e0109651f9c3d4e31a4715e95ca70265a7eb13776abe7ec766f6da2b2f5cd2287",
+      "repairedSuccessorLocking": "aa20cbf77ad8e64e9501e57cbebe7c15e48085c9f4768c405bbdd12fe21ad6aca96987",
+      "originalPrefixBytes": 2001,
+      "repairedUnlockingBytes": 9786,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 7171989
+      }
+    },
+    {
+      "index": 7,
+      "label": "quotient-torus Miller ops[114,153)",
+      "programSha256": "92ab3601bd9600ebf4ec374f971bc1c71d09d79b709fd05b3b7ca6fb79d1bcfa",
+      "repairedLocking": "aa20cbf77ad8e64e9501e57cbebe7c15e48085c9f4768c405bbdd12fe21ad6aca96987",
+      "repairedSuccessorLocking": "aa20f37f171db2b7a2e3775c0262c995b4304936005ae9d613f75e424865f36fac9487",
+      "originalPrefixBytes": 1934,
+      "repairedUnlockingBytes": 9876,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 7219060
+      }
+    },
+    {
+      "index": 8,
+      "label": "quotient-torus Miller ops[153,190)",
+      "programSha256": "a6c6759e3f0963bcb2559152b587a397f16d818234b3830e6e715503623ee7e8",
+      "repairedLocking": "aa20f37f171db2b7a2e3775c0262c995b4304936005ae9d613f75e424865f36fac9487",
+      "repairedSuccessorLocking": "aa206648572a43349e961c1e33f987416f24dab973e16dfd0bfe1da76703cd4e5c7787",
+      "originalPrefixBytes": 1772,
+      "repairedUnlockingBytes": 9531,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 6983136
+      }
+    },
+    {
+      "index": 9,
+      "label": "quotient-torus Miller ops[190,229)",
+      "programSha256": "36e11dcb3adfe4f60d065b1295befecde6669600ace4b2641d13788a06fde718",
+      "repairedLocking": "aa206648572a43349e961c1e33f987416f24dab973e16dfd0bfe1da76703cd4e5c7787",
+      "repairedSuccessorLocking": "aa206c40a463eaea73874a3e159d43fe0aaf0d233f69f3a1012ed398336d217c377187",
+      "originalPrefixBytes": 1878,
+      "repairedUnlockingBytes": 9882,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 7223168
+      }
+    },
+    {
+      "index": 10,
+      "label": "quotient-torus Miller ops[229,267)",
+      "programSha256": "017fe80fc5ba203a5adb3cecf1d9028ed8ac3b6256d4819fd4a0eaeb04f91913",
+      "repairedLocking": "aa206c40a463eaea73874a3e159d43fe0aaf0d233f69f3a1012ed398336d217c377187",
+      "repairedSuccessorLocking": "aa207dc813abc9b897713d926c180da179a51bf2069140c88a70c91e0916fcd79e6687",
+      "originalPrefixBytes": 2026,
+      "repairedUnlockingBytes": 9783,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 7168367
+      }
+    },
+    {
+      "index": 11,
+      "label": "quotient-torus Miller ops[267,304)",
+      "programSha256": "718e397f865503f959328a1a2c0c4256477adce35b3e67067b2b69d709768313",
+      "repairedLocking": "aa207dc813abc9b897713d926c180da179a51bf2069140c88a70c91e0916fcd79e6687",
+      "repairedSuccessorLocking": "aa20196fd3596e4ee122acc3aca222880aea57d9cb758cf57dc74752003bcd598d1187",
+      "originalPrefixBytes": 1842,
+      "repairedUnlockingBytes": 9522,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 6974522
+      }
+    },
+    {
+      "index": 12,
+      "label": "quotient-torus Miller ops[304,342)",
+      "programSha256": "2fdab1ab18b650ed38a89c6c4d9e359f307127c263af47eef8512f2c2b62e24c",
+      "repairedLocking": "aa20196fd3596e4ee122acc3aca222880aea57d9cb758cf57dc74752003bcd598d1187",
+      "repairedSuccessorLocking": "aa208e84627fee6e56c7ee38fca9e73cab3ccee7fd40a6996f3bffb4d6fff7bfc86787",
+      "originalPrefixBytes": 1652,
+      "repairedUnlockingBytes": 9624,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 7036433
+      }
+    },
+    {
+      "index": 13,
+      "label": "quotient-torus Miller ops[342,348) + residue verdict",
+      "programSha256": "97e43d207298cad0e261364b7f3af5efdd83a237805c8eef78755706c3be29e3",
+      "repairedLocking": "aa208e84627fee6e56c7ee38fca9e73cab3ccee7fd40a6996f3bffb4d6fff7bfc86787",
+      "repairedSuccessorLocking": "aa208e84627fee6e56c7ee38fca9e73cab3ccee7fd40a6996f3bffb4d6fff7bfc86787",
+      "originalPrefixBytes": 1190,
+      "repairedUnlockingBytes": 5800,
+      "standard": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1
+      },
+      "consensus": {
+        "accepted": true,
+        "error": null,
+        "stackDepth": 1,
+        "operationCost": 2269846
+      }
+    }
+  ],
+  "qualification": {
+    "standardVmAll14Accepted": true,
+    "consensusVmAll14Accepted": true,
+    "full14PositiveReplay": true,
+    "theoremTransfer": "This receipt validates execution of the packaged repaired graph on the retained positive context; the separate conditional equation and ledger/domain premises remain required."
+  }
+}

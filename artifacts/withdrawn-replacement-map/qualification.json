@@ -1,0 +1,17 @@
+{
+  "schema": "withdrawn-replacement-map-qualification/v1",
+  "status": "ALL31_REPLACEMENT_DISPOSITIONS_RECONCILED_WITH_EXPLICIT_CONDITIONAL_SCOPES",
+  "counts": {
+    "historicalWithdrawals": 31,
+    "completeConditionalMathematicalReplacements": 31,
+    "partialRepairsWithinIdentifiedScope": 0,
+    "noReplacementWithinIdentifiedScope": 0,
+    "constructionFamilies": 16
+  },
+  "mapSha256": "38a681d41c088706a0a44087bef78cfd1e2bea444fdd53748f2b609bb33ff53b",
+  "readmeSha256": "b58cf399beb10d91a9cdc871e178470f21968657c592c191bc49a97205f169a4",
+  "original31WithdrawalsUnchanged": true,
+  "all56LedgerEntriesReclassified": false,
+  "unrestrictedOrUniversalCorrectnessEstablished": false,
+  "registryAndHistoricalScoresChanged": false
+}

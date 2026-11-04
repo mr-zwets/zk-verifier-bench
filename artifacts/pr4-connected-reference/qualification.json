@@ -1,0 +1,76 @@
+{
+  "schema": "pr4-connected-artifact-qualification/v1",
+  "status": "CONDITIONAL_FINITE_FIXED_KEY_FULL_EQUATIONS",
+  "sourceRepository": "mr-zwets/groth16_cashscript",
+  "sourceDirectory": "chunked/pr4-connected-reference",
+  "sourceQualificationSha256": "93c6f8200d4274ffd811291a7d74ffb1b6ca8064bb492be064dc42e43c978da9",
+  "logicalRoots": {
+    "public-source": "sourceRepository/sourceDirectory",
+    "public-artifact": "this artifact directory"
+  },
+  "compiledCatalog": "compiled-catalog.json",
+  "programs": 134,
+  "existingPositiveProofGraphs": 5,
+  "arithmeticOracleAccepted": {
+    "bn254": 144,
+    "bls12-381": 172
+  },
+  "consensusPerInputAccepted": {
+    "bn254": 24,
+    "bls12-381": 170
+  },
+  "standardPerInputAccepted": {
+    "bn254": 24,
+    "bls12-381": 170
+  },
+  "nativeAdmission": "RESOURCE_HOLD_NO_COMPLETE_NATIVE_GRAPH_CLAIM",
+  "theoremBinding": "theorem-binding-v2.json",
+  "domain": {
+    "bls12-381": {
+      "scope": "Finite canonical external A/C, finite canonical strict-r B, endpoint/regular-walk and nonzero-Miller bridge, reviewed four-pair equation, and final-exponent unit predicate.",
+      "notProved": [
+        "arbitrary B subgroup admission",
+        "external infinity/neutral ABI completeness",
+        "arbitrary key/circuit/setup/SNARK knowledge or zero knowledge",
+        "native/standard whole-transaction admission",
+        "mainnet deployment"
+      ]
+    },
+    "bn254": {
+      "scope": "Finite canonical A/C and public MSM inputs, finite nonzero strict-r B, nonzero affine slope/endpoint denominators, fixed key, and exact codec/state/locking identity.",
+      "notProved": [
+        "neutral proof point",
+        "neutral vk_x/public MSM",
+        "neutral B/Miller identity path",
+        "unrestricted raw-input soundness",
+        "valid-proof completeness outside the declared finite domain"
+      ]
+    }
+  },
+  "originalWithdrawalsUnchanged": true,
+  "scope": {
+    "existingProofPublicInputCasesOnly": true,
+    "auxiliaryStateReencoding": true,
+    "newProofs": 0,
+    "deliberateNegativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false
+  },
+  "files": {
+    "README.md": "9be274014176f35d032aeba8e874336ddebbed8884e27bae1673c9eb82a0b729",
+    "bls12-381-positive-context-v2.json": "1ff9e0060466c20e0406569e2000c1f7e21e3fd9f15c08f8262e32eae9927719",
+    "bn254-positive-context-v2.json": "9bea1de34b1737f2889c809b1936d8fafee18930de29cb52ea6c3f979c41e44c",
+    "compiled-catalog.json": "8c6220c366eeba5c4d2e8fbe65af0d46f53f659dc78706c026b4be923900e5e7",
+    "fixed-rebuild-final.json": "4072fe918d6e532784a2c9a0bf57e7b0c65042da269c3d0df2c282243d82563c",
+    "libauth-pin.json": "0782f0b7a67f3b6a92eee5034a874e93f1aaa6c9dc3ee40523229afa9c12b4bf",
+    "replay-assessment-v3.json": "1e542468159402e651db3ebd3791c46b3253320d5945dfb58e501b5319c8a030",
+    "replay-config-v2.json": "ea5aea0beefc7d4d640002e2a074b98db478df636a34f36fb833c91d41d715c3",
+    "replay-receipt-bls-v2.json": "936cb67dea9c4347bcd82ae983f466b7b93cc80942249623b5731879a254bbb9",
+    "replay-receipt-bn-v2.json": "1f0045435a393676eb6accd56e06a900db2119943fc3d6ff3b26f118d373708f",
+    "replay.mjs": "39f074e0dac149495aaefab985e1bf5d5447e580727459fe8937fc7118821e1e",
+    "source4-theorem-transfer-review-v2.json": "f9a21eb9faf7ee6022172ea211c52dccc710bd40ca0704bc64b1b3debb81c4e9",
+    "theorem/whole-bls-composition-peer-v2.json": "b457588f2a3cb84360638814684fd5faecc177bec0d7b29662327f4801570337",
+    "theorem-binding-v2.json": "b4b1cdca890e5689d0fd59d7be45c9c4ed15e8cdb10eff5549b6ad0345b0e650"
+  },
+  "sourceRevision": "e18f0cd34f5ad6facf4cbaa7c06040aadd20f7e9"
+}

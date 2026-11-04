@@ -108,6 +108,7 @@ const results = cases.map(entry => ({index: entry.index,
   outcomes: Object.entries(vms).map(([mode, vm]) => evaluate(entry, mode, vm))}));
 const report = {schema: 'bls-full-proof-domain-existing-positive-replay/v1',
   status: 'PASS_EXISTING_POSITIVES_ARITHMETIC_NATIVE_ADMISSION_HOLD', node: process.version,
+  sourceFile: q.sourceFile,
   sourceSha256: q.sourceSha256, lockingSha256: q.lockingSha256,
   fixtureSha256: q.originalMultiproofSha256, positivePacketSha256: sha(packetBytes),
   neutralCaseSha256: sha(neutralBytes), neutralComputedVkx: true,

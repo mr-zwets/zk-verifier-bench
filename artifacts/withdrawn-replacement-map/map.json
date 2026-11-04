@@ -1,0 +1,1123 @@
+{
+  "schema": "withdrawn-replacement-map/v2",
+  "capturedUtc": "2026-10-28T09:30:52.658050+00:00",
+  "status": "ALL31_REPLACEMENT_DISPOSITIONS_RECONCILED_WITH_EXPLICIT_CONDITIONAL_SCOPES",
+  "definition": "Complete replacement means the identified affected mathematical construction has a distinct qualified full verifier or appropriate component repair, with an exact fixed-key/statement/interface transfer and existing-positive evidence within the stated domain. It does not approve the original head or restore withdrawn architecture/performance or broader claims.",
+  "counts": {
+    "historicalWithdrawals": 31,
+    "completeConditionalMathematicalReplacements": 31,
+    "partialRepairsWithinIdentifiedScope": 0,
+    "noReplacementWithinIdentifiedScope": 0,
+    "constructionFamilies": 16
+  },
+  "sourceRevision": "a9d20b5f2f88c6d9ff82004587e4a43f7e524556",
+  "benchmarkArtifactRevision": "e408546bb69a7733184c81c034d21dcd580039bf",
+  "mergedReplacementHeads": [
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 30,
+      "head": "29bbe91bead62d4ad1f631a0f78a31545299d1c9",
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/30",
+      "disposition": "CONFIRMED_CONDITIONAL_CORRECTIVE_SCOPE_NATIVE_HOLD"
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 47,
+      "head": "24cb5d12544b18dcf4b20e8989a1a970372c1c7d",
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/47",
+      "disposition": "CONFIRMED_CONDITIONAL_CORRECTIVE_SCOPE_NATIVE_HOLD"
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 31,
+      "head": "b7338eab2899f9b7b6be381b029691fc903abebf",
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/31",
+      "disposition": "CONFIRMED_CONDITIONAL_CORRECTIVE_SCOPE_NATIVE_HOLD"
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 48,
+      "head": "ded235ddec8de97b06743b76a1e6e85d79366125",
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/48",
+      "disposition": "CONFIRMED_CONDITIONAL_CORRECTIVE_SCOPE_NATIVE_HOLD"
+    }
+  ],
+  "replacementPublication": "Merged source34/benchmark51 plus follow-ups source35/benchmark55; exact remote final-head verification is recorded separately by the owning ledger.",
+  "followupPullRequests": {
+    "source": "https://github.com/mr-zwets/groth16_cashscript/pull/35",
+    "benchmark": "https://github.com/mr-zwets/zk-verifier-bench/pull/55"
+  },
+  "families": [
+    {
+      "id": "f03-09-bn-residue",
+      "sourcePR": 3,
+      "benchmarkPR": 9,
+      "replacement": "Historical BN27 native/grouped exact-frame and rooted-graph corrections in PR34/51.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Finite canonical BN254 equation/frame ownership with exact selected-program identity and existing positive graph evidence.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/3",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/9",
+      "artifactQualifications": [
+        "artifacts/historical-frame-repairs/qualification.json",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-frame-repairs/qualification.json",
+          "sha256": "63c663ec4c4885000a7108b1994a94ea66a030c27daee545034ecfc127154fe6"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f04-10-bn48-bls86",
+      "sourcePR": 4,
+      "benchmarkPR": 10,
+      "replacement": "Qualified connected BN48/BLS86 graph in source35/benchmark55, alongside the merged source34/benchmark51 references.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Exact conditional finite-domain theorem transfer,134 source/program/ABI rebuilds,132 successor locks and316 accepted existing arithmetic stage evaluations.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/4",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/10",
+      "replacementPrs": {
+        "source": [
+          34,
+          35
+        ],
+        "benchmark": [
+          51,
+          55
+        ]
+      },
+      "domainLimits": "Finite canonical points, strict-r B and the stated regular-walk/normalization charts; exact graph and designated lineage. Neutral/infinity and unrestricted raw-input completeness are unclaimed.",
+      "artifactQualifications": [
+        "artifacts/pr4-connected-reference/qualification.json"
+      ],
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/groth16_cashscript/pull/35",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/55"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/pr4-connected-reference/qualification.json",
+          "sha256": "70c954e74cfe3428e3391530715cc00a4131058737288b42e5b7ff3c70f5d3ff"
+        }
+      ]
+    },
+    {
+      "id": "f05-11-bn42-bls-minop",
+      "sourcePR": 5,
+      "benchmarkPR": 11,
+      "replacement": "Published historical BN13/BLS34/large4 frame repairs; authenticated42 functional same-key/statement replacement; exact BLS45 minop reference.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "The independent public authenticated42 full equation is joined to the native/grouped fixed VK and proof/scalar/state ABI. Minop45 has its own compiled finite-domain theorem, exact rebuild and five existing positive replays.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/5",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/11",
+      "domainLimits": "Finite canonical fixed-key domains and graph/lineage premises. Original42 native/grouped layouts and performance remain withdrawn; the replacement is functional, not a drop-in restoration of those layouts.",
+      "artifactQualifications": [
+        "artifacts/historical-frame-repairs/qualification.json",
+        "artifacts/bn254-auth42-statement-transfer/qualification.json",
+        "artifacts/bls-pr5-minop-interface-reference/qualification.json"
+      ],
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51,
+          55
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/55"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-frame-repairs/qualification.json",
+          "sha256": "63c663ec4c4885000a7108b1994a94ea66a030c27daee545034ecfc127154fe6"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/bn254-auth42-statement-transfer/qualification.json",
+          "sha256": "cd08ef0d0df49230830cfffb3dcd7b3e896861c738cf7c92a13102c6768822c1"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/bls-pr5-minop-interface-reference/qualification.json",
+          "sha256": "5b8adfa756a2eecdb9400d88f3b015b5f3185211214f9cede9a7195e2934ed71"
+        }
+      ]
+    },
+    {
+      "id": "f06-13-source6-singleton",
+      "sourcePR": 6,
+      "benchmarkPR": 13,
+      "replacement": "Full raw14 conditional verifier plus guarded inherited singleton and separately qualified grouped-affine component.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Raw-A normalization and downstream state/key ownership are proved on the exact14-program graph;14/14 existing standard and consensus inputs accept. Missing helper definitions and finite equal-point addition are repaired in the component. The fixed-key full successor and component share IC0/IC1/IC2.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/6",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/13",
+      "domainLimits": "Raw14 requires finite raw B and its stated normalization charts, exact graph and valid designated NFT lineage. The two-program704-byte affine ABI is a component only; no complete generic producer/verifier claim is made for it.",
+      "artifactQualifications": [
+        "artifacts/bn254-pr6-raw14-reference/qualification.json",
+        "artifacts/bn254-pr13-canonical-reference/qualification.json",
+        "chunked/pairing/pr6-grouped-affine-reference/qualification.json (source repository)"
+      ],
+      "replacementPrs": {
+        "source": [
+          34,
+          35
+        ],
+        "benchmark": [
+          51,
+          55
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/groth16_cashscript/pull/35",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/55"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/bn254-pr6-raw14-reference/qualification.json",
+          "sha256": "2f554ab593ef8232995bf0abf6821ecb783832f33d64fc301788bd1238fb2f41"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/bn254-pr13-canonical-reference/qualification.json",
+          "sha256": "e96934ebfb442ae77db737db718f87bbd25c28c7d043e035cf94aabb910c17d9"
+        },
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/pairing/pr6-grouped-affine-reference/qualification.json",
+          "sha256": "025569987894fa24908b4700c8ce5b5b83f70ef5ee113611c4a8bfef012068af"
+        }
+      ]
+    },
+    {
+      "id": "f09-16-bls34",
+      "sourcePR": 9,
+      "benchmarkPR": null,
+      "replacement": "Historical BLS34 carrier4/terminal33 exact-frame and rooted-graph correction in PR34/51.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": null
+      },
+      "mathClaim": "Finite fixed-key BLS34 frame-owner composition with existing positive evidence.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/9",
+      "historicalBenchmarkUrl": null,
+      "artifactQualifications": [
+        "artifacts/historical-frame-repairs/qualification.json",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-frame-repairs/qualification.json",
+          "sha256": "63c663ec4c4885000a7108b1994a94ea66a030c27daee545034ecfc127154fe6"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f11-18-bls-large26",
+      "sourcePR": 11,
+      "benchmarkPR": 18,
+      "replacement": "Historical BLS26 exact-frame and rooted-graph correction in PR34/51.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Finite-affine fixed-key BLS large26 frame and equation composition with externally anchored graph premises.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/11",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/18",
+      "artifactQualifications": [
+        "artifacts/historical-frame-repairs/qualification.json",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-frame-repairs/qualification.json",
+          "sha256": "63c663ec4c4885000a7108b1994a94ea66a030c27daee545034ecfc127154fe6"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f13-20-bls-large24",
+      "sourcePR": 13,
+      "benchmarkPR": 20,
+      "replacement": "Historical BLS24 exact-frame repair plus separately qualified grouped26 graph in PR34/51.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Finite-affine fixed-key BLS native/grouped full-equation composition with strict nonzero-B and ordered graph premises.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/13",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/20",
+      "artifactQualifications": [
+        "artifacts/historical-frame-repairs/qualification.json",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-frame-repairs/qualification.json",
+          "sha256": "63c663ec4c4885000a7108b1994a94ea66a030c27daee545034ecfc127154fe6"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f15-32-bn-full-coordinate",
+      "sourcePR": 15,
+      "benchmarkPR": 32,
+      "replacement": "Historical 4681-byte full-coordinate singleton reference and native5 reference in PR34/51.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Exact historical full-coordinate codec, fixed VK and declared finite/neutral domain, with four existing positive arithmetic-oracle unlockings. This closes the prior local-only gap; it does not relabel merged compact PR30/47.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/15",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/32",
+      "artifactQualifications": [
+        "artifacts/bn254-pr15-full-coordinate-reference/qualification.json",
+        "chunked/bn254/checked-legacy/qualification.json (source repository)"
+      ],
+      "domainLimits": "Canonical full-coordinate EIP197 point values and Fr scalars for the4681-byte singleton; native5 has separate graph/ancestry and resource limits.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/bn254-pr15-full-coordinate-reference/qualification.json",
+          "sha256": "dca9f2d0059548eb553b3c9f6df85b0a1abed10ff784a8e1c22e12dd5334b3a6"
+        },
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/bn254/checked-legacy/qualification.json",
+          "sha256": "d39369e07a7322bc8dccc017d63630b38a50ae94d2d54027cba3b232f0a3e145"
+        }
+      ]
+    },
+    {
+      "id": "f16-33-bls-singleton",
+      "sourcePR": 16,
+      "benchmarkPR": 33,
+      "replacement": "Merged BLS compact singleton cofactor-equivalent successor PR31/48",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Fixed-key compact singleton equation over the declared canonical finite/neutral cofactor-equivalent point domain; separate component/FS claims retain their own qualifications.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/16",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/33",
+      "artifactQualifications": [],
+      "replacementPrs": {
+        "source": [
+          31
+        ],
+        "benchmark": [
+          48
+        ]
+      },
+      "domainLimits": "Declared finite/neutral cofactor-equivalent point domain. This is not an unrestricted strict-r-input/setup/knowledge theorem; other component and FS claims retain their own qualifications.",
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/31",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/48"
+      ],
+      "qualificationSeals": []
+    },
+    {
+      "id": "f17-36-provenance",
+      "sourcePR": 17,
+      "benchmarkPR": 36,
+      "replacement": "Current mandatory checker with recovered same-VK/five-payload identity",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Same fixed VK, statement and five-payload equality establish conditional mathematical replacement; exporter/setup lineage remains an explicit provenance hold.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/17",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/36",
+      "artifactQualifications": [
+        "chunked/bn254/checked-legacy/qualification.json (source repository)",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed. The historical exporter/setup lineage remains unestablished; the recovered fixed-key statement/payload compatibility is separate.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/bn254/checked-legacy/qualification.json",
+          "sha256": "d39369e07a7322bc8dccc017d63630b38a50ae94d2d54027cba3b232f0a3e145"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f19-38",
+      "sourcePR": 19,
+      "benchmarkPR": 38,
+      "replacement": "Current mandatory full-equation legacy profile",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Conditional fixed-key full-equation replacement for the affected finite legacy profile.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/19",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/38",
+      "artifactQualifications": [
+        "chunked/bn254/checked-legacy/qualification.json (source repository)",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/bn254/checked-legacy/qualification.json",
+          "sha256": "d39369e07a7322bc8dccc017d63630b38a50ae94d2d54027cba3b232f0a3e145"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f20-40",
+      "sourcePR": 20,
+      "benchmarkPR": 40,
+      "replacement": "Current mandatory full-equation legacy profile",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Conditional fixed-key full-equation replacement for the affected finite legacy profile.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/20",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/40",
+      "artifactQualifications": [
+        "chunked/bn254/checked-legacy/qualification.json (source repository)",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/bn254/checked-legacy/qualification.json",
+          "sha256": "d39369e07a7322bc8dccc017d63630b38a50ae94d2d54027cba3b232f0a3e145"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f21-41",
+      "sourcePR": 21,
+      "benchmarkPR": 41,
+      "replacement": "Current mandatory full-equation legacy profile",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Conditional fixed-key full-equation replacement for the affected finite legacy profile.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/21",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/41",
+      "artifactQualifications": [
+        "chunked/bn254/checked-legacy/qualification.json (source repository)",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed.",
+      "replacementPrs": {
+        "source": [
+          34
+        ],
+        "benchmark": [
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/bn254/checked-legacy/qualification.json",
+          "sha256": "d39369e07a7322bc8dccc017d63630b38a50ae94d2d54027cba3b232f0a3e145"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f22-42",
+      "sourcePR": 22,
+      "benchmarkPR": 42,
+      "replacement": "Mandatory full-equation checked-legacy profiles in PR34/51 plus merged BN singleton correction PR30/47.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Conditional fixed-key full-equation replacement for the affected finite legacy profile.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/22",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/42",
+      "artifactQualifications": [
+        "chunked/bn254/checked-legacy/qualification.json (source repository)",
+        "artifacts/historical-rooted-graphs/qualification.json"
+      ],
+      "domainLimits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed.",
+      "replacementPrs": {
+        "source": [
+          30,
+          34
+        ],
+        "benchmark": [
+          47,
+          51
+        ]
+      },
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/30",
+        "https://github.com/mr-zwets/groth16_cashscript/pull/34",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/47",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/51"
+      ],
+      "qualificationSeals": [
+        {
+          "repository": "mr-zwets/groth16_cashscript",
+          "file": "chunked/bn254/checked-legacy/qualification.json",
+          "sha256": "d39369e07a7322bc8dccc017d63630b38a50ae94d2d54027cba3b232f0a3e145"
+        },
+        {
+          "repository": "mr-zwets/zk-verifier-bench",
+          "file": "artifacts/historical-rooted-graphs/qualification.json",
+          "sha256": "90f427a751f22fb06b901973e809406c43dba8377a3e0f9dea1e5df26f16feaf"
+        }
+      ]
+    },
+    {
+      "id": "f25-44",
+      "sourcePR": 25,
+      "benchmarkPR": 44,
+      "replacement": "Merged BN singleton source30/benchmark47 and BLS singleton source31/benchmark48 corrections.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Both affected singleton constructions have complete conditional equation/domain replacements. Historical FS measurements remain withdrawn measurement claims; no performance restoration is asserted.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/25",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/44",
+      "replacementPrs": {
+        "source": [
+          30,
+          31
+        ],
+        "benchmark": [
+          47,
+          48
+        ]
+      },
+      "domainLimits": "BN canonical finite/neutral equation and BLS cofactor-equivalent domain. Historical FS measurements/performance remain withdrawn measurement claims, outside verifier theorem coverage.",
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/30",
+        "https://github.com/mr-zwets/groth16_cashscript/pull/31",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/47",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/48"
+      ],
+      "qualificationSeals": []
+    },
+    {
+      "id": "f27-45",
+      "sourcePR": 27,
+      "benchmarkPR": 45,
+      "replacement": "Merged BN singleton identity/MSM correction source30/benchmark47.",
+      "classification": {
+        "source": "COMPLETE_REPLACEMENT",
+        "benchmark": "COMPLETE_REPLACEMENT"
+      },
+      "mathClaim": "Fixed-key four-pair equation with canonical finite/neutral A/B/C and reconstructed vk_x; exact public MSM identity/endpoint handling.",
+      "publication": "Qualified replacement artifacts in the listed corrective PRs; original withdrawn heads are unchanged.",
+      "remainingGaps": [],
+      "historicalSourceUrl": "https://github.com/mr-zwets/groth16_cashscript/pull/27",
+      "historicalBenchmarkUrl": "https://github.com/mr-zwets/zk-verifier-bench/pull/45",
+      "replacementPrs": {
+        "source": [
+          30
+        ],
+        "benchmark": [
+          47
+        ]
+      },
+      "domainLimits": "Canonical finite/neutral BN254 point-value domain with fixed VK; native admission and arbitrary-key/circuit/setup claims remain unestablished.",
+      "replacementUrls": [
+        "https://github.com/mr-zwets/groth16_cashscript/pull/30",
+        "https://github.com/mr-zwets/zk-verifier-bench/pull/47"
+      ],
+      "qualificationSeals": []
+    }
+  ],
+  "rows": [
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 27,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/27",
+      "originalHead": "cb499cd6990965f05b91f245c7c22e687558a039",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f27-45",
+      "replacement": "Merged BN singleton identity/MSM correction source30/benchmark47.",
+      "limits": "Canonical finite/neutral BN254 point-value domain with fixed VK; native admission and arbitrary-key/circuit/setup claims remain unestablished."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 25,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/25",
+      "originalHead": "4c4b21ecf4e390c0d927282af53dd64ed17a7aa9",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f25-44",
+      "replacement": "Merged BN singleton source30/benchmark47 and BLS singleton source31/benchmark48 corrections.",
+      "limits": "BN canonical finite/neutral equation and BLS cofactor-equivalent domain. Historical FS measurements/performance remain withdrawn measurement claims, outside verifier theorem coverage."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 22,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/22",
+      "originalHead": "fa3167c70bebff30fcc860b2b71b7557c1f488ed",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f22-42",
+      "replacement": "Mandatory full-equation checked-legacy profiles in PR34/51 plus merged BN singleton correction PR30/47.",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 21,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/21",
+      "originalHead": "fb4da9568dcdcda2d8c21b35b3c0885d73c7167a",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f21-41",
+      "replacement": "Current mandatory full-equation legacy profile",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 20,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/20",
+      "originalHead": "e26ce32daf59a3db1a718f1e85695d51a3750de2",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f20-40",
+      "replacement": "Current mandatory full-equation legacy profile",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 19,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/19",
+      "originalHead": "bfb9159c46798859cf0e081b2714dd199987fdcd",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f19-38",
+      "replacement": "Current mandatory full-equation legacy profile",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 17,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/17",
+      "originalHead": "76275fc6a0a169a41efa67105ee3cb5af20f8208",
+      "originalDisposition": "WITHDRAWN_UNQUALIFIED",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f17-36-provenance",
+      "replacement": "Current mandatory checker with recovered same-VK/five-payload identity",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed. The historical exporter/setup lineage remains unestablished; the recovered fixed-key statement/payload compatibility is separate."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 16,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/16",
+      "originalHead": "77ab0acdd5c1d17d34e8751a6840fbafed70cf4b",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f16-33-bls-singleton",
+      "replacement": "Merged BLS compact singleton cofactor-equivalent successor PR31/48",
+      "limits": "Declared finite/neutral cofactor-equivalent point domain. This is not an unrestricted strict-r-input/setup/knowledge theorem; other component and FS claims retain their own qualifications."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 15,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/15",
+      "originalHead": "1e7c52ab3b6af132c3f3f87effd38821828c874d",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f15-32-bn-full-coordinate",
+      "replacement": "Historical 4681-byte full-coordinate singleton reference and native5 reference in PR34/51.",
+      "limits": "Canonical full-coordinate EIP197 point values and Fr scalars for the4681-byte singleton; native5 has separate graph/ancestry and resource limits."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 13,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/13",
+      "originalHead": "2b76007bec86727ccc0018dcb4ea9b905042a52f",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f13-20-bls-large24",
+      "replacement": "Historical BLS24 exact-frame repair plus separately qualified grouped26 graph in PR34/51.",
+      "limits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 11,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/11",
+      "originalHead": "106bbb1bb09c32fdf3fc02c1aeb5f9af4721fd69",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f11-18-bls-large26",
+      "replacement": "Historical BLS26 exact-frame and rooted-graph correction in PR34/51.",
+      "limits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 9,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/9",
+      "originalHead": "6819ad7908a66169897f3b9149e11278b261452b",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f09-16-bls34",
+      "replacement": "Historical BLS34 carrier4/terminal33 exact-frame and rooted-graph correction in PR34/51.",
+      "limits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 6,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/6",
+      "originalHead": "0b5b2240cbb2f723a87dce2f43b92fc6f38e4b4d",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f06-13-source6-singleton",
+      "replacement": "Full raw14 conditional verifier plus guarded inherited singleton and separately qualified grouped-affine component.",
+      "limits": "Raw14 requires finite raw B and its stated normalization charts, exact graph and valid designated NFT lineage. The two-program704-byte affine ABI is a component only; no complete generic producer/verifier claim is made for it."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 5,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/5",
+      "originalHead": "2831928fe224d252fc90dfc26ecfdf52f29e9399",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f05-11-bn42-bls-minop",
+      "replacement": "Published historical BN13/BLS34/large4 frame repairs; authenticated42 functional same-key/statement replacement; exact BLS45 minop reference.",
+      "limits": "Finite canonical fixed-key domains and graph/lineage premises. Original42 native/grouped layouts and performance remain withdrawn; the replacement is functional, not a drop-in restoration of those layouts."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 4,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/4",
+      "originalHead": "15d57f4fa13400f83e45aaadeb7154e294078ca0",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f04-10-bn48-bls86",
+      "replacement": "Qualified connected BN48/BLS86 graph in source35/benchmark55, alongside the merged source34/benchmark51 references.",
+      "limits": "Finite canonical points, strict-r B and the stated regular-walk/normalization charts; exact graph and designated lineage. Neutral/infinity and unrestricted raw-input completeness are unclaimed."
+    },
+    {
+      "repository": "mr-zwets/groth16_cashscript",
+      "number": 3,
+      "url": "https://github.com/mr-zwets/groth16_cashscript/pull/3",
+      "originalHead": "b4cf1eadeb596fc80350d9c00c66c5983cb43c77",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f03-09-bn-residue",
+      "replacement": "Historical BN27 native/grouped exact-frame and rooted-graph corrections in PR34/51.",
+      "limits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 45,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/45",
+      "originalHead": "4a444bac52bce6f7fcd8e9320daf03ca6122355d",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f27-45",
+      "replacement": "Merged BN singleton identity/MSM correction source30/benchmark47.",
+      "limits": "Canonical finite/neutral BN254 point-value domain with fixed VK; native admission and arbitrary-key/circuit/setup claims remain unestablished."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 44,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/44",
+      "originalHead": "eb1ea02b79f44a81fad465fe6d1d5fad9a82cd5f",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f25-44",
+      "replacement": "Merged BN singleton source30/benchmark47 and BLS singleton source31/benchmark48 corrections.",
+      "limits": "BN canonical finite/neutral equation and BLS cofactor-equivalent domain. Historical FS measurements/performance remain withdrawn measurement claims, outside verifier theorem coverage."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 42,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/42",
+      "originalHead": "27ec7d41faf3333b0d79fed1e0e9e1e8e577da49",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f22-42",
+      "replacement": "Mandatory full-equation checked-legacy profiles in PR34/51 plus merged BN singleton correction PR30/47.",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 41,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/41",
+      "originalHead": "a1ba9cd8d678d858b45b9ed90ffb9b0babff9171",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f21-41",
+      "replacement": "Current mandatory full-equation legacy profile",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 40,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/40",
+      "originalHead": "06af6c798d998873b02df68b381a7bdcba721067",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f20-40",
+      "replacement": "Current mandatory full-equation legacy profile",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 38,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/38",
+      "originalHead": "75fb52659cd96efabdeee86837712a4b0448951f",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f19-38",
+      "replacement": "Current mandatory full-equation legacy profile",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 36,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/36",
+      "originalHead": "0d0a5c6fc3fa34c54851bd73fdb687325f514baf",
+      "originalDisposition": "WITHDRAWN_UNQUALIFIED",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f17-36-provenance",
+      "replacement": "Current mandatory checker with recovered same-VK/five-payload identity",
+      "limits": "Copied mandatory checker owns the fixed-key equation; old auxiliary predicates only restrict acceptance. Native/resource, arbitrary-key and universal auxiliary/producer completeness remain unclaimed. The historical exporter/setup lineage remains unestablished; the recovered fixed-key statement/payload compatibility is separate."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 33,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/33",
+      "originalHead": "b093e4db5e6139a8c0093c93562f12ee6a34986c",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f16-33-bls-singleton",
+      "replacement": "Merged BLS compact singleton cofactor-equivalent successor PR31/48",
+      "limits": "Declared finite/neutral cofactor-equivalent point domain. This is not an unrestricted strict-r-input/setup/knowledge theorem; other component and FS claims retain their own qualifications."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 32,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/32",
+      "originalHead": "aede1967237b3d7e28f9ca74ab52232e7e6d5421",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f15-32-bn-full-coordinate",
+      "replacement": "Historical 4681-byte full-coordinate singleton reference and native5 reference in PR34/51.",
+      "limits": "Canonical full-coordinate EIP197 point values and Fr scalars for the4681-byte singleton; native5 has separate graph/ancestry and resource limits."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 20,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/20",
+      "originalHead": "8bc667a1be97d511d484b623f9adb10e35cf747c",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f13-20-bls-large24",
+      "replacement": "Historical BLS24 exact-frame repair plus separately qualified grouped26 graph in PR34/51.",
+      "limits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 18,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/18",
+      "originalHead": "c180fa77db4a1ad9126d60bfdea176692ec6360a",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f11-18-bls-large26",
+      "replacement": "Historical BLS26 exact-frame and rooted-graph correction in PR34/51.",
+      "limits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 13,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/13",
+      "originalHead": "0eb69cbdd1a96a83b13fca1045c45169249bc743",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f06-13-source6-singleton",
+      "replacement": "Guarded historical BN254 singleton reference in source34/benchmark51; this row addresses the identified inherited singleton MSM gap.",
+      "limits": "Eight canonical Fp coordinates/two Fr scalars; finite external A/C and strict-r finite B; computed vk_x may be neutral. Native resource HOLD."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 11,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/11",
+      "originalHead": "d1004f640e9ef7de1a3d64da9027c4dd54888cb2",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f05-11-bn42-bls-minop",
+      "replacement": "Published historical BN13/BLS34/large4 frame repairs; authenticated42 functional same-key/statement replacement; exact BLS45 minop reference.",
+      "limits": "Finite canonical fixed-key domains and graph/lineage premises. Original42 native/grouped layouts and performance remain withdrawn; the replacement is functional, not a drop-in restoration of those layouts."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 10,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/10",
+      "originalHead": "39df0459b8b231f4fc0097c78c5a879842b5dc38",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f04-10-bn48-bls86",
+      "replacement": "Qualified connected BN48/BLS86 graph in source35/benchmark55, alongside the merged source34/benchmark51 references.",
+      "limits": "Finite canonical points, strict-r B and the stated regular-walk/normalization charts; exact graph and designated lineage. Neutral/infinity and unrestricted raw-input completeness are unclaimed."
+    },
+    {
+      "repository": "mr-zwets/zk-verifier-bench",
+      "number": 9,
+      "url": "https://github.com/mr-zwets/zk-verifier-bench/pull/9",
+      "originalHead": "84c177c40aa86d7ce5c31e0082981cbc6ccae8ba",
+      "originalDisposition": "WITHDRAWN_CONFIRMED_INCORRECT_ORIGINAL_CONSTRUCTION",
+      "originalHeadRemainsWithdrawn": true,
+      "replacementDisposition": "COMPLETE_REPLACEMENT",
+      "family": "f03-09-bn-residue",
+      "replacement": "Historical BN27 native/grouped exact-frame and rooted-graph corrections in PR34/51.",
+      "limits": "Artifact-specific finite point, fixed-key and exact ordered/rooted graph premises remain. The separately qualified grouped26 branch retains its own domain. No universal neutral-domain, native/relay or setup claim."
+    }
+  ],
+  "unrestrictedOrUniversalCorrectnessEstablished": false,
+  "originalWithdrawalsUnchanged": true,
+  "nativeRelayMainnetAdmissionEstablished": false,
+  "scope": {
+    "mathematicsOnly": true,
+    "existingProofPublicInputFixturesOnly": true,
+    "sameProofAuxiliaryStateReencodingAllowed": true,
+    "newProofs": 0,
+    "deliberateNegativeCases": 0,
+    "cybersecurityTesting": false,
+    "byteOptimization": false,
+    "upstreamMergeOrDeployment": false
+  }
+}

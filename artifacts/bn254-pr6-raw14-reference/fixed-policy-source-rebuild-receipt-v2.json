@@ -1,0 +1,277 @@
+{
+  "schema": "source6-raw14-fixed-policy-source-rebuild/v2",
+  "status": "PASS_DETERMINISTIC_FIXED_POLICY_SOURCE_REBUILD",
+  "policy": {
+    "optimizeFor": "opcost",
+    "rescheduleStacks": true,
+    "compilerExecuted": true,
+    "generatorImported": false,
+    "vmExecuted": false,
+    "proverExecuted": false,
+    "newProofGenerated": false,
+    "newFixtureGenerated": false,
+    "negativeCases": false
+  },
+  "source": {
+    "programCount": 14,
+    "catalogSha256": "273cd035163c2196f0bad07a4f8a991451f7a998ee1d3fe5cf158dea2a0eed41",
+    "compilerOwner": "packages/cashc/src/index.ts",
+    "compilerEntry": "packages/cashc/src/index.ts",
+    "compilerHead": "1c707c1dbf87396b30ba5e0704b1db44475ce893",
+    "compilerEntrySha256": "7d9c6d0d61378e170832d696a5bca0972982d9e994928bd271441cf3136fa5b1"
+  },
+  "rows": [
+    {
+      "input": 0,
+      "sourceBytes": 7474,
+      "sourceSha256": "8d82ae13488582ec0a8b33b3d439cb88e010f0f6e64bd17c5bceacc9fa2ff2f0",
+      "compiledBytes": 2399,
+      "compiledSha256": "d9c068cd6e20ff2df98afc76e4a99341530447f5cfb99260ad66bcd90b946fed",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 15
+    },
+    {
+      "input": 1,
+      "sourceBytes": 6798,
+      "sourceSha256": "aeeade83777c563da34ea6f118ae1c123d009b5b9a6ce4ed56303f370e45cf85",
+      "compiledBytes": 2107,
+      "compiledSha256": "31dfcc4d545e1844102e02d22dea278d8d05d16fff0d25876a568fb82629192e",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 18
+    },
+    {
+      "input": 2,
+      "sourceBytes": 6799,
+      "sourceSha256": "7f7bfc7e28c1df089ca79e67efda1f2d2e4d61c51ab4dc0e8d52d8dc0a9570bf",
+      "compiledBytes": 2107,
+      "compiledSha256": "70571b5f66eb08cfd0fdc5270f6168ac182940c254e63c3a241a28e141d5d1e3",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 18
+    },
+    {
+      "input": 3,
+      "sourceBytes": 7041,
+      "sourceSha256": "8972a31e6792670f7480ce4dcd0ad8bb7ad84345191315ef1fb07cccd4784889",
+      "compiledBytes": 2171,
+      "compiledSha256": "c527b78f1ac268759293a0f308984a67c6aceec1988a7655defc14abfee7a56f",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 19
+    },
+    {
+      "input": 4,
+      "sourceBytes": 20521,
+      "sourceSha256": "501479166e3e9f3bf2f463540f8aeec77f5ba0b346a6d13df185f8e745791a6a",
+      "compiledBytes": 8039,
+      "compiledSha256": "d64ad31a5d64a06c9f85f8924849431614b3f57c96efb9534dcf67c133e8d295",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 44
+    },
+    {
+      "input": 5,
+      "sourceBytes": 19597,
+      "sourceSha256": "bc4925ae11e057f7d7a79bc38745abe3238d7c8a9cf8d764aab43deccc6225f8",
+      "compiledBytes": 7989,
+      "compiledSha256": "c149300cfb2ab21f454fba3449852559fe66c346abc887069728de95e34d42c8",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 53
+    },
+    {
+      "input": 6,
+      "sourceBytes": 19078,
+      "sourceSha256": "073917cc86fa566137684cfc803284344dcf9a0fee899c4519b931fe2a05e573",
+      "compiledBytes": 7782,
+      "compiledSha256": "c45b0eb129a42e2a61ae32bb9ff3841f90cbe2321e5a4cbed2e5564b34446197",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 53
+    },
+    {
+      "input": 7,
+      "sourceBytes": 19625,
+      "sourceSha256": "40e35d0cc0d6f1ab30caf63f616998e87cac0cb5e238a292b37489e0d32297e6",
+      "compiledBytes": 7939,
+      "compiledSha256": "92ab3601bd9600ebf4ec374f971bc1c71d09d79b709fd05b3b7ca6fb79d1bcfa",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 51
+    },
+    {
+      "input": 8,
+      "sourceBytes": 18912,
+      "sourceSha256": "e77290b1f5577c08486483bea153bacef1680bd83b25d3810bd23c93d5cd1e2a",
+      "compiledBytes": 7756,
+      "compiledSha256": "a6c6759e3f0963bcb2559152b587a397f16d818234b3830e6e715503623ee7e8",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 53
+    },
+    {
+      "input": 9,
+      "sourceBytes": 19713,
+      "sourceSha256": "17c90228f5f90ed871582737b0a27cba0f6b224792beb473473816a7ee801468",
+      "compiledBytes": 8001,
+      "compiledSha256": "36e11dcb3adfe4f60d065b1295befecde6669600ace4b2641d13788a06fde718",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 51
+    },
+    {
+      "input": 10,
+      "sourceBytes": 19081,
+      "sourceSha256": "c260f7969f6e0f6c2c3a14c840c7e3e64e97b3f14b0f847aec4a3713d445fef2",
+      "compiledBytes": 7754,
+      "compiledSha256": "017fe80fc5ba203a5adb3cecf1d9028ed8ac3b6256d4819fd4a0eaeb04f91913",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 53
+    },
+    {
+      "input": 11,
+      "sourceBytes": 18792,
+      "sourceSha256": "eadbd2a142108327dabe2b39882bb4c3f9fe481c64d4d93c644b2c2f69a127e1",
+      "compiledBytes": 7677,
+      "compiledSha256": "718e397f865503f959328a1a2c0c4256477adce35b3e67067b2b69d709768313",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 53
+    },
+    {
+      "input": 12,
+      "sourceBytes": 19455,
+      "sourceSha256": "9581fa8338890c065d18bdbcec1505052173c519582f4bd9604d5163e43de364",
+      "compiledBytes": 7969,
+      "compiledSha256": "2fdab1ab18b650ed38a89c6c4d9e359f307127c263af47eef8512f2c2b62e24c",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 51
+    },
+    {
+      "input": 13,
+      "sourceBytes": 9627,
+      "sourceSha256": "5544c6fde4d787df6ffd210eb16a03f362593fda78f143607c3b4ec387e05857",
+      "compiledBytes": 4607,
+      "compiledSha256": "97e43d207298cad0e261364b7f3af5efdd83a237805c8eef78755706c3be29e3",
+      "compiler": {
+        "name": "cashc",
+        "version": "0.14.0-next.1",
+        "options": {
+          "enforceFunctionParameterTypes": true,
+          "enforceLocktimeGuard": true,
+          "optimizeFor": "opcost",
+          "rescheduleStacks": true
+        }
+      },
+      "abiInputCount": 37
+    }
+  ]
+}

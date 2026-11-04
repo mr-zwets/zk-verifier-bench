@@ -1,0 +1,8 @@
+{
+  "schema": "source4-positive-replay-assessment/v3",
+  "status": "PASS_LOOSENED_EXISTING_POSITIVES_WITH_POLICY_HOLDS",
+  "bn254": {"runs": 3, "stages": 48, "loosened": "144/144", "consensus": "24/144", "standard": "24/144", "policyHoldRows": 120},
+  "bls12-381": {"runs": 2, "stages": 86, "loosened": "172/172", "consensus": "170/172", "standard": "170/172", "policyHoldRows": 2},
+  "interpretation": "Loosened positive replay is evidence for the supplied finite corrected graphs and covenant contexts. Consensus/standard shortfalls are explicit byte-size policy holds, not mathematical failures.",
+  "limitations": ["Existing positive payloads only.", "No universal verifier theorem, neutral/infinity completeness, unrestricted raw-input soundness, setup/SNARK/ZK, or mainnet claim."]
+}

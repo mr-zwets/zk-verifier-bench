@@ -1,0 +1,8 @@
+{
+  "schema": "source4-libauth-pin/v1",
+  "package": "@bitauth/libauth@3.1.0-next.8",
+  "entry": "external caller-pinned @bitauth/libauth/build/index.js",
+  "entrySha256": "c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d",
+  "importMustPrecedeReplay": true,
+  "privateFilesystemPathIncluded": false
+}

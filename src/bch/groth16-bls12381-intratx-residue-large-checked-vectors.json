@@ -76,7 +76,7 @@
       "bb2836d8fcdef2ba8d5f8852f4952d8d09406afa85fbd7351df35169022ee723",
       "6d809785131dee6a1397b7392c50e0f50db0c24c9a9ce6e4a2e70baba4ac8845"
     ],
-    "statement": "The selected positive fixture keeps every non-code byte identical and adds only the two role-specific exact frame predicates. This is an artifact correction, not a current-BCH or full-domain admission certificate.",
+    "statement": "The selected positive fixture keeps every non-code byte identical and adds only the three role-specific exact frame predicates. This is an artifact correction, not a current-BCH or full-domain admission certificate.",
     "scope": {
       "positiveContexts": [
         "steps",
@@ -94,9 +94,9 @@
       "sourceBaseRevision": "8eb2c5dd6b1fd88dce3cdf90acc2bb19bfa78db7",
       "builderSha256": "6ab4a1dcf6b09e42c20976113d1ec69e0ac39e496a27daa187314fb94eab339f",
       "transformSha256": "930fc3e48e9e994569e7f38843e563f07978f41a357d9e02aa0f1a6e5d47777d",
+      "note": "The source builder patch is independently reviewable against sourceBaseRevision; the frozen repair below is byte-pinned to this exact registered positive fixture and does not claim compiler byte reproduction. Input 1 owns the 768-byte state carrier consumed after the archived OP_DROP; input 2 owns the 1632-byte terminal state.",
       "repairManifestSha256": "48f4b0efa19935e1b09df630036e470e007fad79dd6f493e96ef746ead8fcffb",
-      "repairHelperSha256": "db44031eef5c85985dbf38f524f8774525ea8d4e1107a152083df676a011f071",
-      "note": "The source builder patch is independently reviewable against sourceBaseRevision; the frozen repair below is byte-pinned to this exact registered positive fixture and does not claim compiler byte reproduction. Input 1 owns the 768-byte state carrier consumed after the archived OP_DROP; input 2 owns the 1632-byte terminal state."
+      "repairHelperSha256": "2d99a6fc88010b305fb683ab44c1596ed7b9b05c04afac5a6e547cab2ee8f3f3"
     },
     "negatives": "Original invalid fixtures remain only in the unchanged historical input; none are read or emitted by this helper."
   }

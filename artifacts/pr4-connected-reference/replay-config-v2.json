@@ -1,0 +1,10 @@
+{
+  "schema": "source4-positive-replay-config/v2",
+  "runner": "replay.mjs",
+  "profiles": {
+    "bn254": {"context": "bn254-positive-context-v2.json", "catalog": "compiled-catalog.json", "stages": 48, "runs": 3, "fixtureSha256": "ddef81a2fb0956e0dc4f19e40441a1f8e3e6b150e97726e282665592782dfcf4"},
+    "bls12-381": {"context": "bls12-381-positive-context-v2.json", "catalog": "compiled-catalog.json", "stages": 86, "runs": 2, "fixtureSha256": "ffe52256056f683d8748a1826a223f60a57f606d63ec44ff1612f8f4b1c88350"}
+  },
+  "vm": {"runnerImports": "external caller-pinned libauth entry", "pin": "libauth-pin.json", "directEvaluation": true, "oldHarnessOrVmCopied": false},
+  "policy": {"existingPositiveFixturesOnly": true, "newProofs": 0, "negativeCases": 0, "cybersecurityTesting": false, "byteOptimization": false, "resourceHolds": "BN consensus/standard 24/144; BLS consensus/standard 170/172; remaining rows exceed the 10000-byte unlocking policy."}
+}

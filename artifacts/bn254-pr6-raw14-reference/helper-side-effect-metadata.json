@@ -1,0 +1,28 @@
+{
+  "schema": "source6-helper-side-effect-metadata/v2",
+  "sourceOnlyMathOwners": [
+    {
+      "id": "proof-public-vk",
+      "role": "proof/public/VK tuple, commitment owner and field/group declarations"
+    },
+    {
+      "id": "glv-state",
+      "role": "GLV decomposition and state recurrence owner"
+    },
+    {
+      "id": "miller-state",
+      "role": "Miller state, fused affine operations and torus root owner"
+    },
+    {
+      "id": "raw-normalization",
+      "role": "raw normalization denominator and identity predicates"
+    }
+  ],
+  "importBehavior": {
+    "generatorImportedByPublicReplay": false,
+    "compilerImportedByPublicReplay": false,
+    "topLevelGeneratorSideEffectsNotInPackage": true,
+    "generatedDirectory": null,
+    "interpretation": "The public package owns fixed source, compiled catalog, and replay artifacts; mathematical generator helpers are not runtime dependencies."
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "schema": "source4-theorem-transfer-review/v2",
+  "status": "CONDITIONAL_FINITE_DOMAIN_TRANSFER_CONFIRMED",
+  "scope": "Read-only mathematical join of the current public-source closure and compiled catalog to the sealed source4 theorem owners; existing positive receipts only.",
+  "bottomLine": "The current 134-program package is covered by the finite-domain theorem binding when the source manifest, compiler identity, catalog, fixed key/statement, and state codec premises are held. This is not an unrestricted operational or mainnet claim.",
+  "identityJoin": {
+    "sourceManifest": "public-source/source-manifest-v2.json",
+    "compiledCatalog": "compiled-catalog.json",
+    "logicalReceiptId": "source4-master-covenant-equivalence-v1",
+    "programs": 134,
+    "matches": 134,
+    "mismatches": 0,
+    "comparedFields": [
+      "curve",
+      "input",
+      "range",
+      "programSha256",
+      "locking",
+      "priorCompileSourceSha256",
+      "spendParameters",
+      "inTerms",
+      "outTerms",
+      "successorLocking",
+      "compilerVariant"
+    ],
+    "abiMetadata": {
+      "bn254": "48/48 exact codec plus source spend declarations",
+      "bls12-381": "86/86 exact spend/in/out terms, successor locks, and compiler variants; raw options at inputs 79, 81, 83, 84"
+    },
+    "method": "Catalog rows are keyed by curve/input and joined to the pinned source4 aggregate identity; no private filesystem path is required.",
+    "sourceManifestSha256": "4630ed5d3a31785118d6b56011856599e2b16cb826ab2f23cf7789b8e763874b",
+    "catalogSha256": "8c6220c366eeba5c4d2e8fbe65af0d46f53f659dc78706c026b4be923900e5e7",
+    "sourceQualificationSha256": "93c6f8200d4274ffd811291a7d74ffb1b6ca8064bb492be064dc42e43c978da9",
+    "currentSourceOwner": "public-source/qualification.json:sourceFiles; independently reproduced exact code/ABI under frozen policy"
+  },
+  "theoremTransfer": {
+    "bls12-381": {
+      "scope": "Finite canonical external A/C, finite canonical strict-r B, endpoint/regular-walk and nonzero-Miller bridge, reviewed four-pair equation, and final-exponent unit predicate.",
+      "notProved": [
+        "arbitrary B subgroup admission",
+        "external infinity/neutral ABI completeness",
+        "arbitrary key/circuit/setup/SNARK knowledge or zero knowledge",
+        "native/standard whole-transaction admission",
+        "mainnet deployment"
+      ]
+    },
+    "bn254": {
+      "scope": "Finite canonical A/C and public MSM inputs, finite nonzero strict-r B, nonzero affine slope/endpoint denominators, fixed key, and exact codec/state/locking identity.",
+      "notProved": [
+        "neutral proof point",
+        "neutral vk_x/public MSM",
+        "neutral B/Miller identity path",
+        "unrestricted raw-input soundness",
+        "valid-proof completeness outside the declared finite domain"
+      ]
+    }
+  },
+  "fixtureReplay": {
+    "existingFixtureOnly": true,
+    "bn254": {
+      "loosenedEvaluated": 144,
+      "loosenedAccepted": 144,
+      "consensusAccepted": 24,
+      "standardAccepted": 24,
+      "resourceFailuresNotMathFailures": 120
+    },
+    "bls12-381": {
+      "loosenedEvaluated": 172,
+      "loosenedAccepted": 172,
+      "consensusAccepted": 170,
+      "standardAccepted": 170,
+      "resourceFailuresNotMathFailures": 2
+    }
+  },
+  "limitations": [
+    "No new proofs, negative/mutation cases, producer/prover/builder execution, cybersecurity testing, or byte optimization was used.",
+    "Consensus/standard shortfalls are explicit 10,000-byte unlocking policy holds."
+  ]
+}
