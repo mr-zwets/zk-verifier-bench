@@ -1,7 +1,11 @@
-From 10fc9be5329340ccab14d67069844dd015b75cf6 Mon Sep 17 00:00:00 2001
+From 5236c10b24d1904a047cc42df4068afe5f352912 Mon Sep 17 00:00:00 2001
 From: Mathieu Geukens <mr-zwets@protonmail.com>
 Date: Wed, 4 Nov 2026 10:29:14 +0100
-Subject: [PATCH] opcostbench: txv5-100k/150k(+num) modes for worst-case-timing
+Subject: [PATCH] opcostbench: raised-limit profile modes for worst-case-timing
+
+Mode IDs txv5-100k / txv5-150k (+num) are identifiers only: BCH 2026 rules with the
+script-size and stack-item caps raised to 100,000 / 150,000 B (density base 41
+unchanged); +num also raises the VM number cap.
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 ---

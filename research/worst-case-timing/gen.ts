@@ -20,12 +20,13 @@
 //
 // Profiles (libauth VMs):
 //   today      BCH 2026 as libauth 3.1.0-next.8 defines it (10,000 B unlocking/stack items/numbers)
-//   txv5-100k  TXv5 as the bench reads it (src/harness/vm.ts consensusTxv5): bytecode, stack item and standard unlocking
+//   txv5-100k  raised-limit profile (same raised limits as src/harness/vm.ts consensusTxv5; "txv5" is an identifier only):
+//              bytecode, stack item and standard unlocking
 //              caps 100,000 B; density base 41; VM numbers stay 10,000 B
 //   txv5-150k  the same with 150,000 B caps
 //   (numbers raised to the item cap: suffix "+num", e.g. txv5-100k+num; only the mul/mod kernels care)
 //
-// Usage: npx tsx gen.ts <outdir>   (writes nc-*.json for node-check/nc.ts and units-*.json for bchd/libauth timers)
+// Usage: npx tsx gen.ts <outdir>   (writes rig-*.json for rig-run.ts and units-*.json for bchd/libauth timers)
 import { writeFileSync, mkdirSync } from 'node:fs';
 import {
   binToHex, createInstructionSetBch2026, generateSigningSerializationBch, hash256, createVirtualMachine, createVirtualMachineBch2026, encodeTransactionBch, encodeTransactionOutputs,
