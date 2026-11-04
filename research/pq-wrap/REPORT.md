@@ -143,7 +143,7 @@ This is a computed, illustrative figure; nothing was paid on any network. It set
 
 ## Open items
 
-1. **Seam review** of the multi-transaction a' chain (F3 class: thread NFTs, the binding of middle outputs, ordering). Until it is done, the 7-transaction result is measured, not sound.
+1. **Seam review** of the multi-transaction a' chain (F3 class: thread NFTs, the binding of middle outputs, ordering). Until it is done, the 7-transaction result is measured, not sound. A known gap from the 2026-11-04 layout review: tx0 mints every thread NFT at once and each later tx burns only its own, so the final transaction (the one that creates the bound outputs) does not depend on the middle transactions having run. Only the queries in tx0 and the final transaction (7 of 43) are enforced before the outputs exist. Any multi-transaction layout must close this first, for example by forwarding one NFT through the chain.
 2. **A real ZisK proof verified end to end.** This needs the bridge AIR, then a Poseidon2 ZisK setup of our own (no published proving key; sudo-installed dependencies; fit in 24 GB unverified).
 3. **Poseidon2 linear layers.** pil2's internal diagonal and M4 differ from Plonky3's, so Track 8's AIR must be adapted.
 4. **The m-factor question** in soundcalc's Thm 4.2 (above). It moves Poseidon2 Final from 128.97 to 128.38, and the BLAKE3 setup from 128.03 to 123.13.
