@@ -1,0 +1,722 @@
+[
+ {
+  "name": "msig@txv5-100k-L100000-std",
+  "group": "msig",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 61994579,
+  "setupNs": 8861004,
+  "batchMeansNs": [
+   277959320.5,
+   286182426,
+   271663461,
+   275993046.5,
+   280678145,
+   267954971.5,
+   267858028
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 275993046.5,
+  "evalMinNs": 266457633,
+  "evalMaxNs": 297561847,
+  "nsPerOpCost": 4.451890003156566
+ },
+ {
+  "name": "invoke@txv5-100k-L100000-std",
+  "group": "invoke",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79962800,
+  "setupNs": 8088986,
+  "batchMeansNs": [
+   50873204.166666664,
+   50315809.833333336,
+   50923177,
+   50446758.833333336,
+   50641384.5,
+   51076733.5,
+   50771761.166666664
+  ],
+  "batchEvals": [
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6
+  ],
+  "evalMedianNs": 50771761.166666664,
+  "evalMinNs": 50028021,
+  "evalMaxNs": 52361148,
+  "nsPerOpCost": 0.6349422627355054
+ },
+ {
+  "name": "hash@txv5-100k-L100000-std",
+  "group": "hash",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 6504745,
+  "setupNs": 6586098,
+  "batchMeansNs": [
+   9728104.129032258,
+   9509277.3125,
+   9504311.96875,
+   9408853.65625,
+   9546219,
+   9397599.8125,
+   9618096.25
+  ],
+  "batchEvals": [
+   31,
+   32,
+   32,
+   32,
+   32,
+   32,
+   32
+  ],
+  "evalMedianNs": 9509277.3125,
+  "evalMinNs": 8961594,
+  "evalMaxNs": 17564441,
+  "nsPerOpCost": 1.4618985544398744
+ },
+ {
+  "name": "roll@txv5-100k-L100000-std",
+  "group": "roll",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 80011217,
+  "setupNs": 14553104,
+  "batchMeansNs": [
+   23559584.46153846,
+   23148865.153846152,
+   23926554.615384616,
+   22854627.35714286,
+   24425140.769230768,
+   23604984.923076924,
+   23371053
+  ],
+  "batchEvals": [
+   13,
+   13,
+   13,
+   14,
+   13,
+   13,
+   13
+  ],
+  "evalMedianNs": 23559584.46153846,
+  "evalMinNs": 20156637,
+  "evalMaxNs": 32940791,
+  "nsPerOpCost": 0.2944535197050991
+ },
+ {
+  "name": "mul1@txv5-100k-L100000-std",
+  "group": "mul1",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79978605,
+  "setupNs": 6605215,
+  "batchMeansNs": [
+   246093292,
+   247705477,
+   248216416.5,
+   247211233,
+   247101351,
+   248184776.5,
+   247566929.5
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 247566929.5,
+  "evalMinNs": 245929964,
+  "evalMaxNs": 248635623,
+  "nsPerOpCost": 3.0954144486516113
+ },
+ {
+  "name": "mul32@txv5-100k-L100000-std",
+  "group": "mul32",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79939085,
+  "setupNs": 8467552,
+  "batchMeansNs": [
+   165187582,
+   164199855.5,
+   164500333,
+   165465000,
+   166602528.5,
+   165729530,
+   165667938
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 165465000,
+  "evalMinNs": 163622360,
+  "evalMaxNs": 166914728,
+  "nsPerOpCost": 2.0698885907938527
+ },
+ {
+  "name": "mod1@txv5-100k-L100000-std",
+  "group": "mod1",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79966125,
+  "setupNs": 6579426,
+  "batchMeansNs": [
+   227428662,
+   227262017.5,
+   226977825.5,
+   228190465.5,
+   227328712.5,
+   227486700.5,
+   238117753
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 227428662,
+  "evalMinNs": 226538821,
+  "evalMaxNs": 248954083,
+  "nsPerOpCost": 2.8440625577392926
+ },
+ {
+  "name": "mulbig@txv5-100k-L100000-std",
+  "group": "mulbig",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 75163986,
+  "setupNs": 6617938,
+  "batchMeansNs": [
+   10987022.92857143,
+   10864056,
+   10868450.642857144,
+   10855408.892857144,
+   10861122.57142857,
+   10837055.57142857,
+   10839951.25
+  ],
+  "batchEvals": [
+   28,
+   28,
+   28,
+   28,
+   28,
+   28,
+   28
+  ],
+  "evalMedianNs": 10861122.57142857,
+  "evalMinNs": 10727519,
+  "evalMaxNs": 13056648,
+  "nsPerOpCost": 0.14449902339437629
+ },
+ {
+  "name": "copy@txv5-100k-L100000-std",
+  "group": "copy",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79360988,
+  "setupNs": 6518711,
+  "batchMeansNs": [
+   13716207.409090908,
+   10877945.67857143,
+   12375607.72,
+   14076792.454545455,
+   12168426.76923077,
+   11598729.807692308,
+   13874850.272727273
+  ],
+  "batchEvals": [
+   22,
+   28,
+   25,
+   22,
+   26,
+   26,
+   22
+  ],
+  "evalMedianNs": 12375607.72,
+  "evalMinNs": 3895156,
+  "evalMaxNs": 22196640,
+  "nsPerOpCost": 0.15594069620201806
+ },
+ {
+  "name": "cat@txv5-100k-L100000-std",
+  "group": "cat",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79360989,
+  "setupNs": 7963089,
+  "batchMeansNs": [
+   13239865,
+   11682966,
+   11369339.777777778,
+   13121208.391304348,
+   12804292.333333334,
+   11972143.26923077,
+   12260247.68
+  ],
+  "batchEvals": [
+   23,
+   26,
+   27,
+   23,
+   24,
+   26,
+   25
+  ],
+  "evalMedianNs": 12260247.68,
+  "evalMinNs": 4633711,
+  "evalMaxNs": 22081833,
+  "nsPerOpCost": 0.1544870828159664
+ },
+ {
+  "name": "mix-msig-roll@txv5-100k-L100000-std",
+  "group": "mix-msig-roll",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 77930919,
+  "setupNs": 7826630,
+  "batchMeansNs": [
+   273519620,
+   277917034,
+   276389845,
+   277247845,
+   276226180.5,
+   275048962.5,
+   278752862.5
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 276389845,
+  "evalMinNs": 272182319,
+  "evalMaxNs": 282586428,
+  "nsPerOpCost": 3.546600611754623
+ },
+ {
+  "name": "mix-msig-hash-roll@txv5-100k-L100000-std",
+  "group": "mix-msig-hash-roll",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 73992475,
+  "setupNs": 6529380,
+  "batchMeansNs": [
+   277364073.5,
+   280274340,
+   280147856.5,
+   279990278.5,
+   277567698,
+   280073425.5,
+   280124576.5
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 280073425.5,
+  "evalMinNs": 275260571,
+  "evalMaxNs": 280559829,
+  "nsPerOpCost": 3.7851609302162146
+ },
+ {
+  "name": "msig@txv5-100k-L100000-cons",
+  "group": "msig",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 61994579,
+  "setupNs": 6471421,
+  "batchMeansNs": [
+   271439970.5,
+   268604020,
+   286000959,
+   267165542.5,
+   267214179,
+   269025500,
+   267077045.5
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 268604020,
+  "evalMinNs": 264387696,
+  "evalMaxNs": 300609573,
+  "nsPerOpCost": 4.3327017350984836
+ },
+ {
+  "name": "invoke@txv5-100k-L100000-cons",
+  "group": "invoke",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79962800,
+  "setupNs": 7750567,
+  "batchMeansNs": [
+   52970065.833333336,
+   53369570.166666664,
+   54073553.166666664,
+   53086981.833333336,
+   53160562.333333336,
+   53799001.333333336,
+   53374107.5
+  ],
+  "batchEvals": [
+   6,
+   6,
+   6,
+   6,
+   6,
+   6,
+   6
+  ],
+  "evalMedianNs": 53369570.166666664,
+  "evalMinNs": 51950461,
+  "evalMaxNs": 54811563,
+  "nsPerOpCost": 0.6674299820249749
+ },
+ {
+  "name": "hash@txv5-100k-L100000-cons",
+  "group": "hash",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 44926056,
+  "setupNs": 6542316,
+  "batchMeansNs": [
+   66782310.6,
+   65801801.2,
+   63892308.6,
+   65158718.4,
+   65254671.4,
+   64516525.8,
+   65791565.6
+  ],
+  "batchEvals": [
+   5,
+   5,
+   5,
+   5,
+   5,
+   5,
+   5
+  ],
+  "evalMedianNs": 65254671.4,
+  "evalMinNs": 62520342,
+  "evalMaxNs": 73245748,
+  "nsPerOpCost": 1.4524905413464293
+ },
+ {
+  "name": "roll@txv5-100k-L100000-cons",
+  "group": "roll",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 80011217,
+  "setupNs": 7790282,
+  "batchMeansNs": [
+   20780127.133333333,
+   20850434.6,
+   20837719.333333332,
+   20852136.466666665,
+   20799869.333333332,
+   20880178.933333334,
+   20875128.8
+  ],
+  "batchEvals": [
+   15,
+   15,
+   15,
+   15,
+   15,
+   15,
+   15
+  ],
+  "evalMedianNs": 20850434.6,
+  "evalMinNs": 20454579,
+  "evalMaxNs": 21311888,
+  "nsPerOpCost": 0.2605938939786405
+ },
+ {
+  "name": "mul1@txv5-100k-L100000-cons",
+  "group": "mul1",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79978605,
+  "setupNs": 6644598,
+  "batchMeansNs": [
+   257250014.5,
+   257051951,
+   257633673.5,
+   256878473,
+   257605079.5,
+   258670752.5,
+   258308272.5
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 257605079.5,
+  "evalMinNs": 255234138,
+  "evalMaxNs": 260168646,
+  "nsPerOpCost": 3.220924889850229
+ },
+ {
+  "name": "mul32@txv5-100k-L100000-cons",
+  "group": "mul32",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79939085,
+  "setupNs": 6568945,
+  "batchMeansNs": [
+   166306745,
+   166389205.5,
+   166025789.5,
+   166858707,
+   166604161,
+   166356779.5,
+   165632847.5
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 166356779.5,
+  "evalMinNs": 165393180,
+  "evalMaxNs": 167131041,
+  "nsPerOpCost": 2.081044328941218
+ },
+ {
+  "name": "mod1@txv5-100k-L100000-cons",
+  "group": "mod1",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79966125,
+  "setupNs": 6580949,
+  "batchMeansNs": [
+   227612938,
+   228140369,
+   229242735.5,
+   229162424,
+   228388262.5,
+   229029036.5,
+   228070747
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 228388262.5,
+  "evalMinNs": 226078735,
+  "evalMaxNs": 230509683,
+  "nsPerOpCost": 2.856062645276359
+ },
+ {
+  "name": "mulbig@txv5-100k-L100000-cons",
+  "group": "mulbig",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 75163986,
+  "setupNs": 6636543,
+  "batchMeansNs": [
+   10824299.785714285,
+   10816897.785714285,
+   10817732.392857144,
+   10824542.107142856,
+   10819332.92857143,
+   10814365.67857143,
+   10818742.92857143
+  ],
+  "batchEvals": [
+   28,
+   28,
+   28,
+   28,
+   28,
+   28,
+   28
+  ],
+  "evalMedianNs": 10818742.92857143,
+  "evalMinNs": 10700147,
+  "evalMaxNs": 10943066,
+  "nsPerOpCost": 0.14393519429067306
+ },
+ {
+  "name": "copy@txv5-100k-L100000-cons",
+  "group": "copy",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79360988,
+  "setupNs": 6545491,
+  "batchMeansNs": [
+   13667754.869565217,
+   12660138.791666666,
+   12840787.583333334,
+   13370813.130434783,
+   13329058.217391305,
+   12645240.875,
+   13797588.727272727
+  ],
+  "batchEvals": [
+   23,
+   24,
+   24,
+   23,
+   23,
+   24,
+   22
+  ],
+  "evalMedianNs": 13329058.217391305,
+  "evalMinNs": 3826145,
+  "evalMaxNs": 24013730,
+  "nsPerOpCost": 0.16795479181019402
+ },
+ {
+  "name": "cat@txv5-100k-L100000-cons",
+  "group": "cat",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 79360989,
+  "setupNs": 7844915,
+  "batchMeansNs": [
+   11363497.629629629,
+   10895195.964285715,
+   11126818.814814815,
+   11277198.222222222,
+   11378307.407407407,
+   11133704.888888888,
+   10691606.586206896
+  ],
+  "batchEvals": [
+   27,
+   28,
+   27,
+   27,
+   27,
+   27,
+   29
+  ],
+  "evalMedianNs": 11133704.888888888,
+  "evalMinNs": 4132875,
+  "evalMaxNs": 18628460,
+  "nsPerOpCost": 0.1402919120487383
+ },
+ {
+  "name": "mix-msig-roll@txv5-100k-L100000-cons",
+  "group": "mix-msig-roll",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 80013205,
+  "setupNs": 7889560,
+  "batchMeansNs": [
+   274066795,
+   275730106,
+   274361937,
+   274300445.5,
+   275215864.5,
+   275857782,
+   276402786
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 275215864.5,
+  "evalMinNs": 273502825,
+  "evalMaxNs": 276998276,
+  "nsPerOpCost": 3.4396305522319723
+ },
+ {
+  "name": "mix-msig-hash-roll@txv5-100k-L100000-cons",
+  "group": "mix-msig-hash-roll",
+  "mode": "txv5-100k",
+  "accepted": true,
+  "opCost": 80025126,
+  "setupNs": 6564988,
+  "batchMeansNs": [
+   296567552,
+   294126341.5,
+   296914978,
+   295651551.5,
+   295153015.5,
+   297346396.5,
+   294915135.5
+  ],
+  "batchEvals": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "evalMedianNs": 295651551.5,
+  "evalMinNs": 290947498,
+  "evalMaxNs": 298288832,
+  "nsPerOpCost": 3.6944840486724133
+ }
+]

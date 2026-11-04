@@ -1,0 +1,36 @@
+From 10fc9be5329340ccab14d67069844dd015b75cf6 Mon Sep 17 00:00:00 2001
+From: Mathieu Geukens <mr-zwets@protonmail.com>
+Date: Wed, 4 Nov 2026 10:29:14 +0100
+Subject: [PATCH] opcostbench: txv5-100k/150k(+num) modes for worst-case-timing
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ cmd/opcostbench/main.go | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/cmd/opcostbench/main.go b/cmd/opcostbench/main.go
+index 9d53f0e1..df0dda10 100644
+--- a/cmd/opcostbench/main.go
++++ b/cmd/opcostbench/main.go
+@@ -79,6 +79,18 @@ func setMode(m string) {
+ 	case "bchspec":
+ 		l.DensityBase = 10000
+ 		l.MaxScriptSize, l.MaxElementSize, l.MaxNumLen = 100000, 100000, 100000
++	// worst-case-timing (verifier.cash research/worst-case-timing): BCH 2026 rules with the per-input caps
++	// (script size, stack item) raised; density base stays 41; "+num" also raises the VM number cap
++	case "today":
++	case "txv5-100k", "txv5-150k", "txv5-100k+num", "txv5-150k+num":
++		c := 100000
++		if m == "txv5-150k" || m == "txv5-150k+num" {
++			c = 150000
++		}
++		l.MaxScriptSize, l.MaxElementSize = c, c
++		if m == "txv5-100k+num" || m == "txv5-150k+num" {
++			l.MaxNumLen = c
++		}
+ 	case "loose":
+ 		l.Unbudgeted = true
+ 		l.MaxScriptSize, l.MaxElementSize, l.MaxNumLen = 1<<30, 1<<30, 1<<30
+-- 
+2.56.0
+

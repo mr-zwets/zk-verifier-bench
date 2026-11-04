@@ -1,0 +1,62 @@
+[
+ {
+  "name": "mulbig@txv5-100k+num-L100000-std",
+  "group": "mulbig",
+  "mode": "txv5-100k+num",
+  "accepted": true,
+  "opCost": 77735905,
+  "setupNs": 8966182,
+  "batchMeansNs": [
+   12173498.88,
+   12543338.875,
+   13146005.739130436,
+   12065437.8,
+   11937238.423076924,
+   11785147.76923077,
+   11695395.923076924
+  ],
+  "batchEvals": [
+   25,
+   24,
+   23,
+   25,
+   26,
+   26,
+   26
+  ],
+  "evalMedianNs": 12065437.8,
+  "evalMinNs": 11409898,
+  "evalMaxNs": 31557235,
+  "nsPerOpCost": 0.15521061728167956
+ },
+ {
+  "name": "mulwide@txv5-100k+num-L100000-std",
+  "group": "mulwide",
+  "mode": "txv5-100k+num",
+  "accepted": true,
+  "opCost": 72330395,
+  "setupNs": 8941927,
+  "batchMeansNs": [
+   401290061,
+   398054902,
+   401611689,
+   397257897,
+   409563865,
+   403747040,
+   410554536
+  ],
+  "batchEvals": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "evalMedianNs": 401611689,
+  "evalMinNs": 397257897,
+  "evalMaxNs": 410554536,
+  "nsPerOpCost": 5.552460884528558
+ }
+]

@@ -1,0 +1,2 @@
+mulbig@txv5-100k+num-L100000-std                             txv5-100k+num ok=true cost=77735905 eval=0.479ms setup=0.000ms ns/cost=0.0062
+mulwide@txv5-100k+num-L100000-std                            txv5-100k+num ok=true cost=72330395 eval=2.172ms setup=0.000ms ns/cost=0.0300
