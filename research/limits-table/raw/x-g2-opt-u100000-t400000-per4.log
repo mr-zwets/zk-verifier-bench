@@ -1,0 +1,1 @@
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: NO PLAN [{"per":4,"probe":0,"finOp":6196999,"qryOp":9150905,"pad":{"fin":0,"qry":0}},{"per":4,"T":1,"maxUnlocking":23417,"txBytes":[291713]},{"per":4,"T":1,"invalid":"tx0 in5 std: Program attempted to use an excessive number of memory slots: stack items, alternate stack items, and/or defined functions. Maximum memory s"}]

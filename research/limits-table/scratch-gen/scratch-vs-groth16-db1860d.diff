@@ -1,0 +1,157 @@
+--- /home/mrzwets/BCH-projects/verifier.cash/groth16_cashscript/research/pq-wrap/onchain/vm.mjs	2026-11-03 18:04:21.303016346 +0100
++++ vm.mjs	2026-11-04 10:09:37.907409083 +0100
+@@ -68,3 +68,16 @@
+   return {accepted, error: st.error, markers: nopCount, opCost: m.operationCost, instr: m.evaluatedInstructionCount,
+     arith: m.arithmeticCost, pushed: m.stackPushedBytes, iters: m.hashDigestIterations, snaps, stackTop: st.stack.slice(-6).map((x) => Buffer.from(x).toString('hex').slice(0, 64))};
+ }
++
++// LIMITS-TABLE (scratch only, not in the repo): a parameterised regime. U = per-input unlocking, bytecode and
++// stack-item limit (BCHN couples MAX_SCRIPT_ELEMENT_SIZE = MAX_SCRIPT_SIZE, vm_limits.h); X = standard transaction
++// size. Density base 41 and 800 op-cost per byte unchanged. Consensus max tx size stays libauth's 1,000,000 B
++// (BCHN MAX_TX_SIZE). Registered as VMS[`L${U}_${X}Std`] / VMS[`L${U}_${X}Cons`].
++export function registerRegime(U, X) {
++  const name = `L${U}_${X}`;
++  if (!VMS[`${name}Std`]) {
++    const c = {...consensusBch2026, maximumBytecodeLength: U, maximumStackItemLength: U, maximumStandardUnlockingBytecodeLength: U, maximumStandardTransactionSize: X};
++    VMS[`${name}Std`] = mk(true, c); VMS[`${name}Cons`] = mk(false, c);
++  }
++  return name;
++}
+--- /home/mrzwets/BCH-projects/verifier.cash/groth16_cashscript/research/pq-wrap/onchain/gena.mjs	2026-11-04 09:43:04.573485242 +0100
++++ gena.mjs	2026-11-04 10:09:37.918942537 +0100
+@@ -734,7 +734,7 @@
+     const counts1 = [0, ...plan.txs.slice(1).map((tx) => R1Q0 + tx.qry.length)];
+     const dispatch1 = dispatchOf(asm(0, 'UTXOTOKENCOMMITMENT', 1, 'SPLIT', 'DROP', 'BIN2NUM'), counts1);
+     const nc1 = opts.nc1 ?? 1;
+-    const pk = packBlobs(names1, dispatch1, nc1, 10_000 - 3);
++    const pk = packBlobs(names1, dispatch1, nc1, (+process.env.LIMITS_UNL || 10_000) - 3);   // LIMITS-TABLE: per-input limit
+     const redeem1 = redeemOf(pk.code);
+     if (redeem1.length > 201) throw new Error(`R1 is ${redeem1.length} B > 201 (P2S)`);
+     R1 = {Q0: R1Q0, top: CL ? TOP_IN : null, code: pk.code, redeem: redeem1, names: names1, inCount: counts1, codeTotal: pk.total,
+@@ -759,7 +759,7 @@
+   // opt.state: R0 carries neither R1's roles nor its STATE parse
+   const r1Only = (name) => STV && (name.startsWith('R1ROLE') || ['QROLE1', 'PARSE_S', 'PARSE_T', 'TOPR'].includes(name));
+   const defs = [...fns.entries()].filter(([name]) => !r1Only(name)).map(([name, f]) => ({name, bytes: asm(f.body, f.id, 'DEFINE')}));
+-  const LIM = 10_000 - 3 - 25;   // (unchanged)   // a CODE input's unlocking: the blob push and (kind 0) its 25-byte ACC push
++  const LIM = (+process.env.LIMITS_UNL || 10_000) - 3 - 25;   // LIMITS-TABLE: per-input limit (default unchanged)   // a CODE input's unlocking: the blob push and (kind 0) its 25-byte ACC push
+   const total = defs.reduce((a, d) => a + d.bytes.length, 0) + dispatch.length;
+   const target = Math.min(LIM, Math.ceil(total / nc) + (opts.blobSlack ?? 200));
+   const blobs = Array.from({length: nc}, () => []);
+--- /home/mrzwets/BCH-projects/verifier.cash/groth16_cashscript/research/pq-wrap/onchain/grade-a2.mjs	2026-11-04 09:43:04.573485242 +0100
++++ grade-lim.mjs	2026-11-04 10:11:16.706741169 +0100
+@@ -17,13 +17,19 @@
+ import {readVector} from './layoutn.mjs';
+ import {vkxA} from './modela.mjs';
+ import {makePlanA, spendA, evaluateTxA, verifyTxA, parseOpt} from './layouta.mjs';
+-import {evaluate} from './vm.mjs';
++import {evaluate, registerRegime} from './vm.mjs';
++// LIMITS-TABLE (scratch copy of grade-a2.mjs): --unl U (per-input unlocking/bytecode/stack-item limit), --tx X (tx size
++// limit; X >= 1,000,000 = consensus-only: whole-tx verify on the consensus VM, per-input std not required), --pers a,b
++// (queries per QRY input to try; the plan with the fewest txs, then fewest bytes, wins). LIMITS_UNL must equal U.
++
+ 
+ const args = process.argv.slice(2);
+ const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
+-const files = args.filter((a, i) => !a.startsWith('--') && !['--per', '--nc', '--out', '--maxT', '--pad', '--target', '--opt'].includes(args[i - 1]));
++const files = args.filter((a, i) => !a.startsWith('--') && !['--per', '--nc', '--out', '--maxT', '--pad', '--target', '--opt', '--unl', '--tx', '--pers'].includes(args[i - 1]));
+ const outFile = opt('--out', new URL('./results/grade-a2.json', import.meta.url).pathname);
+-const NC = +opt('--nc', 2), MAXT = +opt('--maxT', 8);
++const NC = +opt('--nc', 2), MAXT = +opt('--maxT', 8), PERS = opt('--pers') ? opt('--pers').split(',').map(Number) : [3, 2, 1];
++const U = +opt('--unl', 10_000), X = +opt('--tx', 100_000), CONSONLY = X >= 1_000_000, RG = registerRegime(U, Math.min(X, 1_000_000));
++if ((+process.env.LIMITS_UNL || 10_000) !== U) throw new Error('set LIMITS_UNL = --unl');
+ const r1Of = (plan, t) => t > 0 && !!plan.opt?.state && plan.txs.length > 1;
+ export const roleOf = (plan, i, t = 0) => (r1Of(plan, t) ? (i === 0 ? 'STATE' : i === 1 ? 'LIB' : i === 2 && plan.opt?.cap ? 'TOP' : 'QRY')
+   : i === 0 ? 'HEAD' : i <= plan.nc ? `CODE${i}` : i === plan.nc + 1 ? 'FIN' : 'QRY');
+@@ -50,7 +56,8 @@
+ }
+ 
+ export function planFor(vk, proof, pis, outputs, {per, nc = NC, pad = true, target = 0.93, opt} = {}) {
+-  const pers = per ? [per] : [3, 2, 1];
++  const pers = per ? [per] : PERS;
++  let best = null;
+   const tried = [];
+   for (const pq of pers) {
+     const qs = split(vk.Q, pq);
+@@ -77,7 +84,7 @@
+       if (opt?.state && T > 1) {
+         // tx0 (R0) takes as many QRY inputs as fit; the later (R1) transactions share the rest
+         let done = null, stop = false;
+-        for (let n0 = Math.min(qs.length - (T - 1), 12); n0 >= 1; n0--) {
++        for (let n0 = Math.min(qs.length - (T - 1), 64); n0 >= 1; n0--) {
+           const counts = [qs.slice(0, n0), ...share(qs.slice(n0), T - 1)];
+           if (counts.some((c) => !c.length)) continue;
+           const plan = makePlanA(vk, counts, {nc, opt, ...(padv ? {pad: {fin: padv.fin, qry: counts.map((c) => c.map((n) => padOfCount.get(n)))}} : {})});
+@@ -86,12 +93,12 @@
+           const unl = sp.txs.flatMap((tx) => tx.unl.map((u) => u.length));
+           const bytes = sp.txs.map((tx) => tx.txBytes);
+           tried.push({per: pq, T, n0, maxUnlocking: Math.max(...unl), txBytes: bytes});
+-          if (Math.max(...unl) > 10_000) { stop = true; break; }
+-          if (bytes[0] > 100_000) continue;
+-          if (Math.max(...bytes) <= 100_000) done = {plan, sp, per: pq, T, tried};
++          if (Math.max(...unl) > U) { stop = true; break; }
++          if (bytes[0] > X) continue;
++          if (Math.max(...bytes) <= X) done = {plan, sp, per: pq, T, tried};
+           break;
+         }
+-        if (done) return done;
++        if (done) { const v = validate(done.sp); if (v !== true) { tried.push({per: pq, T, invalid: v}); break; } done.total = bytes0(done.sp); if (!best || T < best.T || (T === best.T && done.total < best.total)) best = done; break; }
+         if (stop) break;
+         continue;
+       }
+@@ -103,11 +110,28 @@
+       const unl = sp.txs.flatMap((tx) => tx.unl.map((u) => u.length));
+       const bytes = sp.txs.map((tx) => tx.txBytes);
+       tried.push({per: pq, T, maxUnlocking: Math.max(...unl), txBytes: bytes});
+-      if (Math.max(...unl) > 10_000) break;               // more transactions do not shrink an input
+-      if (Math.max(...bytes) <= 100_000) return {plan, sp, per: pq, T, tried};
++      if (Math.max(...unl) > U) break;               // more transactions do not shrink an input
++      if (Math.max(...bytes) <= X) { const v = validate(sp); if (v !== true) { tried.push({per: pq, T, invalid: v}); break; } const d = {plan, sp, per: pq, T, tried, total: bytes0(sp)}; if (!best || T < best.T || (T === best.T && d.total < best.total)) best = d; break; }
++    }
++  }
++  return best ? {...best, tried} : {plan: null, tried};
++}
++const bytes0 = (sp) => sp.txs.reduce((a, t) => a + t.txBytes, 0);
++// LIMITS-TABLE: a candidate is taken only if every input passes the regime (std unless consensus-only, and cons) within
++// the BCHN-adjusted budget and every whole transaction verifies; otherwise the reason is recorded
++function validate(sp) {
++  for (const [t, tx] of sp.txs.entries()) {
++    const std = CONSONLY ? null : evaluateTxA(tx, `${RG}Std`, {stopAtReject: true}), cons = evaluateTxA(tx, `${RG}Cons`, {stopAtReject: true});
++    for (let i = 0; i < cons.length; i++) {
++      if (std && (!std[i] || !std[i].accepted)) return `tx${t} in${i} std: ${String(std[i]?.error ?? 'stopped').slice(0, 140)}`;
++      if (!cons[i].accepted) return `tx${t} in${i} cons: ${String(cons[i].error).slice(0, 140)}`;
++      const op = (std ? Math.max(std[i].opCost, cons[i].opCost) : cons[i].opCost) + defineBytesOf(sp, t);
++      if (op > cons[i].budget) return `tx${t} in${i} over BCHN-adjusted budget ${op} > ${cons[i].budget}`;
+     }
++    const w = verifyTxA(tx, CONSONLY ? `${RG}Cons` : `${RG}Std`);
++    if (w !== true) return `tx${t} whole: ${String(w).slice(0, 140)}`;
+   }
+-  return {plan: null, tried};
++  return true;
+ }
+ 
+ if (import.meta.url === `file://${process.argv[1]}`) {
+@@ -119,11 +143,11 @@
+     const {plan, sp, per, T, tried} = planFor(vk, proof, pis, outputs, {per: opt('--per') ? +opt('--per') : undefined, pad: opt('--pad') !== '0', target: +opt('--target', 0.93), opt: parseOpt(opt('--opt'))});
+     if (!plan) { console.log(`${path.split('/').pop()}: NO PLAN ${JSON.stringify(tried)}`); rows.push({vector: path.split('/').pop(), plan: null, tried}); continue; }
+     const txs = sp.txs.map((tx, t) => {
+-      const std = evaluateTxA(tx, 'bchStd'), cons = evaluateTxA(tx, 'bchCons'), spec = evaluateTxA(tx, 'specStd');
+-      const whole = verifyTxA(tx, 'bchStd');
++      const std = evaluateTxA(tx, `${RG}Std`), cons = evaluateTxA(tx, `${RG}Cons`), spec = evaluateTxA(tx, 'specStd');
++      const whole = verifyTxA(tx, CONSONLY ? `${RG}Cons` : `${RG}Std`);
+       const inputs = std.map((r, i) => {
+-        const bchn = Math.max(r.opCost, cons[i].opCost) + defineBytesOf(sp, t);
+-        return {role: roleOf(plan, i, t), std: r.accepted, cons: cons[i].accepted, spec: spec[i].accepted, err: r.error ?? cons[i].error ?? null,
++        const bchn = (CONSONLY ? cons[i].opCost : Math.max(r.opCost, cons[i].opCost)) + defineBytesOf(sp, t);
++        return {role: roleOf(plan, i, t), std: CONSONLY ? true : r.accepted, cons: cons[i].accepted, spec: spec[i].accepted, err: r.error ?? cons[i].error ?? null,
+           unlocking: r.unlocking, opCost: r.opCost, opCons: cons[i].opCost, opBchnAdjusted: bchn, budget: r.budget, pct: +(100 * bchn / r.budget).toFixed(2),
+           bchnWithinBudget: bchn <= r.budget, hashIters: r.iters, iterLimit: Math.floor((41 + r.unlocking) / 2)};
+       });
+@@ -131,7 +155,7 @@
+     });
+     const row = {vector: path.split('/').pop(), opt: plan.opt ?? {}, per, T, pad: plan.pad ?? null, counts: plan.txs.map((x) => x.qry.map(([a, b]) => b - a)), txs: txs.length, inputs: txs.reduce((a, t) => a + t.inputs, 0),
+       totalBytes: txs.reduce((a, t) => a + t.bytes, 0), proofBytes: proof.length,
+-      accepted: txs.every((t) => t.allStd && t.whole === true && t.bytes <= 100_000),
++      accepted: txs.every((t) => t.allStd && t.whole === true && t.bytes <= X), limits: {unl: U, tx: X, consensusOnly: CONSONLY},
+       code: sp.pg.code.map((c) => c.length), redeem: sp.pg.redeem.length, defineBytes: sp.pg.defineBytes,
+       ...(sp.pg.R1 ? {r1: {code: sp.pg.R1.code.map((c) => c.length), redeem: sp.pg.R1.redeem.length, defineBytes: sp.pg.R1.defineBytes, functions: sp.pg.R1.names.length}} : {}),
+       opTotalBchnAdjusted: txs.reduce((a, t) => a + t.detail.reduce((b, x) => b + x.opBchnAdjusted, 0), 0),

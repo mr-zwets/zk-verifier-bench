@@ -1,0 +1,13 @@
+tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0.json: ACCEPTED 2 tx, 53 inputs (1 queries per QRY input), 218295 + 226410 = 444705 B, whole-tx true/true, max 92.69% of an input's budget, op-cost (BCHN-adj.) 303650262, spec true, code 8441+8448+8448 B, define 50103 B
+   tx0:HEAD: x1 unlocking 3684-3684 B, op (BCHN-adj.) 2513678-2513678, 84.35-84.35%
+   tx0:CODE1: x1 unlocking 8469-8469 B, op (BCHN-adj.) 4963818-4963818, 72.91-72.91%
+   tx0:CODE2: x1 unlocking 8476-8476 B, op (BCHN-adj.) 4280109-4280109, 62.82-62.82%
+   tx0:CODE3: x1 unlocking 8476-8476 B, op (BCHN-adj.) 4392929-4392929, 64.47-64.47%
+   tx0:FIN: x1 unlocking 7261-7261 B, op (BCHN-adj.) 5409627-5409627, 92.61-92.61%
+   tx0:QRY: x21 unlocking 8587-8587 B, op (BCHN-adj.) 6380294-6395778, 92.44-92.66%
+   tx1:HEAD: x1 unlocking 3684-3684 B, op (BCHN-adj.) 736962-736962, 24.73-24.73%
+   tx1:CODE1: x1 unlocking 8444-8444 B, op (BCHN-adj.) 341402-341402, 5.03-5.03%
+   tx1:CODE2: x1 unlocking 8451-8451 B, op (BCHN-adj.) 341409-341409, 5.03-5.03%
+   tx1:CODE3: x1 unlocking 8451-8451 B, op (BCHN-adj.) 341409-341409, 5.03-5.03%
+   tx1:FIN: x1 unlocking 7261-7261 B, op (BCHN-adj.) 5410832-5410832, 92.63-92.63%
+   tx1:QRY: x22 unlocking 8587-8587 B, op (BCHN-adj.) 6390915-6398020, 92.59-92.69%
