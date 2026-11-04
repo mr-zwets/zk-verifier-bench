@@ -13,7 +13,7 @@ Status: research, 2026-11-03. **Not a leaderboard entry.** Nothing is in REGISTR
   - state is carried in the thread NFT, and later transactions use a query-only library;
   - each transaction gets a Merkle cap layer.
 
-  The baseline is still reproduced byte for byte. This still fails the gate on size (300 KB), so the no-go stands. These results have not been rerun on BCHN and have not been reviewed for soundness. The ordering gap below still applies.
+  The baseline is still reproduced byte for byte. On stock BCHN 29.1.0 (local regtest, node-check run nto1), the 4 transactions pass default relay policy and are mined, in about 48 ms per proof. The single 293,514 B transaction (48 inputs) is refused by the mempool only for its size (`tx-size`), is accepted in a block, and validates in about 49 ms. This still fails the gate on size (300 KB), so the no-go stands. These results have not been rerun on BCHN and have not been reviewed for soundness. The ordering gap below still applies.
 - These numbers are **measured, not sound**. Nobody has reviewed the soundness of the 7-transaction layout, and multi-transaction chains have seams between transactions (the F3 class of issues) that still need a review.
 - **A bridge that is not post-quantum remains viable.** Track 11 (on `main`: groth16_cashscript 075689b, bench ef58440) verifies real SP1 v5 Groth16 proofs, under the production SP1 v5 verifying key, in one 27.5 KB standard transaction. So the proof-check step of an Ethereum-to-BCH bridge via SP1-Helios + Groth16 works today. The bridge itself (an SP1-Helios light-client covenant) has not been built, and SP1 v5's own security is not assessed here. It rests on BN254, which is not post-quantum, and on a trusted setup.
 - With raised limits (about 150 KB per input and 300 KB per transaction), the same stand-in fits in **1 transaction of about 260 KB**. That is what a future limit change would unlock. **No May 2027 upgrade candidate raises these limits.**
@@ -130,7 +130,7 @@ Light compute only, with no downloads, against the soundcalc clone at b325e30.
 | Worst input vs. budget | 92.72% (BCHN-adjusted) | 51.7% (r150 rules) |
 | libauth | 286/286 cases as expected | 172/172 under raised limits; rejected today, as expected |
 | BCHN 29.1.0, local regtest (run g2n2) | 43/43 block cases as expected; 14/14 valid transactions pass `testmempoolaccept` (POLICY=1); the unconfirmed 7-transaction chain enters the mempool and is mined in one block | rejected today (`blk-bad-inputs`), as expected; no node implements the raised limits |
-| Node verification time | about 59 ms per transaction, about 414 ms per proof | n/a |
+| Node verification time | about 12–16 ms per transaction, about 88–89 ms per proof (corrected 2026-11-04: the earlier "59 ms / 414 ms" was the time for a timing block of 4–5 copies, not one transaction) | n/a |
 
 - Even at blowup 8, a' would need about 430–450 KB (modelled, not built), so a' cannot reach 300 KB at any blowup.
 
