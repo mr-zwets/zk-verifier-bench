@@ -28,7 +28,7 @@ libauth 3.1.0-next.8 has the same values: `maximumTransactionLengthBytes: 1_000_
 
 **This matters for reading the grid.** The two axes are different kinds of change:
 - **Raising the tx size limit up to 1 MB is a policy change.** Consensus already allows 1 MB. Such a transaction is valid today if a miner includes it directly.
-- **Raising the per-input limit above 10,000 B is a consensus change** (TXv5 / bch-spec class). `MAX_SCRIPT_SIZE` is enforced in the interpreter.
+- **Raising the per-input limit above 10,000 B is a consensus change** (libauth's bch-spec VM raises it). `MAX_SCRIPT_SIZE` is enforced in the interpreter.
 
 The repo's `r100`/`r150` comments (groth16_cashscript `vm.mjs`, `vmn.mjs`, `grade-b2.mjs`) call these "relay/standardness
 limits raised". For the unlocking, bytecode and stack-item limits that is not what BCHN does: there they are consensus.
@@ -58,6 +58,8 @@ rejected. For "inputs", it is what fixes the per-input packing.
 - `--unl U`: per-input limit used by the plan search and the code-blob packer (`LIMITS_UNL`).
 - `--tx X`: tx limit used by the plan search.
 - A new regime `L<U>_<X>`, in a scratch copy of `vm.mjs` only. It is BCH 2026 with U on unlocking, bytecode and stack item, and X on standard tx size.
+- The R0 first-tx query cap `n0` goes from 12 to 64 so the search can fill one large transaction (search only; at
+  U = 10,000, X = 100,000 it still reproduces the published 355,817 B).
 - `--pers 3,2,1`: queries per QRY input. It keeps the plan with the fewest txs, then the fewest bytes.
 - Every candidate plan is validated in full before it is taken: every input std (except at 1 MB) and cons, within the BCHN-adjusted budget, and whole-tx verify. grade-a2 only checked bytes, which is enough at U = 10,000. At U = 100,000 a 4-query input passed the byte check and then failed on stack slots.
 
@@ -86,7 +88,7 @@ Bytes are total transaction bytes, summed over all transactions.
 |--:|---|--:|--:|--:|---|---|
 | 10,000 | 100,000 (today) | 1 | 10 | 82,888–89,514 (tx) | MEASURED\* (`plonk-kzg/REPORT.md` §T7.5; BCHN node-check) | inputs: input size + op-cost (FILL-padded, 0.00–0.80% margin); tx size margin 10.5 KB |
 | 10,000 | 200k / 400k / 1 MB | 1 | 10 | same | MEASURED\* | input size |
-| 100k / 150k | any | 1 | 1 | 63,276–69,553 (score = tx + 35 B) | MEASURED\* (REPORT §T7.5 "100 KB input", TXv5 regime = same limits) | op-cost (padded to 0.09–0.10% margin) |
+| 100k / 150k | any | 1 | 1 | 63,241–69,518 (tx) | MEASURED\* (REPORT §T7.5 "100 KB input" regime = same limits) | op-cost (padded to 0.09–0.10% margin) |
 
 ### Track 8 STARK M1 (Z128, 24 transaction-bound statements)
 
@@ -96,7 +98,7 @@ Bytes are total transaction bytes, summed over all transactions.
 | 10,000 | 200k / 400k / 1 MB | a′ | 1 | 12 | 98,690 | MEASURED\* | input size, op-cost |
 | 100,000 | 100,000 | b | 1 | 1 | 91,477–95,057 | MEASURED\* (`grade-b.json`, r100) | **input size** (unlocking up to 94,968 of 100,000); op-cost only 47–49% |
 | 100,000 | 100,000 | b2 | 1 | 2 | 96,153–98,321 | MEASURED\* (`grade-b2.json`, r100) | tx size |
-| 150k, or any larger X | | b | 1 | 1 | 91,477–95,057 | MEASURED\* | none |
+| 150,000 | any | b | 1 | 1 | 91,477–95,057 | MEASURED\* | none |
 
 For reference, M2 (not in the brief) is in the same `grade-b2.json`: b2, 2 inputs, 156,384–159,749 B. It needs U = 100,000
 and X ≥ 160 KB, and does not fit today.
@@ -169,8 +171,8 @@ So the threshold for one transaction at today's per-input limit is exactly the 1
 The same 293,514 B transaction is consensus-valid today as a non-standard transaction (the 1 MB column, MEASURED in
 libauth consensus mode). It needs a cooperating miner and no rule change.
 
-The 1-transaction plan has no NFT thread, so the multi-transaction ordering gap in the Track 10 report does not apply
-to it.
+The 1-transaction plan has no NFT thread between transactions; see the Track 10 report for the multi-transaction
+ordering gap. This is a fit table, not a security argument.
 
 ## Caveats
 
