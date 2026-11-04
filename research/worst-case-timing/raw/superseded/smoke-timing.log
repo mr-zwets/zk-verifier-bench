@@ -1,0 +1,5 @@
+4 workloads (timing)
+ok  msig@today-L10000-std K=34 verify=257.08ms ns/op=1.285 accepted
+ok  mix-msig-roll@today-L10000-std K=26 verify=235.01ms ns/op=1.157 accepted
+ok  msig@today-L9950-std-x10 K=4 verify=302.18ms ns/op=1.284 accepted
+ok  l0fhm3 K=3 verify=287.85ms ns/op=1.372 accepted

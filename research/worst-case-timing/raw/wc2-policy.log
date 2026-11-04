@@ -1,0 +1,37 @@
+36 workloads (policy)
+ALLOWED  msig@today-L10000-std 
+ALLOWED  invoke@today-L10000-std 
+ALLOWED  hash@today-L10000-std 
+ALLOWED  roll@today-L10000-std 
+ALLOWED  mul1@today-L10000-std 
+ALLOWED  mul32@today-L10000-std 
+ALLOWED  mod1@today-L10000-std 
+ALLOWED  mulbig@today-L10000-std 
+ALLOWED  copy@today-L10000-std 
+ALLOWED  cat@today-L10000-std 
+ALLOWED  mix-msig-roll@today-L10000-std 
+ALLOWED  mix-msig-hash-roll@today-L10000-std 
+ALLOWED  msig@today-L9950-std-x10 
+ALLOWED  invoke@today-L9950-std-x10 
+ALLOWED  hash@today-L9950-std-x10 
+ALLOWED  roll@today-L9950-std-x10 
+ALLOWED  mul1@today-L9950-std-x10 
+ALLOWED  mul32@today-L9950-std-x10 
+ALLOWED  mod1@today-L9950-std-x10 
+ALLOWED  mulbig@today-L9950-std-x10 
+ALLOWED  copy@today-L9950-std-x10 
+ALLOWED  cat@today-L9950-std-x10 
+ALLOWED  mix-msig-roll@today-L9950-std-x10 
+ALLOWED  mix-msig-hash-roll@today-L9950-std-x10 
+ALLOWED  msig@today-L10000-cons 
+ALLOWED  invoke@today-L10000-cons 
+REJECTED hash@today-L10000-cons 16: mandatory-script-verify-flag-failed (Hash iteration limit exceeded)
+ALLOWED  roll@today-L10000-cons 
+ALLOWED  mul1@today-L10000-cons 
+ALLOWED  mul32@today-L10000-cons 
+ALLOWED  mod1@today-L10000-cons 
+ALLOWED  mulbig@today-L10000-cons 
+ALLOWED  copy@today-L10000-cons 
+ALLOWED  cat@today-L10000-cons 
+REJECTED mix-msig-roll@today-L10000-cons 16: mandatory-script-verify-flag-failed (VM cost limit exceeded)
+REJECTED mix-msig-hash-roll@today-L10000-cons 16: mandatory-script-verify-flag-failed (Hash iteration limit exceeded)

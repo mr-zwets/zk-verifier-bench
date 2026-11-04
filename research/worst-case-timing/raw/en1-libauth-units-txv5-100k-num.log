@@ -1,0 +1,2 @@
+mulbig@txv5-100k+num-L100000-std                         txv5-100k+num cost=77735905 eval=12.065ms ns/cost=0.155 batches=25,24,23,25,26,26,26
+mulwide@txv5-100k+num-L100000-std                        txv5-100k+num cost=72330395 eval=401.612ms ns/cost=5.552 batches=1,1,1,1,1,1,1
