@@ -1,0 +1,46 @@
+45 workloads (timing); libauth charges OP_DEFINE bodies: true
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0 K=4 verify=64.6ms accepted lib=true
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx1 K=5 verify=52.67ms accepted lib=true
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx2 K=5 verify=52.7ms accepted lib=true
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx3 K=5 verify=53.02ms accepted lib=true
+ok  o1-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0 K=1 verify=48.74ms accepted lib=true
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:cap:cap: cap.trace[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:ood:ood: ood[0].trace_local[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:random:random: random_values.random[0][0][0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:pow:pow: pow.batch + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:final:final: final_poly[0] c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:row:row: random matrix 0 (instance 0, 2^24) q0 col 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:salt:salt: random matrix 0 (instance 0, 2^24) q0 salt 0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:sibling:sibling: sib.random[0] byte 0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:fri_value:fri_value: fri[0] q0 value 0 c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tx:tx3 (final): output value - 1 sat (CTX differs) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:root:script ROOT[3] + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:constants:FIN: TBL byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:constants:HEAD and STATE: NF lane 0 byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:input:HEAD: OOD byte 100 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:input:QRY: hint T + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:input:QRY: path byte (input tree) flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:pad:QRY: empty pad replaced by one byte 0x01 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:pad:FIN: empty pad replaced by one byte 0x01 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:graph:CODE 1: code blob byte flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:graph:two QRY inputs swapped (order) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:graph:one input with another locking (R + one byte) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:mix:one QRY input from another statement (tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:mix:transaction 1 (all inputs) from another statement, the NFT of this proof (replay) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:thread:tx1: spends an NFT minted for another proof (commitment of another G) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:thread:tx1: input 0 without the NFT K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:thread:tx3: a QRY input of tx0 instead of its own K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:thread:tx0: baton not returned (output 0 is the NFT only) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:state:tx1 STATE: TBL byte 3 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:state:tx1: library blob byte flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:state:tx1: input 0 (STATE, with its NFT) locked to R0 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:layer:HEAD: LAYER tree 0 node 0 byte 0 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:layer:tx1 TOP: LAYER byte 100 flipped K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o1-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tampered:fri_value:fri_value: fri[0] q0 value 0 c0 + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o1-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:tx:output value - 1 sat (CTX differs) K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o1-tw2x18x16-g2-0-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:input:QRY: hint T + 1 K=1 verify=undefinedms rejected:blk-bad-inputs lib=false
+ok  o4-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0 K=4 verify=64.3ms accepted lib=true
+ok  o4-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx1 K=5 verify=52.57ms accepted lib=true
+ok  o4-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx2 K=5 verify=52.73ms accepted lib=true
+ok  o4-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx3 K=5 verify=52.75ms accepted lib=true
+ok  o1-tw2x18x16-g2-1-Z128_lb5_lf8_q43_bpow20_cpow11_cap0:valid-tx0 K=1 verify=48.88ms accepted lib=true
