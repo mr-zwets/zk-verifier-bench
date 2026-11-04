@@ -385,6 +385,8 @@ guarantees. Application ZK and VM-cost/TXv5 work are welcome as companion
 research tracks; `bch-spec`'s larger limits and its separate TXv5-as-written
 grade are distinct models.
 
+Ideas we tried and parked are listed in [research/TRIED.md](research/TRIED.md).
+
 ## Contributing
 
 External verifier submissions are welcome — several leaderboard entries
