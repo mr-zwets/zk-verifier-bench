@@ -1,0 +1,77 @@
+{
+  "contracts": [
+    "canonical source caller layouts/value domains and stated pile capacities",
+    "generic source lowering, ScriptNum and primitive VM semantics",
+    "LOCAL floor and BOUND below-window/touched-depth preservation",
+    "common branch layout and loop-entry layout restoration",
+    "finite nonrecursive call graph and preserved helper/kernel interfaces"
+  ],
+  "currentArtifact": {
+    "codeBytes": 7553,
+    "codeSha256": "63f12474082916e22ab62faf6c6f0483bedcbb08a9700e4d7eb02415c9d8c242",
+    "redeemBytes": 61,
+    "redeemSha256": "0563cd756e2d300b7653e10fd2e39ba5951e404210ba78f18d8ba4549719a030",
+    "roleIds": [
+      23,
+      24,
+      25
+    ]
+  },
+  "externalConstructiveReview": false,
+  "induction": {
+    "allocationReserve": 2,
+    "bodyAllowance": 946,
+    "callChain": [
+      "role",
+      "LOOP",
+      "BNDSTEP",
+      "EA",
+      "P"
+    ],
+    "conservativeCeiling": 996,
+    "currentCBootstrapPeak": 9,
+    "currentR14BootstrapPeak": 10,
+    "currentTerminalTransient": 9,
+    "enclosingProgramContexts": 1,
+    "kernelTransientReserve": 14,
+    "limit": 1000,
+    "piles": {
+      "Dp": 4,
+      "WSp": 12
+    },
+    "registeredDefinitions": 25,
+    "simultaneousBodyContexts": 5,
+    "symbolicCombinedFrameEnvelope": 155,
+    "total": 990
+  },
+  "interpretation": "The 155 symbolic/capture envelope acquires canonical universal force only under these layout/restoration/lowering contracts. It is not inferred from a finite VM fixture peak.",
+  "newCryptographicProofsOrFixtures": 0,
+  "newVmSourceCompilerProverBenchmarkExecutions": 0,
+  "quantifiers": {
+    "acceptedEquationRequiresProducerOrResourceHonesty": false,
+    "arbitraryAcceptedAdviceResourceClaim": false,
+    "canonicalConstructionOnly": true
+  },
+  "roleMicropeaks": {
+    "role0": {
+      "entryWords": 4,
+      "newCDepth": 3,
+      "newRollPeak": 5,
+      "newSizeCheckPeak": 6,
+      "oldCDepth": 1,
+      "oldRollPeak": 4,
+      "oldSizeCheckPeak": 6
+    },
+    "role1": {
+      "entryWords": 5,
+      "newCDepth": 4,
+      "newRollPeak": 6,
+      "newSizeCheckPeak": 7,
+      "oldCDepth": 1,
+      "oldRollPeak": 5,
+      "oldSizeCheckPeak": 7
+    }
+  },
+  "schema": "bn-c7553-r14-canonical-memory-contract/v1",
+  "status": "PASS_CANONICAL_MEMORY_INDUCTION_UNDER_DECLARED_CONTRACTS"
+}

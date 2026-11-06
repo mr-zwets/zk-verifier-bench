@@ -1,0 +1,13 @@
+{
+  "schema": "pub-fixed-preprocessing-public-proof-plan-check/v3",
+  "status": "PASS_STATIC_PUBLIC_PLAN_WITH_ORDINARY_ESM_CLOSURE",
+  "capturedAtUtc": "2026-11-05T23:16:19Z",
+  "action": "node --experimental-import-meta-resolve check-fixed-preprocessing-public-v3.mjs --check-plan --dependency-root STAGED_NODE_MODULES_ROOT",
+  "mathExecution": false,
+  "dynamicImports": 0,
+  "manifestSourceAssertion": true,
+  "fieldConstants": {"p": true, "r": true, "bnX": true},
+  "dependencyClosure": {"sha256": "50d6ff84697d9d0377cad6feac255331e2b18c8926a3f3088ea6082b0792c497", "edgeCount": 12, "packages": 3, "ordinaryLibraryEsmEdgesChecked": 5},
+  "inputs": {"fixture": "3d38e95a8f69a7c940b4ba03cc28c748254c07e5ff7957edb45665e45248cf91", "certificateInputs": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1"},
+  "sourceBuildEdges": "not loaded by this checker; retained as separate closure evidence"
+}

@@ -1,0 +1,31 @@
+--- a/chunked/bn254/bn-native-sound/script.mjs
++++ b/chunked/bn254/bn-native-sound/script.mjs
+@@ -66,15 +66,25 @@
+   const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+   const addReduced = (acc, term) => k.add(acc, term);
+   const high = (powers, j) => m(mul(powers[5], powers[j]));
++  // Characteristic recurrence for the actual Fp Frobenius factor.  The source
++  // math binds p=Fp.ORDER and proves N=norm(GAMMA1)=ETA; ETA-p is a signed
++  // representative congruent to N modulo p, so this keeps the same field map.
++  const a = (FROB.alpha[1] + 9n * FROB.beta[1]) % p;
++  const trace = (2n * a) % p;
++  const normRep = ETA - p;
++  const traceC = k.c(trace), normC = k.c(normRep);
++  let previous2 = k.c(1n);
++  let previous1 = m(k.add(k.c(FROB.alpha[1]), mul(k.c(FROB.beta[1]), zPowers[5])));
+   let c0Sum = k.c(0n);
+   for (let j = 0; j < 6; j++) c0Sum = k.add(c0Sum, mul(words[j], tauPowers[j]));
+   const c0 = k.sub(k.c(1n), c0Sum);
+   const base = m(k.add(k.add(c0, mul(words[5], k.c(18n))), k.neg(mul(words[5], zPowers[5]))));
+   let zEven = base, zOdd = k.c(0n), etaEven = base, etaOdd = k.c(0n);
+   for (let j = 0; j < 5; j++) {
+-    // z^6 is shared by both evaluations: fold alpha_j + beta_j*z^6 once,
+-    // then reuse g_j = c_j * MOD(alpha_j + beta_j*z^6) for z^j and (eta z)^j.
+-    const folded = m(k.add(k.c(FROB.alpha[j + 1]), mul(k.c(FROB.beta[j + 1]), zPowers[5])));
++    // z^6 is shared by both evaluations: fold each characteristic factor once,
++    // then reuse g_j for z^j and (eta z)^j in the existing weighted consumers.
++    const folded = j === 0 ? previous1 : m(k.sub(mul(traceC, previous1), mul(normC, previous2)));
++    if (j !== 0) { previous2 = previous1; previous1 = folded; }
+     const g = mul(words[j], folded);
+     if ((j + 1) & 1) {
+       zOdd = addReduced(zOdd, mul(g, zPowers[j]));

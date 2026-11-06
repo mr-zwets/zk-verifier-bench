@@ -1,0 +1,791 @@
+diff --git a/chunked/bn254/bn-native-sound/README.md b/chunked/bn254/bn-native-sound/README.md
+index 6b83e99..b70c194 100644
+--- a/chunked/bn254/bn-native-sound/README.md
++++ b/chunked/bn254/bn-native-sound/README.md
+@@ -1,3 +1,13 @@
++# BN254 SI-MX3 affine-chart candidate
++
++The current source uses affine charts for the root and all33 states. Its full
++equation/composition review is pending. See the [current claim sheet](../sound-si-gls/AFFINE-CHARTS.md)
++for exact programs, domain, new degree bounds and existing-fixture evidence.
++Historical review labels and measurements below do not qualify these bytes.
++
++<details>
++<summary>Historical monic-profile documentation</summary>
++
+ # BN254 Groth16 on current BCH (bch-2026), sound by construction: SI-MX3, one transaction with 3 inputs
+ 
+ A full Groth16 verifier for the fixed BN254 VK of the densless fixtures (`../densless-recovered/public-fixtures.json`,
+@@ -454,3 +464,5 @@ In zk-verifier-bench:
+   and that `R_{k,0}` lies in its class, but did not recompute them all from noble. Their end-to-end correctness is shown
+   by the final identity on the 5 fixtures, the extra proofs and every swept proof, and by the binding rejections. A
+   future review could recompute `Rconst` (the class of `m(α,β)·m(IC0,γ)·corr`) from noble.
++
++</details>
+diff --git a/chunked/bn254/bn-native-sound/build.mjs b/chunked/bn254/bn-native-sound/build.mjs
+index 92a532f..d6f4961 100644
+--- a/chunked/bn254/bn-native-sound/build.mjs
++++ b/chunked/bn254/bn-native-sound/build.mjs
+@@ -60,7 +60,7 @@ const out = {
+   roles: ROLES.map((r, i) => ({events: [r.a, r.b], states: r.nStates, bSteps: r.nB, stream: r.streamSize, deltaSlice: DS[i].length, deltaStart: DSTATE[r.a].j,
+     schedule: {firstDigit: SCHEDULE[i].d0, digits: hex(SCHEDULE[i].sch), boundaries: hex(SCHEDULE[i].bnd)}, codeBytes: prog.info.roles[i]})),
+   functions: prog.info.funcs, roleFunctionIds: [0, 1, 2].map((i) => prog.info.roleId + i), prologueBytes: prog.info.prologue,
+-  degreeBound: {NQ_MAX, states: NSTATES, identities: K_IDS, note: 'affine B lines have the SI-GLS slot degrees (<= 9), so the SI-GLS bound (deg <= 275, n_q <= 132) carries over'},
++  degreeBound: {NQ_MAX, states: NSTATES, identities: K_IDS, note: 'affine root/state representatives have degree <= 11; the updated SI-GLS bound is deg D <= 311 and n_q <= 150'},
+   // op costs below are BCHN accounting: libauth 3.1.0-next.8 + patches/@bitauth__libauth@3.1.0-next.8.patch (OP_DEFINE
+   // charges its body as stack-pushed bytes, bitauth/libauth#166). fixture0 re-sizes the fillers fresh; the shipped bench
+   // vectors keep the pre-patch fillers 96/41/67 (see README Results).
+diff --git a/chunked/bn254/bn-native-sound/kernels.mjs b/chunked/bn254/bn-native-sound/kernels.mjs
+index c93a2e9..3b21385 100644
+--- a/chunked/bn254/bn-native-sound/kernels.mjs
++++ b/chunked/bn254/bn-native-sound/kernels.mjs
+@@ -70,6 +70,16 @@ export function kEval() {
+   const od = k.mod(k.sum(k.mul(s[1], x[0]), k.mul(s[3], x[2]), k.mul(s[5], x[4])));
+   return k.output(k.add(ev, od), k.sub(ev, od));
+ }
++// Affine chart evaluation at +-x: 1 +- x*(b0 + b1*x^2 + ... + b5*x^10).
++// The public EA wrapper drops the two unused power inputs explicitly.
++export function kAffineEval() {
++  const k = new Kernel(); const b = [0, 1, 2, 3, 4, 5].map((i) => k.in('in' + i));
++  const [x, x2, x4, x6] = [6, 7, 9, 11].map((i) => k.in('in' + i));
++  const x8 = k.mod(k.mul(x6, x2)), x10 = k.mod(k.mul(x6, x4));
++  const h = k.mod(k.sum(b[0], k.mul(b[1], x2), k.mul(b[2], x4), k.mul(b[3], x6), k.mul(b[4], x8), k.mul(b[5], x10)));
++  const odd = k.mod(k.mul(x, h));
++  return k.output(k.mod(k.add(k.c(1n), odd)), k.mod(k.sub(k.c(1n), odd)));
++}
+ // 16-entry subset table from v0..v3 (consumed): T[n] = prod (or sum) over bits of n; outputs T[15] .. T[0]
+ export function kTable(mult) {
+   const k = new Kernel(); const v = [0, 1, 2, 3].map((i) => k.in('in' + i)); const T = [k.c(mult ? 1n : 0n)];
+diff --git a/chunked/bn254/bn-native-sound/protocol.mjs b/chunked/bn254/bn-native-sound/protocol.mjs
+index 0fba378..813596f 100644
+--- a/chunked/bn254/bn-native-sound/protocol.mjs
++++ b/chunked/bn254/bn-native-sound/protocol.mjs
+@@ -1,16 +1,16 @@
+ // bn-native-sound (SI-MX3) protocol: the 3-input layout, the transcript, the honest prover with the AFFINE
+ // B walk (one inverse-norm witness t per B step), and a value-level mirror of the on-chain computation.
+ //
+-// The mathematics is SI-GLS (../sound-si-gls/README.md): the same NAF schedule, 2-event chunks, 33 monic states,
++// The mathematics is SI-GLS (../sound-si-gls/README.md): the same NAF schedule, 2-event chunks, 33 affine states,
+ // GT-GLS fold, residue root and batched odd identity at +-z. Only two things change:
+ //   - the B lines are the affine lines (1, -lambda, lambda x - y) instead of the projective ones (Fp2 multiples
+-//     of the same lines, so the states -- classes in Fp12*/Fp6* -- are SI-GLS's, asserted by build.mjs);
++//     of the same lines); all transmitted root/state representatives use the common affine quotient chart.
+ //   - the program runs as 3 roles (one per input) over the event ranges CUTS, chained by handovers.
+ import assert from 'node:assert/strict';
+ import {encodeDataPush} from '@bitauth/libauth';
+ import {bn254} from '@noble/curves/bn254.js';
+-import {p, r, mod, F2, F12, f2, g1, g2, DIGITS, NE, NADD, LAMBDA, N6R, PI, GLS_BITS, GLS_OFFSET, glsDecompose, glsFactorPoly,
+-  VKC, psiK, ETA, frob1Monic, linePoly, fromPoly, monicRep, pmul, psub, pneg, psubst, peval, pdivM, M, VK, Fp} from '../sound-si-gls/math.mjs';
++import {p, r, mod, F2, F12, f2, g1, g2, DIGITS, NE, NADD, PI, GLS_BITS, GLS_OFFSET, glsDecompose, glsFactorPoly,
++  VKC, psiK, ETA, frob1Affine, affinePoly, affineWitnesses, linePoly, fromPoly, pmul, psub, pneg, psubst, peval, pdivM, M, VK, Fp} from '../sound-si-gls/math.mjs';
+ import {BOUNDS, NSTATES, K_IDS, isBoundary, NQ_MAX, nqFor, le32, rdle, sha, toFp} from '../sound-si-gls/protocol.mjs';
+ 
+ export {BOUNDS, NSTATES, K_IDS, isBoundary, NQ_MAX, nqFor, le32, rdle, sha, toFp};
+@@ -57,7 +57,7 @@ SCHEDULE.forEach(({sch, bnd, d0}, i) => { const {a, b} = ROLES[i]; assert.equal(
+ 
+ // ---------------- witness items and the transcript ----------------
+ export const VK_DIGEST = sha(...[VK.alpha.x, VK.alpha.y, ...[VK.beta, VK.gamma, VK.delta].flatMap((q) => [q.x.c0, q.x.c1, q.y.c0, q.y.c1]), ...VK.ic.flatMap((q) => [q.x, q.y])].map((v) => le32(BigInt(v))));
+-export const TAG = Buffer.concat([Buffer.from('BNMX3/1'), VK_DIGEST]);
++export const TAG = Buffer.concat([Buffer.from('BNMX3/AFFINE1'), VK_DIGEST]);
+ export const STMT_SIZE = 642, D_SIZE = 96, HAND_SIZE = 224, F_MAX = 10000, NQ_MIN = 1;
+ export const STMT_LAYOUT = {n0: 256, n1: 288, N0: 320, N1: 385, sc: 450};
+ export const pushLen = (n) => encodeDataPush(new Uint8Array(n)).length; // minimal push of n bytes (n = 0: OP_0)
+@@ -122,16 +122,13 @@ export function proveCore({proof, publicInputs}, {es: esOverride} = {}) {
+   for (const ev of sched.events) { raw = F12.sqr(raw); for (const f of ev.fs) raw = F12.mul(raw, fromPoly(f)); }
+   for (const f of sched.term) raw = F12.mul(raw, fromPoly(f));
+   assert.ok(F12.eql(F12.finalExponentiate(raw), F12.ONE), 'Groth16 equation fails');
+-  const minv = (a, m) => { let [x, y] = [mod(a, m), m], [s0, s1] = [1n, 0n]; while (y) { const q = x / y; [x, y] = [y, x - q * y]; [s0, s1] = [s1, s0 - q * s1]; } assert.equal(x, 1n); return mod(s0, m); };
+-  const u = F12.mul(F12.conjugate(raw), F12.inv(raw)), v = F12.pow(u, minv(LAMBDA, N6R)), c = F12.add(F12.ONE, F12.conjugate(v));
+-  const Sc = monicRep(c);
++  // Keep the six affine coordinates as the sole serialized owner. Every
++  // verifier polynomial is reconstructed as the full 12-coefficient chart.
++  const {root: rootWords, states: stateWords, c} = affineWitnesses(raw, sched.events, BOUNDS);
++  assert.equal(stateWords.length, NSTATES);
++  const Sc = affinePoly(rootWords);
++  const states = stateWords.map((words) => affinePoly(words));
+   const cPoly = (sign) => (sign > 0 ? pneg(Sc) : Sc);
+-  let Fc = fromPoly(pneg(Sc)); const states = [];
+-  sched.events.forEach((ev, e) => {
+-    Fc = F12.sqr(Fc); for (const f of ev.fs) Fc = F12.mul(Fc, fromPoly(f)); if (ev.cSign) Fc = F12.mul(Fc, fromPoly(cPoly(ev.cSign)));
+-    if (isBoundary(e)) states.push(monicRep(Fc));
+-  });
+-  assert.equal(states.length, NSTATES);
+   const Sp = [pneg(Sc), ...states]; const ids = [];
+   for (let k = 0; k < NSTATES; k++) {
+     let P = Sp[k];
+@@ -139,7 +136,7 @@ export function proveCore({proof, publicInputs}, {es: esOverride} = {}) {
+     ids.push({P, W: Sp[k + 1]});
+   }
+   let Pfin = Sp[NSTATES]; for (const f of sched.term) Pfin = pmul(Pfin, f); Pfin = pmul(Pfin, psubst(Sc, ETA));
+-  const Fr1 = frob1Monic(Sc); ids.push({P: Pfin, W: pmul(Fr1, psubst(Fr1, ETA))});
++  const Fr1 = frob1Affine(rootWords); ids.push({P: Pfin, W: pmul(Fr1, psubst(Fr1, ETA))});
+   for (const id of ids) {
+     const Nn = pmul(id.P, pneg(id.W)); const D = psub(Nn, pneg(Nn)); const {q, r: rem} = pdivM(D);
+     assert.ok(rem.every((x) => x === 0n), 'identity not divisible by M'); assert.ok(q.every((x, i) => i % 2 === 1 || x === 0n), 'quotient not odd');
+@@ -148,11 +145,11 @@ export function proveCore({proof, publicInputs}, {es: esOverride} = {}) {
+   // statement and streams
+   const W = (x) => le32(mod(x));
+   const STMT = Buffer.concat([...[Aa.x, Aa.y, Ba.x.c0, Ba.x.c1, Ba.y.c0, Ba.y.c1, Ca.x, Ca.y, ns[0], ns[1]].map((x) => le32(x)),
+-    Buffer.from(N[0]), Buffer.from(N[1]), ...Sc.slice(0, 6).map(W)]);
++    Buffer.from(N[0]), Buffer.from(N[1]), ...rootWords.map(W)]);
+   assert.equal(STMT.length, STMT_SIZE);
+   const S = ROLES.map(({a, chunks, i}) => {
+     const out = [];
+-    for (const k of chunks) { for (let e = chunkStart(k); e < BOUNDS[k]; e++) out.push(...sched.events[e].ts.map(W)); out.push(...states[k].slice(0, 6).map(W)); }
++    for (const k of chunks) { for (let e = chunkStart(k); e < BOUNDS[k]; e++) out.push(...sched.events[e].ts.map(W)); out.push(...stateWords[k].map(W)); }
+     if (i === NROLES - 1) out.push(...sched.tts.map(W));
+     const buf = Buffer.concat(out); assert.equal(buf.length, ROLES[i].streamSize); return buf;
+   });
+@@ -167,7 +164,7 @@ export function proveCore({proof, publicInputs}, {es: esOverride} = {}) {
+   while (qOdd.length > 1 && qOdd.at(-1) === 0n) qOdd.pop();
+   assert.ok(qOdd.at(-1) !== 0n);
+   const WQ = Buffer.concat(qOdd.slice().reverse().map(W));
+-  return {STMT, S, D, WQ, nq: qOdd.length, es, ns, N, Sc, states, rho, rhoRaw, h0, st, sched};
++  return {STMT, S, D, WQ, nq: qOdd.length, es, ns, N, Sc, states, root: rootWords, stateWords, c, rho, rhoRaw, h0, st, sched};
+ }
+ 
+ // ---------------- value-level mirror of the on-chain loop (per role, chained by the handovers) ----------------
+@@ -176,25 +173,25 @@ const PhiAt = (a, t) => mod(a.c0 + a.c1 * t);
+ export function runRange(core, z, a, b, start) {
+   const {st, Sc, states, sched, rho} = core; const zm = mod(-z);
+   let {Fp: Fp_, Fm: Fm_, R} = start; let k = BOUNDS.indexOf(a) + 1; if (a === 0) k = 0;
+-  const scP = [...Sc.slice(0, 6), 1n];
++  const scP = Sc;
+   for (let e = a; e < b; e++) {
+     const ev = sched.events[e];
+     Fp_ = mod(Fp_ * Fp_); Fm_ = mod(Fm_ * Fm_);
+     for (const f of ev.fs) { Fp_ = mod(Fp_ * peval(f, z)); Fm_ = mod(Fm_ * peval(f, zm)); }
+     if (ev.cSign) { const cp = ev.cSign > 0 ? pneg(scP) : scP; Fp_ = mod(Fp_ * peval(cp, z)); Fm_ = mod(Fm_ * peval(cp, zm)); }
+-    if (isBoundary(e)) { const Wn = [...states[k].slice(0, 6), 1n]; const Wp = peval(Wn, z), Wm = peval(Wn, zm); R = mod(R * rho + Fp_ * Wm - Fm_ * Wp); Fp_ = Wp; Fm_ = Wm; k++; }
++    if (isBoundary(e)) { const Wn = states[k]; const Wp = peval(Wn, z), Wm = peval(Wn, zm); R = mod(R * rho + Fp_ * Wm - Fm_ * Wp); Fp_ = Wp; Fm_ = Wm; k++; }
+   }
+   const T = sched.events[b - 1].T;
+   return {T, Fp: Fp_, Fm: Fm_, R};
+ }
+-export const startState = (core, z) => { const scP = [...core.Sc.slice(0, 6), 1n]; return {Fp: peval(pneg(scP), z), Fm: peval(pneg(scP), mod(-z)), R: 0n}; };
++export const startState = (core, z) => { const scP = core.Sc; return {Fp: peval(pneg(scP), z), Fm: peval(pneg(scP), mod(-z)), R: 0n}; };
+ export const encodeHand = ({T, Fp: a, Fm: b, R}) => Buffer.concat([T.x.c0, T.x.c1, T.y.c0, T.y.c1, a, b, R].map((v) => le32(mod(v))));
+ // the terminal and final identity, value level (returns R_final and the quotient check)
+ export function finish(core, z, s) {
+-  const {Sc, WQ} = core; const zm = mod(-z); const scP = [...Sc.slice(0, 6), 1n];
++  const {Sc, WQ, root} = core; const zm = mod(-z); const scP = Sc;
+   let {Fp: Fp_, Fm: Fm_, R} = s;
+   for (const f of [...core.sched.term, psubst(scP, ETA)]) { Fp_ = mod(Fp_ * peval(f, z)); Fm_ = mod(Fm_ * peval(f, zm)); }
+-  const Fr1 = frob1Monic(Sc.slice(0, 6)); const Wp = mod(peval(Fr1, z) * peval(Fr1, mod(ETA * z))), Wm = mod(peval(Fr1, zm) * peval(Fr1, mod(-ETA * z)));
++  const Fr1 = frob1Affine(root); const Wp = mod(peval(Fr1, z) * peval(Fr1, mod(ETA * z))), Wm = mod(peval(Fr1, zm) * peval(Fr1, mod(-ETA * z)));
+   R = mod(R * core.rho + Fp_ * Wm - Fm_ * Wp);
+   let acc = 0n; const z2 = mod(z * z); for (let i = 0; i < WQ.length; i += 32) acc = mod(acc * z2 + rdle(WQ, i));
+   return {R, rhs: mod(z * acc * peval(M, z)), ok: R === mod(z * acc * peval(M, z))};
+diff --git a/chunked/bn254/bn-native-sound/script.mjs b/chunked/bn254/bn-native-sound/script.mjs
+index 905703b..c8b5feb 100644
+--- a/chunked/bn254/bn-native-sound/script.mjs
++++ b/chunked/bn254/bn-native-sound/script.mjs
+@@ -4,8 +4,8 @@
+ // assembler's symbolic stack (asm.mjs); shared code lives in OP_DEFINE functions.
+ import assert from 'node:assert/strict';
+ import {Asm, Kernel, OP, pushNum, pushData} from './asm.mjs';
+-import {kADblN, kAAddN, kDStep, kEval, kTable} from './kernels.mjs';
+-import {p, r, ETA, GAMMA1, PSI, B_TWIST, VKC, PI_SUM_OFFSET} from '../sound-si-gls/math.mjs';
++import {kADblN, kAAddN, kDStep, kEval, kAffineEval, kTable} from './kernels.mjs';
++import {p, r, ETA, frob1Affine, PSI, B_TWIST, VKC, PI_SUM_OFFSET} from '../sound-si-gls/math.mjs';
+ import {ROLES, NROLES, DS, DSTATE, SCHEDULE, TAG, STMT_SIZE, D_SIZE, HAND_SIZE, F_MAX, NQ_MAX, pushLen, hdrOf, sha} from './protocol.mjs';
+ 
+ // Track 11: optional application hook, run by role 2 right after the statement is decoded (n0, n1 on the stack by
+@@ -58,6 +58,25 @@ const lookup = (s, tbl, idx, out) => {
+ };
+ const conjMul = (k, a0, a1, g0, g1) => [k.mod(k.add(k.mul(a0, g0), k.mul(a1, g1))), k.mod(k.sub(k.mul(a0, g1), k.mul(a1, g0)))]; // conj(a) * g
+ 
++const AFFINE_FROB_BASIS = Array.from({length: 6}, (_, j) => {
++  const b = Array(6).fill(0n); b[j] = 1n; return frob1Affine(b);
++});
++AFFINE_FROB_BASIS.forEach((poly) => {
++  assert.equal(poly[0], 1n, 'affine Frob constant');
++  assert.ok([2, 4, 6, 8, 10].every((i) => poly[i] === 0n), 'affine Frob even terms');
++});
++function affineFrobPair(k, words, powers) {
++  const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
++  const full = [k.c(1n), ...powers, ...powers.slice(0, 5).map((x) => m(mul(powers[5], x)))];
++  const ev = [k.c(1n)], od = [];
++  for (let j = 0; j < 6; j++) for (let d = 1; d < 12; d++) {
++    const c = AFFINE_FROB_BASIS[j][d]; if (!c) continue;
++    (d & 1 ? od : ev).push(mul(mul(words[j], k.c(c)), full[d]));
++  }
++  const even = m(k.sum(...ev)), odd = m(k.sum(...od));
++  return [m(k.add(even, odd)), m(k.sub(even, odd))];
++}
++
+ // ---------------- shared functions ----------------
+ function defineFunctions(a, WIN) {
+   a.defLocal('P', 0, 1, (s) => s.push(p, 'p'));
+@@ -65,6 +84,7 @@ function defineFunctions(a, WIN) {
+   a.defLocal('RD', 1, 2, (s) => { s.push(32).op(OP.SPLIT, 2, 'w', 'rest').roll('w'); U(s, 'v');
+     s.pick('v').invoke('P', ['p']).op(OP.LESSTHAN, 2, 'ok').op(OP.VERIFY, 1).roll('rest'); });
+   a.defLocal('EV', 12, 2, (s) => s.kernel(kEval(), ['vp', 'vm'], {iters: ITERS}));
++  a.defLocal('EA', 12, 2, (s) => { s.kernel(kAffineEval(), ['vp', 'vm'], {iters: ITERS}); s.drop('in8').drop('in10'); });
+   a.defLocal('TM', 4, 16, (s) => s.kernel(kTable(true), Array.from({length: 16}, (_, i) => 'T' + (15 - i)), {iters: ITERS}));
+   a.defLocal('TA', 4, 16, (s) => s.kernel(kTable(false), Array.from({length: 16}, (_, i) => 'T' + (15 - i)), {iters: ITERS}));
+   a.defLocal('G1C', 2, 0, (s) => { const k = new Kernel(); const x = k.in('in0'), y = k.in('in1'); k.output(k.mod(k.sub(k.mul(y, y), k.add(k.mul(k.mul(x, x), x), k.c(3n))))); s.kernel(k, ['d'], {iters: 200}); s.op(OP.NOT, 1, 'ok').op(OP.VERIFY, 1); });
+@@ -118,7 +138,7 @@ function defineFunctions(a, WIN) {
+       const eta = k.c(ETA), eta2 = k.sub(eta, k.c(1n)); // eta^2 = eta - 1, eta^3 = -1
+       k.output(z2, z3, z4, z5, z6, m(mul(eta, z)), m(mul(eta2, z2)), k.neg(z3), k.neg(m(mul(eta, z4))), k.neg(m(mul(eta2, z5))));
+       s.kernel(k, ['z2', 'z3', 'z4', 'z5', 'z6', 'ez', 'ez2', 'ez3', 'ez4', 'ez5'], {iters: 1500}); }
+-    for (let j = 0; j < 6; j++) s.roll('sc' + j); for (const n of ZP) s.pick(n); s.invoke('EV', ['Scp', 'Scm']);
++    for (let j = 0; j < 6; j++) s.roll('sc' + j); for (const n of ZP) s.pick(n); s.invoke('EA', ['Scp', 'Scm']);
+     for (const k of [0, 1]) {
+       for (const i of [0, 1]) for (let j = 0; j < 6; j++) s.push(VKC.R[k][i][j], `R${k}${i}_${j}`);
+       for (const i of [0, 1, 2, 3]) {
+@@ -162,7 +182,7 @@ function defineFunctions(a, WIN) {
+     t.roll('W');
+     for (let j = 0; j < 6; j++) t.invoke('RD', ['s' + j, 'W']);
+     t.op(OP.SIZE, 1, 'W', 'ws').op(OP.NOT, 1, 'e').op(OP.VERIFY, 1).drop('W'); // the record ends with the state
+-    for (const n of ZP) t.pick(n); t.invoke('EV', ['Sp', 'Sm']);
++    for (const n of ZP) t.pick(n); t.invoke('EA', ['Sp', 'Sm']);
+     const k = new Kernel(); const R = k.in('R');
+     k.output(k.in('Sp'), k.in('Sm'), k.mod(k.sub(k.add(k.mul(R, k.env('rho')), k.mul(k.in('Fp'), k.in('Sm'))), k.mul(k.in('Fm'), k.in('Sp')))));
+     t.kernel(k, ['Fp', 'Fm', 'R'], {iters: 500});
+@@ -327,20 +347,13 @@ function roleProgram(i, ctx, lay, WIN) {
+   a.mark('t:rconst');
+   // F *= Rconst(+-z) * S_c(+-eta z)
+   for (let j = 0; j < 6; j++) a.push(VKC.Rconst[j]); for (const n of ZP) a.pick(n); a.invoke('EV', ['rp', 'rm']);
+-  for (let j = 0; j < 6; j++) a.pick('sc' + j); for (const n of EZP) a.pick(n); a.invoke('EV', ['ep', 'em']);
++  for (let j = 0; j < 6; j++) a.pick('sc' + j); for (const n of EZP) a.pick(n); a.invoke('EA', ['ep', 'em']);
+   { const k = new Kernel(); k.output(k.mod(k.mul(k.mul(k.in('Fp'), k.in('rp')), k.in('ep'))), k.mod(k.mul(k.mul(k.in('Fm'), k.in('rm')), k.in('em')))); a.kernel(k, ['Fp', 'Fm'], {iters: 200}); }
+-  a.mark('t:cj');
+-  // c_j = Phi(gamma1^j)(z) = g0 + g1 (z^6 - 9), j = 1..5 (Frob(X^j) = Phi(gamma1^j) X^j)
+-  { const k = new Kernel(); const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y); const t = k.sub(k.env('z6'), k.c(9n)); const g = [[k.c(GAMMA1.c0), k.c(GAMMA1.c1)]];
+-    const fm = (a0, a1, b0, b1) => [m(k.sub(mul(a0, b0), mul(a1, b1))), m(k.add(mul(a0, b1), mul(a1, b0)))];
+-    for (let j = 2; j <= 5; j++) g.push(fm(...g[j - 2], ...g[0]));
+-    k.output(...g.map(([g0, g1]) => m(k.add(g0, mul(g1, t))))); a.kernel(k, ['c1', 'c2', 'c3', 'c4', 'c5'], {iters: 800}); }
+   a.mark('t:W');
+   // W(+-z) = Frob(S_c)(+-z) Frob(S_c)(+-eta z);  R <- R rho + F+ W(-z) - F- W(+z)
+   { const k = new Kernel(); const I = (n) => k.in(n), E = (n) => k.env(n), m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+-    const sc = [0, 1, 2, 3, 4, 5].map((j) => I('sc' + j)); const sj = [null, ...[1, 2, 3, 4, 5].map((j) => m(mul(sc[j], I('c' + j))))];
+-    const fr = (x) => { const ev = m(k.sum(sc[0], k.c(18n), k.neg(E(x[5])), mul(sj[2], E(x[1])), mul(sj[4], E(x[3])))); const od = m(k.sum(mul(sj[1], E(x[0])), mul(sj[3], E(x[2])), mul(sj[5], E(x[4])))); return [k.add(ev, od), k.sub(ev, od)]; };
+-    const [a1, a2] = fr(ZP), [b1, b2] = fr(EZP);
++    const sc = [0, 1, 2, 3, 4, 5].map((j) => I('sc' + j));
++    const [a1, a2] = affineFrobPair(k, sc, ZP.map((n) => E(n))), [b1, b2] = affineFrobPair(k, sc, EZP.map((n) => E(n)));
+     k.output(m(k.sub(k.add(mul(I('R'), E('rho')), mul(I('Fp'), m(mul(a2, b2)))), mul(I('Fm'), m(mul(a1, b1))))));
+     a.kernel(k, ['R'], {iters: 1500}); }
+   a.mark('binding');
+diff --git a/chunked/bn254/sound-si-gls/README.md b/chunked/bn254/sound-si-gls/README.md
+index 184d7d0..abd96b4 100644
+--- a/chunked/bn254/sound-si-gls/README.md
++++ b/chunked/bn254/sound-si-gls/README.md
+@@ -1,3 +1,13 @@
++# BN254 SI-GLS affine-chart candidate
++
++The current source uses affine charts for the root and all33 states. Its full
++equation/composition review is pending. See the [current claim sheet](AFFINE-CHARTS.md)
++for exact programs, domain, new degree bounds and existing-fixture evidence.
++Historical review labels and measurements below do not qualify these bytes.
++
++<details>
++<summary>Historical monic-profile documentation</summary>
++
+ # BN254 Groth16, SI-GLS: one batched torus identity, sound by construction (one input, bch-spec)
+ 
+ A full Groth16 verifier for the fixed BN254 VK of the densless fixtures (`../densless-recovered/public-fixtures.json`)
+@@ -190,3 +200,5 @@ In zk-verifier-bench: copy `vectors.json` to `src/bch/groth16-sound-si-gls-singl
+ - **The op margin is about 5% at the worst known witness** (6.9% for random proofs). The independent review's worst case zeroes the nibbles at the 5 addition-first events (20, 26, 34, 50, 54), which drops n_q to 66, while keeping the other 120 lookups at full cost (nibble 4): op 23,021,579 standard against a budget of 24,224,800, margin 1,203,221 (4.97%). The every-nibble-1 "liveness extreme" in `sweep.mjs` (n_q 78, margin 1,422,175) is not the worst case. The op cost is almost statement-independent, and the budget shrinks with n_q. Any later change that adds op cost must be re-swept at the n_q-66 witness.
+ - **GLS encoding cost on fixture 0.** Fixture 0 pays about 290 B for the unsigned encoding versus signed digits, while the random-statement mean is equal. A signed variant would need a canonical "no −0" rule, at about 100 B of code.
+ - **Public inputs bind through the GT-GLS fold**, via hashed sub-scalars and an exact mod-r check, rather than an explicit vk_x MSM. The benchmark owner should confirm this is acceptable; the bench public-input gate passes (9/9).
++
++</details>
+diff --git a/chunked/bn254/sound-si-gls/build.mjs b/chunked/bn254/sound-si-gls/build.mjs
+index 609a0ad..3b896f2 100644
+--- a/chunked/bn254/sound-si-gls/build.mjs
++++ b/chunked/bn254/sound-si-gls/build.mjs
+@@ -14,7 +14,7 @@ import {p2sh32, unlockingFor, spend} from './vm.mjs';
+ const sha = (b) => createHash('sha256').update(b).digest('hex');
+ // ---- degree bound (adversarial: every nibble 15) and the n_q cap, from the schedule ----
+ const worst = BOUNDS.map((_, k) => chunkDegP(k, () => 8));
+-const degDmax = Math.max(...worst) + 6; const dD = degDmax % 2 ? degDmax : degDmax - 1;
++const degDmax = Math.max(...worst) + 11; const dD = degDmax % 2 ? degDmax : degDmax - 1;
+ assert.equal(NQ_MAX, (dD - 12 + 1) / 2, 'NQ_MAX from the schedule');
+ const firstAdds = BOUNDS.map((b, k) => (k ? BOUNDS[k - 1] : 0)).filter((a, k) => BOUNDS[k] - a === 2 && DIGITS[a]);
+ const degBound = {chunkDegPmax: Math.max(...worst), degDmax: dD, degQmax: dD - 12, NQ_MAX, chunksWithAddFirst: firstAdds,
+diff --git a/chunked/bn254/sound-si-gls/math.mjs b/chunked/bn254/sound-si-gls/math.mjs
+index 36aa575..a51f393 100644
+--- a/chunked/bn254/sound-si-gls/math.mjs
++++ b/chunked/bn254/sound-si-gls/math.mjs
+@@ -72,6 +72,85 @@ export const monicRep = (f) => {
+ };
+ export const sameClass = (a, b) => isZero(toPoly(F12.sub(F12.mul(a, F12.conjugate(b)), F12.conjugate(F12.mul(a, F12.conjugate(b)))))); // a/b in Fp6 <=> a conj(b) even
+ 
++// ---------------- affine quotient chart ----------------
++// K = E direct-sum X E, with E = Fp6 the even powers of X.  The affine
++// representative of a non-pole class a + Xb is 1 + X(b/a); words are the
++// six E-coefficients of b/a, never the first six coefficients of that full
++// polynomial.
++const EVEN_SLOTS = [0, 2, 4, 6, 8, 10], ODD_SLOTS = [1, 3, 5, 7, 9, 11];
++const affineWords = (words) => {
++  if (!Array.isArray(words) || words.length !== 6) throw new TypeError('affine words must contain six coefficients');
++  return words.map((x) => mod(BigInt(x)));
++};
++export const affinePoly = (words, sign = 1) => {
++  const w = affineWords(words);
++  if (sign !== 1 && sign !== -1) throw new RangeError('affine sign must be 1 or -1');
++  const out = Array(12).fill(0n); out[0] = 1n;
++  w.forEach((x, i) => { out[ODD_SLOTS[i]] = mod(BigInt(sign) * x); });
++  return out;
++};
++const affineEven = (value) => {
++  const poly = toPoly(value); return EVEN_SLOTS.map((slot) => poly[slot]);
++};
++const affineEvenValue = (value) => {
++  const poly = Array(12).fill(0n); affineEven(value).forEach((x, i) => { poly[EVEN_SLOTS[i]] = x; }); return fromPoly(poly);
++};
++const affinePole = (value) => affineEven(value).every((x) => x === 0n);
++const affineNormalize = (value) => {
++  if (affinePole(value)) throw new Error('affine chart pole: zero even component');
++  const normalized = F12.mul(value, F12.inv(affineEvenValue(value)));
++  const poly = toPoly(normalized);
++  if (poly[0] !== 1n || EVEN_SLOTS.slice(1).some((slot) => poly[slot] !== 0n)) throw new Error('affine normalization did not produce unit even component');
++  return {value: normalized, words: ODD_SLOTS.map((slot) => poly[slot])};
++};
++export const affineRep = (value) => affineNormalize(value).words;
++export const frob1Affine = (words, sign = 1) => toPoly(F12.frobeniusMap(fromPoly(affinePoly(words, sign)), 1));
++
++const invMod = (a, m) => {
++  let [x, y] = [mod(a, m), m], [s0, s1] = [1n, 0n];
++  while (y) { const q = x / y; [x, y] = [y, x - q * y]; [s0, s1] = [s1, s0 - q * s1]; }
++  if (x !== 1n) throw new Error('affine root exponent is not invertible');
++  return mod(s0, m);
++};
++const fixedPairingRoot = () => {
++  const reduced = F12.finalExponentiate(bn254.pairing(g1(VK.alpha), g2(VK.beta), false));
++  if (F12.eql(reduced, F12.ONE) || !F12.eql(F12.pow(reduced, r), F12.ONE)) throw new Error('fixed pairing is not a nontrivial r-torsion class');
++  return reduced;
++};
++const eventFactor = (factor) => fromPoly(factor);
++
++// Select one of 35 consecutive lambda-root classes whose root and all 33
++// scheduled states are outside the single affine pole class. Callers must
++// supply the actual 65-event NAF schedule, its 33 positive one-based bounds,
++// a valid FE-one raw class, and unit event factors; this helper owns only the
++// field arithmetic, normalization, and bounded chart search.
++export const affineWitnesses = (raw, events, bounds) => {
++  if (!Array.isArray(events) || !Array.isArray(bounds) || bounds.length !== 33) throw new TypeError('affine witness schedule must have 33 boundaries');
++  if (bounds.some((b, i) => !Number.isInteger(b) || b <= 0 || (i && b <= bounds[i - 1]) || b > events.length)) throw new RangeError('affine witness boundaries must be increasing event counts');
++  const rootBase = F12.pow(raw, invMod(LAMBDA, N6R));
++  const h = fixedPairingRoot();
++  for (let choice = 0n; choice < 35n; choice++) {
++    const candidate = F12.mul(rootBase, F12.pow(h, choice));
++    if (affinePole(candidate)) continue;
++    const root = affineNormalize(candidate);
++    const c = root.value; let Fc = F12.conjugate(c); const states = []; let statePole = false;
++    for (let e = 0; e < events.length; e++) {
++      const ev = events[e];
++      if (!ev || !Array.isArray(ev.fs) || ![-1, 0, 1].includes(ev.cSign)) throw new TypeError('invalid affine witness event');
++      Fc = F12.sqr(Fc);
++      ev.fs.forEach((factor) => { Fc = F12.mul(Fc, eventFactor(factor)); });
++      if (ev.cSign === 1) Fc = F12.mul(Fc, F12.conjugate(c));
++      else if (ev.cSign === -1) Fc = F12.mul(Fc, c);
++      if (bounds.includes(e + 1)) {
++        if (affinePole(Fc)) { statePole = true; break; }
++        states.push(affineRep(Fc));
++      }
++    }
++    if (!statePole && states.length === bounds.length) return {root: root.words, states, c};
++  }
++  throw new Error('no affine chart among first 35 lambda-root classes');
++};
++
+ // ---------------- curve, twist, psi ----------------
+ export const B_TWIST = F2.div(f2(3n, 0n), f2(9n, 1n)); // b' = 3/(9+u)
+ export const B3 = F2.mul(B_TWIST, f2(3n, 0n));          // 3b' (projective doubling)
+diff --git a/chunked/bn254/sound-si-gls/protocol.mjs b/chunked/bn254/sound-si-gls/protocol.mjs
+index d6f183c..86da2be 100644
+--- a/chunked/bn254/sound-si-gls/protocol.mjs
++++ b/chunked/bn254/sound-si-gls/protocol.mjs
+@@ -3,11 +3,11 @@
+ import assert from 'node:assert/strict';
+ import {createHash} from 'node:crypto';
+ import {bn254} from '@noble/curves/bn254.js';
+-import {p, r, mod, inv, F2, F12, Fp6, f2, g1, g2, BN_X, DIGITS, NE, NADD, LAMBDA, N6R, PI, GLS_BITS, GLS_OFFSET, PI_SUM_OFFSET, glsDecompose, glsFactorPoly,
+-  VKC, B_TWIST, B3, psiK, ETA, FROB, frob1Monic, linePoly, Phi, fromPoly, toPoly, monicRep, pmul, padd, psub, pneg, psubst, peval, pdivM, M, VK} from './math.mjs';
++import {p, r, mod, inv, F2, F12, Fp6, f2, g1, g2, BN_X, DIGITS, NE, NADD, PI, GLS_BITS, GLS_OFFSET, PI_SUM_OFFSET, glsDecompose, glsFactorPoly,
++  VKC, B_TWIST, B3, psiK, ETA, FROB, frob1Affine, affinePoly, affineWitnesses, linePoly, Phi, fromPoly, toPoly, pmul, padd, psub, pneg, psubst, peval, pdivM, M, VK} from './math.mjs';
+ 
+ // ---------------- fixed layout ----------------
+-export const TAG = Buffer.from('SIGLS/1');
++export const TAG = Buffer.from('SIGLS/AFFINE1');
+ export const CHUNK = 2;                                   // events per chunk
+ export const BOUNDS = (() => { const b = []; for (let e = CHUNK; e < NE; e += CHUNK) b.push(e); b.push(NE); return b; })(); // state k+1 after BOUNDS[k] events
+ export const NSTATES = BOUNDS.length;                     // 33
+@@ -16,13 +16,14 @@ export const isBoundary = (e) => BOUNDS.includes(e + 1);  // a state is committe
+ export const WS_LAYOUT = {stmt: 0, n0: 256, n1: 288, N0: 320, N1: 385, sc: 450, states: 642};
+ export const WS_SIZE = 642 + NSTATES * 192;               // 6978
+ // ---------------- degree bookkeeping (structural, adversarial) ----------------
+-// per event: B dbl line 9, delta dbl line 9; add: B add 9, delta add 9, c factor 6; GLS: 6 per set bit (<= 8)
+-export const eventDeg = (e, glsBits) => 18 + (DIGITS[e] ? 24 : 0) + 6 * glsBits;
+-export const chunkDegP = (k, bitsOf) => { let d = 6; for (let e = k ? BOUNDS[k - 1] : 0; e < BOUNDS[k]; e++) d = 2 * d + eventDeg(e, bitsOf(e)); return d; };
+-// D = P(X)S'(-X) - P(-X)S'(X) is odd: deg D <= largest odd <= deg P + 6; Q = D/M odd, n_q odd words
++// per event: B/delta lines contribute 18; an addition also carries the affine
++// c factor (degree 11); GLS contributes 6 per selected bit (<= 8).
++export const eventDeg = (e, glsBits) => 18 + (DIGITS[e] ? 29 : 0) + 6 * glsBits;
++export const chunkDegP = (k, bitsOf) => { let d = 11; for (let e = k ? BOUNDS[k - 1] : 0; e < BOUNDS[k]; e++) d = 2 * d + eventDeg(e, bitsOf(e)); return d; };
++// D = P(X)S'(-X) - P(-X)S'(X) is odd: deg D <= largest odd <= deg P + 11; Q = D/M odd, n_q odd words
+ const nqOfDegD = (dD) => { const dq = (dD % 2 ? dD : dD - 1) - 12; return (dq + 1) / 2; };
+-export const NQ_MAX = Math.max(...Array.from({length: NSTATES}, (_, k) => nqOfDegD(chunkDegP(k, () => 8) + 6)), nqOfDegD(54 + 22));
+-export const nqFor = (bitsOf) => Math.max(...Array.from({length: NSTATES}, (_, k) => nqOfDegD(chunkDegP(k, bitsOf) + 6)), nqOfDegD(54 + 22));
++export const NQ_MAX = Math.max(...Array.from({length: NSTATES}, (_, k) => nqOfDegD(chunkDegP(k, () => 8) + 11)), nqOfDegD(86));
++export const nqFor = (bitsOf) => Math.max(...Array.from({length: NSTATES}, (_, k) => nqOfDegD(chunkDegP(k, bitsOf) + 11)), nqOfDegD(86));
+ 
+ // ---------------- encodings ----------------
+ export const le32 = (x) => { assert.ok(x >= 0n && x < 1n << 256n); const b = Buffer.alloc(32); let v = x; for (let i = 0; i < 32; i++) { b[i] = Number(v & 255n); v >>= 8n; } return b; };
+@@ -111,18 +112,13 @@ export function prove({proof, publicInputs}, {es: esOverride, forge = false, rho
+   for (const ev of sched.events) { raw = F12.sqr(raw); for (const f of ev.fs) raw = F12.mul(raw, fromPoly(f)); }
+   for (const f of sched.term) raw = F12.mul(raw, fromPoly(f));
+   if (!forge) assert.ok(F12.eql(F12.finalExponentiate(raw), F12.ONE), 'Groth16 equation fails');
+-  // torus residue root: [c]^lambda = [raw]
+-  const minv = (a, m) => { let [x, y] = [mod(a, m), m], [s0, s1] = [1n, 0n]; while (y) { const q = x / y; [x, y] = [y, x - q * y]; [s0, s1] = [s1, s0 - q * s1]; } assert.equal(x, 1n); return mod(s0, m); };
+-  const u = F12.mul(F12.conjugate(raw), F12.inv(raw)), v = F12.pow(u, minv(LAMBDA, N6R)), c = F12.add(F12.ONE, F12.conjugate(v));
+-  const Sc = monicRep(c); // [s0..s5, 1]
+-  const cPoly = (sign) => (sign > 0 ? pneg(Sc) : Sc); // d = +1: c^-1 = [S_c(-X)], d = -1: c = [S_c(X)]
+-  // classes along the loop, states at boundaries
+-  let Fc = fromPoly(pneg(Sc)); const states = [];
+-  sched.events.forEach((ev, e) => {
+-    Fc = F12.sqr(Fc); for (const f of ev.fs) Fc = F12.mul(Fc, fromPoly(f)); if (ev.cSign) Fc = F12.mul(Fc, fromPoly(cPoly(ev.cSign)));
+-    if (isBoundary(e)) states.push(monicRep(Fc));
+-  });
+-  assert.equal(states.length, NSTATES);
++  // The affine chart owns the serialized six words.  Build every verifier
++  // polynomial from those words; the six words are not a monic prefix.
++  const {root: rootWords, states: stateWords, c} = affineWitnesses(raw, sched.events, BOUNDS);
++  assert.equal(stateWords.length, NSTATES);
++  const Sc = affinePoly(rootWords);
++  const states = stateWords.map((words) => affinePoly(words));
++  const cPoly = (sign) => (sign > 0 ? pneg(Sc) : Sc); // d = +1: c^-1; d = -1: c
+   // identities
+   const Sp = [pneg(Sc), ...states]; const ids = [];
+   for (let k = 0; k < NSTATES; k++) {
+@@ -131,7 +127,7 @@ export function prove({proof, publicInputs}, {es: esOverride, forge = false, rho
+     ids.push({P, W: Sp[k + 1]});
+   }
+   let Pfin = Sp[NSTATES]; for (const f of sched.term) Pfin = pmul(Pfin, f); Pfin = pmul(Pfin, psubst(Sc, ETA));
+-  const Fr1 = frob1Monic(Sc); ids.push({P: Pfin, W: pmul(Fr1, psubst(Fr1, ETA))});
++  const Fr1 = frob1Affine(rootWords); ids.push({P: Pfin, W: pmul(Fr1, psubst(Fr1, ETA))});
+   for (const id of ids) {
+     const Nn = pmul(id.P, pneg(id.W)); const D = psub(Nn, pneg(Nn)); const {q, r: rem} = pdivM(D);
+     if (!forge) { assert.ok(rem.every((x) => x === 0n), 'identity not divisible by M'); assert.ok(q.every((x, i) => i % 2 === 1 || x === 0n), 'quotient not odd'); }
+@@ -141,7 +137,7 @@ export function prove({proof, publicInputs}, {es: esOverride, forge = false, rho
+   const W = (x) => le32(mod(x));
+   const stmt = Buffer.concat([Aa.x, Aa.y, Ba.x.c0, Ba.x.c1, Ba.y.c0, Ba.y.c1, Ca.x, Ca.y, ns[0], ns[1]].map((x) => le32(mod(x, 1n << 256n))));
+   const nib = N.map((Nk) => Buffer.from(Nk));
+-  const WS = Buffer.concat([stmt, nib[0], nib[1], ...Sc.slice(0, 6).map(W), ...states.flatMap((s) => s.slice(0, 6).map(W))]);
++  const WS = Buffer.concat([stmt, nib[0], nib[1], ...rootWords.map(W), ...stateWords.flatMap((s) => s.map(W))]);
+   assert.equal(WS.length, WS_SIZE);
+   const h0 = sha(TAG, WS), rhoRaw = sha(h0, Buffer.from('rho'));
+   const rho = rhoSigned ? mod(((v) => (v >> 255n ? -(v - (1n << 255n)) : v))(rdle(rhoRaw))) : toFp(rhoRaw); // rhoSigned: a WRONG (signed) conversion, red-team only
+@@ -154,7 +150,7 @@ export function prove({proof, publicInputs}, {es: esOverride, forge = false, rho
+   while (qOdd.length > 1 && qOdd.at(-1) === 0n) qOdd.pop(); // canonical: leading word nonzero (trims only w.p. ~1/p)
+   assert.ok(qOdd.at(-1) !== 0n);
+   const WQ = Buffer.concat(qOdd.slice().reverse().map(W)); // highest coefficient first
+-  return {WS, WQ, nq: qOdd.length, es, ns, Sc, states, c, debug: {sched, ids, rho}};
++  return {WS, WQ, nq: qOdd.length, es, ns, Sc, states, root: rootWords, stateWords, c, debug: {sched, ids, rho}};
+ }
+ 
+ // ---------------- value-level reference verifier (mirrors the script) ----------------
+@@ -174,6 +170,7 @@ export function verifyValues(WS, WQ, {trace} = {}) {
+   const words = (o, n) => Array.from({length: n}, (_, i) => word(o + 32 * i));
+   const sc = words(450, 6), stts = Array.from({length: NSTATES}, (_, k) => words(642 + 192 * k, 6));
+   if ([...sc, ...stts.flat()].some((v) => v === null)) return fail('state word not canonical');
++  const scP = affinePoly(sc), statePs = stts.map((words) => affinePoly(words));
+   const qw = Array.from({length: WQ.length / 32}, (_, i) => rdle(WQ, 32 * i)); if (qw.some((v) => v >= p)) return fail('Q word not canonical');
+   if (qw[0] === 0n) return fail('Q leading word zero');
+   const h0 = sha(TAG, WS), rhoRaw = sha(h0, Buffer.from('rho')), rho = toFp(rhoRaw), z = toFp(sha(h0, rhoRaw, WQ));
+@@ -185,19 +182,17 @@ export function verifyValues(WS, WQ, {trace} = {}) {
+   }
+   // evaluations: run the schedule as values at +-z
+   const sched = factorSchedule({xA, yA, xB, yB, xC, yC, N: nibs});
+-  const mono = (s) => [...s, 1n];
+-  const scP = mono(sc);
+   const zm = mod(-z);
+   let Fp_ = peval(pneg(scP), z), Fm_ = peval(pneg(scP), zm), R = 0n, k = 0;
+   sched.events.forEach((ev, e) => {
+     Fp_ = mod(Fp_ * Fp_); Fm_ = mod(Fm_ * Fm_);
+     for (const f of ev.fs) { Fp_ = mod(Fp_ * peval(f, z)); Fm_ = mod(Fm_ * peval(f, zm)); }
+     if (ev.cSign) { const cp = ev.cSign > 0 ? pneg(scP) : scP; Fp_ = mod(Fp_ * peval(cp, z)); Fm_ = mod(Fm_ * peval(cp, zm)); }
+-    if (isBoundary(e)) { const Wn = mono(stts[k]); const Wp = peval(Wn, z), Wm = peval(Wn, zm); R = mod(R * rho + Fp_ * Wm - Fm_ * Wp); Fp_ = Wp; Fm_ = Wm; k++; if (trace) trace({e, R, Fp: Fp_, Fm: Fm_}); }
++    if (isBoundary(e)) { const Wn = statePs[k]; const Wp = peval(Wn, z), Wm = peval(Wn, zm); R = mod(R * rho + Fp_ * Wm - Fm_ * Wp); Fp_ = Wp; Fm_ = Wm; k++; if (trace) trace({e, R, Fp: Fp_, Fm: Fm_}); }
+   });
+   if (!sched.endpoint) return fail('B endpoint');
+   for (const f of [...sched.term, psubst(scP, ETA)]) { Fp_ = mod(Fp_ * peval(f, z)); Fm_ = mod(Fm_ * peval(f, zm)); }
+-  const Fr1 = frob1Monic(sc); const Wp = mod(peval(Fr1, z) * peval(Fr1, mod(ETA * z))), Wm = mod(peval(Fr1, zm) * peval(Fr1, mod(-ETA * z)));
++  const Fr1 = frob1Affine(sc); const Wp = mod(peval(Fr1, z) * peval(Fr1, mod(ETA * z))), Wm = mod(peval(Fr1, zm) * peval(Fr1, mod(-ETA * z)));
+   R = mod(R * rho + Fp_ * Wm - Fm_ * Wp);
+   let acc = 0n; const z2 = mod(z * z); for (const q of qw) acc = mod(acc * z2 + q);
+   const rhs = mod(z * acc * peval(M, z));
+diff --git a/chunked/bn254/sound-si-gls/script.mjs b/chunked/bn254/sound-si-gls/script.mjs
+index f2d9a44..4996756 100644
+--- a/chunked/bn254/sound-si-gls/script.mjs
++++ b/chunked/bn254/sound-si-gls/script.mjs
+@@ -2,7 +2,7 @@
+ // Unlocking: <WQ> <WS> <redeem>. Every item is named on the assembler's symbolic stack.
+ import assert from 'node:assert/strict';
+ import {Asm, Kernel, OP, pushNum, pushData} from './asm.mjs';
+-import {p, r, mod, ETA, GAMMA1, PI, PI_SUM_OFFSET, PSI, B_TWIST, DIGITS, NE, VKC} from './math.mjs';
++import {p, r, mod, ETA, GAMMA1, frob1Affine, PI, PI_SUM_OFFSET, PSI, B_TWIST, DIGITS, NE, VKC} from './math.mjs';
+ import {TAG, WS_SIZE, NQ_MAX, NSTATES, le32} from './protocol.mjs';
+ 
+ const ITERS = Number(process.env.SCHED_ITERS ?? 4000);
+@@ -79,6 +79,39 @@ function kEval() {
+   const od = k.mod(k.sum(k.mul(s[1], x[0]), k.mul(s[3], x[2]), k.mul(s[5], x[4])));
+   return k.output(k.add(ev, od), k.sub(ev, od));
+ }
++// Affine chart evaluation at +-x: 1 +- x*(b0 + b1*x^2 + ... + b5*x^10).
++// The public EA wrapper has 12 inputs; x^3 and x^5 are dropped explicitly
++// after this kernel consumes the ten values used by the polynomial.
++function kAffineEval() {
++  const k = new Kernel(); const b = [0, 1, 2, 3, 4, 5].map((i) => k.in('in' + i));
++  const [x, x2, x4, x6] = [6, 7, 9, 11].map((i) => k.in('in' + i));
++  const x8 = k.mod(k.mul(x6, x2)), x10 = k.mod(k.mul(x6, x4));
++  const h = k.mod(k.sum(b[0], k.mul(b[1], x2), k.mul(b[2], x4), k.mul(b[3], x6), k.mul(b[4], x8), k.mul(b[5], x10)));
++  const odd = k.mod(k.mul(x, h));
++  return k.output(k.mod(k.add(k.c(1n), odd)), k.mod(k.sub(k.c(1n), odd)));
++}
++
++// Frob(1 + X*b) is linear in the six b words. Bake its six basis images
++// from the field implementation and retain all 12 coefficients for terminal
++// evaluation at z and eta*z.
++const AFFINE_FROB_BASIS = Array.from({length: 6}, (_, j) => {
++  const b = Array(6).fill(0n); b[j] = 1n; return frob1Affine(b);
++});
++AFFINE_FROB_BASIS.forEach((poly) => {
++  assert.equal(poly[0], 1n, 'affine Frob constant');
++  assert.ok([2, 4, 6, 8, 10].every((i) => poly[i] === 0n), 'affine Frob even terms');
++});
++function affineFrobPair(k, words, powers) {
++  const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
++  const full = [k.c(1n), ...powers, ...powers.slice(0, 5).map((x) => m(mul(powers[5], x)))];
++  const ev = [k.c(1n)], od = [];
++  for (let j = 0; j < 6; j++) for (let d = 1; d < 12; d++) {
++    const c = AFFINE_FROB_BASIS[j][d]; if (!c) continue;
++    (d & 1 ? od : ev).push(mul(mul(words[j], k.c(c)), full[d]));
++  }
++  const even = m(k.sum(...ev)), odd = m(k.sum(...od));
++  return [m(k.add(even, odd)), m(k.sub(even, odd))];
++}
+ // 16-entry subset table from v0..v3 (consumed): T[n] = prod (or sum) over bits of n; outputs T[15] .. T[0]
+ function kTable(mult) {
+   const k = new Kernel(); const v = [0, 1, 2, 3].map((i) => k.in('in' + i)); const T = [k.c(mult ? 1n : 0n)];
+@@ -112,6 +145,7 @@ function gen(L0guess, stop) {
+   a.defLocal('RD', 1, 2, (s) => { s.push(32).op(OP.SPLIT, 2, 'w', 'rest').roll('w').pushBytes([0]).op(OP.CAT, 2, 'w0').op(OP.BIN2NUM, 1, 'v');
+     s.pick('v').invoke('P', ['p']).op(OP.LESSTHAN, 2, 'ok').op(OP.VERIFY, 1).roll('rest'); });
+   a.defLocal('EV', 12, 2, (s) => s.kernel(kEval(), ['vp', 'vm'], {iters: ITERS}));
++  a.defLocal('EA', 12, 2, (s) => { s.kernel(kAffineEval(), ['vp', 'vm'], {iters: ITERS}); s.drop('in8').drop('in10'); });
+   a.defLocal('TM', 4, 16, (s) => s.kernel(kTable(true), Array.from({length: 16}, (_, i) => 'T' + (15 - i)), {iters: ITERS}));
+   a.defLocal('TA', 4, 16, (s) => s.kernel(kTable(false), Array.from({length: 16}, (_, i) => 'T' + (15 - i)), {iters: ITERS}));
+   a.defLocal('G1C', 2, 0, (s) => { const k = new Kernel(); const x = k.in('in0'), y = k.in('in1'); k.output(k.mod(k.sub(k.mul(y, y), k.add(k.mul(k.mul(x, x), x), k.c(3n))))); s.kernel(k, ['d'], {iters: 200}); s.op(OP.NOT, 1, 'ok').op(OP.VERIFY, 1); });
+@@ -178,15 +212,13 @@ function gen(L0guess, stop) {
+   { const k = new Kernel(); const z = k.env('z'); const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+     const z2 = m(mul(z, z)), z3 = m(mul(z2, z)), z4 = m(mul(z2, z2)), z5 = m(mul(z4, z)), z6 = m(mul(z3, z3));
+     const eta = k.c(ETA), eta2 = k.sub(eta, k.c(1n)); // eta^2 = eta - 1
+-    // gamma^j (j = 1..5), gamma = xi^((p-1)/6) baked; c_j = Phi(gamma^j)(z) = g0 + g1 (z^6 - 9)  (Frob(X^j) = Phi(gamma^j) X^j)
+-    const t = k.sub(z6, k.c(9n)); const g = [[k.c(GAMMA1.c0), k.c(GAMMA1.c1)]];
++    // gamma^2 and gamma^3 are retained for the terminal psi maps.
+     const fm = (a0, a1, b0, b1) => [m(k.sub(mul(a0, b0), mul(a1, b1))), m(k.add(mul(a0, b1), mul(a1, b0)))];
+-    for (let j = 2; j <= 5; j++) g.push(fm(...g[j - 2], ...g[0]));
+-    const cj = g.map(([g0, g1]) => m(k.add(g0, mul(g1, t))));
+-    k.output(z2, z3, z4, z5, z6, m(mul(eta, z)), m(mul(eta2, z2)), k.neg(z3), k.neg(m(mul(eta, z4))), k.neg(m(mul(eta2, z5))), ...g[1], ...g[2], ...cj, eta2);
+-    a.kernel(k, ['z2', 'z3', 'z4', 'z5', 'z6', 'ez', 'ez2', 'ez3', 'ez4', 'ez5', 'g20', 'g21', 'g30', 'g31', 'c1', 'c2', 'c3', 'c4', 'c5', 'om'], {iters: 1500}); }
++    const g1 = [k.c(GAMMA1.c0), k.c(GAMMA1.c1)], g2 = fm(...g1, ...g1), g3 = fm(...g2, ...g1);
++    k.output(z2, z3, z4, z5, z6, m(mul(eta, z)), m(mul(eta2, z2)), k.neg(z3), k.neg(m(mul(eta, z4))), k.neg(m(mul(eta2, z5))), ...g2, ...g3, eta2);
++    a.kernel(k, ['z2', 'z3', 'z4', 'z5', 'z6', 'ez', 'ez2', 'ez3', 'ez4', 'ez5', 'g20', 'g21', 'g30', 'g31', 'om'], {iters: 1500}); }
+   const ZP = ['z', 'z2', 'z3', 'z4', 'z5', 'z6'], EZP = ['ez', 'ez2', 'ez3', 'ez4', 'ez5', 'z6'];
+-  for (let j = 0; j < 6; j++) a.pick('sc' + j); for (const n of ZP) a.pick(n); a.invoke('EV', ['Scp', 'Scm']);
++  for (let j = 0; j < 6; j++) a.pick('sc' + j); for (const n of ZP) a.pick(n); a.invoke('EA', ['Scp', 'Scm']);
+   section('powers');
+   // ---- 4. GT-GLS tables: TP_k[n] = prod_{i in n} R_{k,i}(z), TM_k at -z, TB[n] = sum_{i in n} pi_i ----
+   // R_{k,0}, R_{k,1}: baked monic reps; R_{k,2}, R_{k,3} are R_{k,0}, R_{k,1} at eta z
+@@ -262,7 +294,7 @@ function gen(L0guess, stop) {
+       t.fromAlt('R').fromAlt('WSr').emit(OP.SIZE); t.st.push('wsz'); t.op(OP.NOT, 1, 'wempty').ifElse((u) => { u.drop('WSr').altPileTake('WSr'); });
+       t.push(192).op(OP.SPLIT, 2, 'S', 'WSr').toAlt('WSr');
+       for (let j = 0; j < 6; j++) t.invoke('RD', ['s' + j, 'S']);
+-      t.drop('S'); for (const n of ZP) t.pick(n); t.invoke('EV', ['Sp', 'Sm']);
++      t.drop('S'); for (const n of ZP) t.pick(n); t.invoke('EA', ['Sp', 'Sm']);
+       const k = new Kernel(); const R = k.in('R');
+       k.output(k.in('Sp'), k.in('Sm'), k.mod(k.sub(k.add(k.mul(R, k.env('rho')), k.mul(k.in('Fp'), k.in('Sm'))), k.mul(k.in('Fm'), k.in('Sp')))));
+       t.kernel(k, ['Fp', 'Fm', 'R'], {iters: 500}); t.toAlt('R');
+@@ -297,17 +329,16 @@ function gen(L0guess, stop) {
+     a.op(OP.BOOLOR, 2, 'znz').op(OP.VERIFY, 1); for (let i = 0; i < 4; i++) a.op(OP.NOT, 1, 'q').op(OP.VERIFY, 1); }
+   // F *= Rconst(+-z) * S_c(+-eta z)
+   for (let j = 0; j < 6; j++) a.push(VKC.Rconst[j]); for (const n of ZP) a.pick(n); a.invoke('EV', ['rp', 'rm']);
+-  for (let j = 0; j < 6; j++) a.pick('sc' + j); for (const n of EZP) a.pick(n); a.invoke('EV', ['ep', 'em']); // S_c(+-eta z) = [c^(p^2)]
++  for (let j = 0; j < 6; j++) a.pick('sc' + j); for (const n of EZP) a.pick(n); a.invoke('EA', ['ep', 'em']); // S_c(+-eta z) = [c^(p^2)]
+   { const k = new Kernel(); k.output(k.mod(k.mul(k.mul(k.in('Fp'), k.in('rp')), k.in('ep'))), k.mod(k.mul(k.mul(k.in('Fm'), k.in('rm')), k.in('em')))); a.kernel(k, ['Fp', 'Fm'], {iters: 200}); }
+   // W(+-z) = Frob(S_c)(+-z) Frob(S_c)(+-eta z) = [c^p c^(p^3)];  R <- R rho + F+ W(-z) - F- W(+z)
+   a.fromAlt('d').fromAlt('acc1').fromAlt('acc0').fromAlt('N1').fromAlt('N0').fromAlt('SCH');
+   for (const n of ['d', 'N1', 'N0', 'SCH']) a.drop(n);
+   a.fromAlt('R').fromAlt('WSr').drop('WSr'); a.pileDone('WSp'); a.fromAlt('WQ'); // all 33 states consumed (WS size pinned)
+-  // Frob(S_c)(x) = s0 + 18 - x^6 + sum_j s_j c_j x^j  (c_j = Phi(gamma^j)(z), the same at x = z and x = eta z since (eta z)^6 = z^6)
++  // Frob(S_c)(x) is evaluated from the affine six-word Frobenius map.
+   { const k = new Kernel(); const I = (n) => k.in(n), E = (n) => k.env(n), m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+-    const sc = [0, 1, 2, 3, 4, 5].map((j) => I('sc' + j)); const sj = [null, ...[1, 2, 3, 4, 5].map((j) => m(mul(sc[j], E('c' + j))))];
+-    const fr = (x) => { const ev = m(k.sum(sc[0], k.c(18n), k.neg(E(x[5])), mul(sj[2], E(x[1])), mul(sj[4], E(x[3])))); const od = m(k.sum(mul(sj[1], E(x[0])), mul(sj[3], E(x[2])), mul(sj[5], E(x[4])))); return [k.add(ev, od), k.sub(ev, od)]; };
+-    const [a1, a2] = fr(ZP), [b1, b2] = fr(EZP);
++    const sc = [0, 1, 2, 3, 4, 5].map((j) => I('sc' + j));
++    const [a1, a2] = affineFrobPair(k, sc, ZP.map((n) => E(n))), [b1, b2] = affineFrobPair(k, sc, EZP.map((n) => E(n)));
+     k.output(m(k.sub(k.add(mul(I('R'), E('rho')), mul(I('Fp'), m(mul(a2, b2)))), mul(I('Fm'), m(mul(a1, b1))))));
+     a.kernel(k, ['R'], {iters: 1500}); }
+   // GT-GLS binding (exact integers): acc_k = sum_i u_{k,i} pi_i, u = e + 2^64:  acc_k - 2^64 sum_i pi_i - n_k == 0 (mod r)
+diff --git a/chunked/bn254/sound-si-gls/AFFINE-CHARTS.md b/chunked/bn254/sound-si-gls/AFFINE-CHARTS.md
+new file mode 100644
+index 0000000..70a74c1
+--- /dev/null
++++ b/chunked/bn254/sound-si-gls/AFFINE-CHARTS.md
+@@ -0,0 +1,153 @@
++# BN254 affine root/state correctness candidate
++
++This candidate replaces the residue root and all 33 ordinary state charts with
++six-word affine representatives. Its full equation/composition review is
++**pending**. Historical review labels, scores and rejection records for the
++monic programs do not qualify these changed programs. No official benchmark
++entry or score is updated by this source change.
++
++## Exact programs
++
++| Profile | VM model | Program | SHA-256 |
++|---|---|---|---|
++| Native SI-MX3 | BCH-2026, three P2SH32 inputs | 8,108-byte imported code | `8e4cf7047756c426e1c36c33760d91a3890bede424abf45cf671017bbaa7aad6` |
++| Native SI-MX3 | same | 65-byte common redeem | `5551eff8d8f331a03be53af5aa6ce82328e82de44e5f789c3fe282138824509c` |
++| Rolled SI-GLS | proposed `bch-spec`, one P2SH32 input | 12,072-byte redeem | `33535d5dc0e3567960f89d27e6eacf098734333296146f9392f18836328ac4b7` |
++
++Native role IDs are 23, 24 and 25. Each native P2SH32 locking bytecode has
++SHA-256 `1f12637de917a090f23c7c9e59a916be1bf0fd4dfb52188d0e9fd415e0fa146d`;
++the rolled locking hash is
++`77fa297f4758733bcf29f053523a9eef3d95319e1cf6944ede3640567fd40d1d`.
++
++Ordered native code hosts are input0 C0 (4166 bytes, SHA-256
++`7f511033951f46339b0f280ed832728500344585c452bde971394b90b9d50b0a`) and input1 C1 (3942 bytes,
++`5ecb23bbe90e1afe876303c3ff33fe24aa84be7d0ee00321ed48efbf6a3f5367`). Their concatenation is the
++8,108-byte imported code above. The key-coordinate digest used by the native
++tag is `181aeefd9c0ce8d103ad084f4ef8174546852b0af46ac58a8061d4f38d346a6e`
++(SHA-256 of the20 canonical little-endian32-byte VK coordinates in protocol
++order). The default fixture/key file SHA-256 is
++`3d38e95a8f69a7c940b4ba03cc28c748254c07e5ff7957edb45665e45248cf91`.
++
++Pure reconstruction uses `buildProgram()` in
++[`bn-native-sound/script.mjs`](../bn-native-sound/script.mjs), or
++`buildRedeem()` in [`script.mjs`](script.mjs). Build parameters are default
++`SCHED_ITERS=4000`, `LAZY` disabled, balanced `CODE_SPLIT0`, and the default
++fixed-VK fixture file. Do not substitute another `BN_VK_FIXTURES` file under
++these hashes. The measured environment was Node26.12.0, noble curves2.2.0,
++and libauth3.1.0-next.8. Evaluation includes the benchmark's OP_DEFINE
++function-body accounting patch; an unpatched VM is a different cost model.
++
++## Equation and domain
++
++The key is the published BN254 key in
++[`public-fixtures.json`](../densless-recovered/public-fixtures.json), with
++exactly two public inputs. The intended accepted-run implication is
++
++```
++e(-A,B) * e(alpha,beta) * e(IC0+n0*IC1+n1*IC2,gamma) * e(C,delta) = 1.
++```
++
++A, B and C use finite affine encodings with canonical field coordinates;
++infinity encodings are unsupported. The source checks the G1 curve equations
++and the B twist equation. The B endpoint and checked inverse-norm trajectory
++are intended to enforce its prime-order subgroup. Public inputs are canonical
++`0 <= n0,n1 < r`. The folded pairing treats the public-input expression
++algebraically, including a neutral `vk_x` in the intended equation domain;
++no separate affine `vk_x` decoder is introduced. Complete compiled fold
++coverage remains part of the pending composition review.
++
++The claim concerns this fixed-key equation and domain. Arbitrary verifying
++keys, independent setup, circuit knowledge soundness, application zero
++knowledge, transaction authorization and live relay are separate claims.
++
++## Chart existence and serialization
++
++Let K=Fp12, E=Fp6 be its even subfield, sigma(X)=-X, and
++G=K*/E*. The new representative is
++
++```
++S_b(X) = 1 + b0*X + b1*X^3 + b2*X^5 + b3*X^7 + b4*X^9 + b5*X^11.
++```
++
++The six serialized words are b0..b5. They are never the first six
++coefficients of the expanded polynomial. Every encoded representative is a
++unit because its even component is 1. The chart covers G except [X]. Its
++quotient inverse is represented by sigma(S_b).
++
++Assume the standard BN field/order identities, valid nonzero raw class f,
++and a nontrivial reduced fixed-key pairing h whose quotient class has order
++r. There are r lambda-roots c0*h^i of f. Each recorded state has class
++H_j*c^(-k_j), with H_j independent of c and every NAF prefix k_j invertible
++modulo r. Each of 33 state charts excludes at most one root choice; the root
++chart excludes at most one more. Thus 35 distinct consecutive choices contain
++one usable choice for all 34 charts. The producer implements that bounded
++search. The multiplier h is a reduced pairing, not an unreduced Miller value.
++
++This proves chart availability under those hypotheses. The independently
++checked lattice decomposition also provides bounded 65-bit shifted scalar
++coefficients. Complete producer/VM liveness, including every other auxiliary
++encoding and resource condition, remains a separate obligation.
++
++## Arithmetic, ownership and transcript
++
++`EA` evaluates affine roots/states; `EV` retains the monic interpretation for
++fixed GT factors and Rconst. Both helper contracts and the affine Frobenius
++terminal recurrence have emitted-code checks. Every affine representative
++has degree at most11. The structural bound is `deg D <=311`, with at most
++150 odd quotient words; terminal `deg P+deg W <=64+22=86`.
++
++| Acceptance-dependent value | Intended owner/check |
++|---|---|
++| Point/scalar words | STMT/RD canonical decoders and curve predicates |
++| B slope and point update | BDBL/BADD inverse-norm zero equations |
++| B subgroup | full NAF trajectory and exact psi endpoint |
++| Delta slopes and fixed GT factors | fixed VK preprocessing and authenticated DS tables |
++| Root and 33 state records | WS or stream commitments before rho; computed transition identities |
++| Role handovers | canonical HENC/HDEC and predecessor byte equality |
++| Public-input fold | shared nibble bytes and exact integer relation modulo r |
++| Quotient | canonical words, structural cap, commitment before z and final Horner equality |
++| Imported native code | fixed framing, complete-code digest and common redeem/graph |
++
++The whole compiled owner/composition argument remains under review; this
++source map alone is not its proof.
++
++The new tags are `SIGLS/AFFINE1` and `BNMX3/AFFINE1 || VK_DIGEST`.
++The rolled h0 binds WS; native h0 binds DG, whose entries bind each owning
++stream and STMT. Then `rho_raw=SHA256(h0 || "rho")`. The final challenge
++binds h0, rho_raw and WQ (rolled), or the canonical input2 filler/WQ tail
++(native). Both challenges decode unsigned then reduce modulo p; z must be
++nonzero. A complete adaptive-oracle error budget for these exact programs
++must use the new degrees and the actual reduction distribution. It is not
++inherited from the old monic degree bound.
++
++## Existing-fixture evidence and remaining admission gates
++
++The two archives contain six distinct existing proofs: five source fixtures
++and five benchmark graphs overlap on fixtures0..3 only. The archived dense
++benchmark proof differs from source fixture4. Each original pairing
++equation passes a finite value-only group-MSM/four-pairing check. These six
++checks do not establish the pending universal compiled-equation implication. Their original
++proof/public-input prefixes remain exact; only dependent auxiliaries change.
++Both value references and both complete compiled profiles accept all six.
++
++Native evaluation uses local BCH-2026 standard and consensus models. These
++finite per-input/intra-transaction results do not establish live-chain or
++relay qualification. The largest
++observed unlocking is9,877bytes; minimum observed cost headroom is427,357.
++The measured primary score is28,793bytes and dense score29,369bytes, using
++the source's fixed6% padding policy and benchmark transaction accounting.
++These are local correctness-repair measurements. They are not optimization
++credit or official leaderboard results. Rolled acceptance uses proposed
++`bch-spec` modes and does not establish current-BCH admission.
++
++Final matrices contain36 native input verdicts and12 rolled-spec verdicts.
++Including standard padding probes gives72 actual input evaluations; the18
++final native standard verdicts are a subset of those probes. These are
++synthetic transaction contexts, not live transactions.
++
++Still pending: full exact-byte equation/owner/Fiat-Shamir composition;
++universal producer/resource completion; supplied rejection/full-harness
++qualification; and independent maintainer review. Named assumptions include
++field/tower and group identities, pairing correctness, fixed VK preprocessing,
++hash binding/random-oracle modeling and the declared VM semantics. Internal
++leaf proofs and positive fixtures do not supply blanket approval.

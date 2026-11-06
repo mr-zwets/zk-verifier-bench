@@ -1,0 +1,89 @@
+diff --git a/chunked/bn254/sound-si-gls/protocol.mjs b/chunked/bn254/sound-si-gls/protocol.mjs
+--- a/chunked/bn254/sound-si-gls/protocol.mjs
++++ b/chunked/bn254/sound-si-gls/protocol.mjs
+@@ -148,7 +148,7 @@
+   const qOdd = Qagg.filter((_, i) => i % 2 === 1);
+   assert.equal(qOdd.length, nq); assert.ok(nq <= NQ_MAX);
+   while (qOdd.length > 1 && qOdd.at(-1) === 0n) qOdd.pop(); // canonical: leading word nonzero (trims only w.p. ~1/p)
+-  assert.ok(qOdd.at(-1) !== 0n);
++  assert.ok(qOdd.length === 1 || qOdd.at(-1) !== 0n);
+   const WQ = Buffer.concat(qOdd.slice().reverse().map(W)); // highest coefficient first
+   return {WS, WQ, nq: qOdd.length, es, ns, Sc, states, root: rootWords, stateWords, c, debug: {sched, ids, rho}};
+ }
+@@ -172,9 +172,8 @@
+   if ([...sc, ...stts.flat()].some((v) => v === null)) return fail('state word not canonical');
+   const scP = affinePoly(sc), statePs = stts.map((words) => affinePoly(words));
+   const qw = Array.from({length: WQ.length / 32}, (_, i) => rdle(WQ, 32 * i)); if (qw.some((v) => v >= p)) return fail('Q word not canonical');
+-  if (qw[0] === 0n) return fail('Q leading word zero');
++  if (qw.length > 1 && qw[0] === 0n) return fail('Q leading word zero');
+   const h0 = sha(TAG, WS), rhoRaw = sha(h0, Buffer.from('rho')), rho = toFp(rhoRaw), z = toFp(sha(h0, rhoRaw, WQ));
+-  if (z === 0n) return fail('z = 0');
+   // GLS binding (exact integers): acc_k = sum_e 2^(64-e) TB_k[N_k[e]] = sum_i u_{k,i} pi_i,  TB_k[n] = sum_{i in n} pi_i
+   for (const k of [0, 1]) {
+     let acc = 0n; for (let e = 0; e < NE; e++) { acc = 2n * acc; for (let i = 0; i < 4; i++) if ((nibs[k][e] >> i) & 1) acc += PI[i]; }
+diff --git a/chunked/bn254/sound-si-gls/script.mjs b/chunked/bn254/sound-si-gls/script.mjs
+--- a/chunked/bn254/sound-si-gls/script.mjs
++++ b/chunked/bn254/sound-si-gls/script.mjs
+@@ -170,12 +170,14 @@
+   a.pick('h0').pushBytes(Buffer.from('rho')).op(OP.CAT, 2, 'hr').op(OP.SHA256, 1, 'rhoRaw');
+   a.pick('WQc', 'WQs').emit(OP.SIZE); a.st.push('qsz'); a.drop('WQs');
+   a.pick('qsz').push(32).op(OP.MOD, 2, 'qm').op(OP.NOT, 1, 'qok').op(OP.VERIFY, 1);
+-  a.push(1).push(32 * NQ_MAX + 1).op(OP.WITHIN, 3, 'qin').op(OP.VERIFY, 1);
+-  // canonical n_q: the leading (highest) quotient word is nonzero
+-  a.pick('WQc', 'WQs').push(32).op(OP.SPLIT, 2, 'q0', 'qr').drop('qr').op(OP.BIN2NUM, 1, 'q0').op(OP.ZERONOTEQUAL, 1, 'nz').op(OP.VERIFY, 1);
++  a.pick('qsz', 'c').push(32).op(OP.NUMEQUAL, 2, 'qz');
++  a.roll('qsz').push(1).push(32 * NQ_MAX + 1).op(OP.WITHIN, 3, 'qin').op(OP.VERIFY, 1);
++  // canonical n_q: the leading word is nonzero, except for one-word zero
++  a.pick('WQc', 'WQs').push(32).op(OP.SPLIT, 2, 'q0', 'qr').drop('qr').op(OP.BIN2NUM, 1, 'q0');
++  a.op(OP.ZERONOTEQUAL, 1, 'nz').roll('qz').op(OP.BOOLOR, 2, 'qok').op(OP.VERIFY, 1);
+   a.roll('h0').pick('rhoRaw').op(OP.CAT, 2, 'hh').roll('WQc').op(OP.CAT, 2, 'hq').op(OP.SHA256, 1, 'zRaw');
+   a.invoke('P', ['p']);
+-  a.roll('zRaw'); U('zRaw'); a.pick('p').op(OP.MOD, 2, 'z'); a.pick('z').op(OP.ZERONOTEQUAL, 1, 'znz').op(OP.VERIFY, 1);
++  a.roll('zRaw'); U('zRaw'); a.pick('p').op(OP.MOD, 2, 'z');
+   a.roll('rhoRaw'); U('rhoRaw'); a.pick('p').op(OP.MOD, 2, 'rho');
+   section('transcript');
+   STOP('transcript');
+diff --git a/chunked/bn254/bn-native-sound/protocol.mjs b/chunked/bn254/bn-native-sound/protocol.mjs
+--- a/chunked/bn254/bn-native-sound/protocol.mjs
++++ b/chunked/bn254/bn-native-sound/protocol.mjs
+@@ -162,7 +162,7 @@
+   const qOdd = Qagg.filter((_, i) => i % 2 === 1);
+   assert.equal(qOdd.length, nq); assert.ok(nq <= NQ_MAX);
+   while (qOdd.length > 1 && qOdd.at(-1) === 0n) qOdd.pop();
+-  assert.ok(qOdd.at(-1) !== 0n);
++  assert.ok(qOdd.length === 1 || qOdd.at(-1) !== 0n);
+   const WQ = Buffer.concat(qOdd.slice().reverse().map(W));
+   return {STMT, S, D, WQ, nq: qOdd.length, es, ns, N, Sc, states, root: rootWords, stateWords, c, rho, rhoRaw, h0, st, sched};
+ }
+diff --git a/chunked/bn254/bn-native-sound/script.mjs b/chunked/bn254/bn-native-sound/script.mjs
+--- a/chunked/bn254/bn-native-sound/script.mjs
++++ b/chunked/bn254/bn-native-sound/script.mjs
+@@ -101,13 +101,13 @@
+     for (let j = 0; j < NROLES; j++) { s.push(j).op(IX.UTXOBYTECODE, 1, 'u'); (j < NROLES - 1 ? s.pick('mine') : s.roll('mine')); s.op(OP.EQUALVERIFY, 2); }
+   });
+   // TRANS: [DG, ZT] -> [rho, z]: h0 = SHA256(TAG || DG), rho_raw = SHA256(h0 || "rho"), z_raw = SHA256(h0 || rho_raw || ZT),
+-  // rho, z = BIN2NUM(raw || 0x00) mod p, z != 0
++  // rho, z = BIN2NUM(raw || 0x00) mod p
+   a.defLocal('TRANS', 2, 2, (s) => {
+     s.pushBytes(TAG, 'tag').roll('in0').op(OP.CAT, 2, 'tw').op(OP.SHA256, 1, 'h0');
+     s.pick('h0').pushBytes(Buffer.from('rho')).op(OP.CAT, 2, 'hr').op(OP.SHA256, 1, 'rhoRaw');
+     s.roll('h0').pick('rhoRaw').op(OP.CAT, 2, 'hh').roll('in1').op(OP.CAT, 2, 'hq').op(OP.SHA256, 1, 'zRaw');
+     s.invoke('P', ['p']);
+-    s.roll('zRaw'); U(s, 'zRaw'); s.pick('p').op(OP.MOD, 2, 'z'); s.pick('z').op(OP.ZERONOTEQUAL, 1, 'znz').op(OP.VERIFY, 1);
++    s.roll('zRaw'); U(s, 'zRaw'); s.pick('p').op(OP.MOD, 2, 'z');
+     s.roll('rhoRaw'); U(s, 'rhoRaw'); s.roll('p').op(OP.MOD, 2, 'rho'); s.arrange(['rho', 'z']);
+   });
+   // STMT: [STMT 642] -> words, every coordinate and s^c word < p, n_k < r, every nibble <= 0x0f (local decoding in every role)
+@@ -244,8 +244,11 @@
+     a.op(OP.SIZE, 1, 'WQ', 'qs');
+     a.pick('qs', 'c').push(32).op(OP.MOD, 2, 'qm').op(OP.NOT, 1, 'ok').op(OP.VERIFY, 1);
+     a.pick('qs', 'c').push(32).push(32 * NQ_MAX + 1).op(OP.WITHIN, 3, 'ok').op(OP.VERIFY, 1);
++    a.pick('qs', 'c').push(32).op(OP.NUMEQUAL, 2, 'qz');
++    a.roll('qs');
+     a.invoke('PLEN', ['ql']);
+-    a.pick('WQ', 'c').push(32).op(OP.SPLIT, 2, 'q0', 'x').drop('x'); U(a, 'q0'); a.op(OP.ZERONOTEQUAL, 1, 'nz').op(OP.VERIFY, 1); // canonical n_q
++    a.pick('WQ', 'c').push(32).op(OP.SPLIT, 2, 'q0', 'x').drop('x'); U(a, 'q0');
++    a.op(OP.ZERONOTEQUAL, 1, 'nz').roll('qz').op(OP.BOOLOR, 2, 'qok').op(OP.VERIFY, 1); // canonical n_q, except one-word zero
+   }
+   a.roll('FILL').invoke('FILL', ['fl']);
+   if (!last) { sizeIs(a, 'C', lay.codeLens[i]); a.drop('C'); }

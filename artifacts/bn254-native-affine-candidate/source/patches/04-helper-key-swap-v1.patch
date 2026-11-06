@@ -1,0 +1,13 @@
+--- a/chunked/bn254/bn-native-sound/asm.mjs
++++ b/chunked/bn254/bn-native-sound/asm.mjs
+@@ -37,7 +37,9 @@
+ export const numLen = (n) => numBytes(n).length;
+ // Keep allocator identities canonical while selecting compact raw wire keys.
+ // OP_0 emits the empty raw key; OP_1NEGATE emits raw key 81.
+-export const pushFunctionId = (id) => pushNum(id === 18 ? 0 : id === 20 ? -1 : id);
++// BDBL and HDEC exchange their raw wire keys; allocator identities and
++// definition order remain canonical (f.id / ctx.nextId).
++export const pushFunctionId = (id) => pushNum(id === 18 ? 0 : id === 20 ? -1 : id === 15 ? 21 : id === 21 ? 15 : id);
+ 
+ let uid = 0;
+ const LAZY = process.env.LAZY === '1'; // off by default: the static cost model is not accurate enough for it

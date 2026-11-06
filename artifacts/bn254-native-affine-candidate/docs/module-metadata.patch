@@ -1,0 +1,38 @@
+--- a/src/implementations/bch-groth16-bn254-sound-native-affine-candidate.ts
++++ b/src/implementations/bch-groth16-bn254-sound-native-affine-candidate.ts
+@@ -1,11 +1,10 @@
+ /**
+- * UNREGISTERED BN254 C-first prefix-extraction staging module.
+- *
+- * This mutable staging area retains the historical implementation API while
+- * binding future packet paths to the separately captured C7553/R61 artifact.
+- * It is not a qualified package and does not contain generated transport
+- * packets. The source14 code, redeem, locking and source-patch identities are
+- * recorded in docs/source-provenance.md.
++ * BN254 fixed-VK degree-six candidate; committed existing proof vectors.
++ * Conditional mathematical scope and provenance: docs/submission-claims.md.
++ * External constructive review and upstream admission remain pending.
++ * C7553 SHA-256: 63f12474082916e22ab62faf6c6f0483bedcbb08a9700e4d7eb02415c9d8c242
++ * R61 SHA-256: 0563cd756e2d300b7653e10fd2e39ba5951e404210ba78f18d8ba4549719a030
++ * P2SH32 locking SHA-256: a32303cca71026a88ad8cd74bf38c6c8f6a8794cfa3065af7e7e207d8cf9d2c7
+  */
+ import {readFileSync} from 'node:fs';
+ import {hexToBin} from '@bitauth/libauth';
+@@ -44,7 +43,7 @@
+ 
+ export const bchGroth16Bn254SoundNativeAffineCandidate: Implementation = {
+   id: 'bch-groth16-bn254-sound-native-affine-candidate',
+-  name: 'STAGING: BCH Groth16 BN254 C-first prefix extraction',
++  name: 'BCH Groth16 BN254 degree-six prefix extraction',
+   proofSystem: 'Groth16',
+   field: 'BN254',
+   structure: 'single-tx',
+@@ -55,7 +54,7 @@
+     {input: 2, push: 1, name: 'n1', offset: 288, encoding: 'le32'},
+   ],
+   proofInputs: bn254SoundNativeProofInputs,
+-  source: 'BN254 C-first prefix-extraction candidate; source14 captured C7553/R61 artifact and fourteen-patch source lineage are documented separately. Qualification and packet identities remain pending.',
++  source: 'Fixed benchmark VK and declared finite curve domain. Conditional local mathematical review, exact artifacts, build provenance and existing-fixture evidence are documented in docs/submission-claims.md. External constructive review and upstream admission remain pending.',
+   load: async () => ({
+     valid: toRun(vectors.steps),
+     extraValidProofs: (vectors.extraValidProofs ?? []).map(toRun),

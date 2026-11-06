@@ -1,0 +1,60 @@
+{
+  "bn254": {
+    "bnX": "4965661367192848881",
+    "p": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+    "r": "21888242871839275222246405745257275088548364400416034343698204186575808495617"
+  },
+  "checker": {
+    "bytes": 5823,
+    "path": "docs/vk-v9/check_public_certificate.py",
+    "sha256": "4e28676ae5f18c131816dd4edddbfc7ce55d6e9cd7214c08b808003a247b90a7"
+  },
+  "functionIdDecoderDomain": "Actual native prologue uses only ScriptNum opcode forms OP_1NEGATE (-1) and OP_0..OP_16 / direct small positive pushes for IDs -1 and 0..25; no multi-byte signed-ID fallback is relied upon.",
+  "inputManifest": {
+    "bytes": 1669,
+    "path": "docs/vk-v9/input-manifest.json",
+    "sha256": "29eba85b5405a74ff4edd2b36552cc67fb7d8c4600aa6206ca6b35412313690c"
+  },
+  "observedUtc": "2026-11-05T22:37:47+00:00",
+  "positive": {
+    "cLengths": [
+      3889,
+      3664
+    ],
+    "locking": "aa2021affd236254692aee253595380dc929d405df472af03f772879a386f952e7c287",
+    "redeemSha256": "0563cd756e2d300b7653e10fd2e39ba5951e404210ba78f18d8ba4549719a030",
+    "rowsChecked": 3
+  },
+  "publicArtifact": {
+    "bytes": 59601,
+    "path": "docs/vk-v9/native-artifact.json",
+    "sha256": "3a23339aaa658b631d83c6c1c6a8a1d352cb04fab36061aa64c993f165f43109"
+  },
+  "publicReport": {
+    "path": "docs/vk-v9/report.json"
+  },
+  "publicScope": "The public packet ships the v8 decoder as codec_v8.py and an IO-only v9 wrapper. Private normalizer receipts and private provenance files are not shipped. Raw Miller, VM/compiler, resource, and qualification claims remain separate.",
+  "qualification": false,
+  "relationProofSeparate": true,
+  "reportKind": "public-sanitized-derivative",
+  "schema": "public-pub003-vk-table-native-binding-report/v9",
+  "scope": "Fixed BN254 constants, canonical VK digest, TRANS TAG commitment, and all-three positive final-R bindings added to v8 public native/body/table/GLS checks; pairing relation, VM/compiler semantics, resource theorem, and full qualification remain separate.",
+  "sourceReportSha256": "5717c87fdb5b24a3e913c1a0937b08c9a3322c8c2e3f81e0c5d57aee550a37c8",
+  "status": "PASS_PUB003_FIXED_BN254_VK_TAG_AND_ALL_POSITIVE_R_BINDINGS",
+  "supersedes": "prior fixed-VK/native-table evidence without all row bindings",
+  "tag": {
+    "bytes": 51,
+    "digest": "181aeefd9c0ce8d103ad084f4ef8174546852b0af46ac58a8061d4f38d346a6e",
+    "prefixAscii": "BNMX3/DEGREE6-EVAL1"
+  },
+  "v8Decoder": {
+    "bytes": 13190,
+    "path": "docs/vk-v9/codec_v8.py",
+    "sha256": "3a10e18ec807c0e113d73f9d2e707e2697386fda5165c78f0eefc23bce08f099"
+  },
+  "vk": {
+    "encoding": "unsigned decimal fixture words as canonical little-endian 32-byte values",
+    "sha256": "181aeefd9c0ce8d103ad084f4ef8174546852b0af46ac58a8061d4f38d346a6e",
+    "words": 20
+  }
+}

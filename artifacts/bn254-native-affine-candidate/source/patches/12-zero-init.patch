@@ -1,0 +1,17 @@
+diff --git a/chunked/bn254/bn-native-sound/script.mjs b/chunked/bn254/bn-native-sound/script.mjs
+--- a/chunked/bn254/bn-native-sound/script.mjs
++++ b/chunked/bn254/bn-native-sound/script.mjs
+@@ -78,10 +78,11 @@
+   const tail = k.sub(k.add(tauPowers[5], zPowers[5]), k.c(18n));
+   let acc = k.sub(k.c(1n), mul(words[5], tail));
+   for (let j = 0; j < 5; j++) acc = k.sub(acc, mul(words[j], tauPowers[j]));
+   const base = m(acc);
+-  let zEven = base, zOdd = k.c(0n), etaEven = base, etaOdd = k.c(0n);
+-  for (let j = 0; j < 5; j++) {
++  const g0 = mul(words[0], previous1);
++  let zEven = base, zOdd = mul(g0, zPowers[0]), etaEven = base, etaOdd = mul(g0, etaPowers[0]);
++  for (let j = 1; j < 5; j++) {
+     // z^6 is shared by both evaluations: fold each characteristic factor once,
+     // then reuse g_j for z^j and (eta z)^j in the existing weighted consumers.
+     const folded = j === 0 ? previous1 : m(k.sub(mul(traceC, previous1), mul(normC, previous2)));
+     if (j !== 0) { previous2 = previous1; previous1 = folded; }

@@ -1,0 +1,34 @@
+{
+  "schema": "bn-c-first-prefix-extraction-portable-dependency-closure/v1",
+  "status": "LOCKED_RECIPE_EXTERNAL_ROOT_REQUIRED",
+  "sourceReceipt": "../bn-degree6-controlled-reproduction-v3/reproduction-v3.json",
+  "sourceReceiptSha256": "ba66c92b1d19396b4a7f7bd7a02d7e14333e26c9a374de0d6101413b86262460",
+  "edgeCount": 12,
+  "rootLayout": {
+    "description": "The supplied dependency root contains package directories at these relative paths; it is not a node_modules symlink and is never installed by the driver.",
+    "packages": {
+      "@bitauth/libauth": "@bitauth/libauth",
+      "@noble/curves": "@noble/curves",
+      "@noble/hashes": "@noble/hashes"
+    }
+  },
+  "packages": [
+    {"name":"@bitauth/libauth","version":"3.0.0","rootRelative":"@bitauth/libauth","packageJsonSha256":"c22e017ef82d6841f428b11b71717de1108a4cd051db8d59c9ad028ea6b692c6","fileCount":340,"totalBytes":4422746,"treeSha256":"962756962adf678066b6be6e00621452a04a38a58dbdf84bcb7fe20df81000c2"},
+    {"name":"@noble/curves","version":"1.9.7","rootRelative":"@noble/curves","packageJsonSha256":"cbffd40393726bf2d7ced0f769edd56b1b8a6a092cc2f0641fd3b8e8e78cf605","fileCount":239,"totalBytes":2059987,"treeSha256":"1494b612b9930ff8770a9f5726a15045df0847735ef1e91b43849932e0d7c0b5"},
+    {"name":"@noble/hashes","version":"1.8.0","rootRelative":"@noble/hashes","packageJsonSha256":"7c4657c5e616c22cefa2691cc30670824a639dc71d97bf83925be2d239dc60e3","fileCount":247,"totalBytes":1145416,"treeSha256":"60335d1da0c2af597c08834db50b25fbf6326ed1d85c842a9728ab4094b45f11"}
+  ],
+  "edges": [
+    {"parent":"chunked/bn254/sound-si-gls/asm.mjs","specifier":"@bitauth/libauth","package":"@bitauth/libauth","packageRelativePath":"build/index.js","sha256":"c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d"},
+    {"parent":"chunked/bn254/sound-si-gls/math.mjs","specifier":"@noble/curves/bn254.js","package":"@noble/curves","packageRelativePath":"esm/bn254.js","sha256":"103d84d3199e4df3208c822784c14045e74315905b90afd4ba4478a5d91d1348"},
+    {"parent":"chunked/bn254/sound-si-gls/math.mjs","specifier":"@noble/curves/abstract/tower.js","package":"@noble/curves","packageRelativePath":"esm/abstract/tower.js","sha256":"c7a03a475a6398ca57201718b7f3cf66d804f6252f93fe5278a11faa5a047391"},
+    {"parent":"chunked/bn254/sound-si-gls/protocol.mjs","specifier":"@noble/curves/bn254.js","package":"@noble/curves","packageRelativePath":"esm/bn254.js","sha256":"103d84d3199e4df3208c822784c14045e74315905b90afd4ba4478a5d91d1348"},
+    {"parent":"chunked/bn254/bn-native-sound/asm.mjs","specifier":"@bitauth/libauth","package":"@bitauth/libauth","packageRelativePath":"build/index.js","sha256":"c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d"},
+    {"parent":"chunked/bn254/bn-native-sound/protocol.mjs","specifier":"@bitauth/libauth","package":"@bitauth/libauth","packageRelativePath":"build/index.js","sha256":"c5dd3af1177e6f0457e80ee5984a315617856e39bf9e72987b0f91c76ff91a0d"},
+    {"parent":"chunked/bn254/bn-native-sound/protocol.mjs","specifier":"@noble/curves/bn254.js","package":"@noble/curves","packageRelativePath":"esm/bn254.js","sha256":"103d84d3199e4df3208c822784c14045e74315905b90afd4ba4478a5d91d1348"},
+    {"parent":"@noble/curves/esm/bn254.js","specifier":"@noble/hashes/sha2.js","package":"@noble/hashes","packageRelativePath":"esm/sha2.js","sha256":"e729088b82e5450bff54c3a0013582aa42e1fe8f58dd31f5967f6ebe34c52299"},
+    {"parent":"@noble/curves/esm/abstract/weierstrass.js","specifier":"@noble/hashes/hmac.js","package":"@noble/hashes","packageRelativePath":"esm/hmac.js","sha256":"a330af1af3fb00ebdbba2f023dd5e023aa367669081cd51c7d172eb499533d0b"},
+    {"parent":"@noble/curves/esm/abstract/weierstrass.js","specifier":"@noble/hashes/utils","package":"@noble/hashes","packageRelativePath":"esm/utils.js","sha256":"4cf4c1e05affedcb4fd584a43d76ae1a3711e34a36e2251b90c27e33ecc74fad"},
+    {"parent":"@noble/hashes/esm/utils.js","specifier":"@noble/hashes/utils.js","package":"@noble/hashes","packageRelativePath":"esm/utils.js","sha256":"4cf4c1e05affedcb4fd584a43d76ae1a3711e34a36e2251b90c27e33ecc74fad"},
+    {"parent":"@noble/hashes/esm/utils.js","specifier":"@noble/hashes/crypto","package":"@noble/hashes","packageRelativePath":"esm/cryptoNode.js","sha256":"26f80c6a85b6ef7bfd83b99d95b2b5ba8764397b9465feff32e81ba4e6416619"}
+  ]
+}

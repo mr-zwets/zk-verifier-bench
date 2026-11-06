@@ -1,0 +1,58 @@
+--- a/bn254/bn-native-sound/script.mjs
++++ b/bn254/bn-native-sound/script.mjs
+@@ -58,18 +58,37 @@
+ };
+ const conjMul = (k, a0, a1, g0, g1) => [k.mod(k.add(k.mul(a0, g0), k.mul(a1, g1))), k.mod(k.sub(k.mul(a0, g1), k.mul(a1, g0)))]; // conj(a) * g
+ 
+-function degree6FrobPair(k, words, powers, tauPowers) {
++// Source-only factorization prototype.  The shared base and coefficient
++// products are consumed by both z/eta evaluations instead of being built
++// independently.  This is intentionally unconfirmed: the copied source has
++// not been lowered, framed, or cost-audited.
++function degree6FrobFactorized(k, words, zPowers, etaPowers, tauPowers) {
+   const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+-  const full = [k.c(1n), ...powers, ...powers.slice(0, 5).map((x) => m(mul(powers[5], x)))];
+-  const c0 = m(k.sub(k.c(1n), k.sum(...words.map((word, j) => mul(word, tauPowers[j])))));
+-  const ev = [c0, mul(words[5], k.c(18n)), mul(mul(words[5], k.c(p - 1n)), full[6])], od = [];
++  const addReduced = (acc, term) => k.add(acc, term);
++  const high = (powers, j) => m(mul(powers[5], powers[j]));
++  let c0Sum = k.c(0n);
++  for (let j = 0; j < 6; j++) c0Sum = k.add(c0Sum, mul(words[j], tauPowers[j]));
++  const c0 = m(k.sub(k.c(1n), c0Sum));
++  const base = m(k.add(k.add(c0, mul(words[5], k.c(18n))), mul(mul(words[5], k.c(p - 1n)), zPowers[5])));
++  let zEven = base, zOdd = k.c(0n), etaEven = base, etaOdd = k.c(0n);
+   for (let j = 0; j < 5; j++) {
+-    const dst = ((j + 1) & 1) ? od : ev;
+-    dst.push(mul(mul(words[j], k.c(FROB.alpha[j + 1])), full[j + 1]));
+-    dst.push(mul(mul(words[j], k.c(FROB.beta[j + 1])), full[j + 7]));
++    const alpha = mul(words[j], k.c(FROB.alpha[j + 1]));
++    const beta = mul(words[j], k.c(FROB.beta[j + 1]));
++    if ((j + 1) & 1) {
++      zOdd = addReduced(zOdd, mul(alpha, zPowers[j]));
++      zOdd = addReduced(zOdd, mul(beta, high(zPowers, j)));
++      etaOdd = addReduced(etaOdd, mul(alpha, etaPowers[j]));
++      etaOdd = addReduced(etaOdd, mul(beta, high(etaPowers, j)));
++    } else {
++      zEven = addReduced(zEven, mul(alpha, zPowers[j]));
++      zEven = addReduced(zEven, mul(beta, high(zPowers, j)));
++      etaEven = addReduced(etaEven, mul(alpha, etaPowers[j]));
++      etaEven = addReduced(etaEven, mul(beta, high(etaPowers, j)));
++    }
+   }
+-  const even = m(k.sum(...ev)), odd = m(k.sum(...od));
+-  return [m(k.add(even, odd)), m(k.sub(even, odd))];
++  const zPlus = m(k.add(zEven, zOdd)), zMinus = m(k.sub(zEven, zOdd));
++  const etaPlus = m(k.add(etaEven, etaOdd)), etaMinus = m(k.sub(etaEven, etaOdd));
++  return [zPlus, zMinus, etaPlus, etaMinus];
+ }
+ 
+ // ---------------- shared functions ----------------
+@@ -355,7 +374,7 @@
+   // W(+-z) = Frob(S_c)(+-z) Frob(S_c)(+-eta z);  R <- R rho + F+ W(-z) - F- W(+z)
+   { const k = new Kernel(); const I = (n) => k.in(n), E = (n) => k.env(n), m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+     const sc = [0, 1, 2, 3, 4, 5].map((j) => I('sc' + j));
+-    const [a1, a2] = degree6FrobPair(k, sc, ZP.map((n) => E(n)), TAUP.map((n) => E(n))), [b1, b2] = degree6FrobPair(k, sc, EZP.map((n) => E(n)), TAUP.map((n) => E(n)));
++    const [a1, a2, b1, b2] = degree6FrobFactorized(k, sc, ZP.map((n) => E(n)), EZP.map((n) => E(n)), TAUP.map((n) => E(n)));
+     k.output(m(k.sub(k.add(mul(I('R'), E('rho')), mul(I('Fp'), m(mul(a2, b2)))), mul(I('Fm'), m(mul(a1, b1))))));
+     a.kernel(k, ['R'], {iters: 1500}); }
+   a.mark('binding');

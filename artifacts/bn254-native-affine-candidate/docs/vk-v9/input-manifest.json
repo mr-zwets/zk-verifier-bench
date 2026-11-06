@@ -1,0 +1,52 @@
+{
+  "artifactRoot": "artifacts/bn254-native-affine-candidate",
+  "candidateSourceRoot": "repoRoot",
+  "checker": {
+    "bytes": 5823,
+    "path": "docs/vk-v9/check_public_certificate.py",
+    "sha256": "4e28676ae5f18c131816dd4edddbfc7ce55d6e9cd7214c08b808003a247b90a7"
+  },
+  "privateInputs": false,
+  "refs": [
+    {
+      "bytes": 59601,
+      "ownerRoot": "artifactRoot",
+      "path": "docs/vk-v9/native-artifact.json",
+      "role": "current public C/R/native bundle with function bodies and layout",
+      "sha256": "3a23339aaa658b631d83c6c1c6a8a1d352cb04fab36061aa64c993f165f43109"
+    },
+    {
+      "bytes": 8095,
+      "ownerRoot": "artifactRoot",
+      "path": "source/chunked/bn254/densless-recovered/public-fixtures.json",
+      "role": "public VK fixture",
+      "sha256": "3d38e95a8f69a7c940b4ba03cc28c748254c07e5ff7957edb45665e45248cf91"
+    },
+    {
+      "bytes": 331156,
+      "ownerRoot": "repoRoot",
+      "path": "src/bch/bch-groth16-bn254-sound-native-affine-candidate-positive-vectors.json",
+      "role": "three canonical positive input rows",
+      "sha256": "57332b658f1d22fa0e13ad3467810bd2385318796d2034394e82cd6fb869390b"
+    },
+    {
+      "bytes": 6636,
+      "ownerRoot": "artifactRoot",
+      "path": "docs/vk-v9/certificate-inputs.json",
+      "role": "portable tables and GLS arithmetic inputs",
+      "sha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1"
+    },
+    {
+      "bytes": 13190,
+      "ownerRoot": "artifactRoot",
+      "path": "docs/vk-v9/codec_v8.py",
+      "role": "public native/body/table/GLS decoder",
+      "sha256": "3a10e18ec807c0e113d73f9d2e707e2697386fda5165c78f0eefc23bce08f099"
+    }
+  ],
+  "root": "projection-artifact",
+  "runtimeImports": 0,
+  "schema": "public-pub003-vk-table-native-binding/v9-public-packet",
+  "scope": "Fixed BN254/VK/TAG/R binding supplement; relation, VM, resource, qualification and publication remain separate.",
+  "vmRuns": 0
+}

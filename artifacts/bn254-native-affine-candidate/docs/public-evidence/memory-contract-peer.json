@@ -1,0 +1,47 @@
+{
+  "currentJoin": {
+    "codeBytes": 7553,
+    "codeSha256": "63f12474082916e22ab62faf6c6f0483bedcbb08a9700e4d7eb02415c9d8c242",
+    "ownerLabel": "public-current-R14-memory-join",
+    "provenanceSha256": "ea45d0eb5b0e9191187776f7c05d75efbab1604c339c150b8f4688979113de33",
+    "r13ByteIdentityClaimed": false,
+    "r14Bytes": 61,
+    "r14Sha256": "0563cd756e2d300b7653e10fd2e39ba5951e404210ba78f18d8ba4549719a030"
+  },
+  "induction": {
+    "bodyContexts": 5,
+    "cBootstrapPeak": 9,
+    "conservativeBound": 996,
+    "formula": "6*155+2+14+25+10+9=990",
+    "limit": 1000,
+    "piles": {
+      "Dp": 4,
+      "WSp": 12
+    },
+    "programContexts": 1,
+    "r14BootstrapPeak": 10,
+    "roleMicropeaks": {
+      "role0": [
+        5,
+        6
+      ],
+      "role1": [
+        6,
+        7
+      ]
+    },
+    "terminalTransient": 9
+  },
+  "observedAtUtc": "2026-11-06T00:00:23Z",
+  "schema": "public-memory-contract-peer/v1",
+  "scope": "Static review of the two public memory-contract files against the current C7553/R14 join and prior memory-transfer owner; no execution or qualification credit.",
+  "scopeLimits": {
+    "arbitraryAdviceResourceClaim": false,
+    "externalConstructiveReview": false,
+    "newCryptographicProofsOrFixtures": 0,
+    "newVmSourceCompilerProverBenchmarkExecutions": 0,
+    "observedPeakIsUniversalProof": false,
+    "qualificationOrScoreCredit": false
+  },
+  "status": "PASS_INDEPENDENT_PUBLIC_MEMORY_CONTRACT_CONDITIONAL"
+}
