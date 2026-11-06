@@ -1,0 +1,126 @@
+{
+  "checker": {
+    "bytes": 14340,
+    "defaultAction": "--check-plan",
+    "mathAction": "node --experimental-import-meta-resolve docs/fixed-preprocessing/check-fixed-preprocessing-public-v3.mjs --execute --dependency-root EXTERNAL_PINNED_ROOT --noble-entry EXTERNAL_PINNED_ROOT/@noble/curves/esm/bn254.js",
+    "path": "docs/fixed-preprocessing/check-fixed-preprocessing-public-v3.mjs",
+    "sha256": "262169f9e14342f87be7aef8041f52938ae822b78f89438bb471710bfbe94ae2"
+  },
+  "dependencies": {
+    "closurePath": "source/reproduce-v2/dependency-closure.json",
+    "closureSha256": "50d6ff84697d9d0377cad6feac255331e2b18c8926a3f3088ea6082b0792c497",
+    "edgeCount": 12,
+    "ordinaryLibraryEsmEdgesChecked": 5,
+    "packages": [
+      {
+        "fileCount": 340,
+        "name": "@bitauth/libauth",
+        "packageJsonSha256": "c22e017ef82d6841f428b11b71717de1108a4cd051db8d59c9ad028ea6b692c6",
+        "rootRelative": "@bitauth/libauth",
+        "totalBytes": 4422746,
+        "treeSha256": "962756962adf678066b6be6e00621452a04a38a58dbdf84bcb7fe20df81000c2",
+        "version": "3.0.0"
+      },
+      {
+        "fileCount": 239,
+        "name": "@noble/curves",
+        "packageJsonSha256": "cbffd40393726bf2d7ced0f769edd56b1b8a6a092cc2f0641fd3b8e8e78cf605",
+        "rootRelative": "@noble/curves",
+        "totalBytes": 2059987,
+        "treeSha256": "1494b612b9930ff8770a9f5726a15045df0847735ef1e91b43849932e0d7c0b5",
+        "version": "1.9.7"
+      },
+      {
+        "fileCount": 247,
+        "name": "@noble/hashes",
+        "packageJsonSha256": "7c4657c5e616c22cefa2691cc30670824a639dc71d97bf83925be2d239dc60e3",
+        "rootRelative": "@noble/hashes",
+        "totalBytes": 1145416,
+        "treeSha256": "60335d1da0c2af597c08834db50b25fbf6326ed1d85c842a9728ab4094b45f11",
+        "version": "1.8.0"
+      }
+    ],
+    "sourceBuildEdges": "7 source/verifier edges remain closure evidence for the separate build reproduction and are not claimed loaded by this checker"
+  },
+  "fieldConstants": {
+    "bnX": "4965661367192848881",
+    "flattenBasisDegrees": [
+      0,
+      2,
+      4,
+      1,
+      3,
+      5
+    ],
+    "modulus": "X^12-18X^6+82",
+    "p": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+    "r": "21888242871839275222246405745257275088548364400416034343698204186575808495617"
+  },
+  "inputs": {
+    "certificateInputs": {
+      "bytes": 6636,
+      "path": "docs/fixed-preprocessing/certificate-inputs.json",
+      "sha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1"
+    },
+    "fixture": {
+      "artifactSha256": "dc10764f1e6bafad2727538ed33d51134e7bc04a349e7ac138415474beaa2747",
+      "bytes": 8095,
+      "path": "source/chunked/bn254/densless-recovered/public-fixtures.json",
+      "sha256": "3d38e95a8f69a7c940b4ba03cc28c748254c07e5ff7957edb45665e45248cf91"
+    }
+  },
+  "math": {
+    "classRelation": "raw * conjugate(monic) reduces to an even polynomial",
+    "etaDerivation": "exact: X is converted from polynomial basis, ordinary Fp12.frobeniusMap(X,2) is flattened, all coefficients except degree 1 must vanish, and that coefficient is checked to have order 6 and cube p-1",
+    "expectedRowHashes": {
+      "R00": "da1e0f3825b1d49b6bb042e49dc1e5f073f772d122e3e72a53c62d0252f9f97e",
+      "R01": "76047bcea692a83f62c138ee0cdccb066db95693e19296de605bf13e801114cf",
+      "R10": "330fe6e088ef04bd39e8a2e17dc8cd20c9687db32a24973fd019274a7518994e",
+      "R11": "d88de8a365643c826c0017d3fcb976f3e7a7506ad9db7e5a1d6b7c71022e52b9",
+      "Rconst": "b6cd472f318146d7743be63b48c1756b995f98c9415bcb496f6c641341448efb"
+    },
+    "finalExponentiation": false,
+    "monicRepresentative": "six-by-six Fp solve forcing coefficients X^7..X^11 to zero and X^6=1",
+    "pairingCall": "bn254.pairing(P,Q,false)",
+    "source": "independent raw Miller + local quotient arithmetic"
+  },
+  "ordinaryLibrary": {
+    "entryRelative": "esm/bn254.js",
+    "entrySha256": "103d84d3199e4df3208c822784c14045e74315905b90afd4ba4478a5d91d1348",
+    "package": "@noble/curves",
+    "packageJsonSha256": "cbffd40393726bf2d7ced0f769edd56b1b8a6a092cc2f0641fd3b8e8e78cf605",
+    "treeSha256": "1494b612b9930ff8770a9f5726a15045df0847735ef1e91b43849932e0d7c0b5",
+    "version": "1.9.7"
+  },
+  "refs": [
+    {
+      "path": "source/chunked/bn254/densless-recovered/public-fixtures.json",
+      "sha256": "3d38e95a8f69a7c940b4ba03cc28c748254c07e5ff7957edb45665e45248cf91"
+    },
+    {
+      "path": "docs/fixed-preprocessing/certificate-inputs.json",
+      "sha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1"
+    },
+    {
+      "path": "source/reproduce-v2/dependency-closure.json",
+      "sha256": "50d6ff84697d9d0377cad6feac255331e2b18c8926a3f3088ea6082b0792c497"
+    },
+    {
+      "path": "docs/public-completeness/unit-and-gls-peer-review.md",
+      "sha256": "7e7d4f0d85fdeb0d60d0a41d05f39778785c19172ffb053ec3744b2507383580"
+    }
+  ],
+  "root": "frontier-v1",
+  "schema": "pub-fixed-preprocessing-public-proof/v3",
+  "scope": {
+    "externalIndependence": "only public fixture, v6 inputs, and the caller-supplied dependency root are read; no private catalog or verifier source is an input",
+    "nativeEmissionOwner": "PUB003 claims-vk-table-certificate-v9 and its peer review",
+    "privateCatalogRead": false,
+    "producerRuns": 0,
+    "publicTransfer": "raw Miller quotient-class relation for fixed public VK/table inputs",
+    "qualification": false,
+    "sourceImports": 0,
+    "vmRuns": 0
+  },
+  "status": "PREPARED_STATIC_NO_MATH_EXECUTION"
+}

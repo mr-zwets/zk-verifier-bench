@@ -1,0 +1,59 @@
+--- a/chunked/bn254/bn-native-sound/asm.mjs
++++ b/chunked/bn254/bn-native-sound/asm.mjs
+@@ -35,6 +35,9 @@
+ export const pushNum = (n) => [...encodeDataPush(numBytes(n))];
+ export const pushData = (b) => [...encodeDataPush(Uint8Array.from(b))];
+ export const numLen = (n) => numBytes(n).length;
++// Keep allocator identities canonical while selecting compact raw wire keys.
++// OP_0 emits the empty raw key; OP_1NEGATE emits raw key 81.
++export const pushFunctionId = (id) => pushNum(id === 18 ? 0 : id === 20 ? -1 : id);
+ 
+ let uid = 0;
+ const LAZY = process.env.LAZY === '1'; // off by default: the static cost model is not accurate enough for it
+@@ -171,7 +174,7 @@
+       }
+       this.ctx.defs.push(f);
+     }
+-    this.emit(...pushNum(f.id), OP.INVOKE);
++    this.emit(...pushFunctionId(f.id), OP.INVOKE);
+     if (f.kind === 'local') {
+       assert.ok(this.st.length - f.nIn > this.localFloor);
+       this.st.splice(this.st.length - f.nIn, f.nIn).forEach((n) => this.mk(n)); const o = outs ?? Array.from({length: f.nOut}, () => this.fresh('o')); assert.equal(o.length, f.nOut); this.st.push(...o);
+@@ -189,7 +192,7 @@
+     return this;
+   }
+   // prologue that defines every function used (in id order); function bodies may invoke other functions
+-  prologue() { const out = []; for (const f of [...this.ctx.defs].sort((a, b) => a.id - b.id)) out.push(...pushData(f.code), ...pushNum(f.id), OP.DEFINE); return out; }
++  prologue() { const out = []; for (const f of [...this.ctx.defs].sort((a, b) => a.id - b.id)) out.push(...pushData(f.code), ...pushFunctionId(f.id), OP.DEFINE); return out; }
+   bytes() { return Uint8Array.from(this.code); }
+ 
+   // ---- kernels ----
+@@ -343,7 +346,7 @@
+     if (cl < co) N.forEach((n, i) => { n.args = mod[i]; }); }
+   const {out, hasMod} = plan(iters, true);
+   // resolve the P-invoke placeholder
+-  const code = []; for (const b of out.code) { if (b === 'PINV') { const f = asm.ctx.funcs.get('P'); if (f.id === null) { f.id = asm.ctx.nextId++; f.code = asm.compileLocal(f); asm.ctx.defs.push(f); } code.push(...pushNum(f.id), OP.INVOKE); } else code.push(b); }
++  const code = []; for (const b of out.code) { if (b === 'PINV') { const f = asm.ctx.funcs.get('P'); if (f.id === null) { f.id = asm.ctx.nextId++; f.code = asm.compileLocal(f); asm.ctx.defs.push(f); } code.push(...pushFunctionId(f.id), OP.INVOKE); } else code.push(b); }
+   // the symbolic stack: replace numeric keys of outputs; everything else must be gone
+   const st = out.st.map((x) => (typeof x === 'number' ? `__k${x}` : x));
+   const extra = st.length - asm.st.length + [...K.inputs].length - K.outs.length;
+--- a/chunked/bn254/bn-native-sound/script.mjs
++++ b/chunked/bn254/bn-native-sound/script.mjs
+@@ -3,7 +3,7 @@
+ // See README.md for the protocol, the layout and the soundness argument. Every item is named on the
+ // assembler's symbolic stack (asm.mjs); shared code lives in OP_DEFINE functions.
+ import assert from 'node:assert/strict';
+-import {Asm, Kernel, OP, pushNum, pushData} from './asm.mjs';
++import {Asm, Kernel, OP, pushNum, pushData, pushFunctionId} from './asm.mjs';
+ import {kADblN, kAAddN, kDStep, kEval, kAffineEval, kTable} from './kernels.mjs';
+ import {p, r, ETA, frob1Affine, PSI, B_TWIST, VKC, PI_SUM_OFFSET} from '../sound-si-gls/math.mjs';
+ import {ROLES, NROLES, DS, DSTATE, SCHEDULE, TAG, STMT_SIZE, D_SIZE, HAND_SIZE, F_MAX, NQ_MAX, pushLen, hdrOf, sha} from './protocol.mjs';
+@@ -402,7 +402,7 @@
+   const ctx = {funcs: new Map(), nextId: 2, defs: []};
+   const a0 = new Asm([], ctx); defineFunctions(a0, WIN);
+   const roles = [0, 1, 2].map((i) => roleProgram(i, ctx, lay, WIN));
+-  const pro = []; for (const f of [...ctx.defs].sort((x, y) => x.id - y.id)) pro.push(...pushData(f.code), ...pushNum(f.id), OP.DEFINE);
++  const pro = []; for (const f of [...ctx.defs].sort((x, y) => x.id - y.id)) pro.push(...pushData(f.code), ...pushFunctionId(f.id), OP.DEFINE);
+   const ROLE_ID = ctx.nextId; const offs = [];
+   roles.forEach((x, i) => { const pd = pushData(x.code); offs.push(pro.length + pd.length - x.code.length); pro.push(...pd, ...pushNum(ROLE_ID + i), OP.DEFINE); });
+   const code = Uint8Array.from([...pro, IX.INPUTINDEX, ...pushNum(ROLE_ID), OP.ADD, OP.INVOKE]);

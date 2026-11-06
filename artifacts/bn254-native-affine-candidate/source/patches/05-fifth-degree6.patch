@@ -1,0 +1,399 @@
+--- a/bn254/sound-si-gls/math.mjs	2026-11-04 12:19:40
++++ b/bn254/sound-si-gls/math.mjs	2026-11-04 15:14:03
+@@ -149,8 +149,92 @@
+     if (!statePole && states.length === bounds.length) return {root: root.words, states, c};
+   }
+   throw new Error('no affine chart among first 35 lambda-root classes');
++};
++
++// ---------------- universal degree-6 evaluation chart ----------------
++// A degree <= 6 representative is obtained by multiplying a class value by
++// an even polynomial t in E = span(1,X^2,...,X^10), then forcing X^7..X^11
++// to vanish.  The resulting homogeneous system has five rows and six
++// columns, so its nullspace is found without assuming a particular pivot.
++const degree6Nullspace = (rows) => {
++  const a = rows.map((row) => row.map((x) => mod(x)));
++  const pivots = []; let row = 0;
++  for (let col = 0; col < 6 && row < a.length; col++) {
++    let pivot = row; while (pivot < a.length && a[pivot][col] === 0n) pivot++;
++    if (pivot === a.length) continue;
++    [a[row], a[pivot]] = [a[pivot], a[row]];
++    const iv = inv(a[row][col]); a[row] = a[row].map((x) => mod(x * iv));
++    for (let i = 0; i < a.length; i++) if (i !== row && a[i][col]) {
++      const m = a[i][col]; a[i] = a[i].map((x, j) => mod(x - m * a[row][j]));
++    }
++    pivots.push(col); row++;
++  }
++  const free = Array.from({length: 6}, (_, i) => i).find((i) => !pivots.includes(i));
++  if (free === undefined) throw new Error('degree-6 homogeneous system has no free column');
++  const out = Array(6).fill(0n); out[free] = 1n;
++  pivots.forEach((col, i) => { out[col] = mod(-a[i][free]); });
++  return out;
++};
++
++export const degree6RawRep = (value) => {
++  const fp = toPoly(value);
++  const mono = (d) => [...Array(d).fill(0n), 1n];
++  const cols = [0, 2, 4, 6, 8, 10].map((d) => pmodM(pmul(mono(d), fp)));
++  const rows = [7, 8, 9, 10, 11].map((d) => cols.map((c) => c[d]));
++  const t = degree6Nullspace(rows);
++  const out = Array(12).fill(0n);
++  cols.forEach((c, j) => c.forEach((x, i) => { out[i] = mod(out[i] + t[j] * x); }));
++  assert.ok(out.slice(7).every((x) => x === 0n), 'degree-6 representative high terms');
++  assert.ok(out.slice(0, 7).some((x) => x !== 0n), 'degree-6 representative is nonzero');
++  const rep = out.slice(0, 7);
++  assert.ok(sameClass(fromPoly(rep), value), 'degree-6 representative class');
++  return rep;
++};
++
++export const degree6Poly = (words, tau) => {
++  if (!Array.isArray(words) || words.length !== 6) throw new TypeError('degree-6 words must contain six coefficients');
++  const t = mod(BigInt(tau)); const out = Array(7).fill(0n);
++  for (let i = 0; i < 6; i++) out[i + 1] = mod(BigInt(words[i]));
++  out[0] = mod(1n - out.slice(1).reduce((s, c, i) => mod(s + c * mod(t ** BigInt(i + 1))), 0n));
++  assert.equal(peval(out, t), 1n, 'degree-6 normalization');
++  return out;
+ };
+ 
++const degree6Normalize = (rep, tau) => {
++  const v = peval(rep, tau); if (v === 0n) throw new Error('degree-6 chart pole');
++  const out = rep.map((x) => mod(x * inv(v)));
++  assert.equal(peval(out, tau), 1n);
++  return {poly: out, words: out.slice(1)};
++};
++
++// Direct exponentiation is sufficient for the root class.  lambda is only
++// inverted modulo N6R, hence the relation is checked in K*/E*, not in K.
++export const degree6Witnesses = (raw, events, bounds) => {
++  if (!Array.isArray(events) || !Array.isArray(bounds) || bounds.length !== 33) throw new TypeError('degree-6 witness schedule');
++  if (bounds.some((b, i) => !Number.isInteger(b) || b <= 0 || (i && b <= bounds[i - 1]) || b > events.length)) throw new RangeError('degree-6 witness boundaries');
++  const rootBase = F12.pow(raw, invMod(LAMBDA, N6R));
++  assert.ok(sameClass(F12.pow(rootBase, LAMBDA), raw), 'degree-6 root class relation');
++  const classes = [rootBase]; let Fc = F12.conjugate(rootBase); const stateClasses = [];
++  for (let e = 0; e < events.length; e++) {
++    const ev = events[e]; if (!ev || !Array.isArray(ev.fs) || ![-1, 0, 1].includes(ev.cSign)) throw new TypeError('invalid degree-6 event');
++    Fc = F12.sqr(Fc); ev.fs.forEach((factor) => { Fc = F12.mul(Fc, eventFactor(factor)); });
++    if (ev.cSign === 1) Fc = F12.mul(Fc, F12.conjugate(rootBase));
++    else if (ev.cSign === -1) Fc = F12.mul(Fc, rootBase);
++    if (bounds.includes(e + 1)) stateClasses.push(Fc);
++  }
++  assert.equal(stateClasses.length, bounds.length);
++  classes.push(...stateClasses);
++  const reps = classes.map((value) => degree6RawRep(value));
++  for (let tau = 1n; tau <= 205n; tau++) if (reps.every((rep) => peval(rep, tau) !== 0n)) {
++    const normalized = reps.map((rep) => degree6Normalize(rep, tau));
++    const root = normalized[0]; const states = normalized.slice(1);
++    return {root: root.words, states: states.map((x) => x.words), c: fromPoly(root.poly), tau, classes, rawReps: reps};
++  }
++  throw new Error('no degree-6 chart among tau=1..205');
++};
++
++export const frob1Degree6 = (words, tau) => toPoly(F12.frobeniusMap(fromPoly(degree6Poly(words, tau)), 1));
++
+ // ---------------- curve, twist, psi ----------------
+ export const B_TWIST = F2.div(f2(3n, 0n), f2(9n, 1n)); // b' = 3/(9+u)
+ export const B3 = F2.mul(B_TWIST, f2(3n, 0n));          // 3b' (projective doubling)
+--- a/bn254/bn-native-sound/kernels.mjs	2026-11-04 12:19:40
++++ b/bn254/bn-native-sound/kernels.mjs	2026-11-04 15:16:17
+@@ -70,15 +70,19 @@
+   const od = k.mod(k.sum(k.mul(s[1], x[0]), k.mul(s[3], x[2]), k.mul(s[5], x[4])));
+   return k.output(k.add(ev, od), k.sub(ev, od));
+ }
+-// Affine chart evaluation at +-x: 1 +- x*(b0 + b1*x^2 + ... + b5*x^10).
+-// The public EA wrapper drops the two unused power inputs explicitly.
+-export function kAffineEval() {
+-  const k = new Kernel(); const b = [0, 1, 2, 3, 4, 5].map((i) => k.in('in' + i));
+-  const [x, x2, x4, x6] = [6, 7, 9, 11].map((i) => k.in('in' + i));
+-  const x8 = k.mod(k.mul(x6, x2)), x10 = k.mod(k.mul(x6, x4));
+-  const h = k.mod(k.sum(b[0], k.mul(b[1], x2), k.mul(b[2], x4), k.mul(b[3], x6), k.mul(b[4], x8), k.mul(b[5], x10)));
+-  const odd = k.mod(k.mul(x, h));
+-  return k.output(k.mod(k.add(k.c(1n), odd)), k.mod(k.sub(k.c(1n), odd)));
++// Universal degree-6 chart evaluation at +-x. Inputs are c1..c6, x..x^6,
++// and tau..tau^6; c0 is reconstructed from S(tau)=1. Every transmitted
++// coefficient and both power vectors are consumed by this kernel.
++export function kDegree6Eval() {
++  const k = new Kernel();
++  const c = [0, 1, 2, 3, 4, 5].map((i) => k.in('in' + i));
++  const x = [6, 7, 8, 9, 10, 11].map((i) => k.in('in' + i));
++  const t = [12, 13, 14, 15, 16, 17].map((i) => k.in('in' + i));
++  const c0 = k.mod(k.sub(k.c(1n), k.sum(...c.map((v, i) => k.mul(v, t[i])))));
++  const ev = [c0], od = [];
++  c.forEach((v, i) => ((i + 1) & 1 ? od : ev).push(k.mul(v, x[i])));
++  const even = k.mod(k.sum(...ev)), odd = k.mod(k.sum(...od));
++  return k.output(k.mod(k.add(even, odd)), k.mod(k.sub(even, odd)));
+ }
+ // 16-entry subset table from v0..v3 (consumed): T[n] = prod (or sum) over bits of n; outputs T[15] .. T[0]
+ export function kTable(mult) {
+--- a/bn254/bn-native-sound/protocol.mjs	2026-11-04 12:19:40
++++ b/bn254/bn-native-sound/protocol.mjs	2026-11-04 15:17:23
+@@ -1,20 +1,28 @@
+-// bn-native-sound (SI-MX3) protocol: the 3-input layout, the transcript, the honest prover with the AFFINE
++// bn-native-sound (SI-MX3) protocol: the 3-input layout, transcript, degree-6 honest prover,
+ // B walk (one inverse-norm witness t per B step), and a value-level mirror of the on-chain computation.
+ //
+-// The mathematics is SI-GLS (../sound-si-gls/README.md): the same NAF schedule, 2-event chunks, 33 affine states,
++// The mathematics is SI-GLS (../sound-si-gls/README.md): the same NAF schedule, 2-event chunks, 33 states,
+ // GT-GLS fold, residue root and batched odd identity at +-z. Only two things change:
+ //   - the B lines are the affine lines (1, -lambda, lambda x - y) instead of the projective ones (Fp2 multiples
+-//     of the same lines); all transmitted root/state representatives use the common affine quotient chart.
++//     of the same lines); all transmitted root/state representatives use the universal degree-6 quotient chart.
+ //   - the program runs as 3 roles (one per input) over the event ranges CUTS, chained by handovers.
+ import assert from 'node:assert/strict';
+ import {encodeDataPush} from '@bitauth/libauth';
+ import {bn254} from '@noble/curves/bn254.js';
+ import {p, r, mod, F2, F12, f2, g1, g2, DIGITS, NE, NADD, PI, GLS_BITS, GLS_OFFSET, glsDecompose, glsFactorPoly,
+-  VKC, psiK, ETA, frob1Affine, affinePoly, affineWitnesses, linePoly, fromPoly, pmul, psub, pneg, psubst, peval, pdivM, M, VK, Fp} from '../sound-si-gls/math.mjs';
+-import {BOUNDS, NSTATES, K_IDS, isBoundary, NQ_MAX, nqFor, le32, rdle, sha, toFp} from '../sound-si-gls/protocol.mjs';
++  VKC, psiK, ETA, degree6Poly, degree6Witnesses, frob1Degree6, linePoly, fromPoly, pmul, psub, pneg, psubst, peval, pdivM, M, VK, Fp} from '../sound-si-gls/math.mjs';
++import {BOUNDS, NSTATES, K_IDS, isBoundary, le32, rdle, sha, toFp} from '../sound-si-gls/protocol.mjs';
+ 
+-export {BOUNDS, NSTATES, K_IDS, isBoundary, NQ_MAX, nqFor, le32, rdle, sha, toFp};
++export {BOUNDS, NSTATES, K_IDS, isBoundary, le32, rdle, sha, toFp};
+ 
++// Degree-6 chart bookkeeping.  The native verifier owns this copy so the
++// historical single-input affine protocol retains its sealed resource model.
++export const eventDeg = (e, glsBits) => 18 + (DIGITS[e] ? 24 : 0) + 6 * glsBits;
++export const chunkDegP = (k, bitsOf) => { let d = 6; for (let e = k ? BOUNDS[k - 1] : 0; e < BOUNDS[k]; e++) d = 2 * d + eventDeg(e, bitsOf(e)); return d; };
++const nqOfDegD = (dD) => { const dq = (dD % 2 ? dD : dD - 1) - 12; return (dq + 1) / 2; };
++export const NQ_MAX = Math.max(...Array.from({length: NSTATES}, (_, k) => nqOfDegD(chunkDegP(k, () => 8) + 6)), nqOfDegD(76));
++export const nqFor = (bitsOf) => Math.max(...Array.from({length: NSTATES}, (_, k) => nqOfDegD(chunkDegP(k, bitsOf) + 6)), nqOfDegD(76));
++
+ // ---------------- roles and event ranges ----------------
+ export const CUTS = [0, 24, 48, 65];
+ export const NROLES = CUTS.length - 1;
+@@ -57,13 +65,13 @@
+ 
+ // ---------------- witness items and the transcript ----------------
+ export const VK_DIGEST = sha(...[VK.alpha.x, VK.alpha.y, ...[VK.beta, VK.gamma, VK.delta].flatMap((q) => [q.x.c0, q.x.c1, q.y.c0, q.y.c1]), ...VK.ic.flatMap((q) => [q.x, q.y])].map((v) => le32(BigInt(v))));
+-export const TAG = Buffer.concat([Buffer.from('BNMX3/AFFINE1'), VK_DIGEST]);
+-export const STMT_SIZE = 642, D_SIZE = 96, HAND_SIZE = 224, F_MAX = 10000, NQ_MIN = 1;
+-export const STMT_LAYOUT = {n0: 256, n1: 288, N0: 320, N1: 385, sc: 450};
++export const TAG = Buffer.concat([Buffer.from('BNMX3/DEGREE6-EVAL1'), VK_DIGEST]);
++export const STMT_SIZE = 674, D_SIZE = 96, HAND_SIZE = 224, F_MAX = 10000, NQ_MIN = 1;
++export const STMT_LAYOUT = {n0: 256, n1: 288, N0: 320, N1: 385, tau: 450, sc: 482};
+ export const pushLen = (n) => encodeDataPush(new Uint8Array(n)).length; // minimal push of n bytes (n = 0: OP_0)
+ export const hdrOf = (n) => Buffer.from(encodeDataPush(new Uint8Array(n)).subarray(0, pushLen(n) - n));
+ 
+-// ---------------- the affine B walk and the factor schedule (polynomials, shared by prover and mirror) ----------------
++// ---------------- the native B walk and factor schedule (polynomials, shared by prover and mirror) ----------------
+ const N2 = (a) => mod(a.c0 * a.c0 + a.c1 * a.c1);
+ // doubling at T = (x, y): t = 1 / (2 N(y)), lambda = 3 x^2 conj(y) t; addition of Q: t = 1 / N(x - xQ), lambda = (y - yQ) conj(x - xQ) t
+ export const affDbl = (T) => { const t = Fp.inv(mod(2n * N2(T.y))); const lam = F2.div(F2.mul(f2(3n, 0n), F2.sqr(T.x)), F2.add(T.y, T.y));
+@@ -122,12 +130,12 @@
+   for (const ev of sched.events) { raw = F12.sqr(raw); for (const f of ev.fs) raw = F12.mul(raw, fromPoly(f)); }
+   for (const f of sched.term) raw = F12.mul(raw, fromPoly(f));
+   assert.ok(F12.eql(F12.finalExponentiate(raw), F12.ONE), 'Groth16 equation fails');
+-  // Keep the six affine coordinates as the sole serialized owner. Every
+-  // verifier polynomial is reconstructed as the full 12-coefficient chart.
+-  const {root: rootWords, states: stateWords, c} = affineWitnesses(raw, sched.events, BOUNDS);
++  // Keep six c1..c6 words plus the shared tau as the sole serialized chart
++  // owner. Every verifier polynomial reconstructs c0 and the full class.
++  const {root: rootWords, states: stateWords, c, tau} = degree6Witnesses(raw, sched.events, BOUNDS);
+   assert.equal(stateWords.length, NSTATES);
+-  const Sc = affinePoly(rootWords);
+-  const states = stateWords.map((words) => affinePoly(words));
++  const Sc = degree6Poly(rootWords, tau);
++  const states = stateWords.map((words) => degree6Poly(words, tau));
+   const cPoly = (sign) => (sign > 0 ? pneg(Sc) : Sc);
+   const Sp = [pneg(Sc), ...states]; const ids = [];
+   for (let k = 0; k < NSTATES; k++) {
+@@ -136,7 +144,7 @@
+     ids.push({P, W: Sp[k + 1]});
+   }
+   let Pfin = Sp[NSTATES]; for (const f of sched.term) Pfin = pmul(Pfin, f); Pfin = pmul(Pfin, psubst(Sc, ETA));
+-  const Fr1 = frob1Affine(rootWords); ids.push({P: Pfin, W: pmul(Fr1, psubst(Fr1, ETA))});
++  const Fr1 = frob1Degree6(rootWords, tau); ids.push({P: Pfin, W: pmul(Fr1, psubst(Fr1, ETA))});
+   for (const id of ids) {
+     const Nn = pmul(id.P, pneg(id.W)); const D = psub(Nn, pneg(Nn)); const {q, r: rem} = pdivM(D);
+     assert.ok(rem.every((x) => x === 0n), 'identity not divisible by M'); assert.ok(q.every((x, i) => i % 2 === 1 || x === 0n), 'quotient not odd');
+@@ -145,7 +153,7 @@
+   // statement and streams
+   const W = (x) => le32(mod(x));
+   const STMT = Buffer.concat([...[Aa.x, Aa.y, Ba.x.c0, Ba.x.c1, Ba.y.c0, Ba.y.c1, Ca.x, Ca.y, ns[0], ns[1]].map((x) => le32(x)),
+-    Buffer.from(N[0]), Buffer.from(N[1]), ...rootWords.map(W)]);
++    Buffer.from(N[0]), Buffer.from(N[1]), W(tau), ...rootWords.map(W)]);
+   assert.equal(STMT.length, STMT_SIZE);
+   const S = ROLES.map(({a, chunks, i}) => {
+     const out = [];
+@@ -164,14 +172,14 @@
+   while (qOdd.length > 1 && qOdd.at(-1) === 0n) qOdd.pop();
+   assert.ok(qOdd.length === 1 || qOdd.at(-1) !== 0n);
+   const WQ = Buffer.concat(qOdd.slice().reverse().map(W));
+-  return {STMT, S, D, WQ, nq: qOdd.length, es, ns, N, Sc, states, root: rootWords, stateWords, c, rho, rhoRaw, h0, st, sched};
++  return {STMT, S, D, WQ, nq: qOdd.length, es, ns, N, Sc, states, root: rootWords, stateWords, c, tau, rho, rhoRaw, h0, st, sched};
+ }
+ 
+ // ---------------- value-level mirror of the on-chain loop (per role, chained by the handovers) ----------------
+ const PhiAt = (a, t) => mod(a.c0 + a.c1 * t);
+ // evaluate events [a, b) from a start state; returns the state after event b - 1 (and after its boundary)
+ export function runRange(core, z, a, b, start) {
+-  const {st, Sc, states, sched, rho} = core; const zm = mod(-z);
++  const {st, Sc, states, sched, rho, tau} = core; const zm = mod(-z);
+   let {Fp: Fp_, Fm: Fm_, R} = start; let k = BOUNDS.indexOf(a) + 1; if (a === 0) k = 0;
+   const scP = Sc;
+   for (let e = a; e < b; e++) {
+@@ -188,10 +196,10 @@
+ export const encodeHand = ({T, Fp: a, Fm: b, R}) => Buffer.concat([T.x.c0, T.x.c1, T.y.c0, T.y.c1, a, b, R].map((v) => le32(mod(v))));
+ // the terminal and final identity, value level (returns R_final and the quotient check)
+ export function finish(core, z, s) {
+-  const {Sc, WQ, root} = core; const zm = mod(-z); const scP = Sc;
++  const {Sc, WQ, root, tau} = core; const zm = mod(-z); const scP = Sc;
+   let {Fp: Fp_, Fm: Fm_, R} = s;
+   for (const f of [...core.sched.term, psubst(scP, ETA)]) { Fp_ = mod(Fp_ * peval(f, z)); Fm_ = mod(Fm_ * peval(f, zm)); }
+-  const Fr1 = frob1Affine(root); const Wp = mod(peval(Fr1, z) * peval(Fr1, mod(ETA * z))), Wm = mod(peval(Fr1, zm) * peval(Fr1, mod(-ETA * z)));
++  const Fr1 = frob1Degree6(root, tau); const Wp = mod(peval(Fr1, z) * peval(Fr1, mod(ETA * z))), Wm = mod(peval(Fr1, zm) * peval(Fr1, mod(-ETA * z)));
+   R = mod(R * core.rho + Fp_ * Wm - Fm_ * Wp);
+   let acc = 0n; const z2 = mod(z * z); for (let i = 0; i < WQ.length; i += 32) acc = mod(acc * z2 + rdle(WQ, i));
+   return {R, rhs: mod(z * acc * peval(M, z)), ok: R === mod(z * acc * peval(M, z))};
+--- a/bn254/bn-native-sound/script.mjs	2026-11-04 12:19:57
++++ b/bn254/bn-native-sound/script.mjs	2026-11-04 15:13:58
+@@ -4,8 +4,8 @@
+ // assembler's symbolic stack (asm.mjs); shared code lives in OP_DEFINE functions.
+ import assert from 'node:assert/strict';
+ import {Asm, Kernel, OP, pushNum, pushData, pushFunctionId} from './asm.mjs';
+-import {kADblN, kAAddN, kDStep, kEval, kAffineEval, kTable} from './kernels.mjs';
+-import {p, r, ETA, frob1Affine, PSI, B_TWIST, VKC, PI_SUM_OFFSET} from '../sound-si-gls/math.mjs';
++import {kADblN, kAAddN, kDStep, kEval, kDegree6Eval, kTable} from './kernels.mjs';
++import {p, r, ETA, FROB, PSI, B_TWIST, VKC, PI_SUM_OFFSET} from '../sound-si-gls/math.mjs';
+ import {ROLES, NROLES, DS, DSTATE, SCHEDULE, TAG, STMT_SIZE, D_SIZE, HAND_SIZE, F_MAX, NQ_MAX, pushLen, hdrOf, sha} from './protocol.mjs';
+ 
+ // Track 11: optional application hook, run by role 2 right after the statement is decoded (n0, n1 on the stack by
+@@ -19,7 +19,7 @@
+ // ---------------- layout ----------------
+ // input 0: [S_0] [DS_0] [C_0] [FILL_0] [R]
+ // input 1: [S_1] [HAND_1 224] [DS_1] [C_1] [FILL_1] [R]
+-// input 2: [DG 96] [STMT 642] [S_2] [HAND_2 224] [DS_2] [FILL_2] [WQ] [R]
++// input 2: [DG 96] [STMT 674] [S_2] [HAND_2 224] [DS_2] [FILL_2] [WQ] [R]
+ // Every byte range another input reads (DG, STMT, HAND_i, C_i, the z-tail ZT) starts before any variable-length push.
+ export const CODE_HOSTS = [0, 1];
+ export function layoutFor(codeLens, rLen) {
+@@ -42,12 +42,12 @@
+ 
+ // ---------------- loop window (the items above the delta pile Dp during the event loop) ----------------
+ const TABLES = [0, 1].flatMap((k) => ['TP', 'TM'].flatMap((T) => Array.from({length: 16}, (_, n) => `${T}${k}_${15 - n}`)));
+-const ENV = ['z', 'z2', 'z4', 'z5', 'z6', 'ez', 'ez2', 'ez3', 'ez4', 'ez5'];
++const ENV = ['z', 'z2', 'z4', 'z5', 'z6', 'ez', 'ez2', 'ez3', 'ez4', 'ez5', 'tau', 'tau2', 'tau3', 'tau4', 'tau5', 'tau6'];
+ const HOT = ['xd0', 'xd1', 'xB0', 'xB1', 'yB0', 'yB1', 'nyB0', 'nyB1', 'Scp', 'Scm', 'yC', 'cz', 'czt', 'z3t', 'yP', 'xz', 'xzt', 'z3', 'p'];
+ const STATE0 = ['R', 'SCH', 'N0', 'N1', 'BND', 'd', 'X0', 'X1', 'Y0', 'Y1', 'W', 'D', 'dx0', 'dx1', 'dc0', 'dc1', 'dl0', 'dl1', 'Fp', 'Fm'];
+ const SETUP_OUT = [...TABLES, ...ENV, ...HOT];
+-const STMT_OUT = ['xA', 'yA', 'xB0', 'xB1', 'yB0', 'yB1', 'xC', 'yC', 'n0', 'n1', 'r', 'G', 'sc0', 'sc1', 'sc2', 'sc3', 'sc4', 'sc5'];
+-const ZP = ['z', 'z2', 'z3', 'z4', 'z5', 'z6'], EZP = ['ez', 'ez2', 'ez3', 'ez4', 'ez5', 'z6'];
++const STMT_OUT = ['xA', 'yA', 'xB0', 'xB1', 'yB0', 'yB1', 'xC', 'yC', 'n0', 'n1', 'r', 'G', 'tau', 'sc0', 'sc1', 'sc2', 'sc3', 'sc4', 'sc5'];
++const ZP = ['z', 'z2', 'z3', 'z4', 'z5', 'z6'], EZP = ['ez', 'ez2', 'ez3', 'ez4', 'ez5', 'z6'], TAUP = ['tau', 'tau2', 'tau3', 'tau4', 'tau5', 'tau6'];
+ const OMEGA = (ETA * ETA) % p; // -psi^2(x, y) = (omega x, y)
+ assert.equal(OMEGA, PSI[1].x.c0); assert.equal(PSI[1].x.c1, 0n); assert.equal(PSI[1].y.c0, p - 1n); assert.equal(PSI[1].y.c1, 0n);
+ 
+@@ -58,20 +58,15 @@
+ };
+ const conjMul = (k, a0, a1, g0, g1) => [k.mod(k.add(k.mul(a0, g0), k.mul(a1, g1))), k.mod(k.sub(k.mul(a0, g1), k.mul(a1, g0)))]; // conj(a) * g
+ 
+-const AFFINE_FROB_BASIS = Array.from({length: 6}, (_, j) => {
+-  const b = Array(6).fill(0n); b[j] = 1n; return frob1Affine(b);
+-});
+-AFFINE_FROB_BASIS.forEach((poly) => {
+-  assert.equal(poly[0], 1n, 'affine Frob constant');
+-  assert.ok([2, 4, 6, 8, 10].every((i) => poly[i] === 0n), 'affine Frob even terms');
+-});
+-function affineFrobPair(k, words, powers) {
++function degree6FrobPair(k, words, powers, tauPowers) {
+   const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+   const full = [k.c(1n), ...powers, ...powers.slice(0, 5).map((x) => m(mul(powers[5], x)))];
+-  const ev = [k.c(1n)], od = [];
+-  for (let j = 0; j < 6; j++) for (let d = 1; d < 12; d++) {
+-    const c = AFFINE_FROB_BASIS[j][d]; if (!c) continue;
+-    (d & 1 ? od : ev).push(mul(mul(words[j], k.c(c)), full[d]));
++  const c0 = m(k.sub(k.c(1n), k.sum(...words.map((word, j) => mul(word, tauPowers[j])))));
++  const ev = [c0, mul(words[5], k.c(18n)), mul(mul(words[5], k.c(p - 1n)), full[6])], od = [];
++  for (let j = 0; j < 5; j++) {
++    const dst = ((j + 1) & 1) ? od : ev;
++    dst.push(mul(mul(words[j], k.c(FROB.alpha[j + 1])), full[j + 1]));
++    dst.push(mul(mul(words[j], k.c(FROB.beta[j + 1])), full[j + 7]));
+   }
+   const even = m(k.sum(...ev)), odd = m(k.sum(...od));
+   return [m(k.add(even, odd)), m(k.sub(even, odd))];
+@@ -84,7 +79,7 @@
+   a.defLocal('RD', 1, 2, (s) => { s.push(32).op(OP.SPLIT, 2, 'w', 'rest').roll('w'); U(s, 'v');
+     s.pick('v').invoke('P', ['p']).op(OP.LESSTHAN, 2, 'ok').op(OP.VERIFY, 1).roll('rest'); });
+   a.defLocal('EV', 12, 2, (s) => s.kernel(kEval(), ['vp', 'vm'], {iters: ITERS}));
+-  a.defLocal('EA', 12, 2, (s) => { s.kernel(kAffineEval(), ['vp', 'vm'], {iters: ITERS}); s.drop('in8').drop('in10'); });
++  a.defLocal('EA', 18, 2, (s) => s.kernel(kDegree6Eval(), ['vp', 'vm'], {iters: ITERS}));
+   a.defLocal('TM', 4, 16, (s) => s.kernel(kTable(true), Array.from({length: 16}, (_, i) => 'T' + (15 - i)), {iters: ITERS}));
+   a.defLocal('TA', 4, 16, (s) => s.kernel(kTable(false), Array.from({length: 16}, (_, i) => 'T' + (15 - i)), {iters: ITERS}));
+   a.defLocal('G1C', 2, 0, (s) => { const k = new Kernel(); const x = k.in('in0'), y = k.in('in1'); k.output(k.mod(k.sub(k.mul(y, y), k.add(k.mul(k.mul(x, x), x), k.c(3n))))); s.kernel(k, ['d'], {iters: 200}); s.op(OP.NOT, 1, 'ok').op(OP.VERIFY, 1); });
+@@ -110,7 +105,7 @@
+     s.roll('zRaw'); U(s, 'zRaw'); s.pick('p').op(OP.MOD, 2, 'z');
+     s.roll('rhoRaw'); U(s, 'rhoRaw'); s.roll('p').op(OP.MOD, 2, 'rho'); s.arrange(['rho', 'z']);
+   });
+-  // STMT: [STMT 642] -> words, every coordinate and s^c word < p, n_k < r, every nibble <= 0x0f (local decoding in every role)
++  // STMT: [STMT 674] -> words, every coordinate and s^c word < p, tau in 1..205, n_k < r, every nibble <= 0x0f
+   a.defLocal('STMT', 1, STMT_OUT.length, (s) => {
+     s.rename('in0', 'S');
+     for (const n of STMT_OUT.slice(0, 8)) s.invoke('RD', [n, 'S']);
+@@ -119,7 +114,8 @@
+     s.roll('S').push(130).op(OP.SPLIT, 2, 'G', 'S').roll('G').pick('G', 'Gc');
+     s.pushBytes([0x0f, 0x0f], 'mk'); for (let i = 0; i < 6; i++) s.pick('mk', 'mk2').op(OP.CAT, 2, 'mk');
+     s.pushBytes([0x0f, 0x0f]).op(OP.CAT, 2, 'mk').op(OP.AND, 2, 'Gm').pick('G', 'Gc2').op(OP.EQUALVERIFY, 2);
+-    s.roll('S'); for (let j = 0; j < 6; j++) s.invoke('RD', ['sc' + j, 'S']);
++    s.roll('S'); s.invoke('RD', ['tau', 'S']); s.pick('tau', 'c').push(1).push(206).op(OP.WITHIN, 3, 'ok').op(OP.VERIFY, 1);
++    for (let j = 0; j < 6; j++) s.invoke('RD', ['sc' + j, 'S']);
+     s.drop('S'); s.arrangeAbove('__floor', STMT_OUT);
+   });
+   // HDEC: [HAND 224] -> x_T.c0, x_T.c1, y_T.c0, y_T.c1, F+, F-, R (each < p)
+@@ -130,15 +126,18 @@
+     for (let k = 0; k < 7; k++) { s.roll('in' + k).pick('in7').op(OP.ADD, 2, 'v').pick('in7').op(OP.MOD, 2, 'v').push(33).op(OP.NUM2BIN, 2, 'b').push(32).op(OP.SPLIT, 2, 'b', 'x').pushBytes([0]).op(OP.EQUALVERIFY, 2); if (k) s.op(OP.CAT, 2, 'o'); else s.rename('o'); }
+     s.drop('in7');
+   });
+-  // SETUP: [sc0..sc5, z, xA, yA, xB0, xB1, yB0, yB1, xC, yC, p] -> TABLES, ENV, HOT (see the window above)
+-  a.defLocal('SETUP', 16, SETUP_OUT.length, (s) => {
+-    ['sc0', 'sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'z', 'xA', 'yA', 'xB0', 'xB1', 'yB0', 'yB1', 'xC', 'yC', 'p'].forEach((n, i) => s.rename('in' + i, n));
++  // SETUP: [sc0..sc5, tau, z, xA, yA, xB0, xB1, yB0, yB1, xC, yC, p] -> TABLES, ENV, HOT
++  a.defLocal('SETUP', 17, SETUP_OUT.length, (s) => {
++    ['sc0', 'sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'tau', 'z', 'xA', 'yA', 'xB0', 'xB1', 'yB0', 'yB1', 'xC', 'yC', 'p'].forEach((n, i) => s.rename('in' + i, n));
+     { const k = new Kernel(); const z = k.env('z'); const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+       const z2 = m(mul(z, z)), z3 = m(mul(z2, z)), z4 = m(mul(z2, z2)), z5 = m(mul(z4, z)), z6 = m(mul(z3, z3));
+       const eta = k.c(ETA), eta2 = k.sub(eta, k.c(1n)); // eta^2 = eta - 1, eta^3 = -1
+       k.output(z2, z3, z4, z5, z6, m(mul(eta, z)), m(mul(eta2, z2)), k.neg(z3), k.neg(m(mul(eta, z4))), k.neg(m(mul(eta2, z5))));
+       s.kernel(k, ['z2', 'z3', 'z4', 'z5', 'z6', 'ez', 'ez2', 'ez3', 'ez4', 'ez5'], {iters: 1500}); }
+-    for (let j = 0; j < 6; j++) s.roll('sc' + j); for (const n of ZP) s.pick(n); s.invoke('EA', ['Scp', 'Scm']);
++    { const k = new Kernel(); const t = k.env('tau'); const m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
++      const t2 = m(mul(t, t)), t3 = m(mul(t2, t)), t4 = m(mul(t2, t2)), t5 = m(mul(t4, t)), t6 = m(mul(t3, t3));
++      k.output(t2, t3, t4, t5, t6); s.kernel(k, ['tau2', 'tau3', 'tau4', 'tau5', 'tau6'], {iters: 100}); }
++    for (let j = 0; j < 6; j++) s.roll('sc' + j); for (const n of ZP) s.pick(n); for (const n of TAUP) s.pick(n); s.invoke('EA', ['Scp', 'Scm']);
+     for (const k of [0, 1]) {
+       for (const i of [0, 1]) for (let j = 0; j < 6; j++) s.push(VKC.R[k][i][j], `R${k}${i}_${j}`);
+       for (const i of [0, 1, 2, 3]) {
+@@ -182,7 +181,7 @@
+     t.roll('W');
+     for (let j = 0; j < 6; j++) t.invoke('RD', ['s' + j, 'W']);
+     t.op(OP.SIZE, 1, 'W', 'ws').op(OP.NOT, 1, 'e').op(OP.VERIFY, 1).drop('W'); // the record ends with the state
+-    for (const n of ZP) t.pick(n); t.invoke('EA', ['Sp', 'Sm']);
++    for (const n of ZP) t.pick(n); for (const n of TAUP) t.pick(n); t.invoke('EA', ['Sp', 'Sm']);
+     const k = new Kernel(); const R = k.in('R');
+     k.output(k.in('Sp'), k.in('Sm'), k.mod(k.sub(k.add(k.mul(R, k.env('rho')), k.mul(k.in('Fp'), k.in('Sm'))), k.mul(k.in('Fm'), k.in('Sp')))));
+     t.kernel(k, ['Fp', 'Fm', 'R'], {iters: 500});
+@@ -309,7 +308,7 @@
+     a.roll('DS'); for (let k = nP - 1; k >= 1; k--) a.push(64 * D_PIECE * k).op(OP.SPLIT, 2, 'DS', 'pk' + k).roll('DS');
+     a.st.splice(-nP, nP); a.st.push('Dp'); a.piles.set('Dp', nP); }
+   const keep = last ? ['sc0', 'sc1', 'sc2', 'sc3', 'sc4', 'sc5'] : [];
+-  for (const n of ['sc0', 'sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'z', 'xA', 'yA', 'xB0', 'xB1', 'yB0', 'yB1', 'xC', 'yC']) (keep.includes(n) ? a.pick(n) : a.roll(n));
++  for (const n of ['sc0', 'sc1', 'sc2', 'sc3', 'sc4', 'sc5', 'tau', 'z', 'xA', 'yA', 'xB0', 'xB1', 'yB0', 'yB1', 'xC', 'yC']) (keep.includes(n) ? a.pick(n) : a.roll(n));
+   a.invoke('P', ['p']).invoke('SETUP', SETUP_OUT);
+   if (i === 0) a.pick('xB0', 'X0').pick('xB1', 'X1').pick('yB0', 'Y0').pick('yB1', 'Y1').pick('Scm', 'Fp').pick('Scp', 'Fm');
+   { const ds = DSTATE[RL.a]; a.push(0, 'D').push(ds.x.c0, 'dx0').push(ds.x.c1, 'dx1').push(ds.c.c0, 'dc0').push(ds.c.c1, 'dc1').push(ds.l.c0, 'dl0').push(ds.l.c1, 'dl1'); }
+@@ -350,13 +349,13 @@
+   a.mark('t:rconst');
+   // F *= Rconst(+-z) * S_c(+-eta z)
+   for (let j = 0; j < 6; j++) a.push(VKC.Rconst[j]); for (const n of ZP) a.pick(n); a.invoke('EV', ['rp', 'rm']);
+-  for (let j = 0; j < 6; j++) a.pick('sc' + j); for (const n of EZP) a.pick(n); a.invoke('EA', ['ep', 'em']);
++  for (let j = 0; j < 6; j++) a.pick('sc' + j); for (const n of EZP) a.pick(n); for (const n of TAUP) a.pick(n); a.invoke('EA', ['ep', 'em']);
+   { const k = new Kernel(); k.output(k.mod(k.mul(k.mul(k.in('Fp'), k.in('rp')), k.in('ep'))), k.mod(k.mul(k.mul(k.in('Fm'), k.in('rm')), k.in('em')))); a.kernel(k, ['Fp', 'Fm'], {iters: 200}); }
+   a.mark('t:W');
+   // W(+-z) = Frob(S_c)(+-z) Frob(S_c)(+-eta z);  R <- R rho + F+ W(-z) - F- W(+z)
+   { const k = new Kernel(); const I = (n) => k.in(n), E = (n) => k.env(n), m = (x) => k.mod(x), mul = (x, y) => k.mul(x, y);
+     const sc = [0, 1, 2, 3, 4, 5].map((j) => I('sc' + j));
+-    const [a1, a2] = affineFrobPair(k, sc, ZP.map((n) => E(n))), [b1, b2] = affineFrobPair(k, sc, EZP.map((n) => E(n)));
++    const [a1, a2] = degree6FrobPair(k, sc, ZP.map((n) => E(n)), TAUP.map((n) => E(n))), [b1, b2] = degree6FrobPair(k, sc, EZP.map((n) => E(n)), TAUP.map((n) => E(n)));
+     k.output(m(k.sub(k.add(mul(I('R'), E('rho')), mul(I('Fp'), m(mul(a2, b2)))), mul(I('Fm'), m(mul(a1, b1))))));
+     a.kernel(k, ['R'], {iters: 1500}); }
+   a.mark('binding');
+

@@ -1,0 +1,19 @@
+{
+  "activation": false,
+  "baseCommit": "db068eb4be8a096345ddf80494eb0d85b7e18abf",
+  "baseTree": "702e22ccc243afa203c1f16a175b7c72ec1ef8eb",
+  "effect": "add candidate import and one registry entry only",
+  "patch": {
+    "path": "registry-patch.diff",
+    "sha256": "5f3a501311b6b641fd3241f4cc16467a5e4e3525b0f2c8e955791cf38ff165d7"
+  },
+  "requiredAfterIntegration": [
+    "independent maintainer rebuild and review",
+    "maintainer pnpm typecheck",
+    "maintainer existing-fixture benchmark"
+  ],
+  "schema": "bn-c-first-prefix-extraction-public-registry-plan/v1",
+  "status": "APPLIED_IN_VALIDATED_LOCAL_PROJECTION_NOT_PUBLISHED",
+  "localProjectionActivation": true,
+  "activationScope": "activation=false records upstream publication; the local projection includes the registry import and entry"
+}

@@ -1,0 +1,24 @@
+{
+  "caveats": [
+    "The unit proof relies on the separately owned fixed-key, endpoint, affine-walk, finite-domain, and nonneutral-point premises; it does not establish arbitrary-VK or neutral external-point support.",
+    "The GLS proof is integer/liveness arithmetic only and does not prove compiled bytecode, VM execution, or transcript binding.",
+    "The root-class proof starts from a nonzero FE-one raw class and delegates degree-six representative/resource construction to named owners; it does not infer these from fixture passes.",
+    "Public successor documents must use canonical PI_SUM_OFFSET wording consistently; this review does not edit or certify other document versions."
+  ],
+  "checks": {
+    "glsIntegerLattice": "PASS universal canonical 0<=n<r; exact determinant/cofactor/column bounds are pinned by transfer",
+    "piSumOffset": "PASS canonical residue (2^64 sum pi_i) mod r, not unreduced powers or integer sum",
+    "rootClass": "PASS quotient-class argument under FE-one raw-unit, lambda/N, degree-six representative, and tau construction premises",
+    "scopeDiscipline": "PASS: accepted-execution implications, canonical completeness, compiled lowering, caller/resource, and external review remain separate",
+    "unitIntersectionAndChordArgument": "PASS under declared BN254 G1/G2, fixed-key, finite nonneutral, endpoint, and inverse-norm premises"
+  },
+  "lemmaBytes": 6693,
+  "lemmaSha256": "625248c4e8fa1136127ec0cecd8fcaed9e3467e1d7a8984f84e6121f6bf0e925",
+  "newFixtures": 0,
+  "published": false,
+  "schema": "bn-c-first-prefix-extraction-public-completeness-lemmas-peer-review/v1",
+  "sourceMathSha256": "a923d72837feb99b54d14dbdd4a7a9d314e73cf22c703c78a89f1529d9cbe36f",
+  "status": "PASS_CONDITIONAL_EXISTING_UNIT_GLS_ROOT_CLASS_TRANSFER",
+  "transferSha256": "31a8afa9cf830f8c91fd727c26639fa94f0640f10bcd2254bbace063adaf3c8d",
+  "vmExecutions": 0
+}

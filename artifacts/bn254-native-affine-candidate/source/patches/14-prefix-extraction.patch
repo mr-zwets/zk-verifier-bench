@@ -1,0 +1,12 @@
+diff --git a/chunked/bn254/bn-native-sound/script.mjs b/chunked/bn254/bn-native-sound/script.mjs
+--- a/chunked/bn254/bn-native-sound/script.mjs
++++ b/chunked/bn254/bn-native-sound/script.mjs
+@@ -35,7 +35,7 @@
+ // the redeem: concatenate the code pieces (fixed ranges of the hosts' unlocking bytecode), check the digest, define and run
+ export function redeemFor(lay, Kcode) {
+   const b = [];
+-  CODE_HOSTS.forEach((h, k) => { b.push(...pushNum(h), IX.INPUTBYTECODE, ...pushNum(lay.off[h].C.data), OP.SPLIT, OP.NIP, ...pushNum(lay.codeLens[k]), OP.SPLIT, OP.DROP); if (k) b.push(OP.CAT); });
++  CODE_HOSTS.forEach((h, k) => { b.push(...pushNum(h), IX.INPUTBYTECODE, ...pushNum(lay.off[h].C.data + lay.codeLens[k]), OP.SPLIT, OP.DROP, ...pushNum(lay.off[h].C.data), OP.SPLIT, OP.NIP); if (k) b.push(OP.CAT); });
+   b.push(OP.DUP, OP.SHA256, ...pushData(Kcode), OP.EQUALVERIFY, ...pushNum(1), OP.DEFINE, ...pushNum(1), OP.INVOKE);
+   return Uint8Array.from(b);
+ }

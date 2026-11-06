@@ -1,0 +1,111 @@
+{
+  "arithmetic": {
+    "lambdaModR": "0",
+    "m": "29793968203157093288",
+    "p": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+    "p6Plus1ModR": "0",
+    "r": "21888242871839275222246405745257275088548364400416034343698204186575808495617",
+    "u": "4965661367192848881"
+  },
+  "capturedAtUtc": "2026-11-05T23:40:46Z",
+  "privateProvenanceBoundary": "The root-owned certificate execution receipt and its runtime paths remain separate provenance; their omission here does not enlarge the static theorem or claim a portable execution.",
+  "quantifiers": {
+    "acceptedChartBoundary": "The accepted-execution direction uses the parser/EA and tau/range contracts to establish the normalized chart state Sc(tau)=1 before applying the consumer identity; it does not require an advice-honesty premise.",
+    "acceptedExecution": "For every accepted execution satisfying the existing RD/EA/tau/range guards and named source-to-byte, field, caller, line-factor, and typed-RO contracts, the implication uses no honest-advice, honest-producer, canonical-construction, or resource-budget premise.",
+    "arbitraryAdviceResource": false,
+    "arbitraryVK": false,
+    "canonicalCompleteness": "The separate existence direction uses the existing canonical finite producer to provide normalized witnesses and the separately proved all-row resource bounds. This premise is not imported into accepted-execution soundness."
+  },
+  "refs": [
+    {
+      "path": "source/chunked/bn254/bn-native-sound/script.mjs",
+      "sha256": "621ecb0a47bf753f547a801298c3f807e48fe82b499c53c699a89c527db52c3c"
+    },
+    {
+      "path": "source/chunked/bn254/bn-native-sound/protocol.mjs",
+      "sha256": "afab8c2925e98ee594df14d513c47f31ab96ae85a535f98e443d5777329778bd"
+    },
+    {
+      "path": "source/chunked/bn254/sound-si-gls/math.mjs",
+      "sha256": "a923d72837feb99b54d14dbdd4a7a9d314e73cf22c703c78a89f1529d9cbe36f"
+    },
+    {
+      "path": "docs/degree-six-components.md",
+      "sha256": "bc09b812dd45a455132267530d7f66c48231fa4f3b821fe99f3d4af852f39f79"
+    },
+    {
+      "path": "docs/proof-transfer-vk-conditional.md",
+      "sha256": "37620786aa9e918f149ec3e8ec49dae0ace8cecac038e02a9ff34f817968ea36"
+    },
+    {
+      "path": "docs/fixed-preprocessing/proof-manifest-v3.json",
+      "sha256": "438f8f57334fd068753a14eb1e99e1e014edb4c8ce89bc00d07b422c8a0bce69"
+    },
+    {
+      "path": "docs/fixed-preprocessing/certificate-inputs.json",
+      "sha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1"
+    },
+    {
+      "path": "docs/vk-v9/certificate-inputs.json",
+      "sha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1"
+    },
+    {
+      "path": "docs/vk-v9/native-artifact.json",
+      "sha256": "3a23339aaa658b631d83c6c1c6a8a1d352cb04fab36061aa64c993f165f43109"
+    }
+  ],
+  "residualScope": "Still conditional on the named field/domain, typed-RO, line-factor, source-to-byte/lowering, caller-frame, fixed-VK, and canonical-completeness contracts. No arbitrary-advice, arbitrary-VK, privacy, application, network, maintainer, official, qualification, score, or publication claim.",
+  "schema": "public-dynamic-consumer-proof/v2",
+  "scope": "Portable static source/proof composition only; no source imports, VM, compiler, prover, benchmark, fixture, or new arithmetic execution. The private execution receipt is intentionally kept outside this portable proof.",
+  "status": "PASS_CONDITIONAL_DYNAMIC_CONSUMER_IDENTITY",
+  "transition": {
+    "constituentIdentity": "[g]*[Sc]^(-m+p^2)=[Sc]^(p+p^3) under the existing quotient-zero/line-factor contracts.",
+    "eventExponent": "Pinned NAF factorSchedule/cPoly contributes [Sc]^-m with m=6u+2.",
+    "finalExponent": "lambda mod r=0, hence FE(g)=1 because the final-exponent image has order dividing r.",
+    "glsUse": "GLS is used only through sum_i u_i*pi_i-PI_SUM_OFFSET = n (mod r), then fixed-VK bilinearity supplies the four-pair equation; no stronger K*/E* equality is asserted.",
+    "initialClass": "Fp=Sc(-z), Fm=Sc(z); pneg(a)=a(-X)=sigma(a); the accepted chart contract gives Sc(tau)=1, so [Sc] is defined.",
+    "rearranged": "[g]=[Sc]^(m+p-p^2+p^3).",
+    "sharedCertificateTable": {
+      "fixedPreprocessingInputsSha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1",
+      "rows": [
+        "R00",
+        "R01",
+        "R10",
+        "R11",
+        "Rconst"
+      ],
+      "sourceConsumers": [
+        "VKC.Rconst",
+        "EV",
+        "EA",
+        "degree6FrobFactorized",
+        "terminal t:W",
+        "quotient"
+      ],
+      "vkV9InputsSha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1"
+    },
+    "sourceSpans": {
+      "conjugation": [
+        32,
+        33
+      ],
+      "protocol": [
+        137,
+        147,
+        181,
+        205
+      ],
+      "script": [
+        65,
+        100,
+        377,
+        388,
+        389,
+        402
+      ]
+    },
+    "stateBoundaryW": "The nonterminal runRange boundary W is the next committed state polynomial; protocol.mjs line 190 evaluates that state at +/-z and updates R before continuing. It is distinct from terminal Frobenius W.",
+    "terminalExponent": "At terminal Pfin, psubst(Sc,ETA) contributes [Sc]^(p^2); non-c factors, Rconst, and the actual GLS fold are grouped into the actual raw constituent g.",
+    "terminalFrobW": "The terminal script t:W span evaluates Frob(Sc) at +/-z and +/-eta*z and multiplies the paired evaluations; this terminal W contributes [Sc]^(p+p^3)."
+  }
+}

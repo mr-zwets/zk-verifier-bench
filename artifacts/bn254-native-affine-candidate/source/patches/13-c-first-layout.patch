@@ -1,0 +1,31 @@
+--- a/chunked/bn254/bn-native-sound/script.mjs
++++ b/chunked/bn254/bn-native-sound/script.mjs
+@@ -17,15 +17,15 @@
+ const D_PIECE = 8; // delta slopes per pile piece (512 B)
+
+ // ---------------- layout ----------------
+-// input 0: [S_0] [DS_0] [C_0] [FILL_0] [R]
+-// input 1: [S_1] [HAND_1 224] [DS_1] [C_1] [FILL_1] [R]
++// input 0: [C_0] [S_0] [DS_0] [FILL_0] [R]
++// input 1: [C_1] [S_1] [HAND_1 224] [DS_1] [FILL_1] [R]
+ // input 2: [DG 96] [STMT 674] [S_2] [HAND_2 224] [DS_2] [FILL_2] [WQ] [R]
+ // Every byte range another input reads (DG, STMT, HAND_i, C_i, the z-tail ZT) starts before any variable-length push.
+ export const CODE_HOSTS = [0, 1];
+ export function layoutFor(codeLens, rLen) {
+   const fixed = [
+-    [['S', ROLES[0].streamSize], ['DS', DS[0].length], ['C', codeLens[0]]],
+-    [['S', ROLES[1].streamSize], ['HAND', HAND_SIZE], ['DS', DS[1].length], ['C', codeLens[1]]],
++    [['C', codeLens[0]], ['S', ROLES[0].streamSize], ['DS', DS[0].length]],
++    [['C', codeLens[1]], ['S', ROLES[1].streamSize], ['HAND', HAND_SIZE], ['DS', DS[1].length]],
+     [['DG', D_SIZE], ['STMT', STMT_SIZE], ['S', ROLES[2].streamSize], ['HAND', HAND_SIZE], ['DS', DS[2].length]],
+   ];
+   const pushR = pushLen(rLen);
+@@ -263,7 +263,7 @@
+
+ function roleProgram(i, ctx, lay, WIN) {
+   const RL = ROLES[i], SC = SCHEDULE[i], last = i === NROLES - 1;
+-  const items = [['S', 'DS', 'C', 'FILL'], ['S', 'HAND', 'DS', 'C', 'FILL'], ['DG', 'STMT', 'S', 'HAND', 'DS', 'FILL', 'WQ']][i];
++  const items = [['C', 'S', 'DS', 'FILL'], ['C', 'S', 'HAND', 'DS', 'FILL'], ['DG', 'STMT', 'S', 'HAND', 'DS', 'FILL', 'WQ']][i];
+   const a = new Asm(items, ctx); a.mark('layout');
+   // ---- 1. own layout: item count, every size, filler all-zero, quotient length rules, raw unlocking size ----
+   a.emit(OP.DEPTH, ...pushNum(items.length), OP.NUMEQUALVERIFY);

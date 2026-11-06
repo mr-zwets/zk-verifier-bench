@@ -1,0 +1,42 @@
+{
+  "schema": "bn-c-first-prefix-extraction-public-allowlist/v2",
+  "status": "PUBLIC_RECIPE_ALLOWLIST",
+  "included": [
+    "../source/chunked/bn254/bn-native-sound/asm.mjs",
+    "../source/chunked/bn254/bn-native-sound/kernels.mjs",
+    "../source/chunked/bn254/bn-native-sound/protocol.mjs",
+    "../source/chunked/bn254/bn-native-sound/script.mjs",
+    "../source/chunked/bn254/sound-si-gls/asm.mjs",
+    "../source/chunked/bn254/sound-si-gls/math.mjs",
+    "../source/chunked/bn254/sound-si-gls/protocol.mjs",
+    "../source/chunked/bn254/sound-si-gls/script.mjs",
+    "../source/chunked/bn254/densless-recovered/public-fixtures.json",
+    "../source/patches/01-affine-candidate-source-v2.patch",
+    "../source/patches/02-zero-extension-v2.patch",
+    "../source/patches/03-candidate-source-v1.patch",
+    "../source/patches/04-helper-key-swap-v1.patch",
+    "../source/patches/05-fifth-degree6.patch",
+    "../source/patches/06-frobenius-v2.patch",
+    "../source/patches/07-coefficient-fold-v1.patch",
+    "../source/patches/08-sign-fold.patch",
+    "../source/patches/09-c0-pre-mod.patch",
+    "../source/patches/10-characteristic-recurrence.patch",
+    "../source/patches/11-tail-first-base.patch",
+    "../source/patches/12-zero-init.patch",
+    "../source/patches/13-c-first-layout.patch",
+    "../source/patches/14-prefix-extraction.patch",
+    "../source/reproduce-v2/capture-driver.mjs",
+    "../source/reproduce-v2/portable-manifest.json",
+    "../source/reproduce-v2/dependency-closure.json",
+    "public-reproduction-plan-v3.json",
+    "public-provenance-v3.md"
+  ],
+  "excluded": [
+    "adjacent private catalogs and receipts",
+    "absolute workspace paths",
+    "node_modules and dependency payload trees",
+    "benchmark, VM, prover, compiler, fixture-generation, qualification, and publication outputs",
+    "source-reproduction-plan-v2.json and source-provenance-v2.md because their historical capturedReference is not a public recipe input"
+  ],
+  "boundary": "The allowlist provides a portable source/dependency recipe and public artifact identity checks; it does not claim registry reproducibility or full verifier qualification."
+}

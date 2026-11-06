@@ -1,0 +1,11 @@
+--- a/chunked/bn254/bn-native-sound/script.mjs
++++ b/chunked/bn254/bn-native-sound/script.mjs
+@@ -68,7 +68,7 @@
+   const high = (powers, j) => m(mul(powers[5], powers[j]));
+   let c0Sum = k.c(0n);
+   for (let j = 0; j < 6; j++) c0Sum = k.add(c0Sum, mul(words[j], tauPowers[j]));
+-  const c0 = m(k.sub(k.c(1n), c0Sum));
++  const c0 = k.sub(k.c(1n), c0Sum);
+   const base = m(k.add(k.add(c0, mul(words[5], k.c(18n))), k.neg(mul(words[5], zPowers[5]))));
+   let zEven = base, zOdd = k.c(0n), etaEven = base, etaOdd = k.c(0n);
+   for (let j = 0; j < 5; j++) {

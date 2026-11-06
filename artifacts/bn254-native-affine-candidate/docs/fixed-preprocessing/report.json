@@ -1,0 +1,80 @@
+{
+  "capturedAtUtc": "2026-11-05T23:16:19Z",
+  "checker": {
+    "bytes": 14340,
+    "checkPlanResult": "PASS_STATIC_PUBLIC_PLAN",
+    "mathExecution": false,
+    "path": "docs/fixed-preprocessing/check-fixed-preprocessing-public-v3.mjs",
+    "sha256": "262169f9e14342f87be7aef8041f52938ae822b78f89438bb471710bfbe94ae2"
+  },
+  "dependencies": {
+    "closurePath": "source/reproduce-v2/dependency-closure.json",
+    "closureSha256": "50d6ff84697d9d0377cad6feac255331e2b18c8926a3f3088ea6082b0792c497",
+    "edgeCount": 12,
+    "ordinaryLibrary": "@noble/curves@1.9.7",
+    "ordinaryLibraryEsmEdgesChecked": 5
+  },
+  "proof": {
+    "basis": [
+      0,
+      2,
+      4,
+      1,
+      3,
+      5
+    ],
+    "expectedRowHashes": {
+      "R00": "da1e0f3825b1d49b6bb042e49dc1e5f073f772d122e3e72a53c62d0252f9f97e",
+      "R01": "76047bcea692a83f62c138ee0cdccb066db95693e19296de605bf13e801114cf",
+      "R10": "330fe6e088ef04bd39e8a2e17dc8cd20c9687db32a24973fd019274a7518994e",
+      "R11": "d88de8a365643c826c0017d3fcb976f3e7a7506ad9db7e5a1d6b7c71022e52b9",
+      "Rconst": "b6cd472f318146d7743be63b48c1756b995f98c9415bcb496f6c641341448efb"
+    },
+    "pairing": "bn254.pairing(P,Q,false)",
+    "polynomialModulus": "X^12-18X^6+82",
+    "relation": "raw Miller value / monic degree-six representative in Fp12*/Fp6*",
+    "rows": [
+      "R00",
+      "R01",
+      "R10",
+      "R11",
+      "Rconst"
+    ]
+  },
+  "refs": [
+    {
+      "path": "source/chunked/bn254/densless-recovered/public-fixtures.json",
+      "sha256": "3d38e95a8f69a7c940b4ba03cc28c748254c07e5ff7957edb45665e45248cf91"
+    },
+    {
+      "path": "docs/fixed-preprocessing/certificate-inputs.json",
+      "sha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1"
+    },
+    {
+      "path": "source/reproduce-v2/dependency-closure.json",
+      "sha256": "50d6ff84697d9d0377cad6feac255331e2b18c8926a3f3088ea6082b0792c497"
+    },
+    {
+      "path": "docs/public-completeness/unit-and-gls-peer-review.md",
+      "sha256": "7e7d4f0d85fdeb0d60d0a41d05f39778785c19172ffb053ec3744b2507383580"
+    }
+  ],
+  "reviewCorrections": [
+    "manifest.math.source is present and asserted",
+    "all three package metadata/tree pins and twelve edge hashes are validated before import",
+    "pinned p, r, and BN_X are asserted before import and Fp/Fr orders after import",
+    "ETA is extracted exactly from Frobenius^2(X), with e^2 != 1, without a sampled element or source ETA import",
+    "only five Noble package-to-package ESM edges are claimed loaded; seven source/build edges remain separate closure evidence"
+  ],
+  "schema": "pub-fixed-preprocessing-public-proof/v3",
+  "scope": {
+    "nativeEmission": "current PUB003 v9 owner",
+    "privateCatalogRead": false,
+    "producerRuns": 0,
+    "qualification": false,
+    "remainingBoundary": "the ordinary library implementation and surrounding accepted-equation contracts remain named premises until the explicit reviewed execute action",
+    "sourceImports": 0,
+    "vmRuns": 0
+  },
+  "status": "PREPARED_STATIC_NO_MATH_EXECUTION"
+}

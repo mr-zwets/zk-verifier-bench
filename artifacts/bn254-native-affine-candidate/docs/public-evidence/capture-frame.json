@@ -1,0 +1,847 @@
+{
+  "schema": "bn-native-capture-frame-contract/v1",
+  "status": "STATIC_CAPTURE_AND_CONDITIONAL_COMPOSITION_ONLY",
+  "artifact": {
+    "codeBytes": 7553,
+    "codeSha256": "63f12474082916e22ab62faf6c6f0483bedcbb08a9700e4d7eb02415c9d8c242",
+    "redeemBytes": 61,
+    "redeemSha256": "0563cd756e2d300b7653e10fd2e39ba5951e404210ba78f18d8ba4549719a030",
+    "codePieces": [
+      3889,
+      3664
+    ],
+    "roleFunctionIds": [
+      23,
+      24,
+      25
+    ],
+    "roleByteLengths": [
+      810,
+      725,
+      2372
+    ],
+    "definitions": 24,
+    "nativeArtifactSha256": "3a23339aaa658b631d83c6c1c6a8a1d352cb04fab36061aa64c993f165f43109"
+  },
+  "sourceCapture": {
+    "kernelEvents": 54,
+    "contexts": 98,
+    "terminalFrobeniusConsumer": {
+      "start": 6746,
+      "endExclusive": 7167,
+      "eventCount": 2,
+      "eventIndexes": [
+        28,
+        49
+      ],
+      "duplicateProjectionsAgree": true,
+      "projectionSha256": "5a06dba17c9c6ce4c13d4c8dfee2de5710b6ce95ae6a2f7b7cc750e14a6ada56",
+      "deduplicatedForSpanAudit": true,
+      "bytes": 421,
+      "entryWords": 120,
+      "postWords": 112,
+      "entryPhysical": 120,
+      "postPhysical": 112,
+      "rawSha256": "649b592964b0b4d99071432b2d4f3975e97f50f2da673eeaa620dea959f04057",
+      "nodes": [
+        {
+          "id": 0,
+          "op": "ref",
+          "args": [],
+          "name": "sc0"
+        },
+        {
+          "id": 1,
+          "op": "ref",
+          "args": [],
+          "name": "sc1"
+        },
+        {
+          "id": 2,
+          "op": "ref",
+          "args": [],
+          "name": "sc2"
+        },
+        {
+          "id": 3,
+          "op": "ref",
+          "args": [],
+          "name": "sc3"
+        },
+        {
+          "id": 4,
+          "op": "ref",
+          "args": [],
+          "name": "sc4"
+        },
+        {
+          "id": 5,
+          "op": "ref",
+          "args": [],
+          "name": "sc5"
+        },
+        {
+          "id": 6,
+          "op": "ref",
+          "args": [],
+          "name": "z"
+        },
+        {
+          "id": 7,
+          "op": "ref",
+          "args": [],
+          "name": "z2"
+        },
+        {
+          "id": 8,
+          "op": "ref",
+          "args": [],
+          "name": "z3"
+        },
+        {
+          "id": 9,
+          "op": "ref",
+          "args": [],
+          "name": "z4"
+        },
+        {
+          "id": 10,
+          "op": "ref",
+          "args": [],
+          "name": "z5"
+        },
+        {
+          "id": 11,
+          "op": "ref",
+          "args": [],
+          "name": "z6"
+        },
+        {
+          "id": 12,
+          "op": "ref",
+          "args": [],
+          "name": "ez"
+        },
+        {
+          "id": 13,
+          "op": "ref",
+          "args": [],
+          "name": "ez2"
+        },
+        {
+          "id": 14,
+          "op": "ref",
+          "args": [],
+          "name": "ez3"
+        },
+        {
+          "id": 15,
+          "op": "ref",
+          "args": [],
+          "name": "ez4"
+        },
+        {
+          "id": 16,
+          "op": "ref",
+          "args": [],
+          "name": "ez5"
+        },
+        {
+          "id": 17,
+          "op": "ref",
+          "args": [],
+          "name": "tau"
+        },
+        {
+          "id": 18,
+          "op": "ref",
+          "args": [],
+          "name": "tau2"
+        },
+        {
+          "id": 19,
+          "op": "ref",
+          "args": [],
+          "name": "tau3"
+        },
+        {
+          "id": 20,
+          "op": "ref",
+          "args": [],
+          "name": "tau4"
+        },
+        {
+          "id": 21,
+          "op": "ref",
+          "args": [],
+          "name": "tau5"
+        },
+        {
+          "id": 22,
+          "op": "ref",
+          "args": [],
+          "name": "tau6"
+        },
+        {
+          "id": 23,
+          "op": "const",
+          "args": [],
+          "value": "16752237731527642993167947735252728185179812131736597553819235832037536680160"
+        },
+        {
+          "id": 24,
+          "op": "const",
+          "args": [],
+          "value": "-2203960485148121921418603742825762020974279258880205651966"
+        },
+        {
+          "id": 25,
+          "op": "const",
+          "args": [],
+          "value": "1"
+        },
+        {
+          "id": 26,
+          "op": "const",
+          "args": [],
+          "value": "13365409060938474037306578913838458522380504351979534994799168652879942015317"
+        },
+        {
+          "id": 27,
+          "op": "const",
+          "args": [],
+          "value": "16469823323077808223889137241176536799009286646108169935659301613961712198316"
+        },
+        {
+          "id": 28,
+          "op": "mul",
+          "args": [
+            27,
+            11
+          ]
+        },
+        {
+          "id": 29,
+          "op": "add",
+          "args": [
+            26,
+            28
+          ]
+        },
+        {
+          "id": 30,
+          "op": "mod",
+          "args": [
+            29
+          ]
+        },
+        {
+          "id": 31,
+          "op": "add",
+          "args": [
+            22,
+            11
+          ]
+        },
+        {
+          "id": 32,
+          "op": "const",
+          "args": [],
+          "value": "18"
+        },
+        {
+          "id": 33,
+          "op": "sub",
+          "args": [
+            31,
+            32
+          ]
+        },
+        {
+          "id": 34,
+          "op": "const",
+          "args": [],
+          "value": "1"
+        },
+        {
+          "id": 35,
+          "op": "mul",
+          "args": [
+            5,
+            33
+          ]
+        },
+        {
+          "id": 36,
+          "op": "sub",
+          "args": [
+            34,
+            35
+          ]
+        },
+        {
+          "id": 37,
+          "op": "mul",
+          "args": [
+            0,
+            17
+          ]
+        },
+        {
+          "id": 38,
+          "op": "sub",
+          "args": [
+            36,
+            37
+          ]
+        },
+        {
+          "id": 39,
+          "op": "mul",
+          "args": [
+            1,
+            18
+          ]
+        },
+        {
+          "id": 40,
+          "op": "sub",
+          "args": [
+            38,
+            39
+          ]
+        },
+        {
+          "id": 41,
+          "op": "mul",
+          "args": [
+            2,
+            19
+          ]
+        },
+        {
+          "id": 42,
+          "op": "sub",
+          "args": [
+            40,
+            41
+          ]
+        },
+        {
+          "id": 43,
+          "op": "mul",
+          "args": [
+            3,
+            20
+          ]
+        },
+        {
+          "id": 44,
+          "op": "sub",
+          "args": [
+            42,
+            43
+          ]
+        },
+        {
+          "id": 45,
+          "op": "mul",
+          "args": [
+            4,
+            21
+          ]
+        },
+        {
+          "id": 46,
+          "op": "sub",
+          "args": [
+            44,
+            45
+          ]
+        },
+        {
+          "id": 47,
+          "op": "mod",
+          "args": [
+            46
+          ]
+        },
+        {
+          "id": 48,
+          "op": "mul",
+          "args": [
+            0,
+            30
+          ]
+        },
+        {
+          "id": 49,
+          "op": "mul",
+          "args": [
+            48,
+            6
+          ]
+        },
+        {
+          "id": 50,
+          "op": "mul",
+          "args": [
+            48,
+            12
+          ]
+        },
+        {
+          "id": 51,
+          "op": "mul",
+          "args": [
+            23,
+            30
+          ]
+        },
+        {
+          "id": 52,
+          "op": "mul",
+          "args": [
+            24,
+            25
+          ]
+        },
+        {
+          "id": 53,
+          "op": "sub",
+          "args": [
+            51,
+            52
+          ]
+        },
+        {
+          "id": 54,
+          "op": "mod",
+          "args": [
+            53
+          ]
+        },
+        {
+          "id": 55,
+          "op": "mul",
+          "args": [
+            1,
+            54
+          ]
+        },
+        {
+          "id": 56,
+          "op": "mul",
+          "args": [
+            55,
+            7
+          ]
+        },
+        {
+          "id": 57,
+          "op": "add",
+          "args": [
+            47,
+            56
+          ]
+        },
+        {
+          "id": 58,
+          "op": "mul",
+          "args": [
+            55,
+            13
+          ]
+        },
+        {
+          "id": 59,
+          "op": "add",
+          "args": [
+            47,
+            58
+          ]
+        },
+        {
+          "id": 60,
+          "op": "mul",
+          "args": [
+            23,
+            54
+          ]
+        },
+        {
+          "id": 61,
+          "op": "mul",
+          "args": [
+            24,
+            30
+          ]
+        },
+        {
+          "id": 62,
+          "op": "sub",
+          "args": [
+            60,
+            61
+          ]
+        },
+        {
+          "id": 63,
+          "op": "mod",
+          "args": [
+            62
+          ]
+        },
+        {
+          "id": 64,
+          "op": "mul",
+          "args": [
+            2,
+            63
+          ]
+        },
+        {
+          "id": 65,
+          "op": "mul",
+          "args": [
+            64,
+            8
+          ]
+        },
+        {
+          "id": 66,
+          "op": "add",
+          "args": [
+            49,
+            65
+          ]
+        },
+        {
+          "id": 67,
+          "op": "mul",
+          "args": [
+            64,
+            14
+          ]
+        },
+        {
+          "id": 68,
+          "op": "add",
+          "args": [
+            50,
+            67
+          ]
+        },
+        {
+          "id": 69,
+          "op": "mul",
+          "args": [
+            23,
+            63
+          ]
+        },
+        {
+          "id": 70,
+          "op": "mul",
+          "args": [
+            24,
+            54
+          ]
+        },
+        {
+          "id": 71,
+          "op": "sub",
+          "args": [
+            69,
+            70
+          ]
+        },
+        {
+          "id": 72,
+          "op": "mod",
+          "args": [
+            71
+          ]
+        },
+        {
+          "id": 73,
+          "op": "mul",
+          "args": [
+            3,
+            72
+          ]
+        },
+        {
+          "id": 74,
+          "op": "mul",
+          "args": [
+            73,
+            9
+          ]
+        },
+        {
+          "id": 75,
+          "op": "add",
+          "args": [
+            57,
+            74
+          ]
+        },
+        {
+          "id": 76,
+          "op": "mul",
+          "args": [
+            73,
+            15
+          ]
+        },
+        {
+          "id": 77,
+          "op": "add",
+          "args": [
+            59,
+            76
+          ]
+        },
+        {
+          "id": 78,
+          "op": "mul",
+          "args": [
+            23,
+            72
+          ]
+        },
+        {
+          "id": 79,
+          "op": "mul",
+          "args": [
+            24,
+            63
+          ]
+        },
+        {
+          "id": 80,
+          "op": "sub",
+          "args": [
+            78,
+            79
+          ]
+        },
+        {
+          "id": 81,
+          "op": "mod",
+          "args": [
+            80
+          ]
+        },
+        {
+          "id": 82,
+          "op": "mul",
+          "args": [
+            4,
+            81
+          ]
+        },
+        {
+          "id": 83,
+          "op": "mul",
+          "args": [
+            82,
+            10
+          ]
+        },
+        {
+          "id": 84,
+          "op": "add",
+          "args": [
+            66,
+            83
+          ]
+        },
+        {
+          "id": 85,
+          "op": "mul",
+          "args": [
+            82,
+            16
+          ]
+        },
+        {
+          "id": 86,
+          "op": "add",
+          "args": [
+            68,
+            85
+          ]
+        },
+        {
+          "id": 87,
+          "op": "add",
+          "args": [
+            75,
+            84
+          ]
+        },
+        {
+          "id": 88,
+          "op": "mod",
+          "args": [
+            87
+          ]
+        },
+        {
+          "id": 89,
+          "op": "sub",
+          "args": [
+            75,
+            84
+          ]
+        },
+        {
+          "id": 90,
+          "op": "mod",
+          "args": [
+            89
+          ]
+        },
+        {
+          "id": 91,
+          "op": "add",
+          "args": [
+            77,
+            86
+          ]
+        },
+        {
+          "id": 92,
+          "op": "mod",
+          "args": [
+            91
+          ]
+        },
+        {
+          "id": 93,
+          "op": "sub",
+          "args": [
+            77,
+            86
+          ]
+        },
+        {
+          "id": 94,
+          "op": "mod",
+          "args": [
+            93
+          ]
+        },
+        {
+          "id": 95,
+          "op": "ref",
+          "args": [],
+          "name": "R"
+        },
+        {
+          "id": 96,
+          "op": "ref",
+          "args": [],
+          "name": "rho"
+        },
+        {
+          "id": 97,
+          "op": "mul",
+          "args": [
+            95,
+            96
+          ]
+        },
+        {
+          "id": 98,
+          "op": "ref",
+          "args": [],
+          "name": "Fp"
+        },
+        {
+          "id": 99,
+          "op": "mul",
+          "args": [
+            90,
+            94
+          ]
+        },
+        {
+          "id": 100,
+          "op": "mod",
+          "args": [
+            99
+          ]
+        },
+        {
+          "id": 101,
+          "op": "mul",
+          "args": [
+            98,
+            100
+          ]
+        },
+        {
+          "id": 102,
+          "op": "add",
+          "args": [
+            97,
+            101
+          ]
+        },
+        {
+          "id": 103,
+          "op": "ref",
+          "args": [],
+          "name": "Fm"
+        },
+        {
+          "id": 104,
+          "op": "mul",
+          "args": [
+            88,
+            92
+          ]
+        },
+        {
+          "id": 105,
+          "op": "mod",
+          "args": [
+            104
+          ]
+        },
+        {
+          "id": 106,
+          "op": "mul",
+          "args": [
+            103,
+            105
+          ]
+        },
+        {
+          "id": 107,
+          "op": "sub",
+          "args": [
+            102,
+            106
+          ]
+        },
+        {
+          "id": 108,
+          "op": "mod",
+          "args": [
+            107
+          ]
+        }
+      ]
+    }
+  },
+  "scope": {
+    "symbolicCaptureIsNotVmExecution": true,
+    "entryAndPostCountsAreNotUniversalMemoryBound": true,
+    "genericLoweringAndCallerSemanticsAreExplicitPremises": true,
+    "newExecutionsOrFixtures": 0
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "publicInterpretation": "conditional static resource owner; no qualification, score, or publication credit",
+  "reportSha256": "27057cbca9129b50e4ed757d0f82c4f8c83d2e10068205575c4a1aa0abdaff5a",
+  "resourceLedger": {
+    "U": [
+      8002502,
+      7930995,
+      7865661
+    ],
+    "actualULengthRedeem": {
+      "capDeltaP": -1441,
+      "capDeltaUsed": false,
+      "deltaP": -1280,
+      "newP": 69970,
+      "oldP": 71250
+    },
+    "baselineU": [
+      8007201,
+      7928562,
+      7866933
+    ],
+    "bodyDelta": [
+      -3423,
+      3709,
+      4
+    ],
+    "budgets": [
+      8004000,
+      7932800,
+      7958400
+    ],
+    "correctedDeltaAppliedOnce": [
+      -4699,
+      2433,
+      -1272
+    ],
+    "globalDefinitionReservePPerRole": [
+      4,
+      4,
+      4
+    ],
+    "margins": [
+      1498,
+      1805,
+      92739
+    ],
+    "memory": {
+      "bound": 996,
+      "conditional": true,
+      "inequality": "990 <= 996 < 1000",
+      "inheritedBase": 990,
+      "limit": 1000
+    },
+    "role2PointwiseDeltaP": 4,
+    "targets": [
+      9964,
+      9875,
+      9907
+    ],
+    "wholeIRetained": true
+  },
+  "schema": "pub-proof-006-canonical-resource-proof/v2",
+  "scope": {
+    "arbitraryAdviceResourceClaim": false,
+    "assemblyExecutions": 0,
+    "benchmarkExecutions": 0,
+    "compilerExecutions": 0,
+    "newFixtures": 0,
+    "observedPeakUniversalClaim": false,
+    "proverExecutions": 0,
+    "publicationCredit": false,
+    "qualificationCredit": false,
+    "scoreCredit": false,
+    "sourceImports": 0,
+    "staticOnly": true,
+    "vmExecutions": 0
+  },
+  "status": "PASS_CONDITIONAL_PUBLIC_RESOURCE_ARGUMENT_CURRENT_PREFIX_PEER_RECONCILED_WITH_COMPLETENESS_HOLDS"
+}

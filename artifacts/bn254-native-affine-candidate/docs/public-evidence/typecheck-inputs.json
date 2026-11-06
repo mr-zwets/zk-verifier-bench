@@ -1,0 +1,2873 @@
+{
+  "schema": "portable-typecheck-inputs/v2",
+  "count": 472,
+  "projectCount": 123,
+  "packages": [
+    {
+      "name": "typescript",
+      "version": "6.0.3",
+      "packageJsonSha256": "9332e97c30d3e53ed54910b89207ed657fb444066484df6e5b6965bf130865e9"
+    },
+    {
+      "name": "@bitauth/libauth",
+      "version": "3.1.0-next.8",
+      "packageJsonSha256": "6b4e3b7f062b80782c62cb7732ed01571c5f163fd786af877c0ae5fdc33ec65e"
+    },
+    {
+      "name": "@noble/hashes",
+      "version": "2.2.0",
+      "packageJsonSha256": "df2580ed1896b0deffc07437c6a8d83fcf233e4c4c1e77c12e491563222c4719"
+    },
+    {
+      "name": "@noble/curves",
+      "version": "2.2.0",
+      "packageJsonSha256": "b305a9a8e20df7767458bff98aafb7423cb39e00f543fffea5a9e0b88e0ada9e"
+    },
+    {
+      "name": "@types/node",
+      "version": "25.9.3",
+      "packageJsonSha256": "74902b2c71842dc6c06a3ff4204577a840a7b7d36bc838348faf17498987e65b"
+    },
+    {
+      "name": "undici-types",
+      "version": "7.24.6",
+      "packageJsonSha256": "541adf5ec10733ecbf9278ec706914c76b1e5b25cccebdadb7ade8f3066ae052"
+    }
+  ],
+  "fingerprintMethod": "ordered portable path NUL byteCount NUL SHA256 joined with LF and final LF",
+  "fingerprintSha256": "543b2229a1520ff7a7f8d1145bf091c7ce05f1207b09f3e58f517092df4dcd2b",
+  "inputs": [
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es5.d.ts",
+      "bytes": 218972,
+      "sha256": "bcd24271a113971ba9eb71ff8cb01bc6b0f872a85c23fdbe5d93065b375933cd",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.d.ts",
+      "bytes": 1202,
+      "sha256": "3f88bedbeb09c6f5a6645cb24c7c55f1aa22d19ae96c8e6959cbd8b85a707bc6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2016.d.ts",
+      "bytes": 926,
+      "sha256": "7fe93b39b810eadd916be8db880dd7f0f7012a5cc6ffb62de8f62a2117fa6f1f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2017.d.ts",
+      "bytes": 1123,
+      "sha256": "bb0074cc08b84a2374af33d8bf044b80851ccc9e719a5e202eacf40db2c31600",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2018.d.ts",
+      "bytes": 1049,
+      "sha256": "1a7daebe4f45fb03d9ec53d60008fbf9ac45a697fdc89e4ce218bc94b94f94d6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2019.d.ts",
+      "bytes": 1032,
+      "sha256": "f94b133a3cb14a288803be545ac2683e0d0ff6661bcd37e31aaaec54fc382aed",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.d.ts",
+      "bytes": 1162,
+      "sha256": "f59d0650799f8782fd74cf73c19223730c6d1b9198671b1c5b3a38e1188b5953",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2021.d.ts",
+      "bytes": 997,
+      "sha256": "8a15b4607d9a499e2dbeed9ec0d3c0d7372c850b2d5f1fb259e8f6d41d468a84",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2022.d.ts",
+      "bytes": 1069,
+      "sha256": "26e0fe14baee4e127f4365d1ae0b276f400562e45e19e35fd2d4c296684715e6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.core.d.ts",
+      "bytes": 22824,
+      "sha256": "eadcffda2aa84802c73938e589b9e58248d74c59cb7fcbca6474e3435ac15504",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.collection.d.ts",
+      "bytes": 5305,
+      "sha256": "105ba8ff7ba746404fe1a2e189d1d3d2e0eb29a08c18dded791af02f29fb4711",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.generator.d.ts",
+      "bytes": 2518,
+      "sha256": "00343ca5b2e3d48fa5df1db6e32ea2a59afab09590274a6cccb1dbae82e60c7c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.iterable.d.ts",
+      "bytes": 18185,
+      "sha256": "ebd9f816d4002697cb2864bea1f0b70a103124e18a8cd9645eeccc09bdf80ab4",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.promise.d.ts",
+      "bytes": 3161,
+      "sha256": "2c1afac30a01772cd2a9a298a7ce7706b5892e447bb46bdbeef720f7b5da77ad",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.proxy.d.ts",
+      "bytes": 5212,
+      "sha256": "7b0225f483e4fa685625ebe43dd584bb7973bbd84e66a6ba7bbe175ee1048b4f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.reflect.d.ts",
+      "bytes": 6454,
+      "sha256": "c0a4b8ac6ce74679c1da2b3795296f5896e31c38e888469a8e0f99dc3305de60",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.symbol.d.ts",
+      "bytes": 1610,
+      "sha256": "3084a7b5f569088e0146533a00830e206565de65cae2239509168b11434cd84f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2015.symbol.wellknown.d.ts",
+      "bytes": 10971,
+      "sha256": "c5079c53f0f141a0698faa903e76cb41cd664e3efb01cc17a5c46ec2eb0bef42",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2016.array.include.d.ts",
+      "bytes": 5165,
+      "sha256": "32cafbc484dea6b0ab62cf8473182bbcb23020d70845b406f80b7526f38ae862",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2016.intl.d.ts",
+      "bytes": 1445,
+      "sha256": "fca4cdcb6d6c5ef18a869003d02c9f0fd95df8cfaf6eb431cd3376bc034cad36",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2017.arraybuffer.d.ts",
+      "bytes": 876,
+      "sha256": "b93ec88115de9a9dc1b602291b85baf825c85666bf25985cc5f698073892b467",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2017.date.d.ts",
+      "bytes": 1877,
+      "sha256": "f5c06dcc3fe849fcb297c247865a161f995cc29de7aa823afdd75aaaddc1419b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2017.object.d.ts",
+      "bytes": 2434,
+      "sha256": "b77e16112127a4b169ef0b8c3a4d730edf459c5f25fe52d5e436a6919206c4d7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2017.sharedmemory.d.ts",
+      "bytes": 7170,
+      "sha256": "fbffd9337146eff822c7c00acbb78b01ea7ea23987f6c961eba689349e744f8c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2017.string.d.ts",
+      "bytes": 2339,
+      "sha256": "a995c0e49b721312f74fdfb89e4ba29bd9824c770bbb4021d74d2bf560e4c6bd",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2017.intl.d.ts",
+      "bytes": 1410,
+      "sha256": "c7b3542146734342e440a84b213384bfa188835537ddbda50d30766f0593aff9",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2017.typedarrays.d.ts",
+      "bytes": 1503,
+      "sha256": "ce6180fa19b1cccd07ee7f7dbb9a367ac19c0ed160573e4686425060b6df7f57",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2018.asyncgenerator.d.ts",
+      "bytes": 2653,
+      "sha256": "3f02e2476bccb9dbe21280d6090f0df17d2f66b74711489415a8aa4df73c9675",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2018.asynciterable.d.ts",
+      "bytes": 2218,
+      "sha256": "45e3ab34c1c013c8ab2dc1ba4c80c780744b13b5676800ae2e3be27ae862c40c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2018.intl.d.ts",
+      "bytes": 2982,
+      "sha256": "805c86f6cca8d7702a62a844856dbaa2a3fd2abef0536e65d48732441dde5b5b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2018.promise.d.ts",
+      "bytes": 1314,
+      "sha256": "e42e397f1a5a77994f0185fd1466520691456c772d06bf843e5084ceb879a0ad",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2018.regexp.d.ts",
+      "bytes": 1193,
+      "sha256": "f4c2b41f90c95b1c532ecc874bd3c111865793b23aebcc1c3cbbabcd5d76ffb0",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2019.array.d.ts",
+      "bytes": 3124,
+      "sha256": "ab26191cfad5b66afa11b8bf935ef1cd88fabfcb28d30b2dfa6fad877d050332",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2019.object.d.ts",
+      "bytes": 1434,
+      "sha256": "2088bc26531e38fb05eedac2951480db5309f6be3fa4a08d2221abb0f5b4200d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2019.string.d.ts",
+      "bytes": 1489,
+      "sha256": "cb9d366c425fea79716a8fb3af0d78e6b22ebbab3bd64d25063b42dc9f531c1e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2019.symbol.d.ts",
+      "bytes": 967,
+      "sha256": "500934a8089c26d57ebdb688fc9757389bb6207a3c8f0674d68efa900d2abb34",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2019.intl.d.ts",
+      "bytes": 919,
+      "sha256": "689da16f46e647cef0d64b0def88910e818a5877ca5379ede156ca3afb780ac3",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.bigint.d.ts",
+      "bytes": 38258,
+      "sha256": "bc21cc8b6fee4f4c2440d08035b7ea3c06b3511314c8bab6bef7a92de58a2593",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.date.d.ts",
+      "bytes": 2917,
+      "sha256": "7ca53d13d2957003abb47922a71866ba7cb2068f8d154877c596d63c359fed25",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.promise.d.ts",
+      "bytes": 1764,
+      "sha256": "54725f8c4df3d900cb4dac84b64689ce29548da0b4e9b7c2de61d41c79293611",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.sharedmemory.d.ts",
+      "bytes": 5089,
+      "sha256": "e5594bc3076ac29e6c1ebda77939bc4c8833de72f654b6e376862c0473199323",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.string.d.ts",
+      "bytes": 2451,
+      "sha256": "2f3eb332c2d73e729f3364fcc0c2b375e72a121e8157d25a82d67a138c83a95c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.symbol.wellknown.d.ts",
+      "bytes": 1566,
+      "sha256": "6f4427f9642ce8d500970e4e69d1397f64072ab73b97e476b4002a646ac743b1",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.intl.d.ts",
+      "bytes": 22399,
+      "sha256": "48915f327cd1dea4d7bd358d9dc7732f58f9e1626a29cc0c05c8c692419d9bb7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2020.number.d.ts",
+      "bytes": 1548,
+      "sha256": "b7bf9377723203b5a6a4b920164df22d56a43f593269ba6ae1fdc97774b68855",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2021.promise.d.ts",
+      "bytes": 2223,
+      "sha256": "db9709688f82c9e5f65a119c64d835f906efe5f559d08b11642d56eb85b79357",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2021.string.d.ts",
+      "bytes": 1553,
+      "sha256": "4b25b8c874acd1a4cf8444c3617e037d444d19080ac9f634b405583fd10ce1f7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2021.weakref.d.ts",
+      "bytes": 3132,
+      "sha256": "37be57d7c90cf1f8112ee2636a068d8fd181289f82b744160ec56a7dc158a9f5",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2021.intl.d.ts",
+      "bytes": 8206,
+      "sha256": "a917a49ac94cd26b754ab84e113369a75d1a47a710661d7cd25e961cc797065f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2022.array.d.ts",
+      "bytes": 4637,
+      "sha256": "6d3261badeb7843d157ef3e6f5d1427d0eeb0af0cf9df84a62cfd29fd47ac86e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2022.error.d.ts",
+      "bytes": 2340,
+      "sha256": "195daca651dde22f2167ac0d0a05e215308119a3100f5e6268e8317d05a92526",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2022.intl.d.ts",
+      "bytes": 7653,
+      "sha256": "8b11e4285cd2bb164a4dc09248bdec69e9842517db4ca47c1ba913011e44ff2f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2022.object.d.ts",
+      "bytes": 1046,
+      "sha256": "0508571a52475e245b02bc50fa1394065a0a3d05277fbf5120c3784b85651799",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2022.string.d.ts",
+      "bytes": 1116,
+      "sha256": "8f9af488f510c3015af3cc8c267a9e9d96c4dd38a1fdff0e11dc5a544711415b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2022.regexp.d.ts",
+      "bytes": 1304,
+      "sha256": "fc611fea8d30ea72c6bbfb599c9b4d393ce22e2f5bfef2172534781e7d138104",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.es2025.float16.d.ts",
+      "bytes": 20489,
+      "sha256": "f128dae7c44d8f35ee42e0a437000a57c9f06cc04f8b4fb42eebf44954d53dc8",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.esnext.disposable.d.ts",
+      "bytes": 6767,
+      "sha256": "1ecb8e347cb6b2a8927c09b86263663289418df375f5e68e11a0ae683776978f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.decorators.d.ts",
+      "bytes": 13153,
+      "sha256": "1ce14b81c5cc821994aa8ec1d42b220dd41b27fcc06373bce3958af7421b77d4",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/lib.decorators.legacy.d.ts",
+      "bytes": 1287,
+      "sha256": "b3a048b3e9302ef9a34ef4ebb9aecfb28b66abb3bce577206a79fee559c230da",
+      "kind": "declaration"
+    },
+    {
+      "path": "src/fetch-data.ts",
+      "bytes": 3311,
+      "sha256": "190622a2cb5d9d1cd59543f871b02f0bcf26acece581219e11a226745842c4c2",
+      "kind": "project"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/address/base58-address.d.ts",
+      "bytes": 6973,
+      "sha256": "948ce1b41d1dc286112d3febcf296585fd9b4bda30ca2e016379204239062009",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/address/bech32.d.ts",
+      "bytes": 5286,
+      "sha256": "f8933fa0028d0e494c2effdb12b652fd590e460f077b8f63b06b70fda949750a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/address/cash-address.d.ts",
+      "bytes": 21606,
+      "sha256": "d65cb2acaf278b5d955a51c0635733091718b2df061315f0acc98cdd89786c42",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/address/locking-bytecode.d.ts",
+      "bytes": 10299,
+      "sha256": "cfb3f0ec0b5a4b42ccc4705641cbdda03cbb5502f7238627a251d5119a4be246",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/address/address.d.ts",
+      "bytes": 177,
+      "sha256": "95ab2fe99faa3e25ff8eb9408451730506d4686dce877a96db073f62f9368932",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/bin/hashes.d.ts",
+      "bytes": 699,
+      "sha256": "16bd6879c5cbd654113504f42f767b989f0f66e08af15b2b8e6911ce7fd6ed94",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/bin/ripemd160/ripemd160.base64.d.ts",
+      "bytes": 23849,
+      "sha256": "9a18b997370e8442ed2fe2e7e60180f21d2a3e46e45f443784709eec8284f2e4",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/bin/secp256k1/secp256k1-wasm-types.d.ts",
+      "bytes": 22480,
+      "sha256": "5a95594356532fe14e4ff1aab944493571d7ba571c1f6c6b0026ab8018efaba9",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/bin/secp256k1/secp256k1-wasm.d.ts",
+      "bytes": 1147,
+      "sha256": "3c863e6ccce69483eedb3d505701a957c51af40859c7b19a4558836b1321a892",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/bin/sha1/sha1.base64.d.ts",
+      "bytes": 25639,
+      "sha256": "a3cc420b6dbdfc0245da4e0d837c339c3f9b6bed2efaa2e26dd8bbe4060cef41",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/bin/sha256/sha256.base64.d.ts",
+      "bytes": 25243,
+      "sha256": "6857d9f06f38c5a8d5bf2a0e8326b978b4876031a3c1f47665876c3daa94522d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/bin/sha512/sha512.base64.d.ts",
+      "bytes": 24395,
+      "sha256": "a240ea9a3333d3630ce06bf128d796a233df1147bb3cbda86a2b74a584e7f6ea",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/bin/bin.d.ts",
+      "bytes": 283,
+      "sha256": "4419778f6c54c431a8156c7de194ebb9e0876709a8cfc12d40502b0dd1019244",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/compiler-types.d.ts",
+      "bytes": 28938,
+      "sha256": "c1ade916bfb61cbcacfc9c67e5bec696951a7436bcf8f6c8366c795a4a79b38c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/compiler-bch/compiler-bch.d.ts",
+      "bytes": 20181,
+      "sha256": "8900c2075f40f2f29c43ebe473897d9e976d378adabdb5549d020577c11aee51",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/compiler-defaults.d.ts",
+      "bytes": 3086,
+      "sha256": "2bce7535ec77aa75143dad4ab47dbe152e4792acc6d04ae40d8640a223600f98",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/compiler-operation-helpers.d.ts",
+      "bytes": 5051,
+      "sha256": "e5f22b26b7e3fb64d470b3b60ae1a2498cee10ce7511acf33ca0dc49de81b483",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/compiler-operations.d.ts",
+      "bytes": 6684,
+      "sha256": "a08125d43a41d54195c73a806417831750deb0d0c4b7a8dfdfdc51bd707b1e28",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/compiler-utils.d.ts",
+      "bytes": 11325,
+      "sha256": "eb2a4371ea52999dda223aaceeea3c9bfae4b3fee12027673fef5ff4876dbb6a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/scenarios.d.ts",
+      "bytes": 10602,
+      "sha256": "577e958245b706b21d56bcd242e9b9631547e7ff91b9e4bcc9ce90e11a88a44f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/p2pkh-utils.d.ts",
+      "bytes": 19494,
+      "sha256": "96534084c048113c632b512cd10c456acde0d1d3d547f21ad11daae89d70fbce",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/standard/p2pkh.d.ts",
+      "bytes": 944,
+      "sha256": "9075d3dd8f2469c96d260e557870a66cae21f2158d4606844bd084c798850324",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/standard/standard.d.ts",
+      "bytes": 66,
+      "sha256": "5e9004c2aba118299bcc17d5d115044512faa9bd814417e3239e8b53f83ff5d3",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/engine/types/template-types.d.ts",
+      "bytes": 49515,
+      "sha256": "f2580b19469102c792df96eaf04b1d5c7a5466a7b03111dac089586602c5cdf7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/compiler/compiler.d.ts",
+      "bytes": 448,
+      "sha256": "914bfa5408fe15f35395ffda97729ccef39b028fbca57a31236c5d0a2da3ac07",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/combinations.d.ts",
+      "bytes": 963,
+      "sha256": "cfd66cce7b33cf37d3a54a75bb5048fc323bbef2a41cf5faba62826c444dbfea",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/base-convert.d.ts",
+      "bytes": 2352,
+      "sha256": "ff0a0b234149c49f85ea7e56dfdbc3155cf1b5519b228062d9979687240d9952",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/base64.d.ts",
+      "bytes": 999,
+      "sha256": "4abfff8bd68f35dba5de43166b906d6507878743dee0e171a02d6361f70d8056",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/bin-string.d.ts",
+      "bytes": 1295,
+      "sha256": "9e21aebdf5c8d37e38a0d98935800fbcec561a62cb70e6045a7ad993f876dbe7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/error.d.ts",
+      "bytes": 3070,
+      "sha256": "949f33c5c4f4c9086e8d99cdcc66ff963133df294706fc38b6ed669df4bfaebf",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/hex.d.ts",
+      "bytes": 2585,
+      "sha256": "bd2a5736207511dc9e620f277e3c6758a7439731469f831a44c6539933f6f231",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/log.d.ts",
+      "bytes": 2532,
+      "sha256": "f4be53b57742899e8601463e716946fcc1438b7d9cb7f07752011327193fbe9c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/number.d.ts",
+      "bytes": 15417,
+      "sha256": "cc3b435271e36b1fe9a798f2d9c12cc3b4d4cde59b0833ae284d061351a4e738",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/read.d.ts",
+      "bytes": 2723,
+      "sha256": "09414ca892dcbd88eaa2e77391310d5ec025b613b15db2345aadebdfb3bbdf95",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/time.d.ts",
+      "bytes": 2859,
+      "sha256": "8bc7ec17c82dfa34661ecd4ca91140533ade9f800ee217402d339400351459ed",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/type-utils.d.ts",
+      "bytes": 1334,
+      "sha256": "dbaf089f47c0433b37857abfa70c6466bf2b2c9ff8616b43b799833a727334a0",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/utf8.d.ts",
+      "bytes": 2314,
+      "sha256": "80545060d941ef589373638e311175567021788113b55f9d18571bde686cc6e5",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/format/format.d.ts",
+      "bytes": 356,
+      "sha256": "428565fe14b2bb1e0780087739e6a568b102e449da66c2ba4ae8fb6293e7f06c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/dependencies.d.ts",
+      "bytes": 124,
+      "sha256": "07407dac9e8f0884a6199a270bca13000fe7f7d5f98e07d55a82bebfcec12d53",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/secp256k1-types.d.ts",
+      "bytes": 14905,
+      "sha256": "09a82bcfb91559bdefc2beb61d7d05383b19fc21ce7ed69aace3f5d82f712502",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/default-crypto-instances.d.ts",
+      "bytes": 1165,
+      "sha256": "8bd0eaaeb6413130a8cb3f3121f311a0043869db0e1660ac0927c685d70a0ad6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/hmac.d.ts",
+      "bytes": 1957,
+      "sha256": "a7230ad3b3aa122cda0a050e095981b5bd9d08ab9459bae34f3711953cc14f0b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/pbkdf2.d.ts",
+      "bytes": 1972,
+      "sha256": "61d4b3c2aa4f4dff797d43aef36086d61bb602948f7db75b218de8e0652ce01c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/ripemd160.d.ts",
+      "bytes": 2406,
+      "sha256": "7ac2d6b2189f51706c6a86a425a67f5dfcd9bc2b8e00670dcb1729f4f22e202f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/secp256k1.d.ts",
+      "bytes": 2913,
+      "sha256": "28b2a0553c2d979d452cf6e47ff1ac52ecce561c8ce800a407c42b4443863d00",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/sha1.d.ts",
+      "bytes": 2285,
+      "sha256": "2a296c7ce77f2c255fb20f27e0bb1fe2055d407a78f31810a69706ea26d5a07b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/sha256.d.ts",
+      "bytes": 2349,
+      "sha256": "5fc405f5c75b8ca0d379338b330b631e7577cda8abf996ce6887edac980b48ba",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/sha512.d.ts",
+      "bytes": 2335,
+      "sha256": "714beb121bd85c92902dccac1c424cc690859bb31ab3d2d29308a847a1ab0368",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/crypto/crypto.d.ts",
+      "bytes": 361,
+      "sha256": "24ddcdc0cc404c5fdcbda1c27b7659515ba81af6896e026abbca10267752b609",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/engine/types/bcmr-types.d.ts",
+      "bytes": 40467,
+      "sha256": "2f1f526c402fd34b4b8cf873ad1e50ed9c132a76c52fbb070fcea2e089461871",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/engine/engine.d.ts",
+      "bytes": 118,
+      "sha256": "a5e92b746baac5a9c1954217806a090fbf3b4854d9c59b9b7e68f958fe8dc4de",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/hd-key.d.ts",
+      "bytes": 42876,
+      "sha256": "750d01f84d263d7bf572cdd974a5e4d91f13a4e8cdb5c0c155794658ed4d5b56",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/key-utils.d.ts",
+      "bytes": 7122,
+      "sha256": "577dbdc2c784980a407036a03004b16cc7f288c8b2ef0e9af89b6359bc55f7bd",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.chinese-simplified.d.ts",
+      "bytes": 117,
+      "sha256": "3092f82049f51a30217ec4cfd72d525045dc663358420b511d0bfc8b176c23a2",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.chinese-traditional.d.ts",
+      "bytes": 119,
+      "sha256": "909cedb66be6cbe9de2f6fa72f04602861d356c6dc3b183b476787e80327379f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.czech.d.ts",
+      "bytes": 92,
+      "sha256": "a2d5bded26b161bbfc70e46060cb091d89d456a0953d5980d611a52b75641393",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.english.d.ts",
+      "bytes": 96,
+      "sha256": "3270a62e9dc7cf0980582313878d7bf557491ec38c9c07eed8d4251c156ffab0",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.french.d.ts",
+      "bytes": 94,
+      "sha256": "714ad7a7b1b4671734e08fbd752a5f09ed98b4bf0ea8fd8a96a4190ad5f293ee",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.italian.d.ts",
+      "bytes": 96,
+      "sha256": "99676bc27250b096dfd65338b69f3bb37b95143f97ab19cf272076ddbf264e34",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.japanese.d.ts",
+      "bytes": 98,
+      "sha256": "b9384b0854919d2aabf0e77a34e8396a0fb7efc48b39a29079f3b061565f4aaa",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.korean.d.ts",
+      "bytes": 94,
+      "sha256": "ae133bfc352a8fb028f1440882ce0a9d22ebd4a3728380719b023a95c06220ca",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.portuguese.d.ts",
+      "bytes": 102,
+      "sha256": "c3cef408f4ad7c3559b380f8ff37b1e97ba4a48a05998745654c6bcf5509a7f7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/word-lists/bip39.spanish.d.ts",
+      "bytes": 96,
+      "sha256": "dfb0978de09461409784e94fa2fd0aadd26217d563b7aea8826f56111ac6dd13",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/bip39.d.ts",
+      "bytes": 15189,
+      "sha256": "1cbdb3915ae31b4e4290a33d62779a5baf885fea5996314faa7afc7459c043a4",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/wallet-import-format.d.ts",
+      "bytes": 2653,
+      "sha256": "497fd97d915f726ecc44a7cdb2589d1fc5627f5cbc1fd0d650590b1cfbbb7a33",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/key/key.d.ts",
+      "bytes": 165,
+      "sha256": "f8bfceba8dcc44be7048ba9cb7aed23b5310b1457c6546fa6a432284f0b5618d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/language/compile.d.ts",
+      "bytes": 1105,
+      "sha256": "6d6a37d4e0c9fdb5a96f70a48a9736a559aac6237c7553735b226a148adcc739",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/language/language-utils.d.ts",
+      "bytes": 16847,
+      "sha256": "a73193c5747e55f1d8804ff71a16dff6851279911778366dd91b8cf350f13532",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/language/language-types.d.ts",
+      "bytes": 14076,
+      "sha256": "146b0696a8332889258d80873f142d2cc0042163cc37c7046c4693aba9334cdd",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/language/parse.d.ts",
+      "bytes": 148,
+      "sha256": "5e6a8186fc4d3d31fb0c1ca5087e846378d3302f5905a8ccc2ab243ffa10f94b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/language/reduce.d.ts",
+      "bytes": 2291,
+      "sha256": "569b7f02ca58f3d5847e9530b958a6c9f3e7c8f683a58a578e889ba3001c8ccf",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/language/resolve.d.ts",
+      "bytes": 6226,
+      "sha256": "9b183c30718a77e32e608d98c9bc75b5fa0c101ef9b805d8bcfbb8f853adf6a1",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/language/language.d.ts",
+      "bytes": 229,
+      "sha256": "e312e6add715ec2e97e938409478d9017d6c91f4487ce6e4aa2709e60f67cd95",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/message/read-components.d.ts",
+      "bytes": 2925,
+      "sha256": "98d9bba055a822e1989148118d2a325014477621d5c256a5393b86f9da14059f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/message/transaction-types.d.ts",
+      "bytes": 21537,
+      "sha256": "eb54e3233eb53b27921b2a8d533e7ca7c233ff668f4ba6135b44503eebf9699a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/message/transaction-encoding.d.ts",
+      "bytes": 14357,
+      "sha256": "4628ea537aec3c0a4ef28d5c627f0ba7f2b3e6dcc1b62ccb817609fe0b9e856f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/message/message.d.ts",
+      "bytes": 158,
+      "sha256": "c2a227bd507cac7fdbdb2f5375e3b05f6f28f7e247244c52c81229942d5989aa",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/schema/bcmr.d.ts",
+      "bytes": 762,
+      "sha256": "74ac9fbbe6fcbd7c6605d6b7c0862bf0eb81cc86d6c6599a08aee02e7d531b38",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/schema/wallet-template.d.ts",
+      "bytes": 1179,
+      "sha256": "1307a14e18113e3fbae492789ac4d0a6207ab2f5a50a5ad7e292917925b553e8",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/schema/schema.d.ts",
+      "bytes": 101,
+      "sha256": "d5d0238cb8919cba3933ebbb2564386106585d987f69a101568e9c7fa717d99e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/transaction/generate-transaction.d.ts",
+      "bytes": 4666,
+      "sha256": "26de579c6533e646570818cad56fa5736511ce0b9dc9aebaf4cc9693f3d6a905",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/transaction/transaction.d.ts",
+      "bytes": 84,
+      "sha256": "29c97e978dd0682439d4109094dff72ec8707906786343f6ba6f6f82f9260f75",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/xec/xec-descriptions.d.ts",
+      "bytes": 20022,
+      "sha256": "c889bf0f75e062488d4a48cdcbb69b43079e638c50c629cb16aa39d26cddc855",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/xec/xec-2020-consensus.d.ts",
+      "bytes": 1384,
+      "sha256": "8bf7a04453dd7f458b10a49ece854b977d13a1d87e1d714714e430048e4e76e7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/xec/xec-instruction-set.d.ts",
+      "bytes": 2572,
+      "sha256": "0edcd8a37371994b9b3ed5876cd0d4885e401f63c0f4bd15bbd2a3c69c143b2e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/xec/xec-opcodes.d.ts",
+      "bytes": 6136,
+      "sha256": "fa873558ab06c093df32610127903e86297bec3cc29a97720da7479844bce250",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/xec/xec-types.d.ts",
+      "bytes": 360,
+      "sha256": "f970dcf7a87b07c897fa80800d77fd7927734f35b7b6a1fbf20f3cb7aabff5b2",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/virtual-machine.d.ts",
+      "bytes": 16435,
+      "sha256": "9a1b3cea72e983696d1bb942b5425b355ab800344c57f5edf23ebd7f4ae6adca",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/vm-types.d.ts",
+      "bytes": 9195,
+      "sha256": "0a94832e8d76e8b8cdb6c0f2c5befa84a14e9b0863245081d87f71bf41c75ff5",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/xec/xec-vm.d.ts",
+      "bytes": 711,
+      "sha256": "4cdd04a9d57df0fb0756bcac13a2b3dde38ca91d481d18213b477a18de9b3e26",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/xec/fixtures/satoshi-client/bitcoin-satoshi-utils.d.ts",
+      "bytes": 1087,
+      "sha256": "b25de48fe135da31969d65cd1020df5f660bcab38aee1e2a906c1cdf9f934035",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/xec/xec.d.ts",
+      "bytes": 277,
+      "sha256": "a6d5464c400860c746d59538eeac8aba030bd286a30382cb35ffa180bb45360b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/arithmetic.d.ts",
+      "bytes": 12212,
+      "sha256": "74a71c37496aae653c8b02ca8c0c3ab9d26326579486136aff08391db3b4f31e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/bitwise.d.ts",
+      "bytes": 1114,
+      "sha256": "b6e04b6d80f3858f37fe93d61dcc20c40016e52bfc0ad538ed400a9af51e4f1d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/combinators.d.ts",
+      "bytes": 7044,
+      "sha256": "48198ab7904103efe5c8554c7cdb9428e40c4218bf0d72e1d8f84dc66d6c637f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/common-types.d.ts",
+      "bytes": 1805,
+      "sha256": "e5d822dd654900c91f412122e5a425ea1f38967de37fb98fe6088eabb34d5dc2",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/signing-serialization.d.ts",
+      "bytes": 14052,
+      "sha256": "177bf266d7e5390ebe786294c89531bd77f6015285876efc6888cda82013a42a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/consensus.d.ts",
+      "bytes": 1526,
+      "sha256": "0b8b479022a25a1f9387e7d0c777adc9f448b20b25de96ae17e4a0daf9e5cd4e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/crypto.d.ts",
+      "bytes": 5654,
+      "sha256": "728f371ed49ca4d0ec04e0bbc5fa86779511dcd6402bd1d16f7a90745a416911",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/encoding.d.ts",
+      "bytes": 2233,
+      "sha256": "52ff0058cc25ce2c48b6e252de7d4b46fac848f3b93f7c264b89e39d2192e63c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/errors.d.ts",
+      "bytes": 10766,
+      "sha256": "d9bc6fa65aabd45cf99de6b793cf3399cf2864d063e52609b7efcceb81ad0058",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/flow-control.d.ts",
+      "bytes": 1797,
+      "sha256": "bbaed0d71dfb05a073bc6b4d65ed505bfcf4316d47afc5cd00abee095149dee2",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/format.d.ts",
+      "bytes": 1530,
+      "sha256": "f29fb82bb0c93c66078cbe99014f7783f813262a0d48120c181a5390b5b5a47e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/inspection.d.ts",
+      "bytes": 5046,
+      "sha256": "16a32a3f8e6cb670b1429f16a70e58249acf1542da302db1b0ce5d9c69207717",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/instruction-sets-types.d.ts",
+      "bytes": 3387,
+      "sha256": "4957662cc60e39dbd3f49a21b33a6764567bad9b22c66137ab40211b813eeae4",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/instruction-sets-utils.d.ts",
+      "bytes": 17210,
+      "sha256": "85447f62ea432a9c887ba8bfb95c526272234c263e8146262746fc2601ac57b7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/nop.d.ts",
+      "bytes": 522,
+      "sha256": "9f1fe22bca3d154b2eeb89900eeb6e35106e15a6e2bf53cd1fb00c024c002324",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/push.d.ts",
+      "bytes": 2383,
+      "sha256": "e304bfabdbc384d875976f22a889cd9bfacc6281fdec8115c21d7067bf9e1d86",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/stack.d.ts",
+      "bytes": 2406,
+      "sha256": "32e59b19cc93bf7cb790d4ab56c92a0287e4920103f1e50cbbf46ae3021e98b8",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/time.d.ts",
+      "bytes": 777,
+      "sha256": "4dfc74e0a5679fc2c1b0313e7c7c522f6d6d1d009c77699029d0ecce79decfad",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/common/common.d.ts",
+      "bytes": 791,
+      "sha256": "3d5839dcc56fa931ef88d454b74e117800c8b9e6c70dd5ccf61dd0dcb76fb187",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023-consensus.d.ts",
+      "bytes": 2502,
+      "sha256": "3c1b3809ea6da3c58a279741ab2425da759b85b50458e38461c94220a169c43a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023-descriptions.d.ts",
+      "bytes": 24781,
+      "sha256": "4158dd0a7134c2f0f138945a06a0ad6748a417139865d4bddcb3e77caf7fe4a8",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023-errors.d.ts",
+      "bytes": 253,
+      "sha256": "2e0458be0cd065395bc165c7777281c958a1e8586428e7e628f47f995790af03",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023-instruction-set.d.ts",
+      "bytes": 4527,
+      "sha256": "9ad764f9903faa5aa5d8a0ca4caac44cdc3b7b7def97cba135ff689e5e56692c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023-opcodes.d.ts",
+      "bytes": 6707,
+      "sha256": "509192bd052e4fa7bec4c701b6a6b34480259ced14b12cc506608a209aa81691",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023-tokens.d.ts",
+      "bytes": 4083,
+      "sha256": "d7a2ea953129194a8fc48f7a289a37e2a71c7fe970a377914335e09e4321157f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023-types.d.ts",
+      "bytes": 2334,
+      "sha256": "388effeb73398f33036df083fea6713b1288083b48d8cc6e68d095b35db2acdd",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023-vm.d.ts",
+      "bytes": 742,
+      "sha256": "2269f138d5d502521704a643c7f83feedc1de07e01cd48760da8f5276a7019f4",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2023/bch-2023.d.ts",
+      "bytes": 356,
+      "sha256": "c7dcc325aeece79439f4c4f32a9416c40536a0ff0d2a4ae3e9c2f8ca2e9dd95c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2025/bch-2025-types.d.ts",
+      "bytes": 441,
+      "sha256": "74ece685c9f4e96b195f53d8cbcb58e0ec2df4abc67ff4962774855474de894a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2025/bch-2025-consensus.d.ts",
+      "bytes": 2068,
+      "sha256": "63ec6bfbba5ed9fad7b4287821a3fa6cf3186b05638876de76cee674f8187f23",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2025/bch-2025-errors.d.ts",
+      "bytes": 10984,
+      "sha256": "1503ef1bb02bc6e8d0f9a73fe5123fa6f0562ca39204c729e3417215200b20d6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2025/bch-2025-instruction-set.d.ts",
+      "bytes": 2607,
+      "sha256": "00023a03fbd0343a20b41dfc6293dc8f9be5ef5a6d770461d442b745c5e3bbde",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2025/bch-2025-vm.d.ts",
+      "bytes": 742,
+      "sha256": "f5cb8fc2253504d3be9b73e12225cb118ef9b85a767b8a223af383410c3c61bd",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2025/bch-2025.d.ts",
+      "bytes": 235,
+      "sha256": "2f11842244b6fb191832bfe7ca246e3f71aafdfd6bb3cfe65013b5bf3ee13c3d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026-consensus.d.ts",
+      "bytes": 1772,
+      "sha256": "d9b0d5ea4655c54b9629a3992501de5bf60b8d6e97d1d94e25004874b9681a0c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026-types.d.ts",
+      "bytes": 449,
+      "sha256": "475743dedd310cbc587dab8461f665fd548585b1597643f04b53da390968ac80",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026-instruction-set.d.ts",
+      "bytes": 2729,
+      "sha256": "a602300894001d24b1392c507aa19aea31cd367c5ae30b0ae6ed597ab3da8e81",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026-vm.d.ts",
+      "bytes": 742,
+      "sha256": "68424be326fd0e81ed0fa6cc66c9b350315b0cbb1920dce6fb3f14067251a1f3",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026.d.ts",
+      "bytes": 156,
+      "sha256": "94b3027bf49977721fcb94ca76aa616feda9fcfac98db7c882bf768b3b810d9f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026-descriptions.d.ts",
+      "bytes": 15916,
+      "sha256": "bebf572e0cb5232fd972e72c4eea4bd4e6c6d7f754b69ada137b797dddea818f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/spec/bch-spec-descriptions.d.ts",
+      "bytes": 18451,
+      "sha256": "bddfdb1f48959af81af8917f559e23098de892206ec1181d20c80801625153ca",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026-errors.d.ts",
+      "bytes": 12649,
+      "sha256": "292d7c1c84a279c87beba0487d619cb6b90d6f0d559445760946b7dfe161ca0d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/spec/bch-spec-errors.d.ts",
+      "bytes": 12333,
+      "sha256": "694a47f585d66ffab9f97bc2b8f7fc857a8b202222f60c83013fd39ab12ba571",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/spec/bch-spec-consensus.d.ts",
+      "bytes": 2242,
+      "sha256": "993fc2d99c0e578a9780bbebffc6c956f329860e0903f9c3a20fe59a9a7804db",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/spec/bch-spec-instruction-set.d.ts",
+      "bytes": 2811,
+      "sha256": "a0df21a3cfd7e5c702093b2892eeb860f4686d3011e4929893aae44ea50f3d3a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026-loops.d.ts",
+      "bytes": 329,
+      "sha256": "8e6550bc40d88a1d746acd4883b4a6a941813df9d001cfa19a2895dd9d8e9d7f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/2026/bch-2026-opcodes.d.ts",
+      "bytes": 13565,
+      "sha256": "a76efdee66dc6b0946d0d588b4e8e1c24aeea005791a00634e2d6c3ef7785ec8",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/spec/bch-spec-opcodes.d.ts",
+      "bytes": 18790,
+      "sha256": "2ae29fc8d6616bfced1c8be2adcb9cc0f4ab7389535db9313e5988936d74c928",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/spec/bch-spec-types.d.ts",
+      "bytes": 896,
+      "sha256": "72bacf96b845d4f5a754af0f521a857819f687117b6e5278257383453940d82c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/spec/bch-spec-vm.d.ts",
+      "bytes": 866,
+      "sha256": "a78f8c5c268e69e13c2c962571ca352953aafd963a36ce7abffdec74e4cb83ed",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/spec/bch-spec.d.ts",
+      "bytes": 320,
+      "sha256": "a1f718b70135a5561a6b247d5b632a4177f8ca8f916c4194ddeb4e185299698d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/bch/bch.d.ts",
+      "bytes": 82198,
+      "sha256": "fbbbfb539d9439028491ad5d7ba244f68cb30ef60118eb916fef8d1e6d327728",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/btc/btc-descriptions.d.ts",
+      "bytes": 19123,
+      "sha256": "5f439f9b428b4819042db3c9cd2ebc1d01227821c75c0d8416456781635996d5",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/btc/btc-opcodes.d.ts",
+      "bytes": 6428,
+      "sha256": "a5e4dafb7d18ccda9e24395a302318f8158f4e25011142352502d549cff343e7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/btc/btc-types.d.ts",
+      "bytes": 268,
+      "sha256": "aa22fb0a2672dc4bd1858121674bb87ffb67cc1f63b4d4de071f2098917530bb",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/btc/btc.d.ts",
+      "bytes": 138,
+      "sha256": "c0c81406c104bf1aecd935b2947171b283ff3b153d539193b3151d54ecbed1b2",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/instruction-sets/instruction-sets.d.ts",
+      "bytes": 37038,
+      "sha256": "cb8c577f658509f262e878c6d3658f06008864c90261f87da9c7011d6ac570ed",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vm/vm.d.ts",
+      "bytes": 157,
+      "sha256": "490e36ecada1b2924a08a79137a30a4180ba888a4ad0099e0525ca80dd5c3502",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vmb-tests/bch-vmb-test-utils.d.ts",
+      "bytes": 15006,
+      "sha256": "929f42125c4be64b4761c0262616e0ed7b72ff4c3e375f234812967e6ec835f2",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/vmb-tests/vmb-tests.d.ts",
+      "bytes": 80,
+      "sha256": "1d4dd1f50665186141bb602fd5a627f3d54343666f34c6eb6fec33cb8c906700",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/lib/lib.d.ts",
+      "bytes": 509,
+      "sha256": "eaa35557a8e5b4e82aef16210e4dfe99244361d1e2a84c4c49ce844d98afb659",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@bitauth/libauth@3.1.0-next.8/build/index.d.ts",
+      "bytes": 65,
+      "sha256": "9ef9b3e43e4c3c092943fa1792c867fc4fee2bd1bbe54e6e91d6ce8bcccb0dd0",
+      "kind": "declaration"
+    },
+    {
+      "path": "src/harness/vm.ts",
+      "bytes": 18342,
+      "sha256": "afa1adcb60fc425e566062ca5d6f15f82329109be218323890ddbc921fd9e46d",
+      "kind": "project"
+    },
+    {
+      "path": "src/bch/build-vkx-chunked.ts",
+      "bytes": 4237,
+      "sha256": "98704a00f364bfd2296c8ec18c2916f6a4a72a7fe15b67d81b14f48ac35a8179",
+      "kind": "project"
+    },
+    {
+      "path": "src/bch/fp-mul.ts",
+      "bytes": 3442,
+      "sha256": "0b6c69bfe02cb5f18a13ca8848c2866a9e04ce14d4de546de078affbb5e7c8f8",
+      "kind": "project"
+    },
+    {
+      "path": "src/bch/vkx-chunked.ts",
+      "bytes": 8201,
+      "sha256": "d4f93217bebd89cf0f0846fad4284200937628caa1f2cdb27f39eb16510ed5f1",
+      "kind": "project"
+    },
+    {
+      "path": "src/bch/vkx-scalarmult-sweep.ts",
+      "bytes": 2786,
+      "sha256": "a5597a5615c7fe5ade19c6bf32d84a0ae304a71c731b14b524d86adf5d7bb161",
+      "kind": "project"
+    },
+    {
+      "path": "src/bch/vkx-scalarmult.ts",
+      "bytes": 2363,
+      "sha256": "a1925f41c35d292fd8479ed7f5b31dbaabc883d98bee9b6004f636f7741d3f0c",
+      "kind": "project"
+    },
+    {
+      "path": "src/bch/vkx.ts",
+      "bytes": 4526,
+      "sha256": "a3b2ff21b1e06468bfac193ab2c40364cdf647603ac2dbc25734b943a094a26f",
+      "kind": "project"
+    },
+    {
+      "path": "packages/@noble/hashes@2.2.0/utils.d.ts",
+      "bytes": 20457,
+      "sha256": "ed8b5ae9e1f97b6aaf52f7ed14ffabf6ed0cdd7946210ef26f19219023393c62",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/utils.d.ts",
+      "bytes": 19218,
+      "sha256": "f59d777c3891f6dfce863dd43ee46a870a63459669032d134d1bd11e24ab5ba6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/abstract/modular.d.ts",
+      "bytes": 20380,
+      "sha256": "6166ff2b901ca77dc9d58169f797bc926dbc9de96163ee4a720f2f11f5b3addb",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/abstract/curve.d.ts",
+      "bytes": 17941,
+      "sha256": "77c8470b0c4e7c753019282e09de7e3cb211d19554b4c5f4dc9c63f4f99d6869",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/abstract/hash-to-curve.d.ts",
+      "bytes": 10006,
+      "sha256": "8f6ca4f9652c9f86ddb7a13d7e31ec808387af06fcdc610d9cbcbccadc05931d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/abstract/weierstrass.d.ts",
+      "bytes": 23623,
+      "sha256": "67893131b82b994ab84e464d28f2a101392c32c6961052eb604e52d0ef8532d9",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/abstract/tower.d.ts",
+      "bytes": 7895,
+      "sha256": "4a27dae71bc104129867d9520feba8d011a47a335b7b67fb8616bdcf789ed6f6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/abstract/bls.d.ts",
+      "bytes": 17626,
+      "sha256": "c8c78aa94b4a38637adc337de836cb041eb527c5524cb49bd2fe26520a5d159e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/bn254.d.ts",
+      "bytes": 3183,
+      "sha256": "cc2e1eb6d7f58058ba048544919bdc1e17fc3cc5ac1cad007f34cbe5b9eeb335",
+      "kind": "declaration"
+    },
+    {
+      "path": "src/checkpoints/bn254.ts",
+      "bytes": 3283,
+      "sha256": "2f4c97e9cb77b82e6a2654e6e8291e31fad0275f1d5099d3b91daac218c7e8d9",
+      "kind": "project"
+    },
+    {
+      "path": "src/checkpoints/demo.ts",
+      "bytes": 2446,
+      "sha256": "4c5efc5e206b1561ad5b0902e564da519e11b6de51498affb796c89ffc3f68f3",
+      "kind": "project"
+    },
+    {
+      "path": "src/checkpoints/gen-pairing-vectors.ts",
+      "bytes": 8790,
+      "sha256": "4acbd5180ac0b7d34045f5cd94903035793d259b24d52371eaf5bf5edde28982",
+      "kind": "project"
+    },
+    {
+      "path": "src/checkpoints/pairing-check.ts",
+      "bytes": 9293,
+      "sha256": "1854d692f1687d1490956378c0dc20d6c9a7e8458f2018bd3e0e641f29b04c38",
+      "kind": "project"
+    },
+    {
+      "path": "src/checkpoints/probe-fp12-basis.ts",
+      "bytes": 3599,
+      "sha256": "e91167b609a949da4ae3714802542567bacd637bcafad64bede5d8eab4f77842",
+      "kind": "project"
+    },
+    {
+      "path": "packages/@noble/curves@2.2.0/bls12-381.d.ts",
+      "bytes": 878,
+      "sha256": "1010d72eb91a8fb0ee737553a9e11ce16aed99948218d7797531ddeb3b056694",
+      "kind": "declaration"
+    },
+    {
+      "path": "src/harness/adversarial.ts",
+      "bytes": 6581,
+      "sha256": "0afc14ba5f547f3d72111b0112ffac6b8fbe305990b1f643467dbb9f19a48828",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/gates.ts",
+      "bytes": 10483,
+      "sha256": "521fed58377245edaa3b921a1fedabc25bdd524b001a2f5fda2209ae706f2c73",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/redteam.ts",
+      "bytes": 4362,
+      "sha256": "7fe449fcf605173435c5ae2e1e34ab35926766b0bbbb5825ab9e40bda20d26a0",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/txv5.ts",
+      "bytes": 28579,
+      "sha256": "639de7c43cb1690de97cd04ffa423cfd08a05fdb279510ad18bfe98e4c769bda",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/types.ts",
+      "bytes": 23648,
+      "sha256": "3b5e8cc3e5f3847077009f6e83a61ca80cbcbca6e049432d5ca41047c9ec2d9d",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/scenario-contract.ts",
+      "bytes": 21754,
+      "sha256": "718ce1f3b44beb36d7595c3099cc0d8b0a33abff232c18f60cceedf06952e70a",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-chunked.ts",
+      "bytes": 6297,
+      "sha256": "121d78385a500583c41ad2aec7e36a78ed077fd044148928be9ef28516debe68",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-chunked-covenant.ts",
+      "bytes": 11034,
+      "sha256": "a189ef7756734c364eb404a8844a062687cbe8cbbb38e1ed233e152fee21498c",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/groth16-proof-inputs.ts",
+      "bytes": 10484,
+      "sha256": "09aac42589e1b25b30f55683f0f19cf5ef884272a6fb8bf1dd92f34484e38b1f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-chunked-covenant-residue.ts",
+      "bytes": 9065,
+      "sha256": "707c67ce957d6cfdced0b35123776564c4ec67977761672b7018f150782f642f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton.ts",
+      "bytes": 5547,
+      "sha256": "195478a50660d0eafe2c6a3729af674fb0663d08ff2bd44cad634cde11849f66",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton-opcode-optimized.ts",
+      "bytes": 4481,
+      "sha256": "7b2de447fa6c3a7604c0d02877ddf9e875927c45f42e086a08ce0fe845dd4c6f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton-genpow.ts",
+      "bytes": 3625,
+      "sha256": "80a87a04a486b505bd9a4f0a5daf1a4b395d3b0c1caf308c4f7a04a0b301c674",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton-minop.ts",
+      "bytes": 5541,
+      "sha256": "3c2a2e7118719fc0321a6704ad381e3239fe75cbc921807dd67dc83dfe58896c",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton-fs.ts",
+      "bytes": 6309,
+      "sha256": "12dd7ed4ae8cad4eb578dd3cae1b65b4bd7e962d911f83555838e9f7a01c159a",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton-fs-spec.ts",
+      "bytes": 3875,
+      "sha256": "2c83dc829bced57d5a29e3f4add733928005097d7e1997e372da5bd9b94e559f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton-fs-spec-shared.ts",
+      "bytes": 4557,
+      "sha256": "b0c82006e4185f700584d3e5f3c8b0dda228c46d70649bc7f52383e30d9922b7",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton-fs-spec-zero.ts",
+      "bytes": 4868,
+      "sha256": "5568d30a931642396e270f0116c919d4074fc419c569d317d1601f09c0878594",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-sound-native.ts",
+      "bytes": 4065,
+      "sha256": "88a8007bdfc92e7fc2738ff70d156295eb69cf0f0827e518d6c5fbdda1ec0a5a",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-chunked.ts",
+      "bytes": 6880,
+      "sha256": "5f328e79c6a37e15f2fb30d8704ad4428f04184f71c4e62bca188b216f8046e0",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-chunked-covenant.ts",
+      "bytes": 7723,
+      "sha256": "66eeda86bbebc6b5ac85e4cb62a2a304bd330163c72100dc38ea0e71d11c6a30",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-chunked-covenant-residue.ts",
+      "bytes": 13006,
+      "sha256": "885809e0743a4e6d811fbfc90f51a534af64cd38ed03941d015151bbf33d337c",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-singleton.ts",
+      "bytes": 7484,
+      "sha256": "d098af2377c3dc5c4cb59b5f3705b10ac9ef1eed6be252f17d415480be4272df",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-singleton-opcode-optimized.ts",
+      "bytes": 6416,
+      "sha256": "0d1f2c93253f145f5efbb429740d601650d74fe67e1424d67cfe5b78f59059ae",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-singleton-genpow.ts",
+      "bytes": 3774,
+      "sha256": "32f1c98277dbf387c75b40bd61454a196b458f6ef3daf6aa161b25a268dfdd6c",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-singleton-minop.ts",
+      "bytes": 4253,
+      "sha256": "8780925331df8c12628274e75f563f05502c6de3aebc84354baf8a75f24cef93",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-multistep-demo.ts",
+      "bytes": 2316,
+      "sha256": "66a68dd6474ce48714ac519e238e23c21253e8df20a3d35b7695576b276647ae",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-pairing-bls12381-chunked.ts",
+      "bytes": 5328,
+      "sha256": "b8c15fc23a9e1cf62662ae67a31b83660685a58a23fd32bdb5eff033f372a9e6",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-pairing-bls12381-singleton.ts",
+      "bytes": 2553,
+      "sha256": "2be60db10af5e5910511279026efcbe9c5a46f8a6da94774eb2ef92915fb6724",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-pairing-chunked.ts",
+      "bytes": 4708,
+      "sha256": "6517052c59b0f4393ffaed920df971c24ef549cac31406c8620c45a5b44271f9",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-direct-state-public.ts",
+      "bytes": 2123,
+      "sha256": "64756fa803c409efb27b6a07cfd14846d3bb1eced5bd68c794504e6285fb031e",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-residue.ts",
+      "bytes": 11887,
+      "sha256": "153429580bb65af5b46a08404271cfba584cc2337db390b5b09b21780fda9447",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-general.ts",
+      "bytes": 9176,
+      "sha256": "7dbfa439d26fa873e99486724a333ba5ec1e608132850870acd164f8a8db6aef",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-residue-large.ts",
+      "bytes": 7395,
+      "sha256": "ecad2d02c2594b8fe3b90ba853f5730c823b6cb86be17adc9f8d284e4b34ef4b",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-crown8-rawchain.ts",
+      "bytes": 7084,
+      "sha256": "4107301ebfd7b270c99e36bd771b67dc6d3a528bdd5a297de428eb3120e86a99",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-sound-si-gls-single.ts",
+      "bytes": 4326,
+      "sha256": "352155072e83458534f84c05676526de7488c8050552f2326b22cd03430eb444",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-sound-si-gls-single.ts",
+      "bytes": 4889,
+      "sha256": "703b6fb67fc658ab74433e0f9536270ea479fa2c0e5a41ba594ddbaf9de5e0c4",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bn254-sound-native.ts",
+      "bytes": 3594,
+      "sha256": "7d93a5770e8a45949c25a6969d2a0f11ffd13faafd770b206184d3c7f055b3ee",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bn254-sound-native-affine-candidate.ts",
+      "bytes": 3261,
+      "sha256": "9efdbbd88add5f2b3d34aabf4b7a050ce600a5b91c453b3659986b4b4d936d56",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-sound-si-gls-dproj.ts",
+      "bytes": 3806,
+      "sha256": "219071d29a8c10c4535a770b66fb8890ec9fbe775c06deeff21f4d60156ddbdb",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-sound-si-gls-dproj.ts",
+      "bytes": 3983,
+      "sha256": "89fa3cccbdf1545a46ccf655cfda6fe9ee177d51067f9d9fd76016629ea2b788",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-singleton-rolled-residue.ts",
+      "bytes": 4373,
+      "sha256": "1437a22e333eb0b01cef177313b4f715295130138986f8cea88500a69ea78084",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-singleton-rolled-residue-mulc.ts",
+      "bytes": 4736,
+      "sha256": "18af2492816a802531d5e077d4dcacfb242319aca03d422c14b9a5e1c6b3b817",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-singleton-minop-rolled.ts",
+      "bytes": 5368,
+      "sha256": "aa91a4a4ec05c2acde636932ba7355415681044d32178a8667cc88bcf7ace828",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-grouped.ts",
+      "bytes": 7706,
+      "sha256": "a9a78cfc2dc2134d36f8f3acb427512ce1523efa1a534d0a9c7d16a474581108",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-pairing-bls12381-intratx.ts",
+      "bytes": 3427,
+      "sha256": "458e9f4c79630fb2b67d7b6a3f16a7a1d29a5257b9e296e8a53e9927a38d363f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx.ts",
+      "bytes": 5502,
+      "sha256": "a3d146e2faf2be0f4cdc19bf94805edc75496f188cd41137814db08c053ff741",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs.ts",
+      "bytes": 8947,
+      "sha256": "bc20f2d06b9eeacd74ec03c73fc0b3a772861d5539b47f5de58a1729ef68e16b",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-compact.ts",
+      "bytes": 7293,
+      "sha256": "ec9304ff7a25f1eeba3ff1f897b6c6d8cb6dadbb38ed9d45b9113f5b98d437b5",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-final.ts",
+      "bytes": 5833,
+      "sha256": "afe4624f44b80c7792e464a3b66baea28189db6fefc4da543158b6660a3c65b3",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-regular.ts",
+      "bytes": 4709,
+      "sha256": "a2375e35a89cbe2d7104833f51ef99cc8bf147c45af5b3c00574e5210dbafee2",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-regular-pairs.ts",
+      "bytes": 4728,
+      "sha256": "2a54a3f5a2eceb07e367bdc4969c627329cc5483ab796776de903e3a0141556a",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-regular-pairs-packed.ts",
+      "bytes": 4860,
+      "sha256": "84551f23476a934c39c5d417c95cf0a3d84caca6abde4620f701b29816cbed21",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-regular-triples.ts",
+      "bytes": 4926,
+      "sha256": "e56c32bfd8c4ef8c6251b9023dd8a6d8cbb820d5dd21a09ea2042718f8cfbc18",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-carrier-pair.ts",
+      "bytes": 4857,
+      "sha256": "d367fc0ce67c4b77a9903c31688546e4e69291621e86314598d72f347ed08424",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-middle-pair.ts",
+      "bytes": 4938,
+      "sha256": "e43ff4acb44f399227288785193a036a9d2cc5f537cd78bef097b54c0d1f767f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-regular-initializer.ts",
+      "bytes": 5902,
+      "sha256": "f879709fa896b958d39ab91c6e8f8d8dba384d9a54928ff1248125ef845be965",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-first-tail.ts",
+      "bytes": 5935,
+      "sha256": "216ca9ba1c3234b12684f92fe62f4f58a123022e398f6edb0bae73ff738fdb07",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-coordinator-head.ts",
+      "bytes": 6057,
+      "sha256": "8a25977d08b22b0f85cdef8ba899123f07fc45b7eb7382580e058b024d141f58",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-fs-fused-coordinator-head-fields.ts",
+      "bytes": 6098,
+      "sha256": "67658170f8cec7a4f5de762bb633e09d9ee29014018b1da8cdba7794e6197f6f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-pairing-singleton.ts",
+      "bytes": 3441,
+      "sha256": "5107c621c49f0b627052a19538bc1a044ba7ca23b45a5e88d310fb3836f79c07",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-vkx-chunked-covenant.ts",
+      "bytes": 4309,
+      "sha256": "960d4a2fece7fb02486cc3d80e3465d6d218150d6255462eba90ef3d68b6cd56",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-vkx-chunked-shamir.ts",
+      "bytes": 5542,
+      "sha256": "19efb0056e233280eba22f210f513496a58addecef1154a90985d08b2626c5b5",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-vkx-chunked-twoloop.ts",
+      "bytes": 5905,
+      "sha256": "ed80ea44e322dedd1b6a35c620964c962698f417a340fec5a20d989e86c6b882",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-vkx-bls12381-singleton.ts",
+      "bytes": 2937,
+      "sha256": "6e90f7d2c32b388abbd09e7e18195570e5e86c4a096c89b18819f87fe5d9f87f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-vkx-scalarmult.ts",
+      "bytes": 2787,
+      "sha256": "567db7a8a34919c60e3c725d8a1ece34cbd3ddb45c97be66bc189182c5716b3a",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-vkx-singleton.ts",
+      "bytes": 3481,
+      "sha256": "8954253dcb46fcea343a27aa8ab2d2fba50fb569bb19e541418377c84f9cf31b",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/nchain.ts",
+      "bytes": 1375,
+      "sha256": "f750eb70f925419d2c9317bb89889a6a99d4fd21886fe1bcd4fce5895fdbebb0",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/scrypt-bn256.ts",
+      "bytes": 1856,
+      "sha256": "9e7eae0c7c698bceba861d4e667ed9f8821a64181ef1e056785e8bd7e5bf6b27",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/review-status.ts",
+      "bytes": 24081,
+      "sha256": "344bd8f71b789170be02c67653e9eb6d1d0641d1f61c13a1543e88e15d6522dc",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/tamper.ts",
+      "bytes": 1469,
+      "sha256": "a814977c0861e39b9027a1beaa85316429b6d1509fccee744937d2cb0f16369a",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/benchmark.ts",
+      "bytes": 54999,
+      "sha256": "82efe55bad6463e30942551669c9491181aef960e2175db0e5ff04fc3bf9ba55",
+      "kind": "project"
+    },
+    {
+      "path": "packages/typescript@6.0.3/lib/typescript.d.ts",
+      "bytes": 588452,
+      "sha256": "c967e03c8dbb4770f7e2f0b71b5d13593de679a41cc2b60266c4b69f1342a263",
+      "kind": "declaration"
+    },
+    {
+      "path": "src/harness/input-hash.ts",
+      "bytes": 19499,
+      "sha256": "2965fda3574141ae9a598727d415e25215bc8bf227e4965d60b36f9d54c517da",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/audit-deps.ts",
+      "bytes": 6418,
+      "sha256": "7399ecde6117e935dc40e6b9f406c1ea143f6192e87075babc279b3ffd16b1ad",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/define-cost.test.ts",
+      "bytes": 1874,
+      "sha256": "b718b1fce4586fcd9f7d238ed1d2b89380b79bbdd24cc72c64dafb6d31fd0ba8",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/entry.ts",
+      "bytes": 18665,
+      "sha256": "b380502fc90030909c9c2156546986bb33e01bfa19c749de5bb6cf0de8e34c3f",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/entry.test.ts",
+      "bytes": 4193,
+      "sha256": "d11f5e6b01378c20856ee291a18da6f680d1fb0387ad702a0ea5a8dc2851e7f2",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/export-json.ts",
+      "bytes": 25545,
+      "sha256": "b217785ba9090dd9466ef60a2037c8e08b67d7aa7af66773b1d0cccc5b6222a6",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-grouped.ts",
+      "bytes": 7663,
+      "sha256": "31b3ce55aaae327d4dffe69c7895ede52b15217e7d3ed0c03b54afa37c2b4d11",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/scenario-contract.test.ts",
+      "bytes": 9720,
+      "sha256": "6cf6bafcb63812cf2b5be47d848b5518e269d93b51e1e11e04012333075c3a8a",
+      "kind": "project"
+    },
+    {
+      "path": "src/harness/txv5-report.ts",
+      "bytes": 913,
+      "sha256": "bea231b6b0c600c989c4a443fce2d7f5db5344c2559edd93e9e56f4ae8ce1f61",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-bn-exact-frame-corrected.ts",
+      "bytes": 8489,
+      "sha256": "e7e8ec51eff284dd75fb9a8e349e5587fd3417729319b1bf605bb97ae728382c",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-grouped-residue.ts",
+      "bytes": 14647,
+      "sha256": "36fbd2663e6a3e4f621ff81fb1693c922ba9496a5d5e2f9114cedb4ef1c24680",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-residue-large-corrected.ts",
+      "bytes": 2795,
+      "sha256": "180e64a97e92b66110f59b1d8d0dbf27d2f7ff566877633198e74e6daf15df66",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-residue-large.ts",
+      "bytes": 6656,
+      "sha256": "50583ba174aee0b4a411d8f7be515df6041bde7d6d9c6575b2bf4cb12907c6fe",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bls12381-intratx-residue.ts",
+      "bytes": 5727,
+      "sha256": "606879caab1db1ff3f90731bd731510628da412d1b44cc1d9cee19b0215040d8",
+      "kind": "project"
+    },
+    {
+      "path": "src/bch/bn254-legacy-equation-checked-adapter.d.mts",
+      "bytes": 596,
+      "sha256": "54bb0a825005bc863f650fff5a73e921413be9f6a797346199c970feb5cfd4a7",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-bn254-legacy-equation-checked.ts",
+      "bytes": 2413,
+      "sha256": "7a772325073f909057a5fe6b5446fc4e3eaf11d454fef59ed74207abcb87f791",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-grouped-residue.ts",
+      "bytes": 6337,
+      "sha256": "4053373f6723c698d8639767c749d2d32928da74aa1021a0c92dcc511106d155",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-authenticated-p2s.ts",
+      "bytes": 4880,
+      "sha256": "a609a64d58d5810520d85da66aa7523222ffa5cb6ca4f874b958c7f164a9e15b",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-pairfold5-densless-msm-slim.ts",
+      "bytes": 6303,
+      "sha256": "18a70649c5fef67cecd9aac9646efbc119814ee0bcb08f401ca893c7a0552c96",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-pairfold5-densless-msm-spec.ts",
+      "bytes": 3225,
+      "sha256": "a949b2033218d2c90b3df2a8504d0e404bae865fe19e20d011bb6035b15ebf5f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-pairfold5-densless-msm.ts",
+      "bytes": 3439,
+      "sha256": "e980206abb41d8a1ffa7a8a37a27d5db1c2d6c09506463befa82751018f7beed",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-pairfold5-densless.ts",
+      "bytes": 4159,
+      "sha256": "77906b62c70a7e63972bf706c36d10d57d4d53ed55c9718c09ab24190f3aace2",
+      "kind": "project"
+    },
+    {
+      "path": "src/bch/pairfold5-pevalfuse-deterministic-adapter.d.mts",
+      "bytes": 412,
+      "sha256": "5cce67174353de06bd67f8433fe5eef4f9468b2d85350693054edd9865777c0b",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-pairfold5-pevalfuse-deterministic.ts",
+      "bytes": 2744,
+      "sha256": "882b50d0728eeb9722345ad8d93acc2d11c2728d15913b9bc559877029f3e00d",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-pairfold5-pevalfuse.ts",
+      "bytes": 2526,
+      "sha256": "3369db14f4528285170f8e19b0bb5852f8cec26e2d2fa206c41b9a26b167d431",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-pairfold5.ts",
+      "bytes": 3748,
+      "sha256": "a0991f208597bf2174051d8011ba40b513ef85084fd93d3ea5d696b16a6de971",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx-pairfold7.ts",
+      "bytes": 2762,
+      "sha256": "24402a12da16482dea12de32baeb35dd0bbc37cbeadaed38cd8152b1e19f85bd",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-groth16-intratx.ts",
+      "bytes": 5652,
+      "sha256": "5aafb67359f5b03090049f65bc3479359796400d9b5c6e65522f8ed7c5b83d3f",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-pairing-intratx.ts",
+      "bytes": 3432,
+      "sha256": "6d7e3b008432b3875b1e6db1d47bd34634bda40e0da96d1e339c5690f15101c3",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-vkx-bls12381-chunked-covenant.ts",
+      "bytes": 4230,
+      "sha256": "b3939274d602e30c2ea1db1688942a04a8e09a88aa9c5d764555fed8773a581b",
+      "kind": "project"
+    },
+    {
+      "path": "src/implementations/bch-vkx-bls12381-successor-corrected.ts",
+      "bytes": 2815,
+      "sha256": "a13324b83ef86ad92702db602bd3b20347537ed598fa3c87bdadbb4de2340df6",
+      "kind": "project"
+    },
+    {
+      "path": "src/nchain/extract.ts",
+      "bytes": 2753,
+      "sha256": "a6d11e8a55890edfd7d40c1e3637986918fa76351be92649f0d90f348c0cad2c",
+      "kind": "project"
+    },
+    {
+      "path": "src/nchain/run.ts",
+      "bytes": 2583,
+      "sha256": "1321ac7cc416c659a3ed8bc690b8896b285dde11f775407bd20850512a0b9245",
+      "kind": "project"
+    },
+    {
+      "path": "src/nchain/verify-proofs.ts",
+      "bytes": 4087,
+      "sha256": "b5f9078cee33abcc3ed5f3b57cf13800d0cc62128a2d65d66be10c3cf48dba29",
+      "kind": "project"
+    },
+    {
+      "path": "src/scrypt-bn256/extract.ts",
+      "bytes": 3007,
+      "sha256": "ef833ab9b0817b631acccc1dbe4b2c67a709f0cf9bcea5ccbb7ee56b521175a3",
+      "kind": "project"
+    },
+    {
+      "path": "src/scrypt-bn256/find-vkx.ts",
+      "bytes": 6292,
+      "sha256": "cce0b086ab3510ded8d91463c993e4f28ea10fcaa87cbad8e1db39ecf9b9433f",
+      "kind": "project"
+    },
+    {
+      "path": "src/scrypt-bn256/run.ts",
+      "bytes": 2733,
+      "sha256": "d8a1f41eecb90a4c10fcd87f4809d0f361caca7d0c6cec46a92df5fd51d7f821",
+      "kind": "project"
+    },
+    {
+      "path": "src/scrypt-bn256/verify-proofs.ts",
+      "bytes": 3865,
+      "sha256": "53698f600cfdbb9378db4ed5cec87796392740c062f363f8f8e2d41421019b22",
+      "kind": "project"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/compatibility/iterators.d.ts",
+      "bytes": 1303,
+      "sha256": "d153a11543fd884b596587ccd97aebbeed950b26933ee000f94009f1ab142848",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/globals.typedarray.d.ts",
+      "bytes": 4864,
+      "sha256": "0ccdaa19852d25ecd84eec365c3bfa16e7859cadecf6e9ca6d0dbbbee439743f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/buffer.buffer.d.ts",
+      "bytes": 22604,
+      "sha256": "cc2110f7decca6bfb9392e30421cfa1436479e4a6756e8fec6cbc22625d4f881",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/globals.d.ts",
+      "bytes": 5132,
+      "sha256": "096116f8fedc1765d5bd6ef360c257b4a9048e5415054b3bf3c41b07f8951b0b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/abortcontroller.d.ts",
+      "bytes": 1989,
+      "sha256": "e5e01375c9e124a83b52ee4b3244ed1a4d214a6cfb54ac73e164a823a4a7860a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/blob.d.ts",
+      "bytes": 902,
+      "sha256": "f90ae2bbce1505e67f2f6502392e318f5714bae82d2d969185c4a6cecc8af2fc",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/console.d.ts",
+      "bytes": 149,
+      "sha256": "4b58e207b93a8f1c88bbf2a95ddc686ac83962b13830fe8ad3f404ffc7051fb4",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/crypto.d.ts",
+      "bytes": 1449,
+      "sha256": "1fefabcb2b06736a66d2904074d56268753654805e829989a46a0161cd8412c5",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/domexception.d.ts",
+      "bytes": 2565,
+      "sha256": "9798340ffb0d067d69b1ae5b32faa17ab31b82466a3fc00d8f2f2df0c8554aaa",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/encoding.d.ts",
+      "bytes": 414,
+      "sha256": "c18a99f01eb788d849ad032b31cafd49de0b19e083fe775370834c5675d7df8e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/events.d.ts",
+      "bytes": 3367,
+      "sha256": "5247874c2a23b9a62d178ae84f2db6a1d54e6c9a2e7e057e178cc5eea13757fc",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/utility.d.ts",
+      "bytes": 245,
+      "sha256": "cdcf9ea426ad970f96ac930cd176d5c69c6c24eebd9fc580e1572d6c6a88f62c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/header.d.ts",
+      "bytes": 3336,
+      "sha256": "23cd712e2ce083d68afe69224587438e5914b457b8acf87073c22494d706a3d0",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/readable.d.ts",
+      "bytes": 1910,
+      "sha256": "156a859e21ef3244d13afeeba4e49760a6afa035c149dda52f0c45ea8903b338",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/fetch.d.ts",
+      "bytes": 5667,
+      "sha256": "10ec5e82144dfac6f04fa5d1d6c11763b3e4dbbac6d99101427219ab3e2ae887",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/formdata.d.ts",
+      "bytes": 5009,
+      "sha256": "615754924717c0b1e293e083b83503c0a872717ad5aa60ed7f1a699eb1b4ea5c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/connector.d.ts",
+      "bytes": 1105,
+      "sha256": "14e9acf826baba0ef4b5665704084896e7bcc06f65a9ab13af7e93d27d6b7069",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/client-stats.d.ts",
+      "bytes": 456,
+      "sha256": "68834d631c8838c715f225509cfc3927913b9cc7a4870460b5b60c8dbdb99baf",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/client.d.ts",
+      "bytes": 5506,
+      "sha256": "21adf13435b9b748529c8cedf80f884e5130b9684188120a686cd2b26a2059c7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/errors.d.ts",
+      "bytes": 4868,
+      "sha256": "eec76bf6b9346f3f95fa402621b889489e96930e72295b0369022f332e9b4a6a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/dispatcher.d.ts",
+      "bytes": 15780,
+      "sha256": "0ecd58f413f9bc3b7d4383eae31b0c8fc576985cd7404d6f99f8c643543ade74",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/global-dispatcher.d.ts",
+      "bytes": 275,
+      "sha256": "ea6bc8de8b59f90a7a3960005fd01988f98fd0784e14bc6922dde2e93305ec7d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/global-origin.d.ts",
+      "bytes": 176,
+      "sha256": "36107995674b29284a115e21a0618c4c2751b32a8766dd4cb3ba740308b16d59",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/pool-stats.d.ts",
+      "bytes": 663,
+      "sha256": "914a0ae30d96d71915fc519ccb4efbf2b62c0ddfb3a3fc6129151076bc01dc60",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/pool.d.ts",
+      "bytes": 1490,
+      "sha256": "9c32412007b5662fd34a8eb04292fb5314ec370d7016d1c2fb8aa193c807fe22",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/handlers.d.ts",
+      "bytes": 451,
+      "sha256": "7fd1b31fd35876b0aa650811c25ec2c97a3c6387e5473eb18004bed86cdd76b6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/balanced-pool.d.ts",
+      "bytes": 1019,
+      "sha256": "4d327f7d72ad0918275cea3eee49a6a8dc8114ae1d5b7f3f5d0774de75f7439a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/round-robin-pool.d.ts",
+      "bytes": 1590,
+      "sha256": "6ebe8ebb8659aaa9d1acbf3710d7dae3e923e97610238b9511c25dc39023a166",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/h2c-client.d.ts",
+      "bytes": 3706,
+      "sha256": "e85d7f8068f6a26710bff0cc8c0fc5e47f71089c3780fbede05857331d2ddec9",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/agent.d.ts",
+      "bytes": 1167,
+      "sha256": "7befaf0e76b5671be1d47b77fcc65f2b0aad91cc26529df1904f4a7c46d216e9",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/mock-interceptor.d.ts",
+      "bytes": 3931,
+      "sha256": "0a60a292b89ca7218b8616f78e5bbd1c96b87e048849469cccb4355e98af959a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/mock-call-history.d.ts",
+      "bytes": 5558,
+      "sha256": "0b6e25234b4eec6ed96ab138d96eb70b135690d7dd01f3dd8a8ab291c35a683a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/mock-agent.d.ts",
+      "bytes": 3448,
+      "sha256": "9666f2f84b985b62400d2e5ab0adae9ff44de9b2a34803c2c5bd3c8325b17dc0",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/mock-client.d.ts",
+      "bytes": 1065,
+      "sha256": "40cd35c95e9cf22cfa5bd84e96408b6fcbca55295f4ff822390abb11afbc3dca",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/mock-pool.d.ts",
+      "bytes": 1037,
+      "sha256": "b1616b8959bf557feb16369c6124a97a0e74ed6f49d1df73bb4b9ddf68acf3f3",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/snapshot-agent.d.ts",
+      "bytes": 3048,
+      "sha256": "5b03a034c72146b61573aab280f295b015b9168470f2df05f6080a2122f9b4df",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/mock-errors.d.ts",
+      "bytes": 336,
+      "sha256": "40b463c6766ca1b689bfcc46d26b5e295954f32ad43e37ee6953c0a677e4ae2b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/proxy-agent.d.ts",
+      "bytes": 806,
+      "sha256": "249b9cab7f5d628b71308c7d9bb0a808b50b091e640ba3ed6e2d0516f4a8d91d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/socks5-proxy-agent.d.ts",
+      "bytes": 870,
+      "sha256": "d33ce35e3f9cfcc1d94eca415bdd3bde94d5b153ffdd33e6c4455c029986c630",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/env-http-proxy-agent.d.ts",
+      "bytes": 732,
+      "sha256": "80aae6afc67faa5ac0b32b5b8bc8cc9f7fa299cff15cf09cc2e11fd28c6ae29e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/retry-handler.d.ts",
+      "bytes": 3262,
+      "sha256": "f473cd2288991ff3221165dcf73cd5d24da30391f87e85b3dd4d0450c787a391",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/retry-agent.d.ts",
+      "bytes": 233,
+      "sha256": "499e5b055a5aba1e1998f7311a6c441a369831c70905cc565ceac93c28083d53",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/api.d.ts",
+      "bytes": 1609,
+      "sha256": "8aee8b6d4f9f62cf3776cda1305fb18763e2aade7e13cea5bbe699112df85214",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/cache-interceptor.d.ts",
+      "bytes": 4362,
+      "sha256": "98498b101803bb3dde9f76a56e65c14b75db1cc8bec5f4db72be541570f74fc5",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/interceptors.d.ts",
+      "bytes": 3594,
+      "sha256": "4dc59f6e1dbf3d5f66660fceabe6c174d3261b37b696ae1854f0dbaf255fc753",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/util.d.ts",
+      "bytes": 623,
+      "sha256": "5d0375ca7310efb77e3ef18d068d53784faf62705e0ad04569597ae0e755c401",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/cookies.d.ts",
+      "bytes": 696,
+      "sha256": "59af37caec41ecf7b2e76059c9672a49e682c1a2aa6f9d7dc78878f53aa284d6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/patch.d.ts",
+      "bytes": 599,
+      "sha256": "addf417b9eb3f938fddf8d81e96393a165e4be0d4a8b6402292f9c634b1cb00d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/websocket.d.ts",
+      "bytes": 4711,
+      "sha256": "436d7b4543b340b0f3eef4310d524242e41369b9652aa9c70428767c4dcac455",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/eventsource.d.ts",
+      "bytes": 1794,
+      "sha256": "adf27937dba6af9f08a68c5b1d3fce0ca7d4b960c57e6d6c844e7d1a8e53adae",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/diagnostics-channel.d.ts",
+      "bytes": 1776,
+      "sha256": "12950411eeab8563b349cb7959543d92d8d02c289ed893d78499a19becb5a8cc",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/content-type.d.ts",
+      "bytes": 561,
+      "sha256": "2e85db9e6fd73cfa3d7f28e0ab6b55417ea18931423bd47b409a96e4a169e8e6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/cache.d.ts",
+      "bytes": 1251,
+      "sha256": "c46e079fe54c76f95c67fb89081b3e399da2c7d109e7dca8e4b58d83e332e605",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/undici-types@7.24.6/index.d.ts",
+      "bytes": 4557,
+      "sha256": "114f493b30f364255290472111b5a4791d5902c308645670cd0401429cbc6930",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/fetch.d.ts",
+      "bytes": 3524,
+      "sha256": "c3f5289820990ab66b70c7fb5b63cb674001009ff84b13de40619619a9c8175f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/importmeta.d.ts",
+      "bytes": 259,
+      "sha256": "b3275d55fac10b799c9546804126239baf020d220136163f763b55a74e50e750",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/messaging.d.ts",
+      "bytes": 1113,
+      "sha256": "fa68a0a3b7cb32c00e39ee3cd31f8f15b80cac97dce51b6ee7fc14a1e8deb30b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/navigator.d.ts",
+      "bytes": 891,
+      "sha256": "1cf059eaf468efcc649f8cf6075d3cb98e9a35a0fe9c44419ec3d2f5428d7123",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/performance.d.ts",
+      "bytes": 2551,
+      "sha256": "6c36e755bced82df7fb6ce8169265d0a7bb046ab4e2cb6d0da0cb72b22033e89",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/storage.d.ts",
+      "bytes": 724,
+      "sha256": "e7721c4f69f93c91360c26a0a84ee885997d748237ef78ef665b153e622b36c1",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/streams.d.ts",
+      "bytes": 6707,
+      "sha256": "7a93de4ff8a63bafe62ba86b89af1df0ccb5e40bb85b0c67d6bbcfdcf96bf3d4",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/timers.d.ts",
+      "bytes": 1557,
+      "sha256": "90e85f9bc549dfe2b5749b45fe734144e96cd5d04b38eae244028794e142a77e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/web-globals/url.d.ts",
+      "bytes": 800,
+      "sha256": "e0a5deeb610b2a50a6350bd23df6490036a1773a8a71d70f2f9549ab009e67ee",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/assert.d.ts",
+      "bytes": 39914,
+      "sha256": "d2ae155afe8a01cc0ae612d99117cf8ef16692ba7c4366590156fdec1bcf2d8c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/assert/strict.d.ts",
+      "bytes": 1464,
+      "sha256": "3f5e5d9be35913db9fea42a63f3df0b7e3c8703b97670a2125587b4dbbd56d7c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/async_hooks.d.ts",
+      "bytes": 29929,
+      "sha256": "c8b8968311ec4e5e97b7b5fb8a65efaba455db9bdcfd7fff7fb15f6e317bfba0",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/buffer.d.ts",
+      "bytes": 80592,
+      "sha256": "57c23df0b5f7a8e26363a3849b0bc7763f6b241207157c8e40089d1df4116f35",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/child_process.d.ts",
+      "bytes": 60054,
+      "sha256": "3b8bc0c17b54081b0878673989216229e575d67a10874e84566a21025a2461ee",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/cluster.d.ts",
+      "bytes": 19527,
+      "sha256": "5b0db5a58b73498792a29bfebc333438e61906fef75da898b410e24e52229e6f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/console.d.ts",
+      "bytes": 4250,
+      "sha256": "dbe055b2b29a7bab2c1ca8f259436306adb43f469dca7e639a02cd3695d3f621",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/constants.d.ts",
+      "bytes": 491,
+      "sha256": "1678b04557dca52feab73cc67610918a7f5e25bfdba3e7fa081acd625d93106d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/crypto.d.ts",
+      "bytes": 171900,
+      "sha256": "aecbf1d9e6a18dab7d92ef8a89a1444b47e1eb6134cb2bb776a26d55ff58c29a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/dgram.d.ts",
+      "bytes": 24921,
+      "sha256": "2ea729503db9793f2691162fec3dd1118cab62e96d025f8eeb376d43ec293395",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/diagnostics_channel.d.ts",
+      "bytes": 23968,
+      "sha256": "9ec87fea42b92894b0f209931a880789d43c3397d09dd99c631ae40a2f7071d1",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/dns.d.ts",
+      "bytes": 34346,
+      "sha256": "c68e88cdfadfb6c8ba5fc38e58a3a166b0beae77b1f05b7d921150a32a5ffb8d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/dns/promises.d.ts",
+      "bytes": 20810,
+      "sha256": "2bc7aa4fba46df0bd495425a7c8201437a7d465f83854fac859df2d67f664df3",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/domain.d.ts",
+      "bytes": 6597,
+      "sha256": "41d17e1ad9a002feb11c8cdd2777e5bbc0cdb1e3f595d237e4dded0b6949983b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/events.d.ts",
+      "bytes": 47375,
+      "sha256": "1fede9296beac11ce8e6b425396a1791f64341f2be85deebb6286faf6e16306e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/fs.d.ts",
+      "bytes": 201113,
+      "sha256": "ce697b6a251d9cad53998c7fd3098072df883b525ec45d83530e434dc6d80dc6",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/fs/promises.d.ts",
+      "bytes": 62972,
+      "sha256": "719412f054e6ecc35489462c9a21bab0323d173a7d04e55b0ace4b5d86fbeb07",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/http.d.ts",
+      "bytes": 95789,
+      "sha256": "0eb5d0cbf09de5d34542b977fd6a933bb2e0817bffe8e1a541b2f1ad1b9af1ff",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/http2.d.ts",
+      "bytes": 119039,
+      "sha256": "3db996ecdee7aabecc5385976cc07eb66216034a273c07b17d1a85292e9bab0c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/https.d.ts",
+      "bytes": 16812,
+      "sha256": "2c2bdaa1d8ead9f68628d6d9d250e46ee8e81aa4898b4769a36956ae15e060fe",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/inspector.d.ts",
+      "bytes": 12198,
+      "sha256": "c32c840c62d8bd7aeb3147aa6754cd2d922b990a6b6634530cb2ebdce5adc8e9",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/inspector.generated.d.ts",
+      "bytes": 228362,
+      "sha256": "5ff4433a2deae4f85ab1377e90a7554ce6b47ae51c69a84ca30a6e22fae85834",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/inspector/promises.d.ts",
+      "bytes": 1471,
+      "sha256": "82b91e4e42e6c41bc7fc1b6c2dc5eba6a2ba98375eb1f210e6ff6bba2d54177e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/module.d.ts",
+      "bytes": 34491,
+      "sha256": "c1fa52b3d014001e8662fa2669d90ea15373958a288e3b83a3b621733d25292a",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/net.d.ts",
+      "bytes": 43748,
+      "sha256": "cbed824fec91efefc7bbdcb8b43d1a531fdbebd0e2ef19481501ff365a93cb70",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/os.d.ts",
+      "bytes": 19193,
+      "sha256": "d0716593b3f2b0451bcf0c24cfa86dec2235c325c89f201934248b7c742715fc",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/path.d.ts",
+      "bytes": 7639,
+      "sha256": "ec501101c2a96133a6c695f934c8f6642149cc728571b29cbb7b770984c1088e",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/path/posix.d.ts",
+      "bytes": 194,
+      "sha256": "b214ebcf76c51b115453f69729ee8aa7b7f8eccdae2a922b568a45c2d7ff52f7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/path/win32.d.ts",
+      "bytes": 194,
+      "sha256": "429c9cdfa7d126255779efd7e6d9057ced2d69c81859bbab32073bad52e9ba76",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/perf_hooks.d.ts",
+      "bytes": 23452,
+      "sha256": "2991bca2cc0f0628a278df2a2ccdb8d6cbcb700f3761abbed62bba137d5b1790",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/process.d.ts",
+      "bytes": 111079,
+      "sha256": "5e66972e83eb4dc7123939bf816e6cbd9ad81af5552db1cab84e6bd9c64d2ecc",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/punycode.d.ts",
+      "bytes": 3780,
+      "sha256": "230763250f20449fa7b3c9273e1967adb0023dc890d4be1553faca658ee65971",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/querystring.d.ts",
+      "bytes": 6642,
+      "sha256": "c3e9078b60cb329d1221f5878e88cecfa3e74460550e605a58fcfb41a66029ff",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/quic.d.ts",
+      "bytes": 29522,
+      "sha256": "8413d0641f293aed551c7464615b770d34a02dedede889b9591172287d68e773",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/readline.d.ts",
+      "bytes": 21134,
+      "sha256": "0ea59f7d3e51440baa64f429253759b106cfcbaf51e474cae606e02265b37cf8",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/readline/promises.d.ts",
+      "bytes": 6418,
+      "sha256": "bc18a1991ba681f03e13285fa1d7b99b03b67ee671b7bc936254467177543890",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/repl.d.ts",
+      "bytes": 19023,
+      "sha256": "1b241e24f3227d078c06aeda6e050187ad59a4e591f4467abed44d92b084e08d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/sea.d.ts",
+      "bytes": 2045,
+      "sha256": "fa94bbf532b7af8f394b95fa310980d6e20bd2d4c871c6a6cb9f70f03750a44b",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/sqlite.d.ts",
+      "bytes": 52002,
+      "sha256": "7fde0e1be5c8be204ffbf428abfcf01da2eb0f130e1bc3f539eb7275f4fd1f58",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/stream.d.ts",
+      "bytes": 88900,
+      "sha256": "e284328553df5f425a5d33d36a0c3fa66b46af9d097cad6f4d2e8696dfdeb0f1",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/stream/consumers.d.ts",
+      "bytes": 4272,
+      "sha256": "7fa2214bb0d64701bc6f9ce8cde2fd2ff8c571e0b23065fa04a8a5a6beb91511",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/stream/iter.d.ts",
+      "bytes": 11115,
+      "sha256": "f36b3fbe2be150a9ca140da48593f21e6a8172004f92ddc549b43efec39f3e54",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/stream/promises.d.ts",
+      "bytes": 7347,
+      "sha256": "f1c93e046fb3d9b7f8249629f4b63dc068dd839b824dd0aa39a5e68476dc9420",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/stream/web.d.ts",
+      "bytes": 12129,
+      "sha256": "016b29bf4926b80255a108c53a1451717350059da04fcae64d1075f5e93bbb39",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/string_decoder.d.ts",
+      "bytes": 1318,
+      "sha256": "841983e39bd4cbb463be385e92fda11057cab368bf27100a801c492f1d86cbaa",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/test.d.ts",
+      "bytes": 106628,
+      "sha256": "1c4f139ade4f6ebf45463505f8155173e5d7a5305e50e0aae0a5e712d6ff3b48",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/test/reporters.d.ts",
+      "bytes": 2779,
+      "sha256": "e16b319e5aca1031168de823c4946ff8e29629c4c8cc0ec0fcfe2a8ab2155043",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/timers.d.ts",
+      "bytes": 7351,
+      "sha256": "e4156ddb25aa0e3b5303d372f26957b36778f0f6bbd4326359269873295e3058",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/timers/promises.d.ts",
+      "bytes": 3383,
+      "sha256": "cc1b433a84cae05ddc5672d4823170af78606ad21ecef60dbc4570190cbf1357",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/tls.d.ts",
+      "bytes": 58012,
+      "sha256": "9d3821bc75c59577e52643324cec92fc2145642e8d17cf7ee07a3181f21d985d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/trace_events.d.ts",
+      "bytes": 3842,
+      "sha256": "7f78cfb2b343838612c192cb251746e3a7c62ac7675726a47e130d9b213f6580",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/tty.d.ts",
+      "bytes": 11152,
+      "sha256": "201db9cf1687fab1adf5282fcba861f382b32303dc4f67c89d59655e78a25461",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/url.d.ts",
+      "bytes": 25464,
+      "sha256": "2c3c5c0f54055e87640f5d233716fd889f3034fc7911d603b642369b0dbeb2a7",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/util.d.ts",
+      "bytes": 65865,
+      "sha256": "0a20eaf2e4b1e3c1e1f87f7bccb0c936375b23b022baeea750519b7c9bc6ce83",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/util/types.d.ts",
+      "bytes": 23832,
+      "sha256": "b484ec11ba00e3a2235562a41898d55372ccabe607986c6fa4f4aba72093749f",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/v8.d.ts",
+      "bytes": 40458,
+      "sha256": "a16b91b27bd6b706c687c88cbc8a7d4ee98e5ed6043026d6b84bda923c0aed67",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/vm.d.ts",
+      "bytes": 53143,
+      "sha256": "1c9e5b1a17b1fc9b3711fb36e0690421261ab2880f15b145155b5b2ba2ab6c2d",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/wasi.d.ts",
+      "bytes": 6250,
+      "sha256": "99ab6d0d660ce4d21efb52288a39fd35bb3f556980ec5463b1ae8f304a3bbc85",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/worker_threads.d.ts",
+      "bytes": 29790,
+      "sha256": "6eeded8c7e352be6e0efb83f4935ec752513c4d22043b52522b90849a49a3a11",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/zlib.d.ts",
+      "bytes": 22874,
+      "sha256": "6c1ad90050ffbb151cacc68e2d06ea1a26a945659391e32651f5d42b86fd7f2c",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/zlib/iter.d.ts",
+      "bytes": 5077,
+      "sha256": "afa1c49f8e559e413d57343339db857d2a8159435cf9cf7d4deb41718fff1b88",
+      "kind": "declaration"
+    },
+    {
+      "path": "packages/@types/node@25.9.3/index.d.ts",
+      "bytes": 5113,
+      "sha256": "6953d7597831d0860c7034cf4f0419687d263b6b98a4b32e37ce6d49615c36e2",
+      "kind": "declaration"
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "assemblyRelation": {
+    "assemblyDidNotRunTheseActions": true,
+    "executionOccurredAfterStaticAssembly": true,
+    "predecessor": {
+      "manifestBytes": 15788,
+      "manifestSha256": "83ec0de29f89c8b1e001ab09ee24d9bf879e278adeb585643a3f007e1fdc9e65",
+      "version": "v5",
+      "projected": false
+    },
+    "scope": "Executed component inputs belong to the v5 snapshot; protected code/table/source/checker inputs remain byte-identical in this release. No final9ef module execution is inferred."
+  },
+  "capturedUtc": "2026-11-05T23:27:00.230511+00:00",
+  "environmentControlsCleared": [
+    "BN_VK_FIXTURES",
+    "SCHED_ITERS",
+    "CODE_SPLIT0",
+    "LAZY",
+    "DEBUG_K",
+    "DEBUG_LAZY",
+    "VM",
+    "PROVER",
+    "NODE_OPTIONS",
+    "NODE_PATH"
+  ],
+  "inputs": {
+    "certificateInputsSha256": "10fef94cf35af355a049c704ebfb3bbd3ac077c39984dd664d2f49a52c2017d1",
+    "fieldPrime": "21888242871839275222246405745257275088696311157297823662689037894645226208583",
+    "fixtureSha256": "3d38e95a8f69a7c940b4ba03cc28c748254c07e5ff7957edb45665e45248cf91",
+    "flattenBasisDegrees": [
+      0,
+      2,
+      4,
+      1,
+      3,
+      5
+    ],
+    "polynomialModulus": "X^12-18X^6+82",
+    "scalarOrder": "21888242871839275222246405745257275088548364400416034343698204186575808495617",
+    "tableRowHash": {
+      "R00": "da1e0f3825b1d49b6bb042e49dc1e5f073f772d122e3e72a53c62d0252f9f97e",
+      "R01": "76047bcea692a83f62c138ee0cdccb066db95693e19296de605bf13e801114cf",
+      "R10": "330fe6e088ef04bd39e8a2e17dc8cd20c9687db32a24973fd019274a7518994e",
+      "R11": "d88de8a365643c826c0017d3fcb976f3e7a7506ad9db7e5a1d6b7c71022e52b9",
+      "Rconst": "b6cd472f318146d7743be63b48c1756b995f98c9415bcb496f6c641341448efb"
+    },
+    "tableRows": [
+      "R00",
+      "R01",
+      "R10",
+      "R11",
+      "Rconst"
+    ]
+  },
+  "node": {
+    "bytes": 132848,
+    "sha256": "4d9aea129d56f18e6b3b48792aa5ba13f17dfc8c84d3a37841d14f54d59e1d1a",
+    "versionPathOmitted": true
+  },
+  "ordinaryLibrary": {
+    "entryRelative": "esm/bn254.js",
+    "entrySha256": "103d84d3199e4df3208c822784c14045e74315905b90afd4ba4478a5d91d1348",
+    "package": "@noble/curves",
+    "packageJsonSha256": "cbffd40393726bf2d7ced0f769edd56b1b8a6a092cc2f0641fd3b8e8e78cf605",
+    "treeSha256": "1494b612b9930ff8770a9f5726a15045df0847735ef1e91b43849932e0d7c0b5",
+    "version": "1.9.7"
+  },
+  "packetPinPolicy": "Current files are inventoried by publication-manifest.json. Historical packet/component receipt hashes are predecessor provenance, not current file locators.",
+  "python": "3.8.20 (default, Mar 13 2026, 16:47:27) \n[Clang 17.0.0 (clang-1700.4.4.1)]",
+  "results": {
+    "native": {
+      "qualification": false,
+      "relationProofSeparate": true,
+      "status": "PASS_PUB003_FIXED_BN254_VK_TAG_AND_ALL_POSITIVE_R_BINDINGS"
+    },
+    "plan": {
+      "scope": "raw Miller to degree-six monic quotient-class relation for the fixed public VK/table inputs",
+      "status": "PASS_STATIC_PUBLIC_PLAN"
+    },
+    "rawMiller": {
+      "executedMath": {
+        "eta": "21888242871839275220042445260109153167277707414472061641714758635765020556617",
+        "finalExponentiation": false,
+        "quotientChecks": 9,
+        "rawPairingCalls": 4,
+        "tableRows": 5,
+        "targetHashes": {
+          "R00": "da1e0f3825b1d49b6bb042e49dc1e5f073f772d122e3e72a53c62d0252f9f97e",
+          "R01": "76047bcea692a83f62c138ee0cdccb066db95693e19296de605bf13e801114cf",
+          "R10": "330fe6e088ef04bd39e8a2e17dc8cd20c9687db32a24973fd019274a7518994e",
+          "R11": "d88de8a365643c826c0017d3fcb976f3e7a7506ad9db7e5a1d6b7c71022e52b9",
+          "Rconst": "b6cd472f318146d7743be63b48c1756b995f98c9415bcb496f6c641341448efb"
+        }
+      },
+      "notClaimed": [
+        "native byte emission (owned by the current PUB003 v9 owner)",
+        "VM/compiler/protocol equivalence",
+        "arbitrary VK or arbitrary advice",
+        "complete verifier or qualification/publication admission"
+      ],
+      "status": "PASS_PUBLIC_RAW_MILLER_MONIC_QUOTIENT_TRANSFER"
+    }
+  },
+  "rootReceiptSha256": "8d634d9a8c40966539756cdd92f67cb67987f2ecf2b53d71eaea92cb80bd042c",
+  "runs": {
+    "native": {
+      "command": [
+        "python3",
+        "-B",
+        "docs/vk-v9/check_public_certificate.py",
+        "--bundle",
+        "docs/vk-v9/native-artifact.json",
+        "--fixture",
+        "source/chunked/bn254/densless-recovered/public-fixtures.json",
+        "--positive-vectors",
+        "<packet-positive-vectors>",
+        "--certificate-inputs",
+        "docs/vk-v9/certificate-inputs.json"
+      ],
+      "exitCode": 0,
+      "name": "native",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1327,
+        "sha256": "ef3c315e71f3c7318186a7dd3d8918d48a4b58b1fa3a5622d31716075e78624d"
+      }
+    },
+    "plan": {
+      "command": [
+        "node",
+        "--experimental-import-meta-resolve",
+        "docs/fixed-preprocessing/check-fixed-preprocessing-public-v3.mjs",
+        "--check-plan",
+        "--resolve-edges",
+        "--dependency-root",
+        "<pinned-dependency-root>",
+        "--noble-entry",
+        "<pinned-noble-entry>"
+      ],
+      "exitCode": 0,
+      "name": "plan",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 2307,
+        "sha256": "c38d1bfcbef107aa683a2e6f5346ead40db788bfd6c886c752583bae981cf712"
+      }
+    },
+    "raw-miller": {
+      "command": [
+        "node",
+        "--experimental-import-meta-resolve",
+        "docs/fixed-preprocessing/check-fixed-preprocessing-public-v3.mjs",
+        "--execute",
+        "--dependency-root",
+        "<pinned-dependency-root>",
+        "--noble-entry",
+        "<pinned-noble-entry>"
+      ],
+      "exitCode": 0,
+      "name": "raw-miller",
+      "stderr": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 2987,
+        "sha256": "f04aeced742ef6a3981cc1dbe3629ffba64bf748c2ae9d77582200c7ec309aca"
+      }
+    }
+  },
+  "schema": "bn-c-first-prefix-extraction-public-execution-summary/v1",
+  "scope": {
+    "fullVerifierQualificationChanged": false,
+    "newProofsOrFixtures": 0,
+    "pathSanitized": true,
+    "publication": false,
+    "sourceVmCompilerProverBenchmarkExecutions": 0
+  },
+  "status": "PASS_PORTABLE_NATIVE_AND_RAW_MILLER_CERTIFICATES",
+  "unchangedInputs": {
+    "after": "cd15c4f397813d2489d624f82c99ef5d3bc5f758a2f4ad3e8b9027235119e60c",
+    "before": "cd15c4f397813d2489d624f82c99ef5d3bc5f758a2f4ad3e8b9027235119e60c",
+    "equal": true
+  }
+}

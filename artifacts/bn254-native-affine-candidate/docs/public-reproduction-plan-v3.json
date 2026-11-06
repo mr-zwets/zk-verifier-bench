@@ -1,0 +1,56 @@
+{
+  "schema": "bn-c-first-prefix-extraction-public-source-reproduction/v3",
+  "status": "PUBLIC_RECIPE_WITHOUT_CAPTURE_DEPENDENCY",
+  "scope": "Portable source and dependency recipe; historical capture receipts are evidence only and are not required inputs to reproduce or check the artifact.",
+  "sourceRoot": "../source",
+  "sourceFiles": {
+    "chunked/bn254/bn-native-sound/asm.mjs": "28648265736b857e02ff64f22ca5d52b1f5306c3339771b852fac82b4347f439",
+    "chunked/bn254/bn-native-sound/kernels.mjs": "964235796530eab34f2601f8e045355342fa55d134077295ac53f8bfeaf7f46f",
+    "chunked/bn254/bn-native-sound/protocol.mjs": "afab8c2925e98ee594df14d513c47f31ab96ae85a535f98e443d5777329778bd",
+    "chunked/bn254/bn-native-sound/script.mjs": "621ecb0a47bf753f547a801298c3f807e48fe82b499c53c699a89c527db52c3c",
+    "chunked/bn254/sound-si-gls/asm.mjs": "d663bc45d2cddbca5bb298e34ebbd90b90824c54dfffa2050c4a4983879457f7",
+    "chunked/bn254/sound-si-gls/math.mjs": "a923d72837feb99b54d14dbdd4a7a9d314e73cf22c703c78a89f1529d9cbe36f",
+    "chunked/bn254/sound-si-gls/protocol.mjs": "f85696873f38f598fa585683f6dd0a0e8c265992221325eddd809ee8e090cf38",
+    "chunked/bn254/sound-si-gls/script.mjs": "4579764169557ebd3ce2435050e9017f180d49859f63126b2fabb31693c74d3c"
+  },
+  "fixture": {
+    "path": "../source/chunked/bn254/densless-recovered/public-fixtures.json",
+    "sha256": "3d38e95a8f69a7c940b4ba03cc28c748254c07e5ff7957edb45665e45248cf91"
+  },
+  "baseCommit": "974d86d73b16666520eef16404919a836d88ea74",
+  "patchDirectory": "../source/patches",
+  "patchCount": 14,
+  "dependencyClosure": "../source/reproduce-v2/dependency-closure.json",
+  "driver": {
+    "path": "../source/reproduce-v2/capture-driver.mjs",
+    "sha256": "d99c7d869eab12f8ea2c9ab9cc363da13cb3a193a1ff2ef7271f106aba7c6656"
+  },
+  "expectedArtifact": {
+    "codeBytes": 7553,
+    "codeSha256": "63f12474082916e22ab62faf6c6f0483bedcbb08a9700e4d7eb02415c9d8c242",
+    "redeemBytes": 61,
+    "redeemSha256": "0563cd756e2d300b7653e10fd2e39ba5951e404210ba78f18d8ba4549719a030",
+    "lockingBytes": 35,
+    "lockingSha256": "a32303cca71026a88ad8cd74bf38c6c8f6a8794cfa3065af7e7e207d8cf9d2c7"
+  },
+  "runtime": {
+    "nodeVersion": "v26.12.0",
+    "nodeBinarySha256": "4d9aea129d56f18e6b3b48792aa5ba13f17dfc8c84d3a37841d14f54d59e1d1a",
+    "resolverFlag": "--experimental-import-meta-resolve",
+    "controls": ["BN_VK_FIXTURES", "SCHED_ITERS", "CODE_SPLIT0", "LAZY", "DEBUG_K", "DEBUG_LAZY", "VM", "PROVER"]
+  },
+  "recipe": {
+    "patchOrder": "Apply 01 through 14 lexically to the clean base; verify forward and reverse patch checks.",
+    "dependencyPreparation": "Supply the externally pinned three-package tree described by dependency-closure.json; do not install or resolve from a registry. Stage a separate source/node_modules link only for an explicitly authorized capture.",
+    "preImportChecks": "Verify all source and fixture hashes, package.json and complete package-tree hashes, twelve package-relative edge hashes, Node identity, resolver flag, and eight cleared controls before importing the capture driver.",
+    "captureBoundary": "The driver builds only the source artifact and checks public expected C/R/locking identities. VM, prover, compiler, benchmark, and fixture generation are outside this recipe."
+  },
+  "reproductionBoundary": {
+    "historicalCaptureRequired": false,
+    "privateAdjacentCatalogRequired": false,
+    "privateAbsolutePaths": false,
+    "networkOrInstall": false,
+    "dependencyTreesVendored": false,
+    "exactReproduction": "CONDITIONAL_ON_EXTERNAL_PINNED_DEPENDENCY_ROOT"
+  }
+}

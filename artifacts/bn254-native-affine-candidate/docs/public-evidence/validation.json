@@ -1,0 +1,200 @@
+{
+  "schema": "bn254-portable-validation-evidence/v2",
+  "status": "PASS_FINAL_9EF_TYPECHECK_AND_REGISTERED_CLI_EVIDENCE",
+  "scope": "Finite public evidence for the final 9ef metadata projection; not an equation proof, universal resource theorem, or external admission.",
+  "artifact": {
+    "implementationId": "bch-groth16-bn254-sound-native-affine-candidate",
+    "sourceTag": "BNMX3/DEGREE6-EVAL1||VK_DIGEST",
+    "vkDigest": "181aeefd9c0ce8d103ad084f4ef8174546852b0af46ac58a8061d4f38d346a6e",
+    "interpretation": "BN254 degree6 characteristic evaluation with affine-B walk, C-first wire layout and prefix-first redeem extraction",
+    "codeBytes": 7553,
+    "codeSha256": "63f12474082916e22ab62faf6c6f0483bedcbb08a9700e4d7eb02415c9d8c242",
+    "redeemBytes": 61,
+    "redeemSha256": "0563cd756e2d300b7653e10fd2e39ba5951e404210ba78f18d8ba4549719a030",
+    "codePieces": [
+      3889,
+      3664
+    ],
+    "roleByteLengths": [
+      810,
+      725,
+      2372
+    ],
+    "lockingHex": "aa2021affd236254692aee253595380dc929d405df472af03f772879a386f952e7c287",
+    "lockingBytes": 35,
+    "lockingSha256": "a32303cca71026a88ad8cd74bf38c6c8f6a8794cfa3065af7e7e207d8cf9d2c7",
+    "rawFixed": [
+      9336,
+      9337,
+      5101
+    ],
+    "zt": 5039,
+    "catalogSha256": "3a23339aaa658b631d83c6c1c6a8a1d352cb04fab36061aa64c993f165f43109",
+    "moduleSha256": "9efdbbd88add5f2b3d34aabf4b7a050ce600a5b91c453b3659986b4b4d936d56",
+    "moduleBytes": 3261,
+    "currentVectorPins": {
+      "src/bch/bch-groth16-bn254-sound-native-affine-candidate-existing-invalid-vectors.json": {
+        "bytes": 1454043,
+        "sha256": "7fea10a9d9b499856a5838de3a4730d243e69b5667ec2b855d00f08b4d805549"
+      },
+      "src/bch/bch-groth16-bn254-sound-native-affine-candidate-positive-vectors.json": {
+        "bytes": 331156,
+        "sha256": "57332b658f1d22fa0e13ad3467810bd2385318796d2034394e82cd6fb869390b"
+      }
+    },
+    "registryPatchSha256": "5f3a501311b6b641fd3241f4cc16467a5e4e3525b0f2c8e955791cf38ff165d7",
+    "registryTargetSha256": "82efe55bad6463e30942551669c9491181aef960e2175db0e5ff04fc3bf9ba55"
+  },
+  "loader": {
+    "bytes": 3261,
+    "sha256": "9efdbbd88add5f2b3d34aabf4b7a050ce600a5b91c453b3659986b4b4d936d56"
+  },
+  "supportedDomain": "Exact fixed synthetic benchmark VK; canonical finite G1 A/C, canonical nonneutral prime-order G2 B, two Fr public inputs; algebraic neutral vk_x allowed.",
+  "publicBase": {
+    "repository": "mr-zwets/zk-verifier-bench",
+    "commit": "db068eb4be8a096345ddf80494eb0d85b7e18abf",
+    "baseManifestSha256": "5bd8a45b64bb624876dcf1e158a807588a7896aa8c1cab13ec9088bf64e40b28"
+  },
+  "registry": {
+    "patchSha256": "5f3a501311b6b641fd3241f4cc16467a5e4e3525b0f2c8e955791cf38ff165d7",
+    "postPatchTargetSha256": "82efe55bad6463e30942551669c9491181aef960e2175db0e5ff04fc3bf9ba55",
+    "target": "src/harness/benchmark.ts"
+  },
+  "benchmark": {
+    "completedCalls": 1,
+    "selectedImplementations": 1,
+    "selectedId": "bch-groth16-bn254-sound-native-affine-candidate",
+    "scriptBytes": 27533,
+    "overheadModelBytes": 149,
+    "modeledTotal": 27682,
+    "operationCost": 21083506,
+    "newCryptographicProofs": 0,
+    "newCases": 0,
+    "newRecipes": 0,
+    "internalInputEvaluations": null,
+    "scope": "One final registered metadata CLI call; its input count is not instrumented and is not a new 324-evaluation claim."
+  },
+  "typecheck": {
+    "inputs": 472,
+    "projectInputs": 123,
+    "compilerFiles": 140,
+    "compilerVersion": "6.0.3",
+    "compilerFingerprint": "b20de3f16ab57a09311bdae05eaa2cb6e876c2c033a07e68e0616e3adbf294c1",
+    "beforeAfterEqual": true
+  },
+  "fixtureEvidence": {
+    "directInputEvaluations": 324,
+    "positiveInputEvaluations": 108,
+    "caseInputEvaluations": 216,
+    "wholeCaseProfileRejections": 72,
+    "rejectedCaseInputs": 132,
+    "acceptedCaseSiblings": 84,
+    "costOnlyFailures": 0,
+    "fullBenchmarkCalls": 1,
+    "fullBenchmarkInternalInputEvaluations": null,
+    "ordinaryPositiveProofs": 5,
+    "densePositiveProofs": 1,
+    "ordinaryCases": 22,
+    "domainCases": 2,
+    "publicInputRecipes": 9,
+    "seamRecipes": 2,
+    "paddingRecipes": 3,
+    "inputValidationEnforced": false,
+    "inputValidationEvidence": "run-rejection-only; independent source/captured-domain theorem remains a separate normative owner"
+  },
+  "countsScope": "Frozen qualification retains one original benchmark and 324 direct evaluations. The original-module public reproduction, the 14e predecessor CLI, and this final 9ef CLI are three additional scoped calls; they do not add 324 evaluations or byte credit.",
+  "runtime": {
+    "node": "v26.12.0",
+    "pnpm": "10.12.2",
+    "compiler": "6.0.3",
+    "nodeBinary": {
+      "bytes": 132848,
+      "sha256": "4d9aea129d56f18e6b3b48792aa5ba13f17dfc8c84d3a37841d14f54d59e1d1a"
+    },
+    "pnpmBinary": {
+      "bytes": 1102,
+      "sha256": "b276da51dc8ca5b0d3ee3371695b50fc8b3244b281b091c63a3f082a88dadeb9"
+    },
+    "packages": [
+      {
+        "bytes": 8132047,
+        "fileCount": 1006,
+        "fingerprintOrder": "relative-path-codepoint",
+        "fingerprintSha256": "6384f0f488fdd4ecea59343202cc00c0fc1f8b76b04b8e179a13a7a8362c7a0a",
+        "label": "libauth",
+        "name": "@bitauth/libauth",
+        "resolution": "@bitauth/libauth",
+        "packageJsonSha256": "6b4e3b7f062b80782c62cb7732ed01571c5f163fd786af877c0ae5fdc33ec65e",
+        "version": "3.1.0-next.8"
+      },
+      {
+        "bytes": 519892,
+        "fileCount": 51,
+        "fingerprintOrder": "relative-path-codepoint",
+        "fingerprintSha256": "67dc1960bea9d02c5556f1d6c3c070aaba4ea8f810f2b031db39de816116ef38",
+        "label": "tsx",
+        "name": "tsx",
+        "resolution": "tsx",
+        "packageJsonSha256": "b0d63b124b9b85b53d09cff256fa7832cb6a774f8b90ae1353e63df5275824b2",
+        "version": "4.22.4"
+      },
+      {
+        "bytes": 147329,
+        "fileCount": 8,
+        "fingerprintOrder": "relative-path-codepoint",
+        "fingerprintSha256": "030fb1941e215ebad1d7fd5deee633ca9317fe73670694771aec4f97d3b9b7f9",
+        "label": "esbuild",
+        "name": "esbuild",
+        "resolution": "esbuild",
+        "packageJsonSha256": "d55d1d19fcc5b6079e4a71dd4111340c79c682bc36835ac7058a0c364c7db58a",
+        "version": "0.28.1"
+      },
+      {
+        "bytes": 10574305,
+        "fileCount": 3,
+        "fingerprintOrder": "relative-path-codepoint",
+        "fingerprintSha256": "c274fe1557eca5c08ae0a1e7d3ced6c2e3e6c551073358610d4aea0c7e387fe2",
+        "label": "nativeEsbuild",
+        "name": "@esbuild/darwin-arm64",
+        "resolution": "@esbuild/darwin-arm64/bin/esbuild",
+        "packageJsonSha256": "4741fe8d75953474f275402d367368cf49c242b2bc04b85e25bad14bfd26eaad",
+        "version": "0.28.1"
+      }
+    ],
+    "vmFunctionsSha256": "c5aaa8468411d7a529278b675136598a6a5cb52c7988aaf7f7240ee97484774c",
+    "vmWrapperSha256": "afa1adcb60fc425e566062ca5d6f15f82329109be218323890ddbc921fd9e46d",
+    "ordinaryProfiles": [
+      "loosened",
+      "consensus",
+      "standard"
+    ],
+    "runtimeFileCount": 539
+  },
+  "predecessors": {
+    "originalPrivateModule": {
+      "bytes": 3050,
+      "sha256": "d41296fc1d8803a4f919689c6dec8729ea19e3015214f07da256a4ef2886f6e5",
+      "role": "Original private qualification module; predecessor evidence only."
+    },
+    "standalone14eModule": {
+      "bytes": 3181,
+      "sha256": "14e2dc76d0951e5b33410d3416cb3ad4f031ac5abdd58e9869355ccd5330378a",
+      "role": "Standalone public 14e packet module; predecessor evidence only."
+    },
+    "currentModule": {
+      "bytes": 3261,
+      "sha256": "9efdbbd88add5f2b3d34aabf4b7a050ce600a5b91c453b3659986b4b4d936d56",
+      "role": "Current final 9ef typecheck/CLI module."
+    },
+    "relationship": "The original private, standalone 14e, and current 9ef module identities are distinct; current artifact and loader are derived from the final 9ef typecheck input."
+  },
+  "limitations": [
+    "C/R/locking and existing vectors remain the reviewed finite program identity; the 9ef change is a metadata successor bound by the current typecheck input.",
+    "Equation, completeness, resource, and caller/lowering arguments remain separate conditional proof owners.",
+    "No arbitrary key, application, privacy, live-network, or external-admission claim is made."
+  ],
+  "published": false,
+  "official": false,
+  "maintainerAdmission": false,
+  "applicationOrNetworkClaim": false
+}

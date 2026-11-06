@@ -1,0 +1,737 @@
+{
+  "assumptions": [
+    "The inherited C7551 owner composition is conditional on its named VM, generic-lowering, caller, canonical-constructor and commitment contracts.",
+    "The standard-sum table is not a fresh C7553 whole-program replay; current source14 transfer owns only the changed local boundary and retains inherited whole-I/helper/caller owners.",
+    "The 132-row width replay and actual redeem delta are independent local transfer checks; cap-only -1441 P is excluded from U."
+  ],
+  "derived": {
+    "baselineEnvelopeBridge": {
+      "derivation": "The standard sums are the conditional native role ledger. The larger U values are not reconstructed by adding these differences as anonymous residual costs: the C7551 baseline coverage peer and execution-existence theorem assign unlocking, P2SH/redeem extraction/hash/DEFINE, definitions, dispatch, helper/caller paths and cleanup to the inherited coarse owner composition. The C7551 transfer then retains whole-I/helper/caller/unrelated owners and applies the local t:W replacement once.",
+      "differenceUminusStandard": [
+        640867,
+        609013,
+        604859
+      ],
+      "inheritedBaselineU": [
+        8007201,
+        7928562,
+        7866933
+      ],
+      "ownerChain": [
+        "conditional-sum.json -> disjoint native I/A/P/D role ledger",
+        "native-execution-existence-v1/THEOREM.md -> complete active A/P/D coverage boundary",
+        "bn-c7551-resource-baseline-coverage-peer-v1/report.md -> inherited C7551 envelope and owner transfer",
+        "bn-degree6-zero-init-resource-transfer-v1/report.json -> C7551 U and one-time local replacement"
+      ],
+      "standardSums": [
+        7366334,
+        7319549,
+        7262074
+      ],
+      "status": "INHERITED_OWNER_BOUND_NOT_ARITHMETICALLY_RECONSTRUCTED_FROM_STANDARD_SUM"
+    },
+    "currentTransfer": {
+      "U": [
+        8002502,
+        7930995,
+        7865661
+      ],
+      "actualRedeemDeltaP": -1280,
+      "baselineU": [
+        8007201,
+        7928562,
+        7866933
+      ],
+      "bodyDelta": [
+        -3423,
+        3709,
+        4
+      ],
+      "budgets": [
+        8004000,
+        7932800,
+        7958400
+      ],
+      "capDeltaExcluded": -1441,
+      "correctedDeltaAppliedOnce": [
+        -4699,
+        2433,
+        -1272
+      ],
+      "formula": "U_current[r] = U_baseline[r] + bodyDelta[r] + actualRedeemDeltaP + globalDefinitionReservePPerRole[r]",
+      "globalDefinitionReservePPerRole": [
+        4,
+        4,
+        4
+      ],
+      "margins": [
+        1498,
+        1805,
+        92739
+      ]
+    },
+    "firstUnsupportedBound": {
+      "arbitraryAdvice": false,
+      "bound": "candidate-specific universal frame/lowering/caller induction transferring the 996 memory ceiling",
+      "memoryFormula": "946 body + 25 function slots + 10 R prefix + 9 C prefix = 990 <= 996 < 1000",
+      "status": "OPEN_CONDITIONAL_PREMISE",
+      "whyFirst": "The baseline U owner chain is explicitly named and covers the coarse caller/unlocking/redeem envelope. The current static transfer itself still refuses to turn the inherited memory/frame contract into an unconditional candidate theorem."
+    },
+    "nativeOwnerLedger": {
+      "formula": "standardSum(role) = 100*I + sum(owner A) + sum(owner P) + 192*sum(owner D)",
+      "globalInstructionRule": "I is charged once for the selected role path; each role table displays that same global I on GLOBAL-I-ONCE and does not add it to owner A/P/D rows.",
+      "roles": [
+        {
+          "formula": "100*I + A + P + 192*D",
+          "owners": [
+            {
+              "A": 0,
+              "D": 0,
+              "I": 23245,
+              "P": 0,
+              "count": 1,
+              "owner": "GLOBAL-I-ONCE",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 1,
+              "D": 130,
+              "I": 0,
+              "P": 99511,
+              "count": 1,
+              "owner": "native-preamble",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 4,
+              "D": 86,
+              "I": 0,
+              "P": 117796,
+              "count": 1,
+              "owner": "raw-role-prefix",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 4,
+              "D": 0,
+              "I": 0,
+              "P": 10024,
+              "count": 1,
+              "owner": "FILL",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 219,
+              "count": 1,
+              "owner": "GRAPH",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 2176,
+              "D": 83,
+              "I": 0,
+              "P": 5702,
+              "count": 1,
+              "owner": "TRANS",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 9473,
+              "count": 1,
+              "owner": "STMT",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 32,
+              "count": 1,
+              "owner": "direct-P-before-SETUP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 283426,
+              "D": 0,
+              "I": 0,
+              "P": 34576,
+              "count": 1,
+              "owner": "SETUP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 304224,
+              "D": 0,
+              "I": 0,
+              "P": 40824,
+              "count": 1,
+              "owner": "raw-LOOP-shell",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 1748760,
+              "D": 0,
+              "I": 0,
+              "P": 197760,
+              "count": 24,
+              "owner": "BDBL",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 664440,
+              "D": 0,
+              "I": 0,
+              "P": 139200,
+              "count": 24,
+              "owner": "DSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 751920,
+              "D": 0,
+              "I": 0,
+              "P": 121448,
+              "count": 8,
+              "owner": "ADDSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 300312,
+              "D": 0,
+              "I": 0,
+              "P": 68052,
+              "count": 12,
+              "owner": "BNDSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 15232,
+              "D": 0,
+              "I": 0,
+              "P": 1158,
+              "count": 2,
+              "owner": "G1C",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 17633,
+              "D": 0,
+              "I": 0,
+              "P": 2279,
+              "count": 1,
+              "owner": "twist",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 7616,
+              "D": 0,
+              "I": 0,
+              "P": 2492,
+              "count": 1,
+              "owner": "HENC",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 1,
+              "count": 1,
+              "owner": "nonterminal-cleanup",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 38131,
+              "count": 1,
+              "owner": "bounded-role-state-callers",
+              "source": "conditional-sum.json"
+            }
+          ],
+          "role": 0,
+          "standardSum": 7366334,
+          "totals": {
+            "A": 4095748,
+            "D": 299,
+            "I": 23245,
+            "P": 888678
+          }
+        },
+        {
+          "formula": "100*I + A + P + 192*D",
+          "owners": [
+            {
+              "A": 0,
+              "D": 0,
+              "I": 23210,
+              "P": 0,
+              "count": 1,
+              "owner": "GLOBAL-I-ONCE",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 1,
+              "D": 130,
+              "I": 0,
+              "P": 99510,
+              "count": 1,
+              "owner": "native-preamble",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 4,
+              "D": 86,
+              "I": 0,
+              "P": 107811,
+              "count": 1,
+              "owner": "raw-role-prefix",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 4,
+              "D": 0,
+              "I": 0,
+              "P": 10024,
+              "count": 1,
+              "owner": "FILL",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 219,
+              "count": 1,
+              "owner": "GRAPH",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 2176,
+              "D": 83,
+              "I": 0,
+              "P": 5702,
+              "count": 1,
+              "owner": "TRANS",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 9473,
+              "count": 1,
+              "owner": "STMT",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 32,
+              "count": 1,
+              "owner": "direct-P-before-SETUP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 283426,
+              "D": 0,
+              "I": 0,
+              "P": 34576,
+              "count": 1,
+              "owner": "SETUP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 304224,
+              "D": 0,
+              "I": 0,
+              "P": 40824,
+              "count": 1,
+              "owner": "raw-LOOP-shell",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 1748760,
+              "D": 0,
+              "I": 0,
+              "P": 197760,
+              "count": 24,
+              "owner": "BDBL",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 664440,
+              "D": 0,
+              "I": 0,
+              "P": 139200,
+              "count": 24,
+              "owner": "DSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 751920,
+              "D": 0,
+              "I": 0,
+              "P": 121448,
+              "count": 8,
+              "owner": "ADDSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 300312,
+              "D": 0,
+              "I": 0,
+              "P": 68052,
+              "count": 12,
+              "owner": "BNDSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 7616,
+              "D": 0,
+              "I": 0,
+              "P": 2492,
+              "count": 1,
+              "owner": "HENC",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 1,
+              "count": 1,
+              "owner": "nonterminal-cleanup",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 1834,
+              "count": 1,
+              "owner": "HDEC",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 39300,
+              "count": 1,
+              "owner": "bounded-role-state-callers",
+              "source": "conditional-sum.json"
+            }
+          ],
+          "role": 1,
+          "standardSum": 7319549,
+          "totals": {
+            "A": 4062883,
+            "D": 299,
+            "I": 23210,
+            "P": 878258
+          }
+        },
+        {
+          "formula": "100*I + A + P + 192*D",
+          "owners": [
+            {
+              "A": 0,
+              "D": 0,
+              "I": 25345,
+              "P": 0,
+              "count": 1,
+              "owner": "GLOBAL-I-ONCE",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 1,
+              "D": 130,
+              "I": 0,
+              "P": 99507,
+              "count": 1,
+              "owner": "native-preamble",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 8,
+              "D": 75,
+              "I": 0,
+              "P": 52818,
+              "count": 1,
+              "owner": "raw-role-prefix",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 4,
+              "D": 0,
+              "I": 0,
+              "P": 10024,
+              "count": 1,
+              "owner": "FILL",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 219,
+              "count": 1,
+              "owner": "GRAPH",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 2176,
+              "D": 83,
+              "I": 0,
+              "P": 5702,
+              "count": 1,
+              "owner": "TRANS",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 4,
+              "D": 0,
+              "I": 0,
+              "P": 13,
+              "count": 1,
+              "owner": "direct-PLEN",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 9473,
+              "count": 1,
+              "owner": "STMT",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 32,
+              "count": 1,
+              "owner": "direct-P-before-SETUP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 283426,
+              "D": 0,
+              "I": 0,
+              "P": 34576,
+              "count": 1,
+              "owner": "SETUP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 215492,
+              "D": 0,
+              "I": 0,
+              "P": 29286,
+              "count": 1,
+              "owner": "raw-LOOP-shell",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 1238705,
+              "D": 0,
+              "I": 0,
+              "P": 140080,
+              "count": 17,
+              "owner": "BDBL",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 470645,
+              "D": 0,
+              "I": 0,
+              "P": 98600,
+              "count": 17,
+              "owner": "DSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 469950,
+              "D": 0,
+              "I": 0,
+              "P": 75905,
+              "count": 5,
+              "owner": "ADDSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 225234,
+              "D": 0,
+              "I": 0,
+              "P": 51039,
+              "count": 9,
+              "owner": "BNDSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 1834,
+              "count": 1,
+              "owner": "HDEC",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 17280,
+              "D": 0,
+              "I": 0,
+              "P": 1840,
+              "count": 1,
+              "owner": "psi",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 6336,
+              "D": 0,
+              "I": 0,
+              "P": 509,
+              "count": 1,
+              "owner": "omega",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 8640,
+              "D": 0,
+              "I": 0,
+              "P": 1630,
+              "count": 1,
+              "owner": "endpoint",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 132610,
+              "D": 0,
+              "I": 0,
+              "P": 15856,
+              "count": 2,
+              "owner": "terminal-BADD",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 55370,
+              "D": 0,
+              "I": 0,
+              "P": 11600,
+              "count": 2,
+              "owner": "terminal-DSTEP",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 9984,
+              "D": 0,
+              "I": 0,
+              "P": 1204,
+              "count": 1,
+              "owner": "terminal-EV",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 19554,
+              "D": 0,
+              "I": 0,
+              "P": 1846,
+              "count": 1,
+              "owner": "terminal-EA",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 12672,
+              "D": 0,
+              "I": 0,
+              "P": 560,
+              "count": 1,
+              "owner": "role2.FpFm",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 121258,
+              "D": 0,
+              "I": 0,
+              "P": 13651,
+              "count": 1,
+              "owner": "role2.R",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 16267,
+              "D": 0,
+              "I": 0,
+              "P": 41222,
+              "count": 1,
+              "owner": "GLS-binding-inclusive-TA",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 271504,
+              "D": 0,
+              "I": 0,
+              "P": 362584,
+              "count": 1,
+              "owner": "quotient-inclusive-RD-and-final-cleanup",
+              "source": "conditional-sum.json"
+            },
+            {
+              "A": 0,
+              "D": 0,
+              "I": 0,
+              "P": 33548,
+              "count": 1,
+              "owner": "bounded-role-state-callers",
+              "source": "conditional-sum.json"
+            }
+          ],
+          "role": 2,
+          "standardSum": 7262074,
+          "totals": {
+            "A": 3577120,
+            "D": 288,
+            "I": 25345,
+            "P": 1095158
+          }
+        }
+      ],
+      "standardSums": [
+        7366334,
+        7319549,
+        7262074
+      ]
+    }
+  },
+  "observedUtc": "2026-11-05T20:27:34.750Z",
+  "publicInterpretation": "Static conditional owner-ledger transfer; inherited owner paths are labels only and no private receipts are shipped.",
+  "schema": "bn-c-first-prefix-extraction-public-resource-induction-transfer/v2",
+  "scope": {
+    "assemblyExecutions": 0,
+    "benchmarkExecutions": 0,
+    "compilerExecutions": 0,
+    "newFixtures": 0,
+    "proverExecutions": 0,
+    "publication": false,
+    "qualificationCredit": false,
+    "scoreCredit": false,
+    "sourceImports": 0,
+    "staticOnly": true,
+    "vmExecutions": 0
+  },
+  "status": "PASS_CONDITIONAL_OWNER_LEDGER_AND_INHERITED_U_BRIDGE_MEMORY_HOLD",
+  "unresolved": [
+    "Candidate-specific universal frame/lowering/caller induction for the 996 memory ceiling remains conditional.",
+    "No arbitrary-advice, accepted-input, VM acceptance-equivalence, transport, qualification, score, admission or publication theorem is asserted."
+  ]
+}
