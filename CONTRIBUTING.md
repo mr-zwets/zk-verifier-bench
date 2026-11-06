@@ -46,10 +46,12 @@ claim and assumptions in [docs/submission-claims.md](docs/submission-claims.md):
   loosened BCH 2026 VM;
 - for `proofBinding: 'runtime'` entries whose setup permits minting, supply
   `extraValidProofs` — distinct proofs under the same VK and ordered programs.
-  The harness executes the supplied runs; the submitter and reviewer must
-  check program identity, step counts and proof distinctness. It does not
-  enforce those comparisons. If only one proof is available, disclose that
-  coverage limit rather than claiming empirical generality;
+  The harness enforces matching step counts, ordered locking programs and
+  context kind/topology. Extra proofs are credited as distinct only through
+  declared `proofInputs` locators; the submitter and reviewer must check that
+  those locators identify genuine proof components consumed by the verifier.
+  If only one proof is available, disclose that coverage limit rather than
+  claiming empirical generality;
 - adversarial `invalidInputs` (off-curve / out-of-subgroup points) must be
   rejected if you claim input validation. Rejection alone does not identify
   the rejecting predicate or prove that a domain check exists;
